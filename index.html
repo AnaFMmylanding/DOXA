@@ -434,7 +434,221 @@ max-width: 500px;
         
 
                   /* SECCIÓN DOXAS: LA COLECCIÓN */
+  <style>
+    .coleccion-section {
+        background-color: #302b22;
+        padding: 100px 20px;
+        color: #efefef;
+        font-family: 'Lexend', sans-serif;
+    }
+    .col-header {
+        text-align: center;
+        margin-bottom: 80px;
+    }
+    .col-title {
+        font-size: clamp(30px, 4vw, 40px);
+        font-weight: 300;
+        letter-spacing: 10px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+    .col-desc {
+        font-size: 13px;
+        font-weight: 300;
+        line-height: 2;
+        letter-spacing: 2px;
+        max-width: 600px;
+        margin: 0 auto;
+        opacity: 0.9;
+    }
+    .product-main {
+        display: flex;
+        gap: 60px;
+        max-width: 1000px;
+        margin: 0 auto;
+        align-items: center;
+    }
+    .column-img { flex: 1.2; }
+    .column-text { flex: 1; }
+    .fade-effect {
+        opacity: 1;
+        transition: opacity 0.4s ease-in-out;
+    }
+    .is-hidden { opacity: 0; }
+    .main-image-container img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+    }
+    .thumbnail-grid {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        justify-content: center;
+    }
+    .thumbnail-grid img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: all 0.3s ease;
+        border-radius: 50%;
+    }
+    .thumbnail-grid img:hover, .thumbnail-grid img.active-thumb {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    .variety-title {
+        font-size: clamp(24px, 3vw, 32px);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        font-weight: 400;
+    }
+    .variety-desc {
+        font-size: 13px;
+        font-weight: 300;
+        line-height: 1.8;
+        min-height: 100px;
+        margin-bottom: 40px;
+        opacity: 0.9;
+    }
+    .dietary-icons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 40px;
+    }
+    .tag {
+        font-size: 9px;
+        font-weight: 700;
+        padding: 8px 12px;
+        border: 1px solid rgba(255,255,255,0.3);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    .accordion-btn {
+        background: none;
+        border: none;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        width: 100%;
+        text-align: left;
+        padding: 15px 0;
+        font-family: 'Lexend', sans-serif;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        color: #fff;
+        font-weight: 600;
+        transition: border-color 0.3s ease;
+    }
+    .accordion-btn:hover {
+        border-bottom-color: rgba(255,255,255,0.8);
+    }
+    .accordion-panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+    }
+    .accordion-panel p {
+        padding: 15px 0;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 1.6;
+        opacity: 0.8;
+        margin: 0;
+    }
+    @media (max-width: 768px) {
+        .product-main { flex-direction: column; gap: 40px; text-align: center; }
+        .dietary-icons { justify-content: center; }
+        .accordion-btn { text-align: center; }
+        .variety-desc { min-height: auto; }
+    }
+</style>
+
+<section class="coleccion-section" id="coleccion">
+    <div class="container animate-appear">
         
+        <div class="col-header">
+            <h2 class="col-title">DOXAS. LA COLECCIÓN</h2>
+            <p class="col-desc">
+                Nuestra caja exclusiva incluye las 4 variedades:<br>
+                Bésame Choco, Lux-Umbra, Café Delirium y Selva Negra.<br>
+                Cuatro océanos de sabores. Una DOXA para cada momento.
+            </p>
+        </div>
+
+        <div class="product-main">
+            
+            <div class="column-img">
+                <div class="main-image-container">
+                    <div id="fadeGroup" class="fade-effect">
+                        <img src="https://drive.google.com/thumbnail?id=1n77jeWbfGNIkJlLE6GK5cIyzkL_xCnvq&sz=w1000" id="mainView" alt="Variedad DOXA">
+                    </div>
+                </div>
+                <div class="thumbnail-grid">
+                    <img src="https://drive.google.com/thumbnail?id=1n77jeWbfGNIkJlLE6GK5cIyzkL_xCnvq&sz=w200" onclick="changeVariety(0)" class="thumb-img active-thumb" alt="Bésame Choco">
+                    <img src="https://drive.google.com/thumbnail?id=14S_YCNVodPqWd9DDsd2ZCkqPZfhW4V7s&sz=w200" onclick="changeVariety(1)" class="thumb-img" alt="Lux-Umbra">
+                    <img src="https://drive.google.com/thumbnail?id=1LXn-WY0BSMtuzhVABwdWwjPFZReQhPDB&sz=w200" onclick="changeVariety(2)" class="thumb-img" alt="Café Delirium">
+                    <img src="https://drive.google.com/thumbnail?id=1P4UaVzpMm-oyD5H5doz5x21sA5P_yNIJ&sz=w200" onclick="changeVariety(3)" class="thumb-img" alt="Selva Negra">
+                </div>
+            </div>
+
+            <div class="column-text">
+                <div id="textFadeGroup" class="fade-effect">
+                    <h3 class="variety-title" id="varietyTitle">BÉSAME CHOCO</h3>
+                    <div class="variety-desc" id="varietyDesc">
+                        Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte un capricho.
+                    </div>
+                </div>
+
+                <div class="dietary-icons">
+                    <span class="tag">SIN AZÚCARES AÑADIDOS</span>
+                    <span class="tag">SIN GLUTEN</span>
+                    <span class="tag">APTA KETO</span>
+                    <span class="tag">IDEAL POST-ENTRENO</span>
+                </div>
+
+                <div>
+                    <button class="accordion-btn">Ingredientes Comunes</button>
+                    <div class="accordion-panel">
+                        <p>Base de harina de almendra, eritritol premium y huevos camperos. Cada variedad añade sus propios extractos naturales y superalimentos.</p>
+                    </div>
+                    
+                    <button class="accordion-btn">Información Nutricional (Media)</button>
+                    <div class="accordion-panel">
+                        <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    const doxas = [
+        {
+            title: 'BÉSAME CHOCO',
+            desc: 'Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte un capricho.',
+            img: 'https://drive.google.com/thumbnail?id=1n77jeWbfGNIkJlLE6GK5cIyzkL_xCnvq&sz=w1000'
+        },
+        {
+            title: 'LUX-UMBRA',
+            desc: 'La acidez transgresora de los frutos del bosque frente a la pureza blanca de la manteca de cacao.<br>Una arquitectura de contrastes que te compiten en cada mordida.<br><br>¿Por cuál de tus dos lados te dejarás llevar hoy?',
+            img: 'https://drive.google.com/thumbnail?id=14S_YCNVodPqWd9DDsd2ZCkqPZfhW4V7s&sz=w1000'
+        },
+        {
+            title: 'CAFÉ DELIRIUM',
+            desc: 'Notas profundas de café tostado que despiertan el paladar.<br>Un corazón cremoso de cacao infusionado con café.<br><br>Elegante. Intensa. Irresistiblemente adulta.',
+            img: 'https://drive.google.com/thumbnail?id=1LXn-WY0BSMtuzhVABwdWwjPFZReQhPDB&sz=w1000'
+        },
+        {
+            title: 'SELVA NEGRA',
+            desc: 'Cacao negro por fuera. Cacao negro por dentro.<br>Salv      
                                    /* */
 
 
@@ -496,5 +710,8 @@ max-width: 500px;
         });
     });
 </script>
+
+        
+                                   /* */
 </body>
 </html>
