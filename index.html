@@ -592,7 +592,7 @@ max-width: 500px;
 </section>
 
 <script>
-    // 1. Motor de las Miniaturas
+    // 1. Base de datos de las Doxas
     const doxas = [
         {
             title: 'BÉSAME CHOCO',
@@ -616,31 +616,46 @@ max-width: 500px;
         }
     ];
 
+    // ==========================================
+    // NUEVO: PRECARGA INVISIBLE DE IMÁGENES
+    // ==========================================
+    window.addEventListener('load', function() {
+        doxas.forEach(doxa => {
+            const preloadedImg = new Image();
+            preloadedImg.src = doxa.img;
+        });
+    });
+
+    // 2. Motor de las Miniaturas
     function changeVariety(index) {
         const imgFade = document.getElementById('fadeGroup');
         const textFade = document.getElementById('textFadeGroup');
         const thumbnails = document.getElementsByClassName('thumb-img');
         
+        // Difuminar imagen y texto
         imgFade.classList.add('is-hidden');
         textFade.classList.add('is-hidden');
         
+        // Cambiar opacidad de la miniatura
         for(let i = 0; i < thumbnails.length; i++) {
             thumbnails[i].classList.remove('active-thumb');
         }
         thumbnails[index].classList.add('active-thumb');
 
+        // Esperar a que termine el difuminado (400ms) y cambiar el contenido
         setTimeout(() => {
             const d = doxas[index];
             document.getElementById('varietyTitle').innerText = d.title;
             document.getElementById('varietyDesc').innerHTML = d.desc;
             document.getElementById('mainView').src = d.img;
             
+            // Volver a mostrar imagen y texto
             imgFade.classList.remove('is-hidden');
             textFade.classList.remove('is-hidden');
-        }, 400);
+        }, 400); 
     }
 
-    // 2. Motor del Acordeón a prueba de fallos
+    // 3. Motor del Acordeón a prueba de fallos
     function toggleAccordion(element) {
         element.classList.toggle("active");
         var panel = element.nextElementSibling;
