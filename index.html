@@ -227,7 +227,179 @@
     </div>
 </section>
         
+                            /* SECCIÓN PRESENTACIÓN DE ACTIVOS*/
+
+<style>
+    /* El verdadero efecto Puzzle / Bento */
+    .bento-grid { 
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas invisibles */
+        grid-auto-rows: 300px; /* Altura base de cada bloque */
+        gap: 15px; 
+        max-width: 1200px; 
+        margin: 0 auto; 
+        padding: 0 20px; 
+    }
     
+    .bento-item { 
+        position: relative; 
+        border-radius: 12px; /* Un ligero borde redondeado suaviza el efecto tetris */
+        overflow: hidden; 
+        display: flex; 
+        flex-direction: column; 
+        padding: 40px; 
+    }
+
+    .bento-bg { 
+        position: absolute; 
+        top: 0; left: 0; width: 100%; height: 100%; 
+        background-size: cover; 
+        background-position: center; 
+        filter: brightness(0.4); 
+        z-index: 1; 
+        transition: transform 0.8s ease; /* Transición suave para el zoom */
+    }
+    
+    .bento-item:hover .bento-bg { 
+        transform: scale(1.08); /* Efecto de vida al pasar el ratón */
+    }
+    
+    .bento-content { 
+        position: relative; 
+        z-index: 2; 
+        width: 100%; 
+        height: 100%; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: flex-end; /* Texto anclado abajo para ser elegante */
+    }
+
+    /* CLASES MÁGICAS PARA EL TAMAÑO DE LAS CAJAS */
+    .b-wide { grid-column: span 2; } /* Ocupa 2 de ancho */
+    .b-tall { grid-row: span 2; }    /* Ocupa 2 de alto */
+    .b-full { grid-column: 1 / -1; } /* Ocupa todo el ancho */
+
+    /* Alineaciones del texto */
+    .align-left { align-items: flex-start; text-align: left; }
+    .align-right { align-items: flex-end; text-align: right; }
+    .align-center { align-items: center; text-align: center; justify-content: center; }
+
+    /* Tipografías */
+    .b-tagline { font-family: 'Lexend', sans-serif; font-size: 10px; letter-spacing: 4px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; color: var(--accent-color); }
+    .b-title { font-family: 'Lexend', sans-serif; font-size: clamp(22px, 2.5vw, 30px); font-weight: 300; margin-bottom: 15px; line-height: 1.1; color: #fff; }
+    .b-prop { font-family: 'Lexend', sans-serif; font-size: 12px; font-weight: 600; line-height: 1.6; letter-spacing: 1px; margin-bottom: 10px; color: #fff; }
+    .b-desc { font-family: 'Lexend', sans-serif; font-size: 11px; font-weight: 300; line-height: 1.8; letter-spacing: 1px; color: rgba(255,255,255,0.8); }
+
+    /* Adaptación a Móviles: El tetris se deshace y se vuelve vertical */
+    @media (max-width: 768px) {
+        .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+        .b-wide, .b-tall, .b-full { grid-column: span 1; grid-row: span 1; }
+        .bento-item { min-height: 350px; padding: 30px 20px; }
+        .bento-content { align-items: center !important; text-align: center !important; justify-content: center; }
+    }
+</style>
+
+<section style="background-color: var(--dark-bg); padding: 80px 0;">
+    
+    <div class="container animate-appear" style="text-align: center; margin-bottom: 50px;">
+        <p style="font-family: 'Lexend', sans-serif; font-size: 11px; font-weight: 300; color: var(--text-light); opacity: 0.7; letter-spacing: 2px; max-width: 600px; margin: 0 auto; line-height: 2;">
+            Hemos integrado los suplementos clave en el cuidado de la piel, pelo y articulaciones y tono muscular para que cada DOXA que te tomes tenga sentido, nutrición y efecto reparador en tus tejidos. <br><br>
+            Esto es lo que aportas a tu cuerpo con cada DOXA:
+        </p>
+    </div>
+
+    <div class="bento-grid">
+        
+        <div class="bento-item b-wide animate-appear delay-1">
+            <div class="bento-bg" style="background-image: url('https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920');"></div>
+            <div class="bento-content align-left">
+                <div style="max-width: 400px;">
+                    <h2 class="b-tagline">LA FACTORÍA DE TEJIDOS</h2>
+                    <h3 class="b-title">Aminoácidos Precursores del Colágeno</h3>
+                    <p class="b-prop">10g de los aminoácidos clave</p>
+                    <p class="b-desc">Una de las dosis más altas del mercado y activos de mayor potencia. Así sí notas la diferencia.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-item b-tall animate-appear delay-2">
+            <div class="bento-bg" style="background-image: url('https://drive.google.com/thumbnail?id=1IYiVxhlVG6wOVl0I2r0MMF_5EaEz3NnW&sz=w1920');"></div>
+            <div class="bento-content align-right">
+                <div>
+                    <h2 class="b-tagline">NO SIN MI VITAMINA C</h2>
+                    <h3 class="b-title">Vitamina C</h3>
+                    <p class="b-prop">100mg estratégicos</p>
+                    <p class="b-desc">Síntesis de colágeno.<br>Refuerzo de defensas.<br>Luminosidad.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-item animate-appear delay-3">
+            <div class="bento-bg" style="background-image: url('https://drive.google.com/thumbnail?id=1ECxBeP_peWbBt5YaIz0E0uJisOTFcFoh&sz=w1920');"></div>
+            <div class="bento-content align-left">
+                <div>
+                    <h2 class="b-tagline">ADIÓS, BARRITAS</h2>
+                    <h3 class="b-title">Proteína Whey</h3>
+                    <p class="b-prop">20g totales</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-item animate-appear delay-4">
+            <div class="bento-bg" style="background-image: url('https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920');"></div>
+            <div class="bento-content align-left">
+                <div>
+                    <h2 class="b-tagline">ARQUITECTURA</h2>
+                    <h3 class="b-title">Biotina</h3>
+                    <p class="b-prop">100µg para folículos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-item b-tall animate-appear delay-5">
+            <div class="bento-bg" style="background-image: url('https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920');"></div>
+            <div class="bento-content align-left">
+                <div>
+                    <h2 class="b-tagline">INFLAMACIÓN NO</h2>
+                    <h3 class="b-title">Boswellia & Jengibre</h3>
+                    <p class="b-prop">Articulaciones sanas</p>
+                    <p class="b-desc">Potente contención antiinflamatoria al juntarlos.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-item b-wide animate-appear delay-6">
+            <div class="bento-bg" style="background-image: url('https://drive.google.com/thumbnail?id=1VbwVN25DbA1SDByOwd6tXiGUZexo3KvJ&sz=w1920');"></div>
+            <div class="bento-content align-right">
+                <div style="max-width: 400px;">
+                    <h2 class="b-tagline">TU PARTE CREATIVA</h2>
+                    <h3 class="b-title">Creatina</h3>
+                    <p class="b-prop">3g de Creatina Pura</p>
+                    <p class="b-desc">Mantiene tu vitalidad y tono muscular a pleno rendimiento.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-item b-full animate-appear delay-7">
+            <div class="bento-bg" style="background-image: url('https://drive.google.com/thumbnail?id=1NCcOsbxBtm6uUw65r9qTrjdLWybz04vX&sz=w1920');"></div>
+            <div class="bento-content align-center">
+                <div style="max-width: 600px;">
+                    <h2 class="b-tagline">Y TODOS LOS "SIN" QUE TE GUSTA LEER</h2>
+                    <h3 class="b-title">Sin azúcar. Sin gluten. Sin remordimientos.</h3>
+                    <p class="b-desc">Sin picos de insulina. Sin exceso de carbohidratos. Sin aceites refinados. Cada ingrediente que hay en DOXA es noble y ejerce su función.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+                                    /* SECCIÓN DOXAS:LA COLECCIÓN*/
+ 
+        
+                                   /* */
+        
         <section class="light-section" style="padding: 100px 0;">
             <div class="container">
                 
