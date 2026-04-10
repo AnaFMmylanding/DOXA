@@ -232,5 +232,25 @@
                 <p>TEXTO EN PIE AMARILLO</p>
             </div>
         </footer>
-        </div> </body>
+        </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const animatedElements = document.querySelectorAll('.animate-appear, .zoom-out-appear');
+        animatedElements.forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    });
+</script>
+</body>
 </html>
