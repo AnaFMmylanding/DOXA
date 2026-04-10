@@ -4,30 +4,233 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOXA | Alta Repostería Funcional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* RESET TOTAL: Aquí ganamos la libertad de bordes */
+        /* =========================================
+           RESET TOTAL Y VARIABLES DE MARCA
+           Aquí ganamos la libertad de Google Sites
+           ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body, html { 
-            width: 100%; 
-            overflow-x: hidden; 
-            background-color: #524b3f; 
-            font-family: 'Lexend', sans-serif;
+        :root {
+            --dark-bg: #3C332A;   /* Tu marrón de marca */
+            --light-bg: #F5F1ED;  /* Crema claro */
+            --accent-color: #D9E100; /* Amarillo de acento para botones */
+            --text-light: #F5F1ED;
+            --text-dark: #3C332A;
         }
 
-        .section-wrapper {
+        body, html { 
+            width: 100%; 
+            overflow-x: hidden; /* Evita el scroll horizontal */
+            background-color: var(--dark-bg); 
+            font-family: 'Lexend', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Contenedor principal que permite el 100% de ancho */
+        .page-wrapper {
             width: 100%;
             display: flex;
             flex-direction: column;
+        }
+
+        /* Clase general para secciones de color claro */
+        .light-section {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        /* =========================================
+           LÓGICA DE ANIMACIONES (Cascada y Aparición)
+           ========================================= */
+        
+        /* Definición de la animación: aparecer, deslizarse hacia arriba y delay */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Clase para aplicar el efecto a CUALQUIER elemento informativo */
+        .animate-appear {
+            opacity: 0; /* Empieza invisible */
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+        }
+
+        /* Clases para el efecto cascada (retrasos) */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+
+        /* Clase especial para el Zoom Out de las 4 galletas */
+        .zoom-out-appear {
+            animation: zoomOutEffect 1.2s ease-out forwards;
+        }
+        @keyframes zoomOutEffect {
+            from { opacity: 0; transform: scale(1.1); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* =========================================
+           ESTILOS GENERALES DE ESTRUCTURA
+           (Simplificados para que tú pegues tu código)
+           ========================================= */
+        
+        /* Contenedores para centralizar el contenido pero sin márgenes forzados */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* Estilos de botones (usando el amarillo de acento que te gusta) */
+        .btn-comprar {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            padding: 15px 40px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            transition: transform 0.2s ease;
+        }
+        .btn-comprar:hover { transform: scale(1.05); }
+
+        /* Estilo para la cuadrícula de 6 ingredientes */
+        .ingredient-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablet/desktop */
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        /* Estilo para cada caja de ingrediente */
+        .ingredient-box {
+            background-color: rgba(255, 255, 255, 0.05); /* Un brillo sutil */
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            position: relative;
+            overflow: hidden; /* Para las imágenes de fondo si las pones */
+        }
+
+        /* =========================================
+           ADAPTACIÓN PARA MÓVILES (Responsiveness)
+           Media Queries: Aquí está el truco
+           ========================================= */
+        @media (max-width: 768px) {
+            
+            /* En móvil, la cuadrícula de ingredientes es de 1 sola columna */
+            .ingredient-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Los textos grandes se hacen más pequeños */
+            h1 { font-size: 2.5rem !important; }
+            h2 { font-size: 2rem !important; }
+            
+            /* Aumentamos el padding para que no se pegue al borde */
+            .ingredient-box { padding: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="section-wrapper">
-        <h1 style="color: white; text-align: center; margin-top: 50px;">PROYECTO DOXA: El código es libre</h1>
-    </div>
+    <div class="page-wrapper">
+        
+        <header style="padding: 100px 0; text-align: center; color: var(--text-light);">
+            <div class="container animate-appear">
+                <h1 style="font-weight: 300; font-size: 3rem; margin-bottom: 20px;">DOXA COLÁGENO</h1>
+                <p style="font-family: 'Lato', sans-serif; font-size: 1.1rem; max-width: 600px; margin: 0 auto; opacity: 0.8;">Tu texto de cabecera aquí.</p>
+                <a href="#" class="btn-comprar">COMPRAR</a>
+            </div>
+        </header>
+        <section style="padding: 100px 0; color: var(--text-light); border-top: 1px solid rgba(255, 255, 255, 0.1);">
+            <div class="container animate-appear delay-1">
+                <h2 style="font-weight: 300; font-size: 2.5rem; text-align: center; text-transform: uppercase;">DOXA'S: La Magia Existe</h2>
+            </div>
+        </section>
+        <section class="light-section" style="padding: 100px 0;">
+            <div class="container">
+                
+                <div class="animate-appear delay-1" style="text-align: center; margin-bottom: 50px;">
+                    <h2 style="font-weight: 300; font-size: 2.5rem;">Potencia tu Belleza desde el interior</h2>
+                </div>
 
-</body>
+                <div class="ingredient-grid">
+                    
+                    <div class="ingredient-box animate-appear delay-1">
+                        <h3 style="font-weight: 400; font-size: 1.1rem;">Antioxidantes, Precursores...</h3>
+                    </div>
+
+                    <div class="ingredient-box animate-appear delay-2">
+                        <h3 style="font-weight: 400; font-size: 1.1rem;">Vitamina C</h3>
+                    </div>
+
+                    <div class="ingredient-box animate-appear delay-3">
+                        <h3 style="font-weight: 400; font-size: 1.1rem;">Proteína de Suero de Leche</h3>
+                    </div>
+
+                    <div class="ingredient-box animate-appear delay-4">
+                        <h3 style="font-weight: 400; font-size: 1.1rem;">Hierro, polifenoles y Zinc</h3>
+                    </div>
+
+                    <div class="ingredient-box animate-appear delay-5">
+                        <h3 style="font-weight: 400; font-size: 1.1rem;">Sabor: Delicioso chocolate Belga</h3>
+                    </div>
+
+                    <div class="ingredient-box animate-appear delay-6">
+                        <h3 style="font-weight: 400; font-size: 1.1rem;">Digestión y Nutrición</h3>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section style="padding: 150px 0; background-color: rgba(255,255,255,0.02); text-align: center; color: var(--text-light);">
+            <div class="container animate-appear delay-1">
+                <p style="font-size: 1.1rem;">Tu texto sobre la gran imagen transversal aquí.</p>
+            </div>
+        </section>
+        <section style="padding: 100px 0; color: var(--text-light);">
+            <div class="container animate-appear delay-1">
+                <h2 style="font-weight: 300; font-size: 2.5rem; text-align: center; text-transform: uppercase; margin-bottom: 50px;">DOXA'S: La Colección</h2>
+                
+                <div class="animate-appear delay-2" style="display: flex; gap: 20px; justify-content: center; margin-top: 50px;">
+                    <div class="zoom-out-appear" style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;">G1</div>
+                    <div class="zoom-out-appear" style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;">G2</div>
+                    <div class="zoom-out-appear" style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;">G3</div>
+                    <div class="zoom-out-appear" style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;">G4</div>
+                </div>
+            </div>
+        </section>
+        <section class="light-section" style="padding: 100px 0;">
+            <div class="container animate-appear delay-1">
+                <h2 style="font-weight: 300; font-size: 2.5rem; text-align: center;">Producto de I+D</h2>
+            </div>
+        </section>
+        <footer style="padding: 50px 0; background-color: #111; color: var(--text-light);">
+            <div class="containeranimate-appear delay-1">
+                <p style="text-align: center; opacity: 0.5;">Social Media, etc.</p>
+            </div>
+            
+            <div style="background-color: var(--accent-color); padding: 10px; margin-top: 30px; text-align: center; color: var(--text-dark);">
+                <p>TEXTO EN PIE AMARILLO</p>
+            </div>
+        </footer>
+        </div> </body>
 </html>
