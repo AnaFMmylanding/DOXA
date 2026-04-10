@@ -668,5 +668,151 @@ max-width: 500px;
 </script>
         
                                    /* */
+
+        
+                                   /* SECCIÓN RESERVA-COMPRA */
+
+    <style>
+    .checkout-section {
+        background-color: #f5f1eb; /* El color crema de tu diseño */
+        padding: 100px 20px;
+        text-align: center;
+        font-family: 'Lexend', sans-serif;
+        color: #444;
+    }
+
+    /* GRID DE LAS 4 GALLETAS */
+    .checkout-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+        max-width: 1000px;
+        margin: 0 auto 60px auto;
+    }
+    .grid-item {
+        text-align: center;
+    }
+    .grid-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.1));
+        transition: transform 0.4s ease;
+    }
+    .grid-item:hover img {
+        transform: translateY(-5px);
+    }
+    .grid-title {
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #000;
+    }
+
+    /* TEXTOS DE LA PROPUESTA DE VALOR */
+    .checkout-texts {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    .txt-neg {
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.8;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+        color: #444;
+    }
+    .txt-light {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 2.2;
+        letter-spacing: 1.5px;
+        margin-bottom: 20px;
+        color: #444;
+    }
+
+    /* BOTÓN JOTFORM */
+    .btn-jotform {
+        display: inline-block;
+        background-color: #000;
+        color: #fff;
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 3px;
+        width: 100%;
+        max-width: 500px;
+        padding: 20px 0;
+        margin-top: 40px;
+        border: 1px solid #000;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+    }
+    .btn-jotform:hover {
+        background-color: #524b3f; /* Tu marrón corporativo */
+        color: #fff;
+        transform: translateY(-3px);
+    }
+
+    /* DELAYS PARA LA CASCADA */
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.3s; }
+    .delay-3 { transition-delay: 0.5s; }
+    .delay-4 { transition-delay: 0.7s; }
+    .delay-5 { transition-delay: 0.9s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .checkout-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 20px; }
+        .btn-jotform { width: 90%; }
+    }
+    @media (max-width: 480px) {
+        .checkout-grid { grid-template-columns: 1fr; }
+    }
+</style>
+
+<section class="checkout-section" id="reserva">
+    <div class="container">
+        
+        <div class="checkout-grid">
+            <div class="grid-item animate-appear delay-1">
+                <img src="https://drive.google.com/thumbnail?id=1n77jeWbfGNIkJlLE6GK5cIyzkL_xCnvq&sz=w500" alt="Bésame Choco">
+                <div class="grid-title">BÉSAME CHOCO</div>
+            </div>
+            <div class="grid-item animate-appear delay-2">
+                <img src="https://drive.google.com/thumbnail?id=14S_YCNVodPqWd9DDsd2ZCkqPZfhW4V7s&sz=w500" alt="Lux Umbra">
+                <div class="grid-title">LUX-UMBRA</div>
+            </div>
+            <div class="grid-item animate-appear delay-3">
+                <img src="https://drive.google.com/thumbnail?id=1LXn-WY0BSMtuzhVABwdWwjPFZReQhPDB&sz=w500" alt="Café Delirium">
+                <div class="grid-title">CAFÉ DELIRIUM</div>
+            </div>
+            <div class="grid-item animate-appear delay-4">
+                <img src="https://drive.google.com/thumbnail?id=1P4UaVzpMm-oyD5H5doz5x21sA5P_yNIJ&sz=w500" alt="Selva Negra">
+                <div class="grid-title">SELVA NEGRA</div>
+            </div>
+        </div>
+
+        <div class="checkout-texts animate-appear delay-5">
+            <p class="txt-neg">DOXAS se elaboran artesanalmente y bajo pedido.</p>
+            
+            <p class="txt-light">
+                Las tuyas te serán enviadas en cuanto hayan enfriado tras su horneado.<br><br>
+                Cuando las quieras consumir, puedes darles un golpe de calor en el<br>
+                microondas y las tendrás tiernas y jugosas como recién hechas.<br><br><br>
+                Deja tu correo para que podamos informarte de la fecha de envío
+            </p>
+
+            <a href="https://eu.jotform.com/form/260395833827366" target="_blank" class="btn-jotform">
+                RESERVAR MIS DOXAS
+            </a>
+        </div>
+
+    </div>
+</section>    
+                                   /* */
+        
 </body>
 </html>
