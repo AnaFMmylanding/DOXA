@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOXA | Alta Repostería Funcional</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+   
+    
     <style>
         /* =========================================
            RESET TOTAL Y VARIABLES DE MARCA
@@ -203,9 +205,69 @@ max-width: 500px;
     .activo-wide-card { grid-column: span 1; }
     .activo-card { padding: 40px 20px; min-height: 400px; }
 }
-        
+ /* Cuadrícula de 5 columnas para lograr el efecto desfasado (60/40) */
+    .activos-grid-staggered {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px; 
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    /* Tamaños de las cajas */
+    .box-wide { grid-column: span 3; }
+    .box-narrow { grid-column: span 2; }
+    .box-full { grid-column: span 5; min-height: 500px !important; }
+
+    .activo-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 60px 40px;
+        min-height: 450px;
+        overflow: hidden;
+    }
+
+    .bg-layer-card {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.5);
+        z-index: 1;
+        transition: transform 0.8s ease;
+    }
+    .activo-card:hover .bg-layer-card {
+        transform: scale(1.05);
+    }
+    .content-card {
+        position: relative;
+        z-index: 2;
+        max-width: 500px;
+    }
+    
+    /* Fuentes y textos exactos */
+    .c-tagline { font-family: 'Lexend', sans-serif; font-size: 11px; letter-spacing: 3px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; color: #fff; }
+    .c-title { font-family: 'Lexend', sans-serif; font-size: clamp(24px, 3vw, 32px); font-weight: 400; margin-bottom: 20px; line-height: 1.2; color: #fff; }
+    .c-prop { font-family: 'Lexend', sans-serif; font-size: 12px; font-weight: 600; line-height: 1.8; letter-spacing: 2px; margin-bottom: 15px; color: #fff; }
+    .c-desc { font-family: 'Lexend', sans-serif; font-size: 12px; font-weight: 300; line-height: 1.8; letter-spacing: 2px; color: #fff; opacity: 0.9; }
+
+    /* En móvil se apilan todas igual */
+    @media (max-width: 768px) {
+        .activos-grid-staggered { grid-template-columns: 1fr; }
+        .box-wide, .box-narrow, .box-full { grid-column: span 1; }
+        .activo-card { padding: 40px 20px; min-height: 400px; }
+    }       
     </style>
+
 </head>
+
+
+    
 <body>
 
     <div class="page-wrapper">
@@ -284,7 +346,7 @@ max-width: 500px;
     </div>
 </section>
         
-                            /* SECCIÓN 1 PRESENTACIÓN DE ACTIVOS*/
+                            /* SECCIÓN KO PRESENTACIÓN DE ACTIVOS*/
 
 
 
@@ -384,12 +446,88 @@ max-width: 500px;
 </section>
 
 
-                                    /* SECCIÓN 2 PRESENTACIÓN DE ACTIVOS */
         
+                            /* SECCIÓN OK PRESENTACIÓN DE ACTIVOS*/
+
+  <section style="background-color: #524b3f; padding: 80px 0;">
+    <div class="activos-grid-staggered">
+        
+        <div class="activo-card box-wide animate-appear delay-1">
+            <div class="bg-layer-card" style="background-image: url('PIel hidratada y tersa.jpg');"></div>
+            <div class="content-card">
+                <h2 class="c-tagline">LA FACTORÍA DE TEJIDOS</h2>
+                <h3 class="c-title">Aminoácidos Precursores<br>del Colágeno</h3>
+                <p class="c-prop">10g de los aminoácidos clave</p>
+                <p class="c-desc">Los aminoácidos aislados son mucho más potentes<br>que su misma cantidad en colágeno ya formado.<br><br>Cada DOXA porta 10 g completos de esos<br>aminoácidos. Una de las dosis más altas del<br>mercado y activos de mayor potencia.<br>Así sí notas la diferencia.</p>
+            </div>
+        </div>
+
+        <div class="activo-card box-narrow animate-appear delay-2">
+            <div class="bg-layer-card" style="background-image: url('mano sobre pierna.jpg');"></div>
+            <div class="content-card">
+                <h2 class="c-tagline">NO SIN MI VITAMINA C</h2>
+                <h3 class="c-title">Vitamina C</h3>
+                <p class="c-prop">100mg de vitamina C estratégicamente<br>añadidos para preservar sus cualidades</p>
+                <p class="c-desc">Síntesis de colágeno.<br>Refuerzo de tus defensas.<br>Protección y luminosidad de tu piel.</p>
+            </div>
+        </div>
+
+        <div class="activo-card box-narrow animate-appear delay-3">
+            <div class="bg-layer-card" style="background-image: url('mujer-ejercicio.jpg');"></div>
+            <div class="content-card">
+                <h2 class="c-tagline">ADIÓS, BARRITAS, ADIÓS</h2>
+                <h3 class="c-title">Proteína de Suero de<br>Leche</h3>
+                <p class="c-prop">20g de Proteína que NO sabe a cartón</p>
+                <p class="c-desc">10g de proteína de suero de leche. 10g<br>aportada por el resto de ingredientes.<br>Un toque que ayuda a mantener tu vitalidad y<br>tono muscular.</p>
+            </div>
+        </div>
+
+        <div class="activo-card box-wide animate-appear delay-4">
+            <div class="bg-layer-card" style="background-image: url('piel negra.jpg ');"></div>
+            <div class="content-card">
+                <h2 class="c-tagline">ARQUITECTURA EN EL CABELLO</h2>
+                <h3 class="c-title">Biotina, pelo renovado y<br>fuerte</h3>
+                <p class="c-prop">100µg de biotina para reforzar tus folículos</p>
+                <p class="c-desc">Facilita que tu nuevo pelo sea más fuerte y flexible,<br>y tu piel más elástica.</p>
+            </div>
+        </div>
+
+        <div class="activo-card box-wide animate-appear delay-5">
+            <div class="bg-layer-card" style="background-image: url('https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920');"></div>
+            <div class="content-card">
+                <h2 class="c-tagline">INFLAMACIÓN NO, GRACIAS</h2>
+                <h3 class="c-title">Boswellia Serrata &<br>Jengibre</h3>
+                <p class="c-prop">Extracto de boswellia serrata y jengibre.</p>
+                <p class="c-desc">Cada sustancia por separado son ya potentes<br>antiinflamatorios. Cuando además los juntas, el<br>efecto de contención es brutal y tus articulaciones<br>se mantienen sanas y a pleno rendimiento.</p>
+            </div>
+        </div>
+
+        <div class="activo-card box-narrow animate-appear delay-6">
+            <div class="bg-layer-card" style="background-image: url('Creatina _ok.jpg');"></div>
+            <div class="content-card">
+                <h2 class="c-tagline">TU PARTE CREATIVA</h2>
+                <h3 class="c-title">Creatina</h3>
+                <p class="c-prop">3g de Creatina</p>
+                <p class="c-desc">Sin picos de insulina<br>Sin exceso de carbohidratos<br>Sin aceites refinados que inflaman tus tejidos</p>
+            </div>
+        </div>
+
+        <div class="activo-card box-full animate-appear delay-7">
+            <div class="bg-layer-card" style="background-image: url('https://drive.google.com/thumbnail?id=1NCcOsbxBtm6uUw65r9qTrjdLWybz04vX&sz=w1920');"></div>
+            <div class="content-card">
+                <h2 class="c-tagline">Y TODOS LOS "SIN" QUE TE GUSTA LEER</h2>
+                <h3 class="c-title">Sin azúcar. Sin gluten. Sin<br>remordimientos</h3>
+                <p class="c-desc" style="line-height: 2;">Sin picos de insulina<br>Sin exceso de carbohidratos<br>Sin aceites refinados que inflaman tus tejidos<br>Sin sustancias estériles sólo de relleno<br><br>Cada ingrediente que hay en DOXA (harina de almendra,<br>mantequilla bio, aceite MTC...) es noble y ejerce su función<br>nutritiva reparadora.</p>
+            </div>
+        </div>
+
+    </div>
+</section>      
 
         
                                    /* */
 
+        
 
                   /* SECCIÓN DOXAS: LA COLECCIÓN */
         
