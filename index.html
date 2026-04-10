@@ -434,7 +434,9 @@ max-width: 500px;
         
 
                   /* SECCIÓN DOXAS: LA COLECCIÓN */
-  <style>
+
+
+        <style>
     .coleccion-section {
         background-color: #302b22;
         padding: 100px 20px;
@@ -471,100 +473,60 @@ max-width: 500px;
     }
     .column-img { flex: 1.2; }
     .column-text { flex: 1; }
-    .fade-effect {
-        opacity: 1;
-        transition: opacity 0.4s ease-in-out;
-    }
+    
+    /* Efecto Fade */
+    .fade-effect { opacity: 1; transition: opacity 0.4s ease-in-out; }
     .is-hidden { opacity: 0; }
-    .main-image-container img {
-        width: 100%;
-        height: auto;
-        border-radius: 4px;
-    }
-    .thumbnail-grid {
-        display: flex;
-        gap: 15px;
-        margin-top: 20px;
-        justify-content: center;
-    }
-    .thumbnail-grid img {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-        cursor: pointer;
-        opacity: 0.5;
-        transition: all 0.3s ease;
-        border-radius: 50%;
-    }
-    .thumbnail-grid img:hover, .thumbnail-grid img.active-thumb {
-        opacity: 1;
-        transform: scale(1.1);
-    }
-    .variety-title {
-        font-size: clamp(24px, 3vw, 32px);
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        margin-bottom: 20px;
-        font-weight: 400;
-    }
-    .variety-desc {
-        font-size: 13px;
-        font-weight: 300;
-        line-height: 1.8;
-        min-height: 100px;
-        margin-bottom: 40px;
-        opacity: 0.9;
-    }
-    .dietary-icons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 40px;
-    }
-    .tag {
-        font-size: 9px;
-        font-weight: 700;
-        padding: 8px 12px;
-        border: 1px solid rgba(255,255,255,0.3);
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
-    .accordion-btn {
-        background: none;
-        border: none;
-        border-bottom: 1px solid rgba(255,255,255,0.2);
-        width: 100%;
-        text-align: left;
-        padding: 15px 0;
-        font-family: 'Lexend', sans-serif;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        cursor: pointer;
-        color: #fff;
+    
+    .main-image-container img { width: 100%; height: auto; border-radius: 4px; }
+    
+    .thumbnail-grid { display: flex; gap: 15px; margin-top: 20px; justify-content: center; }
+    .thumbnail-grid img { width: 60px; height: 60px; object-fit: cover; cursor: pointer; opacity: 0.5; transition: all 0.3s ease; border-radius: 50%; }
+    .thumbnail-grid img:hover, .thumbnail-grid img.active-thumb { opacity: 1; transform: scale(1.1); }
+    
+    .variety-title { font-size: clamp(24px, 3vw, 32px); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; font-weight: 400; }
+    .variety-desc { font-size: 13px; font-weight: 300; line-height: 1.8; min-height: 100px; margin-bottom: 40px; opacity: 0.9; }
+    
+    .dietary-icons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+    .tag { font-size: 9px; font-weight: 700; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; }
+    
+    /* ACORDEÓN (Exactamente tus clases originales) */
+    .accordion { 
+        background: none; 
+        border: none; 
+        border-bottom: 1px solid rgba(255,255,255,0.2); 
+        width: 100%; 
+        text-align: left; 
+        padding: 15px 0; 
+        font-family: 'Lexend', sans-serif; 
+        font-size: 11px; 
+        text-transform: uppercase; 
+        cursor: pointer; 
+        color: #efefef;
         font-weight: 600;
+        letter-spacing: 2px;
         transition: border-color 0.3s ease;
     }
-    .accordion-btn:hover {
-        border-bottom-color: rgba(255,255,255,0.8);
+    .accordion:hover { border-bottom-color: rgba(255,255,255,0.8); }
+    .panel { 
+        max-height: 0; 
+        overflow: hidden; 
+        transition: max-height 0.4s ease-out; 
+        color: #efefef;
     }
-    .accordion-panel {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease-out;
-    }
-    .accordion-panel p {
-        padding: 15px 0;
-        font-size: 12px;
-        font-weight: 300;
-        line-height: 1.6;
+    .panel p { 
+        padding: 15px 0; 
+        font-size: 12px; 
+        font-weight: 300; 
         opacity: 0.8;
+        line-height: 1.6;
         margin: 0;
     }
+    
     @media (max-width: 768px) {
         .product-main { flex-direction: column; gap: 40px; text-align: center; }
         .dietary-icons { justify-content: center; }
-        .accordion-btn { text-align: center; }
+        .accordion { text-align: center; }
         .variety-desc { min-height: auto; }
     }
 </style>
@@ -612,14 +574,14 @@ max-width: 500px;
                     <span class="tag">IDEAL POST-ENTRENO</span>
                 </div>
 
-                <div>
-                    <button class="accordion-btn">Ingredientes Comunes</button>
-                    <div class="accordion-panel">
+                <div class="accordion-section">
+                    <button class="accordion" onclick="toggleAccordion(this)">Ingredientes Comunes</button>
+                    <div class="panel">
                         <p>Base de harina de almendra, eritritol premium y huevos camperos. Cada variedad añade sus propios extractos naturales y superalimentos.</p>
                     </div>
                     
-                    <button class="accordion-btn">Información Nutricional (Media)</button>
-                    <div class="accordion-panel">
+                    <button class="accordion" onclick="toggleAccordion(this)">Información Nutricional (Media)</button>
+                    <div class="panel">
                         <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
                     </div>
                 </div>
@@ -630,6 +592,7 @@ max-width: 500px;
 </section>
 
 <script>
+    // 1. Motor de las Miniaturas
     const doxas = [
         {
             title: 'BÉSAME CHOCO',
@@ -648,69 +611,46 @@ max-width: 500px;
         },
         {
             title: 'SELVA NEGRA',
-            desc: 'Cacao negro por fuera. Cacao negro por dentro.<br>Salv      
-                                   /* */
+            desc: 'Cacao negro por fuera. Cacao negro por dentro.<br>Salvaje, profunda, indomable.<br>Tu oscuro objeto de deseo...',
+            img: 'https://drive.google.com/thumbnail?id=1P4UaVzpMm-oyD5H5doz5x21sA5P_yNIJ&sz=w1000'
+        }
+    ];
 
-
-
-
-
-    
-        <section style="padding: 150px 0; background-color: rgba(255,255,255,0.02); text-align: center; color: var(--text-light);">
-            <div class="container animate-appear delay-1">
-                <p style="font-size: 1.1rem;">Tu texto sobre la gran imagen transversal aquí.</p>
-            </div>
-        </section>
-        <section style="padding: 100px 0; color: var(--text-light);">
-            <div class="container animate-appear delay-1">
-                <h2 style="font-weight: 300; font-size: 2.5rem; text-align: center; text-transform: uppercase; margin-bottom: 50px;">DOXA'S: La Colección</h2>
-                
-                <div class="animate-appear delay-2" style="display: flex; gap: 20px; justify-content: center; margin-top: 50px;">
-                    <div class="zoom-out-appear" style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;">G1</div>
-                    <div class="zoom-out-appear" style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;">G2</div>
-                    <div class="zoom-out-appear" style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;">G3</div>
-                    <div class="zoom-out-appear" style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;">G4</div>
-                </div>
-            </div>
-        </section>
-
-
+    function changeVariety(index) {
+        const imgFade = document.getElementById('fadeGroup');
+        const textFade = document.getElementById('textFadeGroup');
+        const thumbnails = document.getElementsByClassName('thumb-img');
         
-        <section class="light-section" style="padding: 100px 0;">
-            <div class="container animate-appear delay-1">
-                <h2 style="font-weight: 300; font-size: 2.5rem; text-align: center;">Producto de I+D</h2>
-            </div>
-        </section>
-        <footer style="padding: 50px 0; background-color: #111; color: var(--text-light);">
-            <div class="containeranimate-appear delay-1">
-                <p style="text-align: center; opacity: 0.5;">Social Media, etc.</p>
-            </div>
+        imgFade.classList.add('is-hidden');
+        textFade.classList.add('is-hidden');
+        
+        for(let i = 0; i < thumbnails.length; i++) {
+            thumbnails[i].classList.remove('active-thumb');
+        }
+        thumbnails[index].classList.add('active-thumb');
+
+        setTimeout(() => {
+            const d = doxas[index];
+            document.getElementById('varietyTitle').innerText = d.title;
+            document.getElementById('varietyDesc').innerHTML = d.desc;
+            document.getElementById('mainView').src = d.img;
             
-            <div style="background-color: var(--accent-color); padding: 10px; margin-top: 30px; text-align: center; color: var(--text-dark);">
-                <p>TEXTO EN PIE AMARILLO</p>
-            </div>
-        </footer>
-        </div>
+            imgFade.classList.remove('is-hidden');
+            textFade.classList.remove('is-hidden');
+        }, 400);
+    }
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        const animatedElements = document.querySelectorAll('.animate-appear, .zoom-out-appear');
-        animatedElements.forEach(el => {
-            el.style.animationPlayState = 'paused';
-            observer.observe(el);
-        });
-    });
+    // 2. Motor del Acordeón a prueba de fallos
+    function toggleAccordion(element) {
+        element.classList.toggle("active");
+        var panel = element.nextElementSibling;
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+    }
 </script>
-
         
                                    /* */
 </body>
