@@ -572,88 +572,251 @@ max-width: 500px;
 
      /* SECCIÓN RUEDA DE ACTIVOS*/
 
+<style>
+    /* 1. Reset y Estilos Base de la Sección */
+    .rueda-section {
+        background-color: #302b22; /* Tu marrón profundo corporativo */
+        padding: 100px 20px 150px 20px; /* Más espacio abajo para el panel */
+        color: #f5f1eb; /* Tu crema suave corporativo */
+        font-family: 'Lexend', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .rueda-header { text-align: center; margin-bottom: 80px; }
+    .rueda-header h2 { font-size: clamp(28px, 4vw, 36px); font-weight: 300; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px; color: #fff; }
+    
+    /* 2. Layout Desktop Radial (El "Ecosistema") */
+    .rueda-desktop {
+        display: block;
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        height: 600px; /* Altura para la rueda */
+        margin: 0 auto;
+    }
+    
+    /* El contenedor que GIRA y se BALANCEA (Efecto Brisa y Parallax) */
+    .rueda-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%) rotate(0deg) translateY(0);
+        /* Esta transición es para el efecto "Leve Brisa" y Parallax suave */
+        transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+        opacity: 0; /* Empieza invisible para el reveal */
+    }
+    
+    /* Imagen central de la galleta (Sube una imagen cuadrada 'doxa-central.png') */
+    .center-cookie {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        object-fit: cover;
+        z-index: 10;
+        filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.6));
+    }
 
+    /* Estilos de cada activo (nodo o "banderita") */
+    .nodo-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        /* El transform inicial lo aplicará JavaScript para el círculo perfecto */
+        transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+        z-index: 15;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    
+    .nodo-punto {
+        width: 12px;
+        height: 12px;
+        background-color: #c19b76; /* Tono cobre/dorado elegante para el acento */
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(193, 155, 118, 0.5);
+        transition: all 0.4s ease;
+    }
+    
+    .nodo-label {
+        position: absolute;
+        width: 120px;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #f5f1eb;
+        top: 25px; /* Etiqueta debajo del punto */
+        opacity: 0.7;
+        transition: all 0.4s ease;
+        pointer-events: none;
+    }
 
+    /* --- EFECTOS HOVER UNIFICADOS --- */
+    
+    /* Cuando hay hover en ALGO de la rueda, todos los nodos se atenúan */
+    .rueda-desktop.section-hovered .nodo-wrapper { opacity: 0.3; filter: grayscale(50%); }
+    
+    /* El nodo que está siendo seleccionado (active) se ilumina y escala suavemente */
+    .rueda-desktop.section-hovered .nodo-wrapper.active { opacity: 1; filter: grayscale(0%); transform: scale(1.1) !important; z-index: 18;}
+    .rueda-desktop.section-hovered .nodo-wrapper.active .nodo-punto { transform: scale(1.5); box-shadow: 0 0 20px rgba(193, 155, 118, 0.9); }
+    .rueda-desktop.section-hovered .nodo-wrapper.active .nodo-label { opacity: 1; color: #c19b76; }
 
-        
+    /* 3. El Nuevo Panel de Detalles (donde puedes pegar código) */
+    .detalles-activo-container {
+        position: relative;
+        max-width: 600px;
+        margin: 50px auto 0 auto;
+        padding: 40px;
+        background-color: rgba(0,0,0,0.2); /* Sutil contraste */
+        border: 1px solid rgba(193, 155, 118, 0.1); /* Borde cobre muy sutil */
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        pointer-events: none; /* No clickable hasta que sea visible */
+        z-index: 5;
+    }
+    .detalles-activo-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto;}
+    
+    .detalles-title { font-size: 18px; font-weight: 400; color: #c19b76; margin-bottom: 20px; letter-spacing: 3px; text-transform: uppercase; text-align: center; }
+    
+    /* Este es el contenedor donde tú insertarás el código o texto para cada activo */
+    .detalles-content-area { font-size: 12px; font-weight: 300; line-height: 1.8; color: #f5f1eb; opacity: 0.9; }
 
-  <section style="background-color: #524b3f; padding: 80px 0;">
-    <div class="activos-grid-staggered">
-        
-        <div class="activo-card box-wide animate-appear delay-1">
-            <div class="bg-layer-card" style="background-image: url('PIel hidratada y tersa.jpg');"></div>
-            <div class="content-card">
-                <h2 class="c-tagline">LA FACTORÍA DE COLÁGENO</h2>
-                <h3 class="c-title">Aminoácidos</h3>
-                <p class="c-desc">Los aminoácidos aislados son mucho más potentes<br>que su misma cantidad en colágeno ya formado.<br>
-                    <br>Cada DOXA porta 10 g de aminoácidos precursores del colágeno<br>
-                    Una de las dosis más altas del mercado y con activos de mayor potencia.<br><br>Así sí notas la diferencia.</p>
+    /* 4. Layout Móvil Vertical (Limpio y legible) */
+    .rueda-mobile { display: none; max-width: 600px; margin: 0 auto; }
+    .mob-item { border-bottom: 1px solid rgba(245, 241, 235, 0.1); padding: 15px 0; }
+    .mob-title { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #c19b76; margin-bottom: 10px; }
+    .mob-desc { font-size: 12px; font-weight: 300; line-height: 1.6; color: #f5f1eb; opacity: 0.8; }
+
+    @media (max-width: 900px) {
+        .rueda-desktop { display: none; }
+        .detalles-activo-container { display: none; }
+        .rueda-mobile { display: block; }
+    }
+</style>
+
+<section class="rueda-section">
+    <div class="container animate-appear">
+        <div class="rueda-header">
+            <h2>El Ecosistema DOXA</h2>
+            <p style="font-size: 12px; font-weight: 300; letter-spacing: 2px; opacity: 0.8;">12 activos funcionales trabajando en sinergia para ti.</p>
+        </div>
+
+        <div class="rueda-desktop" id="desktopWrapper">
+            <img src="doxa-central.png" alt="DOXA" class="center-cookie">
+            
+            <div class="rueda-container" id="ruedaCentral">
+                <div class="nodo-wrapper" data-title="Aminoácidos del Colágeno" data-desc="10g de precursores puros.<br>Máxima biodisponibilidad.<br>Ayuda a regenerar tu piel."><div class="nodo-punto"></div><div class="nodo-label">Colágeno</div></div>
+                <div class="nodo-wrapper" data-title="Vitamina C Estratégica" data-desc="100mg añadidos.<br>Protege la calidad del colágeno.<br>Action antioxidante clave."><div class="nodo-punto"></div><div class="nodo-label">Vitamina C</div></div>
+                <div class="nodo-wrapper" data-title="Proteína Whey Premium" data-desc="20g totales por unidad.<br>Mantenimiento del tono muscular.<br>Ideal para recuperación."><div class="nodo-punto"></div><div class="nodo-label">Proteína</div></div>
+                <div class="nodo-wrapper" data-title="Biotina Activa" data-desc="100µg para folículos.<br>Cabello fuerte y sano.<br>Mejora la elasticidad de la piel."><div class="nodo-punto"></div><div class="nodo-label">Biotina</div></div>
+                <div class="nodo-wrapper" data-title="Boswellia Serrata" data-desc="Potente antiinflamatorio natural.<br>Protege tus articulaciones.<br>Reduce la hinchazón."><div class="nodo-punto"></div><div class="nodo-label">Boswellia</div></div>
+                <div class="nodo-wrapper" data-title="Extracto de Jengibre" data-desc="Sinergia antiinflamatoria.<br>Combate el estrés oxidativo.<br>Favorece la digestión."><div class="nodo-punto"></div><div class="nodo-label">Jengibre</div></div>
+                <div class="nodo-wrapper" data-title="Creatina Pura" data-desc="3g para rendimiento diario.<br>Vitalidad muscular y cognitiva.<br>Sin picos de insulina."><div class="nodo-punto"></div><div class="nodo-label">Creatina</div></div>
+                <div class="nodo-wrapper" data-title="Harina de Almendra" data-desc="Base noble y nutritiva.<br>Aporta grasas saludables.<br>Textura exquisita."><div class="nodo-punto"></div><div class="nodo-label">Almendra</div></div>
+                <div class="nodo-wrapper" data-title="Mantequilla Bio" data-desc="Sabor real y profundo.<br>Sin aceites refinados inflamatorios.<br>Nutrición sana."><div class="nodo-punto"></div><div class="nodo-label">Mantequilla</div></div>
+                <div class="nodo-wrapper" data-title="Aceite MCT" data-desc="Energía rápida y limpia.<br>Favorece la cetosis (keto).<br>Ideal pre/post entreno."><div class="nodo-punto"></div><div class="nodo-label">Aceite MCT</div></div>
+                <div class="nodo-wrapper" data-title="Cacao Puro" data-desc="Rico en polifenoles.<br>Corazón del sabor Lux-Umbra.<br>Action antioxidante."><div class="nodo-punto"></div><div class="nodo-label">Cacao</div></div>
+                <div class="nodo-wrapper" data-title="Eritritol Premium" data-desc="Dulzor sin culpa.<br>Cero picos de glucosa.<br>Amigo de tus dientes."><div class="nodo-punto"></div><div class="nodo-label">Eritritol</div></div>
             </div>
         </div>
 
-        <div class="activo-card box-narrow animate-appear delay-2">
-            <div class="bg-layer-card" style="background-image: url('mano sobre pierna.jpg');"></div>
-            <div class="content-card">
-                <h2 class="c-tagline">NO SIN MI VITAMINA C</h2>
-                <h3 class="c-title">Vitamina C</h3>
-                <p class="c-desc">100mg de Vitamina C. <br><br>Síntesiza tu colágeno.<br>Refuerza de tus defensas.<br>Protege e ilumina tu piel.</p>
-            </div>
+        <div class="detalles-activo-container" id="detallesContainer">
+            <h3 class="detalles-title" id="detallesTitle">Detalle de Activo</h3>
+            
+            <div class="detalles-content-area" id="detallesContent">
+                <p style="text-align: center; font-weight: 300;">Selecciona un ingrediente para ver sus detalles específicos.</p>
+                </div>
         </div>
 
-        <div class="activo-card box-narrow animate-appear delay-3">
-            <div class="bg-layer-card" style="background-image: url('mujer-ejercicio.jpg');"></div>
-            <div class="content-card">
-                <h2 class="c-tagline">BYE BYE BARRITAS</h2>
-                <h3 class="c-title">Proteína</h3>
-                <p class="c-desc">10 g de proteína de suero de leche<br> 10g aportados por el resto de ingredientes.
-                    <br><br>Nutre tu vitalidad y tono muscular sabiendo delicioso. No a cartón.</p>
+        <div class="rueda-mobile" id="mobileList">
             </div>
-        </div>
-
-        <div class="activo-card box-wide animate-appear delay-4">
-            <div class="bg-layer-card" style="background-image: url('piel negra.jpg ');"></div>
-            <div class="content-card">
-                <h2 class="c-tagline">ARQUITECTURA EN EL CABELLO</h2>
-                <h3 class="c-title">Biotina </h3>
-                <p class="c-desc">100µg para reforzar tus folículos.<br><br> Tu pelo más fuerte y tu piel más elástica.</p>
-            </div>
-        </div>
-
-        <div class="activo-card box-wide animate-appear delay-5">
-            <div class="bg-layer-card" style="background-image: url('articulaciones.jpg ');"></div>
-            <div class="content-card">
-                <h2 class="c-tagline">INFLAMACIÓN NO, GRACIAS</h2>
-                <h3 class="c-title">Boswellia Serrata & Estracto de Jengibre</h3>
-                <p class="c-desc"> Potentes antiinflamatorios por separado. <br> Una bomba anti-inflamacion juntos.
-                <br><br>180mg de broswelia y 120mg de jengibre para unas articulaciones sanas y a pleno rendimiento</p>
-            </div>
-        </div>
-
-        <div class="activo-card box-narrow animate-appear delay-6">
-            <div class="bg-layer-card" style="background-image: url('Creatina _ok.jpg');"></div>
-            <div class="content-card">
-                <h2 class="c-tagline">ESE "PUSH" DE MÁS</h2>
-                <h3 class="c-title">Creatina</h3>
-                <p class="c-desc">3g de Creatina para: <br> <br>  Energía extra en tus entrenamientos  <br> Reparación de tejidos
-                    <br> Rendimiento intelectual
-            </div>
-        </div>
-
-        <div class="activo-card box-full animate-appear delay-7">
-            <div class="bg-layer-card" style="background-image: url('todos los sin.jpg');"></div>
-            <div class="content-card">
-                <h2 class="c-tagline">Y TODOS LOS "SIN" QUE TE GUSTA LEER</h2>
-                <h3 class="c-title">Sin azúcar. Sin gluten. Sin remordimientos</h3>
-                <p class="c-desc" style="line-height: 2;">Sin picos de insulina<br>Sin exceso de carbohidratos<br>
-                    Sin aceites refinados que te inflaman <br>Sin sustancias estériles sólo para relleno<br>
-                    <br>Cada DOXA supone 350Kcal y X carbohidratos netos.  <br>Cada ingrediente que hay en DOXA es noble y ejerce su función nutritiva reparadora.</p>
-            </div>
-        </div>
 
     </div>
-</section>      
+</section>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const desktopWrapper = document.getElementById('desktopWrapper');
+        const ruedaCentral = document.getElementById('ruedaCentral');
+        const nodos = document.querySelectorAll('.nodo-wrapper');
+        const detallesContainer = document.getElementById('detallesContainer');
+        const detallesTitle = document.getElementById('detallesTitle');
+        const detallesContent = document.getElementById('detallesContent');
+        const mobileList = document.getElementById('mobileList');
         
+        const radio = 240; // Distancia de las banderitas al centro
+
+        // 1. Reveal Inicial Suave (asentamiento de la rueda)
+        setTimeout(() => {
+            ruedaCentral.style.opacity = "1";
+            // Pequeño zoom-out y asentamiento al cargar
+            ruedaCentral.style.transform = "translate(-50%, -50%) rotate(0deg) scale(1) translateY(0)";
+        }, 150);
+
+        nodos.forEach((nodo, index) => {
+            // 2. Matemáticas para colocar los 12 puntos en círculo perfecto
+            const angulo = (index * 30 - 90) * (Math.PI / 180); 
+            const x = Math.cos(angulo) * radio;
+            const y = Math.sin(angulo) * radio;
+            
+            // Guardamos la posición original en la rueda
+            nodo.style.transform = `translate(${x}px, ${y}px)`;
+            // Guardamos también sus datos para uso en hover/móvil
+            nodo.dataset.baseX = x;
+            nodo.dataset.baseY = y;
+
+            // 3. Lógica para Móvil (Clona los textos en la lista vertical automáticamente)
+            const mobItem = document.createElement('div');
+            mobItem.className = 'mob-item';
+            mobItem.innerHTML = `<div class="mob-title">${nodo.dataset.title}</div><div class="mob-desc">${nodo.dataset.desc}</div>`;
+            mobileList.appendChild(mobItem);
+
+            // 4. Efectos Interactivos Unificados (Brisa, Parallax y Detalles)
+            
+            nodo.addEventListener('mouseenter', () => {
+                desktopWrapper.classList.add('section-hovered');
+                nodo.classList.add('active');
+                
+                // Mantenemos su posición pero aplicando el scale de hover
+                nodo.style.transform = `translate(${x}px, ${y}px) scale(1.1)`; 
+                
+                // --- Efecto "Brisa" Unificado ---
+                // Si el nodo está a la derecha (x > 0), gira a la izquierda. Si está a la izquierda (x < 0), gira a la derecha.
+                const rotacionBrisa = x > 0 ? -4 : 4; 
+                // Añadimos un pequeño movimiento de profundidad Parallax (scale y translateY sutil)
+                ruedaCentral.style.transform = `translate(-50%, -50%) rotate(${rotacionBrisa}deg) scale(0.98) translateY(-5px)`;
+
+                // Actualizar Textos del Panel de Detalles
+                detallesTitle.innerText = nodo.dataset.title;
+                // De momento pongo data-desc como placeholder. AQUÍ ES DONDE TÚ LUEGO VINCULARÁS TU CÓDIGO ESPECÍFICO.
+                detallesContent.innerHTML = nodo.dataset.desc; 
+                detallesContainer.classList.add('visible');
+            });
+
+            nodo.addEventListener('mouseleave', () => {
+                desktopWrapper.classList.remove('section-hovered');
+                nodo.classList.remove('active');
+                nodo.style.transform = `translate(${x}px, ${y}px) scale(1)`; // Vuelve a su tamaño
+                
+                // --- La rueda vuelve a su sitio (Estado Reposo) ---
+                ruedaCentral.style.transform = `translate(-50%, -50%) rotate(0deg) scale(1) translateY(0)`;
+                // detallesContainer.classList.remove('visible'); // Lo dejo visible para que no parpadee al ir de uno a otro
+            });
+        });
+    });
+</script>
+
                                    /* */
 
         
