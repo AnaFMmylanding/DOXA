@@ -270,136 +270,273 @@
            ========================================= */
 
         
-        <section class="rueda-section">
-            <div class="container animate-appear">
-                <div class="rueda-header">
-                    <h2>El Ecosistema DOXA</h2>
-                    <p style="font-size: 12px; font-weight: 300; letter-spacing: 2px; opacity: 0.8;">12 activos funcionales trabajando en sinergia para ti.</p>
-                </div>
+     <style>
+    #doxa-rueda-wrapper {
+        background-color: #302b22;
+        padding: 100px 20px 150px 20px;
+        color: #f5f1eb;
+        font-family: 'Lexend', sans-serif;
+        overflow: hidden;
+        position: relative;
+    }
 
-                <div class="rueda-desktop" id="desktopWrapper">
-                    <img src="Galle choco.png" alt="DOXA" class="center-cookie">
-                    
-                    <div class="rueda-container" id="ruedaCentral">
-                        <div class="nodo-wrapper" data-title="Aminoácidos del Colágeno" data-desc="10g de precursores puros.<br>Máxima biodisponibilidad.<br>Ayuda a regenerar tu piel."><div class="nodo-punto"></div><div class="nodo-label">Colágeno</div></div>
-                        <div class="nodo-wrapper" data-title="Vitamina C Estratégica" data-desc="100mg añadidos.<br>Protege la calidad del colágeno.<br>Action antioxidante clave."><div class="nodo-punto"></div><div class="nodo-label">Vitamina C</div></div>
-                        <div class="nodo-wrapper" data-title="Proteína Whey Premium" data-desc="20g totales por unidad.<br>Mantenimiento del tono muscular.<br>Ideal para recuperación."><div class="nodo-punto"></div><div class="nodo-label">Proteína</div></div>
-                        <div class="nodo-wrapper" data-title="Biotina Activa" data-desc="100µg para folículos.<br>Cabello fuerte y sano.<br>Mejora la elasticidad de la piel."><div class="nodo-punto"></div><div class="nodo-label">Biotina</div></div>
-                        <div class="nodo-wrapper" data-title="Boswellia Serrata" data-desc="Potente antiinflamatorio natural.<br>Protege tus articulaciones.<br>Reduce la hinchazón."><div class="nodo-punto"></div><div class="nodo-label">Boswellia</div></div>
-                        <div class="nodo-wrapper" data-title="Extracto de Jengibre" data-desc="Sinergia antiinflamatoria.<br>Combate el estrés oxidativo.<br>Favorece la digestión."><div class="nodo-punto"></div><div class="nodo-label">Jengibre</div></div>
-                        <div class="nodo-wrapper" data-title="Creatina Pura" data-desc="3g para rendimiento diario.<br>Vitalidad muscular y cognitiva.<br>Sin picos de insulina."><div class="nodo-punto"></div><div class="nodo-label">Creatina</div></div>
-                        <div class="nodo-wrapper" data-title="Harina de Almendra" data-desc="Base noble y nutritiva.<br>Aporta grasas saludables.<br>Textura exquisita."><div class="nodo-punto"></div><div class="nodo-label">Almendra</div></div>
-                        <div class="nodo-wrapper" data-title="Mantequilla Bio" data-desc="Sabor real y profundo.<br>Sin aceites refinados inflamatorios.<br>Nutrición sana."><div class="nodo-punto"></div><div class="nodo-label">Mantequilla</div></div>
-                        <div class="nodo-wrapper" data-title="Aceite MCT" data-desc="Energía rápida y limpia.<br>Favorece la cetosis (keto).<br>Ideal pre/post entreno."><div class="nodo-punto"></div><div class="nodo-label">Aceite MCT</div></div>
-                        <div class="nodo-wrapper" data-title="Cacao Puro" data-desc="Rico en polifenoles.<br>Corazón del sabor Lux-Umbra.<br>Action antioxidante."><div class="nodo-punto"></div><div class="nodo-label">Cacao</div></div>
-                        <div class="nodo-wrapper" data-title="Eritritol Premium" data-desc="Dulzor sin culpa.<br>Cero picos de glucosa.<br>Amigo de tus dientes."><div class="nodo-punto"></div><div class="nodo-label">Eritritol</div></div>
-                    </div>
-                </div>
+    #doxa-rueda-wrapper .header-rueda {
+        text-align: center;
+        margin-bottom: 80px;
+    }
 
-                <div class="detalles-activo-container" id="detallesContainer">
-                    <h3 class="detalles-title" id="detallesTitle">Detalle de Activo</h3>
-                    <div class="detalles-content-area" id="detallesContent">
-                        <p style="text-align: center; font-weight: 300;">Selecciona un ingrediente para ver sus detalles específicos.</p>
-                    </div>
-                </div>
+    #doxa-rueda-wrapper .header-rueda h2 {
+        font-size: clamp(28px, 4vw, 36px);
+        font-weight: 300;
+        letter-spacing: 10px;
+        text-transform: uppercase;
+        color: #fff;
+    }
 
-                <div class="rueda-mobile" id="mobileList"></div>
-            </div>
-        </section>
+    /* ESCRITORIO */
+    #layout-desktop {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        height: 600px;
+        margin: 0 auto;
+        display: block;
+    }
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const desktopWrapper = document.getElementById('desktopWrapper');
-                const ruedaCentral = document.getElementById('ruedaCentral');
-                const nodos = document.querySelectorAll('.nodo-wrapper');
-                const detallesContainer = document.getElementById('detallesContainer');
-                const detallesTitle = document.getElementById('detallesTitle');
-                const detallesContent = document.getElementById('detallesContent');
-                const mobileList = document.getElementById('mobileList');
-                
-                const radio = 240; 
+    #rueda-giratoria {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%) rotate(0deg);
+        transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
 
-                setTimeout(() => {
-                    if(ruedaCentral) {
-                        ruedaCentral.style.opacity = "1";
-                        ruedaCentral.style.transform = "translate(-50%, -50%) rotate(0deg) scale(1) translateY(0)";
-                    }
-                }, 150);
+    #img-centro {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        object-fit: cover;
+        z-index: 10;
+        filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.5));
+    }
 
-                nodos.forEach((nodo, index) => {
-                    const angulo = (index * 30 - 90) * (Math.PI / 180); 
-                    const x = Math.cos(angulo) * radio;
-                    const y = Math.sin(angulo) * radio;
-                    
-                    nodo.style.transform = `translate(${x}px, ${y}px)`;
-                    nodo.dataset.baseX = x;
-                    nodo.dataset.baseY = y;
+    .nodo-activo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 15;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+    }
 
-                    const mobItem = document.createElement('div');
-                    mobItem.className = 'mob-item';
-                    mobItem.innerHTML = `<div class="mob-title">${nodo.dataset.title}</div><div class="mob-desc">${nodo.dataset.desc}</div>`;
-                    if(mobileList) mobileList.appendChild(mobItem);
-                    
-                    nodo.addEventListener('mouseenter', () => {
-                        if(desktopWrapper) desktopWrapper.classList.add('section-hovered');
-                        nodo.classList.add('active');
-                        
-                        nodo.style.transform = `translate(${x}px, ${y}px) scale(1.1)`; 
-                        
-                        const rotacionBrisa = x > 0 ? -4 : 4; 
-                        if(ruedaCentral) ruedaCentral.style.transform = `translate(-50%, -50%) rotate(${rotacionBrisa}deg) scale(0.98) translateY(-5px)`;
+    .punto-activo {
+        width: 14px;
+        height: 14px;
+        background-color: #c19b76;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(193, 155, 118, 0.5);
+        transition: all 0.4s ease;
+    }
 
-                        if(detallesTitle) detallesTitle.innerText = nodo.dataset.title;
-                        if(detallesContent) detallesContent.innerHTML = nodo.dataset.desc; 
-                        if(detallesContainer) detallesContainer.classList.add('visible');
-                    });
+    .label-activo {
+        position: absolute;
+        width: 130px;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #f5f1eb;
+        top: 25px;
+        opacity: 0.7;
+        transition: all 0.4s ease;
+        pointer-events: none;
+    }
 
-                    nodo.addEventListener('mouseleave', () => {
-                        if(desktopWrapper) desktopWrapper.classList.remove('section-hovered');
-                        nodo.classList.remove('active');
-                        nodo.style.transform = `translate(${x}px, ${y}px) scale(1)`; 
-                        
-                        if(ruedaCentral) ruedaCentral.style.transform = `translate(-50%, -50%) rotate(0deg) scale(1) translateY(0)`;
-                    });
-                });
-            });
-        </script>
+    /* EFECTOS INTERACTIVOS (Brisa y Foco) */
+    #layout-desktop.estado-hover .nodo-activo {
+        opacity: 0.2;
+        filter: grayscale(80%);
+    }
 
-        <style>
-            .coleccion-section {
-                background-color: #302b22;
-                padding: 100px 20px;
-                color: #efefef;
-                font-family: 'Lexend', sans-serif;
-            }
-            .col-header { text-align: center; margin-bottom: 80px; }
-            .col-title { font-size: clamp(30px, 4vw, 40px); font-weight: 300; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px; color: #fff; }
-            .col-desc { font-size: 13px; font-weight: 300; line-height: 2; letter-spacing: 2px; max-width: 600px; margin: 0 auto; opacity: 0.9; }
-            .product-main { display: flex; gap: 60px; max-width: 1000px; margin: 0 auto; align-items: center; }
-            .column-img { flex: 1.2; }
-            .column-text { flex: 1; }
-            .fade-effect { opacity: 1; transition: opacity 0.4s ease-in-out; }
-            .is-hidden { opacity: 0; }
-            .main-image-container img { width: 100%; height: auto; border-radius: 4px; }
-            .thumbnail-grid { display: flex; gap: 15px; margin-top: 20px; justify-content: center; }
-            .thumbnail-grid img { width: 60px; height: 60px; object-fit: cover; cursor: pointer; opacity: 0.5; transition: all 0.3s ease; border-radius: 50%; }
-            .thumbnail-grid img:hover, .thumbnail-grid img.active-thumb { opacity: 1; transform: scale(1.1); }
-            .variety-title { font-size: clamp(24px, 3vw, 32px); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; font-weight: 400; }
-            .variety-desc { font-size: 13px; font-weight: 300; line-height: 1.8; min-height: 100px; margin-bottom: 40px; opacity: 0.9; }
-            .dietary-icons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
-            .tag { font-size: 9px; font-weight: 700; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; }
-            .accordion { background: none; border: none; border-bottom: 1px solid rgba(255,255,255,0.2); width: 100%; text-align: left; padding: 15px 0; font-family: 'Lexend', sans-serif; font-size: 11px; text-transform: uppercase; cursor: pointer; color: #efefef; font-weight: 600; letter-spacing: 2px; transition: border-color 0.3s ease; }
-            .accordion:hover { border-bottom-color: rgba(255,255,255,0.8); }
-            .panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; color: #efefef; }
-            .panel p { padding: 15px 0; font-size: 12px; font-weight: 300; opacity: 0.8; line-height: 1.6; margin: 0; }
+    #layout-desktop.estado-hover .nodo-activo.enfocado {
+        opacity: 1;
+        filter: grayscale(0%);
+        z-index: 20;
+    }
+
+    #layout-desktop.estado-hover .nodo-activo.enfocado .punto-activo {
+        transform: scale(1.6);
+        box-shadow: 0 0 20px rgba(193, 155, 118, 0.9);
+        background-color: #fff;
+    }
+
+    #layout-desktop.estado-hover .nodo-activo.enfocado .label-activo {
+        opacity: 1;
+        color: #fff;
+    }
+
+    /* PANEL DE TEXTO INFERIOR */
+    #panel-info {
+        max-width: 600px;
+        margin: 40px auto 0 auto;
+        padding: 30px;
+        background-color: rgba(0,0,0,0.15);
+        border: 1px solid rgba(193, 155, 118, 0.2);
+        text-align: center;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.4s ease;
+    }
+
+    #panel-info.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    #titulo-info {
+        font-size: 18px;
+        color: #c19b76;
+        margin-bottom: 15px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    #desc-info {
+        font-size: 13px;
+        font-weight: 300;
+        line-height: 1.8;
+        color: #f5f1eb;
+    }
+
+    /* MÓVIL */
+    #layout-movil { display: none; max-width: 600px; margin: 0 auto; }
+    .item-movil { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
+    .item-movil h4 { color: #c19b76; font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
+    .item-movil p { font-size: 12px; font-weight: 300; line-height: 1.6; opacity: 0.8; }
+
+    @media (max-width: 900px) {
+        #layout-desktop { display: none; }
+        #panel-info { display: none; }
+        #layout-movil { display: block; }
+    }
+</style>
+
+<section id="doxa-rueda-wrapper">
+    <div class="container">
+        <div class="header-rueda">
+            <h2>DOXA Ciencia Funcional</h2>
+            <p style="font-size: 13px; font-weight: 300; letter-spacing: 2px; opacity: 0.8;">12 activos trabajando en sinergia para ti.</p>
+        </div>
+
+        <div id="layout-desktop">
+            <img src="Galle choco.png" alt="Galleta DOXA" id="img-centro">
             
-            @media (max-width: 768px) {
-                .product-main { flex-direction: column; gap: 40px; text-align: center; }
-                .dietary-icons { justify-content: center; }
-                .accordion { text-align: center; }
-                .variety-desc { min-height: auto; }
-            }
-        </style>
+            <div id="rueda-giratoria">
+                </div>
+        </div>
+
+        <div id="panel-info">
+            <h3 id="titulo-info">Activo</h3>
+            <div id="desc-info">Descripción...</div>
+        </div>
+
+        <div id="layout-movil">
+            </div>
+    </div>
+</section>
+
+<script>
+    // Los datos exactos del ejemplo funcional
+    const datosActivos = [
+        { corto: "Colágeno", titulo: "Aminoácidos del Colágeno", desc: "10g de precursores puros.<br>Máxima biodisponibilidad.<br>Ayuda a regenerar tu piel." },
+        { corto: "Vitamina C", titulo: "Vitamina C Estratégica", desc: "100mg añadidos.<br>Protege la calidad del colágeno.<br>Acción antioxidante clave." },
+        { corto: "Proteína", titulo: "Proteína Whey Premium", desc: "20g totales por unidad.<br>Mantenimiento del tono muscular.<br>Ideal para recuperación." },
+        { corto: "Biotina", titulo: "Biotina Activa", desc: "100µg para folículos.<br>Cabello fuerte y sano.<br>Mejora la elasticidad de la piel." },
+        { corto: "Boswellia", titulo: "Boswellia Serrata", desc: "Potente antiinflamatorio natural.<br>Protege tus articulaciones.<br>Reduce la hinchazón." },
+        { corto: "Jengibre", titulo: "Extracto de Jengibre", desc: "Sinergia antiinflamatoria.<br>Combate el estrés oxidativo.<br>Favorece la digestión." },
+        { corto: "Creatina", titulo: "Creatina Pura", desc: "3g para rendimiento diario.<br>Vitalidad muscular y cognitiva.<br>Sin picos de insulina." },
+        { corto: "Almendra", titulo: "Harina de Almendra", desc: "Base noble y nutritiva.<br>Aporta grasas saludables.<br>Textura exquisita." },
+        { corto: "Mantequilla", titulo: "Mantequilla Bio", desc: "Sabor real y profundo.<br>Sin aceites refinados inflamatorios.<br>Nutrición sana." },
+        { corto: "Aceite MCT", titulo: "Aceite MCT", desc: "Energía rápida y limpia.<br>Favorece la cetosis (keto).<br>Ideal pre/post entreno." },
+        { corto: "Cacao", titulo: "Cacao Puro", desc: "Rico en polifenoles.<br>Corazón del sabor.<br>Acción antioxidante." },
+        { corto: "Eritritol", titulo: "Eritritol Premium", desc: "Dulzor sin culpa.<br>Cero picos de glucosa.<br>Amigo de tus dientes." }
+    ];
+
+    // Esperar a que el HTML cargue completamente
+    window.addEventListener('DOMContentLoaded', () => {
+        const rueda = document.getElementById('rueda-giratoria');
+        const layoutDesktop = document.getElementById('layout-desktop');
+        const panelInfo = document.getElementById('panel-info');
+        const tituloInfo = document.getElementById('titulo-info');
+        const descInfo = document.getElementById('desc-info');
+        const layoutMovil = document.getElementById('layout-movil');
+        
+        const radioRueda = 250; // Distancia del centro
+
+        datosActivos.forEach((activo, index) => {
+            // Cálculos del círculo
+            const anguloRad = (index * 30 - 90) * (Math.PI / 180); 
+            const x = Math.cos(anguloRad) * radioRueda;
+            const y = Math.sin(anguloRad) * radioRueda;
+
+            // 1. Crear nodo de escritorio
+            const nodo = document.createElement('div');
+            nodo.className = 'nodo-activo';
+            nodo.style.transform = `translate(${x}px, ${y}px)`;
+            
+            nodo.innerHTML = `
+                <div class="punto-activo"></div>
+                <div class="label-activo">${activo.corto}</div>
+            `;
+            rueda.appendChild(nodo);
+
+            // 2. Crear ítem de móvil
+            const itemMovil = document.createElement('div');
+            itemMovil.className = 'item-movil';
+            itemMovil.innerHTML = `<h4>${activo.titulo}</h4><p>${activo.desc}</p>`;
+            layoutMovil.appendChild(itemMovil);
+
+            // 3. Interactividad (Hover)
+            nodo.addEventListener('mouseenter', () => {
+                layoutDesktop.classList.add('estado-hover');
+                nodo.classList.add('enfocado');
+                
+                // Mantiene posición pero aplica scale
+                nodo.style.transform = `translate(${x}px, ${y}px) scale(1.15)`;
+                
+                // Efecto brisa (gira la rueda entera)
+                const rotacion = x > 0 ? -5 : 5; 
+                rueda.style.transform = `translate(-50%, -50%) rotate(${rotacion}deg)`;
+
+                // Actualiza panel inferior
+                tituloInfo.innerHTML = activo.titulo;
+                descInfo.innerHTML = activo.desc;
+                panelInfo.classList.add('visible');
+            });
+
+            nodo.addEventListener('mouseleave', () => {
+                layoutDesktop.classList.remove('estado-hover');
+                nodo.classList.remove('enfocado');
+                
+                // Devuelve a estado normal
+                nodo.style.transform = `translate(${x}px, ${y}px) scale(1)`;
+                rueda.style.transform = `translate(-50%, -50%) rotate(0deg)`;
+                
+                panelInfo.classList.remove('visible');
+            });
+        });
+    });
+</script>
 
                       /* ============== FIN DE EL ECOSISTEMA DOXA ============= */
 
