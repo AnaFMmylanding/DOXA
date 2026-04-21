@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOXA | Alta Repostería Funcional</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
-   
     
     <style>
         /* =========================================
            RESET TOTAL Y VARIABLES DE MARCA
-           Aquí ganamos la libertad de Google Sites
            ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -24,7 +22,7 @@
 
         body, html { 
             width: 100%; 
-            overflow-x: hidden; /* Evita el scroll horizontal */
+            overflow-x: hidden; 
             background-color: var(--dark-bg); 
             font-family: 'Lexend', sans-serif;
             scroll-behavior: smooth;
@@ -33,64 +31,27 @@
         a { text-decoration: none; color: white; }
         ul { list-style: none; }
 
-        /* Contenedor principal que permite el 100% de ancho */
-        .page-wrapper {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+        .page-wrapper { width: 100%; display: flex; flex-direction: column; }
+        .light-section { background-color: var(--light-bg); color: var(--text-dark); }
 
-        /* Clase general para secciones de color claro */
-        .light-section {
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-        }
-
-        /* =========================================
-           LÓGICA DE ANIMACIONES (Cascada y Aparición)
-           ========================================= */
-        
-        /* Definición de la animación: aparecer, deslizarse hacia arriba y delay */
+        /* LÓGICA DE ANIMACIONES (Cascada y Aparición) */
         @keyframes fadeInSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Clase para aplicar el efecto a CUALQUIER elemento informativo */
         .animate-appear {
-            opacity: 0; /* Empieza invisible */
+            opacity: 0; 
             animation: fadeInSlideUp 0.8s ease-out forwards;
         }
 
-        /* Clases para el efecto cascada (retrasos) */
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
         .delay-4 { animation-delay: 0.4s; }
         .delay-5 { animation-delay: 0.5s; }
-        .delay-6 { animation-delay: 0.6s; }
 
-        /* Clase especial para el Zoom Out de las 4 galletas */
-        .zoom-out-appear {
-            animation: zoomOutEffect 1.2s ease-out forwards;
-        }
-        @keyframes zoomOutEffect {
-            from { opacity: 0; transform: scale(1.1); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* =========================================
-           ESTILOS GENERALES DE ESTRUCTURA
-           (Simplificados para que tú pegues tu código)
-           ========================================= */
-        
-        /* Contenedores para centralizar el contenido pero sin márgenes forzados */
+        /* ESTILOS GENERALES DE ESTRUCTURA */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -98,7 +59,6 @@
             width: 100%;
         }
 
-        /* Estilos de botones (usando el amarillo de acento que te gusta) */
         .btn-comprar {
             display: inline-block;
             background-color: var(--accent-color);
@@ -113,1097 +73,464 @@
         }
         .btn-comprar:hover { transform: scale(1.05); }
 
-        /* Estilo para la cuadrícula de 6 ingredientes */
-        .ingredient-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablet/desktop */
-            gap: 20px;
-            margin-top: 50px;
-        }
-
-        /* Estilo para cada caja de ingrediente */
-        .ingredient-box {
-            background-color: rgba(255, 255, 255, 0.05); /* Un brillo sutil */
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: left;
-            position: relative;
-            overflow: hidden; /* Para las imágenes de fondo si las pones */
-        }
-
-        /* =========================================
-           ADAPTACIÓN PARA MÓVILES (Responsiveness)
-           Media Queries: Aquí está el truco
-           ========================================= */
         @media (max-width: 768px) {
-            
-            /* En móvil, la cuadrícula de ingredientes es de 1 sola columna */
-            .ingredient-grid {
-                grid-template-columns: 1fr;
-            }
-
-            /* Los textos grandes se hacen más pequeños */
             h1 { font-size: 2.5rem !important; }
             h2 { font-size: 2rem !important; }
-            
-            /* Aumentamos el padding para que no se pegue al borde */
-            .ingredient-box { padding: 30px; }
         }
-
-        
-     /* ESTILOS PARA CAJAS DE PRESENTACIÓN DE ACTIVOS*/
-        
-.activos-grid-2 {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 15px;
-max-width: 1200px;
-margin: 0 auto;
-padding: 0 20px;
-}
-.activo-card {
-position: relative;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-padding: 60px 40px;
-min-height: 450px;
-overflow: hidden;
-}
-.activo-wide-card {
-grid-column: span 2;
-min-height: 500px;
-}
-.bg-layer-card {
-position: absolute;
-top: 0; left: 0; width: 100%; height: 100%;
-background-size: cover;
-background-position: center;
-filter: brightness(0.5);
-z-index: 1;
-transition: transform 0.8s ease;
-}
-.activo-card:hover .bg-layer-card {
-transform: scale(1.05);
-}
-.content-card {
-position: relative;
-z-index: 2;
-max-width: 500px;
-}
-
-/* Fuentes y textos exactos a tu captura */
-.c-tagline { font-family: 'Lexend', sans-serif; font-size: 11px; letter-spacing: 3px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; color: #fff; }
-.c-title { font-family: 'Lexend', sans-serif; font-size: clamp(24px, 3vw, 32px); font-weight: 400; margin-bottom: 20px; line-height: 1.2; color: #fff; }
-.c-prop { font-family: 'Lexend', sans-serif; font-size: 12px; font-weight: 600; line-height: 1.8; letter-spacing: 2px; margin-bottom: 15px; color: #fff; }
-.c-desc { font-family: 'Lexend', sans-serif; font-size: 12px; font-weight: 300; line-height: 1.8; letter-spacing: 2px; color: #fff; opacity: 0.9; }
-
-@media (max-width: 768px) {
-    .activos-grid-2 { grid-template-columns: 1fr; }
-    .activo-wide-card { grid-column: span 1; }
-    .activo-card { padding: 40px 20px; min-height: 400px; }
-}
- /* Cuadrícula de 5 columnas para lograr el efecto desfasado (60/40) */
-    .activos-grid-staggered {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 15px; 
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
-    /* Tamaños de las cajas */
-    .box-wide { grid-column: span 3; }
-    .box-narrow { grid-column: span 2; }
-    .box-full { grid-column: span 5; min-height: 500px !important; }
-
-    .activo-card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 60px 40px;
-        min-height: 450px;
-        overflow: hidden;
-    }
-
-    .bg-layer-card {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background-size: cover;
-        background-position: center;
-        filter: brightness(0.5);
-        z-index: 1;
-        transition: transform 0.8s ease;
-    }
-    .activo-card:hover .bg-layer-card {
-        transform: scale(1.05);
-    }
-    .content-card {
-        position: relative;
-        z-index: 2;
-        max-width: 500px;
-    }
-    
-    /* Fuentes y textos exactos */
-    .c-tagline { font-family: 'Lexend', sans-serif; font-size: 11px; letter-spacing: 3px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; color: #fff; }
-    .c-title { font-family: 'Lexend', sans-serif; font-size: clamp(24px, 3vw, 32px); font-weight: 400; margin-bottom: 20px; line-height: 1.2; color: #fff; }
-    .c-prop { font-family: 'Lexend', sans-serif; font-size: 12px; font-weight: 600; line-height: 1.8; letter-spacing: 2px; margin-bottom: 15px; color: #fff; }
-    .c-desc { font-family: 'Lexend', sans-serif; font-size: 12px; font-weight: 300; line-height: 1.8; letter-spacing: 2px; color: #fff; opacity: 0.9; }
-
-    /* En móvil se apilan todas igual */
-    @media (max-width: 768px) {
-        .activos-grid-staggered { grid-template-columns: 1fr; }
-        .box-wide, .box-narrow, .box-full { grid-column: span 1; }
-        .activo-card { padding: 40px 20px; min-height: 400px; }
-    }       
     </style>
-
 </head>
 
-
-    
 <body>
-
     <div class="page-wrapper">
         
-                    /* SECCIÓN HEADER_Abobe the fold */
-        
         <header class="hero-container animate-appear" style="position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-    
-    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
-        <img src="Pelazo y uñas fuertes.jpg" alt="Fondo Doxa" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4);">
-    </div>
-
-    <div style="position: relative; z-index: 2; text-align: center; color: #FFFFFF; padding: 0 20px;">
-        
-        <h1 style="margin: 0 0 30px 0; line-height: 1.1;">
-            <span style="font-size: clamp(40px, 8vw, 60px); font-family: 'Lato', sans-serif; font-weight: 500; letter-spacing: 15px; display: inline-block;">DOXA</span> 
-            <span style="font-size: clamp(25px, 5vw, 40px); font-family: 'Lexend', sans-serif; font-weight: 300; letter-spacing: 10px; display: inline-block; color: rgba(255,255,255,0.8);">COLÁGENO</span>
-        </h1>
-
-        <h3 style="font-family: 'Lexend', sans-serif; font-size: clamp(12px, 3vw, 15px); font-weight: 300; letter-spacing: 2px; margin-bottom: 40px; opacity: 0.9;">
-            Aminoácidos  .  Vitamina C  .  Hialurónico  .  Biotina  .  Proteína  .  Creatina  .  Boswellia Serrata . MTC
-        </h3>
-
-        <div style="max-width: 650px; margin: 0 auto;">
-            <p style="font-family: 'Lexend', sans-serif; font-size: clamp(11px, 2.5vw, 13px); font-weight: 300; line-height: 2; letter-spacing: 2px; color: #FFFFFF; opacity: 0.8;">
-                Lo más fascinante no es esta poderosa selección de suplementos clave. <br>
-                Lo fascinante es cómo te los vas a tomar...
-            </p>
-        </div>
-
-        <a href="#productos" class="btn-comprar" style="margin-top: 50px;">DESCUBRIR</a>
-    </div>
-</header>
-
-                            /* SECCIÓN PRESENTACIÓN DE LA DOXA */
-        
-        <section style="padding: 100px 0; background-color: var(--dark-bg); color: var(--text-light); border-top: 1px solid rgba(255, 255, 255, 0.05);">
-    <div class="container animate-appear" style="text-align: center;">
-        
-        <div style="margin-bottom: 50px;">
-            <img src="Galle portada.png" alt="Doxa Galleta Portada" style="max-width: 500px; width: 100%; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5));">
-        </div>
-
-        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.1); border-top: 1px dashed rgba(255,255,255,0.2); margin-bottom: 60px;"></div>
-
-        <h2 style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 60px;">
-            DOXAS: LA MAGIA EXISTE
-        </h2>
-
-        <div style="max-width: 800px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-weight: 300; line-height: 2.2; letter-spacing: 1px; font-size: clamp(12px, 2.5vw, 14px); opacity: 0.9;">
-            <p style="margin-bottom: 30px;">Ha llegado la evolución de los suplementos.<br>Los que consiguen que ames tomarlos.</p>
-            
-            <p style="margin-bottom: 30px;">DOXA es la reinterpretación más exquisita de la icónica cookie neoyorquina:<br>grande, húmeda, indecentemente jugosa...</p>
-            
-            <p style="margin-bottom: 30px;">pero con intención y funcionalidad mucho más allá de un momento de placer.</p>
-            
-            <p style="margin-bottom: 30px;">DOXA porta 7 substancias clave para la salud de tu piel, pelo y articulaciones,<br>integradas magistralmente para que mantengan sus propiedades.</p>
-            
-            <p>Alta repostería y ciencia fusionadas para que "pecar" se transforme en todo<br>un regalo para tu cuerpo.</p>
-        </div>
-
-        <a href="#contacto" class="btn-comprar" style="background-color: #000; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 18px 120px; margin-top: 60px; font-size: 11px; letter-spacing: 3px;">
-            RESERVAR MIS DOXAS
-        </a>
-
-    </div>
-</section>
-
-                            /* SECCIÓN BANDA DE ACTIVOS */
-
-<style>
-    .rueda-section {
-        background-color: #302b22;
-        padding: 100px 20px;
-        color: #f5f1eb;
-        font-family: 'Lexend', sans-serif;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .rueda-header { text-align: center; margin-bottom: 60px; }
-    .rueda-header h2 { font-size: clamp(28px, 4vw, 36px); font-weight: 300; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px; }
-    
-    /* ESCRITORIO: Layout Radial */
-    .rueda-desktop {
-        display: block;
-        position: relative;
-        width: 100%;
-        max-width: 800px;
-        height: 600px;
-        margin: 0 auto;
-    }
-    
-    .rueda-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%) rotate(0deg);
-        transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); /* El efecto "Leve Brisa" */
-    }
-    
-    .center-cookie {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
-        object-fit: cover;
-        z-index: 10;
-        filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.6));
-        transition: all 0.4s ease;
-    }
-
-    /* Cada "banderita" */
-    .nodo-wrapper {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        /* El transform lo aplicará JavaScript para hacer el círculo perfecto */
-        transition: opacity 0.4s ease, transform 0.4s ease;
-        z-index: 15;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-    
-    .nodo-punto {
-        width: 12px;
-        height: 12px;
-        background-color: #c19b76; /* Tono cobre/dorado elegante */
-        border-radius: 50%;
-        box-shadow: 0 0 10px rgba(193, 155, 118, 0.5);
-        transition: all 0.4s ease;
-    }
-    
-    .nodo-label {
-        position: absolute;
-        width: 120px;
-        text-align: center;
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #f5f1eb;
-        top: 25px; /* Etiqueta debajo del punto */
-        opacity: 0.7;
-        transition: all 0.4s ease;
-        pointer-events: none;
-    }
-
-    /* Efectos HOVER controlados por clase */
-    .rueda-container.hovered .nodo-wrapper { opacity: 0.3; filter: grayscale(50%); }
-    .rueda-container.hovered .nodo-wrapper.active { opacity: 1; filter: grayscale(0%); transform: scale(1.1) !important; }
-    .rueda-container.hovered .nodo-wrapper.active .nodo-punto { transform: scale(1.5); box-shadow: 0 0 20px rgba(193, 155, 118, 0.9); }
-    .rueda-container.hovered .nodo-wrapper.active .nodo-label { opacity: 1; color: #c19b76; }
-    
-    /* Caja de texto de explicación */
-    .info-box {
-        position: absolute;
-        bottom: -40px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 500px;
-        text-align: center;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        pointer-events: none;
-        z-index: 20;
-    }
-    .info-box.visible { opacity: 1; }
-    .info-title { font-size: 18px; font-weight: 400; color: #c19b76; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
-    .info-desc { font-size: 12px; font-weight: 300; line-height: 1.8; color: #f5f1eb; opacity: 0.9; }
-
-    /* MÓVIL: Layout Vertical Acordeón */
-    .rueda-mobile { display: none; max-width: 600px; margin: 0 auto; }
-    .mob-item { border-bottom: 1px solid rgba(245, 241, 235, 0.1); padding: 15px 0; }
-    .mob-title { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #c19b76; margin-bottom: 10px; }
-    .mob-desc { font-size: 12px; font-weight: 300; line-height: 1.6; color: #f5f1eb; opacity: 0.8; }
-
-    @media (max-width: 900px) {
-        .rueda-desktop { display: none; }
-        .rueda-mobile { display: block; }
-    }
-</style>
-
-<section class="rueda-section">
-    <div class="container animate-appear">
-        <div class="rueda-header">
-            <h2>El Ecosistema DOXA</h2>
-            <p style="font-size: 12px; font-weight: 300; letter-spacing: 2px; opacity: 0.8;">12 activos funcionales trabajando en sinergia para ti.</p>
-        </div>
-
-        <div class="rueda-desktop">
-            <img src="doxa-central.png" alt="DOXA" class="center-cookie">
-            
-            <div class="rueda-container" id="ruedaCentral">
-                <div class="nodo-wrapper" data-title="Aminoácidos del Colágeno" data-desc="10g de precursores puros.<br>Máxima biodisponibilidad.<br>Ayuda a regenerar tu piel."><div class="nodo-punto"></div><div class="nodo-label">Colágeno</div></div>
-                <div class="nodo-wrapper" data-title="Vitamina C Estratégica" data-desc="100mg añadidos.<br>Protege la calidad del colágeno.<br>Acción antioxidante clave."><div class="nodo-punto"></div><div class="nodo-label">Vitamina C</div></div>
-                <div class="nodo-wrapper" data-title="Proteína Whey Premium" data-desc="20g totales por unidad.<br>Mantenimiento del tono muscular.<br>Ideal para recuperación."><div class="nodo-punto"></div><div class="nodo-label">Proteína</div></div>
-                <div class="nodo-wrapper" data-title="Biotina Activa" data-desc="100µg para folículos.<br>Cabello fuerte y sano.<br>Mejora la elasticidad de la piel."><div class="nodo-punto"></div><div class="nodo-label">Biotina</div></div>
-                <div class="nodo-wrapper" data-title="Boswellia Serrata" data-desc="Potente antiinflamatorio natural.<br>Protege tus articulaciones.<br>Reduce la hinchazón."><div class="nodo-punto"></div><div class="nodo-label">Boswellia</div></div>
-                <div class="nodo-wrapper" data-title="Extracto de Jengibre" data-desc="Sinergia antiinflamatoria.<br>Combate el estrés oxidativo.<br>Favorece la digestión."><div class="nodo-punto"></div><div class="nodo-label">Jengibre</div></div>
-                <div class="nodo-wrapper" data-title="Creatina Pura" data-desc="3g para rendimiento diario.<br>Vitalidad muscular y cognitiva.<br>Sin picos de insulina."><div class="nodo-punto"></div><div class="nodo-label">Creatina</div></div>
-                <div class="nodo-wrapper" data-title="Harina de Almendra" data-desc="Base noble y nutritiva.<br>Aporta grasas saludables.<br>Textura exquisita."><div class="nodo-punto"></div><div class="nodo-label">Almendra</div></div>
-                <div class="nodo-wrapper" data-title="Mantequilla Bio" data-desc="Sabor real y profundo.<br>Sin aceites refinados inflamatorios.<br>Nutrición sana."><div class="nodo-punto"></div><div class="nodo-label">Mantequilla</div></div>
-                <div class="nodo-wrapper" data-title="Aceite MCT" data-desc="Energía rápida y limpia.<br>Favorece la cetosis (keto).<br>Ideal pre/post entreno."><div class="nodo-punto"></div><div class="nodo-label">Aceite MCT</div></div>
-                <div class="nodo-wrapper" data-title="Cacao Puro" data-desc="Rico en polifenoles.<br>Corazón del sabor Lux-Umbra.<br>Acción antioxidante."><div class="nodo-punto"></div><div class="nodo-label">Cacao</div></div>
-                <div class="nodo-wrapper" data-title="Eritritol Premium" data-desc="Dulzor sin culpa.<br>Cero picos de glucosa.<br>Amigo de tus dientes."><div class="nodo-punto"></div><div class="nodo-label">Eritritol</div></div>
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+                <img src="Pelazo y uñas fuertes.jpg" alt="Fondo Doxa" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4);">
             </div>
-
-            <div class="info-box" id="infoBox">
-                <h3 class="info-title" id="infoTitle">Activo</h3>
-                <p class="info-desc" id="infoDesc">Descripción del activo</p>
-            </div>
-        </div>
-
-        <div class="rueda-mobile" id="mobileList">
-            </div>
-
-    </div>
-</section>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const rueda = document.getElementById('ruedaCentral');
-        const nodos = document.querySelectorAll('.nodo-wrapper');
-        const infoBox = document.getElementById('infoBox');
-        const infoTitle = document.getElementById('infoTitle');
-        const infoDesc = document.getElementById('infoDesc');
-        const mobileList = document.getElementById('mobileList');
-        
-        const radio = 240; // Distancia de las banderitas al centro
-
-        nodos.forEach((nodo, index) => {
-            // 1. Matemáticas para colocar los 12 puntos en círculo perfecto
-            const angulo = (index * 30 - 90) * (Math.PI / 180); 
-            const x = Math.cos(angulo) * radio;
-            const y = Math.sin(angulo) * radio;
-            
-            // Guardamos la posición original
-            nodo.style.transform = `translate(${x}px, ${y}px)`;
-            nodo.dataset.baseX = x;
-            nodo.dataset.baseY = y;
-
-            // 2. Lógica para Móvil (Clona los textos en la lista vertical)
-            const mobItem = document.createElement('div');
-            mobItem.className = 'mob-item';
-            mobItem.innerHTML = `<div class="mob-title">${nodo.dataset.title}</div><div class="mob-desc">${nodo.dataset.desc}</div>`;
-            mobileList.appendChild(mobItem);
-
-            // 3. Efectos Hover Interactivos
-            nodo.addEventListener('mouseenter', () => {
-                rueda.classList.add('hovered');
-                nodo.classList.add('active');
-                // Mantenerlo en su sitio aunque crezca el scale
-                nodo.style.transform = `translate(${x}px, ${y}px) scale(1.1)`; 
-                
-                // Efecto Brisa: Si el nodo está a la derecha, gira a la izquierda y viceversa
-                const rotacion = x > 0 ? -4 : 4; 
-                rueda.style.transform = `translate(-50%, -50%) rotate(${rotacion}deg)`;
-
-                // Actualizar Textos
-                infoTitle.innerText = nodo.dataset.title;
-                infoDesc.innerHTML = nodo.dataset.desc;
-                infoBox.classList.add('visible');
-            });
-
-            nodo.addEventListener('mouseleave', () => {
-                rueda.classList.remove('hovered');
-                nodo.classList.remove('active');
-                nodo.style.transform = `translate(${x}px, ${y}px) scale(1)`; // Vuelve a su tamaño
-                
-                // La rueda vuelve a su sitio
-                rueda.style.transform = `translate(-50%, -50%) rotate(0deg)`;
-                infoBox.classList.remove('visible');
-            });
-        });
-    });
-</script>
-        
-                                   /* */
-
-<section style="background-color: #F5F1ED; padding: 25px 0; text-align: center;">
-    <div class="container animate-appear">
-        <p style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: 14px; color: #3C332A; letter-spacing: 2px; margin: 0;">
-            AA del Colágeno &nbsp;&bull;&nbsp; Vitamina C &nbsp;&bull;&nbsp; Biotina &nbsp;&bull;&nbsp; Proteína &nbsp;&bull;&nbsp; Creatina &nbsp;&bull;&nbsp; Aceite MTC &nbsp;&bull;&nbsp; Boswellia Serrata
-        </p>
-    </div>
-</section>
-    
-
-
-
-                            /* SECCIÓN PRESENTACIÓN DE ACTIVOS*/
-
-
-     /* SECCIÓN RUEDA DE ACTIVOS*/
-
-<style>
-    /* 1. Reset y Estilos Base de la Sección */
-    .rueda-section {
-        background-color: #302b22; /* Tu marrón profundo corporativo */
-        padding: 100px 20px 150px 20px; /* Más espacio abajo para el panel */
-        color: #f5f1eb; /* Tu crema suave corporativo */
-        font-family: 'Lexend', sans-serif;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .rueda-header { text-align: center; margin-bottom: 80px; }
-    .rueda-header h2 { font-size: clamp(28px, 4vw, 36px); font-weight: 300; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px; color: #fff; }
-    
-    /* 2. Layout Desktop Radial (El "Ecosistema") */
-    .rueda-desktop {
-        display: block;
-        position: relative;
-        width: 100%;
-        max-width: 800px;
-        height: 600px; /* Altura para la rueda */
-        margin: 0 auto;
-    }
-    
-    /* El contenedor que GIRA y se BALANCEA (Efecto Brisa y Parallax) */
-    .rueda-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%) rotate(0deg) translateY(0);
-        /* Esta transición es para el efecto "Leve Brisa" y Parallax suave */
-        transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
-        opacity: 0; /* Empieza invisible para el reveal */
-    }
-    
-    /* Imagen central de la galleta (Sube una imagen cuadrada 'doxa-central.png') */
-    .center-cookie {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
-        object-fit: cover;
-        z-index: 10;
-        filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.6));
-    }
-
-    /* Estilos de cada activo (nodo o "banderita") */
-    .nodo-wrapper {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        /* El transform inicial lo aplicará JavaScript para el círculo perfecto */
-        transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
-        z-index: 15;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-    
-    .nodo-punto {
-        width: 12px;
-        height: 12px;
-        background-color: #c19b76; /* Tono cobre/dorado elegante para el acento */
-        border-radius: 50%;
-        box-shadow: 0 0 10px rgba(193, 155, 118, 0.5);
-        transition: all 0.4s ease;
-    }
-    
-    .nodo-label {
-        position: absolute;
-        width: 120px;
-        text-align: center;
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #f5f1eb;
-        top: 25px; /* Etiqueta debajo del punto */
-        opacity: 0.7;
-        transition: all 0.4s ease;
-        pointer-events: none;
-    }
-
-    /* --- EFECTOS HOVER UNIFICADOS --- */
-    
-    /* Cuando hay hover en ALGO de la rueda, todos los nodos se atenúan */
-    .rueda-desktop.section-hovered .nodo-wrapper { opacity: 0.3; filter: grayscale(50%); }
-    
-    /* El nodo que está siendo seleccionado (active) se ilumina y escala suavemente */
-    .rueda-desktop.section-hovered .nodo-wrapper.active { opacity: 1; filter: grayscale(0%); transform: scale(1.1) !important; z-index: 18;}
-    .rueda-desktop.section-hovered .nodo-wrapper.active .nodo-punto { transform: scale(1.5); box-shadow: 0 0 20px rgba(193, 155, 118, 0.9); }
-    .rueda-desktop.section-hovered .nodo-wrapper.active .nodo-label { opacity: 1; color: #c19b76; }
-
-    /* 3. El Nuevo Panel de Detalles (donde puedes pegar código) */
-    .detalles-activo-container {
-        position: relative;
-        max-width: 600px;
-        margin: 50px auto 0 auto;
-        padding: 40px;
-        background-color: rgba(0,0,0,0.2); /* Sutil contraste */
-        border: 1px solid rgba(193, 155, 118, 0.1); /* Borde cobre muy sutil */
-        border-radius: 4px;
-        opacity: 0;
-        transition: opacity 0.4s ease, transform 0.4s ease;
-        pointer-events: none; /* No clickable hasta que sea visible */
-        z-index: 5;
-    }
-    .detalles-activo-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto;}
-    
-    .detalles-title { font-size: 18px; font-weight: 400; color: #c19b76; margin-bottom: 20px; letter-spacing: 3px; text-transform: uppercase; text-align: center; }
-    
-    /* Este es el contenedor donde tú insertarás el código o texto para cada activo */
-    .detalles-content-area { font-size: 12px; font-weight: 300; line-height: 1.8; color: #f5f1eb; opacity: 0.9; }
-
-    /* 4. Layout Móvil Vertical (Limpio y legible) */
-    .rueda-mobile { display: none; max-width: 600px; margin: 0 auto; }
-    .mob-item { border-bottom: 1px solid rgba(245, 241, 235, 0.1); padding: 15px 0; }
-    .mob-title { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #c19b76; margin-bottom: 10px; }
-    .mob-desc { font-size: 12px; font-weight: 300; line-height: 1.6; color: #f5f1eb; opacity: 0.8; }
-
-    @media (max-width: 900px) {
-        .rueda-desktop { display: none; }
-        .detalles-activo-container { display: none; }
-        .rueda-mobile { display: block; }
-    }
-</style>
-
-<section class="rueda-section">
-    <div class="container animate-appear">
-        <div class="rueda-header">
-            <h2>El Ecosistema DOXA</h2>
-            <p style="font-size: 12px; font-weight: 300; letter-spacing: 2px; opacity: 0.8;">12 activos funcionales trabajando en sinergia para ti.</p>
-        </div>
-
-        <div class="rueda-desktop" id="desktopWrapper">
-            <img src="Galle choco.png" alt="DOXA" class="center-cookie">
-            
-            <div class="rueda-container" id="ruedaCentral">
-                <div class="nodo-wrapper" data-title="Aminoácidos del Colágeno" data-desc="10g de precursores puros.<br>Máxima biodisponibilidad.<br>Ayuda a regenerar tu piel."><div class="nodo-punto"></div><div class="nodo-label">Colágeno</div></div>
-                <div class="nodo-wrapper" data-title="Vitamina C Estratégica" data-desc="100mg añadidos.<br>Protege la calidad del colágeno.<br>Action antioxidante clave."><div class="nodo-punto"></div><div class="nodo-label">Vitamina C</div></div>
-                <div class="nodo-wrapper" data-title="Proteína Whey Premium" data-desc="20g totales por unidad.<br>Mantenimiento del tono muscular.<br>Ideal para recuperación."><div class="nodo-punto"></div><div class="nodo-label">Proteína</div></div>
-                <div class="nodo-wrapper" data-title="Biotina Activa" data-desc="100µg para folículos.<br>Cabello fuerte y sano.<br>Mejora la elasticidad de la piel."><div class="nodo-punto"></div><div class="nodo-label">Biotina</div></div>
-                <div class="nodo-wrapper" data-title="Boswellia Serrata" data-desc="Potente antiinflamatorio natural.<br>Protege tus articulaciones.<br>Reduce la hinchazón."><div class="nodo-punto"></div><div class="nodo-label">Boswellia</div></div>
-                <div class="nodo-wrapper" data-title="Extracto de Jengibre" data-desc="Sinergia antiinflamatoria.<br>Combate el estrés oxidativo.<br>Favorece la digestión."><div class="nodo-punto"></div><div class="nodo-label">Jengibre</div></div>
-                <div class="nodo-wrapper" data-title="Creatina Pura" data-desc="3g para rendimiento diario.<br>Vitalidad muscular y cognitiva.<br>Sin picos de insulina."><div class="nodo-punto"></div><div class="nodo-label">Creatina</div></div>
-                <div class="nodo-wrapper" data-title="Harina de Almendra" data-desc="Base noble y nutritiva.<br>Aporta grasas saludables.<br>Textura exquisita."><div class="nodo-punto"></div><div class="nodo-label">Almendra</div></div>
-                <div class="nodo-wrapper" data-title="Mantequilla Bio" data-desc="Sabor real y profundo.<br>Sin aceites refinados inflamatorios.<br>Nutrición sana."><div class="nodo-punto"></div><div class="nodo-label">Mantequilla</div></div>
-                <div class="nodo-wrapper" data-title="Aceite MCT" data-desc="Energía rápida y limpia.<br>Favorece la cetosis (keto).<br>Ideal pre/post entreno."><div class="nodo-punto"></div><div class="nodo-label">Aceite MCT</div></div>
-                <div class="nodo-wrapper" data-title="Cacao Puro" data-desc="Rico en polifenoles.<br>Corazón del sabor Lux-Umbra.<br>Action antioxidante."><div class="nodo-punto"></div><div class="nodo-label">Cacao</div></div>
-                <div class="nodo-wrapper" data-title="Eritritol Premium" data-desc="Dulzor sin culpa.<br>Cero picos de glucosa.<br>Amigo de tus dientes."><div class="nodo-punto"></div><div class="nodo-label">Eritritol</div></div>
-            </div>
-        </div>
-
-        <div class="detalles-activo-container" id="detallesContainer">
-            <h3 class="detalles-title" id="detallesTitle">Detalle de Activo</h3>
-            
-            <div class="detalles-content-area" id="detallesContent">
-                <p style="text-align: center; font-weight: 300;">Selecciona un ingrediente para ver sus detalles específicos.</p>
+            <div style="position: relative; z-index: 2; text-align: center; color: #FFFFFF; padding: 0 20px;">
+                <h1 style="margin: 0 0 30px 0; line-height: 1.1;">
+                    <span style="font-size: clamp(40px, 8vw, 60px); font-family: 'Lato', sans-serif; font-weight: 500; letter-spacing: 15px; display: inline-block;">DOXA</span> 
+                    <span style="font-size: clamp(25px, 5vw, 40px); font-family: 'Lexend', sans-serif; font-weight: 300; letter-spacing: 10px; display: inline-block; color: rgba(255,255,255,0.8);">COLÁGENO</span>
+                </h1>
+                <h3 style="font-family: 'Lexend', sans-serif; font-size: clamp(12px, 3vw, 15px); font-weight: 300; letter-spacing: 2px; margin-bottom: 40px; opacity: 0.9;">
+                    Aminoácidos  .  Vitamina C  .  Hialurónico  .  Biotina  .  Proteína  .  Creatina  .  Boswellia Serrata . MTC
+                </h3>
+                <div style="max-width: 650px; margin: 0 auto;">
+                    <p style="font-family: 'Lexend', sans-serif; font-size: clamp(11px, 2.5vw, 13px); font-weight: 300; line-height: 2; letter-spacing: 2px; color: #FFFFFF; opacity: 0.8;">
+                        Lo más fascinante no es esta poderosa selección de suplementos clave. <br>
+                        Lo fascinante es cómo te los vas a tomar...
+                    </p>
                 </div>
-        </div>
-
-        <div class="rueda-mobile" id="mobileList">
+                <a href="#productos" class="btn-comprar" style="margin-top: 50px;">DESCUBRIR</a>
             </div>
+        </header>
 
-    </div>
-</section>
+        <section style="padding: 100px 0; background-color: var(--dark-bg); color: var(--text-light); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+            <div class="container animate-appear" style="text-align: center;">
+                <div style="margin-bottom: 50px;">
+                    <img src="Galle portada.png" alt="Doxa Galleta Portada" style="max-width: 500px; width: 100%; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5));">
+                </div>
+                <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.1); border-top: 1px dashed rgba(255,255,255,0.2); margin-bottom: 60px;"></div>
+                <h2 style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 60px;">
+                    DOXAS: LA MAGIA EXISTE
+                </h2>
+                <div style="max-width: 800px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-weight: 300; line-height: 2.2; letter-spacing: 1px; font-size: clamp(12px, 2.5vw, 14px); opacity: 0.9;">
+                    <p style="margin-bottom: 30px;">Ha llegado la evolución de los suplementos.<br>Los que consiguen que ames tomarlos.</p>
+                    <p style="margin-bottom: 30px;">DOXA es la reinterpretación más exquisita de la icónica cookie neoyorquina:<br>grande, húmeda, indecentemente jugosa...</p>
+                    <p style="margin-bottom: 30px;">pero con intención y funcionalidad mucho más allá de un momento de placer.</p>
+                    <p style="margin-bottom: 30px;">DOXA porta 7 substancias clave para la salud de tu piel, pelo y articulaciones,<br>integradas magistralmente para que mantengan sus propiedades.</p>
+                    <p>Alta repostería y ciencia fusionadas para que "pecar" se transforme en todo<br>un regalo para tu cuerpo.</p>
+                </div>
+                <a href="#contacto" class="btn-comprar" style="background-color: #000; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 18px 120px; margin-top: 60px; font-size: 11px; letter-spacing: 3px;">
+                    RESERVAR MIS DOXAS
+                </a>
+            </div>
+        </section>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const desktopWrapper = document.getElementById('desktopWrapper');
-        const ruedaCentral = document.getElementById('ruedaCentral');
-        const nodos = document.querySelectorAll('.nodo-wrapper');
-        const detallesContainer = document.getElementById('detallesContainer');
-        const detallesTitle = document.getElementById('detallesTitle');
-        const detallesContent = document.getElementById('detallesContent');
-        const mobileList = document.getElementById('mobileList');
-        
-        const radio = 240; // Distancia de las banderitas al centro
-
-        // 1. Reveal Inicial Suave (asentamiento de la rueda)
-        setTimeout(() => {
-            ruedaCentral.style.opacity = "1";
-            // Pequeño zoom-out y asentamiento al cargar
-            ruedaCentral.style.transform = "translate(-50%, -50%) rotate(0deg) scale(1) translateY(0)";
-        }, 150);
-
-        nodos.forEach((nodo, index) => {
-            // 2. Matemáticas para colocar los 12 puntos en círculo perfecto
-            const angulo = (index * 30 - 90) * (Math.PI / 180); 
-            const x = Math.cos(angulo) * radio;
-            const y = Math.sin(angulo) * radio;
-            
-            // Guardamos la posición original en la rueda
-            nodo.style.transform = `translate(${x}px, ${y}px)`;
-            // Guardamos también sus datos para uso en hover/móvil
-            nodo.dataset.baseX = x;
-            nodo.dataset.baseY = y;
-
-            // 3. Lógica para Móvil (Clona los textos en la lista vertical automáticamente)
-            const mobItem = document.createElement('div');
-            mobItem.className = 'mob-item';
-            mobItem.innerHTML = `<div class="mob-title">${nodo.dataset.title}</div><div class="mob-desc">${nodo.dataset.desc}</div>`;
-            mobileList.appendChild(mobItem);
-
-            // 4. Efectos Interactivos Unificados (Brisa, Parallax y Detalles)
-            
-            nodo.addEventListener('mouseenter', () => {
-                desktopWrapper.classList.add('section-hovered');
-                nodo.classList.add('active');
-                
-                // Mantenemos su posición pero aplicando el scale de hover
-                nodo.style.transform = `translate(${x}px, ${y}px) scale(1.1)`; 
-                
-                // --- Efecto "Brisa" Unificado ---
-                // Si el nodo está a la derecha (x > 0), gira a la izquierda. Si está a la izquierda (x < 0), gira a la derecha.
-                const rotacionBrisa = x > 0 ? -4 : 4; 
-                // Añadimos un pequeño movimiento de profundidad Parallax (scale y translateY sutil)
-                ruedaCentral.style.transform = `translate(-50%, -50%) rotate(${rotacionBrisa}deg) scale(0.98) translateY(-5px)`;
-
-                // Actualizar Textos del Panel de Detalles
-                detallesTitle.innerText = nodo.dataset.title;
-                // De momento pongo data-desc como placeholder. AQUÍ ES DONDE TÚ LUEGO VINCULARÁS TU CÓDIGO ESPECÍFICO.
-                detallesContent.innerHTML = nodo.dataset.desc; 
-                detallesContainer.classList.add('visible');
-            });
-
-            nodo.addEventListener('mouseleave', () => {
-                desktopWrapper.classList.remove('section-hovered');
-                nodo.classList.remove('active');
-                nodo.style.transform = `translate(${x}px, ${y}px) scale(1)`; // Vuelve a su tamaño
-                
-                // --- La rueda vuelve a su sitio (Estado Reposo) ---
-                ruedaCentral.style.transform = `translate(-50%, -50%) rotate(0deg) scale(1) translateY(0)`;
-                // detallesContainer.classList.remove('visible'); // Lo dejo visible para que no parpadee al ir de uno a otro
-            });
-        });
-    });
-</script>
-
-                                   /* */
-
-        
-
-                  /* SECCIÓN DOXAS: LA COLECCIÓN */
-
+        <section style="background-color: #F5F1ED; padding: 25px 0; text-align: center;">
+            <div class="container animate-appear">
+                <p style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: 14px; color: #3C332A; letter-spacing: 2px; margin: 0;">
+                    AA del Colágeno &nbsp;&bull;&nbsp; Vitamina C &nbsp;&bull;&nbsp; Biotina &nbsp;&bull;&nbsp; Proteína &nbsp;&bull;&nbsp; Creatina &nbsp;&bull;&nbsp; Aceite MTC &nbsp;&bull;&nbsp; Boswellia Serrata
+                </p>
+            </div>
+        </section>
 
         <style>
-    .coleccion-section {
-        background-color: #302b22;
-        padding: 100px 20px;
-        color: #efefef;
-        font-family: 'Lexend', sans-serif;
-    }
-    .col-header {
-        text-align: center;
-        margin-bottom: 80px;
-    }
-    .col-title {
-        font-size: clamp(30px, 4vw, 40px);
-        font-weight: 300;
-        letter-spacing: 10px;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        color: #fff;
-    }
-    .col-desc {
-        font-size: 13px;
-        font-weight: 300;
-        line-height: 2;
-        letter-spacing: 2px;
-        max-width: 600px;
-        margin: 0 auto;
-        opacity: 0.9;
-    }
-    .product-main {
-        display: flex;
-        gap: 60px;
-        max-width: 1000px;
-        margin: 0 auto;
-        align-items: center;
-    }
-    .column-img { flex: 1.2; }
-    .column-text { flex: 1; }
-    
-    /* Efecto Fade */
-    .fade-effect { opacity: 1; transition: opacity 0.4s ease-in-out; }
-    .is-hidden { opacity: 0; }
-    
-    .main-image-container img { width: 100%; height: auto; border-radius: 4px; }
-    
-    .thumbnail-grid { display: flex; gap: 15px; margin-top: 20px; justify-content: center; }
-    .thumbnail-grid img { width: 60px; height: 60px; object-fit: cover; cursor: pointer; opacity: 0.5; transition: all 0.3s ease; border-radius: 50%; }
-    .thumbnail-grid img:hover, .thumbnail-grid img.active-thumb { opacity: 1; transform: scale(1.1); }
-    
-    .variety-title { font-size: clamp(24px, 3vw, 32px); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; font-weight: 400; }
-    .variety-desc { font-size: 13px; font-weight: 300; line-height: 1.8; min-height: 100px; margin-bottom: 40px; opacity: 0.9; }
-    
-    .dietary-icons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
-    .tag { font-size: 9px; font-weight: 700; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; }
-    
-    /* ACORDEÓN (Exactamente tus clases originales) */
-    .accordion { 
-        background: none; 
-        border: none; 
-        border-bottom: 1px solid rgba(255,255,255,0.2); 
-        width: 100%; 
-        text-align: left; 
-        padding: 15px 0; 
-        font-family: 'Lexend', sans-serif; 
-        font-size: 11px; 
-        text-transform: uppercase; 
-        cursor: pointer; 
-        color: #efefef;
-        font-weight: 600;
-        letter-spacing: 2px;
-        transition: border-color 0.3s ease;
-    }
-    .accordion:hover { border-bottom-color: rgba(255,255,255,0.8); }
-    .panel { 
-        max-height: 0; 
-        overflow: hidden; 
-        transition: max-height 0.4s ease-out; 
-        color: #efefef;
-    }
-    .panel p { 
-        padding: 15px 0; 
-        font-size: 12px; 
-        font-weight: 300; 
-        opacity: 0.8;
-        line-height: 1.6;
-        margin: 0;
-    }
-    
-    @media (max-width: 768px) {
-        .product-main { flex-direction: column; gap: 40px; text-align: center; }
-        .dietary-icons { justify-content: center; }
-        .accordion { text-align: center; }
-        .variety-desc { min-height: auto; }
-    }
-</style>
-
-<section class="coleccion-section" id="coleccion">
-    <div class="container animate-appear">
-        
-        <div class="col-header">
-            <h2 class="col-title">DOXAS. LA COLECCIÓN</h2>
-            <p class="col-desc">
-                Nuestra caja exclusiva incluye las 4 variedades:<br>
-                Bésame Choco, Lux-Umbra, Café Delirium y Selva Negra.<br>
-                Cuatro sabores de raza. Una DOXA para cada momento.
-            </p>
-        </div>
-
-        <div class="product-main">
-            
-            <div class="column-img">
-                <div class="main-image-container">
-                    <div id="fadeGroup" class="fade-effect">
-                        <img src="Galle choco.png" id="mainView" alt="Variedad DOXA">
-                    </div>
-                </div>
-                <div class="thumbnail-grid">
-                    <img src="Galle choco.png" onclick="changeVariety(0)" class="thumb-img active-thumb" alt="Bésame Choco">
-                    <img src="Galle frutos bosque.png" onclick="changeVariety(1)" class="thumb-img" alt="Lux-Umbra">
-                    <img src="Galle cafe.png" onclick="changeVariety(2)" class="thumb-img" alt="Café Delirium">
-                    <img src="Galle choco negro.png" onclick="changeVariety(3)" class="thumb-img" alt="Selva Negra">
-                </div>
-            </div>
-
-            <div class="column-text">
-                <div id="textFadeGroup" class="fade-effect">
-                    <h3 class="variety-title" id="varietyTitle">BÉSAME CHOCO</h3>
-                    <div class="variety-desc" id="varietyDesc">
-                        Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte un capricho.
-                    </div>
-                </div>
-
-                <div class="dietary-icons">
-                    <span class="tag">SIN AZÚCARES AÑADIDOS</span>
-                    <span class="tag">SIN GLUTEN</span>
-                    <span class="tag">APTA KETO</span>
-                    <span class="tag">IDEAL POST-ENTRENO</span>
-                </div>
-
-                <div class="accordion-section">
-                    <button class="accordion" onclick="toggleAccordion(this)">Ingredientes Comunes</button>
-                    <div class="panel">
-                        <p>Base de harina de almendra, eritritol premium y huevos camperos. Cada variedad añade sus propios extractos naturales y superalimentos.</p>
-                    </div>
-                    
-                    <button class="accordion" onclick="toggleAccordion(this)">Información Nutricional (Media)</button>
-                    <div class="panel">
-                        <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<script>
-    // 1. Base de datos de las Doxas
-    const doxas = [
-        {
-            title: 'BÉSAME CHOCO',
-            desc: 'Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte un capricho.',
-            img: 'Galle choco.png'
-        },
-        {
-            title: 'LUX-UMBRA',
-            desc: 'La acidez transgresora de los frutos del bosque frente a la pureza blanca de la manteca de cacao.<br>Una arquitectura de contrastes que te compiten en cada mordida.<br><br>¿Por cuál de tus dos lados te dejarás llevar hoy?',
-            img: 'Galle frutos bosque.png'
-        },
-        {
-            title: 'CAFÉ DELIRIUM',
-            desc: 'Notas profundas de café tostado que despiertan el paladar.<br>Un corazón cremoso de cacao infusionado con café.<br><br>Elegante. Intensa. Irresistiblemente adulta.',
-            img: 'Galle cafe.png'
-        },
-        {
-            title: 'SELVA NEGRA',
-            desc: 'Cacao negro por fuera. Cacao negro por dentro.<br>Salvaje, profunda, indomable.<br>Tu oscuro objeto de deseo...',
-            img: 'Galle choco negro.png'
-        }
-    ];
-
-    // ==========================================
-    // NUEVO: PRECARGA INVISIBLE DE IMÁGENES
-    // ==========================================
-    window.addEventListener('load', function() {
-        doxas.forEach(doxa => {
-            const preloadedImg = new Image();
-            preloadedImg.src = doxa.img;
-        });
-    });
-
-    // 2. Motor de las Miniaturas
-    function changeVariety(index) {
-        const imgFade = document.getElementById('fadeGroup');
-        const textFade = document.getElementById('textFadeGroup');
-        const thumbnails = document.getElementsByClassName('thumb-img');
-        
-        // Difuminar imagen y texto
-        imgFade.classList.add('is-hidden');
-        textFade.classList.add('is-hidden');
-        
-        // Cambiar opacidad de la miniatura
-        for(let i = 0; i < thumbnails.length; i++) {
-            thumbnails[i].classList.remove('active-thumb');
-        }
-        thumbnails[index].classList.add('active-thumb');
-
-        // Esperar a que termine el difuminado (400ms) y cambiar el contenido
-        setTimeout(() => {
-            const d = doxas[index];
-            document.getElementById('varietyTitle').innerText = d.title;
-            document.getElementById('varietyDesc').innerHTML = d.desc;
-            document.getElementById('mainView').src = d.img;
-            
-            // Volver a mostrar imagen y texto
-            imgFade.classList.remove('is-hidden');
-            textFade.classList.remove('is-hidden');
-        }, 400); 
-    }
-
-    // 3. Motor del Acordeón a prueba de fallos
-    function toggleAccordion(element) {
-        element.classList.toggle("active");
-        var panel = element.nextElementSibling;
-        if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-        } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-        }
-    }
-</script>
-        
-                                   /* */
-
-        
-                                   /* SECCIÓN RESERVA-COMPRA */
-
-    <style>
-    .checkout-section {
-        background-color: #f5f1eb;
-        padding: 100px 20px;
-        text-align: center;
-        font-family: 'Lexend', sans-serif;
-        color: #444;
-    }
-
-    .checkout-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 25px;
-        max-width: 1000px;
-        margin: 0 auto 60px auto;
-    }
-
-    /* Estado inicial de las galletas (invisibles y un poco abajo) */
-    .grid-item {
-        text-align: center;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s ease-out;
-    }
-
-    /* Clase que activa la aparición */
-    .grid-item.aparece {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .grid-item img {
-        width: 100%;
-        height: auto;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.1));
-    }
-
-    .grid-title {
-        font-size: 11px;
-        font-weight: 400;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #000;
-    }
-
-    /* Tiempos de espera para el efecto cascada */
-    .d-1 { transition-delay: 0.1s; }
-    .d-2 { transition-delay: 0.3s; }
-    .d-3 { transition-delay: 0.5s; }
-    .d-4 { transition-delay: 0.7s; }
-
-    .btn-jotform {
-        display: inline-block;
-        background-color: #000;
-        color: #fff;
-        text-decoration: none;
-        font-size: 11px;
-        letter-spacing: 3px;
-        width: 100%;
-        max-width: 500px;
-        padding: 20px 0;
-        margin-top: 40px;
-        border: 1px solid #000;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-    }
-
-    .btn-jotform:hover {
-        background-color: #524b3f;
-        transform: translateY(-3px);
-    }
-
-    @media (max-width: 768px) {
-        .checkout-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 480px) {
-        .checkout-grid { grid-template-columns: 1fr; }
-    }
-</style>
-
-<section class="checkout-section" id="reserva">
-    <div class="container">
-        
-        <div class="checkout-grid">
-            <div class="grid-item d-1">
-                <img src="Galle choco.png" alt="Bésame Choco">
-                <div class="grid-title"></div>
-            </div>
-            <div class="grid-item d-2">
-                <img src="Galle frutos bosque.png" alt="Lux Umbra">
-                <div class="grid-title"></div>
-            </div>
-            <div class="grid-item d-3">
-                <img src="Galle cafe.png" alt="Café Delirium">
-                <div class="grid-title"></div>
-            </div>
-            <div class="grid-item d-4">
-                <img src="Galle choco negro.png" alt="Selva Negra">
-                <div class="grid-title"></div>
-            </div>
-        </div>
-
-        <div class="checkout-texts" style="opacity: 0; transition: opacity 1s ease 1s;">
-            <p style="font-size: 12px; font-weight: 600; letter-spacing: 2px; margin-bottom: 30px;">
-                DOXAS se elaboran artesanalmente y bajo pedido.
-            </p>
-            <p style="font-size: 12px; font-weight: 400; line-height: 2.2; letter-spacing: 1.5px;">
-                Las tuyas te serán enviadas en cuanto hayan enfriado tras su horneado.<br><br>
-                Cuando las quieras consumir, puedes darles un golpe de calor en el<br>
-                microondas y las tendrás tiernas y jugosas como recién hechas.<br><br>
-                Deja tu correo para que podamos informarte de la fecha de envío
-            </p>
-            <a href="https://eu.jotform.com/form/260395833827366" target="_blank" class="btn-jotform">
-                RESERVAR MIS DOXAS
-            </a>
-        </div>
-
-    </div>
-</section>
-
-<script>
-    // Este pequeño script detecta cuando llegas a la sección de reserva
-    const observerReserva = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Activa las galletas
-                const items = entry.target.querySelectorAll('.grid-item');
-                items.forEach(item => item.classList.add('aparece'));
-                
-                // Activa el bloque de texto con un ligero retraso extra
-                const texto = entry.target.querySelector('.checkout-texts');
-                if(texto) texto.style.opacity = "1";
-                
-                observerReserva.unobserve(entry.target);
+            .rueda-section {
+                background-color: #302b22;
+                padding: 100px 20px 150px 20px;
+                color: #f5f1eb;
+                font-family: 'Lexend', sans-serif;
+                position: relative;
+                overflow: hidden;
             }
-        });
-    }, { threshold: 0.2 });
+            .rueda-header { text-align: center; margin-bottom: 80px; }
+            .rueda-header h2 { font-size: clamp(28px, 4vw, 36px); font-weight: 300; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px; color: #fff; }
+            
+            .rueda-desktop {
+                display: block;
+                position: relative;
+                width: 100%;
+                max-width: 800px;
+                height: 600px; 
+                margin: 0 auto;
+            }
+            
+            .rueda-container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: 100%;
+                transform: translate(-50%, -50%) rotate(0deg) translateY(0);
+                transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+                opacity: 0; 
+            }
+            
+            .center-cookie {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 250px;
+                height: 250px;
+                border-radius: 50%;
+                object-fit: cover;
+                z-index: 10;
+                filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.6));
+            }
 
-    observerReserva.observe(document.querySelector('#reserva'));
-</script>   
-                                   /* */
+            .nodo-wrapper {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+                z-index: 15;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+            
+            .nodo-punto {
+                width: 12px;
+                height: 12px;
+                background-color: #c19b76;
+                border-radius: 50%;
+                box-shadow: 0 0 10px rgba(193, 155, 118, 0.5);
+                transition: all 0.4s ease;
+            }
+            
+            .nodo-label {
+                position: absolute;
+                width: 120px;
+                text-align: center;
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #f5f1eb;
+                top: 25px;
+                opacity: 0.7;
+                transition: all 0.4s ease;
+                pointer-events: none;
+            }
+
+            .rueda-desktop.section-hovered .nodo-wrapper { opacity: 0.3; filter: grayscale(50%); }
+            .rueda-desktop.section-hovered .nodo-wrapper.active { opacity: 1; filter: grayscale(0%); transform: scale(1.1) !important; z-index: 18;}
+            .rueda-desktop.section-hovered .nodo-wrapper.active .nodo-punto { transform: scale(1.5); box-shadow: 0 0 20px rgba(193, 155, 118, 0.9); }
+            .rueda-desktop.section-hovered .nodo-wrapper.active .nodo-label { opacity: 1; color: #c19b76; }
+
+            .detalles-activo-container {
+                position: relative;
+                max-width: 600px;
+                margin: 50px auto 0 auto;
+                padding: 40px;
+                background-color: rgba(0,0,0,0.2); 
+                border: 1px solid rgba(193, 155, 118, 0.1);
+                border-radius: 4px;
+                opacity: 0;
+                transition: opacity 0.4s ease, transform 0.4s ease;
+                pointer-events: none; 
+                z-index: 5;
+            }
+            .detalles-activo-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto;}
+            
+            .detalles-title { font-size: 18px; font-weight: 400; color: #c19b76; margin-bottom: 20px; letter-spacing: 3px; text-transform: uppercase; text-align: center; }
+            .detalles-content-area { font-size: 12px; font-weight: 300; line-height: 1.8; color: #f5f1eb; opacity: 0.9; }
+
+            .rueda-mobile { display: none; max-width: 600px; margin: 0 auto; }
+            .mob-item { border-bottom: 1px solid rgba(245, 241, 235, 0.1); padding: 15px 0; }
+            .mob-title { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #c19b76; margin-bottom: 10px; }
+            .mob-desc { font-size: 12px; font-weight: 300; line-height: 1.6; color: #f5f1eb; opacity: 0.8; }
+
+            @media (max-width: 900px) {
+                .rueda-desktop { display: none; }
+                .detalles-activo-container { display: none; }
+                .rueda-mobile { display: block; }
+            }
+        </style>
+
+        <section class="rueda-section">
+            <div class="container animate-appear">
+                <div class="rueda-header">
+                    <h2>El Ecosistema DOXA</h2>
+                    <p style="font-size: 12px; font-weight: 300; letter-spacing: 2px; opacity: 0.8;">12 activos funcionales trabajando en sinergia para ti.</p>
+                </div>
+
+                <div class="rueda-desktop" id="desktopWrapper">
+                    <img src="Galle choco.png" alt="DOXA" class="center-cookie">
+                    
+                    <div class="rueda-container" id="ruedaCentral">
+                        <div class="nodo-wrapper" data-title="Aminoácidos del Colágeno" data-desc="10g de precursores puros.<br>Máxima biodisponibilidad.<br>Ayuda a regenerar tu piel."><div class="nodo-punto"></div><div class="nodo-label">Colágeno</div></div>
+                        <div class="nodo-wrapper" data-title="Vitamina C Estratégica" data-desc="100mg añadidos.<br>Protege la calidad del colágeno.<br>Action antioxidante clave."><div class="nodo-punto"></div><div class="nodo-label">Vitamina C</div></div>
+                        <div class="nodo-wrapper" data-title="Proteína Whey Premium" data-desc="20g totales por unidad.<br>Mantenimiento del tono muscular.<br>Ideal para recuperación."><div class="nodo-punto"></div><div class="nodo-label">Proteína</div></div>
+                        <div class="nodo-wrapper" data-title="Biotina Activa" data-desc="100µg para folículos.<br>Cabello fuerte y sano.<br>Mejora la elasticidad de la piel."><div class="nodo-punto"></div><div class="nodo-label">Biotina</div></div>
+                        <div class="nodo-wrapper" data-title="Boswellia Serrata" data-desc="Potente antiinflamatorio natural.<br>Protege tus articulaciones.<br>Reduce la hinchazón."><div class="nodo-punto"></div><div class="nodo-label">Boswellia</div></div>
+                        <div class="nodo-wrapper" data-title="Extracto de Jengibre" data-desc="Sinergia antiinflamatoria.<br>Combate el estrés oxidativo.<br>Favorece la digestión."><div class="nodo-punto"></div><div class="nodo-label">Jengibre</div></div>
+                        <div class="nodo-wrapper" data-title="Creatina Pura" data-desc="3g para rendimiento diario.<br>Vitalidad muscular y cognitiva.<br>Sin picos de insulina."><div class="nodo-punto"></div><div class="nodo-label">Creatina</div></div>
+                        <div class="nodo-wrapper" data-title="Harina de Almendra" data-desc="Base noble y nutritiva.<br>Aporta grasas saludables.<br>Textura exquisita."><div class="nodo-punto"></div><div class="nodo-label">Almendra</div></div>
+                        <div class="nodo-wrapper" data-title="Mantequilla Bio" data-desc="Sabor real y profundo.<br>Sin aceites refinados inflamatorios.<br>Nutrición sana."><div class="nodo-punto"></div><div class="nodo-label">Mantequilla</div></div>
+                        <div class="nodo-wrapper" data-title="Aceite MCT" data-desc="Energía rápida y limpia.<br>Favorece la cetosis (keto).<br>Ideal pre/post entreno."><div class="nodo-punto"></div><div class="nodo-label">Aceite MCT</div></div>
+                        <div class="nodo-wrapper" data-title="Cacao Puro" data-desc="Rico en polifenoles.<br>Corazón del sabor Lux-Umbra.<br>Action antioxidante."><div class="nodo-punto"></div><div class="nodo-label">Cacao</div></div>
+                        <div class="nodo-wrapper" data-title="Eritritol Premium" data-desc="Dulzor sin culpa.<br>Cero picos de glucosa.<br>Amigo de tus dientes."><div class="nodo-punto"></div><div class="nodo-label">Eritritol</div></div>
+                    </div>
+                </div>
+
+                <div class="detalles-activo-container" id="detallesContainer">
+                    <h3 class="detalles-title" id="detallesTitle">Detalle de Activo</h3>
+                    <div class="detalles-content-area" id="detallesContent">
+                        <p style="text-align: center; font-weight: 300;">Selecciona un ingrediente para ver sus detalles específicos.</p>
+                    </div>
+                </div>
+
+                <div class="rueda-mobile" id="mobileList"></div>
+            </div>
+        </section>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const desktopWrapper = document.getElementById('desktopWrapper');
+                const ruedaCentral = document.getElementById('ruedaCentral');
+                const nodos = document.querySelectorAll('.nodo-wrapper');
+                const detallesContainer = document.getElementById('detallesContainer');
+                const detallesTitle = document.getElementById('detallesTitle');
+                const detallesContent = document.getElementById('detallesContent');
+                const mobileList = document.getElementById('mobileList');
+                
+                const radio = 240; 
+
+                setTimeout(() => {
+                    if(ruedaCentral) {
+                        ruedaCentral.style.opacity = "1";
+                        ruedaCentral.style.transform = "translate(-50%, -50%) rotate(0deg) scale(1) translateY(0)";
+                    }
+                }, 150);
+
+                nodos.forEach((nodo, index) => {
+                    const angulo = (index * 30 - 90) * (Math.PI / 180); 
+                    const x = Math.cos(angulo) * radio;
+                    const y = Math.sin(angulo) * radio;
+                    
+                    nodo.style.transform = `translate(${x}px, ${y}px)`;
+                    nodo.dataset.baseX = x;
+                    nodo.dataset.baseY = y;
+
+                    const mobItem = document.createElement('div');
+                    mobItem.className = 'mob-item';
+                    mobItem.innerHTML = `<div class="mob-title">${nodo.dataset.title}</div><div class="mob-desc">${nodo.dataset.desc}</div>`;
+                    if(mobileList) mobileList.appendChild(mobItem);
+                    
+                    nodo.addEventListener('mouseenter', () => {
+                        if(desktopWrapper) desktopWrapper.classList.add('section-hovered');
+                        nodo.classList.add('active');
+                        
+                        nodo.style.transform = `translate(${x}px, ${y}px) scale(1.1)`; 
+                        
+                        const rotacionBrisa = x > 0 ? -4 : 4; 
+                        if(ruedaCentral) ruedaCentral.style.transform = `translate(-50%, -50%) rotate(${rotacionBrisa}deg) scale(0.98) translateY(-5px)`;
+
+                        if(detallesTitle) detallesTitle.innerText = nodo.dataset.title;
+                        if(detallesContent) detallesContent.innerHTML = nodo.dataset.desc; 
+                        if(detallesContainer) detallesContainer.classList.add('visible');
+                    });
+
+                    nodo.addEventListener('mouseleave', () => {
+                        if(desktopWrapper) desktopWrapper.classList.remove('section-hovered');
+                        nodo.classList.remove('active');
+                        nodo.style.transform = `translate(${x}px, ${y}px) scale(1)`; 
+                        
+                        if(ruedaCentral) ruedaCentral.style.transform = `translate(-50%, -50%) rotate(0deg) scale(1) translateY(0)`;
+                    });
+                });
+            });
+        </script>
+
+        <style>
+            .coleccion-section {
+                background-color: #302b22;
+                padding: 100px 20px;
+                color: #efefef;
+                font-family: 'Lexend', sans-serif;
+            }
+            .col-header { text-align: center; margin-bottom: 80px; }
+            .col-title { font-size: clamp(30px, 4vw, 40px); font-weight: 300; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px; color: #fff; }
+            .col-desc { font-size: 13px; font-weight: 300; line-height: 2; letter-spacing: 2px; max-width: 600px; margin: 0 auto; opacity: 0.9; }
+            .product-main { display: flex; gap: 60px; max-width: 1000px; margin: 0 auto; align-items: center; }
+            .column-img { flex: 1.2; }
+            .column-text { flex: 1; }
+            .fade-effect { opacity: 1; transition: opacity 0.4s ease-in-out; }
+            .is-hidden { opacity: 0; }
+            .main-image-container img { width: 100%; height: auto; border-radius: 4px; }
+            .thumbnail-grid { display: flex; gap: 15px; margin-top: 20px; justify-content: center; }
+            .thumbnail-grid img { width: 60px; height: 60px; object-fit: cover; cursor: pointer; opacity: 0.5; transition: all 0.3s ease; border-radius: 50%; }
+            .thumbnail-grid img:hover, .thumbnail-grid img.active-thumb { opacity: 1; transform: scale(1.1); }
+            .variety-title { font-size: clamp(24px, 3vw, 32px); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; font-weight: 400; }
+            .variety-desc { font-size: 13px; font-weight: 300; line-height: 1.8; min-height: 100px; margin-bottom: 40px; opacity: 0.9; }
+            .dietary-icons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+            .tag { font-size: 9px; font-weight: 700; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; }
+            .accordion { background: none; border: none; border-bottom: 1px solid rgba(255,255,255,0.2); width: 100%; text-align: left; padding: 15px 0; font-family: 'Lexend', sans-serif; font-size: 11px; text-transform: uppercase; cursor: pointer; color: #efefef; font-weight: 600; letter-spacing: 2px; transition: border-color 0.3s ease; }
+            .accordion:hover { border-bottom-color: rgba(255,255,255,0.8); }
+            .panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; color: #efefef; }
+            .panel p { padding: 15px 0; font-size: 12px; font-weight: 300; opacity: 0.8; line-height: 1.6; margin: 0; }
+            
+            @media (max-width: 768px) {
+                .product-main { flex-direction: column; gap: 40px; text-align: center; }
+                .dietary-icons { justify-content: center; }
+                .accordion { text-align: center; }
+                .variety-desc { min-height: auto; }
+            }
+        </style>
+
+        <section class="coleccion-section" id="coleccion">
+            <div class="container animate-appear">
+                <div class="col-header">
+                    <h2 class="col-title">DOXAS. LA COLECCIÓN</h2>
+                    <p class="col-desc">
+                        Nuestra caja exclusiva incluye las 4 variedades:<br>
+                        Bésame Choco, Lux-Umbra, Café Delirium y Selva Negra.<br>
+                        Cuatro sabores de raza. Una DOXA para cada momento.
+                    </p>
+                </div>
+                <div class="product-main">
+                    <div class="column-img">
+                        <div class="main-image-container">
+                            <div id="fadeGroup" class="fade-effect">
+                                <img src="Galle choco.png" id="mainView" alt="Variedad DOXA">
+                            </div>
+                        </div>
+                        <div class="thumbnail-grid">
+                            <img src="Galle choco.png" onclick="changeVariety(0)" class="thumb-img active-thumb" alt="Bésame Choco">
+                            <img src="Galle frutos bosque.png" onclick="changeVariety(1)" class="thumb-img" alt="Lux-Umbra">
+                            <img src="Galle cafe.png" onclick="changeVariety(2)" class="thumb-img" alt="Café Delirium">
+                            <img src="Galle choco negro.png" onclick="changeVariety(3)" class="thumb-img" alt="Selva Negra">
+                        </div>
+                    </div>
+                    <div class="column-text">
+                        <div id="textFadeGroup" class="fade-effect">
+                            <h3 class="variety-title" id="varietyTitle">BÉSAME CHOCO</h3>
+                            <div class="variety-desc" id="varietyDesc">
+                                Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte un capricho.
+                            </div>
+                        </div>
+                        <div class="dietary-icons">
+                            <span class="tag">SIN AZÚCARES AÑADIDOS</span>
+                            <span class="tag">SIN GLUTEN</span>
+                            <span class="tag">APTA KETO</span>
+                            <span class="tag">IDEAL POST-ENTRENO</span>
+                        </div>
+                        <div class="accordion-section">
+                            <button class="accordion" onclick="toggleAccordion(this)">Ingredientes Comunes</button>
+                            <div class="panel">
+                                <p>Base de harina de almendra, eritritol premium y huevos camperos. Cada variedad añade sus propios extractos naturales y superalimentos.</p>
+                            </div>
+                            <button class="accordion" onclick="toggleAccordion(this)">Información Nutricional (Media)</button>
+                            <div class="panel">
+                                <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            const doxas = [
+                { title: 'BÉSAME CHOCO', desc: 'Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte un capricho.', img: 'Galle choco.png' },
+                { title: 'LUX-UMBRA', desc: 'La acidez transgresora de los frutos del bosque frente a la pureza blanca de la manteca de cacao.<br>Una arquitectura de contrastes que te compiten en cada mordida.<br><br>¿Por cuál de tus dos lados te dejarás llevar hoy?', img: 'Galle frutos bosque.png' },
+                { title: 'CAFÉ DELIRIUM', desc: 'Notas profundas de café tostado que despiertan el paladar.<br>Un corazón cremoso de cacao infusionado con café.<br><br>Elegante. Intensa. Irresistiblemente adulta.', img: 'Galle cafe.png' },
+                { title: 'SELVA NEGRA', desc: 'Cacao negro por fuera. Cacao negro por dentro.<br>Salvaje, profunda, indomable.<br>Tu oscuro objeto de deseo...', img: 'Galle choco negro.png' }
+            ];
+
+            window.addEventListener('load', function() {
+                doxas.forEach(doxa => { const preloadedImg = new Image(); preloadedImg.src = doxa.img; });
+            });
+
+            function changeVariety(index) {
+                const imgFade = document.getElementById('fadeGroup');
+                const textFade = document.getElementById('textFadeGroup');
+                const thumbnails = document.getElementsByClassName('thumb-img');
+                
+                imgFade.classList.add('is-hidden');
+                textFade.classList.add('is-hidden');
+                
+                for(let i = 0; i < thumbnails.length; i++) { thumbnails[i].classList.remove('active-thumb'); }
+                thumbnails[index].classList.add('active-thumb');
+
+                setTimeout(() => {
+                    const d = doxas[index];
+                    document.getElementById('varietyTitle').innerText = d.title;
+                    document.getElementById('varietyDesc').innerHTML = d.desc;
+                    document.getElementById('mainView').src = d.img;
+                    
+                    imgFade.classList.remove('is-hidden');
+                    textFade.classList.remove('is-hidden');
+                }, 400); 
+            }
+
+            function toggleAccordion(element) {
+                element.classList.toggle("active");
+                var panel = element.nextElementSibling;
+                if (panel.style.maxHeight) { panel.style.maxHeight = null; } 
+                else { panel.style.maxHeight = panel.scrollHeight + "px"; }
+            }
+        </script>
+
+        <style>
+            .checkout-section { background-color: #f5f1eb; padding: 100px 20px; text-align: center; font-family: 'Lexend', sans-serif; color: #444; }
+            .checkout-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; max-width: 1000px; margin: 0 auto 60px auto; }
+            .grid-item { text-align: center; opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+            .grid-item.aparece { opacity: 1; transform: translateY(0); }
+            .grid-item img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px; filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.1)); }
+            .grid-title { font-size: 11px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: #000; }
+            .d-1 { transition-delay: 0.1s; } .d-2 { transition-delay: 0.3s; } .d-3 { transition-delay: 0.5s; } .d-4 { transition-delay: 0.7s; }
+            .btn-jotform { display: inline-block; background-color: #000; color: #fff; text-decoration: none; font-size: 11px; letter-spacing: 3px; width: 100%; max-width: 500px; padding: 20px 0; margin-top: 40px; border: 1px solid #000; transition: all 0.3s ease; text-transform: uppercase; }
+            .btn-jotform:hover { background-color: #524b3f; transform: translateY(-3px); }
+            @media (max-width: 768px) { .checkout-grid { grid-template-columns: repeat(2, 1fr); } }
+            @media (max-width: 480px) { .checkout-grid { grid-template-columns: 1fr; } }
+        </style>
+
+        <section class="checkout-section" id="reserva">
+            <div class="container">
+                <div class="checkout-grid">
+                    <div class="grid-item d-1"><img src="Galle choco.png" alt="Bésame Choco"><div class="grid-title"></div></div>
+                    <div class="grid-item d-2"><img src="Galle frutos bosque.png" alt="Lux Umbra"><div class="grid-title"></div></div>
+                    <div class="grid-item d-3"><img src="Galle cafe.png" alt="Café Delirium"><div class="grid-title"></div></div>
+                    <div class="grid-item d-4"><img src="Galle choco negro.png" alt="Selva Negra"><div class="grid-title"></div></div>
+                </div>
+                <div class="checkout-texts" style="opacity: 0; transition: opacity 1s ease 1s;">
+                    <p style="font-size: 12px; font-weight: 600; letter-spacing: 2px; margin-bottom: 30px;">
+                        DOXAS se elaboran artesanalmente y bajo pedido.
+                    </p>
+                    <p style="font-size: 12px; font-weight: 400; line-height: 2.2; letter-spacing: 1.5px;">
+                        Las tuyas te serán enviadas en cuanto hayan enfriado tras su horneado.<br><br>
+                        Cuando las quieras consumir, puedes darles un golpe de calor en el<br>
+                        microondas y las tendrás tiernas y jugosas como recién hechas.<br><br>
+                        Deja tu correo para que podamos informarte de la fecha de envío
+                    </p>
+                    <a href="https://eu.jotform.com/form/260395833827366" target="_blank" class="btn-jotform">
+                        RESERVAR MIS DOXAS
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            const observerReserva = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const items = entry.target.querySelectorAll('.grid-item');
+                        items.forEach(item => item.classList.add('aparece'));
+                        const texto = entry.target.querySelector('.checkout-texts');
+                        if(texto) texto.style.opacity = "1";
+                        observerReserva.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            const reservaSec = document.querySelector('#reserva');
+            if(reservaSec) observerReserva.observe(reservaSec);
+        </script>   
         
-        
+    </div>
 </body>
 </html>
