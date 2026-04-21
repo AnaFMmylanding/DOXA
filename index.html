@@ -338,6 +338,224 @@ max-width: 500px;
 
                             /* SECCIÓN BANDA DE ACTIVOS */
 
+<style>
+    .rueda-section {
+        background-color: #302b22;
+        padding: 100px 20px;
+        color: #f5f1eb;
+        font-family: 'Lexend', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .rueda-header { text-align: center; margin-bottom: 60px; }
+    .rueda-header h2 { font-size: clamp(28px, 4vw, 36px); font-weight: 300; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px; }
+    
+    /* ESCRITORIO: Layout Radial */
+    .rueda-desktop {
+        display: block;
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        height: 600px;
+        margin: 0 auto;
+    }
+    
+    .rueda-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%) rotate(0deg);
+        transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); /* El efecto "Leve Brisa" */
+    }
+    
+    .center-cookie {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        object-fit: cover;
+        z-index: 10;
+        filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.6));
+        transition: all 0.4s ease;
+    }
+
+    /* Cada "banderita" */
+    .nodo-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        /* El transform lo aplicará JavaScript para hacer el círculo perfecto */
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        z-index: 15;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    
+    .nodo-punto {
+        width: 12px;
+        height: 12px;
+        background-color: #c19b76; /* Tono cobre/dorado elegante */
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(193, 155, 118, 0.5);
+        transition: all 0.4s ease;
+    }
+    
+    .nodo-label {
+        position: absolute;
+        width: 120px;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #f5f1eb;
+        top: 25px; /* Etiqueta debajo del punto */
+        opacity: 0.7;
+        transition: all 0.4s ease;
+        pointer-events: none;
+    }
+
+    /* Efectos HOVER controlados por clase */
+    .rueda-container.hovered .nodo-wrapper { opacity: 0.3; filter: grayscale(50%); }
+    .rueda-container.hovered .nodo-wrapper.active { opacity: 1; filter: grayscale(0%); transform: scale(1.1) !important; }
+    .rueda-container.hovered .nodo-wrapper.active .nodo-punto { transform: scale(1.5); box-shadow: 0 0 20px rgba(193, 155, 118, 0.9); }
+    .rueda-container.hovered .nodo-wrapper.active .nodo-label { opacity: 1; color: #c19b76; }
+    
+    /* Caja de texto de explicación */
+    .info-box {
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+        z-index: 20;
+    }
+    .info-box.visible { opacity: 1; }
+    .info-title { font-size: 18px; font-weight: 400; color: #c19b76; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
+    .info-desc { font-size: 12px; font-weight: 300; line-height: 1.8; color: #f5f1eb; opacity: 0.9; }
+
+    /* MÓVIL: Layout Vertical Acordeón */
+    .rueda-mobile { display: none; max-width: 600px; margin: 0 auto; }
+    .mob-item { border-bottom: 1px solid rgba(245, 241, 235, 0.1); padding: 15px 0; }
+    .mob-title { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #c19b76; margin-bottom: 10px; }
+    .mob-desc { font-size: 12px; font-weight: 300; line-height: 1.6; color: #f5f1eb; opacity: 0.8; }
+
+    @media (max-width: 900px) {
+        .rueda-desktop { display: none; }
+        .rueda-mobile { display: block; }
+    }
+</style>
+
+<section class="rueda-section">
+    <div class="container animate-appear">
+        <div class="rueda-header">
+            <h2>El Ecosistema DOXA</h2>
+            <p style="font-size: 12px; font-weight: 300; letter-spacing: 2px; opacity: 0.8;">12 activos funcionales trabajando en sinergia para ti.</p>
+        </div>
+
+        <div class="rueda-desktop">
+            <img src="doxa-central.png" alt="DOXA" class="center-cookie">
+            
+            <div class="rueda-container" id="ruedaCentral">
+                <div class="nodo-wrapper" data-title="Aminoácidos del Colágeno" data-desc="10g de precursores puros.<br>Máxima biodisponibilidad.<br>Ayuda a regenerar tu piel."><div class="nodo-punto"></div><div class="nodo-label">Colágeno</div></div>
+                <div class="nodo-wrapper" data-title="Vitamina C Estratégica" data-desc="100mg añadidos.<br>Protege la calidad del colágeno.<br>Acción antioxidante clave."><div class="nodo-punto"></div><div class="nodo-label">Vitamina C</div></div>
+                <div class="nodo-wrapper" data-title="Proteína Whey Premium" data-desc="20g totales por unidad.<br>Mantenimiento del tono muscular.<br>Ideal para recuperación."><div class="nodo-punto"></div><div class="nodo-label">Proteína</div></div>
+                <div class="nodo-wrapper" data-title="Biotina Activa" data-desc="100µg para folículos.<br>Cabello fuerte y sano.<br>Mejora la elasticidad de la piel."><div class="nodo-punto"></div><div class="nodo-label">Biotina</div></div>
+                <div class="nodo-wrapper" data-title="Boswellia Serrata" data-desc="Potente antiinflamatorio natural.<br>Protege tus articulaciones.<br>Reduce la hinchazón."><div class="nodo-punto"></div><div class="nodo-label">Boswellia</div></div>
+                <div class="nodo-wrapper" data-title="Extracto de Jengibre" data-desc="Sinergia antiinflamatoria.<br>Combate el estrés oxidativo.<br>Favorece la digestión."><div class="nodo-punto"></div><div class="nodo-label">Jengibre</div></div>
+                <div class="nodo-wrapper" data-title="Creatina Pura" data-desc="3g para rendimiento diario.<br>Vitalidad muscular y cognitiva.<br>Sin picos de insulina."><div class="nodo-punto"></div><div class="nodo-label">Creatina</div></div>
+                <div class="nodo-wrapper" data-title="Harina de Almendra" data-desc="Base noble y nutritiva.<br>Aporta grasas saludables.<br>Textura exquisita."><div class="nodo-punto"></div><div class="nodo-label">Almendra</div></div>
+                <div class="nodo-wrapper" data-title="Mantequilla Bio" data-desc="Sabor real y profundo.<br>Sin aceites refinados inflamatorios.<br>Nutrición sana."><div class="nodo-punto"></div><div class="nodo-label">Mantequilla</div></div>
+                <div class="nodo-wrapper" data-title="Aceite MCT" data-desc="Energía rápida y limpia.<br>Favorece la cetosis (keto).<br>Ideal pre/post entreno."><div class="nodo-punto"></div><div class="nodo-label">Aceite MCT</div></div>
+                <div class="nodo-wrapper" data-title="Cacao Puro" data-desc="Rico en polifenoles.<br>Corazón del sabor Lux-Umbra.<br>Acción antioxidante."><div class="nodo-punto"></div><div class="nodo-label">Cacao</div></div>
+                <div class="nodo-wrapper" data-title="Eritritol Premium" data-desc="Dulzor sin culpa.<br>Cero picos de glucosa.<br>Amigo de tus dientes."><div class="nodo-punto"></div><div class="nodo-label">Eritritol</div></div>
+            </div>
+
+            <div class="info-box" id="infoBox">
+                <h3 class="info-title" id="infoTitle">Activo</h3>
+                <p class="info-desc" id="infoDesc">Descripción del activo</p>
+            </div>
+        </div>
+
+        <div class="rueda-mobile" id="mobileList">
+            </div>
+
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const rueda = document.getElementById('ruedaCentral');
+        const nodos = document.querySelectorAll('.nodo-wrapper');
+        const infoBox = document.getElementById('infoBox');
+        const infoTitle = document.getElementById('infoTitle');
+        const infoDesc = document.getElementById('infoDesc');
+        const mobileList = document.getElementById('mobileList');
+        
+        const radio = 240; // Distancia de las banderitas al centro
+
+        nodos.forEach((nodo, index) => {
+            // 1. Matemáticas para colocar los 12 puntos en círculo perfecto
+            const angulo = (index * 30 - 90) * (Math.PI / 180); 
+            const x = Math.cos(angulo) * radio;
+            const y = Math.sin(angulo) * radio;
+            
+            // Guardamos la posición original
+            nodo.style.transform = `translate(${x}px, ${y}px)`;
+            nodo.dataset.baseX = x;
+            nodo.dataset.baseY = y;
+
+            // 2. Lógica para Móvil (Clona los textos en la lista vertical)
+            const mobItem = document.createElement('div');
+            mobItem.className = 'mob-item';
+            mobItem.innerHTML = `<div class="mob-title">${nodo.dataset.title}</div><div class="mob-desc">${nodo.dataset.desc}</div>`;
+            mobileList.appendChild(mobItem);
+
+            // 3. Efectos Hover Interactivos
+            nodo.addEventListener('mouseenter', () => {
+                rueda.classList.add('hovered');
+                nodo.classList.add('active');
+                // Mantenerlo en su sitio aunque crezca el scale
+                nodo.style.transform = `translate(${x}px, ${y}px) scale(1.1)`; 
+                
+                // Efecto Brisa: Si el nodo está a la derecha, gira a la izquierda y viceversa
+                const rotacion = x > 0 ? -4 : 4; 
+                rueda.style.transform = `translate(-50%, -50%) rotate(${rotacion}deg)`;
+
+                // Actualizar Textos
+                infoTitle.innerText = nodo.dataset.title;
+                infoDesc.innerHTML = nodo.dataset.desc;
+                infoBox.classList.add('visible');
+            });
+
+            nodo.addEventListener('mouseleave', () => {
+                rueda.classList.remove('hovered');
+                nodo.classList.remove('active');
+                nodo.style.transform = `translate(${x}px, ${y}px) scale(1)`; // Vuelve a su tamaño
+                
+                // La rueda vuelve a su sitio
+                rueda.style.transform = `translate(-50%, -50%) rotate(0deg)`;
+                infoBox.classList.remove('visible');
+            });
+        });
+    });
+</script>
+        
+                                   /* */
+
 <section style="background-color: #F5F1ED; padding: 25px 0; text-align: center;">
     <div class="container animate-appear">
         <p style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: 14px; color: #3C332A; letter-spacing: 2px; margin: 0;">
@@ -350,6 +568,14 @@ max-width: 500px;
 
 
                             /* SECCIÓN PRESENTACIÓN DE ACTIVOS*/
+
+
+     /* SECCIÓN RUEDA DE ACTIVOS*/
+
+
+
+
+        
 
   <section style="background-color: #524b3f; padding: 80px 0;">
     <div class="activos-grid-staggered">
