@@ -351,11 +351,11 @@ max-width: 500px;
     </div>
 </section>
 
+
+
         
        /*SECCIÓN RUEDA DE ACTIVOS*/
-
-
-        
+ 
 <section id="seccion-rueda-recuperada" style="background-color: #0b0c0d; padding: 100px 0; font-family: 'Lexend', sans-serif;">
     <style>
         .radial-wrapper {
@@ -471,6 +471,9 @@ nodo.onmouseenter = () => {
                 
                 rueda.appendChild(nodo);
             });
+
+            // Usamos a.n que es el nombre corto (ej: "Biotina")
+nodo.innerHTML = `<span style="font-size: 9px; font-weight: 500; color: #000; text-align: center; line-height: 1.1; padding: 5px;">${a.n}</span>`;
         })();
     </script>
 </section>
