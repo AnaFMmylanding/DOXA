@@ -391,18 +391,19 @@ max-width: 500px;
             filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
             pointer-events: none;
         }
-  .nodo-activo {
+.nodo-activo {
             position: absolute;
-            width: 80px;  /* Aumentamos un poco el ancho para que el nombre quepa bien */
-            height: 30px;
-            background: none; /* ELIMINAMOS EL CÍRCULO BLANCO */
-            border-radius: 0;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.3s ease;
-            box-shadow: none; /* ELIMINAMOS LA SOMBRA */
+            width: 100px !important;  /* Más ancho para que el texto no se corte */
+            height: 40px !important;
+            background: transparent !important; /* Transparente total */
+            border-radius: 0 !important;
+            display: flex !important; 
+            align-items: center !important; 
+            justify-content: center !important;
+            cursor: pointer !important;
+            transition: 0.3s ease !important;
+            box-shadow: none !important; /* Fuera sombras */
+            border: none !important; /* Fuera bordes si los hubiera */
         }
         
         .nodo-activo:hover {
