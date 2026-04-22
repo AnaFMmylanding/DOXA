@@ -355,6 +355,148 @@ max-width: 500px;
 
 
 
+        <section id="bloque-rueda-laboratorio" style="background-color: #302b22; padding: 100px 0; overflow: hidden; position: relative;">
+    <style>
+        #bloque-rueda-laboratorio .radial-layout {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #bloque-rueda-laboratorio .circulo-nodos {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        #bloque-rueda-laboratorio .img-central {
+            width: 240px;
+            z-index: 10;
+            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.6));
+            pointer-events: none;
+        }
+        #bloque-rueda-laboratorio .nodo-activo {
+            position: absolute;
+            top: 50%; left: 50%;
+            z-index: 20;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #bloque-rueda-laboratorio .punto-oro {
+            width: 14px; height: 14px;
+            background: #c19b76;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(193,155,118,0.5);
+            transition: all 0.3s ease;
+        }
+        #bloque-rueda-laboratorio .etiqueta-nodo {
+            position: absolute;
+            top: 25px;
+            white-space: nowrap;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+        /* Hover effects */
+        #bloque-rueda-laboratorio .nodo-activo:hover .punto-oro {
+            transform: scale(2);
+            background: #fff;
+            box-shadow: 0 0 20px #fff;
+        }
+        #bloque-rueda-laboratorio .nodo-activo:hover .etiqueta-nodo {
+            opacity: 1;
+            font-weight: 700;
+        }
+        /* Panel de descripción */
+        #bloque-rueda-laboratorio #panel-descripcion {
+            max-width: 600px;
+            margin: 40px auto 0;
+            text-align: center;
+            min-height: 120px;
+            padding: 30px;
+            border: 1px solid rgba(193,155,118,0.1);
+            background: rgba(0,0,0,0.1);
+        }
+        @media (max-width: 800px) {
+            #bloque-rueda-laboratorio .radial-layout { display: none; }
+            #bloque-rueda-laboratorio #panel-descripcion { border: none; }
+        }
+    </style>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h2 style="font-size: clamp(28px, 4vw, 36px); letter-spacing: 10px; text-transform: uppercase; color: #fff; font-weight: 300;">Ciencia Funcional</h2>
+            <p style="font-size: 13px; letter-spacing: 2px; opacity: 0.7; color: #fff;">12 Activos Estratégicos en Sinergia</p>
+        </div>
+
+        <div class="radial-layout">
+            <img src="Galle choco.png" class="img-central" alt="DOXA">
+            <div id="rueda-animada" class="circulo-nodos"></div>
+        </div>
+
+        <div id="panel-descripcion">
+            <h3 id="txt-titulo" style="color: #c19b76; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px;">Explora los activos</h3>
+            <p id="txt-info" style="font-size: 13px; line-height: 1.8; opacity: 0.8; color: #fff;">Pasa el cursor sobre los puntos para conocer la función de cada ingrediente.</p>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const activosDoxa = [
+                {n: "Colágeno", t: "Aminoácidos Precursores", d: "10g de precursores puros que tu cuerpo reconoce y absorbe al instante para reparar tejidos."},
+                {n: "Vitamina C", t: "Vitamina C (100mg)", d: "Catalizador esencial. Sin ella, tu cuerpo no puede fabricar colágeno nuevo de calidad."},
+                {n: "Proteína", t: "Whey Protein Premium", d: "20g totales para el mantenimiento del tono muscular y saciedad prolongada."},
+                {n: "Biotina", t: "Biotina (100µg)", d: "Vitamina B7 que fortalece el folículo capilar y mejora la textura de la dermis."},
+                {n: "Boswellia", t: "Boswellia Serrata", d: "Resina ancestral que reduce la inflamación articular tras el esfuerzo físico."},
+                {n: "Jengibre", t: "Extracto de Jengibre", d: "Sinergia antiinflamatoria y digestiva. Ayuda a la absorción de nutrientes."},
+                {n: "Creatina", t: "Creatina (3g)", d: "Mejora la hidratación celular y el rendimiento cognitivo durante el día."},
+                {n: "Almendra", t: "Harina de Almendra", d: "Base de grasas saludables y bajo índice glucémico. Sin harinas refinadas."},
+                {n: "MCT", t: "Aceite MCT", d: "Triglicéridos de cadena media para energía mental inmediata sin picos de insulina."},
+                {n: "Cacao", t: "Cacao Puro 100%", d: "Antioxidantes naturales (polifenoles) que protegen tus células del estrés oxidativo."},
+                {n: "Eritritol", t: "Eritritol Premium", d: "Endulzante natural con 0 calorías y 0 impacto en la glucosa sanguínea."},
+                {n: "Mantequilla", t: "Mantequilla Bio", d: "Grasas animales nobles, esenciales para la síntesis hormonal y sabor real."}
+            ];
+
+            const contenedor = document.getElementById('rueda-animada');
+            const tit = document.getElementById('txt-titulo');
+            const inf = document.getElementById('txt-info');
+            const radio = 250;
+
+            activosDoxa.forEach((act, i) => {
+                const angulo = (i * 30 - 90) * (Math.PI / 180);
+                const x = Math.cos(angulo) * radio;
+                const y = Math.sin(angulo) * radio;
+
+                const nodo = document.createElement('div');
+                nodo.className = 'nodo-activo';
+                nodo.style.transform = `translate(${x}px, ${y}px)`;
+                nodo.innerHTML = `<div class="punto-oro"></div><div class="etiqueta-nodo">${act.n}</div>`;
+
+                nodo.onmouseenter = () => {
+                    tit.innerText = act.t;
+                    inf.innerText = act.d;
+                    contenedor.style.transform = `rotate(${x > 0 ? -5 : 5}deg)`;
+                };
+                nodo.onmouseleave = () => {
+                    contenedor.style.transform = `rotate(0deg)`;
+                };
+
+                contenedor.appendChild(nodo);
+            });
+        })();
+    </script>
+</section>
+
+
                             /* SECCIÓN PRESENTACIÓN DE ACTIVOS*/
 
   <section style="background-color: #524b3f; padding: 80px 0;">
