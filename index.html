@@ -365,11 +365,13 @@ max-width: 500px;
             align-items: center;
             justify-content: center;
         }
-        #bloque-rueda-laboratorio .circulo-nodos {
+   #bloque-rueda-laboratorio .circulo-nodos {
             position: absolute;
             width: 100%;
             height: 100%;
-            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            /* Esta es la clave: 1.2 segundos y curva 'cubic-bezier' para efecto muelle */
+            transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
         }
         #bloque-rueda-laboratorio .img-central {
             width: 240px;
@@ -479,10 +481,12 @@ max-width: 500px;
                 nodo.style.transform = `translate(${x}px, ${y}px)`;
                 nodo.innerHTML = `<div class="punto-oro"></div><div class="etiqueta-nodo">${act.n}</div>`;
 
-                nodo.onmouseenter = () => {
+          nodo.onmouseenter = () => {
                     tit.innerText = act.t;
                     inf.innerText = act.d;
-                    contenedor.style.transform = `rotate(${x > 0 ? -5 : 5}deg)`;
+                    // Giro más amplio y con inercia (calculado según la posición del nodo)
+                    const factorGiro = x > 0 ? -15 : 15; 
+                    contenedor.style.transform = `rotate(${factorGiro}deg)`;
                 };
                 nodo.onmouseleave = () => {
                     contenedor.style.transform = `rotate(0deg)`;
