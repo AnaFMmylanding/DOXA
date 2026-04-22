@@ -353,7 +353,112 @@ max-width: 500px;
 
         
        /*SECCIÓN RUEDA DE ACTIVOS_PRUEBA*/
+<section id="seccion-rueda-recuperada" style="background-color: #0b0c0d; padding: 100px 0; font-family: 'Lexend', sans-serif;">
+    <style>
+        .radial-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .rueda-giro {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .galleta-fija {
+            position: absolute;
+            width: 240px;
+            z-index: 10;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
+            pointer-events: none;
+        }
+        .nodo-activo {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #d8d8db;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        .nodo-activo:hover {
+            background: #fff;
+            transform: scale(1.2);
+            box-shadow: 0 0 20px #fff;
+        }
+        .info-panel-estanco {
+            max-width: 600px;
+            margin: 40px auto;
+            text-align: center;
+            color: #fff;
+            min-height: 80px;
+        }
+    </style>
 
+    <div class="radial-wrapper">
+        <img src="Galle choco.png" class="galleta-fija" alt="DOXA">
+        <div id="rueda-fisica" class="rueda-giro"></div>
+    </div>
+
+    <div class="info-panel-estanco">
+        <h3 id="titulo-dinamico" style="color: #c19b76; letter-spacing: 3px; text-transform: uppercase;">CIENCIA FUNCIONAL</h3>
+        <p id="texto-dinamico" style="opacity: 0.8; font-size: 14px; margin-top: 10px;">Pasa el ratón por los activos para explorar.</p>
+    </div>
+
+    <script>
+        (function() {
+            const activos = [
+                {n: "Aminoácidos", d: "10g de precursores puros del colágeno."},
+                {n: "Vitamina C", d: "100mg para la síntesis de tejidos."},
+                {n: "Proteína", d: "20g para tono muscular y saciedad."},
+                {n: "Biotina", d: "Refuerzo para cabello y uñas."},
+                {n: "Boswellia", d: "Antiinflamatorio natural articular."},
+                {n: "Jengibre", d: "Sinergia digestiva y antiinflamatoria."},
+                {n: "Creatina", d: "Energía celular y rendimiento cognitivo."},
+                {n: "Almendra", d: "Grasas saludables de bajo índice glucémico."},
+                {n: "MCT", d: "Combustible cerebral inmediato."},
+                {n: "Cacao", d: "Antioxidantes protectores de la célula."},
+                {n: "Eritritol", d: "Dulzor natural sin picos de insulina."},
+                {n: "Mantequilla", d: "Grasas nobles para equilibrio hormonal."}
+            ];
+
+            const rueda = document.getElementById('rueda-fisica');
+            const tit = document.getElementById('titulo-dinamico');
+            const txt = document.getElementById('texto-dinamico');
+            const radio = 250;
+
+            activos.forEach((a, i) => {
+                const angulo = (i * 30 - 90) * (Math.PI / 180);
+                const x = Math.cos(angulo) * radio;
+                const y = Math.sin(angulo) * radio;
+
+                const nodo = document.createElement('div');
+                nodo.className = 'nodo-activo';
+                nodo.style.left = `calc(50% + ${x}px - 25px)`;
+                nodo.style.top = `calc(50% + ${y}px - 25px)`;
+                nodo.innerHTML = `<span style="font-size:10px; font-weight:bold; color:#000;">${i+1}</span>`;
+
+                nodo.onmouseenter = () => {
+                    tit.innerText = a.n;
+                    txt.innerText = a.d;
+                    rueda.style.transform = `rotate(${i * -30}deg)`;
+                };
+                
+                rueda.appendChild(nodo);
+            });
+        })();
+    </script>
+</section>
 
                               /* */  
 
