@@ -357,8 +357,10 @@ max-width: 500px;
 
 
         
-       /*SECCIÓN RUEDA DE ACTIVOS*/
- 
+            /*SECCIÓN RUEDA DE ACTIVOS*/
+
+
+        
 <section id="seccion-rueda-recuperada" style="background-color: #0b0c0d; padding: 100px 0; font-family: 'Lexend', sans-serif;">
     <style>
         .radial-wrapper {
@@ -426,18 +428,18 @@ max-width: 500px;
     <script>
         (function() {
             const activos = [
-                {n: "Aminoácidos", d: "10g de precursores puros del colágeno."},i: "icons8-shield-100.png"},
-                {n: "Vitamina C", d: "100mg para la síntesis de tejidos."},"icons8-water-drop-100.png"},
-                {n: "Proteína", d: "20g para tono muscular y saciedad."},i: "icons8-shield-100.png"},
-                {n: "Biotina", d: "Refuerzo para cabello y uñas."},i: "icons8-shield-100.png"},
-                {n: "Boswellia", d: "Antiinflamatorio natural articular."},i: "icons8-shield-100.png"},
-                {n: "Jengibre", d: "Sinergia digestiva y antiinflamatoria."},i: "icons8-shield-100.png"},
-                {n: "Creatina", d: "Energía celular y rendimiento cognitivo."},i: "icons8-shield-100.png"},
-                {n: "Almendra", d: "Grasas saludables de bajo índice glucémico."},i: "icons8-shield-100.png"},
-                {n: "MCT", d: "Combustible cerebral inmediato."},i: "icons8-shield-100.png"},
-                {n: "Cacao", d: "Antioxidantes protectores de la célula."},i: "icons8-shield-100.png"},
-                {n: "Eritritol", d: "Dulzor natural sin picos de insulina."},i: "icons8-shield-100.png"},
-                {n: "Mantequilla", d: "Grasas nobles para equilibrio hormonal."}i: "icons8-shield-100.png"},
+                {n: "Aminoácidos", d: "10g de precursores puros del colágeno."},
+                {n: "Vitamina C", d: "100mg para la síntesis de tejidos."},
+                {n: "Proteína", d: "20g para tono muscular y saciedad."},
+                {n: "Biotina", d: "Refuerzo para cabello y uñas."},
+                {n: "Boswellia", d: "Antiinflamatorio natural articular."},
+                {n: "Jengibre", d: "Sinergia digestiva y antiinflamatoria."},
+                {n: "Creatina", d: "Energía celular y rendimiento cognitivo."},
+                {n: "Almendra", d: "Grasas saludables de bajo índice glucémico."},
+                {n: "MCT", d: "Combustible cerebral inmediato."},
+                {n: "Cacao", d: "Antioxidantes protectores de la célula."},
+                {n: "Eritritol", d: "Dulzor natural sin picos de insulina."},
+                {n: "Mantequilla", d: "Grasas nobles para equilibrio hormonal."}
             ];
 
             const rueda = document.getElementById('rueda-fisica');
@@ -454,13 +456,7 @@ max-width: 500px;
                 nodo.className = 'nodo-activo';
                 nodo.style.left = `calc(50% + ${x}px - 25px)`;
                 nodo.style.top = `calc(50% + ${y}px - 25px)`;
-// Borra la línea vieja de nodo.innerHTML y pega esta:
-                nodo.innerHTML = `
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%;">
-        <img src="${a.i}" style="width: 24px; height: 24px; margin-bottom: 2px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-        <span style="font-size: 8px; font-weight: 600; color: #000; text-transform: uppercase; display: none;">${a.n}</span>
-    </div>
-`;
+                nodo.innerHTML = `<span style="font-size:10px; font-weight:bold; color:#000;">${i+1}</span>`;
 
 nodo.onmouseenter = () => {
                     tit.innerText = a.n;
@@ -480,14 +476,11 @@ nodo.onmouseenter = () => {
                 
                 rueda.appendChild(nodo);
             });
-
-
         })();
     </script>
 </section>
 
                               /* */  
-
         
                            
 
