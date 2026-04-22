@@ -372,10 +372,9 @@ max-width: 500px;
             position: absolute;
             width: 100%;
             height: 100%;
-            /* HEMOS CAMBIADO ESTO: */
-            /* 2.5 segundos de duración para que sea majestuoso */
-            /* La curva cubic-bezier(0.19, 1, 0.22, 1) es la que da el efecto de seda */
-            transition: transform 2.5s cubic-bezier(0.19, 1, 0.22, 1);
+            /* 3 segundos: movimiento muy lento y señorial */
+            /* La curva 'ease-out' hace que el inicio sea suave y el final casi eterno */
+            transition: transform 3s ease-out; 
             display: flex;
             align-items: center;
             justify-content: center;
