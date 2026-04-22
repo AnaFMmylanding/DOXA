@@ -647,6 +647,19 @@
                         const x = Math.cos(angulo) * radio;
                         const y = Math.sin(angulo) * radio;
 
+                        const line = document.createElement('div');
+                        line.style.position = 'absolute';
+                        line.style.top = 'calc(50% - 0.5px)';
+                        line.style.left = '50%';
+                        line.style.width = `${radio}px`;
+                        line.style.height = '1px';
+                        line.style.background = 'linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 80%, transparent 100%)';
+                        line.style.transformOrigin = '0 50%';
+                        line.style.transform = `rotate(${i * 30 - 90}deg)`;
+                        line.style.zIndex = '0';
+                        line.style.pointerEvents = 'none'; // Para que no interfiera con el ratón
+                        rueda.appendChild(line);
+
                         const nodo = document.createElement('div');
                         nodo.className = 'nodo-activo';
                         nodo.style.left = `calc(50% + ${x}px)`;
