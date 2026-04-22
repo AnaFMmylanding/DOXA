@@ -368,11 +368,14 @@ max-width: 500px;
             align-items: center;
             justify-content: center;
         }
-        .rueda-giro {
+.rueda-giro {
             position: absolute;
             width: 100%;
             height: 100%;
-            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            /* HEMOS CAMBIADO ESTO: */
+            /* 2.5 segundos de duración para que sea majestuoso */
+            /* La curva cubic-bezier(0.19, 1, 0.22, 1) es la que da el efecto de seda */
+            transition: transform 2.5s cubic-bezier(0.19, 1, 0.22, 1);
             display: flex;
             align-items: center;
             justify-content: center;
