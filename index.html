@@ -393,22 +393,19 @@ max-width: 500px;
         }
 .nodo-activo {
             position: absolute;
-            width: 80px;  /* Aumentamos un poco el ancho para que el nombre quepa bien */
-            height: 30px;
-            background: none; /* ELIMINAMOS EL CÍRCULO BLANCO */
-            border-radius: 0;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.3s ease;
-            box-shadow: none; /* ELIMINAMOS LA SOMBRA */
+            width: 120px !important;  /* Más ancho para nombres largos */
+            height: 40px !important;
+            background: transparent !important; 
+            display: flex !important; 
+            align-items: center !important; 
+            justify-content: center !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
         }
         
-  
         .nodo-activo:hover {
-            background: none; /* Que no aparezca fondo al pasar el ratón */
-            transform: scale(1.1); /* Un ligero aumento para saber que estás encima */
+            transform: scale(1.15) !important; /* Crece un poquito al tocarlo */
         }
         .info-panel-estanco {
             max-width: 600px;
