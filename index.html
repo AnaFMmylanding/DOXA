@@ -391,20 +391,23 @@ max-width: 500px;
             filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
             pointer-events: none;
         }
-        .nodo-activo {
+  .nodo-activo {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background: #d8d8db;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
+            width: 80px;  /* Aumentamos un poco el ancho para que el nombre quepa bien */
+            height: 30px;
+            background: none; /* ELIMINAMOS EL CÍRCULO BLANCO */
+            border-radius: 0;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
             cursor: pointer;
             transition: 0.3s ease;
+            box-shadow: none; /* ELIMINAMOS LA SOMBRA */
         }
+        
         .nodo-activo:hover {
-            background: #fff;
-            transform: scale(1.2);
-            box-shadow: 0 0 20px #fff;
+            background: none; /* Que no aparezca fondo al pasar el ratón */
+            transform: scale(1.1); /* Un ligero aumento para saber que estás encima */
         }
         .info-panel-estanco {
             max-width: 600px;
