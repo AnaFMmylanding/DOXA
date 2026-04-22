@@ -454,10 +454,20 @@ max-width: 500px;
                 nodo.style.top = `calc(50% + ${y}px - 25px)`;
                 nodo.innerHTML = `<span style="font-size:10px; font-weight:bold; color:#000;">${i+1}</span>`;
 
-                nodo.onmouseenter = () => {
+nodo.onmouseenter = () => {
                     tit.innerText = a.n;
                     txt.innerText = a.d;
-                    rueda.style.transform = `rotate(${i * -30}deg)`;
+                    
+                    // ESTA ES LA "BRISA" DE AYER:
+                    // En lugar de (i * -30), usamos un giro fijo de solo 5 grados 
+                    // que depende de si el punto está a la izquierda o derecha.
+                    const giroBrisa = x > 0 ? -5 : 5; 
+                    rueda.style.transform = `rotate(${giroBrisa}deg)`;
+                };
+
+                nodo.onmouseleave = () => {
+                    // La rueda vuelve suavemente a su sitio
+                    rueda.style.transform = `rotate(0deg)`;
                 };
                 
                 rueda.appendChild(nodo);
