@@ -353,9 +353,22 @@ max-width: 500px;
     
                             /* SECCIÓN RUEDA DE ACTIVOS*/
         
-<section id="bloque-rueda-laboratorio" style="background-color: #302b22; padding: 100px 0; overflow: hidden; position: relative;">
+<div id="laboratorio-radial-3d" style="background-color: #0b0c0d; font-family: 'Lexend', sans-serif; overflow: hidden; position: relative;">
     <style>
-        #bloque-rueda-laboratorio .radial-layout {
+        #laboratorio-radial-3d .main-frame {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            color: #d8d8db;
+        }
+
+        /* Panel Superior */
+        #laboratorio-radial-3d .top-panel { text-align: left; margin-bottom: 40px; }
+        #laboratorio-radial-3d .top-desc { font-size: 13px; letter-spacing: 2px; font-weight: 300; opacity: 0.9; }
+
+        /* Lienzo Radial */
+        #laboratorio-radial-3d .canvas-radial-completo {
             position: relative;
             width: 100%;
             max-width: 800px;
@@ -364,139 +377,231 @@ max-width: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: radial-gradient(circle, rgba(20,21,22,1) 0%, rgba(11,12,13,1) 100%);
         }
-   #bloque-rueda-laboratorio .circulo-nodos {
+
+        #laboratorio-radial-3d .texto-fondo {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            /* Esta es la clave: 1.2 segundos y curva 'cubic-bezier' para efecto muelle */
+            font-size: clamp(80px, 15vw, 150px);
+            font-weight: 900;
+            letter-spacing: -5px;
+            color: rgba(255,255,255,0.02);
+            text-transform: uppercase;
+            user-select: none;
+            z-index: 1;
+        }
+
+        #laboratorio-radial-completo-rueda {
+            position: absolute;
+            width: 100%; height: 100%;
             transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 2;
         }
-        }
-        #bloque-rueda-laboratorio .img-central {
-            width: 240px;
-            z-index: 10;
-            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.6));
-            pointer-events: none;
-        }
-        #bloque-rueda-laboratorio .nodo-activo {
+
+        #laboratorio-radial-3d .centro-nucleo {
             position: absolute;
             top: 50%; left: 50%;
-            z-index: 20;
-            cursor: pointer;
+            transform: translate(-50%, -50%);
+            width: 250px; height: 250px;
+            border-radius: 50%;
+            background: rgba(48, 43, 34, 0.6);
+            border: 2px solid #524b3f;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            color: #d8d8db;
+            box-shadow: 0 0 50px rgba(193,155,118,0.2), inset 0 0 30px rgba(0,0,0,0.5);
+            z-index: 5;
+            backdrop-filter: blur(5px);
         }
-        #bloque-rueda-laboratorio .punto-oro {
-            width: 14px; height: 14px;
-            background: #c19b76;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(193,155,118,0.5);
-            transition: all 0.3s ease;
-        }
-        #bloque-rueda-laboratorio .etiqueta-nodo {
+
+        #laboratorio-radial-3d .core-tagline { font-size: 10px; letter-spacing: 4px; font-weight: 300; color: rgba(255,255,255,0.7); }
+        #laboratorio-radial-3d .core-title { font-size: 32px; font-weight: 600; letter-spacing: 6px; }
+
+        #laboratorio-radial-3d .linea-conector {
             position: absolute;
-            top: 25px;
-            white-space: nowrap;
-            font-size: 10px;
+            top: 50%; left: 50%;
+            transform-origin: 0 0;
+            width: 250px; height: 1px;
+            background: linear-gradient(90deg, #524b3f 0%, rgba(193,155,118,0) 100%);
+            z-index: 3;
+            transition: opacity 0.3s;
+        }
+
+        /* Nodos e Iconos */
+        #laboratorio-radial-3d .nodo-iconico {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 50px; height: 50px;
+            margin-top: -25px; margin-left: -25px;
+            background: #d8d8db;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 4;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        #laboratorio-radial-3d .nodo-iconico img {
+            width: 24px; height: 24px;
+            transition: transform 0.3s;
+        }
+
+        /* Hover de Nodos */
+        #laboratorio-radial-3d .nodo-iconico:hover, #laboratorio-radial-3d .nodo-iconico.activo {
+            background: #fff;
+            box-shadow: 0 0 25px rgba(255,255,255,0.5), 0 5px 15px rgba(0,0,0,0.3);
+            transform: scale(1.1);
+        }
+
+        #laboratorio-radial-3d .nodo-iconico:hover img { transform: scale(1.1); }
+
+        #laboratorio-radial-3d .popup-label {
+            position: absolute;
+            bottom: -35px;
+            background: rgba(20,21,22,0.9);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #fff;
-            opacity: 0.5;
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+            z-index: 10;
         }
-        /* Hover effects */
-        #bloque-rueda-laboratorio .nodo-activo:hover .punto-oro {
-            transform: scale(2);
-            background: #fff;
-            box-shadow: 0 0 20px #fff;
+
+        #laboratorio-radial-3d .nodo-iconico:hover .popup-label, #laboratorio-radial-3d .nodo-iconico.activo .popup-label {
+            opacity: 1; transform: translateY(-5px);
         }
-        #bloque-rueda-laboratorio .nodo-activo:hover .etiqueta-nodo {
-            opacity: 1;
-            font-weight: 700;
+
+        /* Panel Inferior de Control */
+        #laboratorio-radial-3d .control-panel {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: rgba(20,21,22,0.5);
         }
-        /* Panel de descripción */
-        #bloque-rueda-laboratorio #panel-descripcion {
-            max-width: 600px;
-            margin: 40px auto 0;
-            text-align: center;
-            min-height: 120px;
-            padding: 30px;
-            border: 1px solid rgba(193,155,118,0.1);
-            background: rgba(0,0,0,0.1);
+
+        #laboratorio-radial-3d .control-tagline { font-size: 11px; color: rgba(255,255,255,0.7); letter-spacing: 2px; }
+        #laboratorio-radial-3d .selector-mode {
+            font-size: 13px; color: #fff;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex; align-items: center; gap: 10px;
         }
-        @media (max-width: 800px) {
-            #bloque-rueda-laboratorio .radial-layout { display: none; }
-            #bloque-rueda-laboratorio #panel-descripcion { border: none; }
+        #laboratorio-radial-3d .restart-btn {
+            background: none; border: 1px solid rgba(255,255,255,0.3);
+            color: #d8d8db; padding: 12px 25px;
+            font-size: 12px; letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s;
+        }
+        #laboratorio-radial-3d .restart-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; color: #fff; }
+
+        @media (max-width: 768px) {
+            #laboratorio-radial-3d .control-panel { grid-template-columns: 1fr; gap: 15px; text-align: center; justify-items: center; }
+            #laboratorio-radial-3d .radial-layout-completo { display: none; }
+            #laboratorio-radial-3d .main-frame { display: block; } /* Mostrar lista móvil */
         }
     </style>
 
-    <div class="container">
-        <div style="text-align: center; margin-bottom: 50px;">
-            <h2 style="font-size: clamp(28px, 4vw, 36px); letter-spacing: 10px; text-transform: uppercase; color: #fff; font-weight: 300;">Ciencia Funcional</h2>
-            <p style="font-size: 13px; letter-spacing: 2px; opacity: 0.7; color: #fff;">12 Activos Estratégicos en Sinergia</p>
+    <div class="main-frame">
+        <div class="top-panel">
+            <p id="top-info" class="top-desc">DOXA: Alta Repostería Funcional. Sinergia de suplementos clave.</p>
         </div>
 
-        <div class="radial-layout">
-            <img src="Galle choco.png" class="img-central" alt="DOXA">
-            <div id="rueda-animada" class="circulo-nodos"></div>
+        <div class="canvas-radial-completo">
+            <div class="texto-fondo">SKINCARE</div>
+            
+            <div id="laboratorio-radial-completo-rueda">
+                <div class="centro-nucleo">
+                    <p class="core-tagline">DOXA</p>
+                    <p class="core-title">ACTIVOS</p>
+                    <p class="core-tagline">FUNCIONALES</p>
+                </div>
+                
+                <div id="contenedor-nodos"></div>
+                <div id="contenedor-conectores"></div>
+            </div>
         </div>
 
-        <div id="panel-descripcion">
-            <h3 id="txt-titulo" style="color: #c19b76; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px;">Explora los activos</h3>
-            <p id="txt-info" style="font-size: 13px; line-height: 1.8; opacity: 0.8; color: #fff;">Pasa el cursor sobre los puntos para conocer la función de cada ingrediente.</p>
+        <div class="control-panel">
+            <div class="selector-mode">
+                View Mode: <b>Info Técnica</b>
+            </div>
+            <div></div> <button class="restart-btn" onclick="reiniciarInterfazRadial()">Reiniciar Animación</button>
         </div>
     </div>
 
     <script>
         (function() {
-            const activosDoxa = [
-                {n: "Colágeno", t: "Aminoácidos Precursores", d: "10g de precursores puros que tu cuerpo reconoce y absorbe al instante para reparar tejidos."},
-                {n: "Vitamina C", t: "Vitamina C (100mg)", d: "Catalizador esencial. Sin ella, tu cuerpo no puede fabricar colágeno nuevo de calidad."},
-                {n: "Proteína", t: "Whey Protein Premium", d: "20g totales para el mantenimiento del tono muscular y saciedad prolongada."},
-                {n: "Biotina", t: "Biotina (100µg)", d: "Vitamina B7 que fortalece el folículo capilar y mejora la textura de la dermis."},
-                {n: "Boswellia", t: "Boswellia Serrata", d: "Resina ancestral que reduce la inflamación articular tras el esfuerzo físico."},
-                {n: "Jengibre", t: "Extracto de Jengibre", d: "Sinergia antiinflamatoria y digestiva. Ayuda a la absorción de nutrientes."},
-                {n: "Creatina", t: "Creatina (3g)", d: "Mejora la hidratación celular y el rendimiento cognitivo durante el día."},
-                {n: "Almendra", t: "Harina de Almendra", d: "Base de grasas saludables y bajo índice glucémico. Sin harinas refinadas."},
-                {n: "MCT", t: "Aceite MCT", d: "Triglicéridos de cadena media para energía mental inmediata sin picos de insulina."},
-                {n: "Cacao", t: "Cacao Puro 100%", d: "Antioxidantes naturales (polifenoles) que protegen tus células del estrés oxidativo."},
-                {n: "Eritritol", t: "Eritritol Premium", d: "Endulzante natural con 0 calorías y 0 impacto en la glucosa sanguínea."},
-                {n: "Mantequilla", t: "Mantequilla Bio", d: "Grasas animales nobles, esenciales para la síntesis hormonal y sabor real."}
+            // Datos Completos Pro (Iconos y Textos)
+            const activosPro = [
+                {n: "Aminoácidos", l: "FACTORÍA COLÁGENO", d: "Aminoácidos Precursores del Colágeno. 10g de precursores puros que tu cuerpo reconoce.", i: "icons8-shield-100.png"},
+                {n: "Vitamina C", l: "SÍNTESIS COLÁGENO", d: "100mg fundamentales para que tu cuerpo pueda crear colágeno de calidad.", i: "icons8-water-drop-100.png"},
+                {n: "Proteína", l: "SACIEDAD & MÚSCULO", d: "20g totales de Whey Protein para el tono muscular y control del apetito.", i: "icons8-weightlifting-100.png"},
+                {n: "Biotina Activa", l: "CABELLO & UÑAS", d: "100µg para reforzar folículos y mejorar la textura de la dermis.", i: "icons8-hair-100.png"},
+                {n: "Boswellia", l: "ANTIINFLAMATORIO ARTICULAR", d: "180mg de Boswellia Serrata para articulaciones sanas y sin dolor.", i: "icons8-bone-100.png"},
+                {n: "Jengibre", t: "DIGESTIÓN SINERGIA", d: "Mejora la digestión y aumenta la absorción de los suplementos.", i: "icons8-ginger-100.png"},
+                {n: "Creatina", t: "ENERGÍA COGNITIVA", d: "3g vitales para vitalidad celular y rendimiento mental.", i: "icons8-brain-100.png"},
+                {n: "Almendra", t: "GRASAS SALUDABLES", d: "Base nutritiva de Harina de Almendra. Bajo índice glucémico.", i: "icons8-almond-100.png"},
+                {n: "MCT", t: "CEREBRO RÁPIDO", d: "Energía inmediata para tu cerebro sin picos de insulina.", i: "icons8-rocket-100.png"},
+                {n: "Cacao Puro", t: "ANTIOXIDANTES", d: "Polifenoles naturales que protegen tus células del estrés oxidativo.", i: "icons8-cacao-100.png"},
+                {n: "Eritritol", t: "DULZOR PREMIUM", d: "Índice glucémico cero. Dulzor natural sin calorías.", i: "icons8-spoon-100.png"},
+                {n: "Mantequilla Bio", t: "NUTRICIÓN NOBLE", d: "Esenciales para síntesis hormonal. Sabor real sin aceites vegetales.", i: "icons8-butter-100.png"}
             ];
 
-            const contenedor = document.getElementById('rueda-animada');
-            const tit = document.getElementById('txt-titulo');
-            const inf = document.getElementById('txt-info');
+            const rueda = document.getElementById('laboratorio-radial-completo-rueda');
+            const nodosCont = document.getElementById('contenedor-nodos');
+            const conectCont = document.getElementById('contenedor-conectores');
+            const topInfo = document.getElementById('top-info');
             const radio = 250;
 
-            activosDoxa.forEach((act, i) => {
+            // Generar los elementos
+            activosPro.forEach((act, i) => {
                 const angulo = (i * 30 - 90) * (Math.PI / 180);
                 const x = Math.cos(angulo) * radio;
                 const y = Math.sin(angulo) * radio;
 
+                // Crear Conector
+                const linea = document.createElement('div');
+                linea.className = 'linea-conector';
+                linea.style.transform = `rotate(${i * 30}deg)`;
+                linea.id = `linea-${i}`;
+                linea.style.opacity = '0.3'; // Estado inicial tenue
+                conectCont.appendChild(linea);
+
+                // Crear Nodo e Icono
                 const nodo = document.createElement('div');
-                nodo.className = 'nodo-activo';
+                nodo.className = 'nodo-iconico';
                 nodo.style.transform = `translate(${x}px, ${y}px)`;
-                nodo.innerHTML = `<div class="punto-oro"></div><div class="etiqueta-nodo">${act.n}</div>`;
+                nodo.id = `nodo-${i}`;
+                nodo.innerHTML = `<img src="${act.i}" alt="${act.n}"><div class="popup-label">${act.l}</div>`;
 
-          nodo.onmouseenter = () => {
-                    tit.innerText = act.t;
-                    inf.innerText = act.d;
-                    // Giro más amplio y con inercia (calculado según la posición del nodo)
-                    const factorGiro = x > 0 ? -15 : 15; 
-                    contenedor.style.transform = `rotate(${factorGiro}deg)`;
-                };
-                nodo.onmouseleave = () => {
-                    contenedor.style.transform = `rotate(0deg)`;
+                // Interacción
+                nodo.onmouseenter = () => {
+                    topInfo.innerText = act.d;
+                    topInfo.style.fontWeight = '500'; topInfo.style.color = '#fff';
+                    
+                    // Resaltar línea y nodo
+                    linea.style.opacity = '1';
+                    
+                    // Giro suave (Inercia Radial)
+                    const anguloGiro = i * -30;
+                    rueda.style.transform = `rotate(${anguloGiro}deg)`;
                 };
 
-                contenedor.appendChild(nodo);
-            });
-        })();
-    </script>
-</section>
+                nodo.onmouseleave =
 
                             /* SECCIÓN PRESENTACIÓN DE ACTIVOS*/
 
