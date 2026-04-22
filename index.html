@@ -694,6 +694,190 @@
 
 
 
+        /* SECCIÓN DOXAS: CAJAS DE ACTIVOS */
+        <style>
+          .full-container {
+            position: relative;
+            width: 100vw;
+            height: 600px;
+            display: flex;
+            align-items: center;
+          }
+
+          .bg-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.7);
+            z-index: 1;
+          }
+
+          .hero-value-prop {
+            font-family: 'Lexend', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
+            letter-spacing: 2px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #FFFFFF;
+          }
+
+          .hero-value-prop-neg {
+            font-family: 'Lexend', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.8;
+            letter-spacing: 2px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #FFFFFF;
+          }
+
+          .content-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 0 8%;
+            display: flex;
+            box-sizing: border-box;
+          }
+
+          .lado-derecho { justify-content: flex-end; text-align: right; }
+          .lado-izquierdo { justify-content: flex-start; text-align: left; }
+          .centro { justify-content: center; text-align: center; }
+
+          .text-box {
+            max-width: 500px;
+            color: white;
+            font-family: 'Lexend', sans-serif;
+          }
+
+          .tagline { font-size: 11px; letter-spacing: 3px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
+          .main-title { font-size: 32px; font-weight: 400; margin-bottom: 15px; line-height: 1.1; }
+
+          @media (max-width: 768px) {
+            .full-container { height: 450px; }
+            .content-wrapper { justify-content: center !important; text-align: center !important; padding: 0 20px; }
+            .main-title { 
+              font-size: 26px; 
+              font-weight: 200;
+              letter-spacing: 1px;
+              display: inline-block;
+              color: rgba(255,255,255,0.8);
+            }
+          }
+
+          .reveal-section { opacity: 0; transform: scale(1.1); transition: all 1.8s ease-out; }
+          .reveal-section.is-visible { opacity: 1; transform: scale(1); }
+        </style>
+
+        <section id="cajas-activos">
+            <!-- CAJA 1 -->
+            <div class="full-container reveal-section">
+            <div class="bg-layer" style="background-image: url('https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920');"></div>
+            <div class="content-wrapper lado-derecho"> <div class="text-box">
+                <h2 class="tagline">FABRICANDO TUS TEJIDOS</h2>
+                <h3 class="main-title">Aminoácidos Formadores de Colágeno</h3>
+                <p class="hero-value-prop-neg">10g de los aminoácidos clave PUROS que forman el colágeno</p>
+                <p class="hero-value-prop">
+            Los aminoácidos puros son mucho más potentes que su misma cantidad en colágeno ya formado. Cada DOXA porta 10 g de aminoácidos puros. Más potencia creadora de colágeno.
+            Una cantidad que sí marca la diferencia.
+                </p>
+                </div>
+            </div>
+            </div>
+
+            <!-- CAJA 2 -->
+            <div class="full-container reveal-section">
+            <div class="bg-layer" style="background-image: url('https://drive.google.com/thumbnail?id=1IYiVxhlVG6wOVl0I2r0MMF_5EaEz3NnW&sz=w1920');"></div>
+            <div class="content-wrapper lado-izquierdo"> <div class="text-box">
+                <h2 class="tagline">NO SIN MI VITAMINA C</h2>
+                <h3 class="main-title">Vitamina C</h3>
+                <p class="hero-value-prop-neg">100mg de vitamina C estratégicamente añadidos para preservar sus cualidades</p>
+                <p class="hero-value-prop">
+            Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel.
+                </p>
+                </div>
+            </div>
+            </div>
+
+            <!-- CAJA 3 -->
+            <div class="full-container reveal-section">
+            <div class="bg-layer" style="background-image: url('https://drive.google.com/thumbnail?id=1ECxBeP_peWbBt5YaIz0E0uJisOTFcFoh&sz=w1920');"></div>
+            <div class="content-wrapper lado-derecho"> <div class="text-box">
+                <h2 class="tagline">LA PROTEÍNA PUEDE SER JUGOSA</h2>
+                <h3 class="main-title">Proteína de Suero de Leche</h3>
+                <p class="hero-value-prop-neg">20g de Proteína que NO sabe a cartón</p>
+                <p class="hero-value-prop">
+            10g de proteína de suero de leche. 10g aportada por el resto de ingredientes. <br>  
+            Un toque que ayuda a mentener tu vitalidad y tono muscular.
+                </p>
+                </div>
+            </div>
+            </div>
+
+            <!-- CAJA 4 -->
+            <div class="full-container reveal-section">
+            <div class="bg-layer" style="background-image: url('https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920');"></div>
+            <div class="content-wrapper lado-izquierdo"> <div class="text-box">
+                <h2 class="tagline">INFLAMACIÓN NO, GRACIAS</h2>
+                <h3 class="main-title">Broswelia Serrata & Jengibre</h3>
+                <p class="hero-value-prop-neg">xmg de broswelia serrata y xmg de estracto de jengibre. </p>
+                <p class="hero-value-prop">
+            Cada sustancia por separado son ya potentes antiinblamatorios. Cuando además los juntas, el efecto de contención es brutal y tus articulaciones se mantienen sanas y a pleno rendimiento
+                </p>
+                </div>
+            </div>
+            </div>
+
+            <!-- CAJA 5 -->
+            <div class="full-container reveal-section">
+            <div class="bg-layer" style="background-image: url('https://drive.google.com/thumbnail?id=1VbwVN25DbA1SDByOwd6tXiGUZexo3KvJ&sz=w1920');"></div>
+            <div class="content-wrapper lado-derecho"> 
+                <div class="text-box">
+                <h2 class="tagline">Tu parte "creativa"</h2>
+                <h3 class="main-title">Creatina</h3>
+                <p class="hero-value-prop-neg">Creatiiiinaaaaa</p>
+                <p class="hero-value-prop">
+                    Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel.
+                </p>
+                </div>
+            </div>
+            </div>
+
+            <!-- CAJA 6 -->
+            <div class="full-container reveal-section">
+            <div class="bg-layer" style="background-image: url('https://drive.google.com/thumbnail?id=1NCcOsbxBtm6uUw65r9qTrjdLWybz04vX&sz=w1920');"></div>
+            <div class="content-wrapper lado-derecho">   
+                <div class="text-box">
+                <h2 class="tagline">Y todos los "sin" que te gusta leer</h2>
+                <h3 class="main-title">Sin azúcar. Sin gluten. Sin remordimientos</h3>
+                <div class="hero-value-prop">
+                    <p>Sin picos de insulina</p>
+                    <p>Sin exceso de carbohidratos</p>
+                    <p>Sin aceites refinados que inflaman tus tejidos</p>
+                    <p>Cada ingrediente que hay en tu DOXA (harina de almendra, mantequilla bio, aceite MTC...) es noble y ejerce su función nutritiva o reparadora</p>
+                </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <script>
+            const cajaObs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('#cajas-activos .reveal-section').forEach(el => cajaObs.observe(el));
+        </script>
+        /* */
+
+
+
+
         /* SECCIÓN DOXAS: LA COLECCIÓN */
 
 
