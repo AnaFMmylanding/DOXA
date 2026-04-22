@@ -352,7 +352,10 @@ max-width: 500px;
 </section>
 
         
-       /*SECCIÓN RUEDA DE ACTIVOS_PRUEBA*/
+       /*SECCIÓN RUEDA DE ACTIVOS*/
+
+
+        
 <section id="seccion-rueda-recuperada" style="background-color: #0b0c0d; padding: 100px 0; font-family: 'Lexend', sans-serif;">
     <style>
         .radial-wrapper {
@@ -463,176 +466,7 @@ max-width: 500px;
                               /* */  
 
         
-                            /* SECCIÓN RUEDA DE ACTIVOS*/
-        
-<div id="rueda-doxa-pro" style="background-color: #0b0c0d; padding: 120px 0; overflow: hidden; font-family: 'Lexend', sans-serif;">
-    <style>
-        #rueda-doxa-pro .main-container {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            height: 650px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* El secreto de la suavidad: 1.5s y esta curva bezier específica */
-        #rueda-doxa-pro .dynamic-wheel {
-            position: absolute;
-            width: 550px;
-            height: 550px;
-            transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #rueda-doxa-pro .cookie-center {
-            position: relative;
-            width: 260px;
-            z-index: 10;
-            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8));
-            pointer-events: none;
-            transition: transform 0.5s ease;
-        }
-
-        #rueda-doxa-pro .asset-node {
-            position: absolute;
-            width: 44px;
-            height: 44px;
-            background: #d8d8db;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        #rueda-doxa-pro .asset-node img {
-            width: 22px;
-            height: 22px;
-            opacity: 0.8;
-        }
-
-        /* Efectos de iluminacion y escala */
-        #rueda-doxa-pro .asset-node:hover {
-            background: #fff;
-            transform: scale(1.3) !important;
-            box-shadow: 0 0 30px rgba(255,255,255,0.4);
-            z-index: 100;
-        }
-
-        #rueda-doxa-pro .asset-node:hover img { opacity: 1; }
-
-        /* Panel de Información Flotante */
-        #rueda-doxa-pro .info-overlay {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            max-width: 300px;
-            pointer-events: none;
-        }
-
-        #rueda-doxa-pro .info-title {
-            color: #c19b76;
-            font-size: 14px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        #rueda-doxa-pro .info-body {
-            color: #d8d8db;
-            font-size: 12px;
-            line-height: 1.8;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        @media (max-width: 768px) {
-            #rueda-doxa-pro .main-container { height: 400px; transform: scale(0.7); }
-        }
-    </style>
-
-    <div class="main-container">
-        <div class="info-overlay">
-            <div id="doxa-title" class="info-title">Ciencia Funcional</div>
-            <div id="doxa-desc" class="info-body">Pasa el ratón para explorar los activos.</div>
-        </div>
-
-        <div class="dynamic-wheel" id="main-wheel">
-            <img src="Galle choco.png" class="cookie-center" id="central-cookie" alt="DOXA">
-            
-            <div id="nodes-container"></div>
-        </div>
-    </div>
-
-    <script>
-        (function() {
-            const data = [
-                {n: "Aminoácidos", d: "10g de precursores puros del colágeno.", i: "icons8-shield-100.png"},
-                {n: "Vitamina C", d: "100mg para la síntesis activa de tejidos.", i: "icons8-water-drop-100.png"},
-                {n: "Proteína", d: "20g para tono muscular y saciedad.", i: "icons8-weightlifting-100.png"},
-                {n: "Biotina", d: "Refuerzo estructural para cabello y uñas.", i: "icons8-hair-100.png"},
-                {n: "Boswellia", d: "Antiinflamatorio natural articular.", i: "icons8-bone-100.png"},
-                {n: "Jengibre", d: "Sinergia digestiva y antiinflamatoria.", i: "icons8-ginger-100.png"},
-                {n: "Creatina", d: "Energía celular y rendimiento cognitivo.", i: "icons8-brain-100.png"},
-                {n: "Almendra", d: "Grasas saludables de bajo índice glucémico.", i: "icons8-almond-100.png"},
-                {n: "MCT", d: "Combustible cerebral inmediato.", i: "icons8-rocket-100.png"},
-                {n: "Cacao", d: "Antioxidantes protectores de la célula.", i: "icons8-cacao-100.png"},
-                {n: "Eritritol", d: "Dulzor natural sin picos de insulina.", i: "icons8-spoon-100.png"},
-                {n: "Mantequilla", d: "Grasas nobles para equilibrio hormonal.", i: "icons8-butter-100.png"}
-            ];
-
-            const wheel = document.getElementById('main-wheel');
-            const cookie = document.getElementById('central-cookie');
-            const title = document.getElementById('doxa-title');
-            const desc = document.getElementById('doxa-desc');
-            const container = document.getElementById('nodes-container');
-            const radius = 240;
-
-            data.forEach((item, i) => {
-                const angle = (i * 30 - 90) * (Math.PI / 180);
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-
-                const node = document.createElement('div');
-                node.className = 'asset-node';
-                node.style.left = `calc(50% + ${x}px - 22px)`;
-                node.style.top = `calc(50% + ${y}px - 22px)`;
-                node.innerHTML = `<img src="${item.i}" alt="${item.n}">`;
-
-                node.onmouseenter = () => {
-                    title.innerText = item.n;
-                    desc.innerText = item.d;
-                    desc.style.opacity = "1";
-                    
-                    // FISICA: La rueda gira hacia el nodo de forma fluida
-                    const rotation = i * -30;
-                    wheel.style.transform = `rotate(${rotation}deg)`;
-                    
-                    // La galleta compensa el giro para quedarse "quieta" pero con un leve balanceo
-                    cookie.style.transform = `rotate(${-rotation}deg) scale(1.1)`;
-                };
-
-                node.onmouseleave = () => {
-                    desc.style.opacity = "0";
-                    cookie.style.transform = `rotate(0deg) scale(1)`;
-                };
-
-                container.appendChild(node);
-            });
-        })();
-    </script>
-</div>
-        
-                                   /* */
-
-        
+                           
 
                   /* SECCIÓN DOXAS: LA COLECCIÓN */
 
