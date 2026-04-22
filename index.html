@@ -460,9 +460,8 @@ max-width: 500px;
             nodo.style.left = `calc(50% + ${x}px - 25px)`;
             nodo.style.top = `calc(50% + ${y}px - 25px)`;
             
-            // AQUÍ PONEMOS EL NOMBRE DEL ACTIVO (HE QUITADO LOS NÚMEROS)
-            nodo.innerHTML = `<span style="font-size:8px; font-weight:700; color:#000; text-transform:uppercase; text-align:center; padding:5px; line-height:1;">${a.n}</span>`;
-
+          // Texto en blanco puro con una sombra suave para que "flote"
+            nodo.innerHTML = `<span style="font-size:10px; font-weight:700; color:#ffffff; text-transform:uppercase; text-align:center; letter-spacing:1.5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); pointer-events:none;">${a.n}</span>`;
             nodo.onmouseenter = () => {
                 tit.innerText = a.n;
                 txt.innerText = a.d;
