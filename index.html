@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -541,439 +541,10 @@
             </div>
         </section>
 
-        /*SECCIÓN RUEDA DE ACTIVOS*/
 
 
 
-        <section id="seccion-rueda-recuperada"
-            style="background-color: #0b0c0d; padding: 100px 0 0 0; font-family: 'Lexend', sans-serif;">
-            <style>
-                .radial-wrapper {
-                    position: relative;
-                    width: 100%;
-                    max-width: 800px;
-                    height: 520px;
-                    margin: 0 auto;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-
-                .rueda-giro {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    /* 3 segundos: movimiento muy lento y señorial */
-                    /* La curva 'ease-out' hace que el inicio sea suave y el final casi eterno */
-                    transition: transform 3s ease-out;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-
-                .galleta-fija {
-                    position: absolute;
-                    width: 240px;
-                    z-index: 10;
-                    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
-                    pointer-events: none;
-                }
-
-                .nodo-activo {
-                    position: absolute;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    transition: 0.3s ease;
-                    white-space: nowrap;
-                    transform: translate(-50%, -50%);
-                }
-
-                .nodo-activo:hover {
-                    transform: translate(-50%, -50%) scale(1.2);
-                    color: #c19b76;
-                    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-                }
-
-                .info-panel-estanco {
-                    max-width: 600px;
-                    margin: 40px auto;
-                    text-align: center;
-                    color: #fff;
-                    min-height: 80px;
-                }
-            </style>
-
-            <div class="radial-wrapper">
-                <img src="Galle choco.png" class="galleta-fija" alt="DOXA">
-                <div id="rueda-fisica" class="rueda-giro"></div>
-            </div>
-
-            <script>
-                (function () {
-                    const activos = [
-                        {
-                            n: "Aminoácidos",
-                            d: "10g de precursores puros del colágeno.",
-                            bg: "https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920",
-                            lado: "lado-derecho",
-                            tagline: "FABRICANDO TUS TEJIDOS",
-                            title: "Aminoácidos Formadores de Colágeno",
-                            neg: "10g de los aminoácidos clave PUROS que forman el colágeno",
-                            prop: "Los aminoácidos puros son mucho más potentes que su misma cantidad en colágeno ya formado. Cada DOXA porta 10 g de aminoácidos puros. Más potencia creadora de colágeno. Una cantidad que sí marca la diferencia."
-                        },
-                        {
-                            n: "Vitamina C",
-                            d: "100mg para la síntesis de tejidos.",
-                            bg: "https://drive.google.com/thumbnail?id=1IYiVxhlVG6wOVl0I2r0MMF_5EaEz3NnW&sz=w1920",
-                            lado: "lado-izquierdo",
-                            tagline: "NO SIN MI VITAMINA C",
-                            title: "Vitamina C",
-                            neg: "100mg de vitamina C estratégicamente añadidos para preservar sus cualidades",
-                            prop: "Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel."
-                        },
-                        {
-                            n: "Proteína",
-                            d: "20g para tono muscular y saciedad.",
-                            bg: "https://drive.google.com/thumbnail?id=1ECxBeP_peWbBt5YaIz0E0uJisOTFcFoh&sz=w1920",
-                            lado: "lado-derecho",
-                            tagline: "LA PROTEÍNA PUEDE SER JUGOSA",
-                            title: "Proteína de Suero de Leche",
-                            neg: "20g de Proteína que NO sabe a cartón",
-                            prop: "10g de proteína de suero de leche. 10g aportada por el resto de ingredientes. <br> Un toque que ayuda a mentener tu vitalidad y tono muscular."
-                        },
-                        {
-                            n: "Biotina",
-                            d: "Refuerzo para cabello y uñas.",
-                            lado: "lado-izquierdo",
-                            tagline: "BELLEZA DESDE EL INTERIOR",
-                            title: "Biotina de Alta Absorción",
-                            neg: "Dosis óptima para fortalecer la matriz celular",
-                            prop: "No es solo estética, es regeneración celular. La biotina trabaja en sinergia con los aminoácidos para anclar el cabello y fortalecer las uñas desde la raíz. El verdadero glow empieza por dentro."
-                        },
-                        {
-                            n: "Boswellia",
-                            d: "Antiinflamatorio natural articular.",
-                            bg: "https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920",
-                            lado: "lado-izquierdo",
-                            tagline: "INFLAMACIÓN NO, GRACIAS",
-                            title: "Broswelia Serrata & Jengibre",
-                            neg: "xmg de broswelia serrata y xmg de estracto de jengibre.",
-                            prop: "Cada sustancia por separado son ya potentes antiinblamatorios. Cuando además los juntas, el efecto de contención es brutal y tus articulaciones se mantienen sanas y a pleno rendimiento"
-                        },
-                        {
-                            n: "Jengibre",
-                            d: "Sinergia digestiva y antiinflamatoria.",
-                            bg: "https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920",
-                            lado: "lado-izquierdo",
-                            tagline: "INFLAMACIÓN NO, GRACIAS",
-                            title: "Broswelia Serrata & Jengibre",
-                            neg: "xmg de broswelia serrata y xmg de estracto de jengibre.",
-                            prop: "Cada sustancia por separado son ya potentes antiinblamatorios. Cuando además los juntas, el efecto de contención es brutal y tus articulaciones se mantienen sanas y a pleno rendimiento"
-                        },
-                        {
-                            n: "Creatina",
-                            d: "Energía celular y rendimiento cognitivo.",
-                            bg: "https://drive.google.com/thumbnail?id=1VbwVN25DbA1SDByOwd6tXiGUZexo3KvJ&sz=w1920",
-                            lado: "lado-derecho",
-                            tagline: "Tu parte \"creativa\"",
-                            title: "Creatina",
-                            neg: "Creatiiiinaaaaa",
-                            prop: "Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel."
-                        },
-
-                        {
-                            n: "MCT",
-                            d: "Combustible cerebral inmediato.",
-                            lado: "lado-derecho",
-                            tagline: "ENERGÍA LIMPIA Y DIRECTA",
-                            title: "Triglicéridos de Cadena Media",
-                            neg: "Combustible premium que tu cerebro usa al instante",
-                            prop: "Olvídate de las caídas de energía. El MCT esquiva la digestión pesada y viaja directo a tu hígado para convertirse en cetonas. Foco mental sostenido, claridad y energía imparable."
-                        },
-                        {
-                            n: "Vitamina D",
-                            d: "La hormona vital de tu bienestar inmune y óseo.",
-                            lado: "lado-izquierdo",
-                            tagline: "EL SOL QUE NO TE FALTE",
-                            title: "Vitamina D3",
-                            neg: "000 g de la vitamina más deficiente en el mundo moderno",
-                            prop: "Más que una vitamina, es un director de orquesta hormonal. Regula tu estado de ánimo, blinda tu sistema inmunológico y es absolutamente imprescindible para que el calcio se fije en tus huesos. Tu dosis diaria de vitalidad asegurada."
-                        },
-
-                        {
-                            n: "Ácido Hialurónico",
-                            d: "Hidratación celular profunda para la piel y articulaciones.",
-                            lado: "lado-derecho",
-                            tagline: "SI HAY UN ÁCIDO QUE AMAS, ES ÉSTE",
-                            title: "Ácido Hialurónico Puro",
-                            neg: "000 g de hidratación activa molecular",
-                            prop: "No te lo apliques solo por fuera, nútrelo desde dentro. El ácido hialurónico retiene hasta 1000 veces su peso en agua, lubricando tus articulaciones para moverte sin dolor y devolviendo a tu piel ese aspecto jugoso, firme y radiante."
-                        }
-                    ];
-
-                    const rueda = document.getElementById('rueda-fisica');
-                    const radio = 250;
-                    let rotacionActual = 0;
-
-                    const anguloPaso = 360 / activos.length;
-
-                    activos.forEach((a, i) => {
-                        const grados = i * anguloPaso - 90;
-                        const angulo = grados * (Math.PI / 180);
-                        const x = Math.cos(angulo) * radio;
-                        const y = Math.sin(angulo) * radio;
-
-                        const line = document.createElement('div');
-                        line.style.position = 'absolute';
-                        line.style.top = 'calc(50% - 0.5px)';
-                        line.style.left = '50%';
-                        line.style.width = `${radio}px`;
-                        line.style.height = '1px';
-                        line.style.background = 'linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 80%, transparent 100%)';
-                        line.style.transformOrigin = '0 50%';
-                        line.style.transform = `rotate(${grados}deg)`;
-                        line.style.zIndex = '0';
-                        line.style.pointerEvents = 'none'; // Para que no interfiera con el ratón
-                        rueda.appendChild(line);
-
-                        const nodo = document.createElement('div');
-                        nodo.className = 'nodo-activo';
-                        nodo.style.left = `calc(50% + ${x}px)`;
-                        nodo.style.top = `calc(50% + ${y}px)`;
-                        nodo.innerHTML = `<span class="nodo-texto" style="display:inline-block; transition:transform 3s ease-out; font-size:11px; font-weight:500; color:#fff; letter-spacing: 1px; text-transform: uppercase;">${a.n}</span>`;
-
-                        // Cambiado a onclick para poder leer textos más largos cómodamente
-                        nodo.onclick = () => {
-                            // 2. Actualiza la caja gigante de fondo fotográfico
-                            const contenedorCajas = document.getElementById('cajas-activos');
-                            if (contenedorCajas) {
-                                const fondoStyle = a.bg
-                                    ? `background-image: url('${a.bg}');`
-                                    : `background-color: #1a1714;`; // Fondo elegante por defecto para los que no tienen foto
-
-                                const classLado = a.lado ? a.lado : 'centro';
-
-                                contenedorCajas.innerHTML = `
-                                    <div class="full-container reveal-section is-visible" style="opacity: 0; animation: fadeInCaja 0.8s forwards;">
-                                        <div class="bg-layer" style="${fondoStyle}"></div>
-                                        <div class="content-wrapper ${classLado}"> 
-                                            <div class="text-box">
-                                                <h2 class="tagline">${a.tagline || 'DOXA'}</h2>
-                                                <h3 class="main-title">${a.title || a.n}</h3>
-                                                ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
-                                                <div class="hero-value-prop">${a.prop || a.d}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `;
-                            }
-
-                            const giroBrisa = x > 0 ? -15 : 15;
-                            rotacionActual += giroBrisa;
-                            rueda.style.transform = `rotate(${rotacionActual}deg)`;
-
-                            // Mantener el texto horizontal girando los nombres en sentido opuesto
-                            rueda.querySelectorAll('.nodo-texto').forEach(t => {
-                                t.style.transform = `rotate(${-rotacionActual}deg)`;
-                            });
-                        };
-
-                        rueda.appendChild(nodo);
-                    });
-                })();
-            </script>
-        </section>
-
-        /* */
-
-
-
-
-
-        /* SECCIÓN DOXAS: CAJAS DE ACTIVOS */
-        <style>
-            .full-container {
-                position: relative;
-                width: 100vw;
-                height: 600px;
-                display: flex;
-                align-items: center;
-            }
-
-            .full-container::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 200px;
-                background: linear-gradient(to bottom, #0b0c0d 0%, transparent 100%);
-                z-index: 2;
-                pointer-events: none;
-            }
-
-            .bg-layer {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-size: cover;
-                background-position: center;
-                filter: brightness(0.7);
-                z-index: 1;
-            }
-
-            .hero-value-prop {
-                font-family: 'Lexend', sans-serif;
-                font-size: 12px;
-                font-weight: 300;
-                line-height: 2.2;
-                letter-spacing: 1.5px;
-                max-width: 600px;
-                margin: 0 auto;
-                color: #FFFFFF;
-            }
-
-            .hero-value-prop-neg {
-                font-family: 'Lexend', sans-serif;
-                font-size: 12px;
-                font-weight: 600;
-                line-height: 2.2;
-                letter-spacing: 1.5px;
-                max-width: 600px;
-                margin: 0 auto;
-                color: #FFFFFF;
-            }
-
-            .content-wrapper {
-                position: relative;
-                z-index: 3;
-                width: 100%;
-                padding: 0 8%;
-                display: flex;
-                box-sizing: border-box;
-            }
-
-            .lado-derecho {
-                justify-content: flex-end;
-                text-align: right;
-            }
-
-            .lado-izquierdo {
-                justify-content: flex-start;
-                text-align: left;
-            }
-
-            .centro {
-                justify-content: center;
-                text-align: center;
-            }
-
-            .text-box {
-                max-width: 500px;
-                color: white;
-                font-family: 'Lexend', sans-serif;
-            }
-
-            .tagline {
-                font-size: 11px;
-                letter-spacing: 3px;
-                font-weight: 700;
-                margin-bottom: 10px;
-                text-transform: uppercase;
-            }
-
-            .main-title {
-                font-size: 32px;
-                font-weight: 400;
-                margin-bottom: 15px;
-                line-height: 1.1;
-            }
-
-            @media (max-width: 768px) {
-                .full-container {
-                    height: 450px;
-                }
-
-                .content-wrapper {
-                    justify-content: center !important;
-                    text-align: center !important;
-                    padding: 0 20px;
-                }
-
-                .main-title {
-                    font-size: 26px;
-                    font-weight: 200;
-                    letter-spacing: 1px;
-                    display: inline-block;
-                    color: rgba(255, 255, 255, 0.8);
-                }
-            }
-
-            .reveal-section {
-                opacity: 0;
-                transform: scale(1.1);
-                transition: all 1.8s ease-out;
-            }
-
-            .reveal-section.is-visible {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            @keyframes fadeInCaja {
-                from {
-                    opacity: 0;
-                    transform: scale(1.05);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: scale(1);
-                }
-            }
-        </style>
-
-        <section id="cajas-activos">
-            <!-- La caja inicial por defecto que aparece al cargar (Aminoácidos) -->
-            <div class="full-container reveal-section is-visible">
-                <div class="bg-layer"
-                    style="background-image: url('https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920');">
-                </div>
-                <div class="content-wrapper lado-derecho">
-                    <div class="text-box">
-                        <h2 class="tagline">FABRICANDO TUS TEJIDOS</h2>
-                        <h3 class="main-title">Aminoácidos Formadores de Colágeno</h3>
-                        <p class="hero-value-prop-neg">10g de los aminoácidos clave PUROS que forman el colágeno</p>
-                        <p class="hero-value-prop">
-                            Los aminoácidos puros son mucho más potentes que su misma cantidad en colágeno ya formado.
-                            Cada DOXA porta 10 g de aminoácidos puros. Más potencia creadora de colágeno.
-                            Una cantidad que sí marca la diferencia.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <script>
-            // El observador ahora es opcional porque inyectamos "is-visible" directamente al hacer clic, 
-            // pero lo dejamos por si hay más cajas estáticas abajo.
-            const cajaObs = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('#cajas-activos .reveal-section').forEach(el => cajaObs.observe(el));
-        </script>
-        /* */
-
-
-
-
-        /* SECCIÓN DOXAS: LA COLECCIÓN */
+        /* SECCIÓN ORO EN TU BOCA_INGREDIENTES */
 
 
         <style>
@@ -1159,39 +730,249 @@
             <div class="container animate-appear">
 
                 <div class="col-header">
-                    <h2 class="col-title">DOXAS. LA COLECCIÓN</h2>
+                    <h2 class="col-title">ORO EN TU BOCA</h2>
                     <p class="col-desc">
-                        Nuestra caja exclusiva incluye las 4 variedades:<br>
-                        Bésame Choco, Lux-Umbra, Café Delirium y Selva Negra.<br>
-                        Cuatro sabores de raza. Una DOXA para cada momento.
+                        Explicación de los ingredientes
                     </p>
                 </div>
 
                 <div class="product-main">
 
                     <div class="column-img">
-                        <div class="main-image-container">
-                            <div id="fadeGroup" class="fade-effect">
-                                <img src="Galle choco.png" id="mainView" alt="Variedad DOXA">
-                            </div>
-                        </div>
-                        <div class="thumbnail-grid">
-                            <img src="Galle choco.png" onclick="changeVariety(0)" class="thumb-img active-thumb"
-                                alt="Bésame Choco">
-                            <img src="Galle frutos bosque.png" onclick="changeVariety(1)" class="thumb-img"
-                                alt="Lux-Umbra">
-                            <img src="Galle cafe.png" onclick="changeVariety(2)" class="thumb-img" alt="Café Delirium">
-                            <img src="Galle choco negro.png" onclick="changeVariety(3)" class="thumb-img"
-                                alt="Selva Negra">
-                        </div>
-                    </div>
+                        <style>
+                            .radial-wrapper {
+                                position: relative;
+                                width: 100%;
+                                max-width: 500px;
+                                height: 500px;
+                                margin: 0 auto;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
 
+                            .rueda-giro {
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                transition: transform 3s ease-out;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+
+                            .galleta-fija {
+                                position: absolute;
+                                width: 340px;
+                                z-index: 10;
+                                filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+                                pointer-events: none;
+                            }
+
+                            .nodo-activo {
+                                position: absolute;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                transition: 0.3s ease;
+                                white-space: nowrap;
+                                transform: translate(-50%, -50%);
+                            }
+
+                            .nodo-activo:hover {
+                                transform: translate(-50%, -50%) scale(1.2);
+                                color: #c19b76;
+                                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                            }
+                        </style>
+
+                        <div class="radial-wrapper">
+                            <img src="Galle choco.png" class="galleta-fija" alt="DOXA">
+                            <div id="rueda-fisica" class="rueda-giro"></div>
+                        </div>
+
+                        <script>
+                            (function () {
+                                const activos = [
+                                    {
+                                        n: "Aminoácidos",
+                                        d: "10g de precursores puros del colágeno.",
+                                        bg: "https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920",
+                                        lado: "lado-derecho",
+                                        tagline: "FABRICANDO TUS TEJIDOS",
+                                        title: "Aminoácidos Formadores de Colágeno",
+                                        neg: "10g de los aminoácidos clave PUROS que forman el colágeno",
+                                        prop: "Los aminoácidos puros son mucho más potentes que su misma cantidad en colágeno ya formado. Cada DOXA porta 10 g de aminoácidos puros. Más potencia creadora de colágeno. Una cantidad que sí marca la diferencia."
+                                    },
+                                    {
+                                        n: "Vitamina C",
+                                        d: "100mg para la síntesis de tejidos.",
+                                        bg: "https://drive.google.com/thumbnail?id=1IYiVxhlVG6wOVl0I2r0MMF_5EaEz3NnW&sz=w1920",
+                                        lado: "lado-izquierdo",
+                                        tagline: "NO SIN MI VITAMINA C",
+                                        title: "Vitamina C",
+                                        neg: "100mg de vitamina C estratégicamente añadidos para preservar sus cualidades",
+                                        prop: "Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel."
+                                    },
+                                    {
+                                        n: "Proteína",
+                                        d: "20g para tono muscular y saciedad.",
+                                        bg: "https://drive.google.com/thumbnail?id=1ECxBeP_peWbBt5YaIz0E0uJisOTFcFoh&sz=w1920",
+                                        lado: "lado-derecho",
+                                        tagline: "LA PROTEÍNA PUEDE SER JUGOSA",
+                                        title: "Proteína de Suero de Leche",
+                                        neg: "20g de Proteína que NO sabe a cartón",
+                                        prop: "10g de proteína de suero de leche. 10g aportada por el resto de ingredientes. <br> Un toque que ayuda a mentener tu vitalidad y tono muscular."
+                                    },
+                                    {
+                                        n: "Biotina",
+                                        d: "Refuerzo para cabello y uñas.",
+                                        lado: "lado-izquierdo",
+                                        tagline: "BELLEZA DESDE EL INTERIOR",
+                                        title: "Biotina de Alta Absorción",
+                                        neg: "Dosis óptima para fortalecer la matriz celular",
+                                        prop: "No es solo estética, es regeneración celular. La biotina trabaja en sinergia con los aminoácidos para anclar el cabello y fortalecer las uñas desde la raíz. El verdadero glow empieza por dentro."
+                                    },
+                                    {
+                                        n: "Boswellia",
+                                        d: "Antiinflamatorio natural articular.",
+                                        bg: "https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920",
+                                        lado: "lado-izquierdo",
+                                        tagline: "INFLAMACIÓN NO, GRACIAS",
+                                        title: "Broswelia Serrata & Jengibre",
+                                        neg: "xmg de broswelia serrata y xmg de estracto de jengibre.",
+                                        prop: "Cada sustancia por separado son ya potentes antiinblamatorios. Cuando además los juntas, el efecto de contención es brutal y tus articulaciones se mantienen sanas y a pleno rendimiento"
+                                    },
+                                    {
+                                        n: "Jengibre",
+                                        d: "Sinergia digestiva y antiinflamatoria.",
+                                        bg: "https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920",
+                                        lado: "lado-izquierdo",
+                                        tagline: "INFLAMACIÓN NO, GRACIAS",
+                                        title: "Broswelia Serrata & Jengibre",
+                                        neg: "xmg de broswelia serrata y xmg de estracto de jengibre.",
+                                        prop: "Cada sustancia por separado son ya potentes antiinblamatorios. Cuando además los juntas, el efecto de contención es brutal y tus articulaciones se mantienen sanas y a pleno rendimiento"
+                                    },
+                                    {
+                                        n: "Creatina",
+                                        d: "Energía celular y rendimiento cognitivo.",
+                                        bg: "https://drive.google.com/thumbnail?id=1VbwVN25DbA1SDByOwd6tXiGUZexo3KvJ&sz=w1920",
+                                        lado: "lado-derecho",
+                                        tagline: "Tu parte \"creativa\"",
+                                        title: "Creatina",
+                                        neg: "Creatiiiinaaaaa",
+                                        prop: "Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel."
+                                    },
+                                    {
+                                        n: "MCT",
+                                        d: "Combustible cerebral inmediato.",
+                                        lado: "lado-derecho",
+                                        tagline: "ENERGÍA LIMPIA Y DIRECTA",
+                                        title: "Triglicéridos de Cadena Media",
+                                        neg: "Combustible premium que tu cerebro usa al instante",
+                                        prop: "Olvídate de las caídas de energía. El MCT esquiva la digestión pesada y viaja directo a tu hígado para convertirse en cetonas. Foco mental sostenido, claridad y energía imparable."
+                                    },
+                                    {
+                                        n: "Vitamina D",
+                                        d: "La hormona vital de tu bienestar inmune y óseo.",
+                                        lado: "lado-izquierdo",
+                                        tagline: "EL SOL QUE NO TE FALTE",
+                                        title: "Vitamina D3",
+                                        neg: "000 g de la vitamina más deficiente en el mundo moderno",
+                                        prop: "Más que una vitamina, es un director de orquesta hormonal. Regula tu estado de ánimo, blinda tu sistema inmunológico y es absolutamente imprescindible para que el calcio se fije en tus huesos. Tu dosis diaria de vitalidad asegurada."
+                                    },
+                                    {
+                                        n: "Ácido Hialurónico",
+                                        d: "Hidratación celular profunda para la piel y articulaciones.",
+                                        lado: "lado-derecho",
+                                        tagline: "SI HAY UN ÁCIDO QUE AMAS, ES ÉSTE",
+                                        title: "Ácido Hialurónico Puro",
+                                        neg: "000 g de hidratación activa molecular",
+                                        prop: "No te lo apliques solo por fuera, nútrelo desde dentro. El ácido hialurónico retiene hasta 1000 veces su peso en agua, lubricando tus articulaciones para moverte sin dolor y devolviendo a tu piel ese aspecto jugoso, firme y radiante."
+                                    }
+                                ];
+
+                                const rueda = document.getElementById('rueda-fisica');
+                                const radio = 210;
+                                let rotacionActual = 0;
+
+                                const anguloPaso = 360 / activos.length;
+
+                                activos.forEach((a, i) => {
+                                    const grados = i * anguloPaso - 90;
+                                    const angulo = grados * (Math.PI / 180);
+                                    const x = Math.cos(angulo) * radio;
+                                    const y = Math.sin(angulo) * radio;
+
+                                    const line = document.createElement('div');
+                                    line.style.position = 'absolute';
+                                    line.style.top = 'calc(50% - 0.5px)';
+                                    line.style.left = '50%';
+                                    line.style.width = `${radio}px`;
+                                    line.style.height = '1px';
+                                    line.style.background = 'linear-gradient(90deg, transparent 70%, rgba(255,255,255,0.4) 75%, rgba(255,255,255,0.4) 95%, transparent 100%)';
+                                    line.style.transformOrigin = '0 50%';
+                                    line.style.transform = `rotate(${grados}deg)`;
+                                    line.style.zIndex = '0';
+                                    line.style.pointerEvents = 'none'; // Para que no interfiera con el ratón
+                                    rueda.appendChild(line);
+
+                                    const nodo = document.createElement('div');
+                                    nodo.className = 'nodo-activo';
+                                    nodo.style.left = `calc(50% + ${x}px)`;
+                                    nodo.style.top = `calc(50% + ${y}px)`;
+                                    nodo.innerHTML = `<span class="nodo-texto" style="display:inline-block; transition:transform 3s ease-out; font-size:11px; font-weight:500; color:#fff; letter-spacing: 1px; text-transform: uppercase;">${a.n}</span>`;
+
+                                    // Cambiado a onclick para poder leer textos más largos cómodamente
+                                    nodo.onclick = () => {
+                                        // 2. Actualiza la caja gigante de fondo fotográfico
+                                        const contenedorCajas = document.getElementById('cajas-activos');
+                                        if (contenedorCajas) {
+                                            const fondoStyle = a.bg
+                                                ? `background-image: url('${a.bg}');`
+                                                : `background-color: #1a1714;`; // Fondo elegante por defecto para los que no tienen foto
+
+                                            const classLado = a.lado ? a.lado : 'centro';
+
+                                            contenedorCajas.innerHTML = `
+                                                <div class="full-container reveal-section is-visible" style="opacity: 0; animation: fadeInCaja 0.8s forwards;">
+                                                    <div class="bg-layer" style="${fondoStyle}"></div>
+                                                    <div class="content-wrapper ${classLado}"> 
+                                                        <div class="text-box">
+                                                            <h2 class="tagline">${a.tagline || 'DOXA'}</h2>
+                                                            <h3 class="main-title">${a.title || a.n}</h3>
+                                                            ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
+                                                            <div class="hero-value-prop">${a.prop || a.d}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }
+
+                                        const giroBrisa = x > 0 ? -15 : 15;
+                                        rotacionActual += giroBrisa;
+                                        rueda.style.transform = `rotate(${rotacionActual}deg)`;
+
+                                        // Mantener el texto horizontal girando los nombres en sentido opuesto
+                                        rueda.querySelectorAll('.nodo-texto').forEach(t => {
+                                            t.style.transform = `rotate(${-rotacionActual}deg)`;
+                                        });
+                                    };
+
+                                    rueda.appendChild(nodo);
+                                });
+                            })();
+                        </script>
+                    </div>
                     <div class="column-text">
                         <div id="textFadeGroup" class="fade-effect">
                             <h3 class="variety-title" id="varietyTitle">BÉSAME CHOCO</h3>
                             <div class="variety-desc" id="varietyDesc">
-                                Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>La versión más
-                                icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte un capricho.
+                                Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>"Bésame Choco"
+                                es la primera Doxa.
+                                <br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte
+                                un capricho.
                             </div>
                         </div>
 
@@ -1221,86 +1002,191 @@
             </div>
         </section>
 
+
+        /* SECCIÓN DOXAS: CAJAS DE ACTIVOS */
+        <style>
+            .full-container {
+                position: relative;
+                width: 100vw;
+                height: 600px;
+                display: flex;
+                align-items: center;
+            }
+
+            .full-container::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 200px;
+                background: linear-gradient(to bottom, #0b0c0d 0%, transparent 100%);
+                z-index: 2;
+                pointer-events: none;
+            }
+
+            .bg-layer {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center;
+                filter: brightness(0.7);
+                z-index: 1;
+            }
+
+            .hero-value-prop {
+                font-family: 'Lexend', sans-serif;
+                font-size: 12px;
+                font-weight: 300;
+                line-height: 2.2;
+                letter-spacing: 1.5px;
+                max-width: 600px;
+                margin: 0 auto;
+                color: #FFFFFF;
+            }
+
+            .hero-value-prop-neg {
+                font-family: 'Lexend', sans-serif;
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 2.2;
+                letter-spacing: 1.5px;
+                max-width: 600px;
+                margin: 0 auto;
+                color: #FFFFFF;
+            }
+
+            .content-wrapper {
+                position: relative;
+                z-index: 3;
+                width: 100%;
+                padding: 0 8%;
+                display: flex;
+                box-sizing: border-box;
+            }
+
+            .lado-derecho {
+                justify-content: flex-end;
+                text-align: right;
+            }
+
+            .lado-izquierdo {
+                justify-content: flex-start;
+                text-align: left;
+            }
+
+            .centro {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .text-box {
+                max-width: 500px;
+                color: white;
+                font-family: 'Lexend', sans-serif;
+            }
+
+            .tagline {
+                font-size: 11px;
+                letter-spacing: 3px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                text-transform: uppercase;
+            }
+
+            .main-title {
+                font-size: 32px;
+                font-weight: 400;
+                margin-bottom: 15px;
+                line-height: 1.1;
+            }
+
+            @media (max-width: 768px) {
+                .full-container {
+                    height: 450px;
+                }
+
+                .content-wrapper {
+                    justify-content: center !important;
+                    text-align: center !important;
+                    padding: 0 20px;
+                }
+
+                .main-title {
+                    font-size: 26px;
+                    font-weight: 200;
+                    letter-spacing: 1px;
+                    display: inline-block;
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+
+            .reveal-section {
+                opacity: 0;
+                transform: scale(1.1);
+                transition: all 1.8s ease-out;
+            }
+
+            .reveal-section.is-visible {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            @keyframes fadeInCaja {
+                from {
+                    opacity: 0;
+                    transform: scale(1.05);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+        </style>
+
+        <section id="cajas-activos">
+            <!-- La caja inicial por defecto que aparece al cargar (Aminoácidos) -->
+            <div class="full-container reveal-section is-visible">
+                <div class="bg-layer"
+                    style="background-image: url('https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920');">
+                </div>
+                <div class="content-wrapper lado-derecho">
+                    <div class="text-box">
+                        <h2 class="tagline">FABRICANDO TUS TEJIDOS</h2>
+                        <h3 class="main-title">Aminoácidos Formadores de Colágeno</h3>
+                        <p class="hero-value-prop-neg">10g de los aminoácidos clave PUROS que forman el colágeno</p>
+                        <p class="hero-value-prop">
+                            Los aminoácidos puros son mucho más potentes que su misma cantidad en colágeno ya formado.
+                            Cada DOXA porta 10 g de aminoácidos puros. Más potencia creadora de colágeno.
+                            Una cantidad que sí marca la diferencia.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <script>
-            // 1. Base de datos de las Doxas
-            const doxas = [
-                {
-                    title: 'BÉSAME CHOCO',
-                    desc: 'Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte un capricho.',
-                    img: 'Galle choco.png'
-                },
-                {
-                    title: 'LUX-UMBRA',
-                    desc: 'La acidez transgresora de los frutos del bosque frente a la pureza blanca de la manteca de cacao.<br>Una arquitectura de contrastes que te compiten en cada mordida.<br><br>¿Por cuál de tus dos lados te dejarás llevar hoy?',
-                    img: 'Galle frutos bosque.png'
-                },
-                {
-                    title: 'CAFÉ DELIRIUM',
-                    desc: 'Notas profundas de café tostado que despiertan el paladar.<br>Un corazón cremoso de cacao infusionado con café.<br><br>Elegante. Intensa. Irresistiblemente adulta.',
-                    img: 'Galle cafe.png'
-                },
-                {
-                    title: 'SELVA NEGRA',
-                    desc: 'Cacao negro por fuera. Cacao negro por dentro.<br>Salvaje, profunda, indomable.<br>Tu oscuro objeto de deseo...',
-                    img: 'Galle choco negro.png'
-                }
-            ];
-
-            // ==========================================
-            // NUEVO: PRECARGA INVISIBLE DE IMÁGENES
-            // ==========================================
-            window.addEventListener('load', function () {
-                doxas.forEach(doxa => {
-                    const preloadedImg = new Image();
-                    preloadedImg.src = doxa.img;
+            // El observador ahora es opcional porque inyectamos "is-visible" directamente al hacer clic, 
+            // pero lo dejamos por si hay más cajas estáticas abajo.
+            const cajaObs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
                 });
-            });
-
-            // 2. Motor de las Miniaturas
-            function changeVariety(index) {
-                const imgFade = document.getElementById('fadeGroup');
-                const textFade = document.getElementById('textFadeGroup');
-                const thumbnails = document.getElementsByClassName('thumb-img');
-
-                // Difuminar imagen y texto
-                imgFade.classList.add('is-hidden');
-                textFade.classList.add('is-hidden');
-
-                // Cambiar opacidad de la miniatura
-                for (let i = 0; i < thumbnails.length; i++) {
-                    thumbnails[i].classList.remove('active-thumb');
-                }
-                thumbnails[index].classList.add('active-thumb');
-
-                // Esperar a que termine el difuminado (400ms) y cambiar el contenido
-                setTimeout(() => {
-                    const d = doxas[index];
-                    document.getElementById('varietyTitle').innerText = d.title;
-                    document.getElementById('varietyDesc').innerHTML = d.desc;
-                    document.getElementById('mainView').src = d.img;
-
-                    // Volver a mostrar imagen y texto
-                    imgFade.classList.remove('is-hidden');
-                    textFade.classList.remove('is-hidden');
-                }, 400);
-            }
-
-            // 3. Motor del Acordeón a prueba de fallos
-            function toggleAccordion(element) {
-                element.classList.toggle("active");
-                var panel = element.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            }
+            }, { threshold: 0.1 });
+            document.querySelectorAll('#cajas-activos .reveal-section').forEach(el => cajaObs.observe(el));
         </script>
+        /* */
+
+
 
         /* */
 
 
-        /* SECCIÓN RESERVA-COMPRA */
+        /* SECCIÓN RESERVA TUS DOXAS */
 
         <style>
             .checkout-section {
@@ -1398,12 +1284,46 @@
                     grid-template-columns: 1fr;
                 }
             }
+
+            .col-header {
+                text-align: center;
+                margin-bottom: 80px;
+            }
+
+            .col-title {
+                font-size: clamp(30px, 4vw, 40px);
+                font-weight: 300;
+                letter-spacing: 10px;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+                color: #fff;
+            }
+
+            .col-desc {
+                font-size: 13px;
+                font-weight: 300;
+                line-height: 2;
+                letter-spacing: 2px;
+                max-width: 600px;
+                margin: 0 auto;
+                opacity: 0.9;
+            }
         </style>
 
         <section class="checkout-section" id="reserva">
             <div class="container">
 
-
+                <div class="col-header">
+                    <h2 class="col-title">RESERVA TUS DOXAS</h2>
+                    <p class="col-desc">
+                        DOXAS vienen en una caja de 4 unidades:<br>
+                        Para que pas pruebes tú...y tu pareja, y tu hermana, y tu madre<br>
+                        Para cada post-entreno de la semana
+                        Para un toque de capricho en tus Lunes a Jueves
+                        Para poder repetir y creértelo...cuando veas que en esa delicia hay 12 substancias clave para tu
+                        piel, pelo y articulaciones
+                    </p>
+                </div>
 
                 <div class="checkout-texts" style="opacity: 0; transition: opacity 1s ease 1s;">
                     <p style="font-size: 12px; font-weight: 600; letter-spacing: 2px; margin-bottom: 30px;">
