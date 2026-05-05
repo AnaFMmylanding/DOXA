@@ -730,7 +730,7 @@
             }
         </style>
 
-        <section class="coleccion-section" id="coleccion">
+        <section class="coleccion-section" id="coleccion" style="padding-bottom: 0;">
             <div class="container animate-appear">
 
                 <div class="col-header">
@@ -747,8 +747,8 @@
                             .radial-wrapper {
                                 position: relative;
                                 width: 100%;
-                                max-width: 500px;
-                                height: 500px;
+                                max-width: 600px;
+                                height: 600px;
                                 margin: 0 auto;
                                 display: flex;
                                 align-items: center;
@@ -898,7 +898,7 @@
                                 ];
 
                                 const rueda = document.getElementById('rueda-fisica');
-                                const radio = 210;
+                                const radio = 250;
                                 let rotacionActual = 0;
 
                                 const anguloPaso = 360 / activos.length;
@@ -915,7 +915,7 @@
                                     line.style.left = '50%';
                                     line.style.width = `${radio}px`;
                                     line.style.height = '1px';
-                                    line.style.background = 'linear-gradient(90deg, transparent 70%, rgba(255,255,255,0.4) 75%, rgba(255,255,255,0.4) 95%, transparent 100%)';
+                                    line.style.background = 'linear-gradient(90deg, transparent 62%, rgba(255,255,255,0.4) 64%, rgba(255,255,255,0.4) 95%, transparent 100%)';
                                     line.style.transformOrigin = '0 50%';
                                     line.style.transform = `rotate(${grados}deg)`;
                                     line.style.zIndex = '0';
@@ -968,38 +968,6 @@
                                 });
                             })();
                         </script>
-                    </div>
-                    <div class="column-text">
-                        <div id="textFadeGroup" class="fade-effect">
-                            <h3 class="variety-title" id="varietyTitle">BÉSAME CHOCO</h3>
-                            <div class="variety-desc" id="varietyDesc">
-                                Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>"Bésame Choco"
-                                es la primera Doxa.
-                                <br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte
-                                un capricho.
-                            </div>
-                        </div>
-
-                        <div class="dietary-icons">
-                            <span class="tag">SIN AZÚCARES AÑADIDOS</span>
-                            <span class="tag">SIN GLUTEN</span>
-                            <span class="tag">APTA KETO</span>
-                            <span class="tag">IDEAL POST-ENTRENO</span>
-                        </div>
-
-                        <div class="accordion-section">
-                            <button class="accordion" onclick="toggleAccordion(this)">Ingredientes Comunes</button>
-                            <div class="panel">
-                                <p>Base de harina de almendra, eritritol premium y huevos camperos. Cada variedad añade
-                                    sus propios extractos naturales y superalimentos.</p>
-                            </div>
-
-                            <button class="accordion" onclick="toggleAccordion(this)">Información Nutricional
-                                (Media)</button>
-                            <div class="panel">
-                                <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
@@ -1184,6 +1152,106 @@
             document.querySelectorAll('#cajas-activos .reveal-section').forEach(el => cajaObs.observe(el));
         </script>
         /* */
+
+
+        /* SECCIÓN DESCRIPCIÓN Y NUTRICIONAL */
+        <style>
+            .product-info-grid {
+                display: flex;
+                flex-direction: row;
+                gap: 60px;
+                max-width: 1000px;
+                margin: 0 auto;
+                align-items: center;
+            }
+
+            .product-info-grid .column-text {
+                text-align: left;
+                width: 100%;
+                max-width: 600px;
+            }
+
+            .product-info-grid .accordion {
+                text-align: left;
+            }
+
+            .product-info-grid .dietary-icons {
+                justify-content: flex-start;
+            }
+
+            @media (max-width: 768px) {
+                .product-info-grid {
+                    flex-direction: column;
+                    gap: 40px;
+                }
+
+                .product-info-grid .column-text {
+                    text-align: center;
+                }
+
+                .product-info-grid .accordion {
+                    text-align: center;
+                }
+
+                .product-info-grid .dietary-icons {
+                    justify-content: center;
+                }
+            }
+        </style>
+
+        <section id="descripcion-nutricional" class="coleccion-section">
+            <div class="container animate-appear">
+                <div class="product-info-grid">
+                    <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
+                        <img src="Galle choco.png" alt="DOXA Bésame Choco"
+                            style="width: 100%; max-width: 500px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5)); border-radius: 4px;">
+                    </div>
+                    <div class="column-text" style="flex: 1;">
+                        <div id="textFadeGroup" class="fade-effect">
+                            <h3 class="variety-title" id="varietyTitle">BÉSAME CHOCO</h3>
+                            <div class="variety-desc" id="varietyDesc">
+                                Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>"Bésame Choco"
+                                es la primera Doxa.
+                                <br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte
+                                un capricho.
+                            </div>
+                        </div>
+
+                        <div class="dietary-icons">
+                            <span class="tag">SIN AZÚCARES AÑADIDOS</span>
+                            <span class="tag">SIN GLUTEN</span>
+                            <span class="tag">APTA KETO</span>
+                            <span class="tag">IDEAL POST-ENTRENO</span>
+                        </div>
+
+                        <div class="accordion-section">
+                            <button class="accordion" onclick="toggleAccordion(this)">Ingredientes Comunes</button>
+                            <div class="panel">
+                                <p>Base de harina de almendra, eritritol premium y huevos camperos. Cada variedad añade
+                                    sus propios extractos naturales y superalimentos.</p>
+                            </div>
+
+                            <button class="accordion" onclick="toggleAccordion(this)">Información Nutricional
+                                (Media)</button>
+                            <div class="panel">
+                                <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
+                            </div>
+                        </div>
+                        <script>
+                            function toggleAccordion(el) {
+                                el.classList.toggle("active");
+                                var panel = el.nextElementSibling;
+                                if (panel.style.maxHeight) {
+                                    panel.style.maxHeight = null;
+                                } else {
+                                    panel.style.maxHeight = panel.scrollHeight + "px";
+                                }
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
 
