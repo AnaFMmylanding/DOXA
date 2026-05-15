@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -158,6 +158,45 @@
         }
 
         .btn-comprar:hover {
+            transform: scale(1.05);
+        }
+
+        /* Estilos para el botón de oro (efecto lámina fina) */
+        .btn-oro {
+            display: inline-block;
+            padding: 14px 60px;
+            font-weight: 470px;
+            text-transform: uppercase;
+            font-size: 0.80rem;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            -webkit-font-smoothing: antialiased;
+            /* Aporta mayor nitidez al texto */
+
+            /* Filos superior e izquierdo brillantes, inferior y derecho oscuros para efecto lámina 3D */
+            box-shadow:
+                inset 0 1px 0px rgb(255, 251, 236),
+                inset 0 -1px 0px rgba(0, 0, 0, 0.3),
+                inset 1px 0 0px rgb(0, 0, 0, 0.3),
+                inset -1px 0 0px rgba(255, 251, 236);
+
+            /* Degradado de oro con fixed attachment para el brillo al hacer scroll */
+            background: linear-gradient(135deg,
+                    #af8737 0%,
+                    #FCF6BA 25%,
+                    #715311 50%,
+                    #FBF5B7 75%,
+                    #634716 100%);
+            background-attachment: fixed;
+            background-size: 100% 100vh;
+
+            /* Texto plano en negro */
+            color: #150e02;
+
+            transition: transform 0.2s ease;
+        }
+
+        .btn-oro:hover {
             transform: scale(1.05);
         }
 
@@ -479,7 +518,8 @@
                     </p>
                 </div>
 
-                <a href="#productos" class="btn-comprar" style="margin-top: 50px;">DESCUBRIR</a>
+                <a href="#productos" class="btn-oro" style="margin-top: 50px;">DESCUBRIR</a>
+
             </div>
         </header>
 
@@ -510,9 +550,6 @@
                         style="max-width: 500px; width: 100%; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5));">
                 </div>
 
-                <div
-                    style="width: 100%; height: 1px; background: rgba(255,255,255,0.1); border-top: 1px dashed rgba(255,255,255,0.2); margin-bottom: 60px;">
-                </div>
 
                 <h2
                     style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 60px;">
@@ -529,8 +566,9 @@
                     <p style="margin-bottom: 30px;">pero con intención y funcionalidad mucho más allá de un momento de
                         placer.</p>
 
-                    <p style="margin-bottom: 30px;">DOXA porta 10 substancias clave para la salud de tu piel, pelo y
-                        articulaciones,<br>integradas magistralmente para que mantengan sus propiedades.</p>
+                    <p style="margin-bottom: 30px;">DOXA porta 10 substancias clave que potencian tu piel, pelo,
+                        articulaciones y sistema muscular, óseo e inmunológico<br>integradas magistralmente para que
+                        mantengan sus propiedades.</p>
 
                     <p>Alta repostería y ciencia fusionadas para que "pecar" se transforme en todo<br>un regalo para tu
                         cuerpo.</p>
@@ -544,7 +582,7 @@
 
 
 
-        /* SECCIÓN ORO EN TU BOCA_INGREDIENTES */
+        /* SECCIÓN ORO EN TU BOCA */
 
 
         <style>
@@ -709,6 +747,32 @@
                 margin: 0;
             }
 
+            .comparative-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+                font-size: 10px;
+                color: #efefef;
+                text-align: left;
+            }
+
+            .comparative-table th,
+            .comparative-table td {
+                padding: 12px 8px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .comparative-table th {
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-weight: 600;
+                color: #c19b76;
+            }
+
+            .comparative-table tr:last-child td {
+                border-bottom: none;
+            }
+
             @media (max-width: 768px) {
                 .product-main {
                     flex-direction: column;
@@ -730,23 +794,11 @@
             }
         </style>
 
-        <section class="coleccion-section" id="coleccion" style="padding-bottom: 0;">
-            <div class="container animate-appear">
-
-                <div class="col-header">
-                    <h2 class="col-title">ORO EN TU BOCA</h2>
-                    <p class="col-desc">
-                        Explicación de los ingredientes
-                    </p>
-                </div>
-
-            </div>
-        </section>
 
 
-        /* SECCIÓN DOXAS: CAJAS DE ACTIVOS */
+        /* SUB-SECCIÓN RUEDA DE ACTIVOS + DESCRIPCIÓN + INGREDIENTES */
         <style>
-            #cajas-activos {
+            .cajas-activos-section {
                 position: relative;
                 width: 100vw;
                 min-height: 700px;
@@ -756,14 +808,15 @@
                 background-color: #1a1714;
             }
 
-            #cajas-activos::before {
+
+            .cajas-activos-section::after {
                 content: '';
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: 200px;
-                background: linear-gradient(to bottom, #0b0c0d 0%, transparent 100%);
+                width: 70%;
+                height: 100%;
+                background: linear-gradient(to right, #302b22 0%, #302b22 100px, transparent 100%);
                 z-index: 2;
                 pointer-events: none;
             }
@@ -851,13 +904,16 @@
                 .content-grid {
                     flex-direction: column;
                 }
+
                 .text-column {
                     justify-content: center;
                 }
+
                 .text-box {
                     text-align: center;
                 }
-                #cajas-activos {
+
+                .cajas-activos-section {
                     min-height: 900px;
                 }
             }
@@ -909,9 +965,36 @@
             }
         </style>
 
-        <section id="cajas-activos">
-            <div class="bg-layer" id="caja-bg" style="background-image: url('https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920');"></div>
-            
+
+
+        <section class="coleccion-section" id="coleccion" style="padding-bottom: 0;">
+            <div class="container animate-appear">
+
+                <div class="col-header" style="margin-bottom: 100px;">
+                    <h2 class="col-title">ORO EN TU BOCA</h2>
+                    <p class="col-desc">
+                        DOXA es una combinación magistral entre ingredientes tradicionales nobles y activos clave que
+                        impulsan tu salud y belleza.<br>
+                        En DOXA nada está ahí por simple relleno y abaratamiento de costes.<br>
+                        En DOXA pagas por ingredientes de máxima calidad propios de la dieta
+                        cetogénica y antiinflamatoria.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+
+
+
+
+
+        <section id="cajas-activos" class="cajas-activos-section">
+            <div class="bg-layer" id="caja-bg"
+                style="background-image: url('https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920');">
+            </div>
+
             <div class="content-grid">
                 <!-- Columna Izquierda: Rueda -->
                 <div class="wheel-column">
@@ -920,7 +1003,7 @@
                         <div id="rueda-fisica" class="rueda-giro"></div>
                     </div>
                 </div>
-                
+
                 <!-- Columna Derecha: Texto dinámico -->
                 <div class="text-column">
                     <div class="text-box" id="caja-text">
@@ -928,14 +1011,15 @@
                         <h3 class="main-title">Aminoácidos Formadores de Colágeno</h3>
                         <p class="hero-value-prop-neg">10g de los aminoácidos clave PUROS que forman el colágeno</p>
                         <div class="hero-value-prop">
-                            Los aminoácidos puros son mucho más potentes que su misma cantidad en colágeno ya formado.
-                            Cada DOXA porta 10 g de aminoácidos puros. Más potencia creadora de colágeno.
+                            Los aminoácidos puros son mucho más potentes que su misma cantidad en colágeno ya
+                            formado.</br>
+                            Cada DOXA porta 10 g de aminoácidos puros. Más potencia creadora de colágeno.</br>
                             Una cantidad que sí marca la diferencia.
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <script>
                 (function () {
                     const activos = [
@@ -975,7 +1059,7 @@
                             prop: "No es solo estética, es regeneración celular. La biotina trabaja en sinergia con los aminoácidos para anclar el cabello y fortalecer las uñas desde la raíz. El verdadero glow empieza por dentro."
                         },
                         {
-                            n: "Boswellia",
+                            n: "Boswellia Serrata",
                             d: "Antiinflamatorio natural articular.",
                             bg: "https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920",
                             tagline: "INFLAMACIÓN NO, GRACIAS",
@@ -1002,7 +1086,7 @@
                             prop: "Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel."
                         },
                         {
-                            n: "MCT",
+                            n: "Aceite MCT",
                             d: "Combustible cerebral inmediato.",
                             tagline: "ENERGÍA LIMPIA Y DIRECTA",
                             title: "Triglicéridos de Cadena Media",
@@ -1030,7 +1114,7 @@
                     const rueda = document.getElementById('rueda-fisica');
                     const cajaBg = document.getElementById('caja-bg');
                     const cajaText = document.getElementById('caja-text');
-                    
+
                     const radio = 240;
                     let rotacionActual = 0;
 
@@ -1052,7 +1136,7 @@
                         line.style.transformOrigin = '0 50%';
                         line.style.transform = `rotate(${grados}deg)`;
                         line.style.zIndex = '0';
-                        line.style.pointerEvents = 'none'; 
+                        line.style.pointerEvents = 'none';
                         rueda.appendChild(line);
 
                         const nodo = document.createElement('div');
@@ -1072,7 +1156,7 @@
 
                             // Aplicar efecto de fade al texto
                             cajaText.style.opacity = '0';
-                            
+
                             setTimeout(() => {
                                 // Actualizar el texto
                                 cajaText.innerHTML = `
@@ -1104,7 +1188,44 @@
         /* */
 
 
-        /* SECCIÓN DESCRIPCIÓN Y NUTRICIONAL */
+
+        /* SECCIÓN SIN SIN SIN */
+
+        <section id="cajas-activos-sin-sin-sin" class="cajas-activos-section">
+            <div class="bg-layer" style="background-image: url('Chican SIN.jpg');">
+            </div>
+
+            <div class="content-grid">
+                <!-- Columna Izquierda: Texto dinámico -->
+
+
+                <!-- Columna Izquierda: Texto -->
+                <div class="text-column" style="justify-content: flex-start;">
+                    <div class="text-box" style="text-align: left;">
+                        <h2 class="tagline">Y TODOS LOS "SIN" QUE TE GUSTA LEER</h2>
+                        <h3 class="main-title">Sin azúcares añadidos, sin gluten, sin remordimientos</h3>
+                        <p class="hero-value-prop-neg"></p>
+                        <div class="hero-value-prop">
+                            Sin picos de insulina </br>
+                            Sin aceites refinados inflamatorios</br>
+                            Sin cargas estériles de relleno</br>
+                            Sin angustia por no poder tomarte un capricho</br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+            </script>
+
+        </section>
+
+
+
+
+
+        /* SECCIÓN DESCRIPCIÓN E INFO NUTRICIONAL */
         <style>
             .product-info-grid {
                 display: flex;
@@ -1149,7 +1270,9 @@
             }
         </style>
 
-        <section id="descripcion-nutricional" class="coleccion-section">
+
+
+        <section id="descripcion-nutricional" class="coleccion-section" style="padding-top: 100px;">
             <div class="container animate-appear">
                 <div class="product-info-grid">
                     <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
@@ -1160,16 +1283,18 @@
                         <div id="textFadeGroup" class="fade-effect">
                             <h3 class="variety-title" id="varietyTitle">BÉSAME CHOCO</h3>
                             <div class="variety-desc" id="varietyDesc">
-                                Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>"Bésame Choco"
-                                es la primera Doxa.
-                                <br>La versión más icónica. La siempre irresistible.<br>Incluso cuando no pensabas darte
-                                un capricho.
+
+                                "Bésame Choco" es la primera Doxa.<br>
+                                La versión más icónica. La siempre irresistible.<br>
+                                Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>
+                                Una tentación que ya no te tienes que prohibir...<br>
                             </div>
                         </div>
 
                         <div class="dietary-icons">
                             <span class="tag">SIN AZÚCARES AÑADIDOS</span>
                             <span class="tag">SIN GLUTEN</span>
+                            <span class="tag">SIN INGREDIENTES INFLAMATORIOS</span>
                             <span class="tag">APTA KETO</span>
                             <span class="tag">IDEAL POST-ENTRENO</span>
                         </div>
@@ -1177,14 +1302,112 @@
                         <div class="accordion-section">
                             <button class="accordion" onclick="toggleAccordion(this)">Ingredientes Comunes</button>
                             <div class="panel">
-                                <p>Base de harina de almendra, eritritol premium y huevos camperos. Cada variedad añade
-                                    sus propios extractos naturales y superalimentos.</p>
+                                <p>Base de harina de almendra, manteca pura de cacao, eritritol premium, aceite
+                                    MTC...<br>
+                                    Descripción<br>
                             </div>
+
 
                             <button class="accordion" onclick="toggleAccordion(this)">Información Nutricional
                                 (Media)</button>
                             <div class="panel">
                                 <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
+                            </div>
+
+                            <button class="accordion" onclick="toggleAccordion(this)">Tabla comparativa</button>
+                            <div class="panel">
+                                <p style="padding-top: 15px; margin-bottom: 0; font-size: 11px; opacity: 0.8;">
+                                    Dosis diarias habituales según el formato de el grueso de suplementos del mercado.
+                                    Cantidad de cada activo que porta una Doxa al día.<br><br>
+
+                                    D.D.Recomendada: Dosis Diaria Recomendada por los organimsos oficiales<br>
+                                    D.H.Cápsulas: Dosis habitual en suplementos en cápsulas o comprimidos<br>
+                                    D.H.Polvos: Dosis habitual en suplementos en polvos<br>
+                                    D D Doxas: Dosis diaria que ofrece Doxas (1 Doxa/día)
+                                </p>
+                                <table class="comparative-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Activo</th>
+                                            <th>OMS</th>
+                                            <th>Cápsulas</th>
+                                            <th>Polvos</th>
+                                            <th>Doxas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Proteína</td>
+                                            <td>0.000g</td>
+                                            <td>0.000g</td>
+                                            <td>0.000g</td>
+                                            <td>20.000g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Colágeno (AA)</td>
+                                            <td>0.000g</td>
+                                            <td>0.000g</td>
+                                            <td>0.000g</td>
+                                            <td>10.000g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vitamina C</td>
+                                            <td>0.000g</td>
+                                            <td>0.000mg</td>
+                                            <td>0.000mg</td>
+                                            <td>100.000mg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vitamina D3</td>
+                                            <td>0.000g</td>
+                                            <td>0.000mcg</td>
+                                            <td>0.000mcg</td>
+                                            <td>50.000mcg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Biotina</td>
+                                            <td>0.000g</td>
+                                            <td>0.000mg</td>
+                                            <td>0.000mg</td>
+                                            <td>5.000mg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Creatina</td>
+                                            <td>0.000g</td>
+                                            <td>0.000g</td>
+                                            <td>0.000g</td>
+                                            <td>3.000g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Aceite MCT</td>
+                                            <td>0.000g</td>
+                                            <td>0.000g</td>
+                                            <td>0.000g</td>
+                                            <td>5.000g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Boswellia Serrata</td>
+                                            <td>0.000g</td>
+                                            <td>0.000mg</td>
+                                            <td>0.000mg</td>
+                                            <td>250.000mg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jengibre</td>
+                                            <td>0.000g</td>
+                                            <td>0.000mg</td>
+                                            <td>0.000mg</td>
+                                            <td>100.000mg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ácido Hialurónico</td>
+                                            <td>0.000g</td>
+                                            <td>0.000mg</td>
+                                            <td>0.000mg</td>
+                                            <td>120.000mg</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <script>
@@ -1336,14 +1559,14 @@
             <div class="container">
 
                 <div class="col-header">
-                    <h2 class="col-title">RESERVA TUS DOXAS</h2>
+                    <h2 class="col-title" style="color: #3C332A;">RESERVA TUS DOXAS</h2>
                     <p class="col-desc">
                         DOXAS vienen en una caja de 4 unidades:<br>
-                        Para que pas pruebes tú...y tu pareja, y tu hermana, y tu madre<br>
-                        Para cada post-entreno de la semana
-                        Para un toque de capricho en tus Lunes a Jueves
-                        Para poder repetir y creértelo...cuando veas que en esa delicia hay 12 substancias clave para tu
-                        piel, pelo y articulaciones
+                        Para que las pruebes tú...y tu pareja, tu hermana, tu madre...<br>
+                        Para cada post-entreno de la semana<br>
+                        Para un toque de capricho en tus Lunes a Jueves<br>
+                        Para poder repetir y creértelo...cuando veas que en esa delicia hay 10 suplementos clave para tu
+                        piel, pelo y articulaciones.
                     </p>
                 </div>
 
@@ -1355,10 +1578,10 @@
                         Las tuyas te serán enviadas en cuanto hayan enfriado tras su horneado.<br><br>
                         Cuando las quieras consumir, puedes darles un golpe de calor en el<br>
                         microondas y las tendrás tiernas y jugosas como recién hechas.<br><br><br>
-                        Deja tu correo para que podamos informarte de la fecha de envío
+                        Haz aquí la reserva y deja tu correo para que podamos informarte de la fecha de envío
                     </p>
                     <a href="https://eu.jotform.com/form/260395833827366" target="_blank" class="btn-jotform">
-                        RESERVAR MIS DOXAS
+                        RESERVAR
                     </a>
                 </div>
 
