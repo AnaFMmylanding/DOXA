@@ -740,252 +740,23 @@
                     </p>
                 </div>
 
-                <div class="product-main">
-
-                    <div class="column-img">
-                        <style>
-                            .radial-wrapper {
-                                position: relative;
-                                width: 100%;
-                                max-width: 600px;
-                                height: 600px;
-                                margin: 0 auto;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                            }
-
-                            .rueda-giro {
-                                position: absolute;
-                                width: 100%;
-                                height: 100%;
-                                transition: transform 3s ease-out;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                            }
-
-                            .galleta-fija {
-                                position: absolute;
-                                width: 340px;
-                                z-index: 10;
-                                filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
-                                pointer-events: none;
-                            }
-
-                            .nodo-activo {
-                                position: absolute;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                cursor: pointer;
-                                transition: 0.3s ease;
-                                white-space: nowrap;
-                                transform: translate(-50%, -50%);
-                            }
-
-                            .nodo-activo:hover {
-                                transform: translate(-50%, -50%) scale(1.2);
-                                color: #c19b76;
-                                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-                            }
-                        </style>
-
-                        <div class="radial-wrapper">
-                            <img src="Galle choco.png" class="galleta-fija" alt="DOXA">
-                            <div id="rueda-fisica" class="rueda-giro"></div>
-                        </div>
-
-                        <script>
-                            (function () {
-                                const activos = [
-                                    {
-                                        n: "Aminoácidos",
-                                        d: "10g de precursores puros del colágeno.",
-                                        bg: "https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920",
-                                        lado: "lado-derecho",
-                                        tagline: "FABRICANDO TUS TEJIDOS",
-                                        title: "Aminoácidos Formadores de Colágeno",
-                                        neg: "10g de los aminoácidos clave PUROS que forman el colágeno",
-                                        prop: "Los aminoácidos puros son mucho más potentes que su misma cantidad en colágeno ya formado. Cada DOXA porta 10 g de aminoácidos puros. Más potencia creadora de colágeno. Una cantidad que sí marca la diferencia."
-                                    },
-                                    {
-                                        n: "Vitamina C",
-                                        d: "100mg para la síntesis de tejidos.",
-                                        bg: "https://drive.google.com/thumbnail?id=1IYiVxhlVG6wOVl0I2r0MMF_5EaEz3NnW&sz=w1920",
-                                        lado: "lado-izquierdo",
-                                        tagline: "NO SIN MI VITAMINA C",
-                                        title: "Vitamina C",
-                                        neg: "100mg de vitamina C estratégicamente añadidos para preservar sus cualidades",
-                                        prop: "Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel."
-                                    },
-                                    {
-                                        n: "Proteína",
-                                        d: "20g para tono muscular y saciedad.",
-                                        bg: "https://drive.google.com/thumbnail?id=1ECxBeP_peWbBt5YaIz0E0uJisOTFcFoh&sz=w1920",
-                                        lado: "lado-derecho",
-                                        tagline: "LA PROTEÍNA PUEDE SER JUGOSA",
-                                        title: "Proteína de Suero de Leche",
-                                        neg: "20g de Proteína que NO sabe a cartón",
-                                        prop: "10g de proteína de suero de leche. 10g aportada por el resto de ingredientes. <br> Un toque que ayuda a mentener tu vitalidad y tono muscular."
-                                    },
-                                    {
-                                        n: "Biotina",
-                                        d: "Refuerzo para cabello y uñas.",
-                                        lado: "lado-izquierdo",
-                                        tagline: "BELLEZA DESDE EL INTERIOR",
-                                        title: "Biotina de Alta Absorción",
-                                        neg: "Dosis óptima para fortalecer la matriz celular",
-                                        prop: "No es solo estética, es regeneración celular. La biotina trabaja en sinergia con los aminoácidos para anclar el cabello y fortalecer las uñas desde la raíz. El verdadero glow empieza por dentro."
-                                    },
-                                    {
-                                        n: "Boswellia",
-                                        d: "Antiinflamatorio natural articular.",
-                                        bg: "https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920",
-                                        lado: "lado-izquierdo",
-                                        tagline: "INFLAMACIÓN NO, GRACIAS",
-                                        title: "Broswelia Serrata & Jengibre",
-                                        neg: "xmg de broswelia serrata y xmg de estracto de jengibre.",
-                                        prop: "Cada sustancia por separado son ya potentes antiinblamatorios. Cuando además los juntas, el efecto de contención es brutal y tus articulaciones se mantienen sanas y a pleno rendimiento"
-                                    },
-                                    {
-                                        n: "Jengibre",
-                                        d: "Sinergia digestiva y antiinflamatoria.",
-                                        bg: "https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920",
-                                        lado: "lado-izquierdo",
-                                        tagline: "INFLAMACIÓN NO, GRACIAS",
-                                        title: "Broswelia Serrata & Jengibre",
-                                        neg: "xmg de broswelia serrata y xmg de estracto de jengibre.",
-                                        prop: "Cada sustancia por separado son ya potentes antiinblamatorios. Cuando además los juntas, el efecto de contención es brutal y tus articulaciones se mantienen sanas y a pleno rendimiento"
-                                    },
-                                    {
-                                        n: "Creatina",
-                                        d: "Energía celular y rendimiento cognitivo.",
-                                        bg: "https://drive.google.com/thumbnail?id=1VbwVN25DbA1SDByOwd6tXiGUZexo3KvJ&sz=w1920",
-                                        lado: "lado-derecho",
-                                        tagline: "Tu parte \"creativa\"",
-                                        title: "Creatina",
-                                        neg: "Creatiiiinaaaaa",
-                                        prop: "Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel."
-                                    },
-                                    {
-                                        n: "MCT",
-                                        d: "Combustible cerebral inmediato.",
-                                        lado: "lado-derecho",
-                                        tagline: "ENERGÍA LIMPIA Y DIRECTA",
-                                        title: "Triglicéridos de Cadena Media",
-                                        neg: "Combustible premium que tu cerebro usa al instante",
-                                        prop: "Olvídate de las caídas de energía. El MCT esquiva la digestión pesada y viaja directo a tu hígado para convertirse en cetonas. Foco mental sostenido, claridad y energía imparable."
-                                    },
-                                    {
-                                        n: "Vitamina D",
-                                        d: "La hormona vital de tu bienestar inmune y óseo.",
-                                        lado: "lado-izquierdo",
-                                        tagline: "EL SOL QUE NO TE FALTE",
-                                        title: "Vitamina D3",
-                                        neg: "000 g de la vitamina más deficiente en el mundo moderno",
-                                        prop: "Más que una vitamina, es un director de orquesta hormonal. Regula tu estado de ánimo, blinda tu sistema inmunológico y es absolutamente imprescindible para que el calcio se fije en tus huesos. Tu dosis diaria de vitalidad asegurada."
-                                    },
-                                    {
-                                        n: "Ácido Hialurónico",
-                                        d: "Hidratación celular profunda para la piel y articulaciones.",
-                                        lado: "lado-derecho",
-                                        tagline: "SI HAY UN ÁCIDO QUE AMAS, ES ÉSTE",
-                                        title: "Ácido Hialurónico Puro",
-                                        neg: "000 g de hidratación activa molecular",
-                                        prop: "No te lo apliques solo por fuera, nútrelo desde dentro. El ácido hialurónico retiene hasta 1000 veces su peso en agua, lubricando tus articulaciones para moverte sin dolor y devolviendo a tu piel ese aspecto jugoso, firme y radiante."
-                                    }
-                                ];
-
-                                const rueda = document.getElementById('rueda-fisica');
-                                const radio = 250;
-                                let rotacionActual = 0;
-
-                                const anguloPaso = 360 / activos.length;
-
-                                activos.forEach((a, i) => {
-                                    const grados = i * anguloPaso - 90;
-                                    const angulo = grados * (Math.PI / 180);
-                                    const x = Math.cos(angulo) * radio;
-                                    const y = Math.sin(angulo) * radio;
-
-                                    const line = document.createElement('div');
-                                    line.style.position = 'absolute';
-                                    line.style.top = 'calc(50% - 0.5px)';
-                                    line.style.left = '50%';
-                                    line.style.width = `${radio}px`;
-                                    line.style.height = '1px';
-                                    line.style.background = 'linear-gradient(90deg, transparent 62%, rgba(255,255,255,0.4) 64%, rgba(255,255,255,0.4) 95%, transparent 100%)';
-                                    line.style.transformOrigin = '0 50%';
-                                    line.style.transform = `rotate(${grados}deg)`;
-                                    line.style.zIndex = '0';
-                                    line.style.pointerEvents = 'none'; // Para que no interfiera con el ratón
-                                    rueda.appendChild(line);
-
-                                    const nodo = document.createElement('div');
-                                    nodo.className = 'nodo-activo';
-                                    nodo.style.left = `calc(50% + ${x}px)`;
-                                    nodo.style.top = `calc(50% + ${y}px)`;
-                                    nodo.innerHTML = `<span class="nodo-texto" style="display:inline-block; transition:transform 3s ease-out; font-size:11px; font-weight:500; color:#fff; letter-spacing: 1px; text-transform: uppercase;">${a.n}</span>`;
-
-                                    // Cambiado a onclick para poder leer textos más largos cómodamente
-                                    nodo.onclick = () => {
-                                        // 2. Actualiza la caja gigante de fondo fotográfico
-                                        const contenedorCajas = document.getElementById('cajas-activos');
-                                        if (contenedorCajas) {
-                                            const fondoStyle = a.bg
-                                                ? `background-image: url('${a.bg}');`
-                                                : `background-color: #1a1714;`; // Fondo elegante por defecto para los que no tienen foto
-
-                                            const classLado = a.lado ? a.lado : 'centro';
-
-                                            contenedorCajas.innerHTML = `
-                                                <div class="full-container reveal-section is-visible" style="opacity: 0; animation: fadeInCaja 0.8s forwards;">
-                                                    <div class="bg-layer" style="${fondoStyle}"></div>
-                                                    <div class="content-wrapper ${classLado}"> 
-                                                        <div class="text-box">
-                                                            <h2 class="tagline">${a.tagline || 'DOXA'}</h2>
-                                                            <h3 class="main-title">${a.title || a.n}</h3>
-                                                            ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
-                                                            <div class="hero-value-prop">${a.prop || a.d}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            `;
-                                        }
-
-                                        const giroBrisa = x > 0 ? -15 : 15;
-                                        rotacionActual += giroBrisa;
-                                        rueda.style.transform = `rotate(${rotacionActual}deg)`;
-
-                                        // Mantener el texto horizontal girando los nombres en sentido opuesto
-                                        rueda.querySelectorAll('.nodo-texto').forEach(t => {
-                                            t.style.transform = `rotate(${-rotacionActual}deg)`;
-                                        });
-                                    };
-
-                                    rueda.appendChild(nodo);
-                                });
-                            })();
-                        </script>
-                    </div>
-
-                </div>
             </div>
         </section>
 
 
         /* SECCIÓN DOXAS: CAJAS DE ACTIVOS */
         <style>
-            .full-container {
+            #cajas-activos {
                 position: relative;
                 width: 100vw;
-                height: 600px;
+                min-height: 700px;
                 display: flex;
                 align-items: center;
+                overflow: hidden;
+                background-color: #1a1714;
             }
 
-            .full-container::before {
+            #cajas-activos::before {
                 content: '';
                 position: absolute;
                 top: 0;
@@ -1005,60 +776,42 @@
                 height: 100%;
                 background-size: cover;
                 background-position: center;
-                filter: brightness(0.7);
+                filter: brightness(0.6);
                 z-index: 1;
+                transition: background-image 0.5s ease-in-out;
             }
 
-            .hero-value-prop {
-                font-family: 'Lexend', sans-serif;
-                font-size: 12px;
-                font-weight: 300;
-                line-height: 2.2;
-                letter-spacing: 1.5px;
-                max-width: 600px;
-                margin: 0 auto;
-                color: #FFFFFF;
-            }
-
-            .hero-value-prop-neg {
-                font-family: 'Lexend', sans-serif;
-                font-size: 12px;
-                font-weight: 600;
-                line-height: 2.2;
-                letter-spacing: 1.5px;
-                max-width: 600px;
-                margin: 0 auto;
-                color: #FFFFFF;
-            }
-
-            .content-wrapper {
+            .content-grid {
                 position: relative;
                 z-index: 3;
                 width: 100%;
-                padding: 0 8%;
+                max-width: 1200px;
+                margin: 0 auto;
                 display: flex;
-                box-sizing: border-box;
+                flex-direction: row;
+                align-items: center;
+                gap: 40px;
+                padding: 40px 20px;
             }
 
-            .lado-derecho {
-                justify-content: flex-end;
-                text-align: right;
-            }
-
-            .lado-izquierdo {
-                justify-content: flex-start;
-                text-align: left;
-            }
-
-            .centro {
+            .wheel-column {
+                flex: 1;
+                display: flex;
                 justify-content: center;
-                text-align: center;
+                align-items: center;
+            }
+
+            .text-column {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
             }
 
             .text-box {
                 max-width: 500px;
                 color: white;
                 font-family: 'Lexend', sans-serif;
+                text-align: right;
             }
 
             .tagline {
@@ -1076,81 +829,278 @@
                 line-height: 1.1;
             }
 
+            .hero-value-prop-neg {
+                font-family: 'Lexend', sans-serif;
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 2.2;
+                letter-spacing: 1.5px;
+                margin-bottom: 15px;
+            }
+
+            .hero-value-prop {
+                font-family: 'Lexend', sans-serif;
+                font-size: 12px;
+                font-weight: 300;
+                line-height: 2.2;
+                letter-spacing: 1.5px;
+                opacity: 0.9;
+            }
+
             @media (max-width: 768px) {
-                .full-container {
-                    height: 450px;
+                .content-grid {
+                    flex-direction: column;
                 }
-
-                .content-wrapper {
-                    justify-content: center !important;
-                    text-align: center !important;
-                    padding: 0 20px;
+                .text-column {
+                    justify-content: center;
                 }
-
-                .main-title {
-                    font-size: 26px;
-                    font-weight: 200;
-                    letter-spacing: 1px;
-                    display: inline-block;
-                    color: rgba(255, 255, 255, 0.8);
+                .text-box {
+                    text-align: center;
+                }
+                #cajas-activos {
+                    min-height: 900px;
                 }
             }
 
-            .reveal-section {
-                opacity: 0;
-                transform: scale(1.1);
-                transition: all 1.8s ease-out;
+            /* Estilos de la rueda dentro de cajas-activos */
+            .radial-wrapper {
+                position: relative;
+                width: 100%;
+                max-width: 650px;
+                height: 650px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            .reveal-section.is-visible {
-                opacity: 1;
-                transform: scale(1);
+            .rueda-giro {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                transition: transform 3s ease-out;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            @keyframes fadeInCaja {
-                from {
-                    opacity: 0;
-                    transform: scale(1.05);
-                }
+            .galleta-fija {
+                position: absolute;
+                width: 340px;
+                z-index: 10;
+                filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+                pointer-events: none;
+            }
 
-                to {
-                    opacity: 1;
-                    transform: scale(1);
-                }
+            .nodo-activo {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: 0.3s ease;
+                white-space: nowrap;
+                transform: translate(-50%, -50%);
+            }
+
+            .nodo-activo:hover {
+                transform: translate(-50%, -50%) scale(1.2);
+                color: #c19b76;
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
             }
         </style>
 
         <section id="cajas-activos">
-            <!-- La caja inicial por defecto que aparece al cargar (Aminoácidos) -->
-            <div class="full-container reveal-section is-visible">
-                <div class="bg-layer"
-                    style="background-image: url('https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920');">
+            <div class="bg-layer" id="caja-bg" style="background-image: url('https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920');"></div>
+            
+            <div class="content-grid">
+                <!-- Columna Izquierda: Rueda -->
+                <div class="wheel-column">
+                    <div class="radial-wrapper">
+                        <img src="Galle choco.png" class="galleta-fija" alt="DOXA">
+                        <div id="rueda-fisica" class="rueda-giro"></div>
+                    </div>
                 </div>
-                <div class="content-wrapper lado-derecho">
-                    <div class="text-box">
+                
+                <!-- Columna Derecha: Texto dinámico -->
+                <div class="text-column">
+                    <div class="text-box" id="caja-text">
                         <h2 class="tagline">FABRICANDO TUS TEJIDOS</h2>
                         <h3 class="main-title">Aminoácidos Formadores de Colágeno</h3>
                         <p class="hero-value-prop-neg">10g de los aminoácidos clave PUROS que forman el colágeno</p>
-                        <p class="hero-value-prop">
+                        <div class="hero-value-prop">
                             Los aminoácidos puros son mucho más potentes que su misma cantidad en colágeno ya formado.
                             Cada DOXA porta 10 g de aminoácidos puros. Más potencia creadora de colágeno.
                             Una cantidad que sí marca la diferencia.
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+            
+            <script>
+                (function () {
+                    const activos = [
+                        {
+                            n: "Aminoácidos",
+                            d: "10g de precursores puros del colágeno.",
+                            bg: "https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920",
+                            tagline: "FABRICANDO TUS TEJIDOS",
+                            title: "Aminoácidos Formadores de Colágeno",
+                            neg: "10g de los aminoácidos clave PUROS que forman el colágeno",
+                            prop: "Los aminoácidos puros son mucho más potentes que su misma cantidad en colágeno ya formado. Cada DOXA porta 10 g de aminoácidos puros. Más potencia creadora de colágeno. Una cantidad que sí marca la diferencia."
+                        },
+                        {
+                            n: "Vitamina C",
+                            d: "100mg para la síntesis de tejidos.",
+                            bg: "https://drive.google.com/thumbnail?id=1IYiVxhlVG6wOVl0I2r0MMF_5EaEz3NnW&sz=w1920",
+                            tagline: "NO SIN MI VITAMINA C",
+                            title: "Vitamina C",
+                            neg: "100mg de vitamina C estratégicamente añadidos para preservar sus cualidades",
+                            prop: "Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel."
+                        },
+                        {
+                            n: "Proteína",
+                            d: "20g para tono muscular y saciedad.",
+                            bg: "https://drive.google.com/thumbnail?id=1ECxBeP_peWbBt5YaIz0E0uJisOTFcFoh&sz=w1920",
+                            tagline: "LA PROTEÍNA PUEDE SER JUGOSA",
+                            title: "Proteína de Suero de Leche",
+                            neg: "20g de Proteína que NO sabe a cartón",
+                            prop: "10g de proteína de suero de leche. 10g aportada por el resto de ingredientes. <br> Un toque que ayuda a mentener tu vitalidad y tono muscular."
+                        },
+                        {
+                            n: "Biotina",
+                            d: "Refuerzo para cabello y uñas.",
+                            tagline: "BELLEZA DESDE EL INTERIOR",
+                            title: "Biotina de Alta Absorción",
+                            neg: "Dosis óptima para fortalecer la matriz celular",
+                            prop: "No es solo estética, es regeneración celular. La biotina trabaja en sinergia con los aminoácidos para anclar el cabello y fortalecer las uñas desde la raíz. El verdadero glow empieza por dentro."
+                        },
+                        {
+                            n: "Boswellia",
+                            d: "Antiinflamatorio natural articular.",
+                            bg: "https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920",
+                            tagline: "INFLAMACIÓN NO, GRACIAS",
+                            title: "Broswelia Serrata & Jengibre",
+                            neg: "xmg de broswelia serrata y xmg de estracto de jengibre.",
+                            prop: "Cada sustancia por separado son ya potentes antiinblamatorios. Cuando además los juntas, el efecto de contención es brutal y tus articulaciones se mantienen sanas y a pleno rendimiento"
+                        },
+                        {
+                            n: "Jengibre",
+                            d: "Sinergia digestiva y antiinflamatoria.",
+                            bg: "https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920",
+                            tagline: "INFLAMACIÓN NO, GRACIAS",
+                            title: "Broswelia Serrata & Jengibre",
+                            neg: "xmg de broswelia serrata y xmg de estracto de jengibre.",
+                            prop: "Cada sustancia por separado son ya potentes antiinblamatorios. Cuando además los juntas, el efecto de contención es brutal y tus articulaciones se mantienen sanas y a pleno rendimiento"
+                        },
+                        {
+                            n: "Creatina",
+                            d: "Energía celular y rendimiento cognitivo.",
+                            bg: "https://drive.google.com/thumbnail?id=1VbwVN25DbA1SDByOwd6tXiGUZexo3KvJ&sz=w1920",
+                            tagline: "Tu parte \"creativa\"",
+                            title: "Creatina",
+                            neg: "Creatiiiinaaaaa",
+                            prop: "Síntesis de colágeno.<br> Refuerzo de tus defensas.<br> Protección y luminosidad de tu piel."
+                        },
+                        {
+                            n: "MCT",
+                            d: "Combustible cerebral inmediato.",
+                            tagline: "ENERGÍA LIMPIA Y DIRECTA",
+                            title: "Triglicéridos de Cadena Media",
+                            neg: "Combustible premium que tu cerebro usa al instante",
+                            prop: "Olvídate de las caídas de energía. El MCT esquiva la digestión pesada y viaja directo a tu hígado para convertirse en cetonas. Foco mental sostenido, claridad y energía imparable."
+                        },
+                        {
+                            n: "Vitamina D",
+                            d: "La hormona vital de tu bienestar inmune y óseo.",
+                            tagline: "EL SOL QUE NO TE FALTE",
+                            title: "Vitamina D3",
+                            neg: "000 g de la vitamina más deficiente en el mundo moderno",
+                            prop: "Más que una vitamina, es un director de orquesta hormonal. Regula tu estado de ánimo, blinda tu sistema inmunológico y es absolutamente imprescindible para que el calcio se fije en tus huesos. Tu dosis diaria de vitalidad asegurada."
+                        },
+                        {
+                            n: "Ácido Hialurónico",
+                            d: "Hidratación celular profunda para la piel y articulaciones.",
+                            tagline: "SI HAY UN ÁCIDO QUE AMAS, ES ÉSTE",
+                            title: "Ácido Hialurónico Puro",
+                            neg: "000 g de hidratación activa molecular",
+                            prop: "No te lo apliques solo por fuera, nútrelo desde dentro. El ácido hialurónico retiene hasta 1000 veces su peso en agua, lubricando tus articulaciones para moverte sin dolor y devolviendo a tu piel ese aspecto jugoso, firme y radiante."
+                        }
+                    ];
 
-        <script>
-            // El observador ahora es opcional porque inyectamos "is-visible" directamente al hacer clic, 
-            // pero lo dejamos por si hay más cajas estáticas abajo.
-            const cajaObs = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('#cajas-activos .reveal-section').forEach(el => cajaObs.observe(el));
-        </script>
+                    const rueda = document.getElementById('rueda-fisica');
+                    const cajaBg = document.getElementById('caja-bg');
+                    const cajaText = document.getElementById('caja-text');
+                    
+                    const radio = 240;
+                    let rotacionActual = 0;
+
+                    const anguloPaso = 360 / activos.length;
+
+                    activos.forEach((a, i) => {
+                        const grados = i * anguloPaso - 90;
+                        const angulo = grados * (Math.PI / 180);
+                        const x = Math.cos(angulo) * radio;
+                        const y = Math.sin(angulo) * radio;
+
+                        const line = document.createElement('div');
+                        line.style.position = 'absolute';
+                        line.style.top = 'calc(50% - 0.5px)';
+                        line.style.left = '50%';
+                        line.style.width = `${radio}px`;
+                        line.style.height = '1px';
+                        line.style.background = 'linear-gradient(90deg, transparent 62%, rgba(255,255,255,0.4) 64%, rgba(255,255,255,0.4) 95%, transparent 100%)';
+                        line.style.transformOrigin = '0 50%';
+                        line.style.transform = `rotate(${grados}deg)`;
+                        line.style.zIndex = '0';
+                        line.style.pointerEvents = 'none'; 
+                        rueda.appendChild(line);
+
+                        const nodo = document.createElement('div');
+                        nodo.className = 'nodo-activo';
+                        nodo.style.left = `calc(50% + ${x}px)`;
+                        nodo.style.top = `calc(50% + ${y}px)`;
+                        nodo.innerHTML = `<span class="nodo-texto" style="display:inline-block; transition:transform 3s ease-out; font-size:11px; font-weight:500; color:#fff; letter-spacing: 1px; text-transform: uppercase;">${a.n}</span>`;
+
+                        nodo.onclick = () => {
+                            // Actualizar la imagen de fondo
+                            if (a.bg) {
+                                cajaBg.style.backgroundImage = `url('${a.bg}')`;
+                            } else {
+                                cajaBg.style.backgroundImage = 'none';
+                                cajaBg.style.backgroundColor = '#1a1714';
+                            }
+
+                            // Aplicar efecto de fade al texto
+                            cajaText.style.opacity = '0';
+                            
+                            setTimeout(() => {
+                                // Actualizar el texto
+                                cajaText.innerHTML = `
+                                    <h2 class="tagline">${a.tagline || 'DOXA'}</h2>
+                                    <h3 class="main-title">${a.title || a.n}</h3>
+                                    ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
+                                    <div class="hero-value-prop">${a.prop || a.d}</div>
+                                `;
+                                cajaText.style.transition = 'opacity 0.4s ease-in-out';
+                                cajaText.style.opacity = '1';
+                            }, 300);
+
+                            // Girar la rueda
+                            const giroBrisa = x > 0 ? -15 : 15;
+                            rotacionActual += giroBrisa;
+                            rueda.style.transform = `rotate(${rotacionActual}deg)`;
+
+                            // Mantener el texto horizontal
+                            rueda.querySelectorAll('.nodo-texto').forEach(t => {
+                                t.style.transform = `rotate(${-rotacionActual}deg)`;
+                            });
+                        };
+
+                        rueda.appendChild(nodo);
+                    });
+                })();
+            </script>
+        </section>
         /* */
 
 
