@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -878,7 +878,7 @@
                 font-family: 'Lexend', sans-serif;
                 font-size: 14px;
                 font-weight: 600;
-                line-height: 2.4;
+                line-height: 2;
                 letter-spacing: 1.5px;
                 margin-bottom: 25px;
             }
@@ -887,7 +887,7 @@
                 font-family: 'Lexend', sans-serif;
                 font-size: 14px;
                 font-weight: 300;
-                line-height: 2.8;
+                line-height: 2;
                 letter-spacing: 1.5px;
                 opacity: 0.9;
             }
@@ -1012,7 +1012,7 @@
             <!-- Columna Derecha: Texto dinámico -->
             <div class="text-column">
                 <div class="text-box" id="caja-text">
-                    <h3 class="main-title">COLÁGENO</h3>
+                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">COLÁGENO</h3>
                     <p class="hero-value-prop-neg">El colágeno como nunca lo has tomado</p>
                     <div class="hero-value-prop">
                         10g de péptidos de colágeno en cada DOXA.<br><br>
@@ -1130,7 +1130,7 @@
                             // Actualizar el texto
                             cajaText.innerHTML = `
                                     ${a.tagline ? `<h2 class="tagline">${a.tagline}</h2>` : ''}
-                                    <h3 class="main-title">${a.title || a.n}</h3>
+                                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">${a.title || a.n}</h3>
                                     ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
                                     <div class="hero-value-prop">${a.prop || a.d}</div>
                                 `;
@@ -1171,14 +1171,16 @@
             <!-- Columna Izquierda: Texto -->
             <div class="text-column" style="justify-content: flex-start;">
                 <div class="text-box" style="text-align: left;">
-                    <h2 class="tagline">Y TODOS LOS "SIN" QUE TE GUSTA LEER</h2>
-                    <h3 class="main-title">Sin azúcares añadidos, sin gluten, sin remordimientos</h3>
-                    <p class="hero-value-prop-neg"></p>
+                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Y TODOS LOS "SIN" QUE TE
+                        GUSTA LEER</h3>
+                    <p class="hero-value-prop-neg">Sin azúcares añadidos, sin gluten, sin aceites refinados</p>
                     <div class="hero-value-prop">
-                        Sin picos de insulina </br>
-                        Sin aceites refinados inflamatorios</br>
-                        Sin cargas estériles de relleno</br>
-                        Sin angustia por no poder tomarte un capricho</br>
+
+
+                        Sin rellenos estériles.<Br>
+                        Sin efectos indeseados.<Br>
+                        Sin remordimientos.
+
 
                     </div>
                 </div>
