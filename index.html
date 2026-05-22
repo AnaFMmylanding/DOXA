@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOXA | Alta Repostería Funcional</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700&family=Lato:wght@300;400;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@300;400;500;700&display=swap"
         rel="stylesheet">
 
 
@@ -321,20 +321,18 @@
 
         .c-prop {
             font-family: 'Lexend', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 1.8;
-            letter-spacing: 2px;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 2;
             margin-bottom: 15px;
             color: #fff;
         }
 
         .c-desc {
             font-family: 'Lexend', sans-serif;
-            font-size: 12px;
+            font-size: 15px;
             font-weight: 300;
-            line-height: 1.8;
-            letter-spacing: 2px;
+            line-height: 2;
             color: #fff;
             opacity: 0.9;
         }
@@ -435,20 +433,18 @@
 
         .c-prop {
             font-family: 'Lexend', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 1.8;
-            letter-spacing: 2px;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 2;
             margin-bottom: 15px;
             color: #fff;
         }
 
         .c-desc {
             font-family: 'Lexend', sans-serif;
-            font-size: 12px;
+            font-size: 15px;
             font-weight: 300;
-            line-height: 1.8;
-            letter-spacing: 2px;
+            line-height: 2;
             color: #fff;
             opacity: 0.9;
         }
@@ -503,7 +499,7 @@
                 </h1>
 
                 <div
-                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: 16px; color: #efefef; letter-spacing: 2px; margin: 0; line-height: 1.6;">
+                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: 15px; color: #efefef; margin: 0; line-height: 2; opacity: 0.9;">
                     <br>
                     <p>
                         Grande. Jugosa. Irresistible.
@@ -549,7 +545,7 @@
                 </h2>
 
                 <div
-                    style="max-width: 600px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-weight: 300; line-height: 2.8; letter-spacing: 1px; font-size: clamp(14px, 3vw, 18px); opacity: 0.9;">
+                    style="max-width: 600px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-weight: 300; line-height: 2; font-size: 15px; opacity: 0.9;">
                     <p style="margin-bottom: 40px;">Hay placeres que nunca han estado en duda.<br>
                         Y decisiones que, con el tiempo, empiezas a cuidar más.
 
@@ -602,8 +598,7 @@
             .col-desc {
                 font-size: 15px;
                 font-weight: 300;
-                line-height: 2.2;
-                letter-spacing: 2px;
+                line-height: 2;
                 max-width: 600px;
                 margin: 0 auto;
                 opacity: 0.9;
@@ -732,10 +727,10 @@
 
             .panel p {
                 padding: 15px 0;
-                font-size: 12px;
+                font-size: 15px;
                 font-weight: 300;
-                opacity: 0.8;
-                line-height: 1.6;
+                opacity: 0.9;
+                line-height: 2;
                 margin: 0;
             }
 
@@ -876,19 +871,17 @@
 
             .hero-value-prop-neg {
                 font-family: 'Lexend', sans-serif;
-                font-size: 14px;
-                font-weight: 600;
+                font-size: 15px;
+                font-weight: 500;
                 line-height: 2;
-                letter-spacing: 1.5px;
                 margin-bottom: 25px;
             }
 
             .hero-value-prop {
                 font-family: 'Lexend', sans-serif;
-                font-size: 14px;
+                font-size: 15px;
                 font-weight: 300;
                 line-height: 2;
-                letter-spacing: 1.5px;
                 opacity: 0.9;
             }
 
@@ -945,15 +938,71 @@
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                transition: 0.3s ease;
+                transition: transform 0.3s ease, opacity 0.5s ease;
                 white-space: nowrap;
                 transform: translate(-50%, -50%);
             }
 
             .nodo-activo:hover {
-                transform: translate(-50%, -50%) scale(1.2);
+                transform: translate(-50%, -50%) scale(1.15);
                 color: #c19b76;
                 text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+
+            .nodo-subactivo {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: transform 0.3s ease, opacity 0.5s ease;
+                white-space: nowrap;
+                transform: translate(-50%, -50%);
+                z-index: 20;
+            }
+
+            .sub-activo-link {
+                display: inline-block;
+                font-family: 'Lexend', sans-serif;
+                font-size: 9.5px;
+                font-weight: 500;
+                color: #c19b76;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                transition: color 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
+                scale: 1;
+            }
+
+            .nodo-subactivo:hover .sub-activo-link {
+                color: #f7e7d0;
+                scale: 1.1;
+                text-shadow: 0 0 8px rgba(193, 155, 118, 0.6);
+            }
+
+            .btn-volver {
+                display: none;
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                z-index: 30;
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #fff;
+                padding: 10px 20px;
+                font-size: 10px;
+                font-family: 'Lexend', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                cursor: pointer;
+                border-radius: 20px;
+                backdrop-filter: blur(5px);
+                transition: all 0.3s ease;
+            }
+
+            .btn-volver:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: scale(1.05);
             }
         </style>
 
@@ -965,15 +1014,17 @@
 
                 <h2
                     style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(22px, 5vw, 45px); letter-spacing: clamp(2px, 2vw, 12px); text-transform: uppercase; margin-bottom: 60px;">
-                    LA FORMULACIÓN DOXA
+                    LA ARQUITECTURA DOXA
                 </h2>
 
                 <p class="col-desc">
                     DOXA reúne ingredientes seleccionados
                     por cómo nutren, sostienen y acompañan el cuerpo.<Br>
+
                     <Br>
-                    Activos que normalmente encontrarías aislados en suplementos premium,
-                    integrados aquí en una cookie jugosa, keto y profundamente satisfactoria.
+                    Activos que normalmente se consumen por separado, en distintos formatos y tomas a lo largo del día,
+                    integrados aquí en una sola pieza, una cookie jugosa, keto y profundamente satisfactoria.
+
                     <Br><Br>
                     Una forma distinta de disfrutar,<Br>
                     compatible con una alimentación consciente,<Br>
@@ -992,8 +1043,7 @@
 
 
     <section id="cajas-activos" class="cajas-activos-section">
-        <div class="bg-layer" id="caja-bg"
-            style="background-image: url('https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920');">
+        <div class="bg-layer" id="caja-bg" style="background-image: url('piel negra.jpg');">
         </div>
 
         <div class="content-grid">
@@ -1008,12 +1058,11 @@
             <!-- Columna Derecha: Texto dinámico -->
             <div class="text-column">
                 <div class="text-box" id="caja-text">
-                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">COLÁGENO</h3>
-                    <p class="hero-value-prop-neg">El colágeno como nunca lo has tomado</p>
+                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Piel & Elasticidad</h3>
+                    <p class="hero-value-prop-neg">Nutrición y firmeza desde el interior</p>
                     <div class="hero-value-prop">
-                        10g de péptidos de colágeno en cada DOXA.<br><br>
-                        Una cantidad relevante, asociada al mantenimiento de piel,<br>
-                        tejidos y articulaciones.
+                        Haz clic en cualquiera de las categorías para explorar los activos que componen la arquitectura
+                        de DOXA.
                     </div>
                 </div>
             </div>
@@ -1023,56 +1072,91 @@
             (function () {
                 const activos = [
                     {
-                        n: "COLÁGENO",
-                        bg: "https://drive.google.com/thumbnail?id=1bv7xXxIrw8sIj7rww4o39jGsrJWmMuBS&sz=w1920",
-                        title: "COLÁGENO",
-                        neg: "El colágeno como nunca lo has tomado",
-                        prop: "10g de péptidos de colágeno en cada DOXA.<br><br>Una cantidad relevante, asociada al mantenimiento de piel,<br>tejidos y articulaciones."
+                        n: "Piel & Elasticidad",
+                        bg: "piel negra.jpg",
+                        title: "Piel & Elasticidad",
+                        neg: "Nutrición y firmeza desde el interior",
+                        prop: "Haz clic en este apartado para ver cómo actúan los Péptidos de Colágeno, el Ácido Hialurónico y la Vitamina C en tu piel.",
+                        subActivos: [
+                            { n: "Péptidos de colágeno — 10g", title: "Péptidos de colágeno — 10g", neg: "Estructura y elasticidad", prop: "10g de péptidos de colágeno hidrolizado de la máxima calidad para favorecer la elasticidad, firmeza y regeneración de la piel y tejidos conectivos." },
+                            { n: "Ácido hialurónico", title: "Ácido hialurónico", neg: "Hidratación profunda", prop: "Ayuda a retener el agua en los tejidos, mejorando visiblemente la hidratación, tersura y volumen de la dermis desde el interior." },
+                            { n: "Vitamina C", title: "Vitamina C", neg: "Co-factor esencial", prop: "Potente antioxidante que protege contra el daño celular y actúa como cofactor clave e indispensable en la producción natural de colágeno del cuerpo." }
+                        ]
                     },
                     {
-                        n: "PROTEÍNA",
-                        bg: "https://drive.google.com/thumbnail?id=1ECxBeP_peWbBt5YaIz0E0uJisOTFcFoh&sz=w1920",
-                        title: "PROTEÍNA",
-                        neg: "Más que saciedad",
-                        prop: "10g de proteína de suero de leche en cada pieza.<br><br>Contribuye al mantenimiento de la masa muscular,<br>algo clave con el paso del tiempo<br>y especialmente en personas activas."
+                        n: "Energía Sostenida",
+                        bg: "mujer-ejercicio.jpg",
+                        title: "Energía Sostenida",
+                        neg: "Vitalidad sin picos ni caídas",
+                        prop: "Haz clic en este apartado para descubrir cómo el Aceite MCT y la Proteína te aportan energía constante y limpia.",
+                        subActivos: [
+                            { n: "Aceite MCT", title: "Aceite MCT", neg: "Energía directa", prop: "Ácidos grasos de cadena media de rápida absorción que se convierten directamente en cetonas, proporcionando energía limpia sin generar picos de insulina." },
+                            { n: "Proteína de suero", title: "Proteína de suero", neg: "Soporte muscular", prop: "10g de proteína de suero ultra-filtrada de alta biodisponibilidad para nutrir tus células y mantener la saciedad durante horas." }
+                        ]
                     },
                     {
-                        n: "ÁCIDO HIALURÓNICO",
-                        title: "ÁCIDO HIALURÓNICO",
-                        neg: "Hidratación desde dentro",
-                        prop: "Capaz de retener agua dentro del tejido.<br><br>Un activo habitual en cosmética,<br>aquí integrado para actuar desde el interior."
+                        n: "Claridad Mental",
+                        bg: "mano sobre pierna.jpg",
+                        title: "Claridad Mental",
+                        neg: "Foco y concentración constante",
+                        prop: "Haz clic en este apartado para ver cómo el Aceite MCT y la Vitamina D3 optimizan tu rendimiento cerebral y foco.",
+                        subActivos: [
+                            { n: "Aceite MCT", title: "Aceite MCT", neg: "Combustible cerebral", prop: "Aporta cetonas directas al cerebro, sirviendo como un excelente combustible mental para evitar la neblina cognitiva y potenciar el foco." },
+                            { n: "Vitamina D3", title: "Vitamina D3", neg: "Base esencial de bienestar", prop: "2000 UI de una de las vitaminas más deficitarias del estilo de vida moderno, clave para el equilibrio del sistema nervioso y el estado de ánimo." }
+                        ]
                     },
                     {
-                        n: "BIOTINA",
-                        title: "BIOTINA",
-                        neg: "Apoyo a lo visible",
-                        prop: "Contribuye al mantenimiento de piel, cabello y uñas.<br><br>Un trabajo constante, que se construye con el tiempo."
+                        n: "Recuperación & Tono Muscular",
+                        bg: "Creatina _ok.jpg",
+                        title: "Recuperación & Tono Muscular",
+                        neg: "Sostén y fuerza para tu musculatura",
+                        prop: "Haz clic en este apartado para ver cómo la Proteína de suero y la Creatina facilitan la síntesis muscular y evitan el cansancio.",
+                        subActivos: [
+                            { n: "Proteína de suero", title: "Proteína de suero", neg: "Aminoácidos esenciales", prop: "Aporte de proteínas clave indispensables para la reconstrucción de las fibras musculares tras una sesión de entrenamiento." },
+                            { n: "Creatina", title: "Creatina", neg: "Fuerza y recuperación celular", prop: "Monohidrato de creatina premium que favorece la producción de ATP celular, mejorando la resistencia y acelerando la recuperación física." }
+                        ]
                     },
                     {
-                        n: "MCT",
-                        title: "MCT",
-                        neg: "Energía limpia y directa",
-                        prop: "Fuente de energía rápida y estable,<br>sin picos bruscos.<br><br>Mente lúcida.<br><br>Especialmente valorado en alimentación keto<br>y en contextos de actividad mental y física."
+                        n: "Movimiento & Confort",
+                        bg: "articulaciones.jpg",
+                        title: "Movimiento & Confort",
+                        neg: "Articulaciones y flexibilidad en calma",
+                        prop: "Haz clic en este apartado para explorar la acción antiinflamatoria de la Boswellia Serrata y el Jengibre.",
+                        subActivos: [
+                            { n: "Boswellia Serrata", title: "Boswellia Serrata", neg: "Tejidos en calma", prop: "Extracto botánico altamente purificado tradicionalmente valorado por su papel modulando la inflamación y cuidando las articulaciones." },
+                            { n: "Jengibre", title: "Jengibre", neg: "Flexibilidad y alivio", prop: "Compuestos fenólicos naturales con propiedades analgésicas y estimulantes que facilitan la recuperación del tejido articular y muscular." }
+                        ]
                     },
                     {
-                        n: "CREATINA",
-                        bg: "https://drive.google.com/thumbnail?id=1VbwVN25DbA1SDByOwd6tXiGUZexo3KvJ&sz=w1920",
-                        title: "CREATINA",
-                        neg: "Más allá del entrenamiento",
-                        prop: "Conocida por su papel en el rendimiento físico,<br>también participa en la producción de energía celular.<br><br>Interesante tanto para actividad física<br>como para mantener vitalidad con los años."
+                        n: "Hidratación Profunda",
+                        bg: "PIel hidratada y tersa.jpg",
+                        title: "Hidratación Profunda",
+                        neg: "Equilibrio hídrico celular",
+                        prop: "Haz clic en este apartado para conocer los beneficios de la retención molecular de agua del Ácido Hialurónico.",
+                        subActivos: [
+                            { n: "Ácido hialurónico", title: "Ácido hialurónico", neg: "Hidratación celular", prop: "Retiene hasta 1000 veces su peso en agua en el interior de los tejidos corporales, garantizando una elasticidad e hidratación sistémicas." }
+                        ]
                     },
                     {
-                        n: "VITAMINA D",
-                        title: "VITAMINA D",
-                        neg: "Base esencial",
-                        prop: "Una de las vitaminas más deficitarias.<br><br>Contribuye al mantenimiento óseo, muscular<br>y al funcionamiento del sistema inmune."
+                        n: "Cabello & Uñas",
+                        bg: "Pelazo y uñas fuertes.jpg",
+                        title: "Cabello & Uñas",
+                        neg: "Fuerza, brillo y vitalidad visible",
+                        prop: "Haz clic en este apartado para ver cómo la Biotina fortalece tu estructura queratínica externa.",
+                        subActivos: [
+                            { n: "Biotina", title: "Biotina", neg: "Estructura fuerte", prop: "Vitamina hidrosoluble indispensable para estimular la síntesis de queratina, mejorando de forma notable el grosor, brillo y resistencia de cabello y uñas." }
+                        ]
                     },
                     {
-                        n: "BOSWELLIA & JENGIBRE",
-                        bg: "https://drive.google.com/thumbnail?id=1HaUn9V-T5uTZvdqeBqvCC_-MtTBYsdcU&sz=w1920",
-                        title: "BOSWELLIA & JENGIBRE",
-                        neg: "La calma de tus tejidos",
-                        prop: "Dos compuestos asociados al control de la inflamación.<br><br>Apoyo para articulaciones<br>y para una mejor recuperación.<br>"
+                        n: "Ingredientes que te respetan",
+                        bg: "todos los sin.jpg",
+                        title: "Ingredientes que te respetan",
+                        neg: "Sin añadidos estériles, solo lo que necesitas",
+                        prop: "Haz clic en este apartado para conocer las bases libres de inflamación y de impacto glucémico de nuestra masa.",
+                        subActivos: [
+                            { n: "Sin Azúcares Añadidos", title: "Sin Azúcares Añadidos", neg: "Salud metabólica", prop: "Endulzada exclusivamente con eritritol premium, ideal para satisfacer el paladar sin alterar la curva de glucosa ni la insulina." },
+                            { n: "Sin Aceites Refinados", title: "Sin Aceites Refinados", neg: "Nutrición limpia", prop: "Elaborada solo con grasas nobles y saludables como manteca de cacao pura y base de harina de almendras premium." }
+                        ]
                     }
                 ];
 
@@ -1080,73 +1164,258 @@
                 const cajaBg = document.getElementById('caja-bg');
                 const cajaText = document.getElementById('caja-text');
 
-                const radio = 240;
+                const radioCategorias = 250;
                 let rotacionActual = 0;
+                let prevRot = 0;
+                let selectedCategoryIndex = 0;
 
-                const anguloPaso = 360 / activos.length;
+                function selectCategory(index, initial = false) {
+                    selectedCategoryIndex = index;
+                    const a = activos[index];
 
-                activos.forEach((a, i) => {
-                    const grados = i * anguloPaso - 90;
-                    const angulo = grados * (Math.PI / 180);
-                    const x = Math.cos(angulo) * radio;
-                    const y = Math.sin(angulo) * radio;
+                    const currentBg = a.bg;
+                    if (currentBg) {
+                        cajaBg.style.backgroundImage = `url('${currentBg}')`;
+                    } else {
+                        cajaBg.style.backgroundImage = 'none';
+                        cajaBg.style.backgroundColor = '#1a1714';
+                    }
 
-                    const line = document.createElement('div');
-                    line.style.position = 'absolute';
-                    line.style.top = 'calc(50% - 0.5px)';
-                    line.style.left = '50%';
-                    line.style.width = `${radio}px`;
-                    line.style.height = '1px';
-                    line.style.background = 'linear-gradient(90deg, transparent 62%, rgba(255,255,255,0.4) 64%, rgba(255,255,255,0.4) 95%, transparent 100%)';
-                    line.style.transformOrigin = '0 50%';
-                    line.style.transform = `rotate(${grados}deg)`;
-                    line.style.zIndex = '0';
-                    line.style.pointerEvents = 'none';
-                    rueda.appendChild(line);
-
-                    const nodo = document.createElement('div');
-                    nodo.className = 'nodo-activo';
-                    nodo.style.left = `calc(50% + ${x}px)`;
-                    nodo.style.top = `calc(50% + ${y}px)`;
-                    nodo.innerHTML = `<span class="nodo-texto" style="display:inline-block; transition:transform 3s ease-out; font-size:11px; font-weight:500; color:#fff; letter-spacing: 1px; text-transform: uppercase;">${a.n}</span>`;
-
-                    nodo.onclick = () => {
-                        // Actualizar la imagen de fondo
-                        if (a.bg) {
-                            cajaBg.style.backgroundImage = `url('${a.bg}')`;
-                        } else {
-                            cajaBg.style.backgroundImage = 'none';
-                            cajaBg.style.backgroundColor = '#1a1714';
-                        }
-
-                        // Aplicar efecto de fade al texto
+                    if (initial) {
+                        cajaText.innerHTML = `
+                            ${a.tagline ? `<h2 class="tagline">${a.tagline}</h2>` : ''}
+                            <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">${a.title || a.n}</h3>
+                            ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
+                            <div class="hero-value-prop">${a.prop || ''}</div>
+                        `;
+                        cajaText.style.opacity = '1';
+                    } else {
                         cajaText.style.opacity = '0';
-
                         setTimeout(() => {
-                            // Actualizar el texto
                             cajaText.innerHTML = `
-                                    ${a.tagline ? `<h2 class="tagline">${a.tagline}</h2>` : ''}
-                                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">${a.title || a.n}</h3>
-                                    ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
-                                    <div class="hero-value-prop">${a.prop || a.d}</div>
-                                `;
+                                ${a.tagline ? `<h2 class="tagline">${a.tagline}</h2>` : ''}
+                                <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">${a.title || a.n}</h3>
+                                ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
+                                <div class="hero-value-prop">${a.prop || ''}</div>
+                            `;
                             cajaText.style.transition = 'opacity 0.4s ease-in-out';
                             cajaText.style.opacity = '1';
                         }, 300);
+                    }
 
-                        // Girar la rueda
+                    if (!initial) {
+                        prevRot = rotacionActual;
+                        const anguloPaso = 360 / activos.length;
+                        const grados = index * anguloPaso - 90;
+                        const angulo = grados * (Math.PI / 180);
+                        const x = Math.cos(angulo) * radioCategorias;
                         const giroBrisa = x > 0 ? -15 : 15;
                         rotacionActual += giroBrisa;
                         rueda.style.transform = `rotate(${rotacionActual}deg)`;
+                    } else {
+                        prevRot = rotacionActual;
+                    }
 
-                        // Mantener el texto horizontal
-                        rueda.querySelectorAll('.nodo-texto').forEach(t => {
-                            t.style.transform = `rotate(${-rotacionActual}deg)`;
-                        });
-                    };
+                    renderRueda();
+                }
 
-                    rueda.appendChild(nodo);
-                });
+                function renderRueda() {
+                    // Remove all old sub-active nodes and sub-active lines
+                    const oldSubs = rueda.querySelectorAll('.nodo-subactivo, .sub-ray-line');
+                    oldSubs.forEach(el => el.remove());
+
+                    const anguloPaso = 360 / activos.length;
+
+                    // Determinar si la categoría seleccionada se ubica en uno de los dos polos (superior o inferior)
+                    const selGradosPadre = selectedCategoryIndex * anguloPaso - 90;
+                    let selNormPantalla = (selGradosPadre + rotacionActual) % 360;
+                    if (selNormPantalla < -180) selNormPantalla += 360;
+                    if (selNormPantalla >= 180) selNormPantalla -= 360;
+                    const isPole = Math.abs(Math.abs(selNormPantalla) - 90) <= 20;
+
+                    activos.forEach((a, i) => {
+                        const gradosPadre = i * anguloPaso - 90;
+                        const anguloPadre = gradosPadre * (Math.PI / 180);
+
+                        const isSelected = (i === selectedCategoryIndex);
+
+                        // Si está seleccionado y en el polo, la línea del padre se alarga dinámicamente según la cantidad de activos
+                        const subActivosCount = a.subActivos ? a.subActivos.length : 0;
+                        const parentAdd = subActivosCount > 0 ? 15 + (subActivosCount - 1) * 20 : 0;
+
+                        let actualParentRadio = radioCategorias;
+                        if (isSelected && isPole) {
+                            actualParentRadio = radioCategorias + parentAdd;
+                        }
+
+                        // 1. Get or draw parent radial ray line
+                        let line = rueda.querySelector(`.ray-line[data-index="${i}"]`);
+                        if (!line) {
+                            line = document.createElement('div');
+                            line.className = 'ray-line';
+                            line.dataset.index = i;
+                            line.style.position = 'absolute';
+                            line.style.top = 'calc(50% - 0.5px)';
+                            line.style.left = '50%';
+                            line.style.height = '1px';
+                            line.style.transformOrigin = '0 50%';
+                            line.style.transform = `rotate(${gradosPadre}deg)`;
+                            line.style.zIndex = '0';
+                            line.style.pointerEvents = 'none';
+                            line.style.transition = 'width 0.6s ease, background 0.6s ease';
+                            rueda.appendChild(line);
+                        }
+
+                        line.style.width = `${actualParentRadio}px`;
+                        if (isSelected) {
+                            line.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.06) 42%, rgba(193, 155, 118, 0.3) 95%, transparent 100%)';
+                        } else {
+                            line.style.background = 'linear-gradient(90deg, transparent 62%, rgba(255, 255, 255, 0.03) 64%, rgba(255, 255, 255, 0.03) 95%, transparent 100%)';
+                        }
+
+                        // Parent category node coordinates
+                        const x = Math.cos(anguloPadre) * actualParentRadio;
+                        const y = Math.sin(anguloPadre) * actualParentRadio;
+
+                        // 2. Get or create parent category node
+                        let nodo = rueda.querySelector(`.nodo-activo[data-index="${i}"]`);
+                        if (!nodo) {
+                            nodo = document.createElement('div');
+                            nodo.className = 'nodo-activo';
+                            nodo.dataset.index = i;
+                            nodo.style.position = 'absolute';
+                            nodo.style.left = `calc(50% + ${x}px)`;
+                            nodo.style.top = `calc(50% + ${y}px)`;
+                            nodo.style.transition = 'left 0.6s ease, top 0.6s ease, transform 0.3s ease, opacity 0.5s ease';
+
+                            nodo.innerHTML = `<span class="nodo-texto" style="display:inline-block; transition:transform 3s ease-out, color 0.5s ease; font-size:11px; letter-spacing: 1px; text-transform: uppercase;">${a.n}</span>`;
+
+                            nodo.onclick = () => {
+                                if (!isSelected) {
+                                    selectCategory(i);
+                                }
+                            };
+                            rueda.appendChild(nodo);
+                        }
+
+                        // Update coordinate positions with transition
+                        nodo.style.left = `calc(50% + ${x}px)`;
+                        nodo.style.top = `calc(50% + ${y}px)`;
+
+                        if (isSelected) {
+                            nodo.style.opacity = '1';
+                            nodo.style.scale = '1.1';
+                        } else {
+                            nodo.style.opacity = '0.35';
+                            nodo.style.scale = '0.85';
+                        }
+
+                        const textSpan = nodo.querySelector('.nodo-texto');
+                        const fontWeight = isSelected ? '600' : '400';
+                        const color = isSelected ? '#fff' : '#ccc';
+                        textSpan.style.fontWeight = fontWeight;
+                        textSpan.style.color = color;
+                        textSpan.style.transform = `rotate(${-rotacionActual}deg)`;
+
+                        // Render sub-actives flanking the parent category on their own rays
+                        if (isSelected && a.subActivos) {
+                            // Normalizar gradosPadre + rotacionActual a [-180, 180) para saber la posición en pantalla
+                            let normPantalla = (gradosPadre + rotacionActual) % 360;
+                            if (normPantalla < -180) normPantalla += 360;
+                            if (normPantalla >= 180) normPantalla -= 360;
+
+                            // Si está en la mitad izquierda de la pantalla, faneamos hacia abajo (signo negativo).
+                            // Usamos el umbral de 112.5° para separar el lado izquierdo del derecho/superior/inferior.
+                            const isLeftSide = Math.abs(normPantalla) > 112.5;
+                            const signo = isLeftSide ? -1 : 1;
+
+                            const subActivosCount = a.subActivos.length;
+                            let offsets = [];
+                            if (subActivosCount === 1) {
+                                offsets = [13];
+                            } else if (subActivosCount === 2) {
+                                offsets = [13, 26];
+                            } else if (subActivosCount === 3) {
+                                offsets = [13, 26, 39];
+                            }
+
+                            a.subActivos.forEach((sub, idx) => {
+                                // Si estamos en el polo, todos se alinean en la misma línea vertical (gradosSub = gradosPadre)
+                                // y su radio se va acortando progresivamente en intervalos de 40px
+                                const gradosSub = isPole ? gradosPadre : gradosPadre + offsets[idx] * signo;
+                                const anguloSub = gradosSub * (Math.PI / 180);
+
+                                const subRadio = isPole ? (radioCategorias + (parentAdd - 40) - idx * 40) : radioCategorias;
+
+                                const xSub = Math.cos(anguloSub) * subRadio;
+                                const ySub = Math.sin(anguloSub) * subRadio;
+
+                                // 2.1. Draw extra ray line
+                                const subLine = document.createElement('div');
+                                subLine.className = 'sub-ray-line';
+                                subLine.style.position = 'absolute';
+                                subLine.style.top = 'calc(50% - 0.5px)';
+                                subLine.style.left = '50%';
+                                subLine.style.width = `${subRadio}px`;
+                                subLine.style.height = '1px';
+                                subLine.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.05) 42%, rgba(193, 155, 118, 0.25) 95%, transparent 100%)';
+                                subLine.style.transformOrigin = '0 50%';
+                                subLine.style.transform = `rotate(${gradosSub}deg)`;
+                                subLine.style.zIndex = '0';
+                                subLine.style.pointerEvents = 'none';
+                                subLine.style.opacity = '0';
+                                subLine.style.transition = 'opacity 0.6s ease';
+                                rueda.appendChild(subLine);
+
+                                // 2.2. Create sub-active node
+                                const nodoSub = document.createElement('div');
+                                nodoSub.className = 'nodo-subactivo';
+                                nodoSub.style.left = `calc(50% + ${xSub}px)`;
+                                nodoSub.style.top = `calc(50% + ${ySub}px)`;
+                                nodoSub.style.opacity = '0';
+                                nodoSub.style.transition = 'opacity 0.5s ease, transform 0.3s ease';
+
+                                nodoSub.innerHTML = `
+                                    <span class="sub-activo-link" style="display:inline-block; transition:transform 3s ease-out, color 0.3s ease, text-shadow 0.3s ease; font-size:9.5px; font-weight:500; color:#c19b76; letter-spacing: 1px; text-transform: uppercase;">
+                                        <span style="color: #c19b76; margin-right: 5px; font-size: 11px;">•</span>${sub.n}
+                                    </span>
+                                `;
+
+                                const textSpanSub = nodoSub.querySelector('.sub-activo-link');
+                                // Start rotation animation from the previous rotation angle
+                                textSpanSub.style.transform = `rotate(${-prevRot}deg)`;
+
+                                nodoSub.onclick = (e) => {
+                                    e.stopPropagation();
+
+                                    cajaText.style.opacity = '0';
+                                    setTimeout(() => {
+                                        cajaText.innerHTML = `
+                                            <h2 class="tagline" style="color: #c19b76; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">${a.n}</h2>
+                                            <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">• ${sub.title || sub.n}</h3>
+                                            ${sub.neg ? `<p class="hero-value-prop-neg">${sub.neg}</p>` : ''}
+                                            <div class="hero-value-prop">${sub.prop || ''}</div>
+                                        `;
+                                        cajaText.style.transition = 'opacity 0.4s ease-in-out';
+                                        cajaText.style.opacity = '1';
+                                    }, 300);
+                                };
+
+                                rueda.appendChild(nodoSub);
+
+                                setTimeout(() => {
+                                    subLine.style.opacity = '1';
+                                    nodoSub.style.opacity = '1';
+                                    // Transition rotation animation smoothly to the current rotation angle
+                                    textSpanSub.style.transform = `rotate(${-rotacionActual}deg)`;
+                                }, 50 + idx * 80);
+                            });
+                        }
+                    });
+                }
+
+                // Initial render with first category selected
+                selectCategory(0, true);
             })();
         </script>
     </section>
@@ -1235,12 +1504,30 @@
                 justify-content: center;
             }
         }
+
+        #varietyTitle {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 400;
+        }
     </style>
 
 
 
     <section id="descripcion-nutricional" class="coleccion-section" style="padding-top: 100px;">
         <div class="container animate-appear">
+            <div style="text-align: center; margin-bottom: 80px;">
+                <h2
+                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 40px;">
+                    EL SABOR DOXA
+                </h2>
+                <p class="col-desc" style="max-width: 750px; margin: 0 auto; min-height: auto;">
+                    DOXA es la evolución de lo suplementos.<br><br>
+                    Porque es un producto healthy que no sacrifica la textura<br>
+                    Porque es un suplemento que no sacrifica el placer<br><br>
+                    DOXA fué diseñada para darte le experiencia completa.
+                    No tienes que elegir
+                </p>
+            </div>
             <div class="product-info-grid">
                 <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
                     <img src="Galle choco.png" alt="DOXA Bésame Choco"
@@ -1254,7 +1541,7 @@
                             "Bésame Choco" es la primera Doxa.<br>
                             La versión más icónica. La siempre irresistible.<br>
                             Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>
-                            Una tentación que ya no te tienes que prohibir...<br>
+                            Para ese momento del día.<br>
                         </div>
                     </div>
 
@@ -1550,7 +1837,7 @@
             </div>
 
             <div class="checkout-texts" style="opacity: 0; transition: opacity 1s ease 1s;">
-                <p class="variety-desc" style="font-weight: 600; min-height: auto; margin-bottom: 30px;">
+                <p class="variety-desc" style="font-weight: 500; min-height: auto; margin-bottom: 30px;">
                     DOXAS se elaboran artesanalmente y bajo pedido.
                 </p>
                 <p class="variety-desc" style="min-height: auto; margin-bottom: 0;">
