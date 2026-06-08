@@ -161,11 +161,11 @@
             transform: scale(1.05);
         }
 
-        /* Estilos para el botón de oro (efecto lámina fina) */
+        /* Estilos para el botón de la portada (color plano #e1ff1c, sin biseles ni degradados) */
         .btn-oro {
             display: inline-block;
             padding: 14px 60px;
-            font-weight: 470px;
+            font-weight: 500;
             text-transform: uppercase;
             font-size: 0.80rem;
             letter-spacing: 2px;
@@ -173,22 +173,9 @@
             -webkit-font-smoothing: antialiased;
             /* Aporta mayor nitidez al texto */
 
-            /* Filos superior e izquierdo brillantes, inferior y derecho oscuros para efecto lámina 3D */
-            box-shadow:
-                inset 0 1px 0px rgb(255, 251, 236),
-                inset 0 -1px 0px rgba(0, 0, 0, 0.3),
-                inset 1px 0 0px rgb(0, 0, 0, 0.3),
-                inset -1px 0 0px rgba(255, 251, 236);
-
-            /* Degradado de oro con fixed attachment para el brillo al hacer scroll */
-            background: linear-gradient(135deg,
-                    #af8737 0%,
-                    #FCF6BA 25%,
-                    #715311 50%,
-                    #FBF5B7 75%,
-                    #634716 100%);
-            background-attachment: fixed;
-            background-size: 100% 100vh;
+            background-color: #e1ff1c;
+            border: none;
+            box-shadow: none;
 
             /* Texto plano en negro */
             color: #150e02;
@@ -848,10 +835,14 @@
             }
 
             .text-box {
-                max-width: 500px;
+                width: 100%;
+                max-width: 420px;
                 color: white;
                 font-family: 'Lexend', sans-serif;
                 text-align: right;
+                position: relative;
+                z-index: 25;
+                margin-left: auto;
             }
 
             .tagline {
@@ -896,6 +887,8 @@
 
                 .text-box {
                     text-align: center;
+                    max-width: 100%;
+                    margin-left: 0;
                 }
 
                 .cajas-activos-section {
@@ -1031,12 +1024,14 @@
 
                     <Br>
                     Activos que normalmente se consumen por separado, en distintos formatos y tomas a lo largo del día,
-                    integrados aquí en una sola pieza, una cookie jugosa, keto y profundamente satisfactoria.
-
-                    <Br><Br>
-                    Una forma distinta de disfrutar,<Br>
-                    compatible con una alimentación consciente,<Br>
-                    con el entrenamiento,<Br>
+                    integrados aquí en una sola pieza, una cookie jugosa, keto y profundamente satisfactoria.<br>
+                    <br>
+                    Porque es un producto healthy que no sacrifica la textura<br>
+                    Porque es un suplemento que no sacrifica el placer<br>
+                    <Br>
+                    Una forma distinta de disfrutar,
+                    compatible con una alimentación consciente,
+                    con el entrenamiento,
                     y con el cuidado a largo plazo.<Br>
                 </p>
             </div>
@@ -1088,7 +1083,7 @@
                         subActivos: [
                             { n: "Péptidos de colágeno — 10g", title: "Péptidos de colágeno — 10g", neg: "Estructura y elasticidad", prop: "10g de péptidos de colágeno hidrolizado de la máxima calidad para favorecer la elasticidad, firmeza y regeneración de la piel y tejidos conectivos." },
                             { n: "Ácido hialurónico", title: "Ácido hialurónico", neg: "Hidratación profunda", prop: "Ayuda a retener el agua en los tejidos, mejorando visiblemente la hidratación, tersura y volumen de la dermis desde el interior." },
-                            { n: "Vitamina C", title: "Vitamina C", neg: "Co-factor esencial", prop: "Potente antioxidante que protege contra el daño celular y actúa como cofactor clave e indispensable en la producción natural de colágeno del cuerpo." }
+                            { n: "Vitamina C", title: "Vitamina C", neg: "Co-factor esencial", prop: "Potente antioxidante para las células e imprescindible para poder formar colágeno" }
                         ]
                     },
                     {
@@ -1284,10 +1279,116 @@
                     // 2. Calcular la distancia angular absoluta de la categoría al plano horizontal (los laterales 0° y 180°)
                     const anguloDesdeHorizontal = selectedCategoryIndex !== -1 ? Math.min(Math.abs(selNormPantalla), 180 - Math.abs(selNormPantalla)) : 0;
 
-                    // 3. Transición dinámica inteligente: si la categoría está a más de 37° del plano horizontal (zonas verticales críticas de los polos)
-                    // cambia automáticamente a la presentación en línea recta (modo polos) para evitar colisiones tipográficas.
-                    // Si está a 37° o menos (zonas laterales amplias), se despliega de forma dinámica y holgada en abanico (modo normal).
-                    const isPole = selectedCategoryIndex !== -1 && anguloDesdeHorizontal > 37;
+                    // 3. Transición dinámica inteligente y anticolisión en tiempo real basada en la cercanía de las palabras
+                    let isPole = false;
+                    if (selectedCategoryIndex !== -1) {
+                        // Solo permitimos despliegue en línea si no estamos en el ecuador de la rueda (ángulos muy horizontales < 22°)
+                        // para evitar por completo que los activos se amontonen y colisionen entre sí horizontalmente.
+                        const isInlineAllowed = anguloDesdeHorizontal > 22;
+
+                        if (isInlineAllowed) {
+                            // A: Forzar despliegue en línea automáticamente por geometría en los polos casi verticales extremos (> 56°)
+                            if (anguloDesdeHorizontal > 56) {
+                                isPole = true;
+                            } else {
+                                const a = activos[selectedCategoryIndex];
+                                if (a.subActivos) {
+                                    // Función auxiliar súper precisa para estimar dimensiones físicas en píxeles de cualquier etiqueta
+                                    const getLabelSize = (name, isSub) => {
+                                        if (isSub) {
+                                            // Subactivos: tamaño de fuente 9.5px, bold, prefijo "• "
+                                            const charWidth = 5.1;
+                                            const totalLen = name.length + 2; // Bullet + espacio
+                                            return {
+                                                w: totalLen * charWidth + 10,
+                                                h: 14
+                                            };
+                                        } else {
+                                            // Categorías: tamaño de fuente 11px, divisible en 1 o 2 líneas
+                                            let line1 = name;
+                                            let line2 = "";
+                                            if (name.includes(" & ")) {
+                                                const parts = name.split(" & ");
+                                                line1 = parts[0];
+                                                line2 = "& " + parts[1];
+                                            } else if (name.includes(" ")) {
+                                                const parts = name.split(" ");
+                                                line1 = parts[0];
+                                                line2 = parts.slice(1).join(" ");
+                                            }
+                                            const charWidth = 6.1;
+                                            const maxLen = Math.max(line1.length, line2.length);
+                                            const numLines = line2 ? 2 : 1;
+                                            return {
+                                                w: maxLen * charWidth + 12,
+                                                h: numLines * 13 + 4
+                                            };
+                                        }
+                                    };
+
+                                    // B: Simulación de coordenadas en abanico para detectar colisión física real en 2D
+                                    const subActivosCount = a.subActivos.length;
+                                    let offsets = [];
+                                    if (subActivosCount === 1) offsets = [11];
+                                    else if (subActivosCount === 2) offsets = [11, 22];
+                                    else if (subActivosCount === 3) offsets = [11, 22, 33];
+
+                                    const isLeftSide = Math.abs(selNormPantalla) > 112.5;
+                                    const signo = isLeftSide ? -1 : 1;
+
+                                    for (let idx = 0; idx < subActivosCount; idx++) {
+                                        const sub = a.subActivos[idx];
+                                        const gradosSub = selGradosPadre + offsets[idx] * signo;
+                                        const anguloSubRotado = (gradosSub + rotacionActual) * (Math.PI / 180);
+
+                                        // Determinar el radio hipotético
+                                        let normPadre = selGradosPadre % 360;
+                                        if (normPadre < -180) normPadre += 360;
+                                        if (normPadre >= 180) normPadre -= 360;
+                                        normPadre = Math.round(normPadre);
+
+                                        const esDiagonal = Math.abs(normPadre) === 45 || Math.abs(normPadre) === 135;
+                                        const extraRadio = esDiagonal ? 45 : 25;
+                                        let subRadio = radioCategorias + extraRadio;
+
+                                        const esReloj2o3 = normPadre === -45 || normPadre === 0;
+                                        if (esReloj2o3) {
+                                            subRadio = radioCategorias + 20 + idx * 25;
+                                        }
+
+                                        // Coordenadas 2D hipotéticas en el espacio absoluto de la rueda
+                                        const xSub = Math.cos(anguloSubRotado) * subRadio;
+                                        const ySub = Math.sin(anguloSubRotado) * subRadio;
+                                        const sizeSub = getLabelSize(sub.n, true);
+
+                                        // Comparar contra todas las demás categorías principales del mapa
+                                        for (let i = 0; i < activos.length; i++) {
+                                            if (i === selectedCategoryIndex) continue;
+
+                                            const gradosPadreRotadoAngle = (i * anguloPaso - 90 + rotacionActual) * (Math.PI / 180);
+                                            const xPadre = Math.cos(gradosPadreRotadoAngle) * radioCategorias;
+                                            const yPadre = Math.sin(gradosPadreRotadoAngle) * radioCategorias;
+                                            const sizePadre = getLabelSize(activos[i].n, false);
+
+                                            const dx = Math.abs(xSub - xPadre);
+                                            const dy = Math.abs(ySub - yPadre);
+
+                                            // Colisión AABB extremadamente ajustada: solo se activa si están a punto de tocarse físicamente (1px de margen)
+                                            const marginX = 1;
+                                            const marginY = 1;
+
+                                            if (dx < (sizeSub.w + sizePadre.w) / 2 + marginX &&
+                                                dy < (sizeSub.h + sizePadre.h) / 2 + marginY) {
+                                                isPole = true;
+                                                break;
+                                            }
+                                        }
+                                        if (isPole) break;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     activos.forEach((a, i) => {
                         const gradosPadre = i * anguloPaso - 90;
@@ -1401,11 +1502,11 @@
                             const subActivosCount = a.subActivos.length;
                             let offsets = [];
                             if (subActivosCount === 1) {
-                                offsets = [13];
+                                offsets = [11];
                             } else if (subActivosCount === 2) {
-                                offsets = [13, 26];
+                                offsets = [11, 22];
                             } else if (subActivosCount === 3) {
-                                offsets = [13, 26, 39];
+                                offsets = [11, 22, 33];
                             }
 
                             a.subActivos.forEach((sub, idx) => {
@@ -1520,45 +1621,7 @@
 
 
 
-    /* SECCIÓN SIN SIN SIN */
-
-    <section id="cajas-activos-sin-sin-sin" class="cajas-activos-section">
-        <div class="bg-layer" style="background-image: url('Chican SIN.jpg');">
-        </div>
-
-        <div class="content-grid">
-            <!-- Columna Izquierda: Texto dinámico -->
-
-
-            <!-- Columna Izquierda: Texto -->
-            <div class="text-column" style="justify-content: flex-start;">
-                <div class="text-box" style="text-align: left;">
-                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Y TODOS LOS "SIN" QUE TE
-                        GUSTA LEER</h3>
-                    <p class="hero-value-prop-neg">Sin azúcares añadidos, sin gluten, <Br>sin aceites refinados</p>
-                    <div class="hero-value-prop">
-
-
-                        Sin rellenos estériles.<Br>
-                        Sin efectos indeseados.<Br>
-                        Sin remordimientos.
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-        </script>
-
-    </section>
-
-
-
-
-
-    /* SECCIÓN DESCRIPCIÓN E INFO NUTRICIONAL */
+    /* SECCIÓN EL SABOR DOXA */
     <style>
         .product-info-grid {
             display: flex;
@@ -1615,14 +1678,29 @@
             <div style="text-align: center; margin-bottom: 80px;">
                 <h2
                     style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 40px;">
-                    EL SABOR DOXA
+                    Y SIN EMBARGO...PLACER
                 </h2>
-                <p class="col-desc" style="max-width: 750px; margin: 0 auto; min-height: auto;">
-                    DOXA es la evolución de lo suplementos.<br><br>
-                    Porque es un producto healthy que no sacrifica la textura<br>
-                    Porque es un suplemento que no sacrifica el placer<br><br>
-                    DOXA fué diseñada para darte le experiencia completa.
-                    No tienes que elegir
+
+                <p
+                    style="max-width: 550px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 300; line-height: 2; opacity: 0.9;">
+                    Porque es innegociable.
+                    <br><br>
+                    Reunir ingredientes excepcionales sin renunciar a la textura, la jugosidad y la experiencia que
+                    esperas de una gran cookie no era sencillo.
+                    <br>
+                    Cada ingrediente aporta su propia función.
+
+                    Cada matiz aporta su propia personalidad.
+                    <br>
+                    Una composición poco habitual donde cada elemento tiene sentido por sí solo y, aún más, cuando forma
+                    parte del conjunto.
+                    <br><br>
+                    El resultado es DOXA.
+                    <br>
+                    Donde disfrutar y cuidarse encuentran el mismo camino.
+                    <br><br>
+                    El capricho evoluciona.
+                    <br>
                 </p>
             </div>
             <div class="product-info-grid">
@@ -1635,27 +1713,39 @@
                         <h3 class="variety-title" id="varietyTitle">BÉSAME CHOCO</h3>
                         <div class="variety-desc" id="varietyDesc">
 
-                            "Bésame Choco" es la primera Doxa.<br>
-                            La versión más icónica. La siempre irresistible.<br>
-                            Pepitas de chocolate fundente y un centro cremoso que cede lentamente.<br>
-                            Para ese momento del día.<br>
+                            La primera expresión DOXA. <br>
+                            <br>
+                            Una masa elaborada con almendra molida y mantequilla nutrida en pastos verdes,
+                            horneada hasta lograr un exterior delicadamente dorado y un interior húmedo y tierno. <br>
+                            <br>
+                            Pepitas de cacao puro se funden entre la masa mientras un centro cremoso de cacao, almendra
+                            y aceite mct cede lentamente con cada bocado. <br>
+
+                            <br>
+                            Profunda. Reconfortante. Difícil de olvidar.
                         </div>
                     </div>
 
-                    <div class="dietary-icons">
-                        <span class="tag">SIN AZÚCARES AÑADIDOS</span>
-                        <span class="tag">SIN GLUTEN</span>
-                        <span class="tag">SIN INGREDIENTES INFLAMATORIOS</span>
-                        <span class="tag">APTA KETO</span>
-                        <span class="tag">IDEAL POST-ENTRENO</span>
-                    </div>
 
                     <div class="accordion-section">
                         <button class="accordion" onclick="toggleAccordion(this)">Ingredientes Comunes</button>
                         <div class="panel">
                             <p>Base de harina de almendra, manteca pura de cacao, eritritol premium, aceite
                                 MTC...<br>
-                                Descripción<br>
+                                <br>
+                                Sin azúcares añadidos<br>
+                                Sin gluten<br>
+                                Sin ingredientes inflamatorios<br>
+                                Apta para dieta cetogénica<br>
+                                Ideal para el post-entrenamiento<br>
+
+                            <div class="dietary-icons">
+                                <span class="tag">SIN AZÚCARES AÑADIDOS</span>
+                                <span class="tag">SIN GLUTEN</span>
+                                <span class="tag">SIN INGREDIENTES INFLAMATORIOS</span>
+                                <span class="tag">APTA KETO</span>
+                                <span class="tag">IDEAL POST-ENTRENO</span>
+                            </div>
                         </div>
 
 
@@ -1663,18 +1753,22 @@
                             (Media)</button>
                         <div class="panel">
                             <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
+
+
+
                         </div>
 
                         <button class="accordion" onclick="toggleAccordion(this)">Tabla comparativa</button>
                         <div class="panel">
                             <p style="padding-top: 15px; margin-bottom: 0; font-size: 11px; opacity: 0.8;">
-                                Dosis diarias habituales según el formato de el grueso de suplementos del mercado.
-                                Cantidad de cada activo que porta una Doxa al día.<br><br>
+                                Tabla de las dosis diarias:
+                                Las recomendadas por la OMS
+                                Las que habitualmente portan los suplementos en cápsulas y comprimidos
+                                Las habituales en los suplementos en polvos
 
-                                D.D.Recomendada: Dosis Diaria Recomendada por los organimsos oficiales<br>
-                                D.H.Cápsulas: Dosis habitual en suplementos en cápsulas o comprimidos<br>
-                                D.H.Polvos: Dosis habitual en suplementos en polvos<br>
-                                D D Doxas: Dosis diaria que ofrece Doxas (1 Doxa/día)
+                                Y la cantidad de cada activo que porta una Doxa al día.<br><br>
+
+
                             </p>
                             <table class="comparative-table">
                                 <thead>
@@ -1683,7 +1777,7 @@
                                         <th>OMS</th>
                                         <th>Cápsulas</th>
                                         <th>Polvos</th>
-                                        <th>Doxas</th>
+                                        <th>Doxa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1926,9 +2020,6 @@
                     como pausa consciente,<br>
                     o simplemente cuando te apetece un carpricho...que no rompe tus normas.<br>
                     <br>
-
-                    Puedes compartirlas.<br>
-                    O no.<br>
 
                 </p>
             </div>
