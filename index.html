@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOXA | Alta Repostería Funcional</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@300;400;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@100;300;400;500;700&display=swap"
         rel="stylesheet">
 
 
@@ -26,7 +26,7 @@
             /* Tu marrón de marca */
             --light-bg: #F5F1ED;
             /* Crema claro */
-            --accent-color: #D9E100;
+            --accent-color: #f0ff1c;
             /* Amarillo de acento para botones */
             --text-light: #F5F1ED;
             --text-dark: #3C332A;
@@ -173,7 +173,7 @@
             -webkit-font-smoothing: antialiased;
             /* Aporta mayor nitidez al texto */
 
-            background-color: #e1ff1c;
+            background-color: #f0ff1c;
             border: none;
             box-shadow: none;
 
@@ -480,28 +480,47 @@
 
             <div style="position: relative; z-index: 2; text-align: center; color: #FFFFFF; padding: 0 20px;">
 
-                <h1 style="margin: 0 0 30px 0; line-height: 1.1;">
+                <h1
+                    style="margin: 0 0 30px 0; line-height: 1.1; display: inline-flex; flex-direction: column; align-items: stretch; width: fit-content;">
                     <span
-                        style="font-size: clamp(50px, 10vw, 75px); font-family: 'Lato', sans-serif; font-weight: 500; letter-spacing: 15px; display: inline-block;">DOXA</span>
+                        style="font-size: clamp(75px, 10vw, 80px); font-family: 'Lato', sans-serif; font-weight: 500; letter-spacing: 15px; margin-right: -15px; display: block; text-transform: uppercase;">DOXA</span>
+
+                    <!-- CÁPSULA RESPALDO: REPOSTERÍA MOLECULAR (INVISIBLE)
+                    <span style="display: flex; justify-content: space-between; font-family: 'Lato', sans-serif; font-weight: 100; font-size: clamp(9px, 1.8vw, 13px); margin-top: 10px; text-transform: uppercase; color: #FFFFFF; opacity: 0.9; letter-spacing: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
+                        <span>R</span><span>E</span><span>P</span><span>O</span><span>S</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
+                    </span>
+                    <span style="display: flex; justify-content: space-between; font-family: 'Lato', sans-serif; font-weight: 100; font-size: clamp(9px, 1.8vw, 13px); margin-top: 5px; text-transform: uppercase; color: #FFFFFF; opacity: 0.9; letter-spacing: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
+                        <span>M</span><span>O</span><span>L</span><span>E</span><span>C</span><span>U</span><span>L</span><span>A</span><span>R</span>
+                    </span>
+                    -->
+                    <!-- 
+                    <span
+                        style="display: flex; justify-content: space-between; font-family: 'Lato', sans-serif; font-weight: 120; font-size: clamp(10px, 1.5vw, 11px); margin-top: 12px; text-transform: uppercase; color: #FFFFFF; opacity: 1; letter-spacing: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; padding: 0 5px;">
+                        <span>A</span><span>L</span><span>T</span><span>A</span>
+                        <span style="width: 0.6em;"></span>
+                        <span>R</span><span>E</span><span>P</span><span>O</span><span>S</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
+                        <span style="width: 0.6em;"></span>
+                        <span>M</span><span>O</span><span>L</span><span>E</span><span>C</span><span>U</span><span>L</span><span>A</span><span>R</span>
+                    </span>
+                    -->
+
+                    <span
+                        style="display: flex; justify-content: space-between; font-family: 'Lato', sans-serif; font-weight: 300; font-size: clamp(12px, 1.8vw, 12px); margin-top: 12px; text-transform: uppercase; color: #FFFFFF; opacity: 1; letter-spacing: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; padding: 0 5px;">
+                        <span>R</span><span>E</span><span>P</span><span>O</span><span>S</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
+                        <span style="width: 0.8em;"></span>
+                        <span>M</span><span>O</span><span>L</span><span>E</span><span>C</span><span>U</span><span>L</span><span>A</span><span>R</span>
+                    </span>
+
                 </h1>
 
                 <div
-                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: 15px; color: #efefef; margin: 0; line-height: 2; opacity: 0.9;">
-                    <br>
+                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(11px, 1.5vw, 13px); color: #FFFFFF; margin: 25px auto 0 auto; line-height: 2; opacity: 0.9; text-align: center; max-width: 600px;">
                     <p>
-                        Grande. Jugosa. Irresistible.
-                    </p>
-
-
-                    <br>
-
-
-                    Lo más interesante no es cómo sabe. <br>
-                    Es lo que hay detrás.<br>
+                        Donde placer y propósito se encuentran
                     </p>
                 </div>
 
-                <a href="#productos" class="btn-oro" style="margin-top: 50px;">DESCÚBRELA</a>
+                <a href="#productos" class="btn-oro" style="margin-top: 50px;">PROFUNDIZAR</a>
                 <p
                     style="font-family: 'Lexend', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 1.5px; color: #FFFFFF; opacity: 0.8; margin-top: 15px;">
 
@@ -533,18 +552,16 @@
 
                 <div
                     style="max-width: 600px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-weight: 300; line-height: 2; font-size: 15px; opacity: 0.9;">
-                    <p style="margin-bottom: 40px;">Hay placeres que nunca han estado en duda.<br>
-                        Y decisiones que, con el tiempo, empiezas a cuidar más.
-
-                    <p style="margin-bottom: 40px;">DOXA nace justo ahí.
+                    <p style="margin-bottom: 40px;">
+                    <p style="margin-bottom: 40px;">
                     <p style="margin-bottom: 40px;">DOXA es la reinterpretación más audaz de la icónica cookie
                         neoyorquina:<br>
                         apetitosa, húmeda, indecentemente jugosa…
                     </p>
 
-                    <p style="margin-bottom: 40px;">Pero con una intención mucho más allá del placer.<br></p>
+                    <p style="margin-bottom: 40px;">Pero con intención, significado, valor.<br></p>
 
-                    <p>Alta repostería y ciencia se fusionan para que "pecar" <br>se transforme en todo un regalo para
+                    <p>Alta repostería y ciencia se fusionan para que pecar <br>se transforme en todo un regalo para
                         tu
                         cuerpo.</p>
                 </div>
@@ -562,7 +579,7 @@
 
         <style>
             .coleccion-section {
-                background-color: #302b22;
+                background-color: var(--dark-bg);
                 padding: 100px 20px;
                 color: #efefef;
                 font-family: 'Lexend', sans-serif;
@@ -664,6 +681,22 @@
                 min-height: 100px;
                 margin-bottom: 40px;
                 opacity: 0.9;
+                max-height: 500px;
+                transition: max-height 0.35s ease-in-out, min-height 0.35s ease-in-out, opacity 0.35s ease-in-out, margin-bottom 0.35s ease-in-out;
+                overflow: hidden;
+            }
+
+            .variety-desc.hidden {
+                max-height: 0;
+                min-height: 0;
+                opacity: 0;
+                margin-bottom: 0 !important;
+            }
+
+            .accordion-item {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
             }
 
             .dietary-icons {
@@ -779,7 +812,7 @@
                 display: flex;
                 align-items: center;
                 overflow: hidden;
-                background-color: #1a1714;
+                background-color: var(--dark-bg);
             }
 
 
@@ -790,7 +823,7 @@
                 left: 0;
                 width: 70%;
                 height: 100%;
-                background: linear-gradient(to right, #302b22 0%, #302b22 100px, transparent 100%);
+                background: linear-gradient(to right, var(--dark-bg) 0%, var(--dark-bg) 100px, transparent 100%);
                 z-index: 2;
                 pointer-events: none;
             }
@@ -1200,7 +1233,7 @@
                         cajaBg.style.backgroundImage = `url('${currentBg}')`;
                     } else {
                         cajaBg.style.backgroundImage = 'none';
-                        cajaBg.style.backgroundColor = '#1a1714';
+                        cajaBg.style.backgroundColor = 'var(--dark-bg)';
                     }
 
                     if (initial) {
@@ -1708,26 +1741,22 @@
                     <img src="Galle choco.png" alt="DOXA Bésame Choco"
                         style="width: 100%; max-width: 500px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5)); border-radius: 4px;">
                 </div>
-                <div class="column-text" style="flex: 1;">
-                    <div id="textFadeGroup" class="fade-effect">
-                        <h3 class="variety-title" id="varietyTitle">BÉSAME CHOCO</h3>
-                        <div class="variety-desc" id="varietyDesc">
+                <div class="column-text" style="flex: 1; display: flex; flex-direction: column;">
+                    <h3 class="variety-title" id="varietyTitle" style="margin-bottom: 25px;">BÉSAME CHOCO</h3>
 
-                            La primera expresión DOXA. <br>
-                            <br>
-                            Una masa elaborada con almendra molida y mantequilla nutrida en pastos verdes,
-                            horneada hasta lograr un exterior delicadamente dorado y un interior húmedo y tierno. <br>
-                            <br>
-                            Pepitas de cacao puro se funden entre la masa mientras un centro cremoso de cacao, almendra
-                            y aceite mct cede lentamente con cada bocado. <br>
-
-                            <br>
-                            Profunda. Reconfortante. Difícil de olvidar.
-                        </div>
+                    <div class="variety-desc" id="varietyDesc">
+                        La primera expresión DOXA. <br>
+                        <br>
+                        Una masa elaborada con almendra molida y mantequilla nutrida en pastos verdes,
+                        horneada hasta lograr un exterior delicadamente dorado y un interior húmedo y tierno. <br>
+                        <br>
+                        Pepitas de cacao puro se funden entre la masa mientras un centro cremoso de cacao, almendra
+                        y aceite mct cede lentamente con cada bocado. <br>
+                        <br>
+                        Profunda. Reconfortante. Difícil de olvidar.
                     </div>
 
-
-                    <div class="accordion-section">
+                    <div class="accordion-item">
                         <button class="accordion" onclick="toggleAccordion(this)">Ingredientes Comunes</button>
                         <div class="panel">
                             <p>Base de harina de almendra, manteca pura de cacao, eritritol premium, aceite
@@ -1739,44 +1768,30 @@
                                 Apta para dieta cetogénica<br>
                                 Ideal para el post-entrenamiento<br>
 
-                            <div class="dietary-icons">
-                                <span class="tag">SIN AZÚCARES AÑADIDOS</span>
-                                <span class="tag">SIN GLUTEN</span>
-                                <span class="tag">SIN INGREDIENTES INFLAMATORIOS</span>
-                                <span class="tag">APTA KETO</span>
-                                <span class="tag">IDEAL POST-ENTRENO</span>
-                            </div>
+
                         </div>
+                    </div>
 
-
+                    <div class="accordion-item">
                         <button class="accordion" onclick="toggleAccordion(this)">Información Nutricional
                             (Media)</button>
                         <div class="panel">
                             <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
-
-
-
                         </div>
+                    </div>
 
-                        <button class="accordion" onclick="toggleAccordion(this)">Tabla comparativa</button>
+                    <div class="accordion-item">
+                        <button class="accordion" onclick="toggleAccordion(this)">La dosis DOXA</button>
                         <div class="panel">
                             <p style="padding-top: 15px; margin-bottom: 0; font-size: 11px; opacity: 0.8;">
-                                Tabla de las dosis diarias:
-                                Las recomendadas por la OMS
-                                Las que habitualmente portan los suplementos en cápsulas y comprimidos
-                                Las habituales en los suplementos en polvos
-
-                                Y la cantidad de cada activo que porta una Doxa al día.<br><br>
-
-
+                                *Dosis diarias recomendadas por la OMS
                             </p>
                             <table class="comparative-table">
                                 <thead>
                                     <tr>
                                         <th>Activo</th>
                                         <th>OMS</th>
-                                        <th>Cápsulas</th>
-                                        <th>Polvos</th>
+
                                         <th>Doxa</th>
                                     </tr>
                                 </thead>
@@ -1784,85 +1799,95 @@
                                     <tr>
                                         <td>Proteína</td>
                                         <td>0.000g</td>
-                                        <td>0.000g</td>
-                                        <td>0.000g</td>
+
                                         <td>20.000g</td>
                                     </tr>
                                     <tr>
                                         <td>Colágeno (AA)</td>
                                         <td>0.000g</td>
-                                        <td>0.000g</td>
-                                        <td>0.000g</td>
+
                                         <td>10.000g</td>
                                     </tr>
                                     <tr>
                                         <td>Vitamina C</td>
                                         <td>0.000g</td>
-                                        <td>0.000mg</td>
-                                        <td>0.000mg</td>
+
                                         <td>100.000mg</td>
                                     </tr>
                                     <tr>
                                         <td>Vitamina D3</td>
                                         <td>0.000g</td>
-                                        <td>0.000mcg</td>
-                                        <td>0.000mcg</td>
+
                                         <td>50.000mcg</td>
                                     </tr>
                                     <tr>
                                         <td>Biotina</td>
                                         <td>0.000g</td>
-                                        <td>0.000mg</td>
-                                        <td>0.000mg</td>
+
                                         <td>5.000mg</td>
                                     </tr>
                                     <tr>
                                         <td>Creatina</td>
                                         <td>0.000g</td>
-                                        <td>0.000g</td>
-                                        <td>0.000g</td>
+
                                         <td>3.000g</td>
                                     </tr>
                                     <tr>
                                         <td>Aceite MCT</td>
                                         <td>0.000g</td>
-                                        <td>0.000g</td>
-                                        <td>0.000g</td>
+
                                         <td>5.000g</td>
                                     </tr>
                                     <tr>
                                         <td>Boswellia Serrata</td>
                                         <td>0.000g</td>
-                                        <td>0.000mg</td>
-                                        <td>0.000mg</td>
+
                                         <td>250.000mg</td>
                                     </tr>
                                     <tr>
                                         <td>Jengibre</td>
                                         <td>0.000g</td>
-                                        <td>0.000mg</td>
-                                        <td>0.000mg</td>
+
                                         <td>100.000mg</td>
                                     </tr>
                                     <tr>
                                         <td>Ácido Hialurónico</td>
                                         <td>0.000g</td>
-                                        <td>0.000mg</td>
-                                        <td>0.000mg</td>
+
                                         <td>120.000mg</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
                     <script>
                         function toggleAccordion(el) {
-                            el.classList.toggle("active");
-                            var panel = el.nextElementSibling;
-                            if (panel.style.maxHeight) {
-                                panel.style.maxHeight = null;
-                            } else {
+                            const item = el.closest('.accordion-item');
+                            const panel = el.nextElementSibling;
+                            const desc = document.getElementById('varietyDesc');
+                            const allItems = document.querySelectorAll('.accordion-item');
+
+                            const isOpen = item.classList.contains('active-item');
+
+                            // Close all other items and restore their orders
+                            allItems.forEach(i => {
+                                i.classList.remove('active-item');
+                                i.querySelector('.accordion').classList.remove('active');
+                                i.querySelector('.panel').style.maxHeight = null;
+                            });
+
+                            if (!isOpen) {
+                                // Open this item
+                                item.classList.add('active-item');
+                                el.classList.add('active');
                                 panel.style.maxHeight = panel.scrollHeight + "px";
+
+                                // Hide description smoothly using CSS transitions
+                                desc.classList.add('hidden');
+                            } else {
+                                // Show description again
+                                desc.classList.remove('hidden');
                             }
                         }
                     </script>
