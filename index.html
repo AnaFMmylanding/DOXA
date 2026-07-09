@@ -22,14 +22,21 @@
         }
 
         :root {
-            --dark-bg: #3C332A;
-            /* Tu marrón de marca */
-            --light-bg: #F5F1ED;
+            /* === UBICACIÓN DE COLORES DE FONDO (PUNTO 4) === */
+            --yeso-oscuro: #e6e7e1;
+            /* YESO OSCURO - Fondo de secciones "El Placer", "La Arquitectura Doxa", etc. */
+            --yeso-claro: #f1f2ec;
+            /* YESO CLARO - Fondo de la sección "Reservas" (Checkout) y submenús */
+            /* ============================================== */
+            --dark-bg: var(--yeso-oscuro);
+            /* Tu marrón de marca cambiado por el nuevo color claro */
+            --light-bg: #f1f2ec;
             /* Crema claro */
             --accent-color: #f0ff1c;
             /* Amarillo de acento para botones */
-            --text-light: #F5F1ED;
-            --text-dark: #3C332A;
+            --text-light: #181818;
+            /* Texto oscuro sobre fondo claro */
+            --text-dark: #181818;
         }
 
         body,
@@ -50,6 +57,234 @@
         ul {
             list-style: none;
         }
+
+        /* =========================================================================
+           [INICIO] página GALERÍA (ESTILOS CSS DEL MENÚ DE ACCESO)
+           ========================================================================= */
+        /* =========================================
+           ESTILOS DE NAVEGACIÓN (NAVBAR)
+           ========================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            background-color: transparent;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0);
+        }
+
+        /* Estado al hacer scroll */
+        .navbar.scrolled {
+            height: 75px;
+            background-color: rgba(245, 241, 237, 0.85);
+            /* var(--light-bg) con transparencia */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(60, 51, 42, 0.08);
+            /* var(--text-light) sutil */
+        }
+
+        .navbar-logo {
+            font-family: 'Lato', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 6px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            transition: color 0.4s ease;
+        }
+
+        .navbar.scrolled .navbar-logo {
+            color: var(--text-light);
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .navbar-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.4s ease;
+        }
+
+        .navbar-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .navbar-link:hover {
+            color: #FFFFFF;
+        }
+
+        .navbar-link:hover::after {
+            width: 100%;
+        }
+
+        .navbar.scrolled .navbar-link {
+            color: rgba(60, 51, 42, 0.8);
+        }
+
+        .navbar.scrolled .navbar-link:hover {
+            color: var(--text-light);
+        }
+
+        .navbar.scrolled .navbar-link::after {
+            background-color: var(--text-light);
+        }
+
+        /* Botón de Galería destacado */
+        .btn-gallery {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #150e02;
+            background-color: var(--accent-color);
+            padding: 10px 22px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gallery:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(240, 255, 28, 0.3);
+        }
+
+        .navbar.scrolled .btn-gallery {
+            background-color: #3C332A;
+            /* Color de texto oscuro para que resalte más en navbar claro */
+            color: #F5F1ED;
+        }
+
+        .navbar.scrolled .btn-gallery:hover {
+            background-color: var(--accent-color);
+            color: #150e02;
+            box-shadow: 0 4px 15px rgba(60, 51, 42, 0.2);
+        }
+
+        /* Menú Hamburguesa Móvil */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 16px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            width: 100%;
+            height: 2px;
+            background-color: #FFFFFF;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .mobile-toggle span {
+            background-color: var(--text-light);
+        }
+
+        /* Estilos del menú móvil desplegable */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 25px;
+                height: 70px;
+            }
+
+            .navbar.scrolled {
+                height: 65px;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .navbar-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: rgba(21, 14, 2, 0.95);
+                /* Fondo oscuro premium */
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 40px;
+                padding: 40px;
+                transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+                z-index: 999;
+            }
+
+            .navbar-menu.active {
+                right: 0;
+            }
+
+            .navbar-link {
+                font-size: 16px;
+                color: rgba(255, 255, 255, 0.8) !important;
+            }
+
+            .navbar-link:hover {
+                color: #FFFFFF !important;
+            }
+
+            .navbar-link::after {
+                background-color: var(--accent-color) !important;
+            }
+
+            .btn-gallery {
+                background-color: var(--accent-color) !important;
+                color: #150e02 !important;
+                width: 100%;
+                text-align: center;
+                padding: 15px 0;
+                font-size: 14px;
+            }
+
+            /* Transformación del hamburguesa a X */
+            .mobile-toggle.active span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+                background-color: #FFFFFF !important;
+            }
+
+            .mobile-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-toggle.active span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+                background-color: #FFFFFF !important;
+            }
+        }
+
+        /* =========================================================================
+           [FIN] página GALERÍA (ESTILOS CSS DEL MENÚ DE ACCESO)
+           ========================================================================= */
 
         /* Contenedor principal que permite el 100% de ancho */
         .page-wrapper {
@@ -161,30 +396,36 @@
             transform: scale(1.05);
         }
 
-        /* Estilos para el botón de la portada (color plano #e1ff1c, sin biseles ni degradados) */
+        /* Estilos para el botón de la portada (color plano negro, texto blanco) */
         .btn-oro {
             display: inline-block;
             padding: 14px 60px;
             font-weight: 500;
             text-transform: uppercase;
-            font-size: 0.80rem;
-            letter-spacing: 2px;
+            font-size: 11px;
+            /* Igual que el botón RESERVAR (Punto 1) */
+            letter-spacing: 3px;
+            /* Igual que el botón RESERVAR (Punto 1) */
             margin-top: 30px;
             -webkit-font-smoothing: antialiased;
             /* Aporta mayor nitidez al texto */
 
-            background-color: #f0ff1c;
-            border: none;
+            background-color: #000000;
+            /* Fondo negro */
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            /* Contorno sutil */
             box-shadow: none;
 
-            /* Texto plano en negro */
-            color: #150e02;
+            /* Texto en el mismo color blanco de los botones de menú */
+            color: #FFFFFF;
 
-            transition: transform 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .btn-oro:hover {
             transform: scale(1.05);
+            background-color: #1a1a1a;
+            color: #FFFFFF;
         }
 
         /* Estilo para la cuadrícula de 6 ingredientes */
@@ -463,8 +704,33 @@
 
     <div class="page-wrapper">
 
+        <!-- =========================================================================
+           [INICIO] página GALERÍA (BARRA DE NAVEGACIÓN HTML)
+           Aquí se encuentra el botón "Galería" que redirige a la página galeria.html.
+           ========================================================================= -->
+        <!-- NAVEGACIÓN PRINCIPAL -->
+        <nav class="navbar" id="mainNavbar">
+            <a href="#" class="navbar-logo">DOXA</a>
 
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="#" class="navbar-link">Inicio</a>
+                <a href="#coleccion" class="navbar-link">Colección</a>
+                <a href="#reserva" class="navbar-link">Reservas</a>
+                <!-- NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
+                <a href="galeria.html" class="navbar-link btn-gallery">Galería</a>
+            </div>
+        </nav>
+        <!-- =========================================================================
+           [FIN] página GALERÍA (BARRA DE NAVEGACIÓN HTML)
+           Nota: En index.html no hay enlaces a artistas ni fotos de la galería.
+           Esos elementos los encontrarás detallados en "galeria.html".
+           ========================================================================= -->
 
         /* SECCIÓN HEADER_ABOBE THE FOLD */
 
@@ -535,8 +801,9 @@
 
         /* SECCIÓN PRESENTACIÓN DE LA DOXA */
 
+        <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: #e0e1db (Tono yeso grisáceo alternativo) === -->
         <section
-            style="padding: 100px 0; background-color: var(--dark-bg); color: var(--text-light); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+            style="padding: 100px 0; background-color: #e0e1db; color: var(--text-light); border-top: 1px solid rgba(0, 0, 0, 0.05);">
             <div class="container animate-appear" style="text-align: center;">
 
                 <div style="margin-bottom: 50px;">
@@ -581,7 +848,7 @@
             .coleccion-section {
                 background-color: var(--dark-bg);
                 padding: 100px 20px;
-                color: #efefef;
+                color: var(--text-dark);
                 font-family: 'Lexend', sans-serif;
             }
 
@@ -596,7 +863,7 @@
                 letter-spacing: 10px;
                 text-transform: uppercase;
                 margin-bottom: 20px;
-                color: #fff;
+                color: var(--text-dark);
             }
 
             .col-desc {
@@ -711,7 +978,7 @@
                 font-size: 9px;
                 font-weight: 700;
                 padding: 8px 12px;
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                border: 1px solid rgba(0, 0, 0, 0.15);
                 letter-spacing: 2px;
                 text-transform: uppercase;
             }
@@ -720,7 +987,7 @@
             .accordion {
                 background: none;
                 border: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
                 width: 100%;
                 text-align: center;
                 padding: 15px 0;
@@ -728,21 +995,21 @@
                 font-size: 11px;
                 text-transform: uppercase;
                 cursor: pointer;
-                color: #efefef;
+                color: var(--text-dark);
                 font-weight: 600;
                 letter-spacing: 2px;
                 transition: border-color 0.3s ease;
             }
 
             .accordion:hover {
-                border-bottom-color: rgba(255, 255, 255, 0.8);
+                border-bottom-color: rgba(0, 0, 0, 0.6);
             }
 
             .panel {
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.4s ease-out;
-                color: #efefef;
+                color: var(--text-dark);
             }
 
             .panel p {
@@ -759,21 +1026,21 @@
                 border-collapse: collapse;
                 margin: 20px 0;
                 font-size: 10px;
-                color: #efefef;
+                color: var(--text-dark);
                 text-align: left;
             }
 
             .comparative-table th,
             .comparative-table td {
                 padding: 12px 8px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             }
 
             .comparative-table th {
                 text-transform: uppercase;
                 letter-spacing: 1px;
                 font-weight: 600;
-                color: #c19b76;
+                color: #9e7955;
             }
 
             .comparative-table tr:last-child td {
@@ -820,10 +1087,10 @@
                 content: '';
                 position: absolute;
                 top: 0;
-                left: 0;
+                right: 0;
                 width: 70%;
                 height: 100%;
-                background: linear-gradient(to right, var(--dark-bg) 0%, var(--dark-bg) 100px, transparent 100%);
+                background: linear-gradient(to left, var(--dark-bg) 0%, var(--dark-bg) 100px, transparent 100%);
                 z-index: 2;
                 pointer-events: none;
             }
@@ -870,7 +1137,7 @@
             .text-box {
                 width: 100%;
                 max-width: 420px;
-                color: white;
+                color: #000;
                 font-family: 'Lexend', sans-serif;
                 text-align: right;
                 position: relative;
@@ -1042,6 +1309,7 @@
 
 
 
+        <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) === -->
         <section class="coleccion-section" id="coleccion" style="padding-bottom: 0;">
             <div class="container animate-appear" style="text-align: center;">
 
@@ -1078,6 +1346,7 @@
 
 
 
+    <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) con fondo dinámico === -->
     <section id="cajas-activos" class="cajas-activos-section">
         <div class="bg-layer" id="caja-bg" style="background-image: url('piel negra.jpg');">
         </div>
@@ -1612,7 +1881,7 @@
                                     cajaText.style.opacity = '0';
                                     setTimeout(() => {
                                         cajaText.innerHTML = `
-                                            <h2 class="tagline" style="color: rgba(255, 255, 255, 0.7); font-size: 11px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">${a.n}</h2>
+                                            <h2 class="tagline" style="color: rgba(0, 0, 0, 0.6); font-size: 11px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">${a.n}</h2>
                                             <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">• ${sub.title || sub.n}</h3>
                                             ${sub.neg ? `<p class="hero-value-prop-neg">${sub.neg}</p>` : ''}
                                             <div class="hero-value-prop">${sub.prop || ''}</div>
@@ -1706,12 +1975,13 @@
 
 
 
+    <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) === -->
     <section id="descripcion-nutricional" class="coleccion-section" style="padding-top: 100px;">
         <div class="container animate-appear">
             <div style="text-align: center; margin-bottom: 80px;">
                 <h2
                     style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 40px;">
-                    Y SIN EMBARGO...PLACER
+                    EL PLACER
                 </h2>
 
                 <p
@@ -1905,7 +2175,8 @@
 
     <style>
         .checkout-section {
-            background-color: #f5f1eb;
+            background-color: var(--yeso-claro);
+            /* COLOR DE FONDO: YESO CLARO (#f1f2ec) (Punto 4) */
             padding: 100px 20px;
             text-align: center;
             font-family: 'Lexend', sans-serif;
@@ -2024,13 +2295,14 @@
         }
     </style>
 
+    <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-claro) (Yeso Claro: #f1f2ec) === -->
     <section class="checkout-section" id="reserva">
         <div class="container">
 
 
             <h2
                 style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(22px, 5vw, 45px); letter-spacing: clamp(2px, 2vw, 12px); text-transform: uppercase; margin-bottom: 60px; color: #3C332A;">
-                RESERVA TUS DOXAS
+                RESERVAS
             </h2>
 
 
@@ -2090,6 +2362,45 @@
     </script>
     /* */
 
+    <!-- =========================================================================
+       [INICIO] página GALERÍA (SCRIPT JS DE LA BARRA DE NAVEGACIÓN)
+       Controla el efecto de cambio de fondo al hacer scroll y el menú móvil.
+       ========================================================================= -->
+    <script>
+        // Control de Navbar (Scroll y Menú Móvil)
+        (function () {
+            const navbar = document.getElementById('mainNavbar');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navbarMenu = document.getElementById('navbarMenu');
+            const navLinks = document.querySelectorAll('.navbar-link');
+
+            // Scroll listener para cambiar aspecto de la barra
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Toggle del menú móvil
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                navbarMenu.classList.toggle('active');
+            });
+
+            // Cerrar menú móvil al hacer click en un enlace
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileToggle.classList.remove('active');
+                    navbarMenu.classList.remove('active');
+                });
+            });
+        })();
+    </script>
+    <!-- =========================================================================
+       [FIN] página GALERÍA (SCRIPT JS DE LA BARRA DE NAVEGACIÓN)
+       ========================================================================= -->
 
 </body>
 
