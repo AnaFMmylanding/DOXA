@@ -1,0 +1,1400 @@
+<!-- === [INICIO] página GALERÍA === -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOXA | Galería de Arte Gastronómico</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@100;300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================================
+           RESET TOTAL Y VARIABLES DE MARCA
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* === UBICACIÓN DE COLORES DE FONDO (PUNTO 4) === */
+            --yeso-oscuro: #e6e7e1; /* YESO OSCURO - Fondo general de la página y de las fichas de las cookies */
+            --yeso-claro: #f1f2ec;  /* YESO CLARO - Fondo del menú de creadores (submenu) y de la biografía/presentación */
+            /* ============================================== */
+            --dark-bg: var(--yeso-oscuro);
+            --light-bg: #F5F1ED;
+            --accent-color: #f0ff1c;
+            --text-light: #3C332A;
+            --text-dark: #3C332A;
+        }
+
+        body,
+        html {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: var(--dark-bg);
+            font-family: 'Lexend', sans-serif;
+            scroll-behavior: smooth;
+            color: var(--text-dark);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .page-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================================
+           LÓGICA DE ANIMACIONES
+           ========================================= */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-appear {
+            opacity: 0;
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* =========================================
+           ESTILOS DE NAVEGACIÓN (NAVBAR)
+           ========================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            background-color: transparent;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0);
+        }
+
+        .navbar.scrolled {
+            height: 75px;
+            background-color: rgba(245, 241, 237, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(60, 51, 42, 0.08);
+        }
+
+        .navbar-logo {
+            font-family: 'Lato', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 6px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            transition: color 0.4s ease;
+        }
+
+        .navbar.scrolled .navbar-logo {
+            color: var(--text-light);
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .navbar-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px; /* Tamaño de letra del menú más pequeño */
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.4s ease;
+        }
+
+        .navbar-link:hover {
+            color: #FFFFFF;
+        }
+
+        .navbar.scrolled .navbar-link {
+            color: rgba(60, 51, 42, 0.8);
+        }
+
+        .navbar.scrolled .navbar-link:hover {
+            color: var(--text-light);
+        }
+
+        /* Botón de Galería destacado sin fondo amarillo, contorno transparente */
+        .btn-gallery {
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px; /* Tamaño de letra más pequeño */
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #FFFFFF !important; /* Texto en blanco sobre fondo oscuro hero */
+            background-color: transparent !important; /* Fondo transparente */
+            border: 1px solid #FFFFFF !important; /* Recuadro de contorno blanco */
+            padding: 10px 22px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gallery:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            box-shadow: none;
+        }
+
+        .navbar.scrolled .btn-gallery {
+            background-color: transparent !important;
+            color: var(--text-light) !important; /* Texto en color oscuro cuando hace scroll */
+            border: 1px solid var(--text-light) !important; /* Contorno en color oscuro cuando hace scroll */
+        }
+
+        .navbar.scrolled .btn-gallery:hover {
+            background-color: rgba(60, 51, 42, 0.05) !important;
+            color: var(--text-light) !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 16px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            width: 100%;
+            height: 2px;
+            background-color: #FFFFFF;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .mobile-toggle span {
+            background-color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 25px;
+                height: 70px;
+            }
+            .navbar.scrolled {
+                height: 65px;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .navbar-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: rgba(21, 14, 2, 0.95);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 40px;
+                padding: 40px;
+                transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+                z-index: 999;
+            }
+
+            .navbar-menu.active {
+                right: 0;
+            }
+
+            .navbar-link {
+                font-size: 16px;
+                color: rgba(255, 255, 255, 0.8) !important;
+            }
+
+            .navbar-link:hover {
+                color: #FFFFFF !important;
+            }
+
+            .btn-gallery {
+                background-color: var(--accent-color) !important;
+                color: #150e02 !important;
+                width: 100%;
+                text-align: center;
+                padding: 15px 0;
+                font-size: 14px;
+            }
+
+            .mobile-toggle.active span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+                background-color: #FFFFFF !important;
+            }
+
+            .mobile-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-toggle.active span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+                background-color: #FFFFFF !important;
+            }
+        }
+
+        /* =========================================================================
+           [INICIO ESTILOS] SUBMENÚ DE AUTORES Y ARTISTAS (PARA PARTE B)
+           Controla la visualización del menú superior horizontal de autores.
+           ========================================================================= */
+        .authors-submenu-section {
+            background-color: var(--yeso-claro); /* <-- COLOR DE FONDO: YESO CLARO (#f1f2ec) (Punto 2 y 4) */
+            padding: 40px 0 10px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.05);
+        }
+
+        .authors-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .author-btn {
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            font-weight: 400; /* Negro normal */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: transparent;
+            border: none; /* Sin contorno gris */
+            padding: 14px 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #3C332A;
+            border-radius: 0px;
+            position: relative;
+            opacity: 0.6; /* Un poco atenuado si no está clicado */
+        }
+
+        .author-btn:hover {
+            color: #000;
+            opacity: 0.9;
+        }
+
+        .author-btn.active {
+            color: #000; /* Negro resalte */
+            font-weight: 700; /* Negrita resalte */
+            background-color: transparent; /* Sin color amarillo */
+            box-shadow: none; /* Sin sombra */
+            opacity: 1; /* Opacidad total */
+        }
+        /* =========================================================================
+           [FIN ESTILOS] SUBMENÚ DE AUTORES Y ARTISTAS
+           ========================================================================= */
+
+        /* =========================================
+           SECCIÓN HERO (BANNER DE EXPOSICIÓN)
+           ========================================= */
+        .gallery-hero {
+            position: relative;
+            width: 100%;
+            height: 55vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #111;
+        }
+
+        .gallery-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .gallery-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.25) contrast(1.1);
+        }
+
+        .gallery-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #FFFFFF;
+            padding: 0 20px;
+        }
+
+        .gallery-hero-title {
+            font-family: 'Lato', sans-serif;
+            font-size: clamp(35px, 8vw, 60px);
+            font-weight: 300;
+            letter-spacing: 15px;
+            margin-right: -15px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .gallery-hero-subtitle {
+            font-family: 'Lexend', sans-serif;
+            font-size: clamp(10px, 1.5vw, 12px); /* Subtítulo en letra más pequeña */
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: none; /* Permitir minúsculas */
+            color: #FFFFFF; /* De color blanco, sin amarillo */
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           SECCIÓN ARTISTA (BIOGRAFÍA)
+           ========================================= */
+        .artist-section {
+            background-color: var(--yeso-claro); /* <-- COLOR DE FONDO DE BIOGRAFÍA Y CONTENEDOR: YESO CLARO (#f1f2ec) (Punto 4) */
+            padding: 100px 0;
+            color: var(--text-dark);
+            border-bottom: 1px solid rgba(60, 51, 42, 0.08);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            width: 100%;
+        }
+
+        .artist-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1.9fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .artist-image-container {
+            position: relative;
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .artist-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(15%) contrast(1.05);
+            transition: transform 0.8s ease;
+        }
+
+        .artist-image-container:hover img {
+            transform: scale(1.03);
+        }
+
+        .artist-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .artist-tagline {
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: rgba(60, 51, 42, 0.6);
+            margin-bottom: 15px;
+        }
+
+        .artist-name {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 300;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .artist-bio {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 2;
+            opacity: 0.9;
+        }
+
+        .artist-bio p {
+            margin-bottom: 25px;
+        }
+
+        .artist-quote {
+            font-style: italic;
+            border-left: 2px solid var(--text-dark);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-size: 16px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        @media (max-width: 900px) {
+            .artist-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .artist-image-container {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            .artist-section {
+                padding: 70px 0;
+            }
+        }
+
+        /* =========================================
+           SECCIÓN PORTAFOLIO (LAS OBRAS)
+           ========================================= */
+        .portfolio-section {
+            background-color: var(--dark-bg);
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .artwork-card {
+            background-color: var(--yeso-oscuro); /* <-- COLOR DE FONDO DE CADA FICHA/TARJETA DE ARTISTA: YESO OSCURO (#e6e7e1) (Punto 4) */
+            border: 1px solid rgba(60, 51, 42, 0.08);
+            border-radius: 4px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+        }
+
+        .artwork-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.06);
+            border-color: rgba(60, 51, 42, 0.2);
+        }
+
+        .artwork-image-wrapper {
+            width: 100%;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 25px;
+            background-color: rgba(60, 51, 42, 0.02);
+            border-radius: 2px;
+        }
+
+        .artwork-image-wrapper img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            filter: drop-shadow(0px 15px 20px rgba(0,0,0,0.2));
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .artwork-card:hover .artwork-image-wrapper img {
+            transform: scale(1.08) rotate(2deg);
+        }
+
+        .artwork-number {
+            font-family: 'Lato', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: rgba(60, 51, 42, 0.5);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .artwork-title {
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .artwork-medium {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .btn-view-details {
+            align-self: flex-start;
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            border: none;
+            background: none;
+            border-bottom: 1px solid var(--text-dark);
+            padding-bottom: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view-details:hover {
+            color: #000;
+            border-bottom-color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        @media (max-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .portfolio-section {
+                padding: 80px 0;
+            }
+        }
+
+        /* =========================================
+           LIGHTBOX MODAL (FICHA TÉCNICA)
+           ========================================= */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(21, 14, 2, 0.96);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            padding: 40px;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-content {
+            background-color: var(--light-bg);
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 4px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.1fr 1.4fr;
+            box-shadow: 0px 40px 100px rgba(0, 0, 0, 0.6);
+            transform: scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 35px;
+            height: 35px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .lightbox-close span {
+            position: absolute;
+            width: 20px;
+            height: 1px;
+            background-color: var(--text-dark);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-close span:nth-child(1) { transform: rotate(45deg); }
+        .lightbox-close span:nth-child(2) { transform: rotate(-45deg); }
+
+        .lightbox-close:hover span {
+            background-color: #000;
+            height: 1.5px;
+        }
+
+        .lightbox-left {
+            background-color: rgba(60, 51, 42, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            border-right: 1px solid rgba(60, 51, 42, 0.08);
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            filter: drop-shadow(0px 25px 35px rgba(0,0,0,0.3));
+        }
+
+        .lightbox-right {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .sheet-number {
+            font-family: 'Lato', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: rgba(60, 51, 42, 0.5);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .sheet-title {
+            font-size: 26px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.1);
+            padding-bottom: 15px;
+            color: #000;
+        }
+
+        .sheet-row {
+            display: flex;
+            margin-bottom: 18px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .sheet-label {
+            width: 130px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: rgba(60, 51, 42, 0.7);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .sheet-value {
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .sheet-description {
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0.95;
+            background-color: rgba(60, 51, 42, 0.03);
+            padding: 20px;
+            border-left: 2px solid var(--accent-color);
+        }
+
+        @media (max-width: 850px) {
+            .lightbox-content {
+                grid-template-columns: 1fr;
+                max-height: 90vh;
+            }
+            .lightbox-left {
+                padding: 30px;
+                border-right: none;
+                border-bottom: 1px solid rgba(60, 51, 42, 0.08);
+            }
+            .lightbox-image {
+                max-height: 200px;
+            }
+            .lightbox-right {
+                padding: 30px;
+            }
+            .lightbox {
+                padding: 15px;
+            }
+        }
+
+        .gallery-footer {
+            background-color: #caccc3; /* <-- COLOR DE FONDO DE ESTA SECCIÓN: #caccc3 (Gris Claro Cementoso en Footer) */
+            color: #3C332A; /* Color oscuro para contraste legible */
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Lato', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            letter-spacing: 8px;
+            margin-right: -8px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: #3C332A;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #3C332A;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+            color: #000000;
+        }
+
+        .footer-copy {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #3C332A;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+
+        <!-- NAVEGACIÓN PRINCIPAL -->
+        <nav class="navbar" id="mainNavbar">
+            <a href="index.html" class="navbar-logo">DOXA</a>
+            
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="index.html" class="navbar-link">Inicio</a>
+                <a href="index.html#coleccion" class="navbar-link">Colección</a>
+                <a href="index.html#reserva" class="navbar-link">Reservas</a>
+                <a href="#" class="navbar-link btn-gallery">Galería</a>
+            </div>
+        </nav>
+
+        <!-- SECCIÓN HERO (EXPOSICIÓN) -->
+        <header class="gallery-hero">
+            <div class="gallery-hero-bg">
+                <img src="piel negra.jpg" alt="Exposición Doxa">
+            </div>
+            <div class="gallery-hero-content animate-appear">
+                <h1 class="gallery-hero-title">EXPOSICIÓN DOXA</h1>
+                <p class="gallery-hero-subtitle">La repostería funcional como arte de vanguardia</p>
+            </div>
+        </header>
+
+        <!-- =========================================================================
+           [INICIO HTML] SUBMENÚ DE ENLACES A CADA ARTISTA (PARTE B & C)
+           Modifica o añade nuevos autores aquí. El atributo 'data-author' debe coincidir
+           con el de la base de datos de JS.
+           ========================================================================= -->
+        <section class="authors-submenu-section">
+            <div class="container">
+                <div class="authors-nav">
+                    <!-- ENLACE BOTÓN ARTISTA 1: ANA M. (ACTIVO POR DEFECTO) -->
+                    <button class="author-btn active" data-author="ana">Ana M. (Fundadora)</button>
+                    <!-- ENLACE BOTÓN ARTISTA 2: MARCUS VANCE -->
+                    <button class="author-btn" data-author="marcus">Marcus Vance (Geometría)</button>
+                    <!-- ENLACE BOTÓN ARTISTA 3: ELENA ROSTOVA -->
+                    <button class="author-btn" data-author="elena">Elena Rostova (Botánica)</button>
+                </div>
+            </div>
+        </section>
+        <!-- =========================================================================
+           [FIN HTML] SUBMENÚ DE ENLACES A CADA ARTISTA
+           ========================================================================= -->
+
+        <!-- SECCIÓN ARTISTA (BIOGRAFÍA Y PORTAFOLIO DE OBRA INTEGRADOS - PARTE D) -->
+        <section class="artist-section">
+            <div class="container">
+                <!-- Presentación de la Biografía del Artista -->
+                <div class="artist-grid">
+                    <div class="artist-image-container animate-appear delay-1">
+                        <!-- =========================================================================
+                           [FOTO DEL ARTISTA]
+                           Esta imagen se actualiza automáticamente al cambiar de autor en el menú.
+                           Ruta por defecto: artista_retrato.png
+                           ========================================================================= -->
+                        <img src="artista_retrato.png" id="artistPortrait" alt="Ana M. — Visionaria de DOXA">
+                    </div>
+                    <div class="artist-details animate-appear delay-2">
+                        <!-- [ETIQUETA Y NOMBRE DEL ARTISTA ACTIVO] -->
+                        <span class="artist-tagline" id="artistTagline">El Creador</span>
+                        <h2 class="artist-name" id="artistName">Ana M. & El Atelier</h2>
+                        
+                        <!-- [BIOGRAFÍA E HISTORIA DEL ARTISTA ACTIVO] -->
+                        <div class="artist-bio" id="artistBio">
+                            <p>Para Ana M., alma y mente científica detrás de <strong>DOXA</strong>, la repostería tradicional era un lienzo incompleto. Concibiendo la cocina no como una fábrica, sino como un taller de composición biológica, su trabajo busca fusionar la indulgencia física y el bienestar molecular.</p>
+                            
+                            <p>Con formación en gastronomía molecular y nutrición celular, Ana comenzó a experimentar con la deconstrucción de texturas. Su enfoque elimina por completo los ingredientes tradicionales inertes o perjudiciales (azúcares refinados, grasas hidrolizadas, harinas con alto índice glucémico) y los sustituye por soportes celulares y compuestos bioactivos.</p>
+                            
+                            <div class="artist-quote">
+                                «Diseñar una DOXA es un proceso de composición tridimensional. Busco el equilibrio perfecto entre la humedad táctil de la masa, la liberación de los aceites nobles y la integración de activos de alta pureza (péptidos, creatina, vitaminas) que actúan en armonía con tu organismo. No horneamos dulces; esculpimos salud estética.»
+                            </div>
+
+                            <p>En esta exposición permanente, el atelier muestra la primera colección de obras de repostería molecular. Cuatro piezas únicas concebidas como esculturas funcionales que desafían las barreras entre el postre, el suplemento y la obra de arte visual.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Línea Divisoria Sutil entre la Biografía y las Obras -->
+                <hr style="border: 0; height: 1px; background-color: rgba(60, 51, 42, 0.1); margin: 60px 0;">
+
+                <!-- =========================================================================
+                   [PLANTILLA DE PORTAFOLIO DE OBRA LIGADA AL ARTISTA]
+                   Esta sección está contenida en la misma hoja del artista y se actualiza al unísono
+                   cuando se cambia el autor clicado en el menú.
+                   ========================================================================= -->
+                <div class="portfolio-container animate-appear delay-3">
+                    <div class="section-header" style="margin-bottom: 50px; text-align: left;">
+                        <h3 class="section-title" id="portfolioTitle" style="font-size: clamp(20px, 3vw, 24px); letter-spacing: 4px; text-transform: uppercase;">Obras de Ana M. & El Atelier</h3>
+                        <span class="section-subtitle" style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">Fichas de Exposición</span>
+                    </div>
+
+                    <!-- [INICIO GRID DE PORTAFOLIO Y FOTOS DE LA GALERÍA] -->
+                    <div class="portfolio-grid">
+                        <!-- Tarjeta Obra 1 / V / IX -->
+                        <article class="artwork-card" data-id="ana-1">
+                            <div class="artwork-image-wrapper">
+                                <!-- [FOTO DE LA OBRA 1 (POR DEFECTO BÉSAME CHOCO)] -->
+                                <img src="Galle choco.png" alt="Obra I: Bésame Choco">
+                            </div>
+                            <span class="artwork-number">Obra I</span>
+                            <h3 class="artwork-title">Bésame Choco</h3>
+                            <p class="artwork-medium">Masa de almendras premium, centro fundente de cacao fino, enriquecida con Péptidos de Colágeno y Ácido Hialurónico.</p>
+                            <button class="btn-view-details">Ver Ficha Técnica</button>
+                        </article>
+
+                        <!-- Tarjeta Obra 2 / VI / X -->
+                        <article class="artwork-card" data-id="ana-2">
+                            <div class="artwork-image-wrapper">
+                                <!-- [FOTO DE LA OBRA 2 (POR DEFECTO CAPRICHO CAFÉ)] -->
+                                <img src="Galle cafe.png" alt="Obra II: Capricho Café">
+                            </div>
+                            <span class="artwork-number">Obra II</span>
+                            <h3 class="artwork-title">Capricho Café</h3>
+                            <p class="artwork-medium">Masa infusionada con extracto de café arábica ecológico, infusión de mantequilla de pasto y Aceite MCT.</p>
+                            <button class="btn-view-details">Ver Ficha Técnica</button>
+                        </article>
+
+                        <!-- Tarjeta Obra 3 / VII / XI -->
+                        <article class="artwork-card" data-id="ana-3">
+                            <div class="artwork-image-wrapper">
+                                <!-- [FOTO DE LA OBRA 3 (POR DEFECTO BOSQUE SAGRADO)] -->
+                                <img src="Galle frutos bosque.png" alt="Obra III: Bosque Sagrado">
+                            </div>
+                            <span class="artwork-number">Obra III</span>
+                            <h3 class="artwork-title">Bosque Sagrado</h3>
+                            <p class="artwork-medium">Masa acidulada con arándanos silvestres y frambuesa liofilizada, con soporte de Creatina y fitonutrientes antiinflamatorios.</p>
+                            <button class="btn-view-details">Ver Ficha Técnica</button>
+                        </article>
+
+                        <!-- Tarjeta Obra 4 / VIII / XII -->
+                        <article class="artwork-card" data-id="ana-4">
+                            <div class="artwork-image-wrapper">
+                                <!-- [FOTO DE LA OBRA 4 (POR DEFECTO OBSIDIANA NEGRA)] -->
+                                <img src="Galle choco negro.png" alt="Obra IV: Obsidiana Negra">
+                            </div>
+                            <span class="artwork-number">Obra IV</span>
+                            <h3 class="artwork-title">Obsidiana Negra</h3>
+                            <p class="artwork-medium">Masa compacta de cacao negro 90% con pepitas crujientes al 100%, cargada con Biotina y Proteína de Suero aislada.</p>
+                            <button class="btn-view-details">Ver Ficha Técnica</button>
+                        </article>
+                    </div>
+                    <!-- =========================================================================
+                       [FIN GRID DE PORTAFOLIO Y FOTOS DE LA GALERÍA]
+                       ========================================================================= -->
+                </div>
+            </div>
+        </section>
+
+        <!-- LIGHTBOX MODAL (FICHA TÉCNICA INTERACTIVA) -->
+        <div class="lightbox" id="artworkLightbox">
+            <div class="lightbox-content">
+                <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar ficha">
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="lightbox-left">
+                    <img src="" alt="" class="lightbox-image" id="lightboxImage">
+                </div>
+                <div class="lightbox-right">
+                    <span class="sheet-number" id="lightboxNumber"></span>
+                    <h3 class="sheet-title" id="lightboxTitle"></h3>
+                    
+                    <div class="sheet-row">
+                        <div class="sheet-label">Dimensiones</div>
+                        <div class="sheet-value" id="lightboxWeight">90 gramos por pieza</div>
+                    </div>
+                    <div class="sheet-row">
+                        <div class="sheet-label">Soporte</div>
+                        <div class="sheet-value" id="lightboxBase"></div>
+                    </div>
+                    <div class="sheet-row">
+                        <div class="sheet-label">Activos / Medios</div>
+                        <div class="sheet-value" id="lightboxActives"></div>
+                    </div>
+                    <div class="sheet-row">
+                        <div class="sheet-label">Perfil Sabor</div>
+                        <div class="sheet-value" id="lightboxFlavor"></div>
+                    </div>
+                    <div class="sheet-row">
+                        <div class="sheet-label">Concepto</div>
+                        <div class="sheet-value" id="lightboxConcept"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="gallery-footer">
+            <div class="container">
+                <div class="footer-logo">DOXA</div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">Inicio</a>
+                    <a href="index.html#coleccion" class="footer-link">Colección</a>
+                    <a href="index.html#reserva" class="footer-link">Reservas</a>
+                    <a href="https://eu.jotform.com/form/260395833827366" target="_blank" class="footer-link">Reservar Caja</a>
+                </div>
+                <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // =========================================================================
+        // [BASE DE DATOS] DATOS DE LOS ARTISTAS / AUTORES (BIOGRAFÍAS Y RETRATOS)
+        // =========================================================================
+        const authorsData = {
+            "ana": {
+                name: "Ana M. & El Atelier",
+                tagline: "El Creador",
+                portrait: "artista_retrato.png",
+                bio: `
+                    <p>Para Ana M., alma y mente científica detrás de <strong>DOXA</strong>, la repostería tradicional era un lienzo incompleto. Concibiendo la cocina no como una fábrica, sino como un taller de composición biológica, su trabajo busca fusionar la indulgencia física y el bienestar molecular.</p>
+                    <p>Con formación en gastronomía molecular y nutrición celular, Ana comenzó a experimentar con la deconstrucción de texturas. Su enfoque elimina por completo los ingredientes tradicionales inertes o perjudiciales (azúcares refinados, grasas hidrolizadas, harinas con alto índice glucémico) y los sustituye por soportes celulares y compuestos bioactivos.</p>
+                    <div class="artist-quote">
+                        «Diseñar una DOXA es un proceso de composición tridimensional. Busco el equilibrio perfecto entre la humedad táctil de la masa, la liberación de los aceites nobles y la integración de activos de alta pureza (péptidos, creatina, vitaminas) que actúan en armonía con tu organismo. No horneamos dulces; esculpimos salud estética.»
+                    </div>
+                    <p>En esta exposición permanente, el atelier muestra la primera colección de obras de repostería molecular. Cuatro piezas únicas concebidas como esculturas funcionales que desafían las barreras entre el postre, el suplemento y la obra de arte visual.</p>
+                `
+            },
+            "marcus": {
+                name: "Marcus Vance",
+                tagline: "Artista Invitado — Estructuras",
+                portrait: "marcus_retrato.png",
+                bio: `
+                    <p>Marcus Vance concibe la repostería funcional desde el rigor matemático y la arquitectura brutalista. Para él, una galleta no es solo un bocado; es un elemento estructural que debe soportar cargas nutricionales de alto rendimiento sin perder su estética monolítica.</p>
+                    <p>Especializado en formulación proteica y neuroestimulantes metabólicos, sus creaciones exploran las propiedades mecánicas de las grasas saludables de cadena media y el carbón activo. Su técnica consiste en moldear formas geométricas limpias y de colores oscuros, simulando piedras talladas, con texturas densas y crujientes.</p>
+                    <div class="artist-quote">
+                        «Una obra de repostería debe ser honesta. La textura brutalista y los colores telúricos reflejan el poder de los aminoácidos y los minerales que contienen. Busco una experiencia de masticación que despierte el foco neuronal y la fuerza física elemental.»
+                    </div>
+                    <p>Marcus presenta su colección <em>Monolitos Metálicos</em>, cuatro piezas de alto contenido proteico e ingredientes activos de regeneración profunda diseñados para atletas mentales y de alto rendimiento.</p>
+                `
+            },
+            "elena": {
+                name: "Elena Rostova",
+                tagline: "Artista Invitada — Fitoterapia",
+                portrait: "elena_retrato.png",
+                bio: `
+                    <p>Elena Rostova ve en la naturaleza un lienzo aromático y un laboratorio vivo. Con un trasfondo en fitoterapia tradicional y botánica de campo, su taller se enfoca en la modulación del estrés biológico y la restauración del equilibrio del sistema nervioso a través de adaptógenos.</p>
+                    <p>Su proceso artístico integra flores comestibles secadas al sol, infusiones de té matcha ceremonial y polvos de hongos medicinales como el Reishi y la Melena de León. Sus galletas exhiben formas orgánicas y fluidas, con un perfil visual colorido, decorado a mano, recordando paisajes de un jardín botánico silvestre.</p>
+                    <div class="artist-quote">
+                        «Trabajo con el reino vegetal para calmar la mente y armonizar el organismo. Los adaptógenos y las esencias florales no solo curan el estrés metabólico, sino que proporcionan notas olfativas y gustativas que te transportan a un estado de calma absoluta.»
+                    </div>
+                    <p>Su colección <em>Aura Floral & Adaptógenos</em> incluye cuatro composiciones delicadas donde el dulzor de la miel cruda y la frescura de los frutos del bosque envuelven una potente arquitectura medicinal.</p>
+                `
+            }
+        };
+
+        // =========================================================================
+        // [BASE DE DATOS] FICHA TÉCNICA Y FOTOS DE CADA UNA DE LAS 12 CREADAS (PARTE B)
+        // Puedes cambiar la foto (.image) y los detalles técnicos aquí.
+        // =========================================================================
+        const artworksData = {
+            // --- OBRAS DE ANA M. (ANA) ---
+            "ana-1": {
+                number: "Obra I",
+                title: "Bésame Choco",
+                image: "Galle choco.png",
+                medium: "Masa de almendras premium, centro fundente de cacao fino, enriquecida con Péptidos de Colágeno y Ácido Hialurónico.",
+                base: "Masa húmeda de almendra molida y manteca de cacao pura horneada lentamente, con un centro cremoso de avellanas y chocolate.",
+                actives: "Péptidos de Colágeno Hidrolizado (10g) para elasticidad dérmica, Ácido Hialurónico (120mg) para hidratación interna y Vitamina C (100mg) como cofactor de síntesis.",
+                flavor: "Cacao belga fundido, almendra tostada y un fondo dulce equilibrado con eritritol premium.",
+                concept: "Evocar la indulgencia táctil y sensorial de la cookie neoyorquina tradicional, reinterpretada para alimentar la estructura celular y promover la elasticidad de los tejidos conectivos en el día a día."
+            },
+            "ana-2": {
+                number: "Obra II",
+                title: "Capricho Café",
+                image: "Galle cafe.png",
+                medium: "Masa infusionada con extracto de café arábica ecológico, infusión de mantequilla de pasto y Aceite MCT.",
+                base: "Masa cremosa infusionada con extracto de café arábica ecológico, mezclada con manteca de cacao y base de almendras.",
+                actives: "Aceite MCT (5g) que aporta cetonas de rápida absorción directa para el cerebro, L-Teanina para mitigar la ansiedad de la cafeína, y Vitamina D3 (2000 UI) para salud metabólica.",
+                flavor: "Café espresso concentrado, notas sutiles de avellana tostada y regusto aterciopelado de manteca noble.",
+                concept: "Un estudio sobre el foco cognitivo y la vitalidad sostenida. Diseñada para liberar cafeína y ácidos grasos saludables de forma progresiva, evitando caídas de insulina y potenciando la agudeza mental."
+            },
+            "ana-3": {
+                number: "Obra III",
+                title: "Bosque Sagrado",
+                image: "Galle frutos bosque.png",
+                medium: "Masa acidulada con arándanos silvestres y frambuesa liofilizada, con soporte de Creatina y fitonutrientes.",
+                base: "Masa acidulada con trozos de arándanos silvestres, frambuesas liofilizadas, manteca pura y almendras.",
+                actives: "Monohidrato de Creatina premium (3g) para la producción de ATP muscular y celular, Jengibre orgánico (100mg) y extracto de Boswellia Serrata (250mg) para el alivio de la inflamación articular.",
+                flavor: "Frutos rojos ácidos en contraste con la dulzura cremosa del fondo y un punto picante muy ligero de jengibre.",
+                concept: "Una propuesta conceptualizada para la transición posterior al esfuerzo físico. Enfocada en recargar los depósitos de energía celulares y aliviar las articulaciones a través de potentes fitonutrientes."
+            },
+            "ana-4": {
+                number: "Obra IV",
+                title: "Obsidiana Negra",
+                image: "Galle choco negro.png",
+                medium: "Masa compacta de cacao negro 90% con pepitas crujientes al 100%, cargada con Biotina y Proteína de Suero aislada.",
+                base: "Masa densa e intensa de cacao negro 90% con pepitas crujientes de chocolate al 100% libre de azúcares.",
+                actives: "Proteína de suero ultra-filtrada aislada (10g) para soporte muscular, Biotina (5mg) para estimular la síntesis de queratina, y Zinc orgánico para el cuidado de uñas, cabello y defensa celular.",
+                flavor: "Cacao amargo puro, notas de vainilla de Madagascar y un toque final crujiente de sal marina en escamas.",
+                concept: "Una composición monocromática dedicada a la fuerza y regeneración de las barreras externas del cuerpo (uñas y cabello). Creada especialmente para el paladar entrenado en el amargor del chocolate más puro."
+            },
+
+            // --- OBRAS DE MARCUS VANCE (MARCUS) ---
+            "marcus-1": {
+                number: "Obra V",
+                title: "Monolito de Cacao",
+                image: "Galle choco negro.png",
+                medium: "Estructura mineralizada con base de almendras y harina de coco, color negro intenso obtenido con carbón vegetal activo.",
+                base: "Masa compacta y ultra-densa con base de almendras y harina de coco, color negro intenso obtenido con carbón vegetal activo.",
+                actives: "Aislado de Proteína de Guisante (12g) para balance de aminoácidos, Magnesio Bisglicinato (200mg) para relajación neuromuscular y Zinc para soporte inmune.",
+                flavor: "Chocolate negro amargo extremo, notas ahumadas y de carbón mineral con un acabado de sal volcánica.",
+                concept: "Un ejercicio de brutalismo gastronómico. Estimular la fuerza muscular de recuperación a través de proteínas y magnesio concentrados en una estructura de máxima densidad y color carbón."
+            },
+            "marcus-2": {
+                number: "Obra VI",
+                title: "Bloque Energético",
+                image: "Galle cafe.png",
+                medium: "Bloque rectangular formulado con cacahuetes salados, pasta de cacao puro y manteca de cacao noble.",
+                base: "Galleta rectangular de alta compresión formulada con pasta de cacao puro, crema de cacahuete natural y manteca de cacao.",
+                actives: "Triglicéridos de Cadena Media (MCT) de coco purificado (8g) para energía directa en cetosis y Coenzima Q10 (50mg) para optimización mitocondrial.",
+                flavor: "Cacahuete salado muy denso combinado con la intensidad terrosa del cacao crudo.",
+                concept: "Desarrollada para proveer energía celular instantánea a largo plazo. Un bloque graso de combustión limpia y nulo impacto glucémico que apoya los periodos de ayuno intermitente o entrenamientos severos."
+            },
+            "marcus-3": {
+                number: "Obra VII",
+                title: "Prisma de Colágeno",
+                image: "Galle choco.png",
+                medium: "Masa geométrica firme de almendras, aceite de aguacate y manteca de cacao con incrustaciones de nibs crudos.",
+                base: "Masa firme de almendras, aceite de aguacate y manteca de cacao con incrustaciones geométricas de nibs de cacao puro.",
+                actives: "Péptidos bioactivos de colágeno marino (8g) de bajo peso molecular y Sílice orgánico para reforzar tendones y densidad de los tejidos corporales.",
+                flavor: "Chocolate suave y mantecoso, con textura masticable y crujiente de los nibs.",
+                concept: "Enfocado en la integridad de las fascias corporales. Un soporte biológico mineral y de péptidos diseñado para atletas expuestos al desgaste de articulaciones y ligamentos."
+            },
+            "marcus-4": {
+                number: "Obra VIII",
+                title: "Corteza de Foco",
+                image: "Galle frutos bosque.png",
+                medium: "Masa de nuez de pecán molida y manteca de coco, con arándanos deshidratados de corte poligonal.",
+                base: "Masa de nuez de pecán molida y manteca de coco, con arándanos deshidratados de corte poligonal.",
+                actives: "Alfa-GPC (150mg) para potenciar la acetilcolina cerebral, L-Tirosina (500mg) para síntesis de dopamina y Vitamina B Complex completa para rendimiento cognitivo.",
+                flavor: "Nuez caramelizada (eritritol), notas de madera y acidez crujiente de los arándanos.",
+                concept: "Una cookie funcional orientada al rendimiento ejecutivo. Nutrientes nootrópicos que estimulan los neurotransmisores de la atención y la concentración durante retos intelectuales."
+            },
+
+            // --- OBRAS DE ELENA ROSTOVA (ELENA) ---
+            "elena-1": {
+                number: "Obra IX",
+                title: "Aura Lavanda & Té Matcha",
+                image: "Galle frutos bosque.png",
+                medium: "Masa blanda infusionada con té matcha ceremonial y decorada a mano con pétalos de lavanda orgánica.",
+                base: "Masa blanda y fluida infusionada con té matcha japonés ceremonial y decorada con pétalos de lavanda orgánica.",
+                actives: "Extracto de Ashwagandha KSM-66 (300mg) y L-Teanina (150mg) para mitigar el cortisol y reducir el estrés psicológico.",
+                flavor: "Hierba dulce de matcha, notas florales de lavanda y un final de leche de almendras.",
+                concept: "Un calmante sistémico en forma de galleta. Diseñado para bajar el ritmo de revoluciones mentales por la tarde y ayudar a transicionar hacia un estado de meditación o descanso nocturno."
+            },
+            "elena-2": {
+                number: "Obra X",
+                title: "Néctar Adaptógeno",
+                image: "Galle choco.png",
+                medium: "Masa cremosa de almendras y manteca de cacao, cargada con extracto de Hongo Reishi y Melena de León.",
+                base: "Masa cremosa endulzada con extracto de fruta del monje y mantequilla de almendras blancas, con un remolino de jalea adaptógena.",
+                actives: "Extracto de Hongo Reishi orgánico (500mg) para potenciar el sistema inmune, y extracto de Melena de León para neurogénesis cerebral.",
+                flavor: "Almendra dulce, toques ligeros de canela de Ceylán y un matiz terroso muy suave de los hongos medicinales.",
+                concept: "Un tributo a la micoterapia botánica. Apoyar el equilibrio de las células de defensa y mejorar la memoria a través de una masa sedosa e indulgente."
+            },
+            "elena-3": {
+                number: "Obra XI",
+                title: "Brisa de Jengibre & Cúrcuma",
+                image: "Galle cafe.png",
+                medium: "Masa ligera de nueces de macadamia y manteca pura de cacao, infusionada con raíz de jengibre y cúrcuma fresca.",
+                base: "Masa ligera de nueces de macadamia y manteca pura de cacao, infusionada con raíz de jengibre y cúrcuma fresca.",
+                actives: "Curcumina activa (200mg) combinada con pimienta negra para biodisponibilidad, actuando como un antiinflamatorio natural.",
+                flavor: "Especiado picante de jengibre, calidez de cúrcuma y la cremosidad de la nuez de macadamia.",
+                concept: "Activar el metabolismo y desinflamar el cuerpo de forma sistémica. Un perfil gustativo estimulante que revitaliza el sistema circulatorio y alivia molestias físicas menores."
+            },
+            "elena-4": {
+                number: "Obra XII",
+                title: "Rosa de Colágeno & Hibisco",
+                image: "Galle choco negro.png",
+                medium: "Masa densa de avellanas molidas, manteca de cacao pura y hibisco silvestre que aporta un tono rosáceo.",
+                base: "Masa densa de avellanas molidas, manteca de cacao pura y polvo de hibisco silvestre que aporta un tono ligeramente rosado.",
+                actives: "Péptidos de Colágeno (5g), extracto de pétalos de Rosa de Damasco y Coenzima Q10 para rejuvenecimiento celular.",
+                flavor: "Notas ácidas y afrutadas de hibisco, perfume sutil de rosa y la base untuosa de la avellana.",
+                concept: "Una oda botánica a la belleza y la salud celular de la piel. Antioxidantes florales y colágeno trabajando en sinergia para combatir los radicales libres generados por el sol y la fatiga diaria."
+            }
+        };
+
+        // Control de Navbar (Scroll y Menú Móvil)
+        const navbar = document.getElementById('mainNavbar');
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navbarMenu = document.getElementById('navbarMenu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            navbarMenu.classList.toggle('active');
+        });
+
+        // Control del Lightbox (Ficha Técnica)
+        const lightbox = document.getElementById('artworkLightbox');
+        const closeBtn = document.getElementById('lightboxClose');
+        const cards = document.querySelectorAll('.artwork-card');
+
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxNumber = document.getElementById('lightboxNumber');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxBase = document.getElementById('lightboxBase');
+        const lightboxActives = document.getElementById('lightboxActives');
+        const lightboxFlavor = document.getElementById('lightboxFlavor');
+        const lightboxConcept = document.getElementById('lightboxConcept');
+
+        function openLightbox(id) {
+            const data = artworksData[id];
+            if (!data) return;
+
+            lightboxImage.src = data.image;
+            lightboxImage.alt = data.title;
+            lightboxNumber.textContent = data.number;
+            lightboxTitle.textContent = data.title;
+            lightboxBase.textContent = data.base;
+            lightboxActives.textContent = data.actives;
+            lightboxFlavor.textContent = data.flavor;
+            lightboxConcept.textContent = data.concept;
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Bloquear scroll de fondo
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restaurar scroll
+        }
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.dataset.id;
+                openLightbox(id);
+            });
+        });
+
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeLightbox();
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Cerrar con tecla Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        // =========================================================================
+        // [CONTROL JS] INTERACTIVIDAD DEL SUBMENÚ DE AUTORES (PARTE C)
+        // Gestiona el cambio de contenido dinámico para biografía, retrato y obras
+        // =========================================================================
+        const authorButtons = document.querySelectorAll('.author-btn');
+        const artistPortrait = document.getElementById('artistPortrait');
+        const artistTagline = document.getElementById('artistTagline');
+        const artistName = document.getElementById('artistName');
+        const artistBio = document.getElementById('artistBio');
+        const artworkCards = document.querySelectorAll('.artwork-card');
+
+        function switchAuthor(authorKey) {
+            // 1. Quitar activo de todos los botones y ponerlo en el seleccionado
+            authorButtons.forEach(btn => {
+                if (btn.dataset.author === authorKey) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // 2. Transición suave de fundido para el contenido (biografía y tarjetas) sin alterar el fondo de la sección
+            const artistGrid = document.querySelector('.artist-grid');
+            const portfolioContainer = document.querySelector('.portfolio-container');
+            
+            artistGrid.style.opacity = '0.3';
+            artistGrid.style.transition = 'opacity 0.25s ease';
+            portfolioContainer.style.opacity = '0.3';
+            portfolioContainer.style.transition = 'opacity 0.25s ease';
+
+            setTimeout(() => {
+                // Actualizar biografía del autor activo
+                const author = authorsData[authorKey];
+                artistPortrait.src = author.portrait;
+                artistPortrait.alt = author.name;
+                artistTagline.textContent = author.tagline;
+                artistName.textContent = author.name;
+                artistBio.innerHTML = author.bio;
+
+                // Actualizar título del portafolio ligado al artista (Parte D)
+                document.getElementById('portfolioTitle').textContent = 'Obras de ' + author.name;
+
+                // Actualizar tarjetas de portafolio y fotos de la galería (Parte B)
+                artworkCards.forEach((card, idx) => {
+                    const artworkId = idx + 1;
+                    const artworkKey = `${authorKey}-${artworkId}`;
+                    const artwork = artworksData[artworkKey];
+
+                    if (artwork) {
+                        card.dataset.id = artworkKey;
+                        card.querySelector('.artwork-image-wrapper img').src = artwork.image;
+                        card.querySelector('.artwork-image-wrapper img').alt = artwork.title;
+                        card.querySelector('.artwork-number').textContent = artwork.number;
+                        card.querySelector('.artwork-title').textContent = artwork.title;
+                        card.querySelector('.artwork-medium').textContent = artwork.medium;
+                    }
+                });
+
+                // Fundir de nuevo a opaco
+                artistGrid.style.opacity = '1';
+                portfolioContainer.style.opacity = '1';
+            }, 250);
+        }
+
+        authorButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const authorKey = btn.dataset.author;
+                switchAuthor(authorKey);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+<!-- === [FIN] página GALERÍA === -->
