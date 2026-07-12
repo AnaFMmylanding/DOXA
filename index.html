@@ -1,3 +1,55 @@
+<!-- 
+=========================================================================
+ÍNDICE DE CONTENIDO EDITABLE E IMPORTANTE (LÍNEAS DE CÓDIGO)
+=========================================================================
+Este índice indica la línea de código exacta de los elementos clave de la página de inicio.
+Nota: Si añades o eliminas líneas en este archivo, los números pueden variar ligeramente.
+
+-------------------------------------------------------------------------
+1. SECCIÓN HERO (PORTADA / CABECERA)
+-------------------------------------------------------------------------
+- Imagen de fondo de cabecera: Línea 824
+- Título principal ("DOXA"): Línea 833
+- Lema / Subtítulo: Línea 866
+- Botón CTA ("PROFUNDIZAR"): Línea 870
+
+-------------------------------------------------------------------------
+2. SECCIÓN PRESENTACIÓN ("DOXAS: LA MAGIA EXISTE")
+-------------------------------------------------------------------------
+- Imagen de portada de galleta: Línea 891
+- Título principal: Línea 896
+- Textos descriptivos de presentación: Línea 905
+
+-------------------------------------------------------------------------
+3. SECCIÓN FORMULACIÓN ("LA ARQUITECTURA DOXA")
+-------------------------------------------------------------------------
+- Título de la sección: Línea 1400
+- Textos descriptivos: Línea 1403
+
+-------------------------------------------------------------------------
+4. SECCIÓN RUEDA RADIAL DE ACTIVOS ("cajas-activos")
+-------------------------------------------------------------------------
+- Imagen de fondo por defecto: Línea 1432
+- Imagen de la galleta central: Línea 1439
+- Datos del JS (Títulos de activos, imágenes y descripciones): Línea 1459
+
+-------------------------------------------------------------------------
+5. SECCIÓN EL PLACER / SABOR / ACCORDION
+-------------------------------------------------------------------------
+- Títulos y textos generales de la sección: Línea 2062
+- Imagen de galleta de muestra: Línea 2089
+- Título y descripción de variedad ("BÉSAME CHOCO"): Línea 2093
+- Ingredientes comunes y paneles: Línea 2110
+- Tabla comparativa de activos funcionales (OMS vs Doxa): Línea 2137
+
+-------------------------------------------------------------------------
+6. SECCIÓN RESERVAS ("RESERVAS")
+-------------------------------------------------------------------------
+- Título principal de la sección: Línea 2438
+- Textos descriptivos de reserva: Línea 2446
+- Botón / Enlace JotForm de reserva: Línea 2469
+=========================================================================
+-->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -83,26 +135,35 @@
         /* Estado al hacer scroll */
         .navbar.scrolled {
             height: 75px;
-            background-color: rgba(245, 241, 237, 0.85);
-            /* var(--light-bg) con transparencia */
+            background-color: transparent !important;
+            /* Totalmente transparente */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(60, 51, 42, 0.08);
-            /* var(--text-light) sutil */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            /* Línea sutil blanca */
         }
 
         .navbar-logo {
             font-family: 'Lato', sans-serif;
-            font-size: 20px;
+            font-size: 14px;
+            /* Letras DOXA más pequeñas */
             font-weight: 500;
-            letter-spacing: 6px;
-            color: #FFFFFF;
+            letter-spacing: 4px;
+            /* Ajuste de espaciado */
+            color: #FFFFFF !important;
+            background-color: transparent !important;
+            padding: 12px 0;
+            border: none !important;
             text-transform: uppercase;
-            transition: color 0.4s ease;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .navbar.scrolled .navbar-logo {
-            color: var(--text-light);
+            color: #000000 !important;
+            background-color: transparent !important;
         }
 
         .navbar-menu {
@@ -123,65 +184,79 @@
             transition: color 0.4s ease;
         }
 
-        .navbar-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
         .navbar-link:hover {
             color: #FFFFFF;
         }
 
-        .navbar-link:hover::after {
-            width: 100%;
+        .navbar-link:focus,
+        .navbar-link:active {
+            outline: none !important;
+            text-decoration: none !important;
         }
 
         .navbar.scrolled .navbar-link {
-            color: rgba(60, 51, 42, 0.8);
+            color: #000000 !important;
+            /* Texto negro en scroll */
         }
 
         .navbar.scrolled .navbar-link:hover {
-            color: var(--text-light);
+            color: #524b3f !important;
+            /* Negro más claro al hacer hover */
         }
 
-        .navbar.scrolled .navbar-link::after {
-            background-color: var(--text-light);
-        }
-
-        /* Botón de Galería destacado */
+        /* Botón de Galería destacado (Transparente sin fondo negro) */
         .btn-gallery {
             font-family: 'Lexend', sans-serif;
             font-size: 11px;
             font-weight: 500;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: #150e02;
-            background-color: var(--accent-color);
+            color: rgba(255, 255, 255, 0.8) !important;
+            background-color: transparent !important;
+            /* Quitado fondo negro */
+            border: none !important;
+            /* Sin borde */
             padding: 10px 22px;
             transition: all 0.3s ease;
+            margin-left: -20px; /* Acerca Colección a Galería */
         }
 
         .btn-gallery:hover {
+            color: #ffffff !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
             transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(240, 255, 28, 0.3);
         }
 
         .navbar.scrolled .btn-gallery {
-            background-color: #3C332A;
-            /* Color de texto oscuro para que resalte más en navbar claro */
-            color: #F5F1ED;
+            background-color: transparent !important;
+            color: #000000 !important;
+            /* Negro en scroll */
+            border: none !important;
         }
 
         .navbar.scrolled .btn-gallery:hover {
-            background-color: var(--accent-color);
-            color: #150e02;
-            box-shadow: 0 4px 15px rgba(60, 51, 42, 0.2);
+            background-color: rgba(0, 0, 0, 0.05) !important;
+            color: #524b3f !important;
+        }
+
+        .btn-coleccion {
+            background-color: var(--accent-color) !important;
+            color: #000000 !important;
+            padding: 10px 22px !important;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        .btn-coleccion:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar.scrolled .btn-coleccion {
+            color: #000000 !important;
+            background-color: var(--accent-color) !important;
         }
 
         /* Menú Hamburguesa Móvil */
@@ -205,7 +280,7 @@
         }
 
         .navbar.scrolled .mobile-toggle span {
-            background-color: var(--text-light);
+            background-color: #000000 !important;
         }
 
         /* Estilos del menú móvil desplegable */
@@ -253,16 +328,23 @@
                 color: #FFFFFF !important;
             }
 
-            .navbar-link::after {
-                background-color: var(--accent-color) !important;
+            .btn-gallery {
+                background-color: transparent !important;
+                color: #ffffff !important;
+                border: none !important;
+                width: 100%;
+                text-align: center;
+                padding: 15px 0;
+                font-size: 14px;
+                margin-left: 0 !important;
             }
 
-            .btn-gallery {
+            .btn-coleccion {
                 background-color: var(--accent-color) !important;
                 color: #150e02 !important;
                 width: 100%;
                 text-align: center;
-                padding: 15px 0;
+                padding: 15px 0 !important;
                 font-size: 14px;
             }
 
@@ -400,7 +482,10 @@
         .btn-oro {
             display: inline-block;
             padding: 14px 60px;
-            font-weight: 500;
+            font-family: 'Lato', sans-serif;
+            /* Fuente Lato */
+            font-weight: 300;
+            /* Fina */
             text-transform: uppercase;
             font-size: 11px;
             /* Igual que el botón RESERVAR (Punto 1) */
@@ -412,8 +497,7 @@
 
             background-color: #000000;
             /* Fondo negro */
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            /* Contorno sutil */
+            border: none;
             box-shadow: none;
 
             /* Texto en el mismo color blanco de los botones de menú */
@@ -719,9 +803,8 @@
             </button>
 
             <div class="navbar-menu" id="navbarMenu">
-                <a href="#" class="navbar-link">Inicio</a>
-                <a href="#coleccion" class="navbar-link">Colección</a>
-                <a href="#reserva" class="navbar-link">Reservas</a>
+                <a href="#sobre-doxa" class="navbar-link">Sobre Doxa</a>
+                <a href="#coleccion" class="navbar-link btn-coleccion">Colección</a>
                 <!-- NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
                 <a href="galeria.html" class="navbar-link btn-gallery">Galería</a>
             </div>
@@ -732,7 +815,7 @@
            Esos elementos los encontrarás detallados en "galeria.html".
            ========================================================================= -->
 
-        /* SECCIÓN HEADER_ABOBE THE FOLD */
+        <!-- Antigravity: /*SECCIÓN HEADER_ABOBE THE FOLD*/ -->
 
 
 
@@ -740,7 +823,7 @@
             style="position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;">
 
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
-                <img src="Pelazo y uñas fuertes.jpg" alt="Fondo Doxa"
+                <img src="cabecera_index.jpg" alt="Fondo Doxa"
                     style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4);">
             </div>
 
@@ -782,7 +865,7 @@
                 <div
                     style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(11px, 1.5vw, 13px); color: #FFFFFF; margin: 25px auto 0 auto; line-height: 2; opacity: 0.9; text-align: center; max-width: 600px;">
                     <p>
-                        Donde placer y propósito se encuentran
+                        Donde placer, propósito y alma se encuentran
                     </p>
                 </div>
 
@@ -799,10 +882,10 @@
 
 
 
-        /* SECCIÓN PRESENTACIÓN DE LA DOXA */
+        <!-- Antigravity: /* SECCIÓN PRESENTACIÓN DE LA DOXA */ -->
 
         <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: #e0e1db (Tono yeso grisáceo alternativo) === -->
-        <section
+        <section id="sobre-doxa"
             style="padding: 100px 0; background-color: #e0e1db; color: var(--text-light); border-top: 1px solid rgba(0, 0, 0, 0.05);">
             <div class="container animate-appear" style="text-align: center;">
 
@@ -841,7 +924,7 @@
 
 
 
-        /* SECCIÓN FORMULACIÓN DOXA */
+        <!-- Antigravity: /* SECCIÓN FORMULACIÓN DOXA */ -->
 
 
         <style>
@@ -1070,7 +1153,7 @@
 
 
 
-        /* SUB-SECCIÓN RUEDA DE ACTIVOS + DESCRIPCIÓN + INGREDIENTES */
+        <!-- Antigravity: /* SUB-SECCIÓN RUEDA DE ACTIVOS + DESCRIPCIÓN + INGREDIENTES */ -->
         <style>
             .cajas-activos-section {
                 position: relative;
@@ -1919,11 +2002,8 @@
             })();
         </script>
     </section>
-    /* */
-
-
-
-    /* SECCIÓN EL SABOR DOXA */
+    <!-- Antigravity: /* */ -->
+    <!-- Antigravity: /* SECCIÓN EL SABOR DOXA */ -->
     <style>
         .product-info-grid {
             display: flex;
@@ -2168,10 +2248,8 @@
 
 
 
-    /* */
-
-
-    /* SECCIÓN RESERVA TUS DOXAS */
+    <!-- Antigravity: /* */ -->
+    <!-- Antigravity: /* SECCIÓN RESERVA TUS DOXAS */ -->
 
     <style>
         .checkout-section {
@@ -2243,6 +2321,10 @@
             background-color: #000;
             color: #fff;
             text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            /* Fuente Lato */
+            font-weight: 300;
+            /* Fina */
             font-size: 11px;
             letter-spacing: 3px;
             width: 100%;
@@ -2292,6 +2374,59 @@
             max-width: 600px;
             margin: 0 auto;
             opacity: 0.9;
+        }
+
+        /* FOOTER STYLES */
+        .gallery-footer {
+            background-color: #caccc3;
+            /* Gris Claro Cementoso */
+            color: #3C332A;
+            /* Color oscuro */
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Lato', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            letter-spacing: 8px;
+            margin-right: -8px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: #3C332A;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #3C332A;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+            color: #000000;
+        }
+
+        .footer-copy {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #3C332A;
+            opacity: 0.6;
+            text-transform: uppercase;
         }
     </style>
 
@@ -2360,7 +2495,21 @@
 
         observerReserva.observe(document.querySelector('#reserva'));
     </script>
-    /* */
+
+    <!-- FOOTER -->
+    <footer class="gallery-footer">
+        <div class="container">
+            <div class="footer-logo">DOXA</div>
+            <div class="footer-links">
+                <a href="#certificaciones" class="footer-link">Certificaciones</a>
+                <a href="#newsletter" class="footer-link">Newsletter</a>
+                <a href="#rrss" class="footer-link">Instagram</a>
+                <a href="#contacto" class="footer-link">Contacto</a>
+                <a href="#privacidad" class="footer-link">P. Privacidad</a>
+            </div>
+            <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
     <!-- =========================================================================
        [INICIO] página GALERÍA (SCRIPT JS DE LA BARRA DE NAVEGACIÓN)
@@ -2374,9 +2523,11 @@
             const navbarMenu = document.getElementById('navbarMenu');
             const navLinks = document.querySelectorAll('.navbar-link');
 
-            // Scroll listener para cambiar aspecto de la barra
+            // Scroll listener para cambiar aspecto de la barra al superar el hero
+            const hero = document.querySelector('.hero-container');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
+                const threshold = (hero ? hero.offsetHeight : window.innerHeight) - 90;
+                if (window.scrollY > threshold) {
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');

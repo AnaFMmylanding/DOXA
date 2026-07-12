@@ -1,4 +1,75 @@
 <!-- === [INICIO] página GALERÍA === -->
+<!-- 
+=========================================================================
+ÍNDICE DE CONTENIDO IMPORTANTE (LÍNEAS DE CÓDIGO)
+=========================================================================
+Este índice indica la línea de código exacta de los elementos clave de cada artista.
+Nota: Si añades o eliminas líneas en este archivo, los números pueden variar ligeramente.
+
+-------------------------------------------------------------------------
+1. ANA M. (FUNDADORA) & EL ATELIER
+-------------------------------------------------------------------------
+- Foto del artista (Retrato bio): Línea 1458
+- Texto de presentación/biografía: Línea 1464
+- Fichas y detalles de obras (comienzo): Línea 1514
+- Fotos de las obras:
+  * Obra I (Bésame Choco): Línea 1521
+  * Obra II (Café Delirium): Línea 1538
+  * Obra III (Lux-Umbra): Línea 1555
+  * Obra IV (Selva Negra): Línea 1572
+
+-------------------------------------------------------------------------
+2. ANTONIO GARCÍA VILLARÁN
+-------------------------------------------------------------------------
+- Foto del artista (Retrato bio): Línea 1606
+- Texto de presentación/biografía: Línea 1612
+- Fichas y detalles de obras (comienzo): Línea 1656
+- Fotos de las obras:
+  * Obra I (Monolito de Cacao): Línea 1663
+  * Obra II (Bloque Energético): Línea 1680
+  * Obra III (Prisma de Colágeno): Línea 1697
+  * Obra IV (Corteza de Foco): Línea 1714
+
+-------------------------------------------------------------------------
+3. MIQUEL BARCELÓ
+-------------------------------------------------------------------------
+- Foto del artista (Retrato bio): Línea 1749
+- Texto de presentación/biografía: Línea 1755
+- Fichas y detalles de obras (comienzo): Línea 1800
+- Fotos de las obras:
+  * Obra I (Relieve del Terruño): Línea 1807
+  * Obra II (Materia Marina): Línea 1824
+  * Obra III (Coral Molecular): Línea 1841
+  * Obra IV (Suelo de Cenizas): Línea 1858
+  * Obra V (Suelo de Cenizas - 5): Línea 1874
+  * Obra VI (Suelo de Cenizas - 6): Línea 1890
+
+-------------------------------------------------------------------------
+4. DAVID HOCKNEY
+-------------------------------------------------------------------------
+- Foto del artista (Retrato bio): Línea 1924
+- Texto de presentación/biografía: Línea 1930
+- Fichas y detalles de obras (comienzo): Línea 1974
+- Fotos de las obras:
+  * Obra I (El Gran Splash): Línea 1981
+  * Obra II (Piscina Azul): Línea 1998
+  * Obra III (Doble Retrato): Línea 2015
+  * Obra IV (Primavera Pop): Línea 2033
+
+-------------------------------------------------------------------------
+5. ANSELM KIEFER
+-------------------------------------------------------------------------
+- Foto del artista (Retrato bio): Línea 2067
+- Texto de presentación/biografía: Línea 2073
+- Fichas y detalles de obras (comienzo): Línea 2117
+- Fotos de las obras:
+  * Obra I (Cenizas de Plomo): Línea 2124
+  * Obra II (Ángeles Caídos): Línea 2141
+  * Obra III (Melancolía): Línea 2158
+  * Obra IV (Constelación Estelar): Línea 2175
+  * Obra V (Constelación Estelar - 5): Línea 2191
+=========================================================================
+-->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -22,8 +93,10 @@
 
         :root {
             /* === UBICACIÓN DE COLORES DE FONDO (PUNTO 4) === */
-            --yeso-oscuro: #e6e7e1; /* YESO OSCURO - Fondo general de la página y de las fichas de las cookies */
-            --yeso-claro: #f1f2ec;  /* YESO CLARO - Fondo del menú de creadores (submenu) y de la biografía/presentación */
+            --yeso-oscuro: #e6e7e1;
+            /* YESO OSCURO - Fondo general de la página y de las fichas de las cookies */
+            --yeso-claro: #f1f2ec;
+            /* YESO CLARO - Fondo del menú de creadores (submenu) y de la biografía/presentación */
             /* ============================================== */
             --dark-bg: var(--yeso-oscuro);
             --light-bg: #F5F1ED;
@@ -65,6 +138,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -76,10 +150,21 @@
             animation: fadeInSlideUp 0.8s ease-out forwards;
         }
 
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
 
         /* =========================================
            ESTILOS DE NAVEGACIÓN (NAVBAR)
@@ -102,24 +187,35 @@
 
         .navbar.scrolled {
             height: 75px;
-            background-color: rgba(245, 241, 237, 0.85);
+            background-color: transparent !important;
+            /* Totalmente transparente */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(60, 51, 42, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            /* Línea sutil blanca */
         }
 
         .navbar-logo {
             font-family: 'Lato', sans-serif;
-            font-size: 20px;
+            font-size: 14px;
+            /* Letras DOXA más pequeñas */
             font-weight: 500;
-            letter-spacing: 6px;
-            color: #FFFFFF;
+            letter-spacing: 4px;
+            /* Ajuste de espaciado */
+            color: #FFFFFF !important;
+            background-color: transparent !important;
+            padding: 12px 0;
+            border: none !important;
             text-transform: uppercase;
-            transition: color 0.4s ease;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .navbar.scrolled .navbar-logo {
-            color: var(--text-light);
+            color: #000000 !important;
+            background-color: transparent !important;
         }
 
         .navbar-menu {
@@ -130,7 +226,8 @@
 
         .navbar-link {
             font-family: 'Lexend', sans-serif;
-            font-size: 10px; /* Tamaño de letra del menú más pequeño */
+            font-size: 10px;
+            /* Tamaño de letra del menú más pequeño */
             font-weight: 400;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -142,26 +239,40 @@
             color: #FFFFFF;
         }
 
+        .navbar-link:focus,
+        .navbar-link:active {
+            outline: none !important;
+            text-decoration: none !important;
+        }
+
         .navbar.scrolled .navbar-link {
-            color: rgba(60, 51, 42, 0.8);
+            color: #000000 !important;
+            /* Texto negro en scroll */
         }
 
         .navbar.scrolled .navbar-link:hover {
-            color: var(--text-light);
+            color: #524b3f !important;
+            /* Negro más claro al hacer hover */
         }
 
-        /* Botón de Galería destacado sin fondo amarillo, contorno transparente */
+        /* Botón de Galería destacado sin fondo amarillo, contorno transparente y sin borde */
         .btn-gallery {
             font-family: 'Lexend', sans-serif;
-            font-size: 10px; /* Tamaño de letra más pequeño */
+            font-size: 10px;
+            /* Tamaño de letra más pequeño */
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #FFFFFF !important; /* Texto en blanco sobre fondo oscuro hero */
-            background-color: transparent !important; /* Fondo transparente */
-            border: 1px solid #FFFFFF !important; /* Recuadro de contorno blanco */
+            color: #FFFFFF !important;
+            /* Texto en blanco sobre fondo oscuro hero */
+            background-color: transparent !important;
+            /* Fondo transparente */
+            border: none !important;
+            /* Sin recuadro de contorno */
             padding: 10px 22px;
             transition: all 0.3s ease;
+            margin-left: -20px;
+            /* Acerca Colección a Galería */
         }
 
         .btn-gallery:hover {
@@ -172,13 +283,34 @@
 
         .navbar.scrolled .btn-gallery {
             background-color: transparent !important;
-            color: var(--text-light) !important; /* Texto en color oscuro cuando hace scroll */
-            border: 1px solid var(--text-light) !important; /* Contorno en color oscuro cuando hace scroll */
+            color: #000000 !important;
+            /* Negro en scroll */
+            border: none !important;
         }
 
         .navbar.scrolled .btn-gallery:hover {
-            background-color: rgba(60, 51, 42, 0.05) !important;
-            color: var(--text-light) !important;
+            background-color: rgba(0, 0, 0, 0.05) !important;
+            color: #524b3f !important;
+        }
+
+        .btn-coleccion {
+            background-color: var(--accent-color) !important;
+            color: #000000 !important;
+            padding: 10px 22px !important;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        .btn-coleccion:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar.scrolled .btn-coleccion {
+            color: #000000 !important;
+            background-color: var(--accent-color) !important;
         }
 
         .mobile-toggle {
@@ -201,7 +333,7 @@
         }
 
         .navbar.scrolled .mobile-toggle span {
-            background-color: var(--text-light);
+            background-color: #000000 !important;
         }
 
         @media (max-width: 768px) {
@@ -209,6 +341,7 @@
                 padding: 0 25px;
                 height: 70px;
             }
+
             .navbar.scrolled {
                 height: 65px;
             }
@@ -253,6 +386,16 @@
                 text-align: center;
                 padding: 15px 0;
                 font-size: 14px;
+                margin-left: 0 !important;
+            }
+
+            .btn-coleccion {
+                background-color: var(--accent-color) !important;
+                color: #150e02 !important;
+                width: 100%;
+                text-align: center;
+                padding: 15px 0 !important;
+                font-size: 14px;
             }
 
             .mobile-toggle.active span:nth-child(1) {
@@ -275,7 +418,8 @@
            Controla la visualización del menú superior horizontal de autores.
            ========================================================================= */
         .authors-submenu-section {
-            background-color: var(--yeso-claro); /* <-- COLOR DE FONDO: YESO CLARO (#f1f2ec) (Punto 2 y 4) */
+            background-color: var(--yeso-claro);
+            /* <-- COLOR DE FONDO: YESO CLARO (#f1f2ec) (Punto 2 y 4) */
             padding: 40px 0 10px 0;
             text-align: center;
             border-bottom: 1px solid rgba(60, 51, 42, 0.05);
@@ -291,18 +435,21 @@
         .author-btn {
             font-family: 'Lexend', sans-serif;
             font-size: 10px;
-            font-weight: 400; /* Negro normal */
+            font-weight: 400;
+            /* Negro normal */
             letter-spacing: 2px;
             text-transform: uppercase;
             background: transparent;
-            border: none; /* Sin contorno gris */
+            border: none;
+            /* Sin contorno gris */
             padding: 14px 28px;
             cursor: pointer;
             transition: all 0.3s ease;
             color: #3C332A;
             border-radius: 0px;
             position: relative;
-            opacity: 0.6; /* Un poco atenuado si no está clicado */
+            opacity: 0.6;
+            /* Un poco atenuado si no está clicado */
         }
 
         .author-btn:hover {
@@ -311,12 +458,18 @@
         }
 
         .author-btn.active {
-            color: #000; /* Negro resalte */
-            font-weight: 700; /* Negrita resalte */
-            background-color: transparent; /* Sin color amarillo */
-            box-shadow: none; /* Sin sombra */
-            opacity: 1; /* Opacidad total */
+            color: #000;
+            /* Negro resalte */
+            font-weight: 700;
+            /* Negrita resalte */
+            background-color: transparent;
+            /* Sin color amarillo */
+            box-shadow: none;
+            /* Sin sombra */
+            opacity: 1;
+            /* Opacidad total */
         }
+
         /* =========================================================================
            [FIN ESTILOS] SUBMENÚ DE AUTORES Y ARTISTAS
            ========================================================================= */
@@ -372,11 +525,14 @@
 
         .gallery-hero-subtitle {
             font-family: 'Lexend', sans-serif;
-            font-size: clamp(10px, 1.5vw, 12px); /* Subtítulo en letra más pequeña */
+            font-size: clamp(10px, 1.5vw, 12px);
+            /* Subtítulo en letra más pequeña */
             font-weight: 300;
             letter-spacing: 4px;
-            text-transform: none; /* Permitir minúsculas */
-            color: #FFFFFF; /* De color blanco, sin amarillo */
+            text-transform: none;
+            /* Permitir minúsculas */
+            color: #FFFFFF;
+            /* De color blanco, sin amarillo */
             opacity: 0.8;
             max-width: 600px;
             margin: 0 auto;
@@ -386,7 +542,8 @@
            SECCIÓN ARTISTA (BIOGRAFÍA)
            ========================================= */
         .artist-section {
-            background-color: var(--yeso-claro); /* <-- COLOR DE FONDO DE BIOGRAFÍA Y CONTENEDOR: YESO CLARO (#f1f2ec) (Punto 4) */
+            background-color: var(--yeso-claro);
+            /* <-- COLOR DE FONDO DE BIOGRAFÍA Y CONTENEDOR: YESO CLARO (#f1f2ec) (Punto 4) */
             padding: 100px 0;
             color: var(--text-dark);
             border-bottom: 1px solid rgba(60, 51, 42, 0.08);
@@ -475,10 +632,12 @@
                 grid-template-columns: 1fr;
                 gap: 50px;
             }
+
             .artist-image-container {
                 max-width: 500px;
                 margin: 0 auto;
             }
+
             .artist-section {
                 padding: 70px 0;
             }
@@ -520,7 +679,8 @@
         }
 
         .artwork-card {
-            background-color: var(--yeso-oscuro); /* <-- COLOR DE FONDO DE CADA FICHA/TARJETA DE ARTISTA: YESO OSCURO (#e6e7e1) (Punto 4) */
+            background-color: var(--yeso-oscuro);
+            /* <-- COLOR DE FONDO DE CADA FICHA/TARJETA DE ARTISTA: YESO OSCURO (#e6e7e1) (Punto 4) */
             border: 1px solid rgba(60, 51, 42, 0.08);
             border-radius: 4px;
             padding: 30px;
@@ -552,7 +712,7 @@
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
-            filter: drop-shadow(0px 15px 20px rgba(0,0,0,0.2));
+            filter: drop-shadow(0px 15px 20px rgba(0, 0, 0, 0.2));
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
@@ -621,8 +781,171 @@
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
+
             .portfolio-section {
                 padding: 80px 0;
+            }
+        }
+
+        /* === ESTILOS DEL SLIDER DE OBRAS === */
+        .portfolio-slider-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .portfolio-scroll-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+        }
+
+        .portfolio-scroll-wrapper::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+
+        .portfolio-grid {
+            transition: opacity 0.25s ease;
+        }
+
+        .portfolio-grid:not(.grid-layout) {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            padding: 15px 5px;
+        }
+
+        .portfolio-grid.grid-layout {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            width: 100%;
+            gap: 30px;
+        }
+
+        .portfolio-grid:not(.grid-layout) .artwork-card {
+            flex: 0 0 280px;
+        }
+
+        @media (max-width: 600px) {
+            .portfolio-grid:not(.grid-layout) .artwork-card {
+                flex: 0 0 260px;
+            }
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background-color: transparent !important;
+            /* Sin fondo negro */
+            border: none !important;
+            /* Sin borde */
+            color: rgba(255, 255, 255, 0.6);
+            /* Blanco semitransparente por defecto */
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: none !important;
+            /* Sin sombra */
+        }
+
+        .scroll-arrow:hover {
+            background-color: transparent !important;
+            /* Sin resaltado amarillo */
+            color: #FFFFFF !important;
+            /* Blanco puro en hover */
+            transform: translateY(-50%) scale(1.25);
+            /* Escala ligeramente */
+        }
+
+        .scroll-arrow.left-arrow {
+            left: -24px;
+        }
+
+        .scroll-arrow.right-arrow {
+            right: -24px;
+        }
+
+        .scroll-arrow.hidden {
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        @media (max-width: 1200px) {
+            .scroll-arrow.left-arrow {
+                left: 10px;
+            }
+
+            .scroll-arrow.right-arrow {
+                right: 10px;
+            }
+        }
+
+        /* === ESTILOS PARA ZOOM DE IMAGEN Y FLECHAS DE LIGHTBOX === */
+        .lightbox-image {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.25) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: none !important;
+            color: var(--text-dark);
+            cursor: pointer;
+            z-index: 2100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+            border-radius: 50%;
+        }
+
+        .lightbox-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.85) !important;
+            color: #000000 !important;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-arrow.prev-arrow {
+            left: 40px;
+        }
+
+        .lightbox-arrow.next-arrow {
+            right: 40px;
+        }
+
+        @media (max-width: 1100px) {
+            .lightbox-arrow {
+                width: 45px;
+                height: 45px;
+            }
+
+            .lightbox-arrow.prev-arrow {
+                left: 15px;
+            }
+
+            .lightbox-arrow.next-arrow {
+                right: 15px;
             }
         }
 
@@ -635,16 +958,16 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background-color: rgba(21, 14, 2, 0.96);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background-color: rgba(14, 11, 8, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 2000;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             padding: 40px;
         }
 
@@ -655,15 +978,21 @@
 
         .lightbox-content {
             background-color: var(--light-bg);
-            width: 100%;
-            max-width: 1000px;
-            border-radius: 4px;
+            width: 1200px;
+            height: 750px;
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 6px;
             overflow: hidden;
-            display: grid;
-            grid-template-columns: 1.1fr 1.4fr;
-            box-shadow: 0px 40px 100px rgba(0, 0, 0, 0.6);
-            transform: scale(0.9);
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0px 40px 120px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
         }
 
@@ -671,59 +1000,167 @@
             transform: scale(1);
         }
 
-        .lightbox-close {
+        /* Botón de contraer/expandir descripción */
+        .lightbox-toggle-details {
             position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 35px;
-            height: 35px;
-            background: none;
-            border: none;
+            top: 20px;
+            right: 75px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.65) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: none !important;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
+            z-index: 2200;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--text-dark);
+        }
+
+        .lightbox-toggle-details:hover {
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #000000 !important;
+            transform: scale(1.1);
+        }
+
+        /* Botón de cerrar ficha */
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.65) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: none !important;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2200;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .lightbox-close span {
             position: absolute;
-            width: 20px;
-            height: 1px;
+            width: 18px;
+            height: 1.5px;
             background-color: var(--text-dark);
             transition: transform 0.3s ease;
         }
 
-        .lightbox-close span:nth-child(1) { transform: rotate(45deg); }
-        .lightbox-close span:nth-child(2) { transform: rotate(-45deg); }
+        .lightbox-close span:nth-child(1) {
+            transform: rotate(45deg);
+        }
+
+        .lightbox-close span:nth-child(2) {
+            transform: rotate(-45deg);
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.95) !important;
+            transform: scale(1.1);
+        }
 
         .lightbox-close:hover span {
             background-color: #000;
-            height: 1.5px;
+        }
+
+        /* Estado colapsado (vista grande de la obra) */
+        .lightbox-content.details-collapsed {
+            width: 950px;
+            height: 750px;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            overflow: visible !important;
+        }
+
+        .lightbox-content.details-collapsed .lightbox-close {
+            right: -230px;
+        }
+
+        .lightbox-content.details-collapsed .lightbox-toggle-details {
+            right: -175px;
+        }
+
+        .lightbox-content.details-collapsed .lightbox-right {
+            width: 0 !important;
+            padding: 0 !important;
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+        .lightbox-content.details-collapsed .lightbox-left {
+            border-right: none !important;
+            padding: 0px !important;
+            background-color: transparent !important;
+        }
+
+        .lightbox-content.details-collapsed .lightbox-image {
+            max-height: 100% !important;
+            max-width: 100% !important;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.15));
         }
 
         .lightbox-left {
-            background-color: rgba(60, 51, 42, 0.03);
+            background-color: rgba(60, 51, 42, 0.02);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
-            border-right: 1px solid rgba(60, 51, 42, 0.08);
+            padding: 30px;
+            border-right: 1px solid rgba(60, 51, 42, 0.06);
+            flex: 1;
+            height: 100%;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
         }
 
         .lightbox-image {
             max-width: 100%;
-            max-height: 400px;
+            max-height: 600px;
             object-fit: contain;
-            filter: drop-shadow(0px 25px 35px rgba(0,0,0,0.3));
+            filter: drop-shadow(0px 20px 45px rgba(0, 0, 0, 0.25));
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .lightbox-right {
-            padding: 50px;
+            width: 480px;
+            height: 100%;
+            padding: 50px 40px;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-            max-height: 90vh;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            flex-shrink: 0;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-sizing: border-box;
+            background-color: var(--light-bg);
+        }
+
+        .lightbox-right::-webkit-scrollbar {
+            display: none;
+        }
+
+        .lightbox-right-content {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         .sheet-number {
@@ -781,30 +1218,119 @@
             border-left: 2px solid var(--accent-color);
         }
 
+        /* =========================================
+           DISEÑO DE ADAPTACIÓN VERTICAL (OBRAS VERTICALES)
+           ========================================= */
+        /* Colapsado en formato vertical */
+        .lightbox-content.is-vertical.details-collapsed {
+            width: 580px;
+            height: 750px;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            overflow: visible !important;
+        }
+
+        .lightbox-content.is-vertical.details-collapsed .lightbox-close {
+            right: -230px;
+        }
+
+        .lightbox-content.is-vertical.details-collapsed .lightbox-toggle-details {
+            right: -175px;
+        }
+
+        .lightbox-content.is-vertical.details-collapsed .lightbox-left {
+            border-right: none !important;
+            padding: 0px !important;
+            height: 100%;
+            background-color: transparent !important;
+        }
+
+        .lightbox-content.is-vertical.details-collapsed .lightbox-image {
+            max-height: 100% !important;
+            max-width: 100% !important;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* =========================================
+           RESPONSIVIDAD MÓVIL Y TABLET
+           ========================================= */
         @media (max-width: 850px) {
-            .lightbox-content {
-                grid-template-columns: 1fr;
-                max-height: 90vh;
-            }
-            .lightbox-left {
-                padding: 30px;
-                border-right: none;
-                border-bottom: 1px solid rgba(60, 51, 42, 0.08);
-            }
-            .lightbox-image {
-                max-height: 200px;
-            }
-            .lightbox-right {
-                padding: 30px;
-            }
             .lightbox {
                 padding: 15px;
+            }
+
+            .lightbox-content,
+            .lightbox-content.is-vertical {
+                flex-direction: column;
+                width: 100%;
+                height: 82vh;
+                max-width: 100%;
+                max-height: 100%;
+            }
+
+            .lightbox-content.details-collapsed,
+            .lightbox-content.is-vertical.details-collapsed {
+                width: 100%;
+                height: 82vh;
+            }
+
+            .lightbox-left,
+            .lightbox-content.is-vertical .lightbox-left {
+                height: 45%;
+                padding: 15px;
+                border-right: none;
+                border-bottom: 1px solid rgba(60, 51, 42, 0.06);
+                flex: none;
+            }
+
+            .lightbox-content.details-collapsed .lightbox-left,
+            .lightbox-content.is-vertical.details-collapsed .lightbox-left {
+                height: 100%;
+                padding: 0px !important;
+            }
+
+            .lightbox-image,
+            .lightbox-content.is-vertical .lightbox-image {
+                max-height: 100%;
+            }
+
+            .lightbox-right,
+            .lightbox-content.is-vertical .lightbox-right {
+                width: 100%;
+                height: 55%;
+                padding: 25px 20px;
+            }
+
+            .lightbox-toggle-details {
+                right: 65px;
+                top: 15px;
+                width: 36px;
+                height: 36px;
+            }
+
+            .lightbox-close {
+                right: 15px;
+                top: 15px;
+                width: 36px;
+                height: 36px;
+            }
+
+            .lightbox-content.details-collapsed .lightbox-close {
+                right: 15px !important;
+            }
+
+            .lightbox-content.details-collapsed .lightbox-toggle-details {
+                right: 65px !important;
             }
         }
 
         .gallery-footer {
-            background-color: #caccc3; /* <-- COLOR DE FONDO DE ESTA SECCIÓN: #caccc3 (Gris Claro Cementoso en Footer) */
-            color: #3C332A; /* Color oscuro para contraste legible */
+            background-color: #caccc3;
+            /* <-- COLOR DE FONDO DE ESTA SECCIÓN: #caccc3 (Gris Claro Cementoso en Footer) */
+            color: #3C332A;
+            /* Color oscuro para contraste legible */
             padding: 60px 0;
             text-align: center;
         }
@@ -850,6 +1376,18 @@
             opacity: 0.6;
             text-transform: uppercase;
         }
+
+        /* Lógica de visibilidad y animación para múltiples fichas de artista */
+        .artist-section {
+            display: none;
+            opacity: 0;
+        }
+
+        .artist-section.active {
+            display: block;
+            opacity: 1;
+            animation: fadeInSlideUp 0.6s ease-out forwards;
+        }
     </style>
 </head>
 
@@ -860,7 +1398,7 @@
         <!-- NAVEGACIÓN PRINCIPAL -->
         <nav class="navbar" id="mainNavbar">
             <a href="index.html" class="navbar-logo">DOXA</a>
-            
+
             <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
                 <span></span>
                 <span></span>
@@ -868,9 +1406,8 @@
             </button>
 
             <div class="navbar-menu" id="navbarMenu">
-                <a href="index.html" class="navbar-link">Inicio</a>
-                <a href="index.html#coleccion" class="navbar-link">Colección</a>
-                <a href="index.html#reserva" class="navbar-link">Reservas</a>
+                <a href="index.html#sobre-doxa" class="navbar-link">Sobre Doxa</a>
+                <a href="index.html#coleccion" class="navbar-link btn-coleccion">Colección</a>
                 <a href="#" class="navbar-link btn-gallery">Galería</a>
             </div>
         </nav>
@@ -878,10 +1415,10 @@
         <!-- SECCIÓN HERO (EXPOSICIÓN) -->
         <header class="gallery-hero">
             <div class="gallery-hero-bg">
-                <img src="piel negra.jpg" alt="Exposición Doxa">
+                <img src="cabecera_galeria.jpg" alt="Exposición Doxa">
             </div>
             <div class="gallery-hero-content animate-appear">
-                <h1 class="gallery-hero-title">EXPOSICIÓN DOXA</h1>
+                <h1 class="gallery-hero-title">DOXA Y EL ARTE</h1>
                 <p class="gallery-hero-subtitle">La repostería funcional como arte de vanguardia</p>
             </div>
         </header>
@@ -896,10 +1433,14 @@
                 <div class="authors-nav">
                     <!-- ENLACE BOTÓN ARTISTA 1: ANA M. (ACTIVO POR DEFECTO) -->
                     <button class="author-btn active" data-author="ana">Ana M. (Fundadora)</button>
-                    <!-- ENLACE BOTÓN ARTISTA 2: MARCUS VANCE -->
-                    <button class="author-btn" data-author="marcus">Marcus Vance (Geometría)</button>
-                    <!-- ENLACE BOTÓN ARTISTA 3: ELENA ROSTOVA -->
-                    <button class="author-btn" data-author="elena">Elena Rostova (Botánica)</button>
+                    <!-- ENLACE BOTÓN ARTISTA 2: ANTONIO GARCÍA VILLARÁN -->
+                    <button class="author-btn" data-author="antonio">Antonio García Villarán</button>
+                    <!-- ENLACE BOTÓN ARTISTA 3: MIGUEL BARCELÓ -->
+                    <button class="author-btn" data-author="miguel">Miguel Barceló</button>
+                    <!-- ENLACE BOTÓN ARTISTA 4: DAVID HOCKNEY -->
+                    <button class="author-btn" data-author="david">David Hockney</button>
+                    <!-- ENLACE BOTÓN ARTISTA 5: ANSELM KIEFER -->
+                    <button class="author-btn" data-author="anselm">Anselm Kiefer</button>
                 </div>
             </div>
         </section>
@@ -907,35 +1448,44 @@
            [FIN HTML] SUBMENÚ DE ENLACES A CADA ARTISTA
            ========================================================================= -->
 
-        <!-- SECCIÓN ARTISTA (BIOGRAFÍA Y PORTAFOLIO DE OBRA INTEGRADOS - PARTE D) -->
-        <section class="artist-section">
+        <!-- =========================================================================
+           [INICIO FICHA ARTISTA: ANA M. (FUNDADORA)]
+           [AUTOR]: Ana M. & El Atelier
+           ========================================================================= -->
+        <section class="artist-section active" data-author="ana">
             <div class="container">
-                <!-- Presentación de la Biografía del Artista -->
+                <!-- [TEXTO DE PRESENTACIÓN Y BIOGRAFÍA] -->
                 <div class="artist-grid">
                     <div class="artist-image-container animate-appear delay-1">
-                        <!-- =========================================================================
-                           [FOTO DEL ARTISTA]
-                           Esta imagen se actualiza automáticamente al cambiar de autor en el menú.
-                           Ruta por defecto: artista_retrato.png
-                           ========================================================================= -->
-                        <img src="artista_retrato.png" id="artistPortrait" alt="Ana M. — Visionaria de DOXA">
+                        <!-- ÉSTA ES LA FOTO DE LA BIO -->
+                        <img src="artista_retrato.png" alt="Ana M. — Visionaria de DOXA">
                     </div>
                     <div class="artist-details animate-appear delay-2">
-                        <!-- [ETIQUETA Y NOMBRE DEL ARTISTA ACTIVO] -->
-                        <span class="artist-tagline" id="artistTagline">El Creador</span>
-                        <h2 class="artist-name" id="artistName">Ana M. & El Atelier</h2>
-                        
-                        <!-- [BIOGRAFÍA E HISTORIA DEL ARTISTA ACTIVO] -->
-                        <div class="artist-bio" id="artistBio">
-                            <p>Para Ana M., alma y mente científica detrás de <strong>DOXA</strong>, la repostería tradicional era un lienzo incompleto. Concibiendo la cocina no como una fábrica, sino como un taller de composición biológica, su trabajo busca fusionar la indulgencia física y el bienestar molecular.</p>
-                            
-                            <p>Con formación en gastronomía molecular y nutrición celular, Ana comenzó a experimentar con la deconstrucción de texturas. Su enfoque elimina por completo los ingredientes tradicionales inertes o perjudiciales (azúcares refinados, grasas hidrolizadas, harinas con alto índice glucémico) y los sustituye por soportes celulares y compuestos bioactivos.</p>
-                            
+                        <span class="artist-tagline">El Creador</span>
+                        <h2 class="artist-name">Ana M. & El Atelier</h2>
+
+                        <div class="artist-bio">
+                            <p>Para Ana M., alma y mente científica detrás de <strong>DOXA</strong>, la repostería
+                                tradicional era un lienzo incompleto. Concibiendo la cocina no como una fábrica, sino
+                                como un taller de composición biológica, su trabajo busca fusionar la indulgencia física
+                                y el bienestar molecular.</p>
+
+                            <p>Con formación en gastronomía molecular y nutrición celular, Ana comenzó a experimentar
+                                con la deconstrucción de texturas. Su enfoque elimina por completo los ingredientes
+                                tradicionales inertes o perjudiciales (azúcares refinados, grasas hidrolizadas, harinas
+                                con alto índice glucémico) y los sustituye por soportes celulares y compuestos
+                                bioactivos.</p>
+
                             <div class="artist-quote">
-                                «Diseñar una DOXA es un proceso de composición tridimensional. Busco el equilibrio perfecto entre la humedad táctil de la masa, la liberación de los aceites nobles y la integración de activos de alta pureza (péptidos, creatina, vitaminas) que actúan en armonía con tu organismo. No horneamos dulces; esculpimos salud estética.»
+                                «Diseñar una DOXA es un proceso de composición tridimensional. Busco el equilibrio
+                                perfecto entre la humedad táctil de la masa, la liberación de los aceites nobles y la
+                                integración de activos de alta pureza (péptidos, creatina, vitaminas) que actúan en
+                                armonía con tu organismo. No horneamos dulces; esculpimos salud estética.»
                             </div>
 
-                            <p>En esta exposición permanente, el atelier muestra la primera colección de obras de repostería molecular. Cuatro piezas únicas concebidas como esculturas funcionales que desafían las barreras entre el postre, el suplemento y la obra de arte visual.</p>
+                            <p>En esta exposición permanente, el atelier muestra la primera colección de obras de
+                                repostería molecular. Cuatro piezas únicas concebidas como esculturas funcionales que
+                                desafían las barreras entre el postre, el suplemento y la obra de arte visual.</p>
                         </div>
                     </div>
                 </div>
@@ -943,110 +1493,784 @@
                 <!-- Línea Divisoria Sutil entre la Biografía y las Obras -->
                 <hr style="border: 0; height: 1px; background-color: rgba(60, 51, 42, 0.1); margin: 60px 0;">
 
-                <!-- =========================================================================
-                   [PLANTILLA DE PORTAFOLIO DE OBRA LIGADA AL ARTISTA]
-                   Esta sección está contenida en la misma hoja del artista y se actualiza al unísono
-                   cuando se cambia el autor clicado en el menú.
-                   ========================================================================= -->
+                <!-- [OBRAS DEL ARTISTA] -->
                 <div class="portfolio-container animate-appear delay-3">
                     <div class="section-header" style="margin-bottom: 50px; text-align: left;">
-                        <h3 class="section-title" id="portfolioTitle" style="font-size: clamp(20px, 3vw, 24px); letter-spacing: 4px; text-transform: uppercase;">Obras de Ana M. & El Atelier</h3>
-                        <span class="section-subtitle" style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">Fichas de Exposición</span>
+                        <h3 class="section-title"
+                            style="font-size: clamp(20px, 3vw, 24px); letter-spacing: 4px; text-transform: uppercase;">
+                            Obras de Ana M. & El Atelier</h3>
+                        <span class="section-subtitle"
+                            style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">Fichas
+                            de Exposición</span>
                     </div>
 
-                    <!-- [INICIO GRID DE PORTAFOLIO Y FOTOS DE LA GALERÍA] -->
-                    <div class="portfolio-grid">
-                        <!-- Tarjeta Obra 1 / V / IX -->
-                        <article class="artwork-card" data-id="ana-1">
-                            <div class="artwork-image-wrapper">
-                                <!-- [FOTO DE LA OBRA 1 (POR DEFECTO BÉSAME CHOCO)] -->
-                                <img src="Galle choco.png" alt="Obra I: Bésame Choco">
-                            </div>
-                            <span class="artwork-number">Obra I</span>
-                            <h3 class="artwork-title">Bésame Choco</h3>
-                            <p class="artwork-medium">Masa de almendras premium, centro fundente de cacao fino, enriquecida con Péptidos de Colágeno y Ácido Hialurónico.</p>
-                            <button class="btn-view-details">Ver Ficha Técnica</button>
-                        </article>
+                    <div class="portfolio-slider-container">
+                        <button class="scroll-arrow left-arrow hidden" aria-label="Desplazar a la izquierda">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <div class="portfolio-scroll-wrapper">
+                            <div class="portfolio-grid">
+                                <!-- Tarjeta Obra I -->
+                                <article class="artwork-card" data-id="ana-1" data-weight="90 gramos por pieza"
+                                    data-base="Masa húmeda de almendra molida y manteca de cacao pura horneada lentamente, con un centro cremoso de avellanas y chocolate."
+                                    data-actives="Péptidos de Colágeno Hidrolizado (10g) para elasticidad dérmica, Ácido Hialurónico (120mg) para hidratación interna y Vitamina C (100mg) como cofactor de síntesis."
+                                    data-flavor="Cacao belga fundido, almendra tostada y un fondo dulce equilibrado con eritritol premium."
+                                    data-concept="Evocar la indulgencia táctil y sensorial de la cookie neoyorquina tradicional, reinterpretada para alimentar la estructura celular y promover la elasticidad de los tejidos conectivos en el día a día.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 1 -->
+                                        <img src="Galle choco.png" alt="Obra I: Bésame Choco">
+                                    </div>
+                                    <span class="artwork-number">Obra I</span>
+                                    <h3 class="artwork-title">Bésame Choco</h3>
+                                    <p class="artwork-medium">Masa de almendras premium, centro fundente de cacao fino,
+                                        enriquecida con Péptidos de Colágeno y Ácido Hialurónico.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
 
-                        <!-- Tarjeta Obra 2 / VI / X -->
-                        <article class="artwork-card" data-id="ana-2">
-                            <div class="artwork-image-wrapper">
-                                <!-- [FOTO DE LA OBRA 2 (POR DEFECTO CAPRICHO CAFÉ)] -->
-                                <img src="Galle cafe.png" alt="Obra II: Capricho Café">
-                            </div>
-                            <span class="artwork-number">Obra II</span>
-                            <h3 class="artwork-title">Capricho Café</h3>
-                            <p class="artwork-medium">Masa infusionada con extracto de café arábica ecológico, infusión de mantequilla de pasto y Aceite MCT.</p>
-                            <button class="btn-view-details">Ver Ficha Técnica</button>
-                        </article>
+                                <!-- Tarjeta Obra II -->
+                                <article class="artwork-card" data-id="ana-2" data-weight="90 gramos por pieza"
+                                    data-base="Masa cremosa infusionada con extracto de café arábica ecológico, mezclada con manteca de cacao y base de almendras."
+                                    data-actives="Aceite MCT (5g) que aporta cetonas de rápida absorción directa para el cerebro, L-Teanina para mitigar la ansiedad de la cafeína, y Vitamina D3 (2000 UI) para salud metabólica."
+                                    data-flavor="Café espresso concentrado, notas sutiles de avellana tostada y regusto aterciopelado de manteca noble."
+                                    data-concept="Un estudio sobre el foco cognitivo y la vitalidad sostenida. Diseñada para liberar cafeína y ácidos grasos saludables de forma progresiva, evitando caídas de insulina y potenciando la agudeza mental.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 2 -->
+                                        <img src="Galle cafe.png" alt="Obra II: Café Delirium">
+                                    </div>
+                                    <span class="artwork-number">Obra II</span>
+                                    <h3 class="artwork-title">Café Delirium</h3>
+                                    <p class="artwork-medium">Masa infusionada con extracto de café arábica ecológico,
+                                        infusión de mantequilla de pasto y Aceite MCT.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
 
-                        <!-- Tarjeta Obra 3 / VII / XI -->
-                        <article class="artwork-card" data-id="ana-3">
-                            <div class="artwork-image-wrapper">
-                                <!-- [FOTO DE LA OBRA 3 (POR DEFECTO BOSQUE SAGRADO)] -->
-                                <img src="Galle frutos bosque.png" alt="Obra III: Bosque Sagrado">
-                            </div>
-                            <span class="artwork-number">Obra III</span>
-                            <h3 class="artwork-title">Bosque Sagrado</h3>
-                            <p class="artwork-medium">Masa acidulada con arándanos silvestres y frambuesa liofilizada, con soporte de Creatina y fitonutrientes antiinflamatorios.</p>
-                            <button class="btn-view-details">Ver Ficha Técnica</button>
-                        </article>
+                                <!-- Tarjeta Obra III -->
+                                <article class="artwork-card" data-id="ana-3" data-weight="90 gramos por pieza"
+                                    data-base="Masa acidulada con trozos de arándanos silvestres, frambuesas liofilizadas, manteca pura y almendras."
+                                    data-actives="Monohidrato de Creatina premium (3g) para la producción de ATP muscular y celular, Jengibre orgánico (100mg) y extracto de Boswellia Serrata (250mg) para el alivio de la inflamación articular."
+                                    data-flavor="Frutos rojos ácidos en contraste con la dulzura cremosa del fondo y un punto picante muy ligero de jengibre."
+                                    data-concept="Una propuesta conceptualizada para la transición posterior al esfuerzo físico. Enfocada en recargar los depósitos de energía celulares y aliviar las articulaciones a través de potentes fitonutrientes.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 3 -->
+                                        <img src="Galle frutos bosque.png" alt="Obra III: Lux-Umbra">
+                                    </div>
+                                    <span class="artwork-number">Obra III</span>
+                                    <h3 class="artwork-title">Lux-Umbra</h3>
+                                    <p class="artwork-medium">Masa acidulada con arándanos silvestres y frambuesa
+                                        liofilizada, con soporte de Creatina y fitonutrientes antiinflamatorios.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
 
-                        <!-- Tarjeta Obra 4 / VIII / XII -->
-                        <article class="artwork-card" data-id="ana-4">
-                            <div class="artwork-image-wrapper">
-                                <!-- [FOTO DE LA OBRA 4 (POR DEFECTO OBSIDIANA NEGRA)] -->
-                                <img src="Galle choco negro.png" alt="Obra IV: Obsidiana Negra">
+                                <!-- Tarjeta Obra IV -->
+                                <article class="artwork-card" data-id="ana-4" data-weight="90 gramos por pieza"
+                                    data-base="Masa densa e intensa de cacao negro 90% con pepitas crujientes de chocolate al 100% libre de azúcares."
+                                    data-actives="Proteína de suero ultra-filtrada aislada (10g) para soporte muscular, Biotina (5mg) para estimular la síntesis de queratina, y Zinc orgánico para el cuidado de uñas, cabello y defensa celular."
+                                    data-flavor="Cacao amargo puro, notas de vainilla de Madagascar y un toque final crujiente de sal marina en escamas."
+                                    data-concept="Una composición monocromática dedicada a la fuerza y regeneración de las barreras externas del cuerpo (uñas y cabello). Creada especialmente para el paladar entrenado en el amargor del chocolate más puro.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 4 -->
+                                        <img src="Galle choco negro.png" alt="Obra IV: Selva Negra">
+                                    </div>
+                                    <span class="artwork-number">Obra IV</span>
+                                    <h3 class="artwork-title">Selva Negra</h3>
+                                    <p class="artwork-medium">Masa compacta de cacao negro 90% con pepitas crujientes al
+                                        100%, cargada con Biotina y Proteína de Suero aislada.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
                             </div>
-                            <span class="artwork-number">Obra IV</span>
-                            <h3 class="artwork-title">Obsidiana Negra</h3>
-                            <p class="artwork-medium">Masa compacta de cacao negro 90% con pepitas crujientes al 100%, cargada con Biotina y Proteína de Suero aislada.</p>
-                            <button class="btn-view-details">Ver Ficha Técnica</button>
-                        </article>
+                        </div>
+                        <button class="scroll-arrow right-arrow" aria-label="Desplazar a la derecha">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
                     </div>
-                    <!-- =========================================================================
-                       [FIN GRID DE PORTAFOLIO Y FOTOS DE LA GALERÍA]
-                       ========================================================================= -->
                 </div>
             </div>
         </section>
+        <!-- =========================================================================
+           [FIN FICHA ARTISTA: ANA M. (FUNDADORA)]
+           ========================================================================= -->
+
+        <!-- =========================================================================
+           [INICIO FICHA ARTISTA: ANTONIO GARCÍA VILLARÁN]
+           [AUTOR]: Antonio García Villarán
+           ========================================================================= -->
+        <section class="artist-section" data-author="antonio">
+            <div class="container">
+                <!-- [TEXTO DE PRESENTACIÓN Y BIOGRAFÍA] -->
+                <div class="artist-grid">
+                    <div class="artist-image-container animate-appear delay-1">
+                        <!-- ÉSTA ES LA FOTO DE LA BIO -->
+                        <img src="Antonio Garcia Villarán_autoretrato.webp" alt="Antonio García Villarán">
+                    </div>
+                    <div class="artist-details animate-appear delay-2">
+                        <span class="artist-tagline">El Crítico de la Materia</span>
+                        <h2 class="artist-name">Antonio García Villarán</h2>
+
+                        <div class="artist-bio">
+                            <p>Antonio García Villarán concibe la repostería funcional desde la tensión artística y la
+                                crítica de la materia. Su trabajo explora la desmitificación del postre tradicional,
+                                transformándolo en un soporte de expresión plástica de gran fuerza conceptual y
+                                nutricional.</p>
+                            <p>Utilizando elementos cromáticos de carácter sobrio y texturas de gran relieve (obtenidas
+                                con harinas ancestrales, cacao puro y carbón vegetal activo), sus galletas emulan
+                                piedras, bloques y fragmentos de obras escultóricas. Cada mordisco busca una experiencia
+                                de masticación consciente que active tanto los sentidos como la reflexión artística.</p>
+                            <div class="artist-quote">
+                                «El arte gastronómico no debe adormecer; debe provocar un despertar. Cada pieza en esta
+                                colección es una pequeña escultura comestible diseñada para nutrir el cerebro y retar
+                                las convenciones del sabor cotidiano.»
+                            </div>
+                            <p>Antonio presenta su colección en colaboración con DOXA, donde la densidad mineral y los
+                                nootrópicos se unen para potenciar el rendimiento creativo y la lucidez intelectual.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Línea Divisoria Sutil entre la Biografía y las Obras -->
+                <hr style="border: 0; height: 1px; background-color: rgba(60, 51, 42, 0.1); margin: 60px 0;">
+
+                <!-- [OBRAS DEL ARTISTA] -->
+                <div class="portfolio-container animate-appear delay-3">
+                    <div class="section-header" style="margin-bottom: 50px; text-align: left;">
+                        <h3 class="section-title"
+                            style="font-size: clamp(20px, 3vw, 24px); letter-spacing: 4px; text-transform: uppercase;">
+                            Obras de Antonio García Villarán</h3>
+                        <span class="section-subtitle"
+                            style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">Fichas
+                            de Exposición</span>
+                    </div>
+
+                    <div class="portfolio-slider-container">
+                        <button class="scroll-arrow left-arrow hidden" aria-label="Desplazar a la izquierda">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <div class="portfolio-scroll-wrapper">
+                            <div class="portfolio-grid">
+                                <!-- Tarjeta Obra I -->
+                                <article class="artwork-card" data-id="antonio-1" data-weight="90 gramos por pieza"
+                                    data-base="Masa compacta y ultra-densa con base de almendras y harina de coco, color negro intenso obtenido con carbón vegetal activo."
+                                    data-actives="Aislado de Proteína de Guisante (12g) para balance de aminoácidos, Magnesio Bisglicinato (200mg) para relajación neuromuscular y Zinc para soporte inmune."
+                                    data-flavor="Chocolate negro amargo extremo, notas ahumadas y de carbón mineral con un acabado de sal volcánica."
+                                    data-concept="Un ejercicio de brutalismo gastronómico. Estimular la fuerza muscular de recuperación a través de proteínas y magnesio concentrados en una estructura de máxima densidad y color carbón.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 1 -->
+                                        <img src="Antonio García Villarán 1.webp" alt="Obra I: Monolito de Cacao">
+                                    </div>
+                                    <span class="artwork-number">Obra I</span>
+                                    <h3 class="artwork-title">Monolito de Cacao</h3>
+                                    <p class="artwork-medium">Estructura mineralizada con base de almendras y harina de
+                                        coco, color negro intenso con carbón vegetal activo.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra II -->
+                                <article class="artwork-card" data-id="antonio-2" data-weight="90 gramos por pieza"
+                                    data-base="Galleta rectangular de alta compresión formulada con pasta de cacao puro, crema de cacahuete natural y manteca de cacao."
+                                    data-actives="Triglicéridos de Cadena Media (MCT) de coco purificado (8g) para energía directa en cetosis y Coenzima Q10 (50mg) para optimización mitocondrial."
+                                    data-flavor="Cacahuete salado muy denso combinado con la intensidad terrosa del cacao crudo."
+                                    data-concept="Desarrollada para proveer energía celular instantánea a largo plazo. Un bloque graso de combustión limpia y nulo impacto glucémico que apoya los periodos de ayuno intermitente o entrenamientos severos.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 2 -->
+                                        <img src="Antonio García Villarán 2.webp" alt="Obra II: Bloque Energético">
+                                    </div>
+                                    <span class="artwork-number">Obra II</span>
+                                    <h3 class="artwork-title">Bloque Energético</h3>
+                                    <p class="artwork-medium">Bloque rectangular con cacahuetes salados, pasta de cacao
+                                        puro y manteca de cacao noble.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra III -->
+                                <article class="artwork-card" data-id="antonio-3" data-weight="90 gramos por pieza"
+                                    data-base="Masa firme de almendras, aceite de aguacate y manteca de cacao con incrustaciones geométricas de nibs de cacao puro."
+                                    data-actives="Péptidos bioactivos de colágeno marino (8g) de bajo peso molecular y Sílice orgánico para reforzar tendones y densidad de los tejidos corporales."
+                                    data-flavor="Chocolate suave y mantecoso, con textura masticable y crujiente de los nibs."
+                                    data-concept="Enfocado en la integridad de las fascias corporales. Un soporte biológico mineral y de péptidos diseñado para atletas expuestos al desgaste de articulaciones y ligamentos.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 3 -->
+                                        <img src="Antonio García Villarán 3.webp" alt="Obra III: Prisma de Colágeno">
+                                    </div>
+                                    <span class="artwork-number">Obra III</span>
+                                    <h3 class="artwork-title">Prisma de Colágeno</h3>
+                                    <p class="artwork-medium">Masa geométrica firme de almendras, aceite de aguacate e
+                                        incrustaciones de nibs crudos.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra IV -->
+                                <article class="artwork-card" data-id="antonio-4" data-weight="90 gramos por pieza"
+                                    data-base="Masa de nuez de pecán molida y manteca de coco, con arándanos deshidratados de corte poligonal."
+                                    data-actives="Alfa-GPC (150mg) para potenciar la acetilcolina cerebral, L-Tirosina (500mg) para síntesis de dopamina y Vitamina B Complex completa para rendimiento cognitivo."
+                                    data-flavor="Nuez caramelizada (eritritol), notas de madera y acidez crujiente de los arándanos."
+                                    data-concept="Una cookie funcional orientada al rendimiento ejecutivo. Nutrientes nootrópicos que estimulan los neurotransmisores de la atención y la concentración durante retos intelectuales.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 4 -->
+                                        <img src="Antonio Garcia Villarán_La Carta de la Pitonisa.webp"
+                                            alt="Obra IV: Corteza de Foco">
+                                    </div>
+                                    <span class="artwork-number">Obra IV</span>
+                                    <h3 class="artwork-title">Corteza de Foco</h3>
+                                    <p class="artwork-medium">Masa de nuez de pecán molida y manteca de coco, con
+                                        arándanos deshidratados de corte poligonal.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+                            </div>
+                        </div>
+                        <button class="scroll-arrow right-arrow" aria-label="Desplazar a la derecha">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =========================================================================
+           [FIN FICHA ARTISTA: ANTONIO GARCÍA VILLARÁN]
+           ========================================================================= -->
+
+        <!-- =========================================================================
+           [INICIO FICHA ARTISTA: MIQUEL BARCELÓ]
+           [AUTOR]: Miquel Barceló
+           ========================================================================= -->
+        <section class="artist-section" data-author="miguel">
+            <div class="container">
+                <!-- [TEXTO DE PRESENTACIÓN Y BIOGRAFÍA] -->
+                <div class="artist-grid">
+                    <div class="artist-image-container animate-appear delay-1">
+                        <!-- ÉSTA ES LA FOTO DE LA BIO -->
+                        <img src="Mikel Barceló_él.webp" alt="Miquel Barceló">
+                    </div>
+                    <div class="artist-details animate-appear delay-2">
+                        <span class="artist-tagline">El Relieve de la Materia</span>
+                        <h2 class="artist-name">Miquel Barceló</h2>
+
+                        <div class="artist-bio">
+                            <p>Miquel Barceló, uno de los creadores contemporáneos más universales, traslada su
+                                experimentación pictórica y su relación visceral con la naturaleza del Mediterráneo a la
+                                repostería molecular de DOXA.</p>
+                            <p>Su enfoque escultórico utiliza masas orgánicas irregulares, relieves rugosos y contrastes
+                                de texturas ásperas e hidratadas. Empleando pigmentos naturales provenientes de
+                                fitoplacton, matcha, higos secos y frutos rojos silvestres deshidratados, sus obras
+                                parecen extraídas directamente del suelo marino o de la tierra arcillosa de su Mallorca
+                                natal.</p>
+                            <div class="artist-quote">
+                                «Cocinar y pintar son dos formas de transmutar la materia por efecto del fuego y el
+                                tiempo. Trabajo el relieve de la masa buscando que cada pliegue cuente una historia
+                                táctil antes de fundirse en el paladar.»
+                            </div>
+                            <p>Barceló propone una colección inspirada en la metamorfosis de la corteza terrestre, donde
+                                los ingredientes rústicos de alta pureza aportan propiedades antioxidantes y
+                                fitoterápicas excepcionales.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Línea Divisoria Sutil entre la Biografía y las Obras -->
+                <hr style="border: 0; height: 1px; background-color: rgba(60, 51, 42, 0.1); margin: 60px 0;">
+
+                <!-- [OBRAS DEL ARTISTA] -->
+                <div class="portfolio-container animate-appear delay-3">
+                    <div class="section-header" style="margin-bottom: 50px; text-align: left;">
+                        <h3 class="section-title"
+                            style="font-size: clamp(20px, 3vw, 24px); letter-spacing: 4px; text-transform: uppercase;">
+                            Obras de Miquel Barceló</h3>
+                        <span class="section-subtitle"
+                            style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">Fichas
+                            de Exposición</span>
+                    </div>
+
+                    <div class="portfolio-slider-container">
+                        <button class="scroll-arrow left-arrow hidden" aria-label="Desplazar a la izquierda">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <div class="portfolio-scroll-wrapper">
+                            <div class="portfolio-grid">
+                                <!-- Tarjeta Obra I -->
+                                <article class="artwork-card" data-id="miguel-1" data-weight="90 gramos por pieza"
+                                    data-base="Masa de avellanas rústica, con textura de relieve arenoso y trozos de higos silvestres secados al sol."
+                                    data-actives="L-Glutamina (5g) para la salud intestinal, colágeno de origen vegetal y sales minerales marinas biodisponibles."
+                                    data-flavor="Higo maduro concentrado, el toque salino de la costa mediterránea y un sutil fondo terroso de avellana."
+                                    data-concept="Un homenaje al paisaje mediterráneo seco y a la agricultura de secano, diseñado para fortalecer el sistema digestivo y la recuperación muscular.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 1 -->
+                                        <img src="Barceló 1.jpg" alt="Obra I: Relieve del Terruño">
+                                    </div>
+                                    <span class="artwork-number">Obra I</span>
+                                    <h3 class="artwork-title">Relieve del Terruño</h3>
+                                    <p class="artwork-medium">Base rústica de avellanas, higos secos de Mallorca y sal
+                                        marina, con aminoácidos y colágeno vegetal.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra II -->
+                                <article class="artwork-card" data-id="miguel-2" data-weight="90 gramos por pieza"
+                                    data-base="Base untuosa y densa de pistacho molido con toques crujientes de almendra, coloreada con matcha y clorofila natural."
+                                    data-actives="EGCG de matcha (antioxidante celular), extracto de espirulina para un soporte inmunológico y fósforo de semillas marinas."
+                                    data-flavor="Hierba dulce de matcha, la riqueza grasa del pistacho y un final suavemente balsámico."
+                                    data-concept="Inspirado en el lecho marino y las algas que flotan bajo la luz. Su meta nutricional es la protección contra el estrés oxidativo y la revitalización celular.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 2 -->
+                                        <img src="Barceló 2.jpg" alt="Obra II: Materia Marina">
+                                    </div>
+                                    <span class="artwork-number">Obra II</span>
+                                    <h3 class="artwork-title">Materia Marina</h3>
+                                    <p class="artwork-medium">Masa de pistacho silvestre y extracto de té matcha
+                                        ceremonial, rica en antioxidantes y clorofila.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra III -->
+                                <article class="artwork-card" data-id="miguel-3" data-weight="90 gramos por pieza"
+                                    data-base="Masa porosa y ligera de almendra y clara de huevo ecológica, con incrustaciones tridimensionales de bayas silvestres."
+                                    data-actives="Vitamina C natural del hibisco y la frambuesa, polifenoles antioxidantes y péptidos para la síntesis de colágeno natural."
+                                    data-flavor="Frutos rojos intensamente ácidos mezclados con la dulzura aérea de la almendra horneada."
+                                    data-concept="Simular la textura caliza y viva de los arrecifes. Apoyar la regeneración dérmica y vascular gracias a una masiva dosis de antioxidantes y vitamina C.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 3 -->
+                                        <img src="Barceló 3.jpg" alt="Obra III: Coral Molecular">
+                                    </div>
+                                    <span class="artwork-number">Obra III</span>
+                                    <h3 class="artwork-title">Coral Molecular</h3>
+                                    <p class="artwork-medium">Crujiente de almendras y frambuesa liofilizada que simula
+                                        la textura porosa de las formaciones coralinas.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra IV -->
+                                <article class="artwork-card" data-id="miguel-4" data-weight="90 gramos por pieza"
+                                    data-base="Base densa y crujiente de sésamo negro molido, cacao amargo y manteca de cacao pura."
+                                    data-actives="Biotina (5mg) para salud de la piel y cabello, Zinc quelado (15mg) para defensas celulares e inmunidad."
+                                    data-flavor="Tostado profundo del sésamo, amargor extremo de cacao y un toque mineral."
+                                    data-concept="La representación de la tierra quemada y la fertilidad que resurge. Una cookie enfocada en proveer oligoelementos clave para la salud cutánea y capilar.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 4 -->
+                                        <img src="Barceló 4.jpg" alt="Obra IV: Suelo de Cenizas">
+                                    </div>
+                                    <span class="artwork-number">Obra IV</span>
+                                    <h3 class="artwork-title">Suelo de Cenizas</h3>
+                                    <p class="artwork-medium">Masa compacta de cacao puro al 95% y sésamo negro tostado,
+                                        con biotina y zinc orgánico.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+                                <!-- Tarjeta Obra V -->
+                                <article class="artwork-card" data-id="miguel-4" data-weight="90 gramos por pieza"
+                                    data-base="Base densa y crujiente de sésamo negro molido, cacao amargo y manteca de cacao pura."
+                                    data-actives="Biotina (5mg) para salud de la piel y cabello, Zinc quelado (15mg) para defensas celulares e inmunidad."
+                                    data-flavor="Tostado profundo del sésamo, amargor extremo de cacao y un toque mineral."
+                                    data-concept="La representación de la tierra quemada y la fertilidad que resurge. Una cookie enfocada en proveer oligoelementos clave para la salud cutánea y capilar.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 5 -->
+                                        <img src="Barceló 5.jpg" alt="Obra IV: Suelo de Cenizas">
+                                    </div>
+                                    <span class="artwork-number">Obra IV</span>
+                                    <h3 class="artwork-title">Suelo de Cenizas</h3>
+                                    <p class="artwork-medium">Masa compacta de cacao puro al 95% y sésamo negro tostado,
+                                        con biotina y zinc orgánico.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+                                <!-- Tarjeta Obra VI -->
+                                <article class="artwork-card" data-id="miguel-4" data-weight="90 gramos por pieza"
+                                    data-base="Base densa y crujiente de sésamo negro molido, cacao amargo y manteca de cacao pura."
+                                    data-actives="Biotina (5mg) para salud de la piel y cabello, Zinc quelado (15mg) para defensas celulares e inmunidad."
+                                    data-flavor="Tostado profundo del sésamo, amargor extremo de cacao y un toque mineral."
+                                    data-concept="La representación de la tierra quemada y la fertilidad que resurge. Una cookie enfocada en proveer oligoelementos clave para la salud cutánea y capilar.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 6 -->
+                                        <img src="Barceló 6.jpg" alt="Obra IV: Suelo de Cenizas">
+                                    </div>
+                                    <span class="artwork-number">Obra IV</span>
+                                    <h3 class="artwork-title">Suelo de Cenizas</h3>
+                                    <p class="artwork-medium">Masa compacta de cacao puro al 95% y sésamo negro tostado,
+                                        con biotina y zinc orgánico.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+                            </div>
+                        </div>
+                        <button class="scroll-arrow right-arrow" aria-label="Desplazar a la derecha">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =========================================================================
+           [FIN FICHA ARTISTA: MIQUEL BARCELÓ]
+           ========================================================================= -->
+
+        <!-- =========================================================================
+           [INICIO FICHA ARTISTA: DAVID HOCKNEY]
+           [AUTOR]: David Hockney
+           ========================================================================= -->
+        <section class="artist-section" data-author="david">
+            <div class="container">
+                <!-- [TEXTO DE PRESENTACIÓN Y BIOGRAFÍA] -->
+                <div class="artist-grid">
+                    <div class="artist-image-container animate-appear delay-1">
+                        <!-- ÉSTA ES LA FOTO DE LA BIO -->
+                        <img src="Dvid Hockney retrato.jpg" alt="David Hockney">
+                    </div>
+                    <div class="artist-details animate-appear delay-2">
+                        <span class="artist-tagline">La Explosión de la Luz Pop</span>
+                        <h2 class="artist-name">David Hockney</h2>
+
+                        <div class="artist-bio">
+                            <p>David Hockney traslada su legendario estudio de la perspectiva, el color vibrante y los
+                                paisajes soleados de California al universo gastronómico de DOXA. Para Hockney, la
+                                comida debe ser un estallido de optimismo visual y vitalidad inmediata.</p>
+                            <p>Sus galletas se presentan como lienzos luminosos llenos de color pop. Utilizando
+                                extractos de frutas intensas como frambuesa, lima, maracuyá y espirulina azul, sus
+                                composiciones juegan con contrastes alegres y formas dinámicas que remiten al agua de
+                                sus famosas piscinas y al sol californiano.</p>
+                            <div class="artist-quote">
+                                «El color es lo más alegre que existe. La comida funcional debe nutrir el cuerpo, pero
+                                antes debe alimentar la alegría de vivir con una explosión de color puro y luz en el
+                                plato.»
+                            </div>
+                            <p>Hockney presenta una colección fresca y energética, donde los adaptógenos del optimismo y
+                                las vitaminas de rápida absorción restauran la vitalidad mental y el bienestar físico.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Línea Divisoria Sutil entre la Biografía y las Obras -->
+                <hr style="border: 0; height: 1px; background-color: rgba(60, 51, 42, 0.1); margin: 60px 0;">
+
+                <!-- [OBRAS DEL ARTISTA] -->
+                <div class="portfolio-container animate-appear delay-3">
+                    <div class="section-header" style="margin-bottom: 50px; text-align: left;">
+                        <h3 class="section-title"
+                            style="font-size: clamp(20px, 3vw, 24px); letter-spacing: 4px; text-transform: uppercase;">
+                            Obras de David Hockney</h3>
+                        <span class="section-subtitle"
+                            style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">Fichas
+                            de Exposición</span>
+                    </div>
+
+                    <div class="portfolio-slider-container">
+                        <button class="scroll-arrow left-arrow hidden" aria-label="Desplazar a la izquierda">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <div class="portfolio-scroll-wrapper">
+                            <div class="portfolio-grid">
+                                <!-- Tarjeta Obra I -->
+                                <article class="artwork-card" data-id="david-1" data-weight="90 gramos por pieza"
+                                    data-base="Base de coco y almendra, de textura blanda y refrescante, decorada con un salpicón de glaseado de eritritol."
+                                    data-actives="Extracto de Espirulina azul (rico en ficocianinas antioxidantes), L-Teanina (150mg) para el foco sereno y electrolitos de coco."
+                                    data-flavor="Menta fresca, lima ácida, coco cremoso y una dulzura muy ligera."
+                                    data-concept="Evocar el instante dinámico y refrescante de un salto al agua. Diseñada para rehidratar a nivel celular y refrescar la actividad neuronal de forma instantánea.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 1 -->
+                                        <img src="David Hockney piscina splash.webp" alt="Obra I: El Gran Splash">
+                                    </div>
+                                    <span class="artwork-number">Obra I</span>
+                                    <h3 class="artwork-title">El Gran Splash</h3>
+                                    <p class="artwork-medium">Masa suave de almendras y coco, teñida con espirulina azul
+                                        y aromatizada con menta y ralladura de lima.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra II -->
+                                <article class="artwork-card" data-id="david-2" data-weight="90 gramos por pieza"
+                                    data-base="Galleta de anacardos horneada suavemente para mantener un color claro, con un pozo central de crema de coco teñida con té de mariposa."
+                                    data-actives="Ácido Hialurónico (100mg) para soporte articular y dérmico, y magnesio marino para calmar el sistema nervioso."
+                                    data-flavor="Vainilla bourbon, coco dulce y la sutil cremosidad del anacardo tostado."
+                                    data-concept="Una inmersión en la serenidad visual y física del agua azul. Proporcionar calma sistémica y nutrición estructural para las articulaciones.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 2 -->
+                                        <img src="David Hockney piscina.webp" alt="Obra II: Piscina Azul">
+                                    </div>
+                                    <span class="artwork-number">Obra II</span>
+                                    <h3 class="artwork-title">Piscina Azul</h3>
+                                    <p class="artwork-medium">Masa compacta de anacardos y mantequilla de cacao, con
+                                        centro fundente turquesa natural.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra III -->
+                                <article class="artwork-card" data-id="david-3" data-weight="90 gramos por pieza"
+                                    data-base="Galleta dividida simétricamente en dos texturas y sabores contrastantes cocinados al unísono."
+                                    data-actives="Jengibre concentrado y cúrcuma (antiinflamatorios activos) combinados con antioxidantes del cacao puro."
+                                    data-flavor="Contraste dulce-amargo del chocolate frente al picante cítrico y fresco del jengibre y limón."
+                                    data-concept="Un estudio sobre la dualidad y las relaciones humanas. Estimular el metabolismo y aliviar la inflamación corporal mediante la sinergia de dos mundos gustativos.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 3 -->
+                                        <img src="David Hockney retratos doble padres.webp"
+                                            alt="Obra III: Doble Retrato">
+                                    </div>
+                                    <span class="artwork-number">Obra III</span>
+                                    <h3 class="artwork-title">Doble Retrato</h3>
+                                    <p class="artwork-medium">Composición de dos masas unidas: una mitad de cacao negro
+                                        y la otra mitad de jengibre y limón.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra IV -->
+                                <article class="artwork-card" data-id="david-4" data-weight="90 gramos por pieza"
+                                    data-base="Base de almendras y puré de frambuesas deshidratadas, decorada con flores de caléndula orgánica."
+                                    data-actives="Complejo de Vitaminas B completo para la obtención de energía celular y extracto de bayas de Goji (antioxidante)."
+                                    data-flavor="Frambuesa ácida, notas florales de caléndula y base untuosa de almendras."
+                                    data-concept="Celebrar el renacer de la luz y el color primaveral. Aportar micronutrientes esenciales para potenciar la energía física diaria y combatir el cansancio celular.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 4 -->
+                                        <img src="David Hockney3.jpg" alt="Obra IV: Primavera Pop">
+                                    </div>
+                                    <span class="artwork-number">Obra IV</span>
+                                    <h3 class="artwork-title">Primavera Pop</h3>
+                                    <p class="artwork-medium">Masa de frutos del bosque liofilizados con caléndula, rica
+                                        en vitaminas del grupo B.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+                            </div>
+                        </div>
+                        <button class="scroll-arrow right-arrow" aria-label="Desplazar a la derecha">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =========================================================================
+           [FIN FICHA ARTISTA: DAVID HOCKNEY]
+           ========================================================================= -->
+
+        <!-- =========================================================================
+           [INICIO FICHA ARTISTA: ANSELM KIEFER]
+           [AUTOR]: Anselm Kiefer
+           ========================================================================= -->
+        <section class="artist-section" data-author="anselm">
+            <div class="container">
+                <!-- [TEXTO DE PRESENTACIÓN Y BIOGRAFÍA] -->
+                <div class="artist-grid">
+                    <div class="artist-image-container animate-appear delay-1">
+                        <!-- ÉSTA ES LA FOTO DE LA BIO -->
+                        <img src="Anselm Kiefer_él.jpg" alt="Anselm Kiefer">
+                    </div>
+                    <div class="artist-details animate-appear delay-2">
+                        <span class="artist-tagline">La Alquimia del Plomo y la Memoria</span>
+                        <h2 class="artist-name">Anselm Kiefer</h2>
+
+                        <div class="artist-bio">
+                            <p>Anselm Kiefer concibe el arte como un proceso de transformación alquímica, historia y
+                                memoria colectiva. Su colaboración con DOXA da como resultado piezas de una belleza
+                                dramática y monolítica, casi geológica.</p>
+                            <p>Utilizando texturas quebradizas que recuerdan la tierra agrietada, cenizas e
+                                incrustaciones rústicas, sus galletas emplean ingredientes crudos y oscuros. El centeno,
+                                el sésamo negro, el cacao al 100% y los hongos medicinales se unen en composiciones
+                                densas y solemnes que evocan la materia primordial.</p>
+                            <div class="artist-quote">
+                                «El arte no es decoración; es ruina y renacimiento. Estas piezas de repostería
+                                representan el desgaste de la vida y el poder de los adaptógenos para reconstruir el
+                                cuerpo desde su núcleo biológico.»
+                            </div>
+                            <p>Kiefer nos presenta una colección profunda y reparadora, donde los adaptógenos
+                                restauradores y los minerales esenciales asisten al organismo en fases de reconstrucción
+                                física y mental profunda.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Línea Divisoria Sutil entre la Biografía y las Obras -->
+                <hr style="border: 0; height: 1px; background-color: rgba(60, 51, 42, 0.1); margin: 60px 0;">
+
+                <!-- [OBRAS DEL ARTISTA] -->
+                <div class="portfolio-container animate-appear delay-3">
+                    <div class="section-header" style="margin-bottom: 50px; text-align: left;">
+                        <h3 class="section-title"
+                            style="font-size: clamp(20px, 3vw, 24px); letter-spacing: 4px; text-transform: uppercase;">
+                            Obras de Anselm Kiefer</h3>
+                        <span class="section-subtitle"
+                            style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">Fichas
+                            de Exposición</span>
+                    </div>
+
+                    <div class="portfolio-slider-container">
+                        <button class="scroll-arrow left-arrow hidden" aria-label="Desplazar a la izquierda">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <div class="portfolio-scroll-wrapper">
+                            <div class="portfolio-grid">
+                                <!-- Tarjeta Obra I -->
+                                <article class="artwork-card" data-id="anselm-1" data-weight="90 gramos por pieza"
+                                    data-base="Masa densa y de corteza agrietada, hecha con centeno y sésamo negro molido, emulando texturas volcánicas."
+                                    data-actives="Ginseng siberiano (Eleuterococo) (300mg) para mejorar la resistencia al estrés físico, y Hierro orgánico de alta biodisponibilidad."
+                                    data-flavor="Tostado intenso, centeno rústico, con un regusto amargo y sutilmente ahumado."
+                                    data-concept="Inspirada en el plomo y las cenizas de la historia, esta galleta aporta adaptógenos clave para la resistencia ante condiciones extremas y fatiga.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 1 -->
+                                        <img src="Anselm Kiefer 1.jpg" alt="Obra I: Cenizas de Plomo">
+                                    </div>
+                                    <span class="artwork-number">Obra I</span>
+                                    <h3 class="artwork-title">Cenizas de Plomo</h3>
+                                    <p class="artwork-medium">Masa densa de centeno integral y sésamo negro tostado, con
+                                        extracto de raíz de Ginseng siberiano.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra II -->
+                                <article class="artwork-card" data-id="anselm-2" data-weight="90 gramos por pieza"
+                                    data-base="Galleta de chocolate amargo extremo sin edulcorar, con relieve fracturado y granos de sal marina negra."
+                                    data-actives="Extracto de Ashwagandha KSM-66 (300mg) para reducir los niveles de cortisol, y Magnesio Bisglicinato (250mg)."
+                                    data-flavor="Cacao puro hiper-intenso con contrastes salinos crujientes y notas de madera."
+                                    data-concept="Un descenso a la sobriedad y la profundidad del cacao. Enfocada en mitigar la ansiedad y la sobrecarga neuromuscular del día a día.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 2 -->
+                                        <img src="Anselm Kiefer 2.jpg" alt="Obra II: Ángeles Caídos">
+                                    </div>
+                                    <span class="artwork-number">Obra II</span>
+                                    <h3 class="artwork-title">Ángeles Caídos</h3>
+                                    <p class="artwork-medium">Masa de cacao 100% puro y manteca de cacao noble con
+                                        escamas de sal negra de Chipre.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra III -->
+                                <article class="artwork-card" data-id="anselm-3" data-weight="90 gramos por pieza"
+                                    data-base="Galleta compacta de nueces molidas y semillas de calabaza rústicas, horneadas hasta obtener un tono bronceado oscuro."
+                                    data-actives="Extracto de Hongo Reishi (500mg) con betaglucanos para fortalecer el sistema inmune, y Zinc orgánico."
+                                    data-flavor="Nuez pecán caramelizada, el toque terroso del Reishi y fondo graso de semilla de calabaza."
+                                    data-concept="Un estudio sobre la introspección y la resiliencia del organismo. Diseñada para dar soporte al sistema de defensas durante periodos de fatiga o cambio estacional.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 3 -->
+                                        <img src="Anselm Kiefer 3.jpg" alt="Obra III: Melancolía">
+                                    </div>
+                                    <span class="artwork-number">Obra III</span>
+                                    <h3 class="artwork-title">Melancolía</h3>
+                                    <p class="artwork-medium">Base de nueces de pecán y semillas de calabaza con
+                                        extracto de hongo Reishi orgánico.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+
+                                <!-- Tarjeta Obra IV -->
+                                <article class="artwork-card" data-id="anselm-4" data-weight="90 gramos por pieza"
+                                    data-base="Galleta con relieve de cráteres, hecha de avellana molida, nibs esparcidos y un toque de polvo de oro comestible."
+                                    data-actives="Coenzima Q10 (100mg) para la respiración mitocondrial celular, y Vitamina E natural como antioxidante lipídico."
+                                    data-flavor="Avellana tostada crujiente, amargor intenso de los nibs y fondo de manteca pura."
+                                    data-concept="Concebida como un mapa celestial en el plato, esta cookie combina el poder antioxidante de la Q10 y la avellana para contrarrestar el envejecimiento celular.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 4 -->
+                                        <img src="Anselm Kiefer 4.jpg" alt="Obra IV: Constelación Estelar">
+                                    </div>
+                                    <span class="artwork-number">Obra IV</span>
+                                    <h3 class="artwork-title">Constelación Estelar</h3>
+                                    <p class="artwork-medium">Masa crujiente de avellanas con nibs de cacao amargo y
+                                        polvo de oro, con Coenzima Q10.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+                                <!-- Tarjeta Obra V -->
+                                <article class="artwork-card" data-id="anselm-4" data-weight="90 gramos por pieza"
+                                    data-base="Galleta con relieve de cráteres, hecha de avellana molida, nibs esparcidos y un toque de polvo de oro comestible."
+                                    data-actives="Coenzima Q10 (100mg) para la respiración mitocondrial celular, y Vitamina E natural como antioxidante lipídico."
+                                    data-flavor="Avellana tostada crujiente, amargor intenso de los nibs y fondo de manteca pura."
+                                    data-concept="Concebida como un mapa celestial en el plato, esta cookie combina el poder antioxidante de la Q10 y la avellana para contrarrestar el envejecimiento celular.">
+                                    <div class="artwork-image-wrapper">
+                                        <!-- FOTO OBRA 5 -->
+                                        <img src="Anselm Kiefer_whitecube.gif" alt="Obra IV: Constelación Estelar">
+                                    </div>
+                                    <span class="artwork-number">Obra IV</span>
+                                    <h3 class="artwork-title">Constelación Estelar</h3>
+                                    <p class="artwork-medium">Masa crujiente de avellanas con nibs de cacao amargo y
+                                        polvo de oro, con Coenzima Q10.</p>
+                                    <button class="btn-view-details">Ver Ficha Técnica</button>
+                                </article>
+                            </div>
+                        </div>
+                        <button class="scroll-arrow right-arrow" aria-label="Desplazar a la derecha">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =========================================================================
+           [FIN FICHA ARTISTA: ANSELM KIEFER]
+           ========================================================================= -->
 
         <!-- LIGHTBOX MODAL (FICHA TÉCNICA INTERACTIVA) -->
         <div class="lightbox" id="artworkLightbox">
+            <button class="lightbox-arrow prev-arrow" id="lightboxPrevBtn" aria-label="Obra anterior">
+                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
             <div class="lightbox-content">
                 <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar ficha">
                     <span></span>
                     <span></span>
                 </button>
+                <button class="lightbox-toggle-details" id="lightboxToggleDetails" aria-label="Contraer detalles">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6" id="toggleIconPath"></polyline>
+                    </svg>
+                </button>
                 <div class="lightbox-left">
                     <img src="" alt="" class="lightbox-image" id="lightboxImage">
                 </div>
                 <div class="lightbox-right">
-                    <span class="sheet-number" id="lightboxNumber"></span>
-                    <h3 class="sheet-title" id="lightboxTitle"></h3>
-                    
-                    <div class="sheet-row">
-                        <div class="sheet-label">Dimensiones</div>
-                        <div class="sheet-value" id="lightboxWeight">90 gramos por pieza</div>
-                    </div>
-                    <div class="sheet-row">
-                        <div class="sheet-label">Soporte</div>
-                        <div class="sheet-value" id="lightboxBase"></div>
-                    </div>
-                    <div class="sheet-row">
-                        <div class="sheet-label">Activos / Medios</div>
-                        <div class="sheet-value" id="lightboxActives"></div>
-                    </div>
-                    <div class="sheet-row">
-                        <div class="sheet-label">Perfil Sabor</div>
-                        <div class="sheet-value" id="lightboxFlavor"></div>
-                    </div>
-                    <div class="sheet-row">
-                        <div class="sheet-label">Concepto</div>
-                        <div class="sheet-value" id="lightboxConcept"></div>
+                    <div class="lightbox-right-content">
+                        <span class="sheet-number" id="lightboxNumber"></span>
+                        <h3 class="sheet-title" id="lightboxTitle"></h3>
+
+                        <div class="sheet-row">
+                            <div class="sheet-label">Dimensiones</div>
+                            <div class="sheet-value" id="lightboxWeight">90 gramos por pieza</div>
+                        </div>
+                        <div class="sheet-row">
+                            <div class="sheet-label">Soporte</div>
+                            <div class="sheet-value" id="lightboxBase"></div>
+                        </div>
+                        <div class="sheet-row">
+                            <div class="sheet-label">Activos / Medios</div>
+                            <div class="sheet-value" id="lightboxActives"></div>
+                        </div>
+                        <div class="sheet-row">
+                            <div class="sheet-label">Perfil Sabor</div>
+                            <div class="sheet-value" id="lightboxFlavor"></div>
+                        </div>
+                        <div class="sheet-row">
+                            <div class="sheet-label">Concepto</div>
+                            <div class="sheet-value" id="lightboxConcept"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <button class="lightbox-arrow next-arrow" id="lightboxNextBtn" aria-label="Siguiente obra">
+                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
         </div>
 
         <!-- FOOTER -->
@@ -1054,10 +2278,12 @@
             <div class="container">
                 <div class="footer-logo">DOXA</div>
                 <div class="footer-links">
-                    <a href="index.html" class="footer-link">Inicio</a>
-                    <a href="index.html#coleccion" class="footer-link">Colección</a>
-                    <a href="index.html#reserva" class="footer-link">Reservas</a>
-                    <a href="https://eu.jotform.com/form/260395833827366" target="_blank" class="footer-link">Reservar Caja</a>
+                    <a href="#certificaciones" class="footer-link">Certificaciones</a>
+                    <a href="#envios" class="footer-link">Envíos</a>
+                    <a href="#newsletter" class="footer-link">Newsletter</a>
+                    <a href="#rrss" class="footer-link">Instagram</a>
+                    <a href="#contacto" class="footer-link">Contacto</a>
+                    <a href="#privacidad" class="footer-link">P. Privacidad</a>
                 </div>
                 <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
             </div>
@@ -1067,190 +2293,15 @@
 
     <!-- SCRIPTS -->
     <script>
-        // =========================================================================
-        // [BASE DE DATOS] DATOS DE LOS ARTISTAS / AUTORES (BIOGRAFÍAS Y RETRATOS)
-        // =========================================================================
-        const authorsData = {
-            "ana": {
-                name: "Ana M. & El Atelier",
-                tagline: "El Creador",
-                portrait: "artista_retrato.png",
-                bio: `
-                    <p>Para Ana M., alma y mente científica detrás de <strong>DOXA</strong>, la repostería tradicional era un lienzo incompleto. Concibiendo la cocina no como una fábrica, sino como un taller de composición biológica, su trabajo busca fusionar la indulgencia física y el bienestar molecular.</p>
-                    <p>Con formación en gastronomía molecular y nutrición celular, Ana comenzó a experimentar con la deconstrucción de texturas. Su enfoque elimina por completo los ingredientes tradicionales inertes o perjudiciales (azúcares refinados, grasas hidrolizadas, harinas con alto índice glucémico) y los sustituye por soportes celulares y compuestos bioactivos.</p>
-                    <div class="artist-quote">
-                        «Diseñar una DOXA es un proceso de composición tridimensional. Busco el equilibrio perfecto entre la humedad táctil de la masa, la liberación de los aceites nobles y la integración de activos de alta pureza (péptidos, creatina, vitaminas) que actúan en armonía con tu organismo. No horneamos dulces; esculpimos salud estética.»
-                    </div>
-                    <p>En esta exposición permanente, el atelier muestra la primera colección de obras de repostería molecular. Cuatro piezas únicas concebidas como esculturas funcionales que desafían las barreras entre el postre, el suplemento y la obra de arte visual.</p>
-                `
-            },
-            "marcus": {
-                name: "Marcus Vance",
-                tagline: "Artista Invitado — Estructuras",
-                portrait: "marcus_retrato.png",
-                bio: `
-                    <p>Marcus Vance concibe la repostería funcional desde el rigor matemático y la arquitectura brutalista. Para él, una galleta no es solo un bocado; es un elemento estructural que debe soportar cargas nutricionales de alto rendimiento sin perder su estética monolítica.</p>
-                    <p>Especializado en formulación proteica y neuroestimulantes metabólicos, sus creaciones exploran las propiedades mecánicas de las grasas saludables de cadena media y el carbón activo. Su técnica consiste en moldear formas geométricas limpias y de colores oscuros, simulando piedras talladas, con texturas densas y crujientes.</p>
-                    <div class="artist-quote">
-                        «Una obra de repostería debe ser honesta. La textura brutalista y los colores telúricos reflejan el poder de los aminoácidos y los minerales que contienen. Busco una experiencia de masticación que despierte el foco neuronal y la fuerza física elemental.»
-                    </div>
-                    <p>Marcus presenta su colección <em>Monolitos Metálicos</em>, cuatro piezas de alto contenido proteico e ingredientes activos de regeneración profunda diseñados para atletas mentales y de alto rendimiento.</p>
-                `
-            },
-            "elena": {
-                name: "Elena Rostova",
-                tagline: "Artista Invitada — Fitoterapia",
-                portrait: "elena_retrato.png",
-                bio: `
-                    <p>Elena Rostova ve en la naturaleza un lienzo aromático y un laboratorio vivo. Con un trasfondo en fitoterapia tradicional y botánica de campo, su taller se enfoca en la modulación del estrés biológico y la restauración del equilibrio del sistema nervioso a través de adaptógenos.</p>
-                    <p>Su proceso artístico integra flores comestibles secadas al sol, infusiones de té matcha ceremonial y polvos de hongos medicinales como el Reishi y la Melena de León. Sus galletas exhiben formas orgánicas y fluidas, con un perfil visual colorido, decorado a mano, recordando paisajes de un jardín botánico silvestre.</p>
-                    <div class="artist-quote">
-                        «Trabajo con el reino vegetal para calmar la mente y armonizar el organismo. Los adaptógenos y las esencias florales no solo curan el estrés metabólico, sino que proporcionan notas olfativas y gustativas que te transportan a un estado de calma absoluta.»
-                    </div>
-                    <p>Su colección <em>Aura Floral & Adaptógenos</em> incluye cuatro composiciones delicadas donde el dulzor de la miel cruda y la frescura de los frutos del bosque envuelven una potente arquitectura medicinal.</p>
-                `
-            }
-        };
-
-        // =========================================================================
-        // [BASE DE DATOS] FICHA TÉCNICA Y FOTOS DE CADA UNA DE LAS 12 CREADAS (PARTE B)
-        // Puedes cambiar la foto (.image) y los detalles técnicos aquí.
-        // =========================================================================
-        const artworksData = {
-            // --- OBRAS DE ANA M. (ANA) ---
-            "ana-1": {
-                number: "Obra I",
-                title: "Bésame Choco",
-                image: "Galle choco.png",
-                medium: "Masa de almendras premium, centro fundente de cacao fino, enriquecida con Péptidos de Colágeno y Ácido Hialurónico.",
-                base: "Masa húmeda de almendra molida y manteca de cacao pura horneada lentamente, con un centro cremoso de avellanas y chocolate.",
-                actives: "Péptidos de Colágeno Hidrolizado (10g) para elasticidad dérmica, Ácido Hialurónico (120mg) para hidratación interna y Vitamina C (100mg) como cofactor de síntesis.",
-                flavor: "Cacao belga fundido, almendra tostada y un fondo dulce equilibrado con eritritol premium.",
-                concept: "Evocar la indulgencia táctil y sensorial de la cookie neoyorquina tradicional, reinterpretada para alimentar la estructura celular y promover la elasticidad de los tejidos conectivos en el día a día."
-            },
-            "ana-2": {
-                number: "Obra II",
-                title: "Capricho Café",
-                image: "Galle cafe.png",
-                medium: "Masa infusionada con extracto de café arábica ecológico, infusión de mantequilla de pasto y Aceite MCT.",
-                base: "Masa cremosa infusionada con extracto de café arábica ecológico, mezclada con manteca de cacao y base de almendras.",
-                actives: "Aceite MCT (5g) que aporta cetonas de rápida absorción directa para el cerebro, L-Teanina para mitigar la ansiedad de la cafeína, y Vitamina D3 (2000 UI) para salud metabólica.",
-                flavor: "Café espresso concentrado, notas sutiles de avellana tostada y regusto aterciopelado de manteca noble.",
-                concept: "Un estudio sobre el foco cognitivo y la vitalidad sostenida. Diseñada para liberar cafeína y ácidos grasos saludables de forma progresiva, evitando caídas de insulina y potenciando la agudeza mental."
-            },
-            "ana-3": {
-                number: "Obra III",
-                title: "Bosque Sagrado",
-                image: "Galle frutos bosque.png",
-                medium: "Masa acidulada con arándanos silvestres y frambuesa liofilizada, con soporte de Creatina y fitonutrientes.",
-                base: "Masa acidulada con trozos de arándanos silvestres, frambuesas liofilizadas, manteca pura y almendras.",
-                actives: "Monohidrato de Creatina premium (3g) para la producción de ATP muscular y celular, Jengibre orgánico (100mg) y extracto de Boswellia Serrata (250mg) para el alivio de la inflamación articular.",
-                flavor: "Frutos rojos ácidos en contraste con la dulzura cremosa del fondo y un punto picante muy ligero de jengibre.",
-                concept: "Una propuesta conceptualizada para la transición posterior al esfuerzo físico. Enfocada en recargar los depósitos de energía celulares y aliviar las articulaciones a través de potentes fitonutrientes."
-            },
-            "ana-4": {
-                number: "Obra IV",
-                title: "Obsidiana Negra",
-                image: "Galle choco negro.png",
-                medium: "Masa compacta de cacao negro 90% con pepitas crujientes al 100%, cargada con Biotina y Proteína de Suero aislada.",
-                base: "Masa densa e intensa de cacao negro 90% con pepitas crujientes de chocolate al 100% libre de azúcares.",
-                actives: "Proteína de suero ultra-filtrada aislada (10g) para soporte muscular, Biotina (5mg) para estimular la síntesis de queratina, y Zinc orgánico para el cuidado de uñas, cabello y defensa celular.",
-                flavor: "Cacao amargo puro, notas de vainilla de Madagascar y un toque final crujiente de sal marina en escamas.",
-                concept: "Una composición monocromática dedicada a la fuerza y regeneración de las barreras externas del cuerpo (uñas y cabello). Creada especialmente para el paladar entrenado en el amargor del chocolate más puro."
-            },
-
-            // --- OBRAS DE MARCUS VANCE (MARCUS) ---
-            "marcus-1": {
-                number: "Obra V",
-                title: "Monolito de Cacao",
-                image: "Galle choco negro.png",
-                medium: "Estructura mineralizada con base de almendras y harina de coco, color negro intenso obtenido con carbón vegetal activo.",
-                base: "Masa compacta y ultra-densa con base de almendras y harina de coco, color negro intenso obtenido con carbón vegetal activo.",
-                actives: "Aislado de Proteína de Guisante (12g) para balance de aminoácidos, Magnesio Bisglicinato (200mg) para relajación neuromuscular y Zinc para soporte inmune.",
-                flavor: "Chocolate negro amargo extremo, notas ahumadas y de carbón mineral con un acabado de sal volcánica.",
-                concept: "Un ejercicio de brutalismo gastronómico. Estimular la fuerza muscular de recuperación a través de proteínas y magnesio concentrados en una estructura de máxima densidad y color carbón."
-            },
-            "marcus-2": {
-                number: "Obra VI",
-                title: "Bloque Energético",
-                image: "Galle cafe.png",
-                medium: "Bloque rectangular formulado con cacahuetes salados, pasta de cacao puro y manteca de cacao noble.",
-                base: "Galleta rectangular de alta compresión formulada con pasta de cacao puro, crema de cacahuete natural y manteca de cacao.",
-                actives: "Triglicéridos de Cadena Media (MCT) de coco purificado (8g) para energía directa en cetosis y Coenzima Q10 (50mg) para optimización mitocondrial.",
-                flavor: "Cacahuete salado muy denso combinado con la intensidad terrosa del cacao crudo.",
-                concept: "Desarrollada para proveer energía celular instantánea a largo plazo. Un bloque graso de combustión limpia y nulo impacto glucémico que apoya los periodos de ayuno intermitente o entrenamientos severos."
-            },
-            "marcus-3": {
-                number: "Obra VII",
-                title: "Prisma de Colágeno",
-                image: "Galle choco.png",
-                medium: "Masa geométrica firme de almendras, aceite de aguacate y manteca de cacao con incrustaciones de nibs crudos.",
-                base: "Masa firme de almendras, aceite de aguacate y manteca de cacao con incrustaciones geométricas de nibs de cacao puro.",
-                actives: "Péptidos bioactivos de colágeno marino (8g) de bajo peso molecular y Sílice orgánico para reforzar tendones y densidad de los tejidos corporales.",
-                flavor: "Chocolate suave y mantecoso, con textura masticable y crujiente de los nibs.",
-                concept: "Enfocado en la integridad de las fascias corporales. Un soporte biológico mineral y de péptidos diseñado para atletas expuestos al desgaste de articulaciones y ligamentos."
-            },
-            "marcus-4": {
-                number: "Obra VIII",
-                title: "Corteza de Foco",
-                image: "Galle frutos bosque.png",
-                medium: "Masa de nuez de pecán molida y manteca de coco, con arándanos deshidratados de corte poligonal.",
-                base: "Masa de nuez de pecán molida y manteca de coco, con arándanos deshidratados de corte poligonal.",
-                actives: "Alfa-GPC (150mg) para potenciar la acetilcolina cerebral, L-Tirosina (500mg) para síntesis de dopamina y Vitamina B Complex completa para rendimiento cognitivo.",
-                flavor: "Nuez caramelizada (eritritol), notas de madera y acidez crujiente de los arándanos.",
-                concept: "Una cookie funcional orientada al rendimiento ejecutivo. Nutrientes nootrópicos que estimulan los neurotransmisores de la atención y la concentración durante retos intelectuales."
-            },
-
-            // --- OBRAS DE ELENA ROSTOVA (ELENA) ---
-            "elena-1": {
-                number: "Obra IX",
-                title: "Aura Lavanda & Té Matcha",
-                image: "Galle frutos bosque.png",
-                medium: "Masa blanda infusionada con té matcha ceremonial y decorada a mano con pétalos de lavanda orgánica.",
-                base: "Masa blanda y fluida infusionada con té matcha japonés ceremonial y decorada con pétalos de lavanda orgánica.",
-                actives: "Extracto de Ashwagandha KSM-66 (300mg) y L-Teanina (150mg) para mitigar el cortisol y reducir el estrés psicológico.",
-                flavor: "Hierba dulce de matcha, notas florales de lavanda y un final de leche de almendras.",
-                concept: "Un calmante sistémico en forma de galleta. Diseñado para bajar el ritmo de revoluciones mentales por la tarde y ayudar a transicionar hacia un estado de meditación o descanso nocturno."
-            },
-            "elena-2": {
-                number: "Obra X",
-                title: "Néctar Adaptógeno",
-                image: "Galle choco.png",
-                medium: "Masa cremosa de almendras y manteca de cacao, cargada con extracto de Hongo Reishi y Melena de León.",
-                base: "Masa cremosa endulzada con extracto de fruta del monje y mantequilla de almendras blancas, con un remolino de jalea adaptógena.",
-                actives: "Extracto de Hongo Reishi orgánico (500mg) para potenciar el sistema inmune, y extracto de Melena de León para neurogénesis cerebral.",
-                flavor: "Almendra dulce, toques ligeros de canela de Ceylán y un matiz terroso muy suave de los hongos medicinales.",
-                concept: "Un tributo a la micoterapia botánica. Apoyar el equilibrio de las células de defensa y mejorar la memoria a través de una masa sedosa e indulgente."
-            },
-            "elena-3": {
-                number: "Obra XI",
-                title: "Brisa de Jengibre & Cúrcuma",
-                image: "Galle cafe.png",
-                medium: "Masa ligera de nueces de macadamia y manteca pura de cacao, infusionada con raíz de jengibre y cúrcuma fresca.",
-                base: "Masa ligera de nueces de macadamia y manteca pura de cacao, infusionada con raíz de jengibre y cúrcuma fresca.",
-                actives: "Curcumina activa (200mg) combinada con pimienta negra para biodisponibilidad, actuando como un antiinflamatorio natural.",
-                flavor: "Especiado picante de jengibre, calidez de cúrcuma y la cremosidad de la nuez de macadamia.",
-                concept: "Activar el metabolismo y desinflamar el cuerpo de forma sistémica. Un perfil gustativo estimulante que revitaliza el sistema circulatorio y alivia molestias físicas menores."
-            },
-            "elena-4": {
-                number: "Obra XII",
-                title: "Rosa de Colágeno & Hibisco",
-                image: "Galle choco negro.png",
-                medium: "Masa densa de avellanas molidas, manteca de cacao pura y hibisco silvestre que aporta un tono rosáceo.",
-                base: "Masa densa de avellanas molidas, manteca de cacao pura y polvo de hibisco silvestre que aporta un tono ligeramente rosado.",
-                actives: "Péptidos de Colágeno (5g), extracto de pétalos de Rosa de Damasco y Coenzima Q10 para rejuvenecimiento celular.",
-                flavor: "Notas ácidas y afrutadas de hibisco, perfume sutil de rosa y la base untuosa de la avellana.",
-                concept: "Una oda botánica a la belleza y la salud celular de la piel. Antioxidantes florales y colágeno trabajando en sinergia para combatir los radicales libres generados por el sol y la fatiga diaria."
-            }
-        };
-
         // Control de Navbar (Scroll y Menú Móvil)
         const navbar = document.getElementById('mainNavbar');
         const mobileToggle = document.getElementById('mobileToggle');
         const navbarMenu = document.getElementById('navbarMenu');
 
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
+            const hero = document.querySelector('.gallery-hero');
+            const threshold = (hero ? hero.offsetHeight : window.innerHeight * 0.55) - 90;
+            if (window.scrollY > threshold) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
@@ -1262,10 +2313,13 @@
             navbarMenu.classList.toggle('active');
         });
 
-        // Control del Lightbox (Ficha Técnica)
+        // Control del Lightbox
         const lightbox = document.getElementById('artworkLightbox');
         const closeBtn = document.getElementById('lightboxClose');
-        const cards = document.querySelectorAll('.artwork-card');
+        const toggleDetailsBtn = document.getElementById('lightboxToggleDetails');
+        const lightboxContent = lightbox.querySelector('.lightbox-content');
+        const lightboxRightContent = lightbox.querySelector('.lightbox-right-content');
+        const toggleIconPath = document.getElementById('toggleIconPath');
 
         const lightboxImage = document.getElementById('lightboxImage');
         const lightboxNumber = document.getElementById('lightboxNumber');
@@ -1275,63 +2329,188 @@
         const lightboxFlavor = document.getElementById('lightboxFlavor');
         const lightboxConcept = document.getElementById('lightboxConcept');
 
-        function openLightbox(id) {
-            const data = artworksData[id];
-            if (!data) return;
+        const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+        const lightboxNextBtn = document.getElementById('lightboxNextBtn');
 
-            lightboxImage.src = data.image;
-            lightboxImage.alt = data.title;
-            lightboxNumber.textContent = data.number;
-            lightboxTitle.textContent = data.title;
-            lightboxBase.textContent = data.base;
-            lightboxActives.textContent = data.actives;
-            lightboxFlavor.textContent = data.flavor;
-            lightboxConcept.textContent = data.concept;
+        let activeArtworkElements = [];
+        let currentArtworkIndex = -1;
+
+        function openLightbox(card) {
+            if (!card) return;
+
+            const imageSrc = card.querySelector('.artwork-image-wrapper img').src;
+            const imageAlt = card.querySelector('.artwork-image-wrapper img').alt;
+            const number = card.querySelector('.artwork-number').textContent;
+            const title = card.querySelector('.artwork-title').textContent;
+
+            const base = card.getAttribute('data-base') || '';
+            const actives = card.getAttribute('data-actives') || '';
+            const flavor = card.getAttribute('data-flavor') || '';
+            const concept = card.getAttribute('data-concept') || '';
+            const weight = card.getAttribute('data-weight') || '90 gramos por pieza';
+
+            lightboxImage.src = imageSrc;
+            lightboxImage.alt = imageAlt;
+            lightboxNumber.textContent = number;
+            lightboxTitle.textContent = title;
+            lightboxBase.textContent = base;
+            lightboxActives.textContent = actives;
+            lightboxFlavor.textContent = flavor;
+            lightboxConcept.textContent = concept;
+
+            const weightElement = document.getElementById('lightboxWeight');
+            if (weightElement) weightElement.textContent = weight;
+
+            // Determinar si la obra es vertical o horizontal analizando la imagen
+            const imgTemp = new Image();
+            imgTemp.src = imageSrc;
+            imgTemp.onload = function () {
+                const isVertical = imgTemp.naturalHeight > imgTemp.naturalWidth;
+                if (isVertical) {
+                    lightboxContent.classList.add('is-vertical');
+                } else {
+                    lightboxContent.classList.remove('is-vertical');
+                }
+            };
+
+            const activeSection = card.closest('.artist-section');
+            if (activeSection) {
+                activeArtworkElements = Array.from(activeSection.querySelectorAll('.artwork-card'));
+                currentArtworkIndex = activeArtworkElements.indexOf(card);
+            }
+
+            if (lightboxRightContent) {
+                lightboxRightContent.style.opacity = '1';
+                lightboxRightContent.style.transform = 'translateY(0)';
+            }
 
             lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Bloquear scroll de fondo
+            document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox() {
             lightbox.classList.remove('active');
-            document.body.style.overflow = ''; // Restaurar scroll
+            lightboxContent.classList.remove('details-collapsed', 'is-vertical');
+            if (toggleIconPath) toggleIconPath.setAttribute('points', '9 18 15 12 9 6');
+            document.body.style.overflow = '';
         }
 
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                const id = card.dataset.id;
-                openLightbox(id);
-            });
+        function navigateLightbox(direction) {
+            if (activeArtworkElements.length === 0) return;
+            currentArtworkIndex = (currentArtworkIndex + direction + activeArtworkElements.length) % activeArtworkElements.length;
+            const nextCard = activeArtworkElements[currentArtworkIndex];
+
+            lightboxImage.style.opacity = '0';
+            if (lightboxRightContent) lightboxRightContent.style.opacity = '0';
+
+            setTimeout(() => {
+                const imageSrc = nextCard.querySelector('.artwork-image-wrapper img').src;
+                const imageAlt = nextCard.querySelector('.artwork-image-wrapper img').alt;
+                const number = nextCard.querySelector('.artwork-number').textContent;
+                const title = nextCard.querySelector('.artwork-title').textContent;
+
+                lightboxImage.src = imageSrc;
+                lightboxImage.alt = imageAlt;
+                lightboxNumber.textContent = number;
+                lightboxTitle.textContent = title;
+                lightboxBase.textContent = nextCard.getAttribute('data-base') || '';
+                lightboxActives.textContent = nextCard.getAttribute('data-actives') || '';
+                lightboxFlavor.textContent = nextCard.getAttribute('data-flavor') || '';
+                lightboxConcept.textContent = nextCard.getAttribute('data-concept') || '';
+                document.getElementById('lightboxWeight').textContent = nextCard.getAttribute('data-weight') || '90 gramos por pieza';
+
+                // Determinar si la obra es vertical o horizontal analizando la imagen
+                const imgTemp = new Image();
+                imgTemp.src = imageSrc;
+                imgTemp.onload = function () {
+                    const isVertical = imgTemp.naturalHeight > imgTemp.naturalWidth;
+                    if (isVertical) {
+                        lightboxContent.classList.add('is-vertical');
+                    } else {
+                        lightboxContent.classList.remove('is-vertical');
+                    }
+                };
+
+                lightboxImage.style.opacity = '1';
+                if (lightboxRightContent) lightboxRightContent.style.opacity = '1';
+            }, 300);
+        }
+
+        document.addEventListener('click', (e) => {
+            const card = e.target.closest('.artwork-card');
+            if (card) openLightbox(card);
         });
 
-        closeBtn.addEventListener('click', (e) => {
+        closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+
+        function toggleDetails() {
+            const isCollapsed = lightboxContent.classList.toggle('details-collapsed');
+            if (toggleIconPath) {
+                toggleIconPath.setAttribute('points', isCollapsed ? '15 18 9 12 15 6' : '9 18 15 12 9 6');
+            }
+        }
+
+        toggleDetailsBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            closeLightbox();
+            toggleDetails();
+        });
+
+        lightboxImage.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDetails();
         });
 
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
+            if (e.target === lightbox) closeLightbox();
         });
 
-        // Cerrar con tecla Escape
+        lightboxPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
+        lightboxNextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                closeLightbox();
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                else if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                else if (e.key === 'ArrowRight') navigateLightbox(1);
             }
         });
 
-        // =========================================================================
-        // [CONTROL JS] INTERACTIVIDAD DEL SUBMENÚ DE AUTORES (PARTE C)
-        // Gestiona el cambio de contenido dinámico para biografía, retrato y obras
-        // =========================================================================
+        const sliderContainers = [];
+        function initSliders() {
+            document.querySelectorAll('.portfolio-slider-container').forEach(container => {
+                const wrapper = container.querySelector('.portfolio-scroll-wrapper');
+                const grid = container.querySelector('.portfolio-grid');
+                const leftArrow = container.querySelector('.left-arrow');
+                const rightArrow = container.querySelector('.right-arrow');
+
+                function updateArrows() {
+                    const scrollLeft = wrapper.scrollLeft;
+                    const maxScrollLeft = wrapper.scrollWidth - wrapper.clientWidth;
+                    leftArrow.classList.toggle('hidden', scrollLeft <= 5);
+                    rightArrow.classList.toggle('hidden', scrollLeft >= maxScrollLeft - 5);
+                }
+
+                wrapper.addEventListener('scroll', updateArrows);
+                leftArrow.addEventListener('click', () => wrapper.scrollBy({ left: -310, behavior: 'smooth' }));
+                rightArrow.addEventListener('click', () => wrapper.scrollBy({ left: 310, behavior: 'smooth' }));
+
+                function checkLayout() {
+                    const needsSlider = window.innerWidth <= 768 || grid.querySelectorAll('.artwork-card').length > 4;
+                    grid.classList.toggle('grid-layout', !needsSlider);
+                    leftArrow.style.display = needsSlider ? 'flex' : 'none';
+                    rightArrow.style.display = needsSlider ? 'flex' : 'none';
+                    if (needsSlider) updateArrows();
+                }
+
+                window.addEventListener('resize', checkLayout);
+                checkLayout();
+                container.checkLayout = checkLayout;
+                sliderContainers.push(container);
+            });
+        }
+
         const authorButtons = document.querySelectorAll('.author-btn');
-        const artistPortrait = document.getElementById('artistPortrait');
-        const artistTagline = document.getElementById('artistTagline');
-        const artistName = document.getElementById('artistName');
-        const artistBio = document.getElementById('artistBio');
-        const artworkCards = document.querySelectorAll('.artwork-card');
+        const artistSections = document.querySelectorAll('.artist-section');
 
         function switchAuthor(authorKey) {
             // 1. Quitar activo de todos los botones y ponerlo en el seleccionado
@@ -1343,47 +2522,28 @@
                 }
             });
 
-            // 2. Transición suave de fundido para el contenido (biografía y tarjetas) sin alterar el fondo de la sección
-            const artistGrid = document.querySelector('.artist-grid');
-            const portfolioContainer = document.querySelector('.portfolio-container');
-            
-            artistGrid.style.opacity = '0.3';
-            artistGrid.style.transition = 'opacity 0.25s ease';
-            portfolioContainer.style.opacity = '0.3';
-            portfolioContainer.style.transition = 'opacity 0.25s ease';
+            // 2. Buscar la sección correspondiente y hacer transición
+            artistSections.forEach(section => {
+                if (section.dataset.author === authorKey) {
+                    section.style.display = 'block';
+                    section.classList.add('active');
 
-            setTimeout(() => {
-                // Actualizar biografía del autor activo
-                const author = authorsData[authorKey];
-                artistPortrait.src = author.portrait;
-                artistPortrait.alt = author.name;
-                artistTagline.textContent = author.tagline;
-                artistName.textContent = author.name;
-                artistBio.innerHTML = author.bio;
-
-                // Actualizar título del portafolio ligado al artista (Parte D)
-                document.getElementById('portfolioTitle').textContent = 'Obras de ' + author.name;
-
-                // Actualizar tarjetas de portafolio y fotos de la galería (Parte B)
-                artworkCards.forEach((card, idx) => {
-                    const artworkId = idx + 1;
-                    const artworkKey = `${authorKey}-${artworkId}`;
-                    const artwork = artworksData[artworkKey];
-
-                    if (artwork) {
-                        card.dataset.id = artworkKey;
-                        card.querySelector('.artwork-image-wrapper img').src = artwork.image;
-                        card.querySelector('.artwork-image-wrapper img').alt = artwork.title;
-                        card.querySelector('.artwork-number').textContent = artwork.number;
-                        card.querySelector('.artwork-title').textContent = artwork.title;
-                        card.querySelector('.artwork-medium').textContent = artwork.medium;
+                    // Reiniciar scroll a la izquierda
+                    const scrollWrapper = section.querySelector('.portfolio-scroll-wrapper');
+                    if (scrollWrapper) {
+                        scrollWrapper.scrollLeft = 0;
                     }
-                });
 
-                // Fundir de nuevo a opaco
-                artistGrid.style.opacity = '1';
-                portfolioContainer.style.opacity = '1';
-            }, 250);
+                    // Recalcular layout del slider de esta sección
+                    const container = section.querySelector('.portfolio-slider-container');
+                    if (container && typeof container.checkLayout === 'function') {
+                        container.checkLayout();
+                    }
+                } else {
+                    section.style.display = 'none';
+                    section.classList.remove('active');
+                }
+            });
         }
 
         authorButtons.forEach(btn => {
@@ -1392,6 +2552,13 @@
                 switchAuthor(authorKey);
             });
         });
+
+        // Inicializar sliders en la carga de la página
+        document.addEventListener('DOMContentLoaded', () => {
+            initSliders();
+        });
+        // Si ya cargó la página, llamar directamente por si acaso
+        initSliders();
     </script>
 
 </body>
