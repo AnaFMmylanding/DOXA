@@ -2379,62 +2379,53 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         }
 
         /* FOOTER STYLES */
+        /* =========================================
+           PIE DE PÁGINA DE LUJO SIMPLIFICADO
+           ========================================= */
         .gallery-footer {
-            background-color: #caccc3;
-            /* Gris Claro Cementoso */
+            background-color: #caccc3; /* Gris Claro Cementoso / Yeso Oscuro */
             color: #3C332A;
-            /* Color oscuro */
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-family: 'Lato', sans-serif;
-            font-size: 26px;
-            font-weight: 500;
-            letter-spacing: 8px;
-            margin-right: -8px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            color: #3C332A;
+            padding: 40px 0 25px 0; /* Menor altura */
+            text-align: left;
         }
 
         .footer-grid-container {
-            max-width: 1200px;
+            max-width: 1400px; /* Ampliado de 1200px para mayor amplitud */
             margin: 0 auto;
             padding: 0 40px;
         }
 
         .footer-columns-row {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-bottom: 50px;
-            text-align: center;
+            grid-template-columns: repeat(5, 1fr); /* Columnas perfectamente equidistantes */
+            gap: 30px; /* Mayor espacio entre columnas */
+            margin-bottom: 30px;
+            align-items: start;
         }
 
         .footer-column {
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
         }
 
         .footer-column-title {
             font-family: 'Lato', sans-serif;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: #3C332A;
-            margin-bottom: 25px;
-            border-bottom: 1px solid rgba(60, 51, 42, 0.1);
-            padding-bottom: 8px;
+            margin-bottom: 20px;
         }
 
         .footer-column-links {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
         }
 
         .footer-column-links .footer-link {
@@ -2443,52 +2434,30 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             color: #3C332A;
             text-decoration: none;
             opacity: 0.7;
-            line-height: 1.6;
+            line-height: 1.4;
             transition: all 0.3s ease;
+            font-weight: 300;
         }
 
         .footer-column-links .footer-link:hover {
             opacity: 1;
-            padding-left: 2px;
         }
 
-        .footer-middle-row {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr 1fr;
-            gap: 40px;
-            border-top: 1px solid rgba(60, 51, 42, 0.15);
-            padding: 40px 0;
-            margin-bottom: 40px;
-        }
-
-        .footer-middle-column {
+        .footer-newsletter-info {
             display: flex;
             flex-direction: column;
-        }
-
-        .footer-middle-column.customer-service {
-            text-align: left;
-            align-items: flex-start;
-        }
-
-        .footer-middle-column.newsletter-col {
-            text-align: center;
             align-items: center;
+            gap: 12px;
         }
 
-        .footer-middle-column.social-col {
-            text-align: center;
-            align-items: center;
-        }
-
-        .footer-service-info p,
         .footer-newsletter-info p {
             font-family: 'Lexend', sans-serif;
-            font-size: 11px;
+            font-size: 10px;
             color: #3C332A;
             opacity: 0.8;
-            line-height: 1.8;
-            margin-bottom: 15px;
+            margin-bottom: 0;
+            font-weight: 300;
+            letter-spacing: 0.2px;
         }
 
         .footer-link-underline {
@@ -2496,10 +2465,11 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             font-size: 11px;
             color: #3C332A;
             text-decoration: underline;
-            opacity: 0.8;
-            font-weight: 500;
+            opacity: 0.7;
+            font-weight: 300;
             transition: opacity 0.3s ease;
             display: inline-block;
+            margin-bottom: 12px;
         }
 
         .footer-link-underline:hover {
@@ -2511,13 +2481,13 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             background-color: transparent;
             border: 1px solid #3C332A;
             color: #3C332A;
-            padding: 10px 24px;
+            padding: 8px 20px;
             font-family: 'Lexend', sans-serif;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 2px;
             text-transform: uppercase;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 400;
             transition: all 0.3s ease;
             text-align: center;
             width: fit-content;
@@ -2530,10 +2500,9 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
         .footer-social-icons {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
-            justify-content: center;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .social-icon {
@@ -2549,54 +2518,53 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             opacity: 1;
         }
 
-        .footer-copy {
-            font-size: 10px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            color: #3C332A;
-            opacity: 0.6;
-            text-transform: uppercase;
-        }
-
         .footer-bottom-row {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* Alinear a la derecha como en la captura */
             align-items: center;
             border-top: 1px solid rgba(60, 51, 42, 0.1);
-            padding-top: 30px;
+            padding-top: 20px;
+            margin-top: 10px;
         }
 
-        .location-link {
+        .footer-copy {
             font-family: 'Lexend', sans-serif;
             font-size: 10px;
-            letter-spacing: 1.5px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
             color: #3C332A;
-            text-decoration: none;
-            font-weight: 600;
+            opacity: 0.8;
+            text-align: right;
             text-transform: uppercase;
         }
 
-        /* Responsive */
         @media (max-width: 992px) {
             .footer-columns-row {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 30px;
             }
+            .footer-column:nth-child(5) {
+                align-items: flex-start;
+                text-align: left;
+            }
+        }
 
-            .footer-middle-row {
+        @media (max-width: 768px) {
+            .footer-columns-row {
                 grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .footer-middle-column.customer-service,
-            .footer-middle-column.newsletter-col,
-            .footer-middle-column.social-col {
+                gap: 25px;
                 text-align: center;
-                align-items: center;
             }
-
-            .footer-social-icons {
+            .footer-column {
+                align-items: center !important;
+                text-align: center !important;
+            }
+            .footer-bottom-row {
                 justify-content: center;
+                text-align: center;
+            }
+            .footer-copy {
+                text-align: center;
             }
         }
 
@@ -2681,196 +2649,78 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
     </script>
 
     <!-- =========================================================================
-       [INICIO] SECCIÓN DE FOOTER DE LUJO (ESTILO HERMÈS)
+       [INICIO] SECCIÓN DE FOOTER DE LUJO SIMPLIFICADO
        ========================================================================= -->
     <footer class="gallery-footer">
-        <div class="container footer-grid-container">
+        <div class="footer-grid-container">
 
-            <!-- [FILA 1] ENLACES PRINCIPALES EN COLUMNAS -->
+            <!-- Fila única con las 5 columnas en la misma banda -->
             <div class="footer-columns-row">
 
-                <!-- [COLUMNA 1] SERVICIOS -->
-                <!-- Todo el bloque de SERVICIOS desactivado temporalmente
+                <!-- [COLUMNA 1] CONTACTO -->
                 <div class="footer-column">
-                    <h4 class="footer-column-title">Servicios</h4>
+                    <h4 class="footer-column-title">Contacto</h4>
                     <div class="footer-column-links">
-                        [BOTÓN: Contacte con nosotros]
-                        <a href="#contacto" class="footer-link">Contacte con nosotros</a>
-
-                        [BOTÓN: Preguntas frecuentes]
-                        <a href="#faq" class="footer-link">Preguntas frecuentes</a>
-
-                        [BOTÓN: Encuentre una tienda]
-                        <a href="#tiendas" class="footer-link">Encuentre una tienda</a>
-
-                        [BOTÓN: Puntos de venta belleza]
-                        <a href="#puntos-belleza" class="footer-link">Puntos de venta con sección de belleza</a>
-
-                        [BOTÓN: Puntos de venta Apple Watch Hermès]
-                        <a href="#puntos-watch" class="footer-link">Puntos de venta de Apple Watch Hermès</a>
-
-                        [BOTÓN: Hacer un regalo]
-                        <a href="#regalo" class="footer-link">Hacer un regalo</a>
-
-                        [BOTÓN: A medida]
-                        <a href="#a-medida" class="footer-link">A medida</a>
-
-                        [BOTÓN: Mantenimiento y reparación]
-                        <a href="#mantenimiento" class="footer-link">Mantenimiento y reparación</a>
+                        <a href="mailto:tu-correo@ejemplo.com" class="footer-link-underline">Envíanos un correo</a>
+                        <div class="footer-social-icons">
+                            <a href="https://instagram.com" class="social-icon" target="_blank" aria-label="Instagram">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                -->
 
                 <!-- [COLUMNA 2] MIS PEDIDOS -->
                 <div class="footer-column">
                     <h4 class="footer-column-title">Mis Pedidos</h4>
                     <div class="footer-column-links">
-                        <!-- BOTÓN: Opciones de pago -->
                         <a href="#pagos" class="footer-link">Opciones de pago</a>
-
-                        <!-- BOTÓN: Opciones de entrega -->
                         <a href="#entregas" class="footer-link">Opciones de entrega</a>
-
-                        <!-- BOTÓN: Recogida en tienda
-                        <a href="#recogida" class="footer-link">Recogida en tienda</a>
-                        -->
-
-                        <!-- BOTÓN: Seguimiento de pedidos -->
                         <a href="#seguimiento" class="footer-link">Seguimiento de pedidos</a>
-
-                        <!-- BOTÓN: Cambios y devoluciones -->
                         <a href="#devoluciones" class="footer-link">Cambios y devoluciones</a>
                     </div>
                 </div>
-                <!-- [FIN COLUMNA: MIS PEDIDOS] -->
 
-                <!-- [COLUMNA 3] LA MAISON -->
-                <div class="footer-column">
-                    <h4 class="footer-column-title">La Maison Hermès</h4>
-                    <div class="footer-column-links">
-                        <!-- BOTÓN: Desarrollo sostenible
-                        <a href="#sostenibilidad" class="footer-link">Desarrollo sostenible</a>
-                        -->
-
-                        <!-- BOTÓN: La Fundación Corporativa -->
-                        <a href="#fundacion" class="footer-link">La Fundación Corporativa Hermès</a>
-
-                        <!-- BOTÓN: Empleo
-                        <a href="#empleo" class="footer-link">Empleo</a>
-                        -->
-
-                        <!-- BOTÓN: Finanzas y Gobernanza
-                        <a href="#finanzas" class="footer-link">Finanzas y Gobernanza</a>
-                        -->
-
-                        <!-- BOTÓN: Nuestros colaboradores
-                        <a href="#colaboradores" class="footer-link">Nuestros colaboradores</a>
-                        -->
-                    </div>
-                </div>
-                <!-- [FIN COLUMNA: LA MAISON] -->
-
-                <!-- [COLUMNA 4] AVISO LEGAL -->
-                <div class="footer-column">
-                    <h4 class="footer-column-title">Aviso Legal</h4>
-                    <div class="footer-column-links">
-                        <!-- BOTÓN: Condiciones generales de venta -->
-                        <a href="#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
-
-                        <!-- BOTÓN: Términos y condiciones de uso -->
-                        <a href="#terminos-uso" class="footer-link">Términos y condiciones generales de uso del sitio
-                            Hermès.com</a>
-
-                        <!-- BOTÓN: Política de confidencialidad -->
-                        <a href="#privacidad" class="footer-link">Política de confidencialidad</a>
-
-                        <!-- BOTÓN: Cookies -->
-                        <a href="#cookies" class="footer-link">Cookies</a>
-
-                        <!-- BOTÓN: BCR
-                        <a href="#bcr" class="footer-link">Normas corporativas vinculantes (BCR)</a>
-                        -->
-                        <!-- BOTÓN: Cuestiones jurídicas
-                        <a href="#juridico" class="footer-link">Cuestiones jurídicas</a>
-                        -->
-
-                        <!-- BOTÓN: Accesibilidad -->
-                        <a href="#accesibilidad" class="footer-link">ACCESIBILIDAD: PARCIALMENTE CONFORME</a>
-
-                        <!-- BOTÓN: Mapa del sitio -->
-                        <a href="#mapa-sitio" class="footer-link">Mapa del sitio Hermès.com</a>
-                    </div>
-                </div>
-                <!-- [FIN COLUMNA: AVISO LEGAL] -->
-
-            </div>
-
-            <!-- [FILA 2] ATENCIÓN AL CLIENTE, NEWSLETTER Y REDES -->
-            <div class="footer-middle-row">
-
-                <!-- [COLUMNA MIDDLE 1] CONTACTO -->
-                <div class="footer-middle-column customer-service">
-                    <h4 class="footer-column-title">Contacto</h4>
-                    <div class="footer-service-info">
-                        <!-- EDITAR EL MAILTO DEBAJO -->
-                        <p><a href="mailto:tu-correo@ejemplo.com" class="footer-link-underline">Envíanos un correo</a>
-                        </p>
-                    </div>
-
-                    <!-- Todo el bloque de texto desactivado temporalmente
-                    <div class="footer-service-info-old">
-                        <p><strong>Tienda online:</strong><br>De lunes a sábado, de 10:00 a 19:00.<br>Contáctenos por
-                            correo electrónico, por teléfono o por Whatsapp en el <strong>+34 91 414 99 36</strong></p>
-                        <p><strong>Tiendas físicas:</strong><br>De lunes a viernes, de 10:00 a 18:30.<br>Encontrará los
-                            datos de contacto en nuestro Store Locator.</p>
-                    </div>
-                    -->
-                </div>
-
-                <!-- [COLUMNA MIDDLE 2] NEWSLETTER -->
-                <div class="footer-middle-column newsletter-col">
+                <!-- [COLUMNA 3] NEWSLETTER -->
+                <div class="footer-column newsletter-col">
                     <h4 class="footer-column-title">Newsletter</h4>
                     <div class="footer-newsletter-info">
                         <p>Mantente en contacto con el mundo Doxa</p>
-                        <!-- BOTÓN DE SUSCRIPCIÓN -->
                         <a href="#newsletter-signup" class="btn-newsletter-subscribe">Suscribirse</a>
                     </div>
                 </div>
 
-                <!-- [COLUMNA MIDDLE 3] SEGUIRNOS (REDES SOCIALES) -->
-                <div class="footer-middle-column social-col">
-                    <h4 class="footer-column-title">Seguirnos</h4>
-                    <div class="footer-social-icons">
-                        <!-- ENLACE RED: Instagram -->
-                        <a href="https://instagram.com" class="social-icon" target="_blank" aria-label="Instagram">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                            </svg>
-                        </a>
+                <!-- [COLUMNA 4] LA MAISON -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">La Maison Hermès</h4>
+                    <div class="footer-column-links">
+                        <a href="#fundacion" class="footer-link">La Fundación Corporativa Hermès</a>
                     </div>
                 </div>
-                <!-- [FIN COLUMNA: SEGUIRNOS] -->
+
+                <!-- [COLUMNA 5] AVISO LEGAL -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">Aviso Legal</h4>
+                    <div class="footer-column-links">
+                        <a href="#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
+                        <a href="#privacidad" class="footer-link">Política de confidencialidad</a>
+                        <a href="#cookies" class="footer-link">Cookies</a>
+                    </div>
+                </div>
 
             </div>
 
-            <!-- [FILA 3] UBICACIÓN Y COPYRIGHT -->
+            <!-- Fila inferior: copyright alineado a la derecha -->
             <div class="footer-bottom-row">
-                <!-- SU UBICACIÓN -->
-                <div class="footer-location">
-                    <a href="#location" class="location-link">
-                        SU UBICACIÓN : ESPAÑA &gt;
-                    </a>
-                </div>
-
-                <!-- COPYRIGHT -->
                 <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
             </div>
 
         </div>
     </footer>
     <!-- =========================================================================
-       [FIN] SECCIÓN DE FOOTER DE LUJO (ESTILO HERMÈS)
+       [FIN] SECCIÓN DE FOOTER DE LUJO SIMPLIFICADO
        ========================================================================= -->
 
     <!-- =========================================================================
