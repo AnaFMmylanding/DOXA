@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artículos Artísticos | DOXA</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@100;300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================================
+           RESET TOTAL Y VARIABLES DINÁMICAS
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* === COLORES DE MARCA / DE LA WEB === */
+            --yeso-oscuro: #e6e7e1;
+            --yeso-claro: #f1f2ec;
+            --bg-color: var(--yeso-claro);
+            --text-color: #181818;
+            --nav-text-initial: rgba(24, 24, 24, 0.8);
+            --nav-logo-initial: #181818;
+            --nav-text-scrolled: #181818;
+            --nav-logo-scrolled: #181818;
+            --nav-scrolled-bg: rgba(241, 242, 236, 0.85);
+            --tag-bg: rgba(24, 24, 24, 0.06);
+            --tag-text: #181818;
+            --card-bg: #ffffff;
+            --card-text: #181818;
+            --accent-hover: #181818;
+            --accent-color: #f0ff1c;
+        }
+
+        body,
+        html {
+            width: 100%;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Lexend', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.8s ease, color 0.8s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* =========================================
+           BARRA DE NAVEGACIÓN (NAVBAR)
+           ========================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            background-color: transparent;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0);
+        }
+
+        .navbar.scrolled {
+            height: 75px;
+            background-color: var(--nav-scrolled-bg) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-logo {
+            font-family: 'Lato', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: var(--nav-logo-initial) !important;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar.scrolled .navbar-logo {
+            color: var(--nav-logo-scrolled) !important;
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .navbar-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--nav-text-initial);
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.4s ease;
+        }
+
+        .navbar.scrolled .navbar-link {
+            color: var(--nav-text-scrolled) !important;
+        }
+
+        .navbar-link:hover {
+            color: var(--text-color) !important;
+            opacity: 0.8;
+        }
+
+        .btn-gallery {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--nav-text-initial) !important;
+            background-color: transparent !important;
+            border: none !important;
+            padding: 10px 22px;
+            transition: all 0.3s ease;
+            margin-left: -20px;
+        }
+
+        .btn-gallery:hover {
+            background-color: rgba(0, 0, 0, 0.04) !important;
+            border-radius: 4px;
+        }
+
+        .navbar.scrolled .btn-gallery {
+            color: var(--nav-text-scrolled) !important;
+        }
+
+        .btn-coleccion {
+            background-color: var(--accent-color) !important;
+            color: #000000 !important;
+            padding: 10px 22px !important;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        .btn-coleccion:hover {
+            transform: scale(1.05);
+        }
+
+        /* Menú Hamburguesa Móvil */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 16px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Estilos del menú móvil desplegable */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 25px;
+                height: 70px;
+            }
+
+            .navbar.scrolled {
+                height: 65px;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .navbar-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 320px;
+                height: 100vh;
+                background-color: var(--nav-scrolled-bg);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 50px 40px;
+                gap: 30px;
+                transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+            }
+
+            .navbar-menu.active {
+                right: 0;
+            }
+
+            .navbar-link {
+                font-size: 16px;
+                color: var(--text-color) !important;
+            }
+
+            .btn-gallery {
+                margin-left: 0;
+                padding: 10px 0;
+                font-size: 16px;
+                color: var(--text-color) !important;
+            }
+        }
+
+        /* =========================================
+           ESTRUCTURA DEL ARTÍCULO (ESTILO HISTORIA-ARTE)
+           ========================================= */
+        .artwork-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            min-height: 100vh;
+            padding-top: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .artwork-container.fade-out {
+            opacity: 0;
+        }
+
+        /* Columna Izquierda: Imagen fija (Desktop) */
+        .artwork-figures {
+            width: 45%;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background-color: var(--yeso-oscuro);
+            overflow: hidden;
+            align-self: flex-start; /* Evita que se estire al alto de la columna de texto y permite el sticky */
+        }
+
+        .artwork-figure {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .artwork-figure img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: zoom-in;
+        }
+
+        .artwork-figure img:hover {
+            transform: scale(1.02);
+        }
+
+        .zoom-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 10px 22px;
+            background-color: var(--card-bg);
+            color: var(--card-text);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+
+        .zoom-btn:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Columna Derecha: Lectura y Ficha */
+        .artwork-content-scroll {
+            width: 55%;
+            padding: 120px 80px 100px 80px;
+            overflow-y: visible;
+        }
+
+        /* Header de la obra */
+        .artwork-header {
+            margin-bottom: 35px;
+        }
+
+        .artwork-title {
+            font-family: 'Lexend', sans-serif;
+            font-size: clamp(24px, 3.5vw, 42px);
+            font-weight: 300;
+            line-height: 1.3;
+            letter-spacing: clamp(4px, 1.5vw, 10px);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .artwork-subtitle {
+            font-family: 'Lexend', sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 2;
+            opacity: 0.85;
+            margin-bottom: 30px;
+            border-left: 2px solid var(--text-color);
+            padding-left: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .artwork-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .artwork-info .artist-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: opacity 0.2s ease;
+        }
+
+        .artwork-info .artist-link:hover {
+            opacity: 0.75;
+        }
+
+        .artwork-info .artist-link img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ficha Técnica y Taxonomía */
+        .artwork-details {
+            margin-bottom: 45px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .taxonomy-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .taxonomy-tags li a {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .taxonomy-tags li a:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            transform: translateY(-2px);
+        }
+
+        .taxonomy-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .taxonomy-info li {
+            display: flex;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.06);
+            padding-bottom: 8px;
+        }
+
+        .taxonomy-info li strong {
+            width: 180px;
+            flex-shrink: 0;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .taxonomy-info li span {
+            font-weight: 400;
+        }
+
+        /* Cuerpo del artículo */
+        .artwork-body {
+            font-family: 'Lexend', sans-serif;
+            font-size: 15px;
+            line-height: 2;
+            letter-spacing: 0.2px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .artwork-body p {
+            margin-bottom: 25px;
+        }
+
+        .artwork-body strong {
+            font-weight: 600;
+        }
+
+        .section-footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        /* Caja de colaboración */
+        .collaborate {
+            margin-top: 50px;
+            background-color: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            padding: 30px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .collaborate a {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+
+        .collaborate a:hover {
+            opacity: 0.7;
+        }
+
+        .collaborate a:last-child {
+            margin-bottom: 0;
+        }
+
+        /* responsividad en tablet/móvil */
+        @media (max-width: 992px) {
+            .artwork-container {
+                flex-direction: column;
+            }
+
+            .artwork-figures {
+                width: 100%;
+                height: 50vh;
+                position: relative;
+                top: 0;
+                padding: 0;
+            }
+
+            .artwork-figure img {
+                height: 100%;
+            }
+
+            .artwork-content-scroll {
+                width: 100%;
+                padding: 40px 30px;
+            }
+        }
+
+        /* =========================================
+           SECCIÓN INFERIOR: CARRUSEL RELACIONADO
+           ========================================= */
+        .artwork-related-group {
+            width: 100%;
+            padding: 80px 80px;
+            background-color: var(--yeso-oscuro);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .related-title {
+            font-family: 'Lexend', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            text-align: left;
+            opacity: 0.85;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        .carousel-wrapper:hover .carousel-arrow {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .carousel-arrow:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            transform: translateY(-50%) scale(1.08);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-arrow.left-arrow {
+            left: -22px;
+        }
+
+        .carousel-arrow.right-arrow {
+            right: -22px;
+        }
+
+        .carousel-arrow.hidden {
+            display: none !important;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 0 30px 0;
+            scrollbar-width: none; /* Ocultar en Firefox */
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            display: none; /* Ocultar en Chrome/Safari */
+        }
+
+        /* Tarjeta del carrusel */
+        .related-card {
+            flex: 0 0 300px;
+            background-color: var(--card-bg);
+            color: var(--card-text);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .related-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .related-card.active {
+            border: 2px solid var(--text-color);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .related-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .related-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .card-content {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-family: 'Lexend', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+        }
+
+        .card-artist {
+            font-family: 'Lexend', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 300;
+            opacity: 0.7;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-desc {
+            font-family: 'Lexend', sans-serif;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            opacity: 0.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .artwork-related-group {
+                padding: 60px 20px;
+            }
+        }
+
+        /* =========================================
+           MODAL DE ZOOM / LIGHTBOX
+           ========================================= */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img {
+            max-width: 95vw;
+            max-height: 95vh;
+            object-fit: contain;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.6);
+            border-radius: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 44px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            z-index: 2010;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.1);
+        }
+
+        /* =========================================
+           PIE DE PÁGINA DE LUJO (ESTILO HERMÈS)
+           ========================================= */
+        .gallery-footer {
+            background-color: #caccc3; /* Gris Claro Cementoso / Yeso Oscuro */
+            color: #3C332A;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Lato', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            letter-spacing: 8px;
+            margin-right: -8px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: #3C332A;
+        }
+
+        .footer-grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .footer-columns-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-column-title {
+            font-family: 'Lato', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #3C332A;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.1);
+            padding-bottom: 8px;
+        }
+
+        .footer-column-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-column-links .footer-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            color: #3C332A;
+            text-decoration: none;
+            opacity: 0.7;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column-links .footer-link:hover {
+            opacity: 1;
+            padding-left: 2px;
+        }
+
+        .footer-middle-row {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: 40px;
+            border-top: 1px solid rgba(60, 51, 42, 0.15);
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .footer-middle-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-middle-column.customer-service {
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        .footer-middle-column.newsletter-col {
+            text-align: center;
+            align-items: center;
+        }
+
+        .footer-middle-column.social-col {
+            text-align: center;
+            align-items: center;
+        }
+
+        .footer-service-info p,
+        .footer-newsletter-info p {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            color: #3C332A;
+            opacity: 0.8;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .footer-link-underline {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            color: #3C332A;
+            text-decoration: underline;
+            opacity: 0.8;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-link-underline:hover {
+            opacity: 1;
+        }
+
+        .btn-newsletter-subscribe {
+            display: inline-block;
+            background-color: transparent;
+            border: 1px solid #3C332A;
+            color: #3C332A;
+            padding: 10px 24px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .btn-newsletter-subscribe:hover {
+            background-color: #3C332A;
+            color: #caccc3;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .social-icon {
+            color: #3C332A;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(60, 51, 42, 0.1);
+            padding-top: 30px;
+        }
+
+        .location-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            color: #3C332A;
+            text-decoration: none;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+
+        .location-link:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .footer-columns-row {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-middle-row {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom-row {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================================
+       [INICIO] PÁGINA DE ARTÍCULOS (NAVEGACIÓN Y CONTENIDO DEL ARTÍCULO)
+       ========================================================================= -->
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="navbar" id="mainNavbar">
+        <a href="index.html" class="navbar-logo">DOXA</a>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="index.html#sobre-doxa" class="navbar-link">Sobre Doxa</a>
+            <a href="index.html#coleccion" class="navbar-link btn-coleccion">Colección</a>
+            <a href="galeria.html" class="navbar-link btn-gallery">Galería</a>
+            <a href="#" class="navbar-link" style="font-weight: 600;">Artículos</a>
+        </div>
+    </nav>
+
+    <!-- CONTENEDOR PRINCIPAL DEL ARTÍCULO (SE LLENA CON JS) -->
+    <article class="artwork-container" id="artworkContainer">
+        <!-- Columna Izquierda: Imagen Fija -->
+        <div class="artwork-figures">
+            <div class="artwork-figure">
+                <img id="articleImage" src="todos los sin.jpg" alt="La Cocina como Taller Alquímico">
+                <button class="zoom-btn" id="btnZoom">Ampliar</button>
+            </div>
+        </div>
+
+        <!-- Columna Derecha: Lectura y Ficha -->
+        <div class="artwork-content-scroll" id="scrollContainer">
+            <header class="artwork-header">
+                <h1 class="artwork-title" id="articleTitle">La Cocina como Taller Alquímico</h1>
+                <p class="artwork-subtitle" id="articleSubtitle">Deconstrucción de texturas e ingredientes funcionales como la vanguardia de la salud estética.</p>
+                <div class="artwork-info">
+                    <a href="galeria.html" class="artist-link">
+                        <img id="artistAvatar" src="artista_retrato.png" alt="Ana M.">
+                        <strong id="artistName">Ana M. & El Atelier</strong>
+                    </a>
+                    <span id="articleMetaOrigin">España, 2026</span>
+                </div>
+            </header>
+
+            <div class="ly-artwork-nav artwork-details">
+                <footer class="artwork-footer taxonomy">
+                    <!-- === CONFIGURACIÓN DE TAGS ESTÁTICOS / DE SEGURIDAD (FALLBACK) ===
+                         Estas tags y enlaces se muestran solo si JavaScript falla o está cargando.
+                         Para editarlos de forma dinámica en la base de datos de artículos, dirígete 
+                         a la base de datos de JavaScript (línea 1170 en adelante) e identifica la propiedad "tags"
+                         en el artículo deseado.
+                         ====================================================================== -->
+                    <ul class="taxonomy-tags" id="articleTags">
+                        <li><a href="#">Repostería Molecular</a></li>
+                        <li><a href="#">Salud Estética</a></li>
+                        <li><a href="#">Ingredientes Sin</a></li>
+                    </ul>
+                    <ul class="taxonomy-info">
+                        <li>
+                            <strong>Atelier / Colección:</strong>
+                            <span id="metaColeccion">Atelier DOXA (Colección Fundadora)</span>
+                        </li>
+                        <li>
+                            <strong>Técnica / Formulación:</strong>
+                            <span id="metaFormula">Deconstrucción Molecular y Soporte Celular</span>
+                        </li>
+                        <li>
+                            <strong>Escrito por:</strong>
+                            <span id="metaAutor">Ana M. & El Atelier</span>
+                        </li>
+                    </ul>
+                </footer>
+            </div>
+
+            <div class="artwork-body" id="articleBody">
+                <p>En el corazón de <strong>DOXA</strong> no hay moldes de repostería comunes, sino un laboratorio de experimentación bioactiva. Para su fundadora, <strong>Ana M.</strong>, la cocina tradicional representa un paradigma superado que abusa de azúcares y grasas inertes. Su enfoque propone la deconstrucción molecular del postre, sustituyendo los aglutinantes tradicionales por matrices de colágeno, almendras molidas y grasas de cadena media que alimentan la estructura celular.</p>
+                <p>La cocina molecular deja de ser una técnica puramente visual para transformarse en un sistema de entrega nutricional de alta precisión. Cada creación del Atelier DOXA es concebida como una escultura funcional donde el sabor y los activos (como el ácido hialurónico, el magnesio y los nootrópicos) están integrados a nivel atómico, garantizando que el cuerpo los absorba de manera eficiente sin elevar el índice glucémico.</p>
+                <p>Este artículo explora el manifiesto de la repostería funcional de vanguardia. La repostería ya no es una recompensa culposa; es el lienzo donde la ciencia biológica y la estética gastronómica se fusionan para esculpir la salud y la vitalidad desde el interior. La cocina de DOXA es, en definitiva, el taller donde la alquimia de los nutrientes crea el arte comestible del futuro.</p>
+            </div>
+
+            <footer class="section-footer">
+                <p>(CC) Licencia Creative Commons Atribución 4.0 - <cite id="footerAuthorDate">Ana M. & El Atelier, 21-07-2026</cite></p>
+            </footer>
+
+            <aside class="collaborate">
+                <a href="index.html#reservas"><strong>DOXA es una experiencia permanente.</strong> Si deseas reservar una degustación molecular en el Atelier, ponte en contacto con nosotros.</a>
+                <a href="galeria.html">O si lo prefieres, puedes <strong>explorar la galería de arte digital</strong> para conocer en profundidad a los artistas colaboradores.</a>
+            </aside>
+        </div>
+    </article>
+
+    <!-- SECCIÓN INFERIOR: CARRUSEL RELACIONADO -->
+    <aside class="artwork-related-group">
+        <h2 class="related-title">Artículos de la Colección</h2>
+        <div class="carousel-wrapper">
+            <button class="carousel-arrow left-arrow" id="carouselLeftArrow" aria-label="Desplazar a la izquierda">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <div class="carousel-container" id="carouselContainer">
+                <!-- Las tarjetas se generan dinámicamente con JS -->
+            </div>
+            <button class="carousel-arrow right-arrow" id="carouselRightArrow" aria-label="Desplazar a la derecha">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </aside>
+
+    <!-- MODAL LIGHTBOX -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">&times;</button>
+            <img class="lightbox-img" id="lightboxImg" src="" alt="Zoom de la obra">
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer class="gallery-footer">
+        <div class="footer-grid-container">
+
+            <!-- [FILA 1] ENLACES PRINCIPALES EN COLUMNAS -->
+            <div class="footer-columns-row">
+
+                <!-- [COLUMNA 2] MIS PEDIDOS -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">Mis Pedidos</h4>
+                    <div class="footer-column-links">
+                        <a href="index.html#pagos" class="footer-link">Opciones de pago</a>
+                        <a href="index.html#entregas" class="footer-link">Opciones de entrega</a>
+                        <a href="index.html#seguimiento" class="footer-link">Seguimiento de pedidos</a>
+                        <a href="index.html#devoluciones" class="footer-link">Cambios y devoluciones</a>
+                    </div>
+                </div>
+
+                <!-- [COLUMNA 3] LA MAISON -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">La Maison Hermès</h4>
+                    <div class="footer-column-links">
+                        <a href="index.html#fundacion" class="footer-link">La Fundación Corporativa Hermès</a>
+                    </div>
+                </div>
+
+                <!-- [COLUMNA 4] AVISO LEGAL -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">Aviso Legal</h4>
+                    <div class="footer-column-links">
+                        <a href="index.html#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
+                        <a href="index.html#terminos-uso" class="footer-link">Términos y condiciones generales de uso del sitio Hermès.com</a>
+                        <a href="index.html#privacidad" class="footer-link">Política de confidencialidad</a>
+                        <a href="index.html#cookies" class="footer-link">Cookies</a>
+                        <a href="index.html#accesibilidad" class="footer-link">ACCESIBILIDAD: PARCIALMENTE CONFORME</a>
+                        <a href="index.html#mapa-sitio" class="footer-link">Mapa del sitio Hermès.com</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- [FILA 2] ATENCIÓN AL CLIENTE, NEWSLETTER Y REDES -->
+            <div class="footer-middle-row">
+
+                <!-- [COLUMNA MIDDLE 1] CONTACTO -->
+                <div class="footer-middle-column customer-service">
+                    <h4 class="footer-column-title">Contacto</h4>
+                    <div class="footer-service-info">
+                        <p><a href="mailto:tu-correo@ejemplo.com" class="footer-link-underline">Envíanos un correo</a></p>
+                    </div>
+                </div>
+
+                <!-- [COLUMNA MIDDLE 2] NEWSLETTER -->
+                <div class="footer-middle-column newsletter-col">
+                    <h4 class="footer-column-title">Newsletter</h4>
+                    <div class="footer-newsletter-info">
+                        <p>Mantente en contacto con el mundo Doxa</p>
+                        <a href="index.html#newsletter-signup" class="btn-newsletter-subscribe">Suscribirse</a>
+                    </div>
+                </div>
+
+                <!-- [COLUMNA MIDDLE 3] SEGUIRNOS (REDES SOCIALES) -->
+                <div class="footer-middle-column social-col">
+                    <h4 class="footer-column-title">Seguirnos</h4>
+                    <div class="footer-social-icons">
+                        <a href="https://instagram.com" class="social-icon" target="_blank" aria-label="Instagram">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- [FILA 3] UBICACIÓN Y COPYRIGHT -->
+            <div class="footer-bottom-row">
+                <div class="footer-location">
+                    <a href="index.html#location" class="location-link">
+                        SU UBICACIÓN : ESPAÑA &gt;
+                    </a>
+                </div>
+                <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- =========================================
+         LÓGICA JAVASCRIPT DINÁMICA
+         ========================================= -->
+    <script>
+        // PALETA CROMÁTICA DE LA MARCA (YESO CLARO Y YESO OSCURO)
+        const themeColors = {
+            '--bg-color': '#f1f2ec', // Yeso Claro
+            '--text-color': '#181818', // Dark charcoal
+            '--nav-text-initial': 'rgba(24, 24, 24, 0.8)',
+            '--nav-logo-initial': '#181818',
+            '--nav-text-scrolled': '#181818',
+            '--nav-logo-scrolled': '#181818',
+            '--nav-scrolled-bg': 'rgba(241, 242, 236, 0.85)',
+            '--tag-bg': 'rgba(24, 24, 24, 0.06)',
+            '--tag-text': '#181818',
+            '--card-bg': '#ffffff',
+            '--card-text': '#181818',
+            '--accent-hover': '#181818'
+        };
+
+        // === EDITAR AQUÍ (BASE DE DATOS DE ARTÍCULOS Y SUS TAGS DINÁMICAS) ===
+        // Aquí puedes editar el contenido, imágenes, creadores, fechas y etiquetas (tags) de cada artículo.
+        // Cada artículo se define con una clave única (ana, antonio, anselm, david, miguel).
+        // Las etiquetas del artículo se definen en el array "tags" (ej. tags: ['Tag 1', 'Tag 2', 'Tag 3']).
+        const articlesDb = {
+            ana: {
+                id: 'ana',
+                title: 'La Cocina como Taller Alquímico',
+                subtitle: 'Deconstrucción de texturas e ingredientes funcionales como la vanguardia de la salud estética.',
+                image: 'todos los sin.jpg',
+                artistName: 'Ana M. & El Atelier',
+                artistAvatar: 'artista_retrato.png',
+                origin: 'España, 2026',
+                coleccion: 'Atelier DOXA (Colección Fundadora)',
+                formula: 'Deconstrucción Molecular y Soporte Celular',
+                autor: 'Ana M. & El Atelier',
+                fecha: '21-07-2026',
+                tags: ['Repostería Molecular', 'Salud Estética', 'Ingredientes Sin'],
+                body: `
+                    <p>En el corazón de <strong>DOXA</strong> no hay moldes de repostería comunes, sino un laboratorio de experimentación bioactiva. Para su fundadora, <strong>Ana M.</strong>, la cocina tradicional representa un paradigma superado que abusa de azúcares y grasas inertes. Su enfoque propone la deconstrucción molecular del postre, sustituyendo los aglutinantes tradicionales por matrices de colágeno, almendras molidas y grasas de cadena media que alimentan la estructura celular.</p>
+                    <p>La cocina molecular deja de ser una técnica puramente visual para transformarse en un sistema de entrega nutricional de alta precisión. Cada creación del Atelier DOXA es concebida como una sculpture funcional donde el sabor y los activos (como el ácido hialurónico, el magnesio y los nootrópicos) están integrados a nivel atómico, garantizando que el cuerpo los absorba de manera eficiente sin elevar el índice glucémico.</p>
+                    <p>Este artículo explora el manifiesto de la repostería funcional de vanguardia. La repostería ya no es una recompensa culposa; es el lienzo donde la ciencia biológica y la estética gastronómica se fusionan para esculpir la salud y la vitalidad desde el interior. La cocina de DOXA es, en definitiva, el taller donde la alquimia de los nutrientes crea el arte comestible del futuro.</p>
+                `,
+                colors: themeColors
+            },
+            antonio: {
+                id: 'antonio',
+                title: 'Brutalismo Gastronómico',
+                subtitle: 'Desmitificación del dulce y activación neuronal extrema mediante carbón vegetal y cacao al 100%.',
+                image: 'Antonio García Villarán 1.webp',
+                artistName: 'Antonio García Villarán',
+                artistAvatar: 'Antonio Garcia Villarán_autoretrato.webp',
+                origin: 'España, 2026',
+                coleccion: 'Atelier DOXA (Colección Crítica)',
+                formula: 'Masa brutalista de almendra, Carbón Activo y Magnesio',
+                autor: 'Ana M. & El Atelier',
+                fecha: '18-07-2026',
+                tags: ['Brutalismo', 'Nootrópicos', 'Magnesio Bisglicinato', 'Arte Crítico'],
+                body: `
+                    <p>La repostería, tradicionalmente relegada al papel de simple gratificación efímera y complacencia azucarada, es cuestionada por <strong>Antonio García Villarán</strong> en esta colaboración sin precedentes con <strong>DOXA</strong>. Su pieza insignia, el <em>Monolito de Cacao</em>, se erige como un manifiesto tridimensional de lo que él mismo define como "brutalismo gastronómico". Con una apariencia que emula fragmentos de carbón o restos de meteorito, la galleta rompe con toda convención visual.</p>
+                    <p>El uso de carbón vegetal activo no responde únicamente a un capricho cromático de negro absoluto; es una declaración sobre la purificación y la densidad de la materia. Al combinar esta base mineral con una carga de aminoácidos puros derivados del guisante y bisglicinato de magnesio, la obra actúa como un potente agente de recuperación neuromuscular extrema. No es un postre diseñado para evadir la realidad, sino un objeto estético-funcional que exige una participación consciente: el comensal debe masticar la densidad del arte, sintiendo los granos de sal volcánica como acentos de una experiencia telúrica.</p>
+                    <p>La filosofía de García Villarán se opone frontalmente al facilismo culinario. Cada arista, cada grieta en la superficie del Monolito es deliberada, recordando la superficie inacabada de las esculturas que luchan por salir del bloque de piedra. Al integrar nootrópicos y minerales en esta corteza impenetrable, la pieza nutre el sistema nervioso central, induciendo un estado de calma y concentración perfecto para el trabajo creativo y la autocrítica.</p>
+                `,
+                colors: themeColors
+            },
+            anselm: {
+                id: 'anselm',
+                title: 'La Alquimia del Plomo',
+                subtitle: 'Ruina poética, texturas cenicientas y la regeneración celular a través de adaptógenos y péptidos.',
+                image: 'Anselm Kiefer 1.jpg',
+                artistName: 'Anselm Kiefer',
+                artistAvatar: 'Anselm Kiefer_él.jpg',
+                origin: 'Alemania / Francia, 2026',
+                coleccion: 'Atelier DOXA (Colección Alquímica)',
+                formula: 'Masa de almendra, Péptidos de Colágeno y Ashwagandha',
+                autor: 'Ana M. & El Atelier',
+                fecha: '12-07-2026',
+                tags: ['Alquimia', 'Colágeno', 'Ashwagandha', 'Expresionismo Material'],
+                body: `
+                    <p>Los monumentales lienzos de <strong>Anselm Kiefer</strong>, cargados de ceniza, plomo, paja y alambre de espino, evocan la destrucción y la memoria histórica, pero también la posibilidad de una transformación alquímica. Su influencia en el Atelier DOXA da vida a <em>Ángeles Caídos</em>, una pieza que adopta la estética de la ruina para proponer una profunda reconstrucción biológica a través de nutrientes reparadores del colágeno dérmico y adaptógenos naturales.</p>
+                    <p>La superficie de la pieza, de un tono grisáceo y craquelado que recuerda la arcilla seca y las texturas de plomo de Kiefer, esconde una formulación sumamente compleja. Los péptidos de colágeno hidrolizado trabajan junto al ácido hialurónico para hidratar y recomponer las estructuras internas de la piel y las articulaciones, simulando el proceso de consolidación de un lienzo envejecido. Por su parte, la ashwagandha y el hongo reishi intervienen para regular el cortisol (la hormona del estrés), permitiendo que el cuerpo entre en un estado de calma profunda.</p>
+                    <p>Kiefer concibe el arte no como decoración, sino como un ritual de transformación. Al consumir esta obra de alta repostería, el individuo participa de esa misma alquimia: la materia pesada de las tensiones diarias es procesada y transmutada en recursos para la renovación celular. Es un recordatorio de que la belleza y la salud a menudo nacen de las cenizas de lo que ha caído, un tributo comestible a la resiliencia humana.</p>
+                `,
+                colors: themeColors
+            },
+            david: {
+                id: 'david',
+                title: 'El Pop de la Hidratación',
+                subtitle: 'Vitalidad estival, color saturado y renovación metabólica con Espirulina Azul y Electrolitos.',
+                image: 'David Hockney piscina splash.webp',
+                artistName: 'David Hockney',
+                artistAvatar: 'Dvid Hockney retrato.jpg',
+                origin: 'Reino Unido / EE.UU., 2026',
+                coleccion: 'Atelier DOXA (Colección Estival)',
+                formula: 'Fórmula hidratante con Phycocyanina (Espirulina Azul) y Ácido Hialurónico',
+                autor: 'Ana M. & El Atelier',
+                fecha: '05-07-2026',
+                tags: ['Pop Art', 'Espirulina Azul', 'Hidratación Celular', 'Antioxidantes'],
+                body: `
+                    <p>El arte de <strong>David Hockney</strong> es una inyección de sol, color saturado y hedonismo cotidiano. Sus famosas pinturas de piscinas californianas, con sus aguas turquesas y salpicaduras congeladas en el tiempo, representan el clímax de la frescura y la vitalidad del siglo XX. El Atelier DOXA traduce esta atmósfera en la pieza <em>Piscina de Splash</em>, un bocado que estalla en color y energía hidratante.</p>
+                    <p>El distintivo color azul cian de la obra se logra mediante la phycocyanina, un extracto puro de espirulina azul conocido por sus potentes propiedades antioxidantes y neuroprotectoras. Diseñada para emular el brillo del agua bajo el sol de California, la fórmula incluye ácido hialurónico y agua de coco liofilizada rica en potasio y magnesio, restaurando instantáneamente el equilibrio celular de hidratación. Al igual que el chapuzón en una piscina refrescante, cada bocado revitaliza la dermis y el metabolismo.</p>
+                    <p>La obra de Hockney nos invita a disfrutar del instante presente con una mirada limpia e ingenua. <em>Piscina de Splash</em> refleja esta misma ligereza estival, eliminando los azúcares pesados y sustituyéndolos por un frescor mentolado y cítrico que despierta las papilas gustativas. Una golosina visual y funcional que demuestra que la nutrición puede ser tan luminosa, divertida y refrescante como una tarde de verano en Los Ángeles.</p>
+                `,
+                colors: themeColors
+            },
+            miguel: {
+                id: 'miguel',
+                title: 'El Exceso Orgánico de la Arcilla',
+                subtitle: 'Fuerza telúrica, texturas agrietadas y cacao puro al 100% para la estimulación circulatoria.',
+                image: 'Barceló 1.jpg',
+                artistName: 'Miquel Barceló',
+                artistAvatar: 'Mikel Barceló_él.webp',
+                origin: 'España, 2026',
+                coleccion: 'Atelier DOXA (Colección Telúrica)',
+                formula: 'Base maciza de Cacao Puro 100%, Nibs de cacao y Sal Volcánica',
+                autor: 'Ana M. & El Atelier',
+                fecha: '28-06-2026',
+                tags: ['Neoexpresionismo', 'Materia Orgánica', 'Cacao Puro', 'Polifenoles'],
+                body: `
+                    <p>La obra de <strong>Miquel Barceló</strong> destaca por su organicidad extrema, acumulando gruesas capas de materia que parecen respirar y pudrirse en el lienzo, emulando la vida marina, la arcilla húmeda y la corteza terrestre. En <em>Bésame Choco</em>, DOXA captura esa misma fuerza telúrica en una cookie que imita las texturas agrietadas y porosas características de las cerámicas del artista mallorquín.</p>
+                    <p>La base de cacao puro al 100% y manteca de cacao proporciona una dosis maciza de polifenoles y teobromina, estimulantes naturales de la circulación sanguínea y potentes protectores celulares contra el daño oxidativo. Para emular el relieve de las creaciones de Barceló, la pieza incorpora nibs de cacao crujientes y sal marina escamada, que desencadenan una interacción de texturas rugosas y sabores intensos. Es una obra diseñada para la recuperación y el placer físico sin concesiones.</p>
+                    <p>Al comer <em>Bésame Choco</em>, se experimenta una conexión directa con los elementos primordiales de la tierra. Barceló nos recuerda que somos naturaleza en constante cambio y fricción. Esta pieza no busca la simetría ni el acabado perfecto; celebra el exceso orgánico, la irregularidad y la energía desbordante de la materia en su estado más puro y nutritivo.</p>
+                `,
+                colors: themeColors
+            }
+        };
+
+        // ELEMENTOS DEL DOM
+        const navbar = document.getElementById('mainNavbar');
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navbarMenu = document.getElementById('navbarMenu');
+        const scrollContainer = document.getElementById('scrollContainer');
+        const artworkContainer = document.getElementById('artworkContainer');
+
+        const articleImage = document.getElementById('articleImage');
+        const btnZoom = document.getElementById('btnZoom');
+        const articleTitle = document.getElementById('articleTitle');
+        const articleSubtitle = document.getElementById('articleSubtitle');
+        const artistAvatar = document.getElementById('artistAvatar');
+        const artistName = document.getElementById('artistName');
+        const articleMetaOrigin = document.getElementById('articleMetaOrigin');
+        const articleTags = document.getElementById('articleTags');
+        const metaColeccion = document.getElementById('metaColeccion');
+        const metaFormula = document.getElementById('metaFormula');
+        const metaAutor = document.getElementById('metaAutor');
+        const articleBody = document.getElementById('articleBody');
+        const footerAuthorDate = document.getElementById('footerAuthorDate');
+
+        const carouselContainer = document.getElementById('carouselContainer');
+        const lightboxModal = document.getElementById('lightboxModal');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        // CONTROL DE NAVEGACIÓN Y MENÚ MÓVIL
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            navbarMenu.classList.toggle('active');
+        });
+
+        // CERRAR MENÚ MÓVIL AL HACER CLIC EN ENLACE
+        document.querySelectorAll('.navbar-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                navbarMenu.classList.remove('active');
+            });
+        });
+
+        // CONTROL DE SCROLL ADAPTATIVO PARA NAVBAR
+        const updateNavbarScroll = () => {
+            const scrollTop = window.scrollY;
+            if (scrollTop > 40) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        };
+
+        window.addEventListener('scroll', updateNavbarScroll);
+
+        // RENDERIZAR ARTÍCULO SELECCIONADO
+        const renderArticle = (id) => {
+            const article = articlesDb[id];
+            if (!article) return;
+
+            // Iniciar animación de fade-out
+            artworkContainer.classList.add('fade-out');
+
+            setTimeout(() => {
+                // 1. Aplicar variables de color de tema al body
+                const root = document.documentElement;
+                Object.keys(article.colors).forEach(key => {
+                    root.style.setProperty(key, article.colors[key]);
+                });
+
+                // 2. Cargar contenido del artículo
+                articleImage.src = article.image;
+                articleImage.alt = article.title;
+                articleTitle.innerText = article.title;
+                articleSubtitle.innerText = article.subtitle;
+                artistAvatar.src = article.artistAvatar;
+                artistAvatar.alt = article.artistName;
+                artistName.innerText = article.artistName;
+                articleMetaOrigin.innerText = article.origin;
+
+                metaColeccion.innerText = article.coleccion;
+                metaFormula.innerText = article.formula;
+                metaAutor.innerText = article.autor;
+                footerAuthorDate.innerText = `${article.autor}, ${article.fecha}`;
+
+                // Cargar tags
+                articleTags.innerHTML = '';
+                article.tags.forEach(tag => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    
+                    // === EDITAR AQUÍ (ENLACES DE TAGS DINÁMICAS) ===
+                    // Cambia '#' por la URL a la que deseas enviar al usuario cuando hace clic en cualquier etiqueta.
+                    // Si deseas enlaces específicos por etiqueta, puedes agregar lógica condicional aquí (ej. a.href = 'buscar.html?tag=' + encodeURIComponent(tag);)
+                    a.href = '#';
+                    
+                    a.innerText = tag;
+                    li.appendChild(a);
+                    articleTags.appendChild(li);
+                });
+
+                // Cargar texto del artículo
+                articleBody.innerHTML = article.body;
+
+                // 3. Actualizar la tarjeta activa en el carrusel
+                document.querySelectorAll('.related-card').forEach(card => {
+                    if (card.dataset.id === id) {
+                        card.classList.add('active');
+                    } else {
+                        card.classList.remove('active');
+                    }
+                });
+
+                // Resetear scroll de lectura al inicio
+                scrollContainer.scrollTop = 0;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Finalizar animación de fade-in
+                artworkContainer.classList.remove('fade-out');
+                navbar.classList.remove('scrolled');
+            }, 400);
+        };
+
+        // GENERAR TARJETAS EN EL CARRUSEL RELACIONADO
+        const generateCarousel = () => {
+            carouselContainer.innerHTML = '';
+            Object.values(articlesDb).forEach(article => {
+                const card = document.createElement('div');
+                card.className = 'related-card';
+                card.dataset.id = article.id;
+
+                card.innerHTML = `
+                    <div class="card-img-wrapper">
+                        <img src="${article.image}" alt="${article.title}">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${article.title}</h3>
+                        <span class="card-artist">${article.artistName}</span>
+                        <p class="card-desc">${article.subtitle}</p>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => {
+                    // Actualizar URL hash y cargar artículo
+                    window.location.hash = article.id;
+                });
+
+                carouselContainer.appendChild(card);
+            });
+        };
+
+        // CONTROL DEL MODAL DE ZOOM / LIGHTBOX
+        const openLightbox = () => {
+            lightboxImg.src = articleImage.src;
+            lightboxImg.alt = articleImage.alt;
+            lightboxModal.classList.add('active');
+        };
+
+        const closeLightbox = () => {
+            lightboxModal.classList.remove('active');
+        };
+
+        articleImage.addEventListener('click', openLightbox);
+        btnZoom.addEventListener('click', openLightbox);
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) closeLightbox();
+        });
+
+        // CONTROL DE FLECHAS Y SCROLL DEL CARRUSEL
+        const leftArrow = document.getElementById('carouselLeftArrow');
+        const rightArrow = document.getElementById('carouselRightArrow');
+        const scrollAmount = 330; // 300px ancho tarjeta + 30px gap
+
+        leftArrow.addEventListener('click', () => {
+            carouselContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        rightArrow.addEventListener('click', () => {
+            carouselContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        const toggleArrows = () => {
+            const scrollLeft = carouselContainer.scrollLeft;
+            const maxScroll = carouselContainer.scrollWidth - carouselContainer.clientWidth;
+
+            if (scrollLeft <= 5) {
+                leftArrow.classList.add('hidden');
+            } else {
+                leftArrow.classList.remove('hidden');
+            }
+
+            if (scrollLeft >= maxScroll - 5) {
+                rightArrow.classList.add('hidden');
+            } else {
+                rightArrow.classList.remove('hidden');
+            }
+        };
+
+        carouselContainer.addEventListener('scroll', toggleArrows);
+        window.addEventListener('resize', toggleArrows);
+
+        // DETECTAR CAMBIOS DE HASH EN URL
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (articlesDb[hash]) {
+                renderArticle(hash);
+                setTimeout(toggleArrows, 500);
+            }
+        });
+
+        // INICIALIZACIÓN DE LA PÁGINA
+        generateCarousel();
+
+        // Cargar el artículo inicial según el hash, o "ana" por defecto
+        const initialHash = window.location.hash.substring(1);
+        if (articlesDb[initialHash]) {
+            renderArticle(initialHash);
+        } else {
+            renderArticle('ana');
+        }
+        
+        // Ajustar flechas inicialmente
+        setTimeout(toggleArrows, 600);
+    </script>
+
+    <!-- =========================================================================
+       [FIN] PÁGINA DE ARTÍCULOS (LÓGICA JAVASCRIPT Y ESTRUCTURA)
+       ========================================================================= -->
+
+</body>
+
+</html>
