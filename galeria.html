@@ -501,7 +501,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.25) contrast(1.1);
+            filter: brightness(0.50) contrast(1.1);
+            /* transparencia de la imagen del cabecero */
         }
 
         .gallery-hero-content {
@@ -559,14 +560,17 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         .artist-grid {
             display: grid;
             grid-template-columns: 1.1fr 1.9fr;
-            gap: 30px; /* Margen pequeño entre foto y texto */
-            align-items: stretch; /* Alto igual para foto y texto */
+            gap: 30px;
+            /* Margen pequeño entre foto y texto */
+            align-items: stretch;
+            /* Alto igual para foto y texto */
         }
 
         .artist-image-container {
             position: relative;
             width: 100%;
-            height: 100%; /* Ocupa todo el alto de la cuadrícula */
+            height: 100%;
+            /* Ocupa todo el alto de la cuadrícula */
             border-radius: 4px;
             overflow: hidden;
             box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.12);
@@ -574,8 +578,10 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
         .artist-image-container img {
             width: 100%;
-            height: 100%; /* Ocupa todo el alto de su contenedor */
-            object-fit: cover; /* Recorta los bordes laterales y se adapta al alto del texto */
+            height: 100%;
+            /* Ocupa todo el alto de su contenedor */
+            object-fit: cover;
+            /* Recorta los bordes laterales y se adapta al alto del texto */
             display: block;
             filter: grayscale(15%) contrast(1.05);
             transition: transform 0.8s ease;
@@ -638,7 +644,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             .artist-image-container {
                 max-width: 500px;
                 margin: 0 auto;
-                height: 380px; /* Alto fijo en móvil para mantener la estética */
+                height: 380px;
+                /* Alto fijo en móvil para mantener la estética */
             }
 
             .artist-image-container img {
@@ -1926,7 +1933,15 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         </button>
                         <div class="portfolio-scroll-wrapper">
                             <div class="portfolio-grid">
-                                <!-- Tarjeta Obra I -->
+                                <!-- =========================================================================
+                                   [INICIO] Tarjeta Obra I - Bésame Choco
+                                   Cada tarjeta de obra almacena su información técnica en atributos "data-*".
+                                   - data-weight: Se muestra en el Apartado 1 (ej. Dimensiones o Peso).
+                                   - data-base: Se muestra en el Apartado 2 (ej. Soporte o Base).
+                                   - data-actives: Se muestra en el Apartado 3 (ej. Activos o Medios).
+                                   - data-flavor: Se muestra en el Apartado 4 (ej. Sabor o Perfil de Sabor).
+                                   - data-concept: Se muestra en el Apartado 5 (ej. Concepto).
+                                   ========================================================================= -->
                                 <article class="artwork-card" data-id="ana-1" data-weight="90 gramos por pieza"
                                     data-base="Masa húmeda de almendra molida y manteca de cacao pura horneada lentamente, con un centro cremoso de avellanas y chocolate."
                                     data-actives="Péptidos de Colágeno Hidrolizado (10g) para elasticidad dérmica, Ácido Hialurónico (120mg) para hidratación interna y Vitamina C (100mg) como cofactor de síntesis."
@@ -1942,6 +1957,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                                         enriquecida con Péptidos de Colágeno y Ácido Hialurónico.</p>
                                     <button class="btn-view-details">Ver Ficha Técnica</button>
                                 </article>
+                                <!-- [FIN] Tarjeta Obra I - Bésame Choco -->
 
                                 <!-- Tarjeta Obra II -->
                                 <article class="artwork-card" data-id="ana-2" data-weight="90 gramos por pieza"
@@ -2655,24 +2671,34 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         <span class="sheet-number" id="lightboxNumber"></span>
                         <h3 class="sheet-title" id="lightboxTitle"></h3>
 
+                        <!-- =========================================================================
+                           [ETIQUETAS DE LA FICHA TÉCNICA - EDITABLES]
+                           Puedes cambiar el texto dentro de <div class="sheet-label">...</div> 
+                           para cambiar el nombre de los apartados que se muestran al ampliar la obra.
+                           ========================================================================= -->
                         <div class="sheet-row">
                             <div class="sheet-label">Dimensiones</div>
+                            <!-- Apartado 1: Cambia "Dimensiones" por lo que desees -->
                             <div class="sheet-value" id="lightboxWeight">90 gramos por pieza</div>
                         </div>
                         <div class="sheet-row">
                             <div class="sheet-label">Soporte</div>
+                            <!-- Apartado 2: Cambia "Soporte" por lo que desees -->
                             <div class="sheet-value" id="lightboxBase"></div>
                         </div>
                         <div class="sheet-row">
                             <div class="sheet-label">Activos / Medios</div>
+                            <!-- Apartado 3: Cambia "Activos / Medios" por lo que desees -->
                             <div class="sheet-value" id="lightboxActives"></div>
                         </div>
                         <div class="sheet-row">
                             <div class="sheet-label">Perfil Sabor</div>
+                            <!-- Apartado 4: Cambia "Perfil Sabor" por lo que desees -->
                             <div class="sheet-value" id="lightboxFlavor"></div>
                         </div>
                         <div class="sheet-row">
                             <div class="sheet-label">Concepto</div>
+                            <!-- Apartado 5: Cambia "Concepto" por lo que desees -->
                             <div class="sheet-value" id="lightboxConcept"></div>
                         </div>
                     </div>
@@ -2848,6 +2874,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                                 <!-- Los artistas custom se inyectarán aquí dinámicamente -->
                             </select>
                         </div>
+
+                        <!-- FORMULARIO 2: EDITAR VALORES DE LA FICHA PARA CADA OBRA ARTÍSTICA -->
                         <div class="admin-form-group">
                             <label class="admin-form-label" for="artworkTitleInput">Título de la Obra</label>
                             <input class="admin-form-input" type="text" id="artworkTitleInput"
@@ -2867,37 +2895,45 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                                 <img class="admin-image-preview" id="artworkImgPreview2" src="" alt="Previsualización">
                             </div>
                         </div>
+                        <!-- =========================================================================
+                           [ETIQUETAS DEL FORMULARIO DE EDICIÓN - EDITABLES]
+                           Puedes cambiar el texto dentro de <label class="admin-form-label">...</label>
+                           para cambiar la etiqueta que ves en el formulario de administrador. 
+                           Asegúrate de que coincida conceptualmente con las etiquetas del Lightbox.
+                           ========================================================================= -->
                         <div class="admin-form-group">
                             <label class="admin-form-label" for="artworkMediumInput">Descripción Corta / Medio</label>
+                            <!-- Cambia esta etiqueta si lo deseas -->
                             <input class="admin-form-input" type="text" id="artworkMediumInput"
                                 placeholder="ej. Masa de almendras premium, centro fundente..." required>
                         </div>
                         <div class="admin-form-group">
                             <label class="admin-form-label" for="artworkWeightInput">Peso de la Pieza</label>
+                            <!-- Cambia esta etiqueta (Apartado 1) -->
                             <input class="admin-form-input" type="text" id="artworkWeightInput"
                                 value="90 gramos por pieza">
                         </div>
                         <div class="admin-form-group">
                             <label class="admin-form-label" for="artworkBaseInput">Base de la formulación (Ficha
-                                Técnica)</label>
+                                Técnica)</label> <!-- Cambia esta etiqueta (Apartado 2) -->
                             <textarea class="admin-form-textarea" id="artworkBaseInput" rows="2"
                                 placeholder="ej. Masa húmeda de almendra molida..." required></textarea>
                         </div>
                         <div class="admin-form-group">
                             <label class="admin-form-label" for="artworkActivesInput">Activos Funcionales (Ficha
-                                Técnica)</label>
+                                Técnica)</label> <!-- Cambia esta etiqueta (Apartado 3) -->
                             <textarea class="admin-form-textarea" id="artworkActivesInput" rows="2"
                                 placeholder="ej. Péptidos de Colágeno Hidrolizado (10g)..." required></textarea>
                         </div>
                         <div class="admin-form-group">
                             <label class="admin-form-label" for="artworkFlavorInput">Sabor y perfil sensorial (Ficha
-                                Técnica)</label>
+                                Técnica)</label> <!-- Cambia esta etiqueta (Apartado 4) -->
                             <textarea class="admin-form-textarea" id="artworkFlavorInput" rows="2"
                                 placeholder="ej. Cacao belga fundido, almendra tostada..." required></textarea>
                         </div>
                         <div class="admin-form-group">
                             <label class="admin-form-label" for="artworkConceptInput">Concepto Artístico (Ficha
-                                Técnica)</label>
+                                Técnica)</label> <!-- Cambia esta etiqueta (Apartado 5) -->
                             <textarea class="admin-form-textarea" id="artworkConceptInput" rows="3"
                                 placeholder="ej. Reinterpretar la cookie neoyorquina tradicional..."
                                 required></textarea>
@@ -3405,12 +3441,40 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 }
             };
 
+            const isFormDirty = () => {
+                // Detectar cualquier texto en el formulario de artistas
+                const artistInputs = Array.from(adminArtistForm.querySelectorAll('input[type="text"], textarea'));
+                const hasArtistData = artistInputs.some(el => el.value.trim() !== "");
+
+                // Detectar cualquier texto en el formulario de obras
+                const artworkInputs = Array.from(adminArtworkForm.querySelectorAll('input[type="text"], textarea'));
+                const hasArtworkData = artworkInputs.some(el => {
+                    if (el.id === 'artworkWeightInput') {
+                        return el.value !== "90 gramos por pieza";
+                    }
+                    return el.value.trim() !== "";
+                });
+
+                return hasArtistData || hasArtworkData || tempArtistImageBase64 !== "" || tempArtworkImageBase64 !== "";
+            };
+
+            const closeAdminModalWithConfirmation = () => {
+                if (isFormDirty()) {
+                    if (!confirm("¿Estás segura de que deseas cerrar? Se perderán todos los datos que has escrito en el formulario.")) {
+                        return; // Cancelar el cierre
+                    }
+                }
+                toggleAdminModal(false);
+            };
+
             adminFabBtn.addEventListener('click', () => toggleAdminModal(true));
-            adminModalCloseBtn.addEventListener('click', () => toggleAdminModal(false));
-            adminArtistCancelBtn.addEventListener('click', () => toggleAdminModal(false));
-            adminArtworkCancelBtn.addEventListener('click', () => toggleAdminModal(false));
+            adminModalCloseBtn.addEventListener('click', closeAdminModalWithConfirmation);
+            adminArtistCancelBtn.addEventListener('click', closeAdminModalWithConfirmation);
+            adminArtworkCancelBtn.addEventListener('click', closeAdminModalWithConfirmation);
+
+            // Desactivado el cierre al hacer clic fuera (fondo oscuro) para evitar pérdidas accidentales al arrastrar o seleccionar texto
             adminModalOverlay.addEventListener('click', (e) => {
-                if (e.target === adminModalOverlay) toggleAdminModal(false);
+                // No hacer nada
             });
 
             // Previsualizar archivos cargados
@@ -3501,6 +3565,9 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 // Activar pestaña del artista recién creado
                 switchAuthor(key);
 
+                // Resetear formulario para saltar la confirmación al cerrar
+                adminArtistForm.reset();
+                tempArtistImageBase64 = "";
                 toggleAdminModal(false);
                 alert('¡Artista creado con éxito localmente!');
             });
@@ -3542,6 +3609,9 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 // Activar autor para ver la nueva ficha
                 switchAuthor(authorId);
 
+                // Resetear formulario para saltar la confirmación al cerrar
+                adminArtworkForm.reset();
+                tempArtworkImageBase64 = "";
                 toggleAdminModal(false);
                 alert('¡Ficha técnica publicada con éxito localmente!');
             });
