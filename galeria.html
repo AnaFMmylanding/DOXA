@@ -559,13 +559,14 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         .artist-grid {
             display: grid;
             grid-template-columns: 1.1fr 1.9fr;
-            gap: 80px;
-            align-items: center;
+            gap: 30px; /* Margen pequeño entre foto y texto */
+            align-items: stretch; /* Alto igual para foto y texto */
         }
 
         .artist-image-container {
             position: relative;
             width: 100%;
+            height: 100%; /* Ocupa todo el alto de la cuadrícula */
             border-radius: 4px;
             overflow: hidden;
             box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.12);
@@ -573,7 +574,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
         .artist-image-container img {
             width: 100%;
-            height: auto;
+            height: 100%; /* Ocupa todo el alto de su contenedor */
+            object-fit: cover; /* Recorta los bordes laterales y se adapta al alto del texto */
             display: block;
             filter: grayscale(15%) contrast(1.05);
             transition: transform 0.8s ease;
@@ -636,6 +638,12 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             .artist-image-container {
                 max-width: 500px;
                 margin: 0 auto;
+                height: 380px; /* Alto fijo en móvil para mantener la estética */
+            }
+
+            .artist-image-container img {
+                height: 100%;
+                object-fit: cover;
             }
 
             .artist-section {
@@ -1327,22 +1335,27 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         }
 
         .gallery-footer {
-            background-color: #caccc3; /* Gris Claro Cementoso / Yeso Oscuro */
+            background-color: #caccc3;
+            /* Gris Claro Cementoso / Yeso Oscuro */
             color: #3C332A;
-            padding: 40px 0 25px 0; /* Menor altura */
+            padding: 40px 0 25px 0;
+            /* Menor altura */
             text-align: left;
         }
 
         .footer-grid-container {
-            max-width: 1400px; /* Ampliado de 1200px para mayor amplitud */
+            max-width: 1400px;
+            /* Ampliado de 1200px para mayor amplitud */
             margin: 0 auto;
             padding: 0 40px;
         }
 
         .footer-columns-row {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* Columnas perfectamente equidistantes */
-            gap: 30px; /* Mayor espacio entre columnas */
+            grid-template-columns: repeat(5, 1fr);
+            /* Columnas perfectamente equidistantes */
+            gap: 30px;
+            /* Mayor espacio entre columnas */
             margin-bottom: 30px;
             align-items: start;
         }
@@ -1464,7 +1477,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
         .footer-bottom-row {
             display: flex;
-            justify-content: flex-end; /* Alinear a la derecha como en la captura */
+            justify-content: flex-end;
+            /* Alinear a la derecha como en la captura */
             align-items: center;
             border-top: 1px solid rgba(60, 51, 42, 0.1);
             padding-top: 20px;
@@ -1487,6 +1501,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 grid-template-columns: repeat(3, 1fr);
                 gap: 30px;
             }
+
             .footer-column:nth-child(5) {
                 align-items: flex-start;
                 text-align: left;
@@ -1499,14 +1514,17 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 gap: 25px;
                 text-align: center;
             }
+
             .footer-column {
                 align-items: center !important;
                 text-align: center !important;
             }
+
             .footer-bottom-row {
                 justify-content: center;
                 text-align: center;
             }
+
             .footer-copy {
                 text-align: center;
             }
@@ -1521,7 +1539,266 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         .artist-section.active {
             display: block;
             opacity: 1;
-            animation: fadeInSlideUp 0.6s ease-out forwards;
+        }
+
+        /* =========================================================================
+           [NUEVO] ESTILOS DEL PANEL DE ADMINISTRACIÓN (CMS LOCAL)
+           ========================================================================= */
+        .admin-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #3C332A;
+            color: #F7F5F0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .admin-fab:hover {
+            transform: translateY(-2px);
+            background-color: #1c1814;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .admin-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(60, 51, 42, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .admin-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .admin-modal-container {
+            background-color: #F7F5F0;
+            color: #3C332A;
+            width: 90%;
+            max-width: 650px;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            border: 1px solid rgba(60, 51, 42, 0.1);
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .admin-modal-overlay.active .admin-modal-container {
+            transform: translateY(0);
+        }
+
+        .admin-modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background-color: #F7F5F0;
+            z-index: 10;
+        }
+
+        .admin-modal-title {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .admin-modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #3C332A;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .admin-modal-close:hover {
+            opacity: 1;
+        }
+
+        .admin-modal-body {
+            padding: 30px;
+        }
+
+        .admin-tab-nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.1);
+            padding-bottom: 12px;
+        }
+
+        .admin-tab-btn {
+            background: none;
+            border: none;
+            color: #6d5d4d;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .admin-tab-btn.active {
+            background-color: #3C332A;
+            color: #F7F5F0;
+        }
+
+        .admin-form-group {
+            margin-bottom: 20px;
+        }
+
+        .admin-form-label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .admin-form-input,
+        .admin-form-textarea,
+        .admin-form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(60, 51, 42, 0.2);
+            background-color: #fff;
+            color: #3C332A;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease;
+        }
+
+        .admin-form-input:focus,
+        .admin-form-textarea:focus,
+        .admin-form-select:focus {
+            outline: none;
+            border-color: #3C332A;
+        }
+
+        .admin-form-file-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .admin-form-file-input {
+            font-size: 13px;
+        }
+
+        .admin-form-actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .admin-btn {
+            padding: 12px 24px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .admin-btn-primary {
+            background-color: #3C332A;
+            color: #F7F5F0;
+            border: 1px solid #3C332A;
+            flex-grow: 1;
+        }
+
+        .admin-btn-primary:hover {
+            background-color: #1c1814;
+            border-color: #1c1814;
+        }
+
+        .admin-btn-secondary {
+            background-color: transparent;
+            color: #3C332A;
+            border: 1px solid rgba(60, 51, 42, 0.3);
+        }
+
+        .admin-btn-secondary:hover {
+            background-color: rgba(60, 51, 42, 0.05);
+        }
+
+        .admin-btn-danger {
+            background-color: #8c2d2d;
+            color: #fff;
+            border: 1px solid #8c2d2d;
+        }
+
+        .admin-btn-danger:hover {
+            background-color: #6a2121;
+        }
+
+        .admin-export-box {
+            margin-top: 25px;
+            background-color: #f0ede6;
+            border: 1px solid rgba(60, 51, 42, 0.15);
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .admin-export-code {
+            width: 100%;
+            height: 120px;
+            font-family: monospace;
+            font-size: 11px;
+            background-color: #fff;
+            border: 1px solid rgba(60, 51, 42, 0.1);
+            border-radius: 4px;
+            padding: 10px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .admin-image-preview {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid rgba(60, 51, 42, 0.2);
+            background-color: #eee;
+            display: none;
         }
     </style>
 </head>
@@ -1594,7 +1871,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 <div class="artist-grid">
                     <div class="artist-image-container animate-appear delay-1">
                         <!-- ÉSTA ES LA FOTO DE LA BIO -->
-                        <img src="artista_retrato.png" alt="Ana M. — Visionaria de DOXA">
+                        <img src="ProtoDoxa.png" alt="Ana M. — Visionaria de DOXA">
                     </div>
                     <div class="artist-details animate-appear delay-2">
                         <span class="artist-tagline">El Creador</span>
@@ -2425,9 +2702,11 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         <div class="footer-column-links">
                             <a href="mailto:tu-correo@ejemplo.com" class="footer-link-underline">Envíanos un correo</a>
                             <div class="footer-social-icons">
-                                <a href="https://instagram.com" class="social-icon" target="_blank" aria-label="Instagram">
+                                <a href="https://instagram.com" class="social-icon" target="_blank"
+                                    aria-label="Instagram">
                                     <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                                     </svg>
                                 </a>
                             </div>
@@ -2466,7 +2745,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     <div class="footer-column">
                         <h4 class="footer-column-title">Aviso Legal</h4>
                         <div class="footer-column-links">
-                            <a href="index.html#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
+                            <a href="index.html#condiciones-venta" class="footer-link">Condiciones generales de
+                                venta</a>
                             <a href="index.html#privacidad" class="footer-link">Política de privacidad</a>
                             <a href="index.html#cookies" class="footer-link">Cookies</a>
                         </div>
@@ -2485,135 +2765,237 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
            [FIN] SECCIÓN DE FOOTER DE LUJO SIMPLIFICADO
            ========================================================================= -->
 
-    </div>
+        <!-- =========================================================================
+       [NUEVO] PANEL DE ADMINISTRACIÓN - BOTÓN FLOTANTE Y MODAL DE DIÁLOGO (GALERÍA)
+       ========================================================================= -->
+        <button class="admin-fab" id="adminFabBtn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.5C12.87 21.6 13.43 21.93 14 22.18l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
+            </svg>
+            Admin
+        </button>
 
-    <!-- SCRIPTS -->
-    <script>
-        // Control de Navbar (Scroll y Menú Móvil)
-        const navbar = document.getElementById('mainNavbar');
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navbarMenu = document.getElementById('navbarMenu');
+        <div class="admin-modal-overlay" id="adminModalOverlay">
+            <div class="admin-modal-container">
+                <div class="admin-modal-header">
+                    <h3 class="admin-modal-title">Administrador: Galería</h3>
+                    <button class="admin-modal-close" id="adminModalCloseBtn">&times;</button>
+                </div>
+                <div class="admin-modal-body">
+                    <div class="admin-tab-nav">
+                        <button class="admin-tab-btn active" id="tabBtnArtist" type="button">Editar Nuevo
+                            Artista</button>
+                        <button class="admin-tab-btn" id="tabBtnArtwork" type="button">Editar Ficha (Añadir
+                            Obra)</button>
+                    </div>
 
-        window.addEventListener('scroll', () => {
-            const hero = document.querySelector('.gallery-hero');
-            const threshold = (hero ? hero.offsetHeight : window.innerHeight * 0.55) - 90;
-            if (window.scrollY > threshold) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+                    <!-- FORMULARIO 1: AÑADIR ARTISTA -->
+                    <form id="adminArtistForm">
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artistKey">Identificador único (sin espacios, ej:
+                                picasso)</label>
+                            <input class="admin-form-input" type="text" id="artistKey" placeholder="ej. picasso"
+                                required>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artistNameInput">Nombre del Artista</label>
+                            <input class="admin-form-input" type="text" id="artistNameInput"
+                                placeholder="Nombre completo..." required>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artistTaglineInput">Frase Destacada / Tagline</label>
+                            <input class="admin-form-input" type="text" id="artistTaglineInput"
+                                placeholder="ej. El Crítico de la Materia">
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label">Foto de Portada / Biografía</label>
+                            <div class="admin-form-file-wrapper">
+                                <input class="admin-form-file-input" type="file" id="artistImageFile" accept="image/*">
+                                <input class="admin-form-input" type="text" id="artistImageUrl"
+                                    placeholder="o escribe el nombre del archivo (ej. foto.jpg)">
+                                <img class="admin-image-preview" id="artistImgPreview" src="" alt="Previsualización">
+                            </div>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artistQuoteInput">Cita Célebre / Declaración</label>
+                            <input class="admin-form-input" type="text" id="artistQuoteInput"
+                                placeholder="Escribe una cita textual representativa...">
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artistBioInput">Biografía / Presentación (puedes usar
+                                HTML)</label>
+                            <textarea class="admin-form-textarea" id="artistBioInput" rows="6"
+                                placeholder="Escribe el texto de presentación..." required></textarea>
+                        </div>
+                        <div class="admin-form-actions">
+                            <button class="admin-btn admin-btn-secondary" type="button"
+                                id="adminArtistCancelBtn">Cancelar</button>
+                            <button class="admin-btn admin-btn-primary" type="submit">Publicar Artista</button>
+                        </div>
+                    </form>
 
-        mobileToggle.addEventListener('click', () => {
-            mobileToggle.classList.toggle('active');
-            navbarMenu.classList.toggle('active');
-        });
+                    <!-- FORMULARIO 2: AÑADIR FICHA / OBRA -->
+                    <form id="adminArtworkForm" style="display: none;">
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artworkArtistSelect">Seleccionar Artista</label>
+                            <select class="admin-form-select" id="artworkArtistSelect" required>
+                                <option value="ana">Ana M. (Fundadora)</option>
+                                <option value="antonio">Antonio García Villarán</option>
+                                <option value="miguel">Miguel Barceló</option>
+                                <option value="david">David Hockney</option>
+                                <option value="anselm">Anselm Kiefer</option>
+                                <!-- Los artistas custom se inyectarán aquí dinámicamente -->
+                            </select>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artworkTitleInput">Título de la Obra</label>
+                            <input class="admin-form-input" type="text" id="artworkTitleInput"
+                                placeholder="ej. Bésame Choco" required>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artworkNumberInput">Número de Obra</label>
+                            <input class="admin-form-input" type="text" id="artworkNumberInput" placeholder="ej. Obra V"
+                                required>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label">Foto de la Obra</label>
+                            <div class="admin-form-file-wrapper">
+                                <input class="admin-form-file-input" type="file" id="artworkImageFile" accept="image/*">
+                                <input class="admin-form-input" type="text" id="artworkImageUrl"
+                                    placeholder="o escribe el nombre del archivo (ej. foto.png)">
+                                <img class="admin-image-preview" id="artworkImgPreview2" src="" alt="Previsualización">
+                            </div>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artworkMediumInput">Descripción Corta / Medio</label>
+                            <input class="admin-form-input" type="text" id="artworkMediumInput"
+                                placeholder="ej. Masa de almendras premium, centro fundente..." required>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artworkWeightInput">Peso de la Pieza</label>
+                            <input class="admin-form-input" type="text" id="artworkWeightInput"
+                                value="90 gramos por pieza">
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artworkBaseInput">Base de la formulación (Ficha
+                                Técnica)</label>
+                            <textarea class="admin-form-textarea" id="artworkBaseInput" rows="2"
+                                placeholder="ej. Masa húmeda de almendra molida..." required></textarea>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artworkActivesInput">Activos Funcionales (Ficha
+                                Técnica)</label>
+                            <textarea class="admin-form-textarea" id="artworkActivesInput" rows="2"
+                                placeholder="ej. Péptidos de Colágeno Hidrolizado (10g)..." required></textarea>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artworkFlavorInput">Sabor y perfil sensorial (Ficha
+                                Técnica)</label>
+                            <textarea class="admin-form-textarea" id="artworkFlavorInput" rows="2"
+                                placeholder="ej. Cacao belga fundido, almendra tostada..." required></textarea>
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artworkConceptInput">Concepto Artístico (Ficha
+                                Técnica)</label>
+                            <textarea class="admin-form-textarea" id="artworkConceptInput" rows="3"
+                                placeholder="ej. Reinterpretar la cookie neoyorquina tradicional..."
+                                required></textarea>
+                        </div>
+                        <div class="admin-form-actions">
+                            <button class="admin-btn admin-btn-secondary" type="button"
+                                id="adminArtworkCancelBtn">Cancelar</button>
+                            <button class="admin-btn admin-btn-primary" type="submit">Publicar Ficha</button>
+                        </div>
+                    </form>
 
-        // Control del Lightbox
-        const lightbox = document.getElementById('artworkLightbox');
-        const closeBtn = document.getElementById('lightboxClose');
-        const toggleDetailsBtn = document.getElementById('lightboxToggleDetails');
-        const lightboxContent = lightbox.querySelector('.lightbox-content');
-        const lightboxRightContent = lightbox.querySelector('.lightbox-right-content');
-        const toggleIconPath = document.getElementById('toggleIconPath');
+                    <div class="admin-export-box">
+                        <label class="admin-form-label">Exportar Artistas y Fichas (Código JS)</label>
+                        <p style="font-size: 11px; margin: 4px 0 10px 0; color: #6d5d4d;">Copia el código JSON para
+                            consolidarlo en tu base de datos o almacenamiento permanente.</p>
+                        <textarea class="admin-export-code" id="adminExportCode" readonly
+                            placeholder="No hay artistas u obras personalizadas todavía."></textarea>
+                        <div
+                            style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                            <button class="admin-btn admin-btn-secondary" style="font-size: 11px; padding: 6px 12px;"
+                                id="adminCopyCodeBtn">Copiar Código</button>
+                            <button class="admin-btn admin-btn-danger" style="font-size: 11px; padding: 6px 12px;"
+                                id="adminClearCustomBtn">Eliminar todos los datos nuevos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        const lightboxImage = document.getElementById('lightboxImage');
-        const lightboxNumber = document.getElementById('lightboxNumber');
-        const lightboxTitle = document.getElementById('lightboxTitle');
-        const lightboxBase = document.getElementById('lightboxBase');
-        const lightboxActives = document.getElementById('lightboxActives');
-        const lightboxFlavor = document.getElementById('lightboxFlavor');
-        const lightboxConcept = document.getElementById('lightboxConcept');
+        <!-- SCRIPTS -->
+        <script>
+            // Control de Navbar (Scroll y Menú Móvil)
+            const navbar = document.getElementById('mainNavbar');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navbarMenu = document.getElementById('navbarMenu');
 
-        const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
-        const lightboxNextBtn = document.getElementById('lightboxNextBtn');
-
-        let activeArtworkElements = [];
-        let currentArtworkIndex = -1;
-
-        function openLightbox(card) {
-            if (!card) return;
-
-            const imageSrc = card.querySelector('.artwork-image-wrapper img').src;
-            const imageAlt = card.querySelector('.artwork-image-wrapper img').alt;
-            const number = card.querySelector('.artwork-number').textContent;
-            const title = card.querySelector('.artwork-title').textContent;
-
-            const base = card.getAttribute('data-base') || '';
-            const actives = card.getAttribute('data-actives') || '';
-            const flavor = card.getAttribute('data-flavor') || '';
-            const concept = card.getAttribute('data-concept') || '';
-            const weight = card.getAttribute('data-weight') || '90 gramos por pieza';
-
-            lightboxImage.src = imageSrc;
-            lightboxImage.alt = imageAlt;
-            lightboxNumber.textContent = number;
-            lightboxTitle.textContent = title;
-            lightboxBase.textContent = base;
-            lightboxActives.textContent = actives;
-            lightboxFlavor.textContent = flavor;
-            lightboxConcept.textContent = concept;
-
-            const weightElement = document.getElementById('lightboxWeight');
-            if (weightElement) weightElement.textContent = weight;
-
-            // Determinar si la obra es vertical o horizontal analizando la imagen
-            const imgTemp = new Image();
-            imgTemp.src = imageSrc;
-            imgTemp.onload = function () {
-                const isVertical = imgTemp.naturalHeight > imgTemp.naturalWidth;
-                if (isVertical) {
-                    lightboxContent.classList.add('is-vertical');
+            window.addEventListener('scroll', () => {
+                const hero = document.querySelector('.gallery-hero');
+                const threshold = (hero ? hero.offsetHeight : window.innerHeight * 0.55) - 90;
+                if (window.scrollY > threshold) {
+                    navbar.classList.add('scrolled');
                 } else {
-                    lightboxContent.classList.remove('is-vertical');
+                    navbar.classList.remove('scrolled');
                 }
-            };
+            });
 
-            const activeSection = card.closest('.artist-section');
-            if (activeSection) {
-                activeArtworkElements = Array.from(activeSection.querySelectorAll('.artwork-card'));
-                currentArtworkIndex = activeArtworkElements.indexOf(card);
-            }
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                navbarMenu.classList.toggle('active');
+            });
 
-            if (lightboxRightContent) {
-                lightboxRightContent.style.opacity = '1';
-                lightboxRightContent.style.transform = 'translateY(0)';
-            }
+            // Control del Lightbox
+            const lightbox = document.getElementById('artworkLightbox');
+            const closeBtn = document.getElementById('lightboxClose');
+            const toggleDetailsBtn = document.getElementById('lightboxToggleDetails');
+            const lightboxContent = lightbox.querySelector('.lightbox-content');
+            const lightboxRightContent = lightbox.querySelector('.lightbox-right-content');
+            const toggleIconPath = document.getElementById('toggleIconPath');
 
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxNumber = document.getElementById('lightboxNumber');
+            const lightboxTitle = document.getElementById('lightboxTitle');
+            const lightboxBase = document.getElementById('lightboxBase');
+            const lightboxActives = document.getElementById('lightboxActives');
+            const lightboxFlavor = document.getElementById('lightboxFlavor');
+            const lightboxConcept = document.getElementById('lightboxConcept');
 
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            lightboxContent.classList.remove('details-collapsed', 'is-vertical');
-            if (toggleIconPath) toggleIconPath.setAttribute('points', '9 18 15 12 9 6');
-            document.body.style.overflow = '';
-        }
+            const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+            const lightboxNextBtn = document.getElementById('lightboxNextBtn');
 
-        function navigateLightbox(direction) {
-            if (activeArtworkElements.length === 0) return;
-            currentArtworkIndex = (currentArtworkIndex + direction + activeArtworkElements.length) % activeArtworkElements.length;
-            const nextCard = activeArtworkElements[currentArtworkIndex];
+            let activeArtworkElements = [];
+            let currentArtworkIndex = -1;
 
-            lightboxImage.style.opacity = '0';
-            if (lightboxRightContent) lightboxRightContent.style.opacity = '0';
+            function openLightbox(card) {
+                if (!card) return;
 
-            setTimeout(() => {
-                const imageSrc = nextCard.querySelector('.artwork-image-wrapper img').src;
-                const imageAlt = nextCard.querySelector('.artwork-image-wrapper img').alt;
-                const number = nextCard.querySelector('.artwork-number').textContent;
-                const title = nextCard.querySelector('.artwork-title').textContent;
+                const imageSrc = card.querySelector('.artwork-image-wrapper img').src;
+                const imageAlt = card.querySelector('.artwork-image-wrapper img').alt;
+                const number = card.querySelector('.artwork-number').textContent;
+                const title = card.querySelector('.artwork-title').textContent;
+
+                const base = card.getAttribute('data-base') || '';
+                const actives = card.getAttribute('data-actives') || '';
+                const flavor = card.getAttribute('data-flavor') || '';
+                const concept = card.getAttribute('data-concept') || '';
+                const weight = card.getAttribute('data-weight') || '90 gramos por pieza';
 
                 lightboxImage.src = imageSrc;
                 lightboxImage.alt = imageAlt;
                 lightboxNumber.textContent = number;
                 lightboxTitle.textContent = title;
-                lightboxBase.textContent = nextCard.getAttribute('data-base') || '';
-                lightboxActives.textContent = nextCard.getAttribute('data-actives') || '';
-                lightboxFlavor.textContent = nextCard.getAttribute('data-flavor') || '';
-                lightboxConcept.textContent = nextCard.getAttribute('data-concept') || '';
-                document.getElementById('lightboxWeight').textContent = nextCard.getAttribute('data-weight') || '90 gramos por pieza';
+                lightboxBase.textContent = base;
+                lightboxActives.textContent = actives;
+                lightboxFlavor.textContent = flavor;
+                lightboxConcept.textContent = concept;
+
+                const weightElement = document.getElementById('lightboxWeight');
+                if (weightElement) weightElement.textContent = weight;
 
                 // Determinar si la obra es vertical o horizontal analizando la imagen
                 const imgTemp = new Image();
@@ -2627,135 +3009,563 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     }
                 };
 
-                lightboxImage.style.opacity = '1';
-                if (lightboxRightContent) lightboxRightContent.style.opacity = '1';
-            }, 300);
-        }
+                const activeSection = card.closest('.artist-section');
+                if (activeSection) {
+                    activeArtworkElements = Array.from(activeSection.querySelectorAll('.artwork-card'));
+                    currentArtworkIndex = activeArtworkElements.indexOf(card);
+                }
 
-        document.addEventListener('click', (e) => {
-            const card = e.target.closest('.artwork-card');
-            if (card) openLightbox(card);
-        });
+                if (lightboxRightContent) {
+                    lightboxRightContent.style.opacity = '1';
+                    lightboxRightContent.style.transform = 'translateY(0)';
+                }
 
-        closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
-
-        function toggleDetails() {
-            const isCollapsed = lightboxContent.classList.toggle('details-collapsed');
-            if (toggleIconPath) {
-                toggleIconPath.setAttribute('points', isCollapsed ? '15 18 9 12 15 6' : '9 18 15 12 9 6');
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
             }
-        }
 
-        toggleDetailsBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleDetails();
-        });
-
-        lightboxImage.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleDetails();
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
-
-        lightboxPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
-        lightboxNextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
-
-        document.addEventListener('keydown', (e) => {
-            if (lightbox.classList.contains('active')) {
-                if (e.key === 'Escape') closeLightbox();
-                else if (e.key === 'ArrowLeft') navigateLightbox(-1);
-                else if (e.key === 'ArrowRight') navigateLightbox(1);
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                lightboxContent.classList.remove('details-collapsed', 'is-vertical');
+                if (toggleIconPath) toggleIconPath.setAttribute('points', '9 18 15 12 9 6');
+                document.body.style.overflow = '';
             }
-        });
 
-        const sliderContainers = [];
-        function initSliders() {
-            document.querySelectorAll('.portfolio-slider-container').forEach(container => {
-                const wrapper = container.querySelector('.portfolio-scroll-wrapper');
-                const grid = container.querySelector('.portfolio-grid');
-                const leftArrow = container.querySelector('.left-arrow');
-                const rightArrow = container.querySelector('.right-arrow');
+            function navigateLightbox(direction) {
+                if (activeArtworkElements.length === 0) return;
+                currentArtworkIndex = (currentArtworkIndex + direction + activeArtworkElements.length) % activeArtworkElements.length;
+                const nextCard = activeArtworkElements[currentArtworkIndex];
 
-                function updateArrows() {
-                    const scrollLeft = wrapper.scrollLeft;
-                    const maxScrollLeft = wrapper.scrollWidth - wrapper.clientWidth;
-                    leftArrow.classList.toggle('hidden', scrollLeft <= 5);
-                    rightArrow.classList.toggle('hidden', scrollLeft >= maxScrollLeft - 5);
-                }
+                lightboxImage.style.opacity = '0';
+                if (lightboxRightContent) lightboxRightContent.style.opacity = '0';
 
-                wrapper.addEventListener('scroll', updateArrows);
-                leftArrow.addEventListener('click', () => wrapper.scrollBy({ left: -310, behavior: 'smooth' }));
-                rightArrow.addEventListener('click', () => wrapper.scrollBy({ left: 310, behavior: 'smooth' }));
+                setTimeout(() => {
+                    const imageSrc = nextCard.querySelector('.artwork-image-wrapper img').src;
+                    const imageAlt = nextCard.querySelector('.artwork-image-wrapper img').alt;
+                    const number = nextCard.querySelector('.artwork-number').textContent;
+                    const title = nextCard.querySelector('.artwork-title').textContent;
 
-                function checkLayout() {
-                    const needsSlider = window.innerWidth <= 768 || grid.querySelectorAll('.artwork-card').length > 4;
-                    grid.classList.toggle('grid-layout', !needsSlider);
-                    leftArrow.style.display = needsSlider ? 'flex' : 'none';
-                    rightArrow.style.display = needsSlider ? 'flex' : 'none';
-                    if (needsSlider) updateArrows();
-                }
+                    lightboxImage.src = imageSrc;
+                    lightboxImage.alt = imageAlt;
+                    lightboxNumber.textContent = number;
+                    lightboxTitle.textContent = title;
+                    lightboxBase.textContent = nextCard.getAttribute('data-base') || '';
+                    lightboxActives.textContent = nextCard.getAttribute('data-actives') || '';
+                    lightboxFlavor.textContent = nextCard.getAttribute('data-flavor') || '';
+                    lightboxConcept.textContent = nextCard.getAttribute('data-concept') || '';
+                    document.getElementById('lightboxWeight').textContent = nextCard.getAttribute('data-weight') || '90 gramos por pieza';
 
-                window.addEventListener('resize', checkLayout);
-                checkLayout();
-                container.checkLayout = checkLayout;
-                sliderContainers.push(container);
-            });
-        }
+                    // Determinar si la obra es vertical o horizontal analizando la imagen
+                    const imgTemp = new Image();
+                    imgTemp.src = imageSrc;
+                    imgTemp.onload = function () {
+                        const isVertical = imgTemp.naturalHeight > imgTemp.naturalWidth;
+                        if (isVertical) {
+                            lightboxContent.classList.add('is-vertical');
+                        } else {
+                            lightboxContent.classList.remove('is-vertical');
+                        }
+                    };
 
-        const authorButtons = document.querySelectorAll('.author-btn');
-        const artistSections = document.querySelectorAll('.artist-section');
+                    lightboxImage.style.opacity = '1';
+                    if (lightboxRightContent) lightboxRightContent.style.opacity = '1';
+                }, 300);
+            }
 
-        function switchAuthor(authorKey) {
-            // 1. Quitar activo de todos los botones y ponerlo en el seleccionado
-            authorButtons.forEach(btn => {
-                if (btn.dataset.author === authorKey) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
+            document.addEventListener('click', (e) => {
+                const card = e.target.closest('.artwork-card');
+                if (card) openLightbox(card);
             });
 
-            // 2. Buscar la sección correspondiente y hacer transición
-            artistSections.forEach(section => {
-                if (section.dataset.author === authorKey) {
-                    section.style.display = 'block';
-                    section.classList.add('active');
+            closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
 
-                    // Reiniciar scroll a la izquierda
-                    const scrollWrapper = section.querySelector('.portfolio-scroll-wrapper');
-                    if (scrollWrapper) {
-                        scrollWrapper.scrollLeft = 0;
+            function toggleDetails() {
+                const isCollapsed = lightboxContent.classList.toggle('details-collapsed');
+                if (toggleIconPath) {
+                    toggleIconPath.setAttribute('points', isCollapsed ? '15 18 9 12 15 6' : '9 18 15 12 9 6');
+                }
+            }
+
+            toggleDetailsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleDetails();
+            });
+
+            lightboxImage.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleDetails();
+            });
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            lightboxPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
+            lightboxNextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'Escape') closeLightbox();
+                    else if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                    else if (e.key === 'ArrowRight') navigateLightbox(1);
+                }
+            });
+
+            const sliderContainers = [];
+            function initSliders() {
+                document.querySelectorAll('.portfolio-slider-container').forEach(container => {
+                    const wrapper = container.querySelector('.portfolio-scroll-wrapper');
+                    const grid = container.querySelector('.portfolio-grid');
+                    const leftArrow = container.querySelector('.left-arrow');
+                    const rightArrow = container.querySelector('.right-arrow');
+
+                    function updateArrows() {
+                        const scrollLeft = wrapper.scrollLeft;
+                        const maxScrollLeft = wrapper.scrollWidth - wrapper.clientWidth;
+                        leftArrow.classList.toggle('hidden', scrollLeft <= 5);
+                        rightArrow.classList.toggle('hidden', scrollLeft >= maxScrollLeft - 5);
                     }
 
-                    // Recalcular layout del slider de esta sección
-                    const container = section.querySelector('.portfolio-slider-container');
-                    if (container && typeof container.checkLayout === 'function') {
-                        container.checkLayout();
+                    wrapper.addEventListener('scroll', updateArrows);
+                    leftArrow.addEventListener('click', () => wrapper.scrollBy({ left: -310, behavior: 'smooth' }));
+                    rightArrow.addEventListener('click', () => wrapper.scrollBy({ left: 310, behavior: 'smooth' }));
+
+                    function checkLayout() {
+                        const needsSlider = window.innerWidth <= 768 || grid.querySelectorAll('.artwork-card').length > 4;
+                        grid.classList.toggle('grid-layout', !needsSlider);
+                        leftArrow.style.display = needsSlider ? 'flex' : 'none';
+                        rightArrow.style.display = needsSlider ? 'flex' : 'none';
+                        if (needsSlider) updateArrows();
                     }
-                } else {
-                    section.style.display = 'none';
-                    section.classList.remove('active');
-                }
-            });
-        }
 
-        authorButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const authorKey = btn.dataset.author;
-                switchAuthor(authorKey);
-            });
-        });
+                    window.addEventListener('resize', checkLayout);
+                    checkLayout();
+                    container.checkLayout = checkLayout;
+                    sliderContainers.push(container);
+                });
+            }
 
-        // Inicializar sliders en la carga de la página
-        document.addEventListener('DOMContentLoaded', () => {
+            function switchAuthor(authorKey) {
+                const currentButtons = document.querySelectorAll('.author-btn');
+                const currentSections = document.querySelectorAll('.artist-section');
+
+                currentButtons.forEach(btn => {
+                    if (btn.dataset.author === authorKey) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+
+                currentSections.forEach(section => {
+                    if (section.dataset.author === authorKey) {
+                        section.style.display = 'block';
+                        section.classList.add('active');
+
+                        // Reiniciar scroll a la izquierda
+                        const scrollWrapper = section.querySelector('.portfolio-scroll-wrapper');
+                        if (scrollWrapper) {
+                            scrollWrapper.scrollLeft = 0;
+                        }
+
+                        // Recalcular layout del slider de esta sección
+                        const container = section.querySelector('.portfolio-slider-container');
+                        if (container && typeof container.checkLayout === 'function') {
+                            container.checkLayout();
+                        }
+                    } else {
+                        section.style.display = 'none';
+                        section.classList.remove('active');
+                    }
+                });
+            }
+
+            // Usar delegación de eventos para soportar botones dinámicos
+            const navContainer = document.querySelector('.authors-nav');
+            if (navContainer) {
+                navContainer.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.author-btn');
+                    if (btn) {
+                        const authorKey = btn.dataset.author;
+                        switchAuthor(authorKey);
+                    }
+                });
+            }
+
+            // Inicializar sliders en la carga de la página
+            document.addEventListener('DOMContentLoaded', () => {
+                initSliders();
+            });
+            // Si ya cargó la página, llamar directamente por si acaso
             initSliders();
-        });
-        // Si ya cargó la página, llamar directamente por si acaso
-        initSliders();
-    </script>
+
+            // =========================================================================
+            // [NUEVO] LÓGICA DE CONTROL DEL PANEL DE ADMINISTRACIÓN (GALERÍA CMS LOCAL)
+            // =========================================================================
+            const adminFabBtn = document.getElementById('adminFabBtn');
+            const adminModalOverlay = document.getElementById('adminModalOverlay');
+            const adminModalCloseBtn = document.getElementById('adminModalCloseBtn');
+
+            const tabBtnArtist = document.getElementById('tabBtnArtist');
+            const tabBtnArtwork = document.getElementById('tabBtnArtwork');
+
+            const adminArtistForm = document.getElementById('adminArtistForm');
+            const adminArtworkForm = document.getElementById('adminArtworkForm');
+
+            const adminArtistCancelBtn = document.getElementById('adminArtistCancelBtn');
+            const adminArtworkCancelBtn = document.getElementById('adminArtworkCancelBtn');
+
+            // Campos Artista
+            const artistKey = document.getElementById('artistKey');
+            const artistNameInput = document.getElementById('artistNameInput');
+            const artistTaglineInput = document.getElementById('artistTaglineInput');
+            const artistImageFile = document.getElementById('artistImageFile');
+            const artistImageUrl = document.getElementById('artistImageUrl');
+            const artistImgPreview = document.getElementById('artistImgPreview');
+            const artistQuoteInput = document.getElementById('artistQuoteInput');
+            const artistBioInput = document.getElementById('artistBioInput');
+
+            // Campos Obra/Ficha
+            const artworkArtistSelect = document.getElementById('artworkArtistSelect');
+            const artworkTitleInput = document.getElementById('artworkTitleInput');
+            const artworkNumberInput = document.getElementById('artworkNumberInput');
+            const artworkImageFile = document.getElementById('artworkImageFile');
+            const artworkImageUrl = document.getElementById('artworkImageUrl');
+            const artworkImgPreview2 = document.getElementById('artworkImgPreview2');
+            const artworkMediumInput = document.getElementById('artworkMediumInput');
+            const artworkWeightInput = document.getElementById('artworkWeightInput');
+            const artworkBaseInput = document.getElementById('artworkBaseInput');
+            const artworkActivesInput = document.getElementById('artworkActivesInput');
+            const artworkFlavorInput = document.getElementById('artworkFlavorInput');
+            const artworkConceptInput = document.getElementById('artworkConceptInput');
+
+            const adminExportCode = document.getElementById('adminExportCode');
+            const adminCopyCodeBtn = document.getElementById('adminCopyCodeBtn');
+            const adminClearCustomBtn = document.getElementById('adminClearCustomBtn');
+
+            let tempArtistImageBase64 = "";
+            let tempArtworkImageBase64 = "";
+
+            // Inicialización y carga de contenido de localStorage en vivo
+            const initCustomContent = () => {
+                const customArtists = JSON.parse(localStorage.getItem('doxa_custom_artists') || '{}');
+                const customArtworks = JSON.parse(localStorage.getItem('doxa_custom_artworks') || '[]');
+
+                const nav = document.querySelector('.authors-nav');
+                const select = document.getElementById('artworkArtistSelect');
+                const wrapper = document.querySelector('.page-wrapper');
+                const footer = document.querySelector('.gallery-footer');
+
+                // 1. Inyectar Artistas Custom
+                Object.values(customArtists).forEach(artist => {
+                    // Verificar si el botón ya existe para no duplicarlo
+                    if (document.querySelector(`.author-btn[data-author="${artist.id}"]`)) return;
+
+                    // Crear botón de navegación
+                    const btn = document.createElement('button');
+                    btn.className = 'author-btn';
+                    btn.dataset.author = artist.id;
+                    btn.innerText = artist.name;
+                    nav.appendChild(btn);
+
+                    // Crear opción en select de obras
+                    const option = document.createElement('option');
+                    option.value = artist.id;
+                    option.innerText = artist.name;
+                    select.appendChild(option);
+
+                    // Crear sección de artista en HTML
+                    const section = document.createElement('section');
+                    section.className = 'artist-section';
+                    section.dataset.author = artist.id;
+                    section.style.display = 'none';
+                    section.innerHTML = `
+                    <div class="container">
+                        <div class="artist-grid">
+                            <div class="artist-image-container animate-appear delay-1">
+                                <img src="${artist.image}" alt="${artist.name}">
+                            </div>
+                            <div class="artist-details animate-appear delay-2">
+                                <span class="artist-tagline">${artist.tagline || 'El Creador'}</span>
+                                <h2 class="artist-name">${artist.name}</h2>
+                                <div class="artist-bio">
+                                    ${artist.bio.split('\n').map(p => p.trim() ? `<p>${p.trim()}</p>` : '').join('')}
+                                    ${artist.quote ? `<div class="artist-quote">«${artist.quote}»</div>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="border: 0; height: 1px; background-color: rgba(60, 51, 42, 0.1); margin: 60px 0;">
+                        <div class="portfolio-container animate-appear delay-3">
+                            <div class="section-header" style="margin-bottom: 50px; text-align: left;">
+                                <h3 class="section-title" style="font-size: clamp(20px, 3vw, 24px); letter-spacing: 4px; text-transform: uppercase;">
+                                    Obras de ${artist.name}
+                                </h3>
+                                <span class="section-subtitle" style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">
+                                    Fichas de Exposición
+                                </span>
+                            </div>
+                            <div class="portfolio-slider-container">
+                                <button class="scroll-arrow left-arrow hidden" aria-label="Desplazar a la izquierda">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="15 18 9 12 15 6"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="portfolio-scroll-wrapper">
+                                    <div class="portfolio-grid">
+                                    </div>
+                                </div>
+                                <button class="scroll-arrow right-arrow" aria-label="Desplazar a la derecha">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                    wrapper.insertBefore(section, footer);
+                });
+
+                // 2. Inyectar Obras Custom
+                customArtworks.forEach(artwork => {
+                    // Verificar si la tarjeta de obra ya existe
+                    if (document.querySelector(`.artwork-card[data-id="${artwork.id}"]`)) return;
+
+                    const section = document.querySelector(`.artist-section[data-author="${artwork.authorId}"]`);
+                    if (section) {
+                        const grid = section.querySelector('.portfolio-grid');
+                        if (grid) {
+                            const card = document.createElement('article');
+                            card.className = 'artwork-card';
+                            card.dataset.id = artwork.id;
+                            card.setAttribute('data-weight', artwork.weight || '90 gramos por pieza');
+                            card.setAttribute('data-base', artwork.base || '');
+                            card.setAttribute('data-actives', artwork.actives || '');
+                            card.setAttribute('data-flavor', artwork.flavor || '');
+                            card.setAttribute('data-concept', artwork.concept || '');
+
+                            card.innerHTML = `
+                            <div class="artwork-image-wrapper">
+                                <img src="${artwork.image}" alt="${artwork.title}">
+                            </div>
+                            <span class="artwork-number">${artwork.number || 'Obra'}</span>
+                            <h3 class="artwork-title">${artwork.title}</h3>
+                            <p class="artwork-medium">${artwork.medium}</p>
+                            <button class="btn-view-details">Ver Ficha Técnica</button>
+                        `;
+                            grid.appendChild(card);
+                        }
+                    }
+                });
+            };
+
+            // Ejecutar carga al inicio de los scripts
+            initCustomContent();
+
+            // Control de pestañas del modal
+            const switchTab = (tab) => {
+                if (tab === 'artist') {
+                    tabBtnArtist.classList.add('active');
+                    tabBtnArtwork.classList.remove('active');
+                    adminArtistForm.style.display = 'block';
+                    adminArtworkForm.style.display = 'none';
+                } else {
+                    tabBtnArtist.classList.remove('active');
+                    tabBtnArtwork.classList.add('active');
+                    adminArtistForm.style.display = 'none';
+                    adminArtworkForm.style.display = 'block';
+
+                    // Actualizar el dropdown con el artista activo por defecto si es posible
+                    const activeSection = document.querySelector('.artist-section.active');
+                    if (activeSection) {
+                        artworkArtistSelect.value = activeSection.dataset.author;
+                    }
+                }
+            };
+
+            tabBtnArtist.addEventListener('click', () => switchTab('artist'));
+            tabBtnArtwork.addEventListener('click', () => switchTab('artwork'));
+
+            // Abrir y cerrar modal
+            const toggleAdminModal = (show) => {
+                if (show) {
+                    adminModalOverlay.classList.add('active');
+                    updateExportCodeBox();
+
+                    // Pestaña por defecto: artista
+                    switchTab('artist');
+                } else {
+                    adminModalOverlay.classList.remove('active');
+                    adminArtistForm.reset();
+                    adminArtworkForm.reset();
+                    artistImgPreview.style.display = 'none';
+                    artworkImgPreview2.style.display = 'none';
+                    tempArtistImageBase64 = "";
+                    tempArtworkImageBase64 = "";
+                }
+            };
+
+            adminFabBtn.addEventListener('click', () => toggleAdminModal(true));
+            adminModalCloseBtn.addEventListener('click', () => toggleAdminModal(false));
+            adminArtistCancelBtn.addEventListener('click', () => toggleAdminModal(false));
+            adminArtworkCancelBtn.addEventListener('click', () => toggleAdminModal(false));
+            adminModalOverlay.addEventListener('click', (e) => {
+                if (e.target === adminModalOverlay) toggleAdminModal(false);
+            });
+
+            // Previsualizar archivos cargados
+            artistImageFile.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        tempArtistImageBase64 = event.target.result;
+                        artistImgPreview.src = tempArtistImageBase64;
+                        artistImgPreview.style.display = 'block';
+                        artistImageUrl.value = "";
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            artistImageUrl.addEventListener('input', () => {
+                if (artistImageUrl.value) {
+                    artistImgPreview.style.display = 'none';
+                    artistImageFile.value = "";
+                    tempArtistImageBase64 = "";
+                }
+            });
+
+            artworkImageFile.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        tempArtworkImageBase64 = event.target.result;
+                        artworkImgPreview2.src = tempArtworkImageBase64;
+                        artworkImgPreview2.style.display = 'block';
+                        artworkImageUrl.value = "";
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            artworkImageUrl.addEventListener('input', () => {
+                if (artworkImageUrl.value) {
+                    artworkImgPreview2.style.display = 'none';
+                    artworkImageFile.value = "";
+                    tempArtworkImageBase64 = "";
+                }
+            });
+
+            // Actualizar caja de exportación de código
+            const updateExportCodeBox = () => {
+                const artists = JSON.parse(localStorage.getItem('doxa_custom_artists') || '{}');
+                const artworks = JSON.parse(localStorage.getItem('doxa_custom_artworks') || '[]');
+
+                if (Object.keys(artists).length > 0 || artworks.length > 0) {
+                    adminExportCode.value = JSON.stringify({
+                        artistas_nuevos: artists,
+                        fichas_nuevas: artworks
+                    }, null, 4);
+                } else {
+                    adminExportCode.value = "";
+                }
+            };
+
+            // Guardar Artista Custom
+            adminArtistForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const key = artistKey.value.trim().toLowerCase().replace(/\s+/g, '_');
+                if (!key) return;
+
+                const finalImage = tempArtistImageBase64 || artistImageUrl.value.trim() || 'artista_retrato.png';
+
+                const newArtist = {
+                    id: key,
+                    name: artistNameInput.value.trim(),
+                    tagline: artistTaglineInput.value.trim() || 'El Creador',
+                    image: finalImage,
+                    quote: artistQuoteInput.value.trim(),
+                    bio: artistBioInput.value.trim()
+                };
+
+                const custom = JSON.parse(localStorage.getItem('doxa_custom_artists') || '{}');
+                custom[key] = newArtist;
+                localStorage.setItem('doxa_custom_artists', JSON.stringify(custom));
+
+                // Cargar y activar artista de inmediato
+                initCustomContent();
+
+                // Re-vincular sliders para la nueva sección
+                initSliders();
+
+                // Activar pestaña del artista recién creado
+                switchAuthor(key);
+
+                toggleAdminModal(false);
+                alert('¡Artista creado con éxito localmente!');
+            });
+
+            // Guardar Obra / Ficha Custom
+            adminArtworkForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const authorId = artworkArtistSelect.value;
+                const title = artworkTitleInput.value.trim();
+                const number = artworkNumberInput.value.trim();
+                const key = `${authorId}-${title.toLowerCase().replace(/\s+/g, '_')}`;
+
+                const finalImage = tempArtworkImageBase64 || artworkImageUrl.value.trim() || 'Galle choco.png';
+
+                const newArtwork = {
+                    id: key,
+                    authorId: authorId,
+                    title: title,
+                    number: number,
+                    image: finalImage,
+                    medium: artworkMediumInput.value.trim(),
+                    weight: artworkWeightInput.value.trim(),
+                    base: artworkBaseInput.value.trim(),
+                    actives: artworkActivesInput.value.trim(),
+                    flavor: artworkFlavorInput.value.trim(),
+                    concept: artworkConceptInput.value.trim()
+                };
+
+                const custom = JSON.parse(localStorage.getItem('doxa_custom_artworks') || '[]');
+                custom.push(newArtwork);
+                localStorage.setItem('doxa_custom_artworks', JSON.stringify(custom));
+
+                // Cargar contenido
+                initCustomContent();
+
+                // Re-vincular sliders para recalculación
+                initSliders();
+
+                // Activar autor para ver la nueva ficha
+                switchAuthor(authorId);
+
+                toggleAdminModal(false);
+                alert('¡Ficha técnica publicada con éxito localmente!');
+            });
+
+            // Copiar código de exportación al portapapeles
+            adminCopyCodeBtn.addEventListener('click', () => {
+                if (adminExportCode.value) {
+                    adminExportCode.select();
+                    document.execCommand('copy');
+                    alert('Código copiado al portapapeles.');
+                } else {
+                    alert('No hay código para copiar. Primero crea algún artista u obra.');
+                }
+            });
+
+            // Borrar datos personalizados de la galería
+            adminClearCustomBtn.addEventListener('click', () => {
+                if (confirm('¿Estás segura de que deseas borrar todos los artistas y obras personalizadas? Esto vaciará el almacenamiento local.')) {
+                    localStorage.removeItem('doxa_custom_artists');
+                    localStorage.removeItem('doxa_custom_artworks');
+                    window.location.reload();
+                }
+            });
+        </script>
 
 </body>
 

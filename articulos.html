@@ -267,7 +267,8 @@
             padding: 0;
             background-color: var(--yeso-oscuro);
             overflow: hidden;
-            align-self: flex-start; /* Evita que se estire al alto de la columna de texto y permite el sticky */
+            align-self: flex-start;
+            /* Evita que se estire al alto de la columna de texto y permite el sticky */
         }
 
         .artwork-figure {
@@ -591,11 +592,13 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 10px 0 30px 0;
-            scrollbar-width: none; /* Ocultar en Firefox */
+            scrollbar-width: none;
+            /* Ocultar en Firefox */
         }
 
         .carousel-container::-webkit-scrollbar {
-            display: none; /* Ocultar en Chrome/Safari */
+            display: none;
+            /* Ocultar en Chrome/Safari */
         }
 
         /* Tarjeta del carrusel */
@@ -744,22 +747,27 @@
            PIE DE PÁGINA DE LUJO SIMPLIFICADO
            ========================================= */
         .gallery-footer {
-            background-color: #caccc3; /* Gris Claro Cementoso / Yeso Oscuro */
+            background-color: #caccc3;
+            /* Gris Claro Cementoso / Yeso Oscuro */
             color: #3C332A;
-            padding: 40px 0 25px 0; /* Menor altura */
+            padding: 40px 0 25px 0;
+            /* Menor altura */
             text-align: left;
         }
 
         .footer-grid-container {
-            max-width: 1400px; /* Ampliado de 1200px para mayor amplitud */
+            max-width: 1400px;
+            /* Ampliado de 1200px para mayor amplitud */
             margin: 0 auto;
             padding: 0 40px;
         }
 
         .footer-columns-row {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* Columnas perfectamente equidistantes */
-            gap: 30px; /* Mayor espacio entre columnas */
+            grid-template-columns: repeat(5, 1fr);
+            /* Columnas perfectamente equidistantes */
+            gap: 30px;
+            /* Mayor espacio entre columnas */
             margin-bottom: 30px;
             align-items: start;
         }
@@ -881,7 +889,8 @@
 
         .footer-bottom-row {
             display: flex;
-            justify-content: flex-end; /* Alinear a la derecha como en la captura */
+            justify-content: flex-end;
+            /* Alinear a la derecha como en la captura */
             align-items: center;
             border-top: 1px solid rgba(60, 51, 42, 0.1);
             padding-top: 20px;
@@ -904,6 +913,7 @@
                 grid-template-columns: repeat(3, 1fr);
                 gap: 30px;
             }
+
             .footer-column:nth-child(5) {
                 align-items: flex-start;
                 text-align: left;
@@ -916,17 +926,255 @@
                 gap: 25px;
                 text-align: center;
             }
+
             .footer-column {
                 align-items: center !important;
                 text-align: center !important;
             }
+
             .footer-bottom-row {
                 justify-content: center;
                 text-align: center;
             }
+
             .footer-copy {
                 text-align: center;
             }
+        }
+
+        /* =========================================================================
+           [NUEVO] ESTILOS DEL PANEL DE ADMINISTRACIÓN (CMS LOCAL)
+           ========================================================================= */
+        .admin-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #3C332A;
+            color: #F7F5F0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .admin-fab:hover {
+            transform: translateY(-2px);
+            background-color: #1c1814;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .admin-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(60, 51, 42, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .admin-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .admin-modal-container {
+            background-color: #F7F5F0;
+            color: #3C332A;
+            width: 90%;
+            max-width: 650px;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            border: 1px solid rgba(60, 51, 42, 0.1);
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .admin-modal-overlay.active .admin-modal-container {
+            transform: translateY(0);
+        }
+
+        .admin-modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background-color: #F7F5F0;
+            z-index: 10;
+        }
+
+        .admin-modal-title {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .admin-modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #3C332A;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .admin-modal-close:hover {
+            opacity: 1;
+        }
+
+        .admin-modal-body {
+            padding: 30px;
+        }
+
+        .admin-form-group {
+            margin-bottom: 20px;
+        }
+
+        .admin-form-label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .admin-form-input,
+        .admin-form-textarea,
+        .admin-form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(60, 51, 42, 0.2);
+            background-color: #fff;
+            color: #3C332A;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease;
+        }
+
+        .admin-form-input:focus,
+        .admin-form-textarea:focus,
+        .admin-form-select:focus {
+            outline: none;
+            border-color: #3C332A;
+        }
+
+        .admin-form-file-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .admin-form-file-input {
+            font-size: 13px;
+        }
+
+        .admin-form-actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .admin-btn {
+            padding: 12px 24px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .admin-btn-primary {
+            background-color: #3C332A;
+            color: #F7F5F0;
+            border: 1px solid #3C332A;
+            flex-grow: 1;
+        }
+
+        .admin-btn-primary:hover {
+            background-color: #1c1814;
+            border-color: #1c1814;
+        }
+
+        .admin-btn-secondary {
+            background-color: transparent;
+            color: #3C332A;
+            border: 1px solid rgba(60, 51, 42, 0.3);
+        }
+
+        .admin-btn-secondary:hover {
+            background-color: rgba(60, 51, 42, 0.05);
+        }
+
+        .admin-btn-danger {
+            background-color: #8c2d2d;
+            color: #fff;
+            border: 1px solid #8c2d2d;
+        }
+
+        .admin-btn-danger:hover {
+            background-color: #6a2121;
+        }
+
+        .admin-export-box {
+            margin-top: 25px;
+            background-color: #f0ede6;
+            border: 1px solid rgba(60, 51, 42, 0.15);
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .admin-export-code {
+            width: 100%;
+            height: 120px;
+            font-family: monospace;
+            font-size: 11px;
+            background-color: #fff;
+            border: 1px solid rgba(60, 51, 42, 0.1);
+            border-radius: 4px;
+            padding: 10px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .admin-image-preview {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid rgba(60, 51, 42, 0.2);
+            background-color: #eee;
+            display: none;
         }
     </style>
 </head>
@@ -960,7 +1208,7 @@
         <!-- Columna Izquierda: Imagen Fija -->
         <div class="artwork-figures">
             <div class="artwork-figure">
-                <img id="articleImage" src="todos los sin.jpg" alt="La Cocina como Taller Alquímico">
+                <img id="articleImage" src="ProtoDoxa.png" alt="La Cocina como Taller Alquímico">
                 <button class="zoom-btn" id="btnZoom">Ampliar</button>
             </div>
         </div>
@@ -969,7 +1217,8 @@
         <div class="artwork-content-scroll" id="scrollContainer">
             <header class="artwork-header">
                 <h1 class="artwork-title" id="articleTitle">La Cocina como Taller Alquímico</h1>
-                <p class="artwork-subtitle" id="articleSubtitle">Deconstrucción de texturas e ingredientes funcionales como la vanguardia de la salud estética.</p>
+                <p class="artwork-subtitle" id="articleSubtitle">Deconstrucción de texturas e ingredientes funcionales
+                    como la vanguardia de la salud estética.</p>
                 <div class="artwork-info">
                     <a href="galeria.html" class="artist-link">
                         <img id="artistAvatar" src="artista_retrato.png" alt="Ana M.">
@@ -1010,29 +1259,51 @@
             </div>
 
             <div class="artwork-body" id="articleBody">
-                <p>En el corazón de <strong>DOXA</strong> no hay moldes de repostería comunes, sino un laboratorio de experimentación bioactiva. Para su fundadora, <strong>Ana M.</strong>, la cocina tradicional representa un paradigma superado que abusa de azúcares y grasas inertes. Su enfoque propone la deconstrucción molecular del postre, sustituyendo los aglutinantes tradicionales por matrices de colágeno, almendras molidas y grasas de cadena media que alimentan la estructura celular.</p>
-                <p>La cocina molecular deja de ser una técnica puramente visual para transformarse en un sistema de entrega nutricional de alta precisión. Cada creación del Atelier DOXA es concebida como una escultura funcional donde el sabor y los activos (como el ácido hialurónico, el magnesio y los nootrópicos) están integrados a nivel atómico, garantizando que el cuerpo los absorba de manera eficiente sin elevar el índice glucémico.</p>
-                <p>Este artículo explora el manifiesto de la repostería funcional de vanguardia. La repostería ya no es una recompensa culposa; es el lienzo donde la ciencia biológica y la estética gastronómica se fusionan para esculpir la salud y la vitalidad desde el interior. La cocina de DOXA es, en definitiva, el taller donde la alquimia de los nutrientes crea el arte comestible del futuro.</p>
+                <p>En el corazón de <strong>DOXA</strong> no hay moldes de repostería comunes, sino un laboratorio de
+                    experimentación bioactiva. Para su fundadora, <strong>Ana M.</strong>, la cocina tradicional
+                    representa un paradigma superado que abusa de azúcares y grasas inertes. Su enfoque propone la
+                    deconstrucción molecular del postre, sustituyendo los aglutinantes tradicionales por matrices de
+                    colágeno, almendras molidas y grasas de cadena media que alimentan la estructura celular.</p>
+                <p>La cocina molecular deja de ser una técnica puramente visual para transformarse en un sistema de
+                    entrega nutricional de alta precisión. Cada creación del Atelier DOXA es concebida como una
+                    escultura funcional donde el sabor y los activos (como el ácido hialurónico, el magnesio y los
+                    nootrópicos) están integrados a nivel atómico, garantizando que el cuerpo los absorba de manera
+                    eficiente sin elevar el índice glucémico.</p>
+                <p>Este artículo explora el manifiesto de la repostería funcional de vanguardia. La repostería ya no es
+                    una recompensa culposa; es el lienzo donde la ciencia biológica y la estética gastronómica se
+                    fusionan para esculpir la salud y la vitalidad desde el interior. La cocina de DOXA es, en
+                    definitiva, el taller donde la alquimia de los nutrientes crea el arte comestible del futuro.</p>
             </div>
 
             <footer class="section-footer">
-                <p>(CC) Licencia Creative Commons Atribución 4.0 - <cite id="footerAuthorDate">Ana M. & El Atelier, 21-07-2026</cite></p>
+                <p>(CC) Licencia Creative Commons Atribución 4.0 - <cite id="footerAuthorDate">Ana M. & El Atelier,
+                        21-07-2026</cite></p>
             </footer>
 
             <aside class="collaborate">
-                <a href="index.html#reservas"><strong>DOXA es una experiencia permanente.</strong> Si deseas reservar una degustación molecular en el Atelier, ponte en contacto con nosotros.</a>
-                <a href="galeria.html">O si lo prefieres, puedes <strong>explorar la galería de arte digital</strong> para conocer en profundidad a los artistas colaboradores.</a>
+                <a href="index.html#reservas"><strong>DOXA es una experiencia permanente.</strong> Si deseas reservar
+                    una degustación molecular en el Atelier, ponte en contacto con nosotros.</a>
+                <a href="galeria.html">O si lo prefieres, puedes <strong>explorar la galería de arte digital</strong>
+                    para conocer en profundidad a los artistas colaboradores.</a>
             </aside>
         </div>
     </article>
 
     <!-- SECCIÓN INFERIOR: CARRUSEL RELACIONADO -->
     <aside class="artwork-related-group">
-        <h2 class="related-title">Artículos de la Colección</h2>
+        <h2 class="related-title" style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
+            Artículos de la Colección
+            <span id="activeFilterBadge" class="filter-badge"
+                style="display: none; font-size: 13px; font-weight: normal; background-color: var(--tag-bg); color: var(--tag-text); padding: 4px 10px; border-radius: 12px; cursor: pointer; border: 1px solid rgba(60, 51, 42, 0.15); transition: all 0.2s ease;"
+                onmouseover="this.style.backgroundColor='rgba(24, 24, 24, 0.12)'"
+                onmouseout="this.style.backgroundColor='var(--tag-bg)'">
+                Filtrado por: <strong id="activeFilterName" style="margin-right: 4px;"></strong> &times;
+            </span>
+        </h2>
         <div class="carousel-wrapper">
             <button class="carousel-arrow left-arrow" id="carouselLeftArrow" aria-label="Desplazar a la izquierda">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
             </button>
@@ -1040,8 +1311,8 @@
                 <!-- Las tarjetas se generan dinámicamente con JS -->
             </div>
             <button class="carousel-arrow right-arrow" id="carouselRightArrow" aria-label="Desplazar a la derecha">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </button>
@@ -1071,7 +1342,8 @@
                         <div class="footer-social-icons">
                             <a href="https://instagram.com" class="social-icon" target="_blank" aria-label="Instagram">
                                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                                 </svg>
                             </a>
                         </div>
@@ -1125,6 +1397,101 @@
 
         </div>
     </footer>
+
+    <!-- =========================================================================
+       [NUEVO] PANEL DE ADMINISTRACIÓN - BOTÓN FLOTANTE Y MODAL DE DIÁLOGO
+       ========================================================================= -->
+    <button class="admin-fab" id="adminFabBtn">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+            <path
+                d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.5C12.87 21.6 13.43 21.93 14 22.18l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
+        </svg>
+        Admin
+    </button>
+
+    <div class="admin-modal-overlay" id="adminModalOverlay">
+        <div class="admin-modal-container">
+            <div class="admin-modal-header">
+                <h3 class="admin-modal-title">Administrador: Artículos</h3>
+                <button class="admin-modal-close" id="adminModalCloseBtn">&times;</button>
+            </div>
+            <div class="admin-modal-body">
+                <form id="adminArticleForm">
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="articleKey">Identificador único (sin espacios, ej:
+                            mi_receta)</label>
+                        <input class="admin-form-input" type="text" id="articleKey" placeholder="ej. postre_detox"
+                            required>
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="articleTitleInput">Título del Artículo</label>
+                        <input class="admin-form-input" type="text" id="articleTitleInput"
+                            placeholder="Escribe el título..." required>
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="articleSubtitleInput">Subtítulo</label>
+                        <input class="admin-form-input" type="text" id="articleSubtitleInput"
+                            placeholder="Escribe el subtítulo..." required>
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">Foto de Portada</label>
+                        <div class="admin-form-file-wrapper">
+                            <input class="admin-form-file-input" type="file" id="articleImageFile" accept="image/*">
+                            <input class="admin-form-input" type="text" id="articleImageUrl"
+                                placeholder="o escribe el nombre del archivo (ej. foto.jpg)">
+                            <img class="admin-image-preview" id="articleImgPreview" src="" alt="Previsualización">
+                        </div>
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="articleAuthorInput">Autor / Creador</label>
+                        <input class="admin-form-input" type="text" id="articleAuthorInput"
+                            placeholder="ej. Ana M. & El Atelier" required>
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="articleColeccionInput">Atelier / Colección</label>
+                        <input class="admin-form-input" type="text" id="articleColeccionInput"
+                            placeholder="ej. Atelier DOXA (Colección Fundadora)">
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="articleFormulaInput">Técnica / Formulación</label>
+                        <input class="admin-form-input" type="text" id="articleFormulaInput"
+                            placeholder="ej. Deconstrucción Molecular y Soporte Celular">
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="articleTagsInput">Etiquetas (separadas por comas)</label>
+                        <input class="admin-form-input" type="text" id="articleTagsInput"
+                            placeholder="ej. Salud Estética, Nootrópicos, Colágeno">
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="articleBodyInput">Cuerpo del Artículo (puedes usar
+                            HTML)</label>
+                        <textarea class="admin-form-textarea" id="articleBodyInput" rows="6"
+                            placeholder="Escribe el contenido en párrafos..." required></textarea>
+                    </div>
+                    <div class="admin-form-actions">
+                        <button class="admin-btn admin-btn-secondary" type="button"
+                            id="adminCancelBtn">Cancelar</button>
+                        <button class="admin-btn admin-btn-primary" type="submit">Publicar Artículo</button>
+                    </div>
+                </form>
+
+                <div class="admin-export-box">
+                    <label class="admin-form-label">Exportar Artículos Personalizados (Código JS)</label>
+                    <p style="font-size: 11px; margin: 4px 0 10px 0; color: #6d5d4d;">Copia este bloque de código y
+                        pégalo dentro de `articlesDb` en tu archivo `articulos.html` para consolidar permanentemente tus
+                        cambios.</p>
+                    <textarea class="admin-export-code" id="adminExportCode" readonly
+                        placeholder="No hay artículos personalizados todavía. Crea uno para ver el código aquí."></textarea>
+                    <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <button class="admin-btn admin-btn-secondary" style="font-size: 11px; padding: 6px 12px;"
+                            id="adminCopyCodeBtn">Copiar Código</button>
+                        <button class="admin-btn admin-btn-danger" style="font-size: 11px; padding: 6px 12px;"
+                            id="adminClearCustomBtn">Eliminar todos los artículos nuevos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- =========================================
          LÓGICA JAVASCRIPT DINÁMICA
@@ -1253,6 +1620,12 @@
             }
         };
 
+        // Cargar artículos personalizados de localStorage
+        const customArticles = JSON.parse(localStorage.getItem('doxa_custom_articles') || '{}');
+        Object.keys(customArticles).forEach(key => {
+            articlesDb[key] = customArticles[key];
+        });
+
         // ELEMENTOS DEL DOM
         const navbar = document.getElementById('mainNavbar');
         const mobileToggle = document.getElementById('mobileToggle');
@@ -1340,13 +1713,12 @@
                 article.tags.forEach(tag => {
                     const li = document.createElement('li');
                     const a = document.createElement('a');
-                    
-                    // === EDITAR AQUÍ (ENLACES DE TAGS DINÁMICAS) ===
-                    // Cambia '#' por la URL a la que deseas enviar al usuario cuando hace clic en cualquier etiqueta.
-                    // Si deseas enlaces específicos por etiqueta, puedes agregar lógica condicional aquí (ej. a.href = 'buscar.html?tag=' + encodeURIComponent(tag);)
                     a.href = '#';
-                    
                     a.innerText = tag;
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        setFilter(tag);
+                    });
                     li.appendChild(a);
                     articleTags.appendChild(li);
                 });
@@ -1373,13 +1745,61 @@
             }, 400);
         };
 
+        // FILTRADO DE ARTÍCULOS POR ETIQUETA
+        let activeFilter = null;
+
+        const setFilter = (tag) => {
+            activeFilter = tag;
+            const badge = document.getElementById('activeFilterBadge');
+            const nameSpan = document.getElementById('activeFilterName');
+
+            if (badge && nameSpan) {
+                if (tag) {
+                    nameSpan.innerText = tag;
+                    badge.style.display = 'inline-flex';
+                    badge.style.alignItems = 'center';
+
+                    // Generar carrusel filtrado
+                    generateCarousel(tag);
+
+                    // Desplazar suavemente hasta el carrusel para ver las tarjetas filtradas
+                    const relatedSection = document.querySelector('.artwork-related-group');
+                    if (relatedSection) {
+                        relatedSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                } else {
+                    badge.style.display = 'none';
+                    generateCarousel(null);
+                }
+            }
+        };
+
+        // Escuchar click en el badge de filtro para quitarlo
+        const activeFilterBadge = document.getElementById('activeFilterBadge');
+        if (activeFilterBadge) {
+            activeFilterBadge.addEventListener('click', () => {
+                setFilter(null);
+            });
+        }
+
         // GENERAR TARJETAS EN EL CARRUSEL RELACIONADO
-        const generateCarousel = () => {
+        const generateCarousel = (filterTag = null) => {
             carouselContainer.innerHTML = '';
             Object.values(articlesDb).forEach(article => {
+                // Si hay un filtro activo y el artículo no tiene este tag, omitirlo
+                if (filterTag && !article.tags.includes(filterTag)) {
+                    return;
+                }
+
                 const card = document.createElement('div');
                 card.className = 'related-card';
                 card.dataset.id = article.id;
+
+                // Marcar tarjeta como activa si corresponde al artículo actual
+                const currentHash = window.location.hash.substring(1) || 'ana';
+                if (article.id === currentHash) {
+                    card.classList.add('active');
+                }
 
                 card.innerHTML = `
                     <div class="card-img-wrapper">
@@ -1399,6 +1819,11 @@
 
                 carouselContainer.appendChild(card);
             });
+
+            // Reajustar la visibilidad de las flechas del carrusel
+            if (typeof toggleArrows === 'function') {
+                setTimeout(toggleArrows, 100);
+            }
         };
 
         // CONTROL DEL MODAL DE ZOOM / LIGHTBOX
@@ -1471,9 +1896,159 @@
         } else {
             renderArticle('ana');
         }
-        
+
         // Ajustar flechas inicialmente
         setTimeout(toggleArrows, 600);
+
+        // =========================================================================
+        // [NUEVO] LÓGICA DE CONTROL DEL PANEL DE ADMINISTRACIÓN (CMS LOCAL)
+        // =========================================================================
+        const adminFabBtn = document.getElementById('adminFabBtn');
+        const adminModalOverlay = document.getElementById('adminModalOverlay');
+        const adminModalCloseBtn = document.getElementById('adminModalCloseBtn');
+        const adminCancelBtn = document.getElementById('adminCancelBtn');
+        const adminArticleForm = document.getElementById('adminArticleForm');
+
+        const articleKey = document.getElementById('articleKey');
+        const articleTitleInput = document.getElementById('articleTitleInput');
+        const articleSubtitleInput = document.getElementById('articleSubtitleInput');
+        const articleImageFile = document.getElementById('articleImageFile');
+        const articleImageUrl = document.getElementById('articleImageUrl');
+        const articleImgPreview = document.getElementById('articleImgPreview');
+        const articleAuthorInput = document.getElementById('articleAuthorInput');
+        const articleColeccionInput = document.getElementById('articleColeccionInput');
+        const articleFormulaInput = document.getElementById('articleFormulaInput');
+        const articleTagsInput = document.getElementById('articleTagsInput');
+        const articleBodyInput = document.getElementById('articleBodyInput');
+
+        const adminExportCode = document.getElementById('adminExportCode');
+        const adminCopyCodeBtn = document.getElementById('adminCopyCodeBtn');
+        const adminClearCustomBtn = document.getElementById('adminClearCustomBtn');
+
+        let tempImageBase64 = "";
+
+        // Abrir y cerrar modal
+        const toggleAdminModal = (show) => {
+            if (show) {
+                adminModalOverlay.classList.add('active');
+                updateExportCodeBox();
+            } else {
+                adminModalOverlay.classList.remove('active');
+                adminArticleForm.reset();
+                articleImgPreview.style.display = 'none';
+                tempImageBase64 = "";
+            }
+        };
+
+        adminFabBtn.addEventListener('click', () => toggleAdminModal(true));
+        adminModalCloseBtn.addEventListener('click', () => toggleAdminModal(false));
+        adminCancelBtn.addEventListener('click', () => toggleAdminModal(false));
+        adminModalOverlay.addEventListener('click', (e) => {
+            if (e.target === adminModalOverlay) toggleAdminModal(false);
+        });
+
+        // Previsualizar archivo cargado y convertir a Base64
+        articleImageFile.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    tempImageBase64 = event.target.result;
+                    articleImgPreview.src = tempImageBase64;
+                    articleImgPreview.style.display = 'block';
+                    articleImageUrl.value = ""; // Limpiar el input de texto
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Si escriben en el campo de texto de la imagen, ocultar la previsualización del archivo
+        articleImageUrl.addEventListener('input', () => {
+            if (articleImageUrl.value) {
+                articleImgPreview.style.display = 'none';
+                articleImageFile.value = "";
+                tempImageBase64 = "";
+            }
+        });
+
+        // Actualizar caja de exportación de código
+        const updateExportCodeBox = () => {
+            const custom = localStorage.getItem('doxa_custom_articles');
+            if (custom && custom !== '{}') {
+                // Formatear el JSON para que sea un objeto de código JS asignable
+                const formatted = JSON.stringify(JSON.parse(custom), null, 4);
+                adminExportCode.value = formatted;
+            } else {
+                adminExportCode.value = "";
+            }
+        };
+
+        // Guardar artículo
+        adminArticleForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const key = articleKey.value.trim().toLowerCase().replace(/\s+/g, '_');
+            if (!key) return;
+
+            // Determinar la imagen final (Base64 o nombre de archivo de texto)
+            const finalImage = tempImageBase64 || articleImageUrl.value.trim() || 'todos los sin.jpg';
+
+            // Crear el objeto del nuevo artículo
+            const newArticle = {
+                id: key,
+                title: articleTitleInput.value.trim(),
+                subtitle: articleSubtitleInput.value.trim(),
+                image: finalImage,
+                artistName: articleAuthorInput.value.trim(),
+                artistAvatar: 'artista_retrato.png',
+                origin: 'España, 2026',
+                coleccion: articleColeccionInput.value.trim() || 'Atelier DOXA (Colección Fundadora)',
+                formula: articleFormulaInput.value.trim() || 'Deconstrucción Molecular y Soporte Celular',
+                autor: articleAuthorInput.value.trim(),
+                fecha: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-'),
+                tags: articleTagsInput.value.split(',').map(t => t.trim()).filter(Boolean),
+                body: articleBodyInput.value.trim().split('\n').map(p => p.trim() ? `<p>${p.trim()}</p>` : '').join(''),
+                colors: themeColors
+            };
+
+            // Guardar en localStorage
+            const custom = JSON.parse(localStorage.getItem('doxa_custom_articles') || '{}');
+            custom[key] = newArticle;
+            localStorage.setItem('doxa_custom_articles', JSON.stringify(custom));
+
+            // Actualizar la base de datos en vivo de la página
+            articlesDb[key] = newArticle;
+
+            // Regenerar carrusel y cargar el nuevo artículo
+            generateCarousel();
+            window.location.hash = key;
+
+            // Cerrar modal
+            toggleAdminModal(false);
+
+            alert('¡Artículo publicado con éxito localmente!');
+        });
+
+        // Copiar código de exportación al portapapeles
+        adminCopyCodeBtn.addEventListener('click', () => {
+            if (adminExportCode.value) {
+                adminExportCode.select();
+                document.execCommand('copy');
+                alert('Código copiado al portapapeles. Ahora puedes pegarlo en el archivo `articulos.html`.');
+            } else {
+                alert('No hay código para copiar. Primero crea algún artículo.');
+            }
+        });
+
+        // Borrar artículos personalizados
+        adminClearCustomBtn.addEventListener('click', () => {
+            if (confirm('¿Estás segura de que deseas borrar todos tus artículos personalizados? Esto vaciará el almacenamiento local.')) {
+                localStorage.removeItem('doxa_custom_articles');
+
+                // Recargar para limpiar
+                window.location.reload();
+            }
+        });
     </script>
 
     <!-- =========================================================================
