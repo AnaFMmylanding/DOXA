@@ -1548,6 +1548,33 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             opacity: 1;
         }
 
+        .btn-ver-articulo {
+            display: inline-flex;
+            align-items: center;
+            background-color: #3C332A;
+            color: #F7F5F0 !important;
+            padding: 12px 24px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 1px solid #3C332A;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(60, 51, 42, 0.1);
+            margin-top: 25px;
+        }
+
+        .btn-ver-articulo:hover {
+            background-color: transparent;
+            color: #3C332A !important;
+            border-color: #3C332A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(60, 51, 42, 0.15);
+        }
+
         /* =========================================================================
            [NUEVO] ESTILOS DEL PANEL DE ADMINISTRACIÓN (CMS LOCAL)
            ========================================================================= */
@@ -1807,6 +1834,46 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             background-color: #eee;
             display: none;
         }
+
+        .admin-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* [NUEVO] ESTILOS PARA SUB-PESTAÑAS */
+        .admin-sub-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .admin-sub-tab {
+            background: none;
+            border: 1px solid rgba(60, 51, 42, 0.15);
+            padding: 6px 12px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            color: rgba(60, 51, 42, 0.6);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .admin-sub-tab:hover {
+            color: #3C332A;
+            border-color: rgba(60, 51, 42, 0.4);
+        }
+
+        .admin-sub-tab.active {
+            color: #F7F5F0;
+            background-color: #3C332A;
+            border-color: #3C332A;
+        }
     </style>
 </head>
 
@@ -1835,7 +1902,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         <!-- SECCIÓN HERO (EXPOSICIÓN) -->
         <header class="gallery-hero">
             <div class="gallery-hero-bg">
-                <img src="cabecera_galeria.jpg" alt="Exposición Doxa">
+                <img src="MASEDA 2.jpg" alt="Exposición Doxa">
             </div>
             <div class="gallery-hero-content animate-appear">
                 <h1 class="gallery-hero-title">DOXA Y EL ARTE</h1>
@@ -2818,6 +2885,21 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
                     <!-- FORMULARIO 1: AÑADIR ARTISTA -->
                     <form id="adminArtistForm">
+                        <div class="admin-sub-tabs">
+                            <button type="button" class="admin-sub-tab active" id="artistModeCreate">Crear Artista</button>
+                            <button type="button" class="admin-sub-tab" id="artistModeEdit">Editar/Borrar Artista</button>
+                        </div>
+                        <div class="admin-form-group" id="artistSelectGroup" style="display: none;">
+                            <label class="admin-form-label" for="artistSelect">Seleccionar Artista</label>
+                            <select class="admin-form-select" id="artistSelect"></select>
+                        </div>
+                        <div class="admin-form-group" id="artistUrlInfo" style="display: none; background-color: #f7f5f0; padding: 12px; border-left: 3px solid #3C332A; margin-bottom: 20px; border-radius: 4px;">
+                            <label class="admin-form-label" style="font-size: 11px; color: #6d5d4d; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin-bottom: 6px; display: block;">URL para enlazar este artista:</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="artistUrlText" readonly class="admin-form-input" style="flex: 1; font-family: monospace; font-size: 12px; background-color: #fff; cursor: text; margin: 0; padding: 8px;" onclick="this.select()">
+                                <button type="button" id="copyArtistUrlBtn" class="admin-btn admin-btn-primary" style="padding: 8px 16px; font-size: 11px; white-space: nowrap; margin: 0; min-height: unset; line-height: unset;">Copiar</button>
+                            </div>
+                        </div>
                         <div class="admin-form-group">
                             <label class="admin-form-label" for="artistKey">Identificador único (sin espacios, ej:
                                 picasso)</label>
@@ -2854,15 +2936,37 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                             <textarea class="admin-form-textarea" id="artistBioInput" rows="6"
                                 placeholder="Escribe el texto de presentación..." required></textarea>
                         </div>
+                        <div class="admin-form-group">
+                            <label class="admin-form-label" for="artistArticleUrlInput">Enlace al Artículo (Artículo del artista)</label>
+                            <input class="admin-form-input" type="text" id="artistArticleUrlInput"
+                                placeholder="ej. articulos.html#antonio">
+                        </div>
                         <div class="admin-form-actions">
                             <button class="admin-btn admin-btn-secondary" type="button"
                                 id="adminArtistCancelBtn">Cancelar</button>
-                            <button class="admin-btn admin-btn-primary" type="submit">Publicar Artista</button>
+                            <button class="admin-btn admin-btn-danger" type="button"
+                                id="adminArtistDeleteBtn" style="display: none;">Borrar Artista</button>
+                            <button class="admin-btn admin-btn-primary" type="submit" id="adminArtistSubmitBtn">Publicar Artista</button>
                         </div>
                     </form>
 
                     <!-- FORMULARIO 2: AÑADIR FICHA / OBRA -->
                     <form id="adminArtworkForm" style="display: none;">
+                        <div class="admin-sub-tabs">
+                            <button type="button" class="admin-sub-tab active" id="artworkModeCreate">Añadir Ficha</button>
+                            <button type="button" class="admin-sub-tab" id="artworkModeEdit">Editar/Borrar Ficha</button>
+                        </div>
+                        <div class="admin-form-group" id="artworkSelectGroup" style="display: none;">
+                            <label class="admin-form-label" for="artworkSelect">Seleccionar Ficha (Obra)</label>
+                            <select class="admin-form-select" id="artworkSelect"></select>
+                        </div>
+                        <div class="admin-form-group" id="artworkUrlInfo" style="display: none; background-color: #f7f5f0; padding: 12px; border-left: 3px solid #3C332A; margin-bottom: 20px; border-radius: 4px;">
+                            <label class="admin-form-label" style="font-size: 11px; color: #6d5d4d; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin-bottom: 6px; display: block;">URL para enlazar esta obra (Galería del artista):</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="artworkUrlText" readonly class="admin-form-input" style="flex: 1; font-family: monospace; font-size: 12px; background-color: #fff; cursor: text; margin: 0; padding: 8px;" onclick="this.select()">
+                                <button type="button" id="copyArtworkUrlBtn" class="admin-btn admin-btn-primary" style="padding: 8px 16px; font-size: 11px; white-space: nowrap; margin: 0; min-height: unset; line-height: unset;">Copiar</button>
+                            </div>
+                        </div>
                         <div class="admin-form-group">
                             <label class="admin-form-label" for="artworkArtistSelect">Seleccionar Artista</label>
                             <select class="admin-form-select" id="artworkArtistSelect" required>
@@ -2941,7 +3045,9 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         <div class="admin-form-actions">
                             <button class="admin-btn admin-btn-secondary" type="button"
                                 id="adminArtworkCancelBtn">Cancelar</button>
-                            <button class="admin-btn admin-btn-primary" type="submit">Publicar Ficha</button>
+                            <button class="admin-btn admin-btn-danger" type="button"
+                                id="adminArtworkDeleteBtn" style="display: none;">Borrar Ficha</button>
+                            <button class="admin-btn admin-btn-primary" type="submit" id="adminArtworkSubmitBtn">Publicar Ficha</button>
                         </div>
                     </form>
 
@@ -3155,6 +3261,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     const leftArrow = container.querySelector('.left-arrow');
                     const rightArrow = container.querySelector('.right-arrow');
 
+                    if (!wrapper || !leftArrow || !rightArrow || !grid) return;
+
                     function updateArrows() {
                         const scrollLeft = wrapper.scrollLeft;
                         const maxScrollLeft = wrapper.scrollWidth - wrapper.clientWidth;
@@ -3198,13 +3306,11 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         section.style.display = 'block';
                         section.classList.add('active');
 
-                        // Reiniciar scroll a la izquierda
                         const scrollWrapper = section.querySelector('.portfolio-scroll-wrapper');
                         if (scrollWrapper) {
                             scrollWrapper.scrollLeft = 0;
                         }
 
-                        // Recalcular layout del slider de esta sección
                         const container = section.querySelector('.portfolio-slider-container');
                         if (container && typeof container.checkLayout === 'function') {
                             container.checkLayout();
@@ -3216,7 +3322,6 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 });
             }
 
-            // Usar delegación de eventos para soportar botones dinámicos
             const navContainer = document.querySelector('.authors-nav');
             if (navContainer) {
                 navContainer.addEventListener('click', (e) => {
@@ -3228,12 +3333,45 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 });
             }
 
-            // Inicializar sliders en la carga de la página
+            // DETECTAR HASH AL CARGAR O CAMBIAR PARA NAVEGACIÓN DIRECTA
+            const handleHashChange = () => {
+                const hash = window.location.hash.substring(1);
+                if (hash) {
+                    const sections = document.querySelectorAll('.artist-section');
+                    const section = Array.from(sections).find(sec => sec.dataset.author === hash);
+                    if (section) {
+                        switchAuthor(hash);
+                    } else {
+                        const activeBtn = document.querySelector('.author-btn.active');
+                        if (activeBtn) {
+                            switchAuthor(activeBtn.dataset.author);
+                        } else {
+                            const remainingBtn = document.querySelector('.author-btn');
+                            if (remainingBtn) {
+                                switchAuthor(remainingBtn.dataset.author);
+                            }
+                        }
+                    }
+                } else {
+                    const activeBtn = document.querySelector('.author-btn.active');
+                    if (activeBtn) {
+                        switchAuthor(activeBtn.dataset.author);
+                    } else {
+                        const remainingBtn = document.querySelector('.author-btn');
+                        if (remainingBtn) {
+                            switchAuthor(remainingBtn.dataset.author);
+                        }
+                    }
+                }
+            };
+            window.addEventListener('hashchange', handleHashChange);
+
             document.addEventListener('DOMContentLoaded', () => {
                 initSliders();
+                handleHashChange();
             });
-            // Si ya cargó la página, llamar directamente por si acaso
             initSliders();
+            handleHashChange();
 
             // =========================================================================
             // [NUEVO] LÓGICA DE CONTROL DEL PANEL DE ADMINISTRACIÓN (GALERÍA CMS LOCAL)
@@ -3251,6 +3389,26 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             const adminArtistCancelBtn = document.getElementById('adminArtistCancelBtn');
             const adminArtworkCancelBtn = document.getElementById('adminArtworkCancelBtn');
 
+            // Nuevos elementos de sub-pestañas y selección
+            const artistModeCreate = document.getElementById('artistModeCreate');
+            const artistModeEdit = document.getElementById('artistModeEdit');
+            const artistSelectGroup = document.getElementById('artistSelectGroup');
+            const artistSelect = document.getElementById('artistSelect');
+            const adminArtistDeleteBtn = document.getElementById('adminArtistDeleteBtn');
+            const adminArtistSubmitBtn = document.getElementById('adminArtistSubmitBtn');
+
+            const artworkModeCreate = document.getElementById('artworkModeCreate');
+            const artworkModeEdit = document.getElementById('artworkModeEdit');
+            const artworkSelectGroup = document.getElementById('artworkSelectGroup');
+            const artworkSelect = document.getElementById('artworkSelect');
+            const adminArtworkDeleteBtn = document.getElementById('adminArtworkDeleteBtn');
+            const adminArtworkSubmitBtn = document.getElementById('adminArtworkSubmitBtn');
+
+            const artistUrlInfo = document.getElementById('artistUrlInfo');
+            const artistUrlText = document.getElementById('artistUrlText');
+            const artworkUrlInfo = document.getElementById('artworkUrlInfo');
+            const artworkUrlText = document.getElementById('artworkUrlText');
+
             // Campos Artista
             const artistKey = document.getElementById('artistKey');
             const artistNameInput = document.getElementById('artistNameInput');
@@ -3260,6 +3418,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             const artistImgPreview = document.getElementById('artistImgPreview');
             const artistQuoteInput = document.getElementById('artistQuoteInput');
             const artistBioInput = document.getElementById('artistBioInput');
+            const artistArticleUrlInput = document.getElementById('artistArticleUrlInput');
 
             // Campos Obra/Ficha
             const artworkArtistSelect = document.getElementById('artworkArtistSelect');
@@ -3281,137 +3440,546 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
             let tempArtistImageBase64 = "";
             let tempArtworkImageBase64 = "";
+            let artistMode = "create"; // "create" o "edit"
+            let artworkMode = "create"; // "create" o "edit"
+
+            // Obtener lista de artistas actuales del DOM
+            const getArtistsList = () => {
+                const list = [];
+                document.querySelectorAll('.artist-section').forEach(section => {
+                    const id = section.dataset.author;
+                    const nameEl = section.querySelector('.artist-name');
+                    const name = nameEl ? nameEl.textContent.trim() : id;
+                    list.push({ id, name });
+                });
+                return list;
+            };
+
+            // Obtener lista de obras actuales del DOM
+            const getArtworksList = () => {
+                const list = [];
+                document.querySelectorAll('.artwork-card').forEach(card => {
+                    const id = card.dataset.id;
+                    const titleEl = card.querySelector('.artwork-title');
+                    const title = titleEl ? titleEl.textContent.trim() : id;
+                    const authorSection = card.closest('.artist-section');
+                    const authorId = authorSection ? authorSection.dataset.author : '';
+                    list.push({ id, title, authorId });
+                });
+                return list;
+            };
+
+            // Rellenar selectores de edición
+            const populateArtistSelect = () => {
+                artistSelect.innerHTML = '';
+                const defaultOpt = document.createElement('option');
+                defaultOpt.value = '';
+                defaultOpt.textContent = '-- Selecciona un artista --';
+                artistSelect.appendChild(defaultOpt);
+
+                getArtistsList().forEach(artist => {
+                    const opt = document.createElement('option');
+                    opt.value = artist.id;
+                    opt.textContent = `${artist.name} (${artist.id})`;
+                    artistSelect.appendChild(opt);
+                });
+            };
+
+            const populateArtworkSelect = () => {
+                artworkSelect.innerHTML = '';
+                const defaultOpt = document.createElement('option');
+                defaultOpt.value = '';
+                defaultOpt.textContent = '-- Selecciona una ficha --';
+                artworkSelect.appendChild(defaultOpt);
+
+                getArtworksList().forEach(art => {
+                    const opt = document.createElement('option');
+                    opt.value = art.id;
+                    opt.textContent = `${art.title} (de ${art.authorId})`;
+                    artworkSelect.appendChild(opt);
+                });
+            };
+
+            // Convertir párrafos HTML a texto plano con saltos de línea
+            const htmlToText = (html) => {
+                if (!html) return '';
+                const div = document.createElement('div');
+                div.innerHTML = html;
+                const paragraphs = Array.from(div.querySelectorAll('p'));
+                if (paragraphs.length > 0) {
+                    return paragraphs.map(p => p.innerHTML.trim()).join('\n\n');
+                }
+                return div.innerHTML.trim().replace(/<br\s*\/?>/gi, '\n');
+            };
+
+            // Cargar datos en el formulario de artistas
+            const loadArtistToForm = (id) => {
+                const section = document.querySelector(`.artist-section[data-author="${id}"]`);
+                if (!section) {
+                    adminArtistForm.reset();
+                    artistKey.value = '';
+                    artistImgPreview.style.display = 'none';
+                    tempArtistImageBase64 = "";
+                    artistUrlInfo.style.display = 'none';
+                    artistArticleUrlInput.value = '';
+                    return;
+                }
+
+                artistKey.value = id;
+                artistNameInput.value = section.querySelector('.artist-name').textContent.trim();
+                
+                const taglineEl = section.querySelector('.artist-tagline');
+                artistTaglineInput.value = taglineEl ? taglineEl.textContent.trim() : '';
+                
+                const imgEl = section.querySelector('.artist-image-container img');
+                const imgUrl = (imgEl ? imgEl.getAttribute('src') : '') || '';
+                if (imgUrl.startsWith('data:image')) {
+                    tempArtistImageBase64 = imgUrl;
+                    artistImgPreview.src = tempArtistImageBase64;
+                    artistImgPreview.style.display = 'block';
+                    artistImageUrl.value = "";
+                } else {
+                    tempArtistImageBase64 = "";
+                    artistImageUrl.value = imgUrl;
+                    artistImgPreview.src = imgUrl;
+                    artistImgPreview.style.display = 'block';
+                }
+
+                const quoteEl = section.querySelector('.artist-quote');
+                if (quoteEl) {
+                    let qText = quoteEl.textContent.trim();
+                    if (qText.startsWith('«') && qText.endsWith('»')) {
+                        qText = qText.substring(1, qText.length - 1);
+                    }
+                    artistQuoteInput.value = qText;
+                } else {
+                    artistQuoteInput.value = '';
+                }
+
+                const bioParagraphs = Array.from(section.querySelectorAll('.artist-bio p'));
+                artistBioInput.value = bioParagraphs.map(p => p.innerHTML.trim()).join('\n\n');
+
+                // Mostrar URL de este artista
+                artistUrlText.value = window.location.href.split('#')[0].replace('index.html', '') + '#' + id;
+                artistUrlInfo.style.display = 'block';
+
+                // Cargar enlace del artículo
+                const customArtists = JSON.parse(localStorage.getItem('doxa_custom_artists') || '{}') || {};
+                const factoryArticleUrls = {
+                    'ana': 'articulos.html#ana',
+                    'antonio': 'articulos.html#antonio',
+                    'miguel': 'articulos.html#miguel',
+                    'david': 'articulos.html#david',
+                    'anselm': 'articulos.html#anselm'
+                };
+                const customArtist = customArtists[id];
+                const defaultUrl = factoryArticleUrls[id] || '';
+                const artUrl = (customArtist && customArtist.articleUrl !== undefined) ? customArtist.articleUrl : defaultUrl;
+                artistArticleUrlInput.value = artUrl;
+            };
+
+            // Cargar datos en el formulario de obras
+            const loadArtworkToForm = (id) => {
+                const card = document.querySelector(`.artwork-card[data-id="${id}"]`);
+                if (!card) {
+                    adminArtworkForm.reset();
+                    artworkImgPreview2.style.display = 'none';
+                    tempArtworkImageBase64 = "";
+                    artworkUrlInfo.style.display = 'none';
+                    return;
+                }
+
+                const authorSection = card.closest('.artist-section');
+                const authorId = authorSection ? authorSection.dataset.author : '';
+                artworkArtistSelect.value = authorId;
+                
+                artworkTitleInput.value = card.querySelector('.artwork-title').textContent.trim();
+                artworkNumberInput.value = card.querySelector('.artwork-number').textContent.trim();
+                artworkMediumInput.value = card.querySelector('.artwork-medium').textContent.trim();
+                artworkWeightInput.value = card.getAttribute('data-weight') || '90 gramos por pieza';
+                artworkBaseInput.value = card.getAttribute('data-base') || '';
+                artworkActivesInput.value = card.getAttribute('data-actives') || '';
+                artworkFlavorInput.value = card.getAttribute('data-flavor') || '';
+                artworkConceptInput.value = card.getAttribute('data-concept') || '';
+
+                const imgEl = card.querySelector('.artwork-image-wrapper img');
+                const imgUrl = (imgEl ? imgEl.getAttribute('src') : '') || '';
+                if (imgUrl.startsWith('data:image')) {
+                    tempArtworkImageBase64 = imgUrl;
+                    artworkImgPreview2.src = tempArtworkImageBase64;
+                    artworkImgPreview2.style.display = 'block';
+                    artworkImageUrl.value = "";
+                } else {
+                    tempArtworkImageBase64 = "";
+                    artworkImageUrl.value = imgUrl;
+                    artworkImgPreview2.src = imgUrl;
+                    artworkImgPreview2.style.display = 'block';
+                }
+
+                // Mostrar URL para ver la obra (la sección de galería del artista donde vive)
+                artworkUrlText.value = window.location.href.split('#')[0].replace('index.html', '') + '#' + authorId;
+                artworkUrlInfo.style.display = 'block';
+            };
+
+            // Alternar modos en artistas
+            const switchArtistMode = (mode) => {
+                artistMode = mode;
+                if (mode === 'create') {
+                    artistModeCreate.classList.add('active');
+                    artistModeEdit.classList.remove('active');
+                    artistSelectGroup.style.display = 'none';
+                    artistUrlInfo.style.display = 'none';
+
+                    adminArtistForm.reset();
+                    artistArticleUrlInput.value = '';
+                    artistKey.readOnly = false;
+                    artistKey.style.backgroundColor = '#ffffff';
+                    artistImgPreview.style.display = 'none';
+                    tempArtistImageBase64 = "";
+                    adminArtistSubmitBtn.textContent = 'Publicar Artista';
+                    adminArtistDeleteBtn.style.display = 'none';
+                } else {
+                    artistModeCreate.classList.remove('active');
+                    artistModeEdit.classList.add('active');
+                    artistSelectGroup.style.display = 'block';
+                    artistUrlInfo.style.display = 'none';
+
+                    adminArtistForm.reset();
+                    artistArticleUrlInput.value = '';
+                    artistKey.readOnly = true;
+                    artistKey.style.backgroundColor = 'rgba(60, 51, 42, 0.08)';
+                    artistImgPreview.style.display = 'none';
+                    tempArtistImageBase64 = "";
+                    adminArtistSubmitBtn.textContent = 'Guardar Cambios';
+                    adminArtistDeleteBtn.style.display = 'inline-block';
+                    adminArtistDeleteBtn.disabled = true;
+
+                    populateArtistSelect();
+                }
+            };
+
+            // Alternar modos en obras/fichas
+            const switchArtworkMode = (mode) => {
+                artworkMode = mode;
+                if (mode === 'create') {
+                    artworkModeCreate.classList.add('active');
+                    artworkModeEdit.classList.remove('active');
+                    artworkSelectGroup.style.display = 'none';
+                    artworkUrlInfo.style.display = 'none';
+
+                    adminArtworkForm.reset();
+                    artworkWeightInput.value = "90 gramos por pieza";
+                    artworkImgPreview2.style.display = 'none';
+                    tempArtworkImageBase64 = "";
+                    adminArtworkSubmitBtn.textContent = 'Publicar Ficha';
+                    adminArtworkDeleteBtn.style.display = 'none';
+                } else {
+                    artworkModeCreate.classList.remove('active');
+                    artworkModeEdit.classList.add('active');
+                    artworkSelectGroup.style.display = 'block';
+                    artworkUrlInfo.style.display = 'none';
+
+                    adminArtworkForm.reset();
+                    artworkImgPreview2.style.display = 'none';
+                    tempArtworkImageBase64 = "";
+                    adminArtworkSubmitBtn.textContent = 'Guardar Cambios';
+                    adminArtworkDeleteBtn.style.display = 'inline-block';
+                    adminArtworkDeleteBtn.disabled = true;
+
+                    populateArtworkSelect();
+                }
+            };
+
+            artistModeCreate.addEventListener('click', () => switchArtistMode('create'));
+            artistModeEdit.addEventListener('click', () => switchArtistMode('edit'));
+            artworkModeCreate.addEventListener('click', () => switchArtworkMode('create'));
+            artworkModeEdit.addEventListener('click', () => switchArtworkMode('edit'));
+
+            const copyArtistUrlBtn = document.getElementById('copyArtistUrlBtn');
+            const copyArtworkUrlBtn = document.getElementById('copyArtworkUrlBtn');
+
+            copyArtistUrlBtn.addEventListener('click', () => {
+                artistUrlText.select();
+                document.execCommand('copy');
+                const originalText = copyArtistUrlBtn.textContent;
+                copyArtistUrlBtn.textContent = '¡Copiado!';
+                copyArtistUrlBtn.style.backgroundColor = '#27ae60';
+                setTimeout(() => {
+                    copyArtistUrlBtn.textContent = originalText;
+                    copyArtistUrlBtn.style.backgroundColor = '';
+                }, 2000);
+            });
+
+            copyArtworkUrlBtn.addEventListener('click', () => {
+                artworkUrlText.select();
+                document.execCommand('copy');
+                const originalText = copyArtworkUrlBtn.textContent;
+                copyArtworkUrlBtn.textContent = '¡Copiado!';
+                copyArtworkUrlBtn.style.backgroundColor = '#27ae60';
+                setTimeout(() => {
+                    copyArtworkUrlBtn.textContent = originalText;
+                    copyArtworkUrlBtn.style.backgroundColor = '';
+                }, 2000);
+            });
+
+            artistSelect.addEventListener('change', (e) => {
+                loadArtistToForm(e.target.value);
+                if (e.target.value) {
+                    adminArtistDeleteBtn.disabled = false;
+                } else {
+                    adminArtistDeleteBtn.disabled = true;
+                }
+            });
+
+            artworkSelect.addEventListener('change', (e) => {
+                loadArtworkToForm(e.target.value);
+                if (e.target.value) {
+                    adminArtworkDeleteBtn.disabled = false;
+                } else {
+                    adminArtworkDeleteBtn.disabled = true;
+                }
+            });
 
             // Inicialización y carga de contenido de localStorage en vivo
             const initCustomContent = () => {
-                const customArtists = JSON.parse(localStorage.getItem('doxa_custom_artists') || '{}');
-                const customArtworks = JSON.parse(localStorage.getItem('doxa_custom_artworks') || '[]');
+                const customArtists = JSON.parse(localStorage.getItem('doxa_custom_artists') || '{}') || {};
+                const customArtworks = JSON.parse(localStorage.getItem('doxa_custom_artworks') || '[]') || [];
 
                 const nav = document.querySelector('.authors-nav');
                 const select = document.getElementById('artworkArtistSelect');
                 const wrapper = document.querySelector('.page-wrapper');
                 const footer = document.querySelector('.gallery-footer');
 
-                // 1. Inyectar Artistas Custom
+                // 1. Inyectar / Actualizar Artistas Custom o Default
                 Object.values(customArtists).forEach(artist => {
-                    // Verificar si el botón ya existe para no duplicarlo
-                    if (document.querySelector(`.author-btn[data-author="${artist.id}"]`)) return;
+                    const existingSection = document.querySelector(`.artist-section[data-author="${artist.id}"]`);
+                    if (existingSection) {
+                        existingSection.querySelector('.artist-name').textContent = artist.name;
+                        const taglineEl = existingSection.querySelector('.artist-tagline');
+                        if (taglineEl) taglineEl.textContent = artist.tagline;
+                        const imgEl = existingSection.querySelector('.artist-image-container img');
+                        if (imgEl) imgEl.src = artist.image;
+                        const bioEl = existingSection.querySelector('.artist-bio');
+                        if (bioEl) {
+                            bioEl.innerHTML = `
+                                ${artist.bio.split('\n').map(p => p.trim() ? `<p>${p.trim()}</p>` : '').join('')}
+                                ${artist.quote ? `<div class="artist-quote">«${artist.quote}»</div>` : ''}
+                            `;
+                        }
+                        const btn = document.querySelector(`.author-btn[data-author="${artist.id}"]`);
+                        if (btn) btn.innerText = artist.name;
+                        const opt = document.querySelector(`#artworkArtistSelect option[value="${artist.id}"]`);
+                        if (opt) opt.innerText = artist.name;
+                    } else {
+                        if (document.querySelector(`.author-btn[data-author="${artist.id}"]`)) return;
 
-                    // Crear botón de navegación
-                    const btn = document.createElement('button');
-                    btn.className = 'author-btn';
-                    btn.dataset.author = artist.id;
-                    btn.innerText = artist.name;
-                    nav.appendChild(btn);
+                        const btn = document.createElement('button');
+                        btn.className = 'author-btn';
+                        btn.dataset.author = artist.id;
+                        btn.innerText = artist.name;
+                        nav.appendChild(btn);
 
-                    // Crear opción en select de obras
-                    const option = document.createElement('option');
-                    option.value = artist.id;
-                    option.innerText = artist.name;
-                    select.appendChild(option);
+                        const option = document.createElement('option');
+                        option.value = artist.id;
+                        option.innerText = artist.name;
+                        select.appendChild(option);
 
-                    // Crear sección de artista en HTML
-                    const section = document.createElement('section');
-                    section.className = 'artist-section';
-                    section.dataset.author = artist.id;
-                    section.style.display = 'none';
-                    section.innerHTML = `
-                    <div class="container">
-                        <div class="artist-grid">
-                            <div class="artist-image-container animate-appear delay-1">
-                                <img src="${artist.image}" alt="${artist.name}">
-                            </div>
-                            <div class="artist-details animate-appear delay-2">
-                                <span class="artist-tagline">${artist.tagline || 'El Creador'}</span>
-                                <h2 class="artist-name">${artist.name}</h2>
-                                <div class="artist-bio">
-                                    ${artist.bio.split('\n').map(p => p.trim() ? `<p>${p.trim()}</p>` : '').join('')}
-                                    ${artist.quote ? `<div class="artist-quote">«${artist.quote}»</div>` : ''}
+                        const section = document.createElement('section');
+                        section.className = 'artist-section';
+                        section.dataset.author = artist.id;
+                        section.style.display = 'none';
+                        section.innerHTML = `
+                        <div class="container">
+                            <div class="artist-grid">
+                                <div class="artist-image-container animate-appear delay-1">
+                                    <img src="${artist.image}" alt="${artist.name}">
                                 </div>
-                            </div>
-                        </div>
-                        <hr style="border: 0; height: 1px; background-color: rgba(60, 51, 42, 0.1); margin: 60px 0;">
-                        <div class="portfolio-container animate-appear delay-3">
-                            <div class="section-header" style="margin-bottom: 50px; text-align: left;">
-                                <h3 class="section-title" style="font-size: clamp(20px, 3vw, 24px); letter-spacing: 4px; text-transform: uppercase;">
-                                    Obras de ${artist.name}
-                                </h3>
-                                <span class="section-subtitle" style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">
-                                    Fichas de Exposición
-                                </span>
-                            </div>
-                            <div class="portfolio-slider-container">
-                                <button class="scroll-arrow left-arrow hidden" aria-label="Desplazar a la izquierda">
-                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="15 18 9 12 15 6"></polyline>
-                                    </svg>
-                                </button>
-                                <div class="portfolio-scroll-wrapper">
-                                    <div class="portfolio-grid">
+                                <div class="artist-details animate-appear delay-2">
+                                    <span class="artist-tagline">${artist.tagline || 'El Creador'}</span>
+                                    <h2 class="artist-name">${artist.name}</h2>
+                                    <div class="artist-bio">
+                                        ${artist.bio.split('\n').map(p => p.trim() ? `<p>${p.trim()}</p>` : '').join('')}
+                                        ${artist.quote ? `<div class="artist-quote">«${artist.quote}»</div>` : ''}
                                     </div>
                                 </div>
-                                <button class="scroll-arrow right-arrow" aria-label="Desplazar a la derecha">
-                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="9 18 15 12 9 6"></polyline>
-                                    </svg>
-                                </button>
+                            </div>
+                            <hr style="border: 0; height: 1px; background-color: rgba(60, 51, 42, 0.1); margin: 60px 0;">
+                            <div class="portfolio-container animate-appear delay-3">
+                                <div class="section-header" style="margin-bottom: 50px; text-align: left;">
+                                    <h3 class="section-title" style="font-size: clamp(20px, 3vw, 24px); letter-spacing: 4px; text-transform: uppercase;">
+                                        Obras de ${artist.name}
+                                    </h3>
+                                    <span class="section-subtitle" style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">
+                                        Fichas de Exposición
+                                    </span>
+                                </div>
+                                <div class="portfolio-slider-container">
+                                    <button class="scroll-arrow left-arrow hidden" aria-label="Desplazar a la izquierda">
+                                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="15 18 9 12 15 6"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="portfolio-scroll-wrapper">
+                                        <div class="portfolio-grid">
+                                        </div>
+                                    </div>
+                                    <button class="scroll-arrow right-arrow" aria-label="Desplazar a la derecha">
+                                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="9 18 15 12 9 6"></polyline>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-                    wrapper.insertBefore(section, footer);
+                    `;
+                        wrapper.insertBefore(section, footer);
+                    }
                 });
 
-                // 2. Inyectar Obras Custom
+                // 2. Inyectar / Actualizar Obras Custom o Default
                 customArtworks.forEach(artwork => {
-                    // Verificar si la tarjeta de obra ya existe
-                    if (document.querySelector(`.artwork-card[data-id="${artwork.id}"]`)) return;
+                    const existingCard = document.querySelector(`.artwork-card[data-id="${artwork.id}"]`);
+                    if (existingCard) {
+                        existingCard.setAttribute('data-weight', artwork.weight || '90 gramos por pieza');
+                        existingCard.setAttribute('data-base', artwork.base || '');
+                        existingCard.setAttribute('data-actives', artwork.actives || '');
+                        existingCard.setAttribute('data-flavor', artwork.flavor || '');
+                        existingCard.setAttribute('data-concept', artwork.concept || '');
+                        const imgEl = existingCard.querySelector('.artwork-image-wrapper img');
+                        if (imgEl) {
+                            imgEl.src = artwork.image;
+                            imgEl.alt = `${artwork.number || 'Obra'}: ${artwork.title}`;
+                        }
+                        const numEl = existingCard.querySelector('.artwork-number');
+                        if (numEl) numEl.textContent = artwork.number || 'Obra';
+                        const titleEl = existingCard.querySelector('.artwork-title');
+                        if (titleEl) titleEl.textContent = artwork.title;
+                        const medEl = existingCard.querySelector('.artwork-medium');
+                        if (medEl) medEl.textContent = artwork.medium;
+                    } else {
+                        const section = document.querySelector(`.artist-section[data-author="${artwork.authorId}"]`);
+                        if (section) {
+                            const grid = section.querySelector('.portfolio-grid');
+                            if (grid) {
+                                const card = document.createElement('article');
+                                card.className = 'artwork-card';
+                                card.dataset.id = artwork.id;
+                                card.setAttribute('data-weight', artwork.weight || '90 gramos por pieza');
+                                card.setAttribute('data-base', artwork.base || '');
+                                card.setAttribute('data-actives', artwork.actives || '');
+                                card.setAttribute('data-flavor', artwork.flavor || '');
+                                card.setAttribute('data-concept', artwork.concept || '');
 
-                    const section = document.querySelector(`.artist-section[data-author="${artwork.authorId}"]`);
-                    if (section) {
-                        const grid = section.querySelector('.portfolio-grid');
-                        if (grid) {
-                            const card = document.createElement('article');
-                            card.className = 'artwork-card';
-                            card.dataset.id = artwork.id;
-                            card.setAttribute('data-weight', artwork.weight || '90 gramos por pieza');
-                            card.setAttribute('data-base', artwork.base || '');
-                            card.setAttribute('data-actives', artwork.actives || '');
-                            card.setAttribute('data-flavor', artwork.flavor || '');
-                            card.setAttribute('data-concept', artwork.concept || '');
-
-                            card.innerHTML = `
-                            <div class="artwork-image-wrapper">
-                                <img src="${artwork.image}" alt="${artwork.title}">
-                            </div>
-                            <span class="artwork-number">${artwork.number || 'Obra'}</span>
-                            <h3 class="artwork-title">${artwork.title}</h3>
-                            <p class="artwork-medium">${artwork.medium}</p>
-                            <button class="btn-view-details">Ver Ficha Técnica</button>
-                        `;
-                            grid.appendChild(card);
+                                card.innerHTML = `
+                                <div class="artwork-image-wrapper">
+                                    <img src="${artwork.image}" alt="${artwork.title}">
+                                </div>
+                                <span class="artwork-number">${artwork.number || 'Obra'}</span>
+                                <h3 class="artwork-title">${artwork.title}</h3>
+                                <p class="artwork-medium">${artwork.medium}</p>
+                                <button class="btn-view-details">Ver Ficha Técnica</button>
+                            `;
+                                grid.appendChild(card);
+                            }
                         }
                     }
                 });
+
+                // 3. Filtrar / Ocultar los eliminados
+                const deletedArtists = JSON.parse(localStorage.getItem('doxa_deleted_artists') || '[]') || [];
+                deletedArtists.forEach(key => {
+                    const btn = document.querySelector(`.author-btn[data-author="${key}"]`);
+                    if (btn) btn.remove();
+                    const opt = document.querySelector(`#artworkArtistSelect option[value="${key}"]`);
+                    if (opt) opt.remove();
+                    const section = document.querySelector(`.artist-section[data-author="${key}"]`);
+                    if (section) section.remove();
+                });
+
+                const deletedArtworks = JSON.parse(localStorage.getItem('doxa_deleted_artworks') || '[]') || [];
+                deletedArtworks.forEach(id => {
+                    const card = document.querySelector(`.artwork-card[data-id="${id}"]`);
+                    if (card) card.remove();
+                });
+
+                // Inyectar/actualizar enlaces al artículo en vivo para los artistas
+                const factoryArticleUrls = {
+                    'ana': 'articulos.html#ana',
+                    'antonio': 'articulos.html#antonio',
+                    'miguel': 'articulos.html#miguel',
+                    'david': 'articulos.html#david',
+                    'anselm': 'articulos.html#anselm'
+                };
+
+                document.querySelectorAll('.artist-section').forEach(section => {
+                    const authorId = section.dataset.author;
+                    const customArtist = customArtists[authorId];
+                    const articleUrl = (customArtist && customArtist.articleUrl !== undefined) ? customArtist.articleUrl : factoryArticleUrls[authorId];
+
+                    let btnWrapper = section.querySelector('.artist-article-btn-wrapper');
+                    
+                    if (articleUrl && articleUrl.trim() !== '') {
+                        if (!btnWrapper) {
+                            btnWrapper = document.createElement('div');
+                            btnWrapper.className = 'artist-article-btn-wrapper';
+                            btnWrapper.style.textAlign = 'left';
+                            btnWrapper.style.marginTop = '25px';
+                            
+                            const btn = document.createElement('a');
+                            btn.className = 'btn-ver-articulo';
+                            btn.innerHTML = `
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; vertical-align: middle;">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>Ver artículo del artista
+                            `;
+                            btnWrapper.appendChild(btn);
+                            
+                            const bioEl = section.querySelector('.artist-bio');
+                            if (bioEl) {
+                                bioEl.appendChild(btnWrapper);
+                            }
+                        }
+                        const btnLink = btnWrapper.querySelector('a');
+                        if (btnLink) {
+                            btnLink.href = articleUrl;
+                        }
+                    } else {
+                        if (btnWrapper) {
+                            btnWrapper.remove();
+                        }
+                    }
+                });
+
+                // Asegurar que siempre haya un artista activo al inicio si no hay hash o si el activo fue eliminado
+                const hash = window.location.hash.substring(1);
+                const activeSection = document.querySelector('.artist-section.active');
+                if (!hash || !activeSection) {
+                    const remainingBtn = document.querySelector('.author-btn');
+                    if (remainingBtn) {
+                        switchAuthor(remainingBtn.dataset.author);
+                    }
+                }
             };
 
-            // Ejecutar carga al inicio de los scripts
             initCustomContent();
 
-            // Control de pestañas del modal
+            // Control de pestañas principales del modal (Artista vs Obra)
             const switchTab = (tab) => {
                 if (tab === 'artist') {
                     tabBtnArtist.classList.add('active');
                     tabBtnArtwork.classList.remove('active');
                     adminArtistForm.style.display = 'block';
                     adminArtworkForm.style.display = 'none';
+                    switchArtistMode('create');
                 } else {
                     tabBtnArtist.classList.remove('active');
                     tabBtnArtwork.classList.add('active');
                     adminArtistForm.style.display = 'none';
                     adminArtworkForm.style.display = 'block';
+                    switchArtworkMode('create');
 
-                    // Actualizar el dropdown con el artista activo por defecto si es posible
                     const activeSection = document.querySelector('.artist-section.active');
                     if (activeSection) {
                         artworkArtistSelect.value = activeSection.dataset.author;
@@ -3427,8 +3995,6 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 if (show) {
                     adminModalOverlay.classList.add('active');
                     updateExportCodeBox();
-
-                    // Pestaña por defecto: artista
                     switchTab('artist');
                 } else {
                     adminModalOverlay.classList.remove('active');
@@ -3438,15 +4004,15 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     artworkImgPreview2.style.display = 'none';
                     tempArtistImageBase64 = "";
                     tempArtworkImageBase64 = "";
+                    switchArtistMode('create');
+                    switchArtworkMode('create');
                 }
             };
 
             const isFormDirty = () => {
-                // Detectar cualquier texto en el formulario de artistas
                 const artistInputs = Array.from(adminArtistForm.querySelectorAll('input[type="text"], textarea'));
                 const hasArtistData = artistInputs.some(el => el.value.trim() !== "");
 
-                // Detectar cualquier texto en el formulario de obras
                 const artworkInputs = Array.from(adminArtworkForm.querySelectorAll('input[type="text"], textarea'));
                 const hasArtworkData = artworkInputs.some(el => {
                     if (el.id === 'artworkWeightInput') {
@@ -3461,7 +4027,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             const closeAdminModalWithConfirmation = () => {
                 if (isFormDirty()) {
                     if (!confirm("¿Estás segura de que deseas cerrar? Se perderán todos los datos que has escrito en el formulario.")) {
-                        return; // Cancelar el cierre
+                        return;
                     }
                 }
                 toggleAdminModal(false);
@@ -3472,7 +4038,6 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             adminArtistCancelBtn.addEventListener('click', closeAdminModalWithConfirmation);
             adminArtworkCancelBtn.addEventListener('click', closeAdminModalWithConfirmation);
 
-            // Desactivado el cierre al hacer clic fuera (fondo oscuro) para evitar pérdidas accidentales al arrastrar o seleccionar texto
             adminModalOverlay.addEventListener('click', (e) => {
                 // No hacer nada
             });
@@ -3535,7 +4100,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 }
             };
 
-            // Guardar Artista Custom
+            // Guardar Artista Custom/Editado
             adminArtistForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const key = artistKey.value.trim().toLowerCase().replace(/\s+/g, '_');
@@ -3549,41 +4114,49 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     tagline: artistTaglineInput.value.trim() || 'El Creador',
                     image: finalImage,
                     quote: artistQuoteInput.value.trim(),
-                    bio: artistBioInput.value.trim()
+                    bio: artistBioInput.value.trim(),
+                    articleUrl: artistArticleUrlInput.value.trim()
                 };
 
                 const custom = JSON.parse(localStorage.getItem('doxa_custom_artists') || '{}');
                 custom[key] = newArtist;
                 localStorage.setItem('doxa_custom_artists', JSON.stringify(custom));
 
-                // Cargar y activar artista de inmediato
                 initCustomContent();
-
-                // Re-vincular sliders para la nueva sección
                 initSliders();
-
-                // Activar pestaña del artista recién creado
                 switchAuthor(key);
 
-                // Resetear formulario para saltar la confirmación al cerrar
                 adminArtistForm.reset();
                 tempArtistImageBase64 = "";
                 toggleAdminModal(false);
-                alert('¡Artista creado con éxito localmente!');
+                
+                if (artistMode === 'edit') {
+                    alert('¡Artista guardado con éxito localmente!');
+                } else {
+                    alert('¡Artista creado con éxito localmente!');
+                }
             });
 
-            // Guardar Obra / Ficha Custom
+            // Guardar Obra / Ficha Custom/Editada
             adminArtworkForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const authorId = artworkArtistSelect.value;
                 const title = artworkTitleInput.value.trim();
                 const number = artworkNumberInput.value.trim();
-                const key = `${authorId}-${title.toLowerCase().replace(/\s+/g, '_')}`;
+                
+                let cardId = "";
+                if (artworkMode === 'edit') {
+                    cardId = artworkSelect.value;
+                } else {
+                    cardId = `${authorId}-${title.toLowerCase().replace(/\s+/g, '_')}`;
+                }
+
+                if (!cardId) return;
 
                 const finalImage = tempArtworkImageBase64 || artworkImageUrl.value.trim() || 'Galle choco.png';
 
                 const newArtwork = {
-                    id: key,
+                    id: cardId,
                     authorId: authorId,
                     title: title,
                     number: number,
@@ -3597,23 +4170,104 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 };
 
                 const custom = JSON.parse(localStorage.getItem('doxa_custom_artworks') || '[]');
-                custom.push(newArtwork);
+                const existingIndex = custom.findIndex(art => art.id === cardId);
+                if (existingIndex > -1) {
+                    custom[existingIndex] = newArtwork;
+                } else {
+                    custom.push(newArtwork);
+                }
                 localStorage.setItem('doxa_custom_artworks', JSON.stringify(custom));
 
-                // Cargar contenido
                 initCustomContent();
-
-                // Re-vincular sliders para recalculación
                 initSliders();
-
-                // Activar autor para ver la nueva ficha
                 switchAuthor(authorId);
 
-                // Resetear formulario para saltar la confirmación al cerrar
                 adminArtworkForm.reset();
                 tempArtworkImageBase64 = "";
                 toggleAdminModal(false);
-                alert('¡Ficha técnica publicada con éxito localmente!');
+                
+                if (artworkMode === 'edit') {
+                    alert('¡Ficha técnica guardada con éxito localmente!');
+                } else {
+                    alert('¡Ficha técnica publicada con éxito localmente!');
+                }
+            });
+
+            // Borrar Artista
+            adminArtistDeleteBtn.addEventListener('click', () => {
+                const key = artistKey.value.trim().toLowerCase();
+                if (!key) return;
+
+                if (confirm(`¿Estás segura de que deseas borrar el artista "${artistNameInput.value.trim()}" y todas sus fichas?`)) {
+                    const customArtists = JSON.parse(localStorage.getItem('doxa_custom_artists') || '{}');
+                    if (customArtists[key]) {
+                        delete customArtists[key];
+                        localStorage.setItem('doxa_custom_artists', JSON.stringify(customArtists));
+                    } else {
+                        const deletedArtists = JSON.parse(localStorage.getItem('doxa_deleted_artists') || '[]');
+                        if (!deletedArtists.includes(key)) {
+                            deletedArtists.push(key);
+                            localStorage.setItem('doxa_deleted_artists', JSON.stringify(deletedArtists));
+                        }
+                    }
+
+                    const deletedArtworks = JSON.parse(localStorage.getItem('doxa_deleted_artworks') || '[]');
+                    document.querySelectorAll(`.artist-section[data-author="${key}"] .artwork-card`).forEach(card => {
+                        const artId = card.dataset.id;
+                        if (!deletedArtworks.includes(artId)) {
+                            deletedArtworks.push(artId);
+                        }
+                    });
+                    localStorage.setItem('doxa_deleted_artworks', JSON.stringify(deletedArtworks));
+
+                    let customArtworks = JSON.parse(localStorage.getItem('doxa_custom_artworks') || '[]');
+                    customArtworks = customArtworks.filter(art => art.authorId !== key);
+                    localStorage.setItem('doxa_custom_artworks', JSON.stringify(customArtworks));
+
+                    const btn = document.querySelector(`.author-btn[data-author="${key}"]`);
+                    if (btn) btn.remove();
+                    const opt = document.querySelector(`#artworkArtistSelect option[value="${key}"]`);
+                    if (opt) opt.remove();
+                    const section = document.querySelector(`.artist-section[data-author="${key}"]`);
+                    if (section) section.remove();
+
+                    const remainingSections = Array.from(document.querySelectorAll('.artist-section'));
+                    if (remainingSections.length > 0) {
+                        switchAuthor(remainingSections[0].dataset.author);
+                    }
+
+                    toggleAdminModal(false);
+                    alert('¡Artista y sus obras eliminados con éxito!');
+                }
+            });
+
+            // Borrar Ficha / Obra
+            adminArtworkDeleteBtn.addEventListener('click', () => {
+                const id = artworkSelect.value;
+                if (!id) return;
+
+                const title = artworkTitleInput.value.trim();
+
+                if (confirm(`¿Estás segura de que deseas borrar la ficha de la obra "${title}"?`)) {
+                    let customArtworks = JSON.parse(localStorage.getItem('doxa_custom_artworks') || '[]');
+                    const isCustom = customArtworks.some(art => art.id === id);
+                    if (isCustom) {
+                        customArtworks = customArtworks.filter(art => art.id !== id);
+                        localStorage.setItem('doxa_custom_artworks', JSON.stringify(customArtworks));
+                    } else {
+                        const deletedArtworks = JSON.parse(localStorage.getItem('doxa_deleted_artworks') || '[]');
+                        if (!deletedArtworks.includes(id)) {
+                            deletedArtworks.push(id);
+                            localStorage.setItem('doxa_deleted_artworks', JSON.stringify(deletedArtworks));
+                        }
+                    }
+
+                    const card = document.querySelector(`.artwork-card[data-id="${id}"]`);
+                    if (card) card.remove();
+
+                    toggleAdminModal(false);
+                    alert('¡Ficha de la obra eliminada con éxito!');
+                }
             });
 
             // Copiar código de exportación al portapapeles
@@ -3627,11 +4281,13 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 }
             });
 
-            // Borrar datos personalizados de la galería
+            // Borrar todos los datos personalizados de la galería
             adminClearCustomBtn.addEventListener('click', () => {
-                if (confirm('¿Estás segura de que deseas borrar todos los artistas y obras personalizadas? Esto vaciará el almacenamiento local.')) {
+                if (confirm('¿Estás segura de que deseas restablecer la galería? Esto borrará todos tus artistas y obras personalizadas, y restaurará los de fábrica.')) {
                     localStorage.removeItem('doxa_custom_artists');
                     localStorage.removeItem('doxa_custom_artworks');
+                    localStorage.removeItem('doxa_deleted_artists');
+                    localStorage.removeItem('doxa_deleted_artworks');
                     window.location.reload();
                 }
             });

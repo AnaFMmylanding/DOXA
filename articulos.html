@@ -238,6 +238,32 @@
             }
         }
 
+        .btn-ver-galeria {
+            display: inline-flex;
+            align-items: center;
+            background-color: #3C332A;
+            color: #F7F5F0 !important;
+            padding: 12px 24px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 1px solid #3C332A;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(60, 51, 42, 0.1);
+        }
+
+        .btn-ver-galeria:hover {
+            background-color: transparent;
+            color: #3C332A !important;
+            border-color: #3C332A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(60, 51, 42, 0.15);
+        }
+
         /* =========================================
            ESTRUCTURA DEL ARTÍCULO (ESTILO HISTORIA-ARTE)
            ========================================= */
@@ -1116,6 +1142,12 @@
             box-sizing: border-box;
         }
 
+        .admin-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         .admin-btn-primary {
             background-color: #3C332A;
             color: #F7F5F0;
@@ -1177,6 +1209,47 @@
             border: 1px solid rgba(60, 51, 42, 0.2);
             background-color: #eee;
             display: none;
+        }
+
+        /* [NUEVO] ESTILOS PARA LAS PESTAÑAS Y EL MODO EDICIÓN */
+        .admin-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.15);
+            padding-bottom: 10px;
+        }
+
+        .admin-tab {
+            background: none;
+            border: none;
+            padding: 8px 16px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: rgba(60, 51, 42, 0.6);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .admin-tab:hover {
+            color: #3C332A;
+        }
+
+        .admin-tab.active {
+            color: #3C332A;
+        }
+
+        .admin-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -11px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #3C332A;
         }
     </style>
 </head>
@@ -1418,7 +1491,22 @@
                 <button class="admin-modal-close" id="adminModalCloseBtn">&times;</button>
             </div>
             <div class="admin-modal-body">
+                <div class="admin-tabs">
+                    <button type="button" class="admin-tab active" id="adminTabCreate">Crear artículo</button>
+                    <button type="button" class="admin-tab" id="adminTabEdit">Editar artículo</button>
+                </div>
                 <form id="adminArticleForm">
+                    <div class="admin-form-group" id="adminSelectArticleGroup" style="display: none;">
+                        <label class="admin-form-label" for="adminSelectArticle">Seleccionar artículo para editar</label>
+                        <select class="admin-form-select" id="adminSelectArticle"></select>
+                    </div>
+                    <div class="admin-form-group" id="articleUrlInfo" style="display: none; background-color: #f7f5f0; padding: 12px; border-left: 3px solid #3C332A; margin-bottom: 20px; border-radius: 4px;">
+                        <label class="admin-form-label" style="font-size: 11px; color: #6d5d4d; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin-bottom: 6px; display: block;">URL para enlazar este artículo:</label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="articleUrlText" readonly class="admin-form-input" style="flex: 1; font-family: monospace; font-size: 12px; background-color: #fff; cursor: text; margin: 0; padding: 8px;" onclick="this.select()">
+                            <button type="button" id="copyArticleUrlBtn" class="admin-btn admin-btn-primary" style="padding: 8px 16px; font-size: 11px; white-space: nowrap; margin: 0; min-height: unset; line-height: unset;">Copiar</button>
+                        </div>
+                    </div>
                     <div class="admin-form-group">
                         <label class="admin-form-label" for="articleKey">Identificador único (sin espacios, ej:
                             mi_receta)</label>
@@ -1470,10 +1558,17 @@
                         <textarea class="admin-form-textarea" id="articleBodyInput" rows="6"
                             placeholder="Escribe el contenido en párrafos..." required></textarea>
                     </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="articleGalleryUrlInput">Enlace a Galería (Ficha de artista/obra)</label>
+                        <input class="admin-form-input" type="text" id="articleGalleryUrlInput"
+                            placeholder="ej. galeria.html#antonio">
+                    </div>
                     <div class="admin-form-actions">
                         <button class="admin-btn admin-btn-secondary" type="button"
                             id="adminCancelBtn">Cancelar</button>
-                        <button class="admin-btn admin-btn-primary" type="submit">Publicar Artículo</button>
+                        <button class="admin-btn admin-btn-danger" type="button"
+                            id="adminDeleteBtn" style="display: none;">Borrar Artículo</button>
+                        <button class="admin-btn admin-btn-primary" type="submit" id="adminSubmitBtn">Publicar Artículo</button>
                     </div>
                 </form>
 
@@ -1533,6 +1628,7 @@
                 autor: 'Ana M. & El Atelier',
                 fecha: '21-07-2026',
                 tags: ['Repostería Molecular', 'Salud Estética', 'Ingredientes Sin'],
+                galleryUrl: 'galeria.html#ana',
                 body: `
                     <p>En el corazón de <strong>DOXA</strong> no hay moldes de repostería comunes, sino un laboratorio de experimentación bioactiva. Para su fundadora, <strong>Ana M.</strong>, la cocina tradicional representa un paradigma superado que abusa de azúcares y grasas inertes. Su enfoque propone la deconstrucción molecular del postre, sustituyendo los aglutinantes tradicionales por matrices de colágeno, almendras molidas y grasas de cadena media que alimentan la estructura celular.</p>
                     <p>La cocina molecular deja de ser una técnica puramente visual para transformarse en un sistema de entrega nutricional de alta precisión. Cada creación del Atelier DOXA es concebida como una sculpture funcional donde el sabor y los activos (como el ácido hialurónico, el magnesio y los nootrópicos) están integrados a nivel atómico, garantizando que el cuerpo los absorba de manera eficiente sin elevar el índice glucémico.</p>
@@ -1553,6 +1649,7 @@
                 autor: 'Ana M. & El Atelier',
                 fecha: '18-07-2026',
                 tags: ['Brutalismo', 'Nootrópicos', 'Magnesio Bisglicinato', 'Arte Crítico'],
+                galleryUrl: 'galeria.html#antonio',
                 body: `
                     <p>La repostería, tradicionalmente relegada al papel de simple gratificación efímera y complacencia azucarada, es cuestionada por <strong>Antonio García Villarán</strong> en esta colaboración sin precedentes con <strong>DOXA</strong>. Su pieza insignia, el <em>Monolito de Cacao</em>, se erige como un manifiesto tridimensional de lo que él mismo define como "brutalismo gastronómico". Con una apariencia que emula fragmentos de carbón o restos de meteorito, la galleta rompe con toda convención visual.</p>
                     <p>El uso de carbón vegetal activo no responde únicamente a un capricho cromático de negro absoluto; es una declaración sobre la purificación y la densidad de la materia. Al combinar esta base mineral con una carga de aminoácidos puros derivados del guisante y bisglicinato de magnesio, la obra actúa como un potente agente de recuperación neuromuscular extrema. No es un postre diseñado para evadir la realidad, sino un objeto estético-funcional que exige una participación consciente: el comensal debe masticar la densidad del arte, sintiendo los granos de sal volcánica como acentos de una experiencia telúrica.</p>
@@ -1573,6 +1670,7 @@
                 autor: 'Ana M. & El Atelier',
                 fecha: '12-07-2026',
                 tags: ['Alquimia', 'Colágeno', 'Ashwagandha', 'Expresionismo Material'],
+                galleryUrl: 'galeria.html#anselm',
                 body: `
                     <p>Los monumentales lienzos de <strong>Anselm Kiefer</strong>, cargados de ceniza, plomo, paja y alambre de espino, evocan la destrucción y la memoria histórica, pero también la posibilidad de una transformación alquímica. Su influencia en el Atelier DOXA da vida a <em>Ángeles Caídos</em>, una pieza que adopta la estética de la ruina para proponer una profunda reconstrucción biológica a través de nutrientes reparadores del colágeno dérmico y adaptógenos naturales.</p>
                     <p>La superficie de la pieza, de un tono grisáceo y craquelado que recuerda la arcilla seca y las texturas de plomo de Kiefer, esconde una formulación sumamente compleja. Los péptidos de colágeno hidrolizado trabajan junto al ácido hialurónico para hidratar y recomponer las estructuras internas de la piel y las articulaciones, simulando el proceso de consolidación de un lienzo envejecido. Por su parte, la ashwagandha y el hongo reishi intervienen para regular el cortisol (la hormona del estrés), permitiendo que el cuerpo entre en un estado de calma profunda.</p>
@@ -1593,6 +1691,7 @@
                 autor: 'Ana M. & El Atelier',
                 fecha: '05-07-2026',
                 tags: ['Pop Art', 'Espirulina Azul', 'Hidratación Celular', 'Antioxidantes'],
+                galleryUrl: 'galeria.html#david',
                 body: `
                     <p>El arte de <strong>David Hockney</strong> es una inyección de sol, color saturado y hedonismo cotidiano. Sus famosas pinturas de piscinas californianas, con sus aguas turquesas y salpicaduras congeladas en el tiempo, representan el clímax de la frescura y la vitalidad del siglo XX. El Atelier DOXA traduce esta atmósfera en la pieza <em>Piscina de Splash</em>, un bocado que estalla en color y energía hidratante.</p>
                     <p>El distintivo color azul cian de la obra se logra mediante la phycocyanina, un extracto puro de espirulina azul conocido por sus potentes propiedades antioxidantes y neuroprotectoras. Diseñada para emular el brillo del agua bajo el sol de California, la fórmula incluye ácido hialurónico y agua de coco liofilizada rica en potasio y magnesio, restaurando instantáneamente el equilibrio celular de hidratación. Al igual que el chapuzón en una piscina refrescante, cada bocado revitaliza la dermis y el metabolismo.</p>
@@ -1613,6 +1712,7 @@
                 autor: 'Ana M. & El Atelier',
                 fecha: '28-06-2026',
                 tags: ['Neoexpresionismo', 'Materia Orgánica', 'Cacao Puro', 'Polifenoles'],
+                galleryUrl: 'galeria.html#miguel',
                 body: `
                     <p>La obra de <strong>Miquel Barceló</strong> destaca por su organicidad extrema, acumulando gruesas capas de materia que parecen respirar y pudrirse en el lienzo, emulando la vida marina, la arcilla húmeda y la corteza terrestre. En <em>Bésame Choco</em>, DOXA captura esa misma fuerza telúrica en una cookie que imita las texturas agrietadas y porosas características de las cerámicas del artista mallorquín.</p>
                     <p>La base de cacao puro al 100% y manteca de cacao proporciona una dosis maciza de polifenoles y teobromina, estimulantes naturales de la circulación sanguínea y potentes protectores celulares contra el daño oxidativo. Para emular el relieve de las creaciones de Barceló, la pieza incorpora nibs de cacao crujientes y sal marina escamada, que desencadenan una interacción de texturas rugosas y sabores intensos. Es una obra diseñada para la recuperación y el placer físico sin concesiones.</p>
@@ -1626,6 +1726,12 @@
         const customArticles = JSON.parse(localStorage.getItem('doxa_custom_articles') || '{}');
         Object.keys(customArticles).forEach(key => {
             articlesDb[key] = customArticles[key];
+        });
+
+        // Filtrar artículos eliminados de localStorage
+        const deletedArticles = JSON.parse(localStorage.getItem('doxa_deleted_articles') || '[]');
+        deletedArticles.forEach(key => {
+            delete articlesDb[key];
         });
 
         // ELEMENTOS DEL DOM
@@ -1727,6 +1833,29 @@
 
                 // Cargar texto del artículo
                 articleBody.innerHTML = article.body;
+
+                // Si existe un enlace a la galería, insertar el botón "Ver ficha de artista"
+                if (article.galleryUrl) {
+                    const btnWrapper = document.createElement('div');
+                    btnWrapper.className = 'article-gallery-btn-wrapper';
+                    btnWrapper.style.marginTop = '40px';
+                    btnWrapper.style.marginBottom = '20px';
+                    btnWrapper.style.textAlign = 'left';
+                    
+                    const btn = document.createElement('a');
+                    btn.href = article.galleryUrl;
+                    btn.className = 'btn-ver-galeria';
+                    btn.innerHTML = `
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; vertical-align: middle;">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>Ver ficha de artista
+                    `;
+                    
+                    btnWrapper.appendChild(btn);
+                    articleBody.appendChild(btnWrapper);
+                }
 
                 // 3. Actualizar la tarjeta activa en el carrusel
                 document.querySelectorAll('.related-card').forEach(card => {
@@ -1911,6 +2040,13 @@
         const adminCancelBtn = document.getElementById('adminCancelBtn');
         const adminArticleForm = document.getElementById('adminArticleForm');
 
+        const adminTabCreate = document.getElementById('adminTabCreate');
+        const adminTabEdit = document.getElementById('adminTabEdit');
+        const adminSelectArticleGroup = document.getElementById('adminSelectArticleGroup');
+        const adminSelectArticle = document.getElementById('adminSelectArticle');
+        const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+        const adminDeleteBtn = document.getElementById('adminDeleteBtn');
+
         const articleKey = document.getElementById('articleKey');
         const articleTitleInput = document.getElementById('articleTitleInput');
         const articleSubtitleInput = document.getElementById('articleSubtitleInput');
@@ -1922,23 +2058,158 @@
         const articleFormulaInput = document.getElementById('articleFormulaInput');
         const articleTagsInput = document.getElementById('articleTagsInput');
         const articleBodyInput = document.getElementById('articleBodyInput');
+        const articleGalleryUrlInput = document.getElementById('articleGalleryUrlInput');
+        const articleUrlInfo = document.getElementById('articleUrlInfo');
+        const articleUrlText = document.getElementById('articleUrlText');
 
         const adminExportCode = document.getElementById('adminExportCode');
         const adminCopyCodeBtn = document.getElementById('adminCopyCodeBtn');
         const adminClearCustomBtn = document.getElementById('adminClearCustomBtn');
 
         let tempImageBase64 = "";
+        let adminMode = "create"; // "create" o "edit"
+
+        // Rellenar selector de edición con artículos
+        const populateEditSelect = () => {
+            adminSelectArticle.innerHTML = '';
+            const defaultOpt = document.createElement('option');
+            defaultOpt.value = '';
+            defaultOpt.textContent = '-- Selecciona un artículo --';
+            adminSelectArticle.appendChild(defaultOpt);
+
+            Object.keys(articlesDb).forEach(key => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = `${articlesDb[key].title} (${key})`;
+                adminSelectArticle.appendChild(opt);
+            });
+        };
+
+        // Convertir párrafos HTML a texto plano con saltos de línea para el textarea
+        const htmlToText = (html) => {
+            if (!html) return '';
+            const div = document.createElement('div');
+            div.innerHTML = html;
+            const paragraphs = Array.from(div.querySelectorAll('p'));
+            if (paragraphs.length > 0) {
+                return paragraphs.map(p => p.innerHTML.trim()).join('\n\n');
+            }
+            return div.innerHTML.trim().replace(/<br\s*\/?>/gi, '\n');
+        };
+
+        // Cargar artículo seleccionado en el formulario
+        const loadArticleToForm = (id) => {
+            const article = articlesDb[id];
+            if (!article) {
+                adminArticleForm.reset();
+                articleKey.value = '';
+                articleImgPreview.style.display = 'none';
+                tempImageBase64 = "";
+                articleUrlInfo.style.display = 'none';
+                return;
+            }
+
+            articleKey.value = article.id;
+            articleTitleInput.value = article.title;
+            articleSubtitleInput.value = article.subtitle;
+
+            // Gestionar imagen actual
+            if (article.image.startsWith('data:image')) {
+                tempImageBase64 = article.image;
+                articleImgPreview.src = tempImageBase64;
+                articleImgPreview.style.display = 'block';
+                articleImageUrl.value = "";
+            } else {
+                tempImageBase64 = "";
+                articleImageUrl.value = article.image;
+                articleImgPreview.src = article.image;
+                articleImgPreview.style.display = 'block';
+            }
+
+            articleAuthorInput.value = article.autor || article.artistName;
+            articleColeccionInput.value = article.coleccion || "";
+            articleFormulaInput.value = article.formula || "";
+            articleTagsInput.value = (article.tags || []).join(', ');
+            articleBodyInput.value = htmlToText(article.body);
+            articleGalleryUrlInput.value = article.galleryUrl || "";
+
+            // Mostrar URL del artículo
+            articleUrlText.value = window.location.href.split('#')[0].replace('index.html', '') + '#' + id;
+            articleUrlInfo.style.display = 'block';
+        };
+
+        // Alternar modo de administración (Crear vs Editar)
+        const switchAdminMode = (mode) => {
+            adminMode = mode;
+            if (mode === 'create') {
+                adminTabCreate.classList.add('active');
+                adminTabEdit.classList.remove('active');
+                adminSelectArticleGroup.style.display = 'none';
+                articleUrlInfo.style.display = 'none';
+
+                adminArticleForm.reset();
+                articleKey.readOnly = false;
+                articleKey.style.backgroundColor = '#ffffff';
+                articleImgPreview.style.display = 'none';
+                tempImageBase64 = "";
+                adminSubmitBtn.textContent = 'Publicar Artículo';
+                adminDeleteBtn.style.display = 'none';
+            } else {
+                adminTabCreate.classList.remove('active');
+                adminTabEdit.classList.add('active');
+                adminSelectArticleGroup.style.display = 'block';
+                articleUrlInfo.style.display = 'none';
+
+                adminArticleForm.reset();
+                articleKey.readOnly = true;
+                articleKey.style.backgroundColor = 'rgba(60, 51, 42, 0.08)';
+                articleImgPreview.style.display = 'none';
+                tempImageBase64 = "";
+                adminSubmitBtn.textContent = 'Guardar Cambios';
+                adminDeleteBtn.style.display = 'inline-block';
+                adminDeleteBtn.disabled = true;
+
+                populateEditSelect();
+            }
+        };
+
+        const copyArticleUrlBtn = document.getElementById('copyArticleUrlBtn');
+        copyArticleUrlBtn.addEventListener('click', () => {
+            articleUrlText.select();
+            document.execCommand('copy');
+            const originalText = copyArticleUrlBtn.textContent;
+            copyArticleUrlBtn.textContent = '¡Copiado!';
+            copyArticleUrlBtn.style.backgroundColor = '#27ae60';
+            setTimeout(() => {
+                copyArticleUrlBtn.textContent = originalText;
+                copyArticleUrlBtn.style.backgroundColor = '';
+            }, 2000);
+        });
+
+        adminTabCreate.addEventListener('click', () => switchAdminMode('create'));
+        adminTabEdit.addEventListener('click', () => switchAdminMode('edit'));
+
+        adminSelectArticle.addEventListener('change', (e) => {
+            loadArticleToForm(e.target.value);
+            if (e.target.value) {
+                adminDeleteBtn.disabled = false;
+            } else {
+                adminDeleteBtn.disabled = true;
+            }
+        });
 
         // Abrir y cerrar modal
         const toggleAdminModal = (show) => {
             if (show) {
                 adminModalOverlay.classList.add('active');
+                switchAdminMode('create');
                 updateExportCodeBox();
             } else {
                 adminModalOverlay.classList.remove('active');
                 adminArticleForm.reset();
                 articleImgPreview.style.display = 'none';
                 tempImageBase64 = "";
+                switchAdminMode('create');
             }
         };
 
@@ -1977,7 +2248,6 @@
         const updateExportCodeBox = () => {
             const custom = localStorage.getItem('doxa_custom_articles');
             if (custom && custom !== '{}') {
-                // Formatear el JSON para que sea un objeto de código JS asignable
                 const formatted = JSON.stringify(JSON.parse(custom), null, 4);
                 adminExportCode.value = formatted;
             } else {
@@ -1985,7 +2255,7 @@
             }
         };
 
-        // Guardar artículo
+        // Guardar artículo (creación o edición)
         adminArticleForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -1995,22 +2265,27 @@
             // Determinar la imagen final (Base64 o nombre de archivo de texto)
             const finalImage = tempImageBase64 || articleImageUrl.value.trim() || 'todos los sin.jpg';
 
-            // Crear el objeto del nuevo artículo
+            // Conservar metadatos anteriores si el artículo ya existe en articlesDb
+            const existingArticle = articlesDb[key] || {};
+
+            // Crear el objeto del artículo
             const newArticle = {
+                ...existingArticle,
                 id: key,
                 title: articleTitleInput.value.trim(),
                 subtitle: articleSubtitleInput.value.trim(),
                 image: finalImage,
                 artistName: articleAuthorInput.value.trim(),
-                artistAvatar: 'artista_retrato.png',
-                origin: 'España, 2026',
+                artistAvatar: existingArticle.artistAvatar || 'artista_retrato.png',
+                origin: existingArticle.origin || 'España, 2026',
                 coleccion: articleColeccionInput.value.trim() || 'Atelier DOXA (Colección Fundadora)',
                 formula: articleFormulaInput.value.trim() || 'Deconstrucción Molecular y Soporte Celular',
                 autor: articleAuthorInput.value.trim(),
-                fecha: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-'),
+                fecha: existingArticle.fecha || new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-'),
                 tags: articleTagsInput.value.split(',').map(t => t.trim()).filter(Boolean),
+                galleryUrl: articleGalleryUrlInput.value.trim(),
                 body: articleBodyInput.value.trim().split('\n').map(p => p.trim() ? `<p>${p.trim()}</p>` : '').join(''),
-                colors: themeColors
+                colors: existingArticle.colors || themeColors
             };
 
             // Guardar en localStorage
@@ -2021,14 +2296,18 @@
             // Actualizar la base de datos en vivo de la página
             articlesDb[key] = newArticle;
 
-            // Regenerar carrusel y cargar el nuevo artículo
+            // Regenerar carrusel y cargar el nuevo/editado artículo
             generateCarousel();
             window.location.hash = key;
 
             // Cerrar modal
             toggleAdminModal(false);
 
-            alert('¡Artículo publicado con éxito localmente!');
+            if (adminMode === 'edit') {
+                alert('¡Artículo editado con éxito localmente!');
+            } else {
+                alert('¡Artículo publicado con éxito localmente!');
+            }
         });
 
         // Copiar código de exportación al portapapeles
@@ -2038,16 +2317,51 @@
                 document.execCommand('copy');
                 alert('Código copiado al portapapeles. Ahora puedes pegarlo en el archivo `articulos.html`.');
             } else {
-                alert('No hay código para copiar. Primero crea algún artículo.');
+                alert('No hay código para copiar. Primero crea o edita algún artículo.');
+            }
+        });
+
+        // Borrar un artículo individual
+        adminDeleteBtn.addEventListener('click', () => {
+            const key = articleKey.value.trim().toLowerCase();
+            if (!key || !articlesDb[key]) return;
+
+            if (confirm(`¿Estás segura de que deseas borrar el artículo "${articlesDb[key].title}"?`)) {
+                const custom = JSON.parse(localStorage.getItem('doxa_custom_articles') || '{}');
+                if (custom[key]) {
+                    delete custom[key];
+                    localStorage.setItem('doxa_custom_articles', JSON.stringify(custom));
+                } else {
+                    const deleted = JSON.parse(localStorage.getItem('doxa_deleted_articles') || '[]');
+                    if (!deleted.includes(key)) {
+                        deleted.push(key);
+                        localStorage.setItem('doxa_deleted_articles', JSON.stringify(deleted));
+                    }
+                }
+
+                delete articlesDb[key];
+                toggleAdminModal(false);
+
+                const remainingKeys = Object.keys(articlesDb);
+                if (remainingKeys.length > 0) {
+                    const nextKey = remainingKeys[0];
+                    window.location.hash = nextKey;
+                    renderArticle(nextKey);
+                } else {
+                    window.location.hash = '';
+                    window.location.reload();
+                }
+
+                generateCarousel();
+                alert('¡Artículo eliminado con éxito!');
             }
         });
 
         // Borrar artículos personalizados
         adminClearCustomBtn.addEventListener('click', () => {
-            if (confirm('¿Estás segura de que deseas borrar todos tus artículos personalizados? Esto vaciará el almacenamiento local.')) {
+            if (confirm('¿Estás segura de que deseas restablecer el sitio? Esto borrará tus artículos personalizados y restaurará los artículos por defecto.')) {
                 localStorage.removeItem('doxa_custom_articles');
-
-                // Recargar para limpiar
+                localStorage.removeItem('doxa_deleted_articles');
                 window.location.reload();
             }
         });
