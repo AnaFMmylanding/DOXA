@@ -185,6 +185,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             border-bottom: 1px solid rgba(255, 255, 255, 0);
         }
 
+        /* Estado al hacer scroll */
         .navbar.scrolled {
             height: 75px;
             background-color: transparent !important;
@@ -202,7 +203,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             font-weight: 500;
             letter-spacing: 4px;
             /* Ajuste de espaciado */
-            color: #FFFFFF !important;
+            color: var(--nav-logo-initial, #FFFFFF) !important;
             background-color: transparent !important;
             padding: 12px 0;
             border: none !important;
@@ -214,7 +215,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         }
 
         .navbar.scrolled .navbar-logo {
-            color: #000000 !important;
+            color: var(--nav-logo-scrolled, #000000) !important;
             background-color: transparent !important;
         }
 
@@ -226,93 +227,47 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
         .navbar-link {
             font-family: 'Lexend', sans-serif;
-            font-size: 10px;
-            /* Tamaño de letra del menú más pequeño */
-            font-weight: 400;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.8);
-            transition: color 0.4s ease;
-        }
-
-        .navbar-link:hover {
-            color: #FFFFFF;
-        }
-
-        .navbar-link:focus,
-        .navbar-link:active {
-            outline: none !important;
-            text-decoration: none !important;
-        }
-
-        .navbar.scrolled .navbar-link {
-            color: #000000 !important;
-            /* Texto negro en scroll */
-        }
-
-        .navbar.scrolled .navbar-link:hover {
-            color: #524b3f !important;
-            /* Negro más claro al hacer hover */
-        }
-
-        /* Botón de Galería destacado sin fondo amarillo, contorno transparente y sin borde */
-        .btn-gallery {
-            font-family: 'Lexend', sans-serif;
-            font-size: 10px;
-            /* Tamaño de letra más pequeño */
+            font-size: 11px;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #FFFFFF !important;
-            /* Texto en blanco sobre fondo oscuro hero */
+            color: var(--nav-text-initial, rgba(255, 255, 255, 0.8)) !important;
             background-color: transparent !important;
-            /* Fondo transparente */
-            border: none !important;
-            /* Sin recuadro de contorno */
-            padding: 10px 22px;
-            transition: all 0.3s ease;
-            margin-left: -20px;
-            /* Acerca Colección a Galería */
-        }
-
-        .btn-gallery:hover {
-            transform: scale(1.05);
-            background-color: rgba(255, 255, 255, 0.1) !important;
-            box-shadow: none;
-        }
-
-        .navbar.scrolled .btn-gallery {
-            background-color: transparent !important;
-            color: #000000 !important;
-            /* Negro en scroll */
-            border: none !important;
-        }
-
-        .navbar.scrolled .btn-gallery:hover {
-            background-color: rgba(0, 0, 0, 0.05) !important;
-            color: #524b3f !important;
-        }
-
-        .btn-coleccion {
-            background-color: var(--accent-color) !important;
-            color: #000000 !important;
             padding: 10px 22px !important;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-weight: 500;
         }
 
-        .btn-coleccion:hover {
+        .navbar-link.active {
+            color: #000000 !important;
+            background-color: var(--accent-color) !important;
             transform: scale(1.05);
         }
 
-        .navbar.scrolled .btn-coleccion {
+        .navbar-link:not(.active):hover {
+            color: var(--nav-text-hover, #FFFFFF) !important;
+            background-color: transparent !important;
+            transform: scale(1.05);
+        }
+
+        .navbar.scrolled .navbar-link {
+            color: var(--nav-text-scrolled, #000000) !important;
+            background-color: transparent !important;
+        }
+
+        .navbar.scrolled .navbar-link.active {
             color: #000000 !important;
             background-color: var(--accent-color) !important;
         }
 
+        .navbar.scrolled .navbar-link:not(.active):hover {
+            color: var(--nav-text-scrolled-hover, #524b3f) !important;
+            background-color: transparent !important;
+        }
+
+        /* Menú Hamburguesa Móvil */
         .mobile-toggle {
             display: none;
             flex-direction: column;
@@ -336,6 +291,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             background-color: #000000 !important;
         }
 
+        /* Estilos del menú móvil desplegable */
         @media (max-width: 768px) {
             .navbar {
                 padding: 0 25px;
@@ -357,6 +313,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 width: 70%;
                 height: 100vh;
                 background-color: rgba(21, 14, 2, 0.95);
+                /* Fondo oscuro premium */
                 backdrop-filter: blur(15px);
                 flex-direction: column;
                 justify-content: center;
@@ -371,33 +328,30 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             }
 
             .navbar-link {
-                font-size: 16px;
+                font-family: 'Lexend', sans-serif;
+                font-size: 14px !important;
                 color: rgba(255, 255, 255, 0.8) !important;
-            }
-
-            .navbar-link:hover {
-                color: #FFFFFF !important;
-            }
-
-            .btn-gallery {
-                background-color: var(--accent-color) !important;
-                color: #150e02 !important;
-                width: 100%;
-                text-align: center;
-                padding: 15px 0;
-                font-size: 14px;
-                margin-left: 0 !important;
-            }
-
-            .btn-coleccion {
-                background-color: var(--accent-color) !important;
-                color: #150e02 !important;
+                background-color: transparent !important;
                 width: 100%;
                 text-align: center;
                 padding: 15px 0 !important;
-                font-size: 14px;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
             }
 
+            .navbar-link.active {
+                background-color: var(--accent-color) !important;
+                color: #150e02 !important;
+            }
+
+            .navbar-link:not(.active):hover {
+                background-color: transparent !important;
+                color: #FFFFFF !important;
+            }
+
+            /* Transformación del hamburguesa a X */
             .mobile-toggle.active span:nth-child(1) {
                 transform: translateY(7px) rotate(45deg);
                 background-color: #FFFFFF !important;
@@ -1894,7 +1848,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             <div class="navbar-menu" id="navbarMenu">
                 <a href="index.html#sobre-doxa" class="navbar-link">Sobre Doxa</a>
                 <a href="index.html#coleccion" class="navbar-link btn-coleccion">Colección</a>
-                <a href="#" class="navbar-link btn-gallery">Galería</a>
+                <a href="#" class="navbar-link btn-gallery active">Galería</a>
                 <a href="articulos.html" class="navbar-link">Artículos</a>
             </div>
         </nav>

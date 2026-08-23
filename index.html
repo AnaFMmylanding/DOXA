@@ -150,7 +150,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             font-weight: 500;
             letter-spacing: 4px;
             /* Ajuste de espaciado */
-            color: #FFFFFF !important;
+            color: var(--nav-logo-initial, #FFFFFF) !important;
             background-color: transparent !important;
             padding: 12px 0;
             border: none !important;
@@ -162,7 +162,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         }
 
         .navbar.scrolled .navbar-logo {
-            color: #000000 !important;
+            color: var(--nav-logo-scrolled, #000000) !important;
             background-color: transparent !important;
         }
 
@@ -175,89 +175,43 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         .navbar-link {
             font-family: 'Lexend', sans-serif;
             font-size: 11px;
-            font-weight: 400;
+            font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.8);
-            position: relative;
-            padding: 8px 0;
-            transition: color 0.4s ease;
-        }
-
-        .navbar-link:hover {
-            color: #FFFFFF;
-        }
-
-        .navbar-link:focus,
-        .navbar-link:active {
-            outline: none !important;
-            text-decoration: none !important;
-        }
-
-        .navbar.scrolled .navbar-link {
-            color: #000000 !important;
-            /* Texto negro en scroll */
-        }
-
-        .navbar.scrolled .navbar-link:hover {
-            color: #524b3f !important;
-            /* Negro más claro al hacer hover */
-        }
-
-        /* Botón de Galería destacado (Transparente sin fondo negro) */
-        .btn-gallery {
-            font-family: 'Lexend', sans-serif;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.8) !important;
+            color: var(--nav-text-initial, rgba(255, 255, 255, 0.8)) !important;
             background-color: transparent !important;
-            /* Quitado fondo negro */
-            border: none !important;
-            /* Sin borde */
-            padding: 10px 22px;
-            transition: all 0.3s ease;
-            margin-left: -20px;
-            /* Acerca Colección a Galería */
-        }
-
-        .btn-gallery:hover {
-            color: #ffffff !important;
-            background-color: rgba(255, 255, 255, 0.1) !important;
-            transform: scale(1.05);
-        }
-
-        .navbar.scrolled .btn-gallery {
-            background-color: transparent !important;
-            color: #000000 !important;
-            /* Negro en scroll */
-            border: none !important;
-        }
-
-        .navbar.scrolled .btn-gallery:hover {
-            background-color: rgba(0, 0, 0, 0.05) !important;
-            color: #524b3f !important;
-        }
-
-        .btn-coleccion {
-            background-color: var(--accent-color) !important;
-            color: #000000 !important;
             padding: 10px 22px !important;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-weight: 500;
         }
 
-        .btn-coleccion:hover {
+        .navbar-link.active {
+            color: #000000 !important;
+            background-color: var(--accent-color) !important;
             transform: scale(1.05);
         }
 
-        .navbar.scrolled .btn-coleccion {
+        .navbar-link:not(.active):hover {
+            color: var(--nav-text-hover, #FFFFFF) !important;
+            background-color: transparent !important;
+            transform: scale(1.05);
+        }
+
+        .navbar.scrolled .navbar-link {
+            color: var(--nav-text-scrolled, #000000) !important;
+            background-color: transparent !important;
+        }
+
+        .navbar.scrolled .navbar-link.active {
             color: #000000 !important;
             background-color: var(--accent-color) !important;
+        }
+
+        .navbar.scrolled .navbar-link:not(.active):hover {
+            color: var(--nav-text-scrolled-hover, #524b3f) !important;
+            background-color: transparent !important;
         }
 
         /* Menú Hamburguesa Móvil */
@@ -321,32 +275,27 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             }
 
             .navbar-link {
-                font-size: 16px;
+                font-family: 'Lexend', sans-serif;
+                font-size: 14px !important;
                 color: rgba(255, 255, 255, 0.8) !important;
-            }
-
-            .navbar-link:hover {
-                color: #FFFFFF !important;
-            }
-
-            .btn-gallery {
                 background-color: transparent !important;
-                color: #ffffff !important;
-                border: none !important;
-                width: 100%;
-                text-align: center;
-                padding: 15px 0;
-                font-size: 14px;
-                margin-left: 0 !important;
-            }
-
-            .btn-coleccion {
-                background-color: var(--accent-color) !important;
-                color: #150e02 !important;
                 width: 100%;
                 text-align: center;
                 padding: 15px 0 !important;
-                font-size: 14px;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .navbar-link.active {
+                background-color: var(--accent-color) !important;
+                color: #150e02 !important;
+            }
+
+            .navbar-link:not(.active):hover {
+                background-color: transparent !important;
+                color: #FFFFFF !important;
             }
 
             /* Transformación del hamburguesa a X */
@@ -1529,9 +1478,9 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         ]
                     },
                     {
-                        n: "Ingredientes que te respetan",
+                        n: "Ingredientes que no inflaman",
                         bg: "respeto.jpg",
-                        title: "Ingredientes que te respetan",
+                        title: "Ingredientes que respetan el cuerpo",
                         neg: "Sin añadidos estériles, solo lo que necesitas",
                         prop: "Haz clic en este apartado para conocer las bases libres de inflamación y de impacto glucémico de nuestra masa.",
                         subActivos: [
@@ -2737,8 +2686,43 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             const navbarMenu = document.getElementById('navbarMenu');
             const navLinks = document.querySelectorAll('.navbar-link');
 
-            // Scroll listener para cambiar aspecto de la barra al superar el hero
+            // Scroll listener para cambiar aspecto de la barra al superar el hero y Scrollspy
             const hero = document.querySelector('.hero-container');
+            const sections = document.querySelectorAll('section[id]');
+
+            let disableScrollspy = false;
+            let scrollspyTimeout;
+
+            function tempDisableScrollspy() {
+                disableScrollspy = true;
+                clearTimeout(scrollspyTimeout);
+                scrollspyTimeout = setTimeout(() => {
+                    disableScrollspy = false;
+                }, 1000);
+            }
+
+            // Resaltado inmediato al cargar con un hash en la URL (ej: #coleccion)
+            if (window.location.hash && window.location.hash !== '#') {
+                const currentHash = window.location.hash;
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href');
+                    if (href === currentHash || (href && href.startsWith('#') && href === currentHash)) {
+                        link.classList.add('active');
+                    }
+                });
+                tempDisableScrollspy();
+            } else {
+                // Resaltar 'Colección' por defecto al cargar en la cabecera sin hash
+                navLinks.forEach(link => {
+                    if (link.classList.contains('btn-coleccion')) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+
             window.addEventListener('scroll', () => {
                 const threshold = (hero ? hero.offsetHeight : window.innerHeight) - 90;
                 if (window.scrollY > threshold) {
@@ -2746,6 +2730,35 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 } else {
                     navbar.classList.remove('scrolled');
                 }
+
+                if (disableScrollspy) return;
+
+                // Scrollspy para resaltar el enlace activo
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                // Si estamos arriba del todo (hero), resaltar 'Colección' por defecto
+                if (current === '') {
+                    current = 'coleccion';
+                }
+
+                // Mapear subsecciones de colección al botón "Colección"
+                if (current === 'cajas-activos' || current === 'descripcion-nutricional') {
+                    current = 'coleccion';
+                }
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#') && href.slice(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
             });
 
             // Toggle del menú móvil
@@ -2754,11 +2767,14 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 navbarMenu.classList.toggle('active');
             });
 
-            // Cerrar menú móvil al hacer click en un enlace
+            // Cerrar menú móvil al hacer click en un enlace y establecer el botón activo inmediatamente
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
                     mobileToggle.classList.remove('active');
                     navbarMenu.classList.remove('active');
+                    tempDisableScrollspy();
                 });
             });
         })();

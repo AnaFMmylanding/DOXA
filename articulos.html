@@ -29,6 +29,8 @@
             --nav-logo-initial: #181818;
             --nav-text-scrolled: #181818;
             --nav-logo-scrolled: #181818;
+            --nav-text-hover: #181818;
+            --nav-text-scrolled-hover: #181818;
             --nav-scrolled-bg: rgba(241, 242, 236, 0.85);
             --tag-bg: rgba(24, 24, 24, 0.06);
             --tag-text: #181818;
@@ -59,7 +61,7 @@
         }
 
         /* =========================================
-           BARRA DE NAVEGACIÓN (NAVBAR)
+           ESTILOS DE NAVEGACIÓN (NAVBAR)
            ========================================= */
         .navbar {
             position: fixed;
@@ -77,20 +79,28 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0);
         }
 
+        /* Estado al hacer scroll */
         .navbar.scrolled {
             height: 75px;
-            background-color: var(--nav-scrolled-bg) !important;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: transparent !important;
+            /* Totalmente transparente */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            /* Línea sutil blanca */
         }
 
         .navbar-logo {
             font-family: 'Lato', sans-serif;
             font-size: 14px;
+            /* Letras DOXA más pequeñas */
             font-weight: 500;
             letter-spacing: 4px;
-            color: var(--nav-logo-initial) !important;
+            /* Ajuste de espaciado */
+            color: var(--nav-logo-initial, #FFFFFF) !important;
+            background-color: transparent !important;
+            padding: 12px 0;
+            border: none !important;
             text-transform: uppercase;
             transition: all 0.4s ease;
             display: inline-flex;
@@ -99,7 +109,8 @@
         }
 
         .navbar.scrolled .navbar-logo {
-            color: var(--nav-logo-scrolled) !important;
+            color: var(--nav-logo-scrolled, #000000) !important;
+            background-color: transparent !important;
         }
 
         .navbar-menu {
@@ -111,60 +122,43 @@
         .navbar-link {
             font-family: 'Lexend', sans-serif;
             font-size: 11px;
-            font-weight: 400;
+            font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--nav-text-initial);
-            position: relative;
-            padding: 8px 0;
-            transition: color 0.4s ease;
-        }
-
-        .navbar.scrolled .navbar-link {
-            color: var(--nav-text-scrolled) !important;
-        }
-
-        .navbar-link:hover {
-            color: var(--text-color) !important;
-            opacity: 0.8;
-        }
-
-        .btn-gallery {
-            font-family: 'Lexend', sans-serif;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--nav-text-initial) !important;
+            color: var(--nav-text-initial, rgba(255, 255, 255, 0.8)) !important;
             background-color: transparent !important;
-            border: none !important;
-            padding: 10px 22px;
-            transition: all 0.3s ease;
-            margin-left: -20px;
-        }
-
-        .btn-gallery:hover {
-            background-color: rgba(0, 0, 0, 0.04) !important;
-            border-radius: 4px;
-        }
-
-        .navbar.scrolled .btn-gallery {
-            color: var(--nav-text-scrolled) !important;
-        }
-
-        .btn-coleccion {
-            background-color: var(--accent-color) !important;
-            color: #000000 !important;
             padding: 10px 22px !important;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-weight: 500;
         }
 
-        .btn-coleccion:hover {
+        .navbar-link.active {
+            color: #000000 !important;
+            background-color: var(--accent-color) !important;
             transform: scale(1.05);
+        }
+
+        .navbar-link:not(.active):hover {
+            color: var(--nav-text-hover, #FFFFFF) !important;
+            background-color: transparent !important;
+            transform: scale(1.05);
+        }
+
+        .navbar.scrolled .navbar-link {
+            color: var(--nav-text-scrolled, #000000) !important;
+            background-color: transparent !important;
+        }
+
+        .navbar.scrolled .navbar-link.active {
+            color: #000000 !important;
+            background-color: var(--accent-color) !important;
+        }
+
+        .navbar.scrolled .navbar-link:not(.active):hover {
+            color: var(--nav-text-scrolled-hover, #524b3f) !important;
+            background-color: transparent !important;
         }
 
         /* Menú Hamburguesa Móvil */
@@ -183,8 +177,12 @@
         .mobile-toggle span {
             width: 100%;
             height: 2px;
-            background-color: var(--text-color);
+            background-color: #FFFFFF;
             transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .mobile-toggle span {
+            background-color: #000000 !important;
         }
 
         /* Estilos del menú móvil desplegable */
@@ -206,19 +204,17 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 75%;
-                max-width: 320px;
+                width: 70%;
                 height: 100vh;
-                background-color: var(--nav-scrolled-bg);
+                background-color: rgba(21, 14, 2, 0.95);
+                /* Fondo oscuro premium */
                 backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
                 flex-direction: column;
                 justify-content: center;
-                align-items: flex-start;
-                padding: 50px 40px;
-                gap: 30px;
+                gap: 40px;
+                padding: 40px;
                 transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+                z-index: 999;
             }
 
             .navbar-menu.active {
@@ -226,15 +222,42 @@
             }
 
             .navbar-link {
-                font-size: 16px;
-                color: var(--text-color) !important;
+                font-family: 'Lexend', sans-serif;
+                font-size: 14px !important;
+                color: rgba(255, 255, 255, 0.8) !important;
+                background-color: transparent !important;
+                width: 100%;
+                text-align: center;
+                padding: 15px 0 !important;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            .btn-gallery {
-                margin-left: 0;
-                padding: 10px 0;
-                font-size: 16px;
-                color: var(--text-color) !important;
+            .navbar-link.active {
+                background-color: var(--accent-color) !important;
+                color: #150e02 !important;
+            }
+
+            .navbar-link:not(.active):hover {
+                background-color: transparent !important;
+                color: #FFFFFF !important;
+            }
+
+            /* Transformación del hamburguesa a X */
+            .mobile-toggle.active span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+                background-color: #FFFFFF !important;
+            }
+
+            .mobile-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-toggle.active span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+                background-color: #FFFFFF !important;
             }
         }
 
@@ -1274,7 +1297,7 @@
             <a href="index.html#sobre-doxa" class="navbar-link">Sobre Doxa</a>
             <a href="index.html#coleccion" class="navbar-link btn-coleccion">Colección</a>
             <a href="galeria.html" class="navbar-link btn-gallery">Galería</a>
-            <a href="#" class="navbar-link" style="font-weight: 600;">Artículos</a>
+            <a href="#" class="navbar-link active">Artículos</a>
         </div>
     </nav>
 
