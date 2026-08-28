@@ -551,21 +551,30 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             justify-content: center;
         }
 
-        .artist-tagline {
-            font-size: 11px;
-            letter-spacing: 3px;
-            font-weight: 700;
+        .artist-name {
+            font-family: 'Lexend', sans-serif;
+            font-size: clamp(24px, 3.5vw, 42px);
+            font-weight: 300;
+            line-height: 1.3;
+            letter-spacing: clamp(4px, 1.5vw, 10px);
+            margin-bottom: 25px;
             text-transform: uppercase;
-            color: rgba(60, 51, 42, 0.6);
-            margin-bottom: 15px;
+            color: var(--text-dark);
         }
 
-        .artist-name {
-            font-size: clamp(28px, 4vw, 40px);
-            font-weight: 300;
-            letter-spacing: 2px;
-            line-height: 1.2;
+        .artist-tagline {
+            display: block;
+            font-family: 'Lexend', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 2;
+            opacity: 0.95;
             margin-bottom: 30px;
+            border-left: 2px solid var(--text-dark);
+            padding-left: 20px;
+            letter-spacing: 0.5px;
+            color: var(--text-dark);
+            text-transform: none;
         }
 
         .artist-bio {
@@ -1902,8 +1911,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         <img src="ProtoDoxa.png" alt="Ana M. — Visionaria de DOXA">
                     </div>
                     <div class="artist-details animate-appear delay-2">
-                        <span class="artist-tagline">El Creador</span>
                         <h2 class="artist-name">Ana M. & El Atelier</h2>
+                        <span class="artist-tagline">El Creador</span>
 
                         <div class="artist-bio">
                             <p>Para Ana M., alma y mente científica detrás de <strong>DOXA</strong>, la repostería
@@ -2059,8 +2068,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         <img src="Antonio Garcia Villarán_autoretrato.webp" alt="Antonio García Villarán">
                     </div>
                     <div class="artist-details animate-appear delay-2">
-                        <span class="artist-tagline">El Crítico de la Materia</span>
                         <h2 class="artist-name">Antonio García Villarán</h2>
+                        <span class="artist-tagline">El Crítico de la Materia</span>
 
                         <div class="artist-bio">
                             <p>Antonio García Villarán concibe la repostería funcional desde la tensión artística y la
@@ -2202,8 +2211,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         <img src="Mikel Barceló_él.webp" alt="Miquel Barceló">
                     </div>
                     <div class="artist-details animate-appear delay-2">
-                        <span class="artist-tagline">El Relieve de la Materia</span>
                         <h2 class="artist-name">Miquel Barceló</h2>
+                        <span class="artist-tagline">El Relieve de la Materia</span>
 
                         <div class="artist-bio">
                             <p>Miquel Barceló, uno de los creadores contemporáneos más universales, traslada su
@@ -2377,8 +2386,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         <img src="Dvid Hockney retrato.jpg" alt="David Hockney">
                     </div>
                     <div class="artist-details animate-appear delay-2">
-                        <span class="artist-tagline">La Explosión de la Luz Pop</span>
                         <h2 class="artist-name">David Hockney</h2>
+                        <span class="artist-tagline">La Explosión de la Luz Pop</span>
 
                         <div class="artist-bio">
                             <p>David Hockney traslada su legendario estudio de la perspectiva, el color vibrante y los
@@ -2520,8 +2529,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         <img src="Anselm Kiefer_él.jpg" alt="Anselm Kiefer">
                     </div>
                     <div class="artist-details animate-appear delay-2">
-                        <span class="artist-tagline">La Alquimia del Plomo y la Memoria</span>
                         <h2 class="artist-name">Anselm Kiefer</h2>
+                        <span class="artist-tagline">La Alquimia del Plomo y la Memoria</span>
 
                         <div class="artist-bio">
                             <p>Anselm Kiefer concibe el arte como un proceso de transformación alquímica, historia y
@@ -2840,18 +2849,26 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     <!-- FORMULARIO 1: AÑADIR ARTISTA -->
                     <form id="adminArtistForm">
                         <div class="admin-sub-tabs">
-                            <button type="button" class="admin-sub-tab active" id="artistModeCreate">Crear Artista</button>
-                            <button type="button" class="admin-sub-tab" id="artistModeEdit">Editar/Borrar Artista</button>
+                            <button type="button" class="admin-sub-tab active" id="artistModeCreate">Crear
+                                Artista</button>
+                            <button type="button" class="admin-sub-tab" id="artistModeEdit">Editar/Borrar
+                                Artista</button>
                         </div>
                         <div class="admin-form-group" id="artistSelectGroup" style="display: none;">
                             <label class="admin-form-label" for="artistSelect">Seleccionar Artista</label>
                             <select class="admin-form-select" id="artistSelect"></select>
                         </div>
-                        <div class="admin-form-group" id="artistUrlInfo" style="display: none; background-color: #f7f5f0; padding: 12px; border-left: 3px solid #3C332A; margin-bottom: 20px; border-radius: 4px;">
-                            <label class="admin-form-label" style="font-size: 11px; color: #6d5d4d; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin-bottom: 6px; display: block;">URL para enlazar este artista:</label>
+                        <div class="admin-form-group" id="artistUrlInfo"
+                            style="display: none; background-color: #f7f5f0; padding: 12px; border-left: 3px solid #3C332A; margin-bottom: 20px; border-radius: 4px;">
+                            <label class="admin-form-label"
+                                style="font-size: 11px; color: #6d5d4d; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin-bottom: 6px; display: block;">URL
+                                para enlazar este artista:</label>
                             <div style="display: flex; gap: 8px;">
-                                <input type="text" id="artistUrlText" readonly class="admin-form-input" style="flex: 1; font-family: monospace; font-size: 12px; background-color: #fff; cursor: text; margin: 0; padding: 8px;" onclick="this.select()">
-                                <button type="button" id="copyArtistUrlBtn" class="admin-btn admin-btn-primary" style="padding: 8px 16px; font-size: 11px; white-space: nowrap; margin: 0; min-height: unset; line-height: unset;">Copiar</button>
+                                <input type="text" id="artistUrlText" readonly class="admin-form-input"
+                                    style="flex: 1; font-family: monospace; font-size: 12px; background-color: #fff; cursor: text; margin: 0; padding: 8px;"
+                                    onclick="this.select()">
+                                <button type="button" id="copyArtistUrlBtn" class="admin-btn admin-btn-primary"
+                                    style="padding: 8px 16px; font-size: 11px; white-space: nowrap; margin: 0; min-height: unset; line-height: unset;">Copiar</button>
                             </div>
                         </div>
                         <div class="admin-form-group">
@@ -2891,34 +2908,44 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                                 placeholder="Escribe el texto de presentación..." required></textarea>
                         </div>
                         <div class="admin-form-group">
-                            <label class="admin-form-label" for="artistArticleUrlInput">Enlace al Artículo (Artículo del artista)</label>
+                            <label class="admin-form-label" for="artistArticleUrlInput">Enlace al Artículo (Artículo del
+                                artista)</label>
                             <input class="admin-form-input" type="text" id="artistArticleUrlInput"
                                 placeholder="ej. articulos.html#antonio">
                         </div>
                         <div class="admin-form-actions">
                             <button class="admin-btn admin-btn-secondary" type="button"
                                 id="adminArtistCancelBtn">Cancelar</button>
-                            <button class="admin-btn admin-btn-danger" type="button"
-                                id="adminArtistDeleteBtn" style="display: none;">Borrar Artista</button>
-                            <button class="admin-btn admin-btn-primary" type="submit" id="adminArtistSubmitBtn">Publicar Artista</button>
+                            <button class="admin-btn admin-btn-danger" type="button" id="adminArtistDeleteBtn"
+                                style="display: none;">Borrar Artista</button>
+                            <button class="admin-btn admin-btn-primary" type="submit" id="adminArtistSubmitBtn">Publicar
+                                Artista</button>
                         </div>
                     </form>
 
                     <!-- FORMULARIO 2: AÑADIR FICHA / OBRA -->
                     <form id="adminArtworkForm" style="display: none;">
                         <div class="admin-sub-tabs">
-                            <button type="button" class="admin-sub-tab active" id="artworkModeCreate">Añadir Ficha</button>
-                            <button type="button" class="admin-sub-tab" id="artworkModeEdit">Editar/Borrar Ficha</button>
+                            <button type="button" class="admin-sub-tab active" id="artworkModeCreate">Añadir
+                                Ficha</button>
+                            <button type="button" class="admin-sub-tab" id="artworkModeEdit">Editar/Borrar
+                                Ficha</button>
                         </div>
                         <div class="admin-form-group" id="artworkSelectGroup" style="display: none;">
                             <label class="admin-form-label" for="artworkSelect">Seleccionar Ficha (Obra)</label>
                             <select class="admin-form-select" id="artworkSelect"></select>
                         </div>
-                        <div class="admin-form-group" id="artworkUrlInfo" style="display: none; background-color: #f7f5f0; padding: 12px; border-left: 3px solid #3C332A; margin-bottom: 20px; border-radius: 4px;">
-                            <label class="admin-form-label" style="font-size: 11px; color: #6d5d4d; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin-bottom: 6px; display: block;">URL para enlazar esta obra (Galería del artista):</label>
+                        <div class="admin-form-group" id="artworkUrlInfo"
+                            style="display: none; background-color: #f7f5f0; padding: 12px; border-left: 3px solid #3C332A; margin-bottom: 20px; border-radius: 4px;">
+                            <label class="admin-form-label"
+                                style="font-size: 11px; color: #6d5d4d; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin-bottom: 6px; display: block;">URL
+                                para enlazar esta obra (Galería del artista):</label>
                             <div style="display: flex; gap: 8px;">
-                                <input type="text" id="artworkUrlText" readonly class="admin-form-input" style="flex: 1; font-family: monospace; font-size: 12px; background-color: #fff; cursor: text; margin: 0; padding: 8px;" onclick="this.select()">
-                                <button type="button" id="copyArtworkUrlBtn" class="admin-btn admin-btn-primary" style="padding: 8px 16px; font-size: 11px; white-space: nowrap; margin: 0; min-height: unset; line-height: unset;">Copiar</button>
+                                <input type="text" id="artworkUrlText" readonly class="admin-form-input"
+                                    style="flex: 1; font-family: monospace; font-size: 12px; background-color: #fff; cursor: text; margin: 0; padding: 8px;"
+                                    onclick="this.select()">
+                                <button type="button" id="copyArtworkUrlBtn" class="admin-btn admin-btn-primary"
+                                    style="padding: 8px 16px; font-size: 11px; white-space: nowrap; margin: 0; min-height: unset; line-height: unset;">Copiar</button>
                             </div>
                         </div>
                         <div class="admin-form-group">
@@ -2999,9 +3026,10 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         <div class="admin-form-actions">
                             <button class="admin-btn admin-btn-secondary" type="button"
                                 id="adminArtworkCancelBtn">Cancelar</button>
-                            <button class="admin-btn admin-btn-danger" type="button"
-                                id="adminArtworkDeleteBtn" style="display: none;">Borrar Ficha</button>
-                            <button class="admin-btn admin-btn-primary" type="submit" id="adminArtworkSubmitBtn">Publicar Ficha</button>
+                            <button class="admin-btn admin-btn-danger" type="button" id="adminArtworkDeleteBtn"
+                                style="display: none;">Borrar Ficha</button>
+                            <button class="admin-btn admin-btn-primary" type="submit"
+                                id="adminArtworkSubmitBtn">Publicar Ficha</button>
                         </div>
                     </form>
 
@@ -3481,10 +3509,10 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
                 artistKey.value = id;
                 artistNameInput.value = section.querySelector('.artist-name').textContent.trim();
-                
+
                 const taglineEl = section.querySelector('.artist-tagline');
                 artistTaglineInput.value = taglineEl ? taglineEl.textContent.trim() : '';
-                
+
                 const imgEl = section.querySelector('.artist-image-container img');
                 const imgUrl = (imgEl ? imgEl.getAttribute('src') : '') || '';
                 if (imgUrl.startsWith('data:image')) {
@@ -3546,7 +3574,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 const authorSection = card.closest('.artist-section');
                 const authorId = authorSection ? authorSection.dataset.author : '';
                 artworkArtistSelect.value = authorId;
-                
+
                 artworkTitleInput.value = card.querySelector('.artwork-title').textContent.trim();
                 artworkNumberInput.value = card.querySelector('.artwork-number').textContent.trim();
                 artworkMediumInput.value = card.querySelector('.artwork-medium').textContent.trim();
@@ -3749,8 +3777,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                                     <img src="${artist.image}" alt="${artist.name}">
                                 </div>
                                 <div class="artist-details animate-appear delay-2">
-                                    <span class="artist-tagline">${artist.tagline || 'El Creador'}</span>
                                     <h2 class="artist-name">${artist.name}</h2>
+                                    <span class="artist-tagline">${artist.tagline || 'El Creador'}</span>
                                     <div class="artist-bio">
                                         ${artist.bio.split('\n').map(p => p.trim() ? `<p>${p.trim()}</p>` : '').join('')}
                                         ${artist.quote ? `<div class="artist-quote">«${artist.quote}»</div>` : ''}
@@ -3871,14 +3899,14 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     const articleUrl = (customArtist && customArtist.articleUrl !== undefined) ? customArtist.articleUrl : factoryArticleUrls[authorId];
 
                     let btnWrapper = section.querySelector('.artist-article-btn-wrapper');
-                    
+
                     if (articleUrl && articleUrl.trim() !== '') {
                         if (!btnWrapper) {
                             btnWrapper = document.createElement('div');
                             btnWrapper.className = 'artist-article-btn-wrapper';
                             btnWrapper.style.textAlign = 'left';
                             btnWrapper.style.marginTop = '25px';
-                            
+
                             const btn = document.createElement('a');
                             btn.className = 'btn-ver-articulo';
                             btn.innerHTML = `
@@ -3889,7 +3917,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                                 </svg>Ver artículo del artista
                             `;
                             btnWrapper.appendChild(btn);
-                            
+
                             const bioEl = section.querySelector('.artist-bio');
                             if (bioEl) {
                                 bioEl.appendChild(btnWrapper);
@@ -4083,7 +4111,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 adminArtistForm.reset();
                 tempArtistImageBase64 = "";
                 toggleAdminModal(false);
-                
+
                 if (artistMode === 'edit') {
                     alert('¡Artista guardado con éxito localmente!');
                 } else {
@@ -4097,7 +4125,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 const authorId = artworkArtistSelect.value;
                 const title = artworkTitleInput.value.trim();
                 const number = artworkNumberInput.value.trim();
-                
+
                 let cardId = "";
                 if (artworkMode === 'edit') {
                     cardId = artworkSelect.value;
@@ -4139,7 +4167,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 adminArtworkForm.reset();
                 tempArtworkImageBase64 = "";
                 toggleAdminModal(false);
-                
+
                 if (artworkMode === 'edit') {
                     alert('¡Ficha técnica guardada con éxito localmente!');
                 } else {
