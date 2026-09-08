@@ -759,8 +759,7 @@ Menú del Index: Líena 742
             </button>
 
             <div class="navbar-menu" id="navbarMenu">
-                <a href="#sobre-doxa" class="navbar-link">Sobre Doxa</a>
-                <a href="#coleccion" class="navbar-link btn-coleccion">Colección</a>
+                <a href="coleccion.html" class="navbar-link btn-coleccion">La Colección</a>
                 <!-- NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
                 <a href="galeria.html" class="navbar-link btn-gallery">Galería</a>
                 <a href="articulos.html" class="navbar-link">Artículos</a>
@@ -1350,16 +1349,15 @@ Menú del Index: Líena 742
 
 
         <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) === -->
-        <section class="coleccion-section" id="coleccion" style="padding-bottom: 0;">
+        <section class="coleccion-section" id="proposito" style="padding-bottom: 90px;">
             <div class="container animate-appear" style="text-align: center;">
-
 
                 <h2
                     style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(22px, 5vw, 45px); letter-spacing: clamp(2px, 2vw, 12px); text-transform: uppercase; margin-bottom: 60px;">
                     EL PROPÓSITO
                 </h2>
 
-                <p class="col-desc">
+                <p class="col-desc" style="margin-bottom: 40px;">
                     DOXA reúne ingredientes seleccionados
                     por cómo nutren, sostienen y acompañan el cuerpo.<Br>
 
@@ -1379,9 +1377,7 @@ Menú del Index: Líena 742
                     y con el cuidado a largo plazo.<Br>
                 </p>
             </div>
-
-    </div>
-    </section>
+        </section>
 
 
 
@@ -2198,15 +2194,119 @@ Menú del Index: Líena 742
         </div>
     </section>
 
+    <!-- =========================================================================
+       SECCIÓN "EL ALMA" (ARTE, MECENAZGO Y EVOLUCIÓN HUMANA)
+       ========================================================================= -->
+    <style>
+        .alma-section {
+            background-color: var(--yeso-claro);
+            padding: 110px 0 140px 0;
+            color: var(--text-dark);
+            border-top: 1px solid rgba(60, 51, 42, 0.08);
+            border-bottom: 1px solid rgba(60, 51, 42, 0.08);
+        }
 
+        .btn-alma-coleccion {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #150e02;
+            color: #FFFFFF !important;
+            padding: 18px 40px;
+            font-family: 'Lato', sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 1px solid #150e02;
+            box-shadow: 0 4px 15px rgba(21, 14, 2, 0.15);
+            cursor: pointer;
+        }
+
+        .btn-alma-coleccion:hover {
+            background-color: #3C332A;
+            border-color: #3C332A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(21, 14, 2, 0.22);
+        }
+
+        .alma-img-card {
+            max-width: 820px;
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.16);
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .alma-img-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 36px 70px rgba(0, 0, 0, 0.22);
+        }
+
+        .alma-img-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: contrast(1.04);
+        }
+    </style>
+
+    <section id="el-alma" class="alma-section">
+        <div class="container animate-appear">
+            <!-- ESTRUCTURA IDÉNTICA A "EL PLACER": TÍTULO Y TEXTO CENTRADOS -->
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2
+                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 40px; color: var(--text-dark);">
+                    EL ALMA
+                </h2>
+
+                <p
+                    style="max-width: 620px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 300; line-height: 2.1; opacity: 0.9; color: var(--text-dark);">
+                    Para <strong>DOXA</strong>, el arte no es un adorno superficial ni una disciplina aislada: es el alma misma de nuestra existencia y un pilar indispensable para la evolución y la consciencia humana.
+                    <br><br>
+                    Concebimos cada una de nuestras formulaciones como una obra escultórica efímera y de alta precisión biológica. Desde esta filosofía, ejercemos una labor activa de mecenazgo cultural, respaldando con devoción a artistas emergentes y creando espacios donde el talento contemporáneo encuentra impulso, libertad y proyección.
+                    <br><br>
+                    El arte ensancha los límites de la mente, despierta la sensibilidad y transforma el mundo interior. Nutrir el cuerpo físico sin alimentar el espíritu es un acto incompleto.
+                    <br><br>
+                    Nuestra misión entrelaza alta nutrición celular y devoción estética.
+                    <br><br>
+                    El arte evoluciona.
+                    <br>
+                </p>
+            </div>
+
+            <!-- IMAGEN ABAJO (sin la caja de características) -->
+            <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 30px;">
+                <div class="alma-img-card">
+                    <img src="ProtoDoxa.png" alt="DOXA — El Alma y el Arte">
+                </div>
+            </div>
+
+            <!-- BOTÓN CTA A LA COLECCIÓN DEBAJO DE LA IMAGEN CON MARGEN GENEROSO -->
+            <div style="text-align: center; margin-top: 60px; margin-bottom: 10px;">
+                <a href="coleccion.html" class="btn-alma-coleccion">
+                    Descubre la colección
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left: 10px;">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Antigravity: /* */ -->
     <!-- Antigravity: /* SECCIÓN RESERVA TUS DOXAS */ -->
 
     <style>
         .checkout-section {
-            background-color: var(--yeso-claro);
-            /* COLOR DE FONDO: YESO CLARO (#f1f2ec) (Punto 4) */
+            background-color: var(--yeso-oscuro);
+            /* COLOR DE FONDO: YESO OSCURO (#e6e7e1) igual que "El Placer" */
             padding: 100px 20px;
             text-align: center;
             font-family: 'Lexend', sans-serif;
@@ -2542,7 +2642,7 @@ Menú del Index: Líena 742
         }
     </style>
 
-    <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-claro) (Yeso Claro: #f1f2ec) === -->
+    <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) igual que "El Placer" === -->
     <section class="checkout-section" id="reserva">
         <div class="container">
 
@@ -2657,7 +2757,7 @@ Menú del Index: Líena 742
                 <div class="footer-column">
                     <h4 class="footer-column-title">DOXA, la Misión</h4>
                     <div class="footer-column-links">
-                        <a href="#fundacion" class="footer-link">La Fundación DOXA</a>
+                        <a href="sobre-doxa.html" class="footer-link">La Misión</a>
                     </div>
                 </div>
 

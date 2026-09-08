@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOXA | La Misión Doxa — Alta Repostería Funcional</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@100;300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================================
+           RESET Y VARIABLES DE MARCA
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --yeso-oscuro: #e6e7e1;
+            --yeso-claro: #f1f2ec;
+            --dark-bg: var(--yeso-oscuro);
+            --light-bg: #F5F1ED;
+            --accent-color: #f0ff1c;
+            --text-dark: #3C332A;
+            --text-light: #3C332A;
+            --nav-logo-initial: #3C332A;
+            --nav-text-initial: rgba(60, 51, 42, 0.85);
+            --nav-logo-scrolled: #3C332A;
+            --nav-text-scrolled: #3C332A;
+            --nav-text-hover: #3C332A;
+            --nav-text-scrolled-hover: #3C332A;
+        }
+
+        body,
+        html {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-color: var(--yeso-claro);
+            font-family: 'Lexend', sans-serif;
+            scroll-behavior: smooth;
+            color: var(--text-dark);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .page-wrapper {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-appear {
+            opacity: 0;
+            animation: fadeInSlideUp 0.9s ease-out forwards;
+        }
+
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 45px;
+            width: 100%;
+        }
+
+        /* =========================================
+           BARRA DE NAVEGACIÓN (EXACTA A COMPRA / GALERÍA)
+           ========================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            background-color: rgba(241, 242, 236, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border-bottom: 1px solid rgba(60, 51, 42, 0.08);
+        }
+
+        .navbar.scrolled {
+            height: 75px;
+            background-color: rgba(230, 231, 225, 0.98) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border-bottom: 1px solid rgba(60, 51, 42, 0.1);
+        }
+
+        .navbar-logo {
+            font-family: 'Lato', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: var(--nav-logo-initial, #3C332A) !important;
+            background-color: transparent !important;
+            padding: 12px 0;
+            border: none !important;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .navbar-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--nav-text-initial, rgba(60, 51, 42, 0.85)) !important;
+            background-color: transparent !important;
+            padding: 10px 22px !important;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+        }
+
+        .navbar-link.active {
+            color: #000000 !important;
+            background-color: var(--accent-color) !important;
+            transform: scale(1.05);
+        }
+
+        .navbar-link:not(.active):hover {
+            color: #000000 !important;
+            background-color: transparent !important;
+            transform: scale(1.05);
+        }
+
+        .navbar.scrolled .navbar-link {
+            color: var(--nav-text-scrolled, #3C332A) !important;
+        }
+
+        .navbar.scrolled .navbar-link.active {
+            color: #000000 !important;
+            background-color: var(--accent-color) !important;
+        }
+
+        /* Menú Hamburguesa Móvil */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 16px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            width: 100%;
+            height: 2px;
+            background-color: #3C332A;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 25px;
+                height: 70px;
+            }
+
+            .navbar.scrolled {
+                height: 65px;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .navbar-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: rgba(21, 14, 2, 0.96);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 40px;
+                padding: 40px;
+                transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+                z-index: 999;
+            }
+
+            .navbar-menu.active {
+                right: 0;
+            }
+
+            .navbar-menu .navbar-link {
+                font-size: 14px !important;
+                color: rgba(255, 255, 255, 0.85) !important;
+                width: 100%;
+                text-align: center;
+                padding: 15px 0 !important;
+            }
+
+            .navbar-menu .navbar-link.active {
+                background-color: var(--accent-color) !important;
+                color: #150e02 !important;
+            }
+        }
+
+        /* =========================================
+           SECCIÓN PRINCIPAL: LA MISIÓN DOXA (ESPACIADA Y FLUIDA)
+           ========================================= */
+        .about-main-section {
+            padding-top: clamp(170px, 20vh, 230px);
+            padding-bottom: clamp(140px, 16vh, 200px);
+            background-color: var(--yeso-claro);
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .artist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.55fr;
+            gap: clamp(45px, 5.5vw, 90px);
+            align-items: center; /* Alineación centrada para que el texto flote libre y natural */
+        }
+
+        .artist-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.13);
+            transition: transform 0.8s ease, box-shadow 0.8s ease;
+        }
+
+        .artist-image-container:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 38px 70px rgba(0, 0, 0, 0.18);
+        }
+
+        .artist-image-container img {
+            width: 100%;
+            height: auto;
+            max-height: 680px;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(8%) contrast(1.05);
+            transition: transform 0.8s ease;
+        }
+
+        .artist-image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        .artist-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px 0 20px 10px;
+        }
+
+        .artist-name {
+            font-family: 'Lexend', sans-serif;
+            font-size: clamp(26px, 4.2vw, 44px);
+            font-weight: 300;
+            line-height: 1.3;
+            letter-spacing: clamp(6px, 1.8vw, 12px);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+        }
+
+        .artist-tagline {
+            display: block;
+            font-family: 'Lexend', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 2;
+            opacity: 0.95;
+            margin-bottom: 70px; /* Mayor espacio entre subtítulo y texto */
+            border-left: 2px solid var(--text-dark);
+            padding-left: 24px;
+            letter-spacing: 0.5px;
+            color: var(--text-dark);
+        }
+
+        .artist-bio {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 2.3; /* Lectura aireada y flotante */
+            opacity: 0.9;
+        }
+
+        .artist-bio p {
+            margin-bottom: 30px;
+        }
+
+        .artist-quote {
+            font-style: italic;
+            border-left: 2px solid var(--text-dark);
+            padding-left: 24px;
+            margin: 40px 0;
+            font-size: 16px;
+            line-height: 2.1;
+            opacity: 0.95;
+            color: #150e02;
+        }
+
+        .btn-action-doxa {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #150e02;
+            color: #FFFFFF !important;
+            padding: 16px 36px;
+            font-family: 'Lato', sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 1px solid #150e02;
+            box-shadow: 0 4px 15px rgba(21, 14, 2, 0.15);
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn-action-doxa:hover {
+            background-color: #3C332A;
+            border-color: #3C332A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(21, 14, 2, 0.22);
+        }
+
+        @media (max-width: 992px) {
+            .artist-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .artist-details {
+                padding: 0;
+            }
+
+            .artist-image-container {
+                max-width: 100%;
+            }
+        }
+
+        /* =========================================
+           PIE DE PÁGINA EDITORIAL (IDÉNTICO A INDEX)
+           ========================================= */
+        .gallery-footer {
+            background-color: var(--yeso-oscuro);
+            color: #3C332A;
+            padding: 40px 0 25px 0;
+            text-align: left;
+            font-family: 'Lexend', sans-serif;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .footer-columns-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: start;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-column-title {
+            font-family: 'Lato', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #3C332A;
+            margin-bottom: 20px;
+        }
+
+        .footer-column-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .footer-column-links .footer-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            color: #3C332A;
+            text-decoration: none;
+            opacity: 0.7;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+
+        .footer-column-links .footer-link:hover {
+            opacity: 1;
+        }
+
+        .footer-newsletter-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-newsletter-info p {
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            color: #3C332A;
+            opacity: 0.8;
+            margin-bottom: 0;
+            font-weight: 300;
+            letter-spacing: 0.2px;
+        }
+
+        .footer-link-underline {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            color: #3C332A;
+            text-decoration: underline;
+            opacity: 0.7;
+            font-weight: 300;
+            transition: opacity 0.3s ease;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .footer-link-underline:hover {
+            opacity: 1;
+        }
+
+        .btn-newsletter-subscribe {
+            display: inline-block;
+            background-color: transparent;
+            border: 1px solid #3C332A;
+            color: #3C332A;
+            padding: 8px 20px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .btn-newsletter-subscribe:hover {
+            background-color: #3C332A;
+            color: #caccc3;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .social-icon {
+            color: #3C332A;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            border-top: 1px solid rgba(60, 51, 42, 0.1);
+            padding-top: 20px;
+            margin-top: 10px;
+        }
+
+        .footer-copy {
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            color: #3C332A;
+            opacity: 0.8;
+            text-align: right;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 992px) {
+            .footer-columns-row {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-columns-row {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+
+            .footer-column {
+                align-items: center !important;
+                text-align: center !important;
+            }
+
+            .footer-bottom-row {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-copy {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+
+        <!-- NAVEGACIÓN PRINCIPAL UNIFICADA -->
+        <nav class="navbar" id="mainNavbar">
+            <a href="index.html" class="navbar-logo">DOXA</a>
+
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="coleccion.html" class="navbar-link btn-coleccion">La Colección</a>
+                <a href="galeria.html" class="navbar-link btn-gallery">Galería</a>
+                <a href="articulos.html" class="navbar-link">Artículos</a>
+            </div>
+        </nav>
+
+        <!-- SECCIÓN PRINCIPAL: LA MISIÓN DOXA (TEXTO FLOTANTE CON ESPACIADO GENEROSO) -->
+        <main class="about-main-section">
+            <div class="container animate-appear">
+                <div class="artist-grid">
+                    
+                    <!-- FOTO DE PRESENTACIÓN -->
+                    <div class="artist-image-container">
+                        <img src="respeto.jpg" alt="Atelier DOXA — La Misión Doxa y Repostería Funcional">
+                    </div>
+
+                    <!-- DETALLES EDITORIALES -->
+                    <div class="artist-details">
+                        <h1 class="artist-name">LA MISIÓN DOXA</h1>
+                        <span class="artist-tagline">La deconstrucción molecular de la repostería funcional</span>
+
+                        <div class="artist-bio">
+                            <p>
+                                <strong>DOXA</strong> nace de una premisa innegociable: la repostería de alta gama no tiene por qué ser un compromiso destructivo contra el organismo, ni el cuidado biológico tiene que renunciar a la sensualidad de la textura y al placer absoluto.
+                            </p>
+
+                            <p>
+                                En nuestro atelier, el acto de hornear se concibe como una composición arquitectónica. Eliminamos por completo los ingredientes inertes, el azúcar refinado y las grasas hidrolizadas, reemplazándolos por bases nobles de almendra seleccionada, triglicéridos de cadena media (MCT) y dosis terapéuticas de activos celulares de pureza farmacológica: péptidos de colágeno hidrolizado, ácido hialurónico, creatina y antioxidantes esenciales.
+                            </p>
+
+                            <div class="artist-quote">
+                                «No horneamos dulces tradicionales; formulamos obras sensoriales donde cada gramo ejerce una función concreta en tu fisiología. DOXA es el encuentro definitivo entre la nutrición celular, el placer gastronómico y la estética contemporánea.»
+                            </div>
+
+                            <p>
+                                Más que una marca, DOXA es una declaración de principios: una forma distinta de disfrutar compatible con una vida consciente, con el rendimiento físico y mental, y con el cuidado preventivo a largo plazo.
+                            </p>
+                        </div>
+
+                        <div>
+                            <a href="coleccion.html" class="btn-action-doxa">
+                                Explorar La Colección
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left: 10px;">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+        <!-- PIE DE PÁGINA EDITORIAL (IDÉNTICO A INDEX) -->
+        <footer class="gallery-footer">
+            <div class="footer-grid-container">
+                <div class="footer-columns-row">
+
+                    <!-- [COLUMNA 1] CONTACTO -->
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Contacto</h4>
+                        <div class="footer-column-links">
+                            <a href="mailto:tu-correo@ejemplo.com" class="footer-link-underline">Envíanos un correo</a>
+                            <div class="footer-social-icons">
+                                <a href="https://instagram.com" class="social-icon" target="_blank" aria-label="Instagram">
+                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0 3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- [COLUMNA 2] MIS PEDIDOS -->
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Mis Pedidos</h4>
+                        <div class="footer-column-links">
+                            <a href="compra.html" class="footer-link">Opciones de pago</a>
+                            <a href="#entregas" class="footer-link">Opciones de entrega</a>
+                            <a href="#seguimiento" class="footer-link">Seguimiento de pedidos</a>
+                            <a href="#devoluciones" class="footer-link">Cambios y devoluciones</a>
+                        </div>
+                    </div>
+
+                    <!-- [COLUMNA 3] NEWSLETTER -->
+                    <div class="footer-column newsletter-col">
+                        <h4 class="footer-column-title">Newsletter</h4>
+                        <div class="footer-newsletter-info">
+                            <p>Mantente en contacto con nuestro ecosistema</p>
+                            <a href="index.html#newsletter-signup" class="btn-newsletter-subscribe">Suscríbete</a>
+                        </div>
+                    </div>
+
+                    <!-- [COLUMNA 4] LA MAISON -->
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">DOXA, la Misión</h4>
+                        <div class="footer-column-links">
+                            <a href="sobre-doxa.html" class="footer-link">La Misión</a>
+                        </div>
+                    </div>
+
+                    <!-- [COLUMNA 5] AVISO LEGAL -->
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Aviso Legal</h4>
+                        <div class="footer-column-links">
+                            <a href="index.html#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
+                            <a href="index.html#privacidad" class="footer-link">Política de privacidad</a>
+                            <a href="index.html#cookies" class="footer-link">Cookies</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer-bottom-row">
+                    <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Efecto scroll en Navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNavbar');
+            if (window.scrollY > 40) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Toggle menú móvil
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navbarMenu = document.getElementById('navbarMenu');
+
+        if (mobileToggle && navbarMenu) {
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                navbarMenu.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>

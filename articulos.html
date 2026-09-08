@@ -371,13 +371,13 @@
         /* Columna Derecha: Lectura y Ficha */
         .artwork-content-scroll {
             width: 55%;
-            padding: 120px 80px 100px 80px;
+            padding: clamp(190px, 22vh, 240px) 80px 100px 80px;
             overflow-y: visible;
         }
 
         /* Header de la obra */
         .artwork-header {
-            margin-bottom: 35px;
+            margin-bottom: 50px;
         }
 
         .artwork-title {
@@ -396,7 +396,7 @@
             font-weight: 300;
             line-height: 2;
             opacity: 0.85;
-            margin-bottom: 30px;
+            margin-bottom: 65px; /* Mayor espacio entre subtítulo y texto */
             border-left: 2px solid var(--text-color);
             padding-left: 20px;
             letter-spacing: 0.5px;
@@ -432,8 +432,8 @@
 
         /* Ficha Técnica y Taxonomía */
         .artwork-details {
-            margin-bottom: 45px;
-            padding-bottom: 30px;
+            margin-bottom: 55px;
+            padding-bottom: 35px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
@@ -1294,8 +1294,7 @@
         </button>
 
         <div class="navbar-menu" id="navbarMenu">
-            <a href="index.html#sobre-doxa" class="navbar-link">Sobre Doxa</a>
-            <a href="index.html#coleccion" class="navbar-link btn-coleccion">Colección</a>
+            <a href="coleccion.html" class="navbar-link btn-coleccion">La Colección</a>
             <a href="galeria.html" class="navbar-link btn-gallery">Galería</a>
             <a href="#" class="navbar-link active">Artículos</a>
         </div>
@@ -1468,11 +1467,11 @@
                     </div>
                 </div>
 
-                <!-- [COLUMNA 4] LA MAISON -->
+                <!-- [COLUMNA 4] DOXA, LA MISIÓN -->
                 <div class="footer-column">
                     <h4 class="footer-column-title">DOXA, la Misión</h4>
                     <div class="footer-column-links">
-                        <a href="index.html#fundacion" class="footer-link">La Fundación DOXA</a>
+                        <a href="sobre-doxa.html" class="footer-link">La Misión</a>
                     </div>
                 </div>
 
