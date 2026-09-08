@@ -332,16 +332,18 @@
         .receipt-row {
             display: flex;
             justify-content: space-between;
-            font-size: 13px;
-            margin-bottom: 10px;
+            font-size: 13.5px;
+            margin-bottom: 14px;
+            line-height: 1.5;
         }
 
         .receipt-row.total-row {
-            border-top: 1px solid rgba(60, 51, 42, 0.1);
-            padding-top: 12px;
-            margin-top: 12px;
+            border-top: 1px solid rgba(60, 51, 42, 0.15);
+            padding-top: 16px;
+            margin-top: 20px;
             font-weight: 600;
             color: #000;
+            font-size: 14px;
         }
 
         /* Botón de volver al index igual a .btn-jotform */
@@ -566,19 +568,26 @@
                     <h2 class="thankyou-title">¡Gracias por tu pedido!</h2>
                     
                     <p class="thankyou-text">
-                        Hemos recibido tu solicitud y estamos procesando tu pedido en nuestro atelier. Te enviaremos un correo electrónico de confirmación tan pronto como tu caja esté lista y sea despachada.
+                        Tus Doxas se envían nada más ser horneadas y artificadas para que las recibas en su máxima frescura. En cuanto salgan en reparto, recibirás un correo y SMS con el enlace de seguimiento en tiempo real de cada uno de tus envíos.
                     </p>
 
                     <!-- Resumen del pedido extraído de la URL -->
                     <div class="receipt-box">
-                        <h4 class="receipt-title">Resumen de Compra</h4>
-                        <div class="receipt-row">
-                            <span>Variedad:</span>
+                        <div class="receipt-row" id="personalVarietyRow">
+                            <span>Tus Cajas:</span>
                             <strong id="receiptVariety">-</strong>
                         </div>
-                        <div class="receipt-row">
+                        <div class="receipt-row" id="personalQtyRow">
                             <span>Cantidad:</span>
                             <strong id="receiptQty">-</strong>
+                        </div>
+                        <div id="receiptGiftsSection" style="display: none; margin-top: 26px; padding-top: 24px; margin-bottom: 26px; border-top: 1px dashed rgba(60, 51, 42, 0.2); border-bottom: 1px dashed rgba(60, 51, 42, 0.2); padding-bottom: 24px;">
+                            <span style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: #150e02; display: block; margin-bottom: 16px;">🎁 Regalos incluidos en el envío:</span>
+                            <div id="receiptGiftsList"></div>
+                            <div style="margin-top: 18px; font-size: 12px; opacity: 0.9; line-height: 1.65; background: rgba(255, 255, 255, 0.9); padding: 14px 18px; border-left: 3px solid #3C332A; border-radius: 4px; font-style: italic; color: #3C332A; text-align: left;">
+                                "Un regalo está en camino hacia tí... Te hemos enviado un correo y SMS con el enlace de seguimiento en tiempo real. Si algo se dificultase para entregártelo podrían llamarte.<br>
+                                Espero que sea de tu agrado. Alguien te aprecia mucho..."
+                            </div>
                         </div>
                         <div class="receipt-row">
                             <span>Cliente:</span>
@@ -682,13 +691,58 @@
         const total = urlParams.get('total');
         const name = urlParams.get('name');
         const email = urlParams.get('email');
+        const giftsData = urlParams.get('gifts');
 
         // Poblar el recibo de compra
-        if (variety) document.getElementById('receiptVariety').innerText = variety;
-        if (qty) document.getElementById('receiptQty').innerText = qty + (parseInt(qty) === 1 ? " caja" : " cajas");
+        if (qty === '0') {
+            document.getElementById('receiptVariety').innerText = "Solo envíos para regalo";
+            document.getElementById('receiptQty').innerText = "0 cajas personales";
+        } else {
+            if (variety) document.getElementById('receiptVariety').innerText = variety;
+            if (qty) document.getElementById('receiptQty').innerText = qty + (parseInt(qty) === 1 ? " caja" : " cajas");
+        }
+
         if (total) document.getElementById('receiptTotal').innerText = total;
         if (name) document.getElementById('receiptName').innerText = name;
         if (email) document.getElementById('receiptEmail').innerText = email;
+
+        if (giftsData) {
+            try {
+                const gifts = JSON.parse(decodeURIComponent(giftsData));
+                if (Array.isArray(gifts) && gifts.length > 0) {
+                    const giftsSection = document.getElementById('receiptGiftsSection');
+                    const giftsList = document.getElementById('receiptGiftsList');
+                    giftsSection.style.display = 'block';
+                    giftsList.innerHTML = '';
+                    gifts.forEach(g => {
+                        const div = document.createElement('div');
+                        div.style.cssText = 'font-size: 13px; margin-bottom: 18px; background: rgba(255, 255, 255, 0.95); padding: 22px 24px; border-radius: 8px; border: 1px solid rgba(60, 51, 42, 0.14); text-align: left; box-shadow: 0 4px 14px rgba(60, 51, 42, 0.05);';
+                        div.innerHTML = `
+                            <div style="font-size: 14px; font-weight: 600; color: #150e02; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid rgba(60, 51, 42, 0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                                <span>🎁 ${g.qty}x ${g.variety}</span>
+                                <span style="font-size: 12px; font-weight: 500; color: #3C332A; background: rgba(60, 51, 42, 0.08); padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px;">Para ${g.recipientName}</span>
+                            </div>
+                            <div style="font-size: 12.5px; opacity: 0.88; line-height: 1.8; margin-bottom: 4px;">
+                                <div style="margin-bottom: 8px;">
+                                    <strong style="color: #150e02;">Dirección de entrega:</strong> ${g.address}, ${g.zip} ${g.city}
+                                </div>
+                                <div>
+                                    <strong style="color: #150e02;">Teléfono de aviso:</strong> ${g.phone}
+                                </div>
+                            </div>
+                            ${g.message ? `
+                            <div style="font-size: 12px; font-style: italic; color: #3C332A; margin-top: 16px; padding: 14px 16px; background: rgba(247, 245, 240, 0.9); border-left: 3px solid #3C332A; border-radius: 4px; line-height: 1.65;">
+                                <strong style="font-style: normal; display: block; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">Dedicatoria en la tarjeta:</strong>
+                                "${g.message}"
+                            </div>` : ''}
+                        `;
+                        giftsList.appendChild(div);
+                    });
+                }
+            } catch(e) {
+                console.warn('Error interpretando datos de regalos:', e);
+            }
+        }
 
         // Efecto scroll en Navbar
         window.addEventListener('scroll', () => {
