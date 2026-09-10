@@ -804,7 +804,7 @@ Menú del Index: Líena 742
 
 
 
-        <header class="hero-container animate-appear"
+        <header class="hero-container"
             style="position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;">
 
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
@@ -812,7 +812,7 @@ Menú del Index: Líena 742
                     style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4);">
             </div>
 
-            <div style="position: relative; z-index: 2; text-align: center; color: #FFFFFF; padding: 0 20px;">
+            <div class="hero-content animate-appear" style="position: relative; z-index: 2; text-align: center; color: #FFFFFF; padding: 0 20px;">
 
                 <h1
                     style="margin: 0 0 30px 0; line-height: 1.1; display: inline-flex; flex-direction: column; align-items: stretch; width: fit-content;">
@@ -2708,7 +2708,7 @@ Menú del Index: Líena 742
                     </p>
                 </div>
 
-                <div class="checkout-texts" style="opacity: 0; transition: opacity 1s ease 1s;">
+                <div class="checkout-texts">
                     <p class="variety-desc" style="font-weight: 500; min-height: auto; margin-bottom: 30px;">
                         DOXAS se elaboran artesanalmente y bajo pedido.
                     </p>
@@ -2726,27 +2726,6 @@ Menú del Index: Líena 742
 
             </div>
         </section>
-
-        <script>
-            // Este pequeño script detecta cuando llegas a la sección de reserva
-            const observerReserva = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Activa las galletas
-                        const items = entry.target.querySelectorAll('.grid-item');
-                        items.forEach(item => item.classList.add('aparece'));
-
-                        // Activa el bloque de texto con un ligero retraso extra
-                        const texto = entry.target.querySelector('.checkout-texts');
-                        if (texto) texto.style.opacity = "1";
-
-                        observerReserva.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2 });
-
-            observerReserva.observe(document.querySelector('#reserva'));
-        </script>
 
         <!-- =========================================================================
        [INICIO] SECCIÓN DEL FOOTER
