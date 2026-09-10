@@ -115,6 +115,19 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             color: var(--text-dark);
         }
 
+        /* Escalado proporcional para pantallas de escritorio */
+        @media (min-width: 1200px) {
+            body {
+                zoom: 1.2;
+            }
+        }
+
+        @media (min-width: 1024px) and (max-width: 1199px) {
+            body {
+                zoom: 1.1;
+            }
+        }
+
         a {
             text-decoration: none;
             color: inherit;

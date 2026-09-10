@@ -51,6 +51,19 @@
             transition: background-color 0.8s ease, color 0.8s ease;
         }
 
+        /* Escalado proporcional para pantallas de escritorio */
+        @media (min-width: 1200px) {
+            body {
+                zoom: 1.2;
+            }
+        }
+
+        @media (min-width: 1024px) and (max-width: 1199px) {
+            body {
+                zoom: 1.1;
+            }
+        }
+
         a {
             text-decoration: none;
             color: inherit;
