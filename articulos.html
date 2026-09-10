@@ -61,6 +61,42 @@
         }
 
         /* =========================================
+           LÓGICA DE ANIMACIONES (IDÉNTICA A GALERÍA)
+           ========================================= */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-appear {
+            opacity: 0;
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        /* =========================================
            ESTILOS DE NAVEGACIÓN (NAVBAR)
            ========================================= */
         .navbar {
@@ -1304,7 +1340,7 @@
     <article class="artwork-container" id="artworkContainer">
         <!-- Columna Izquierda: Imagen Fija -->
         <div class="artwork-figures">
-            <div class="artwork-figure">
+            <div class="artwork-figure animate-appear delay-1">
                 <img id="articleImage" src="ProtoDoxa.png" alt="La Cocina como Taller Alquímico">
                 <button class="zoom-btn" id="btnZoom">Ampliar</button>
             </div>
@@ -1312,7 +1348,7 @@
 
         <!-- Columna Derecha: Lectura y Ficha -->
         <div class="artwork-content-scroll" id="scrollContainer">
-            <header class="artwork-header">
+            <header class="artwork-header animate-appear delay-2">
                 <h1 class="artwork-title" id="articleTitle">La Cocina como Taller Alquímico</h1>
                 <p class="artwork-subtitle" id="articleSubtitle">Deconstrucción de texturas e ingredientes funcionales
                     como la vanguardia de la salud estética.</p>
@@ -1325,7 +1361,7 @@
                 </div>
             </header>
 
-            <div class="ly-artwork-nav artwork-details">
+            <div class="ly-artwork-nav artwork-details animate-appear delay-3">
                 <footer class="artwork-footer taxonomy">
                     <!-- === CONFIGURACIÓN DE TAGS ESTÁTICOS / DE SEGURIDAD (FALLBACK) ===
                          Estas tags y enlaces se muestran solo si JavaScript falla o está cargando.
@@ -1355,7 +1391,7 @@
                 </footer>
             </div>
 
-            <div class="artwork-body" id="articleBody">
+            <div class="artwork-body animate-appear delay-4" id="articleBody">
                 <p>En el corazón de <strong>DOXA</strong> no hay moldes de repostería comunes, sino un laboratorio de
                     experimentación bioactiva. Para su fundadora, <strong>Ana M.</strong>, la cocina tradicional
                     representa un paradigma superado que abusa de azúcares y grasas inertes. Su enfoque propone la
@@ -1808,89 +1844,101 @@
 
         window.addEventListener('scroll', updateNavbarScroll);
 
+        // APLICAR DATOS DEL ARTÍCULO
+        const populateArticleContent = (article, id) => {
+            // 1. Aplicar variables de color de tema al body
+            const root = document.documentElement;
+            Object.keys(article.colors).forEach(key => {
+                root.style.setProperty(key, article.colors[key]);
+            });
+
+            // 2. Cargar contenido del artículo
+            articleImage.src = article.image;
+            articleImage.alt = article.title;
+            articleTitle.innerText = article.title;
+            articleSubtitle.innerText = article.subtitle;
+            artistAvatar.src = article.artistAvatar;
+            artistAvatar.alt = article.artistName;
+            artistName.innerText = article.artistName;
+            articleMetaOrigin.innerText = article.origin;
+
+            metaColeccion.innerText = article.coleccion;
+            metaFormula.innerText = article.formula;
+            metaAutor.innerText = article.autor;
+            footerAuthorDate.innerText = `${article.autor}, ${article.fecha}`;
+
+            // Cargar tags
+            articleTags.innerHTML = '';
+            article.tags.forEach(tag => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#';
+                a.innerText = tag;
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setFilter(tag);
+                });
+                li.appendChild(a);
+                articleTags.appendChild(li);
+            });
+
+            // Cargar texto del artículo
+            articleBody.innerHTML = article.body;
+
+            // Si existe un enlace a la galería, insertar el botón "Ver ficha de artista"
+            if (article.galleryUrl) {
+                const btnWrapper = document.createElement('div');
+                btnWrapper.className = 'article-gallery-btn-wrapper';
+                btnWrapper.style.marginTop = '40px';
+                btnWrapper.style.marginBottom = '20px';
+                btnWrapper.style.textAlign = 'left';
+                
+                const btn = document.createElement('a');
+                btn.href = article.galleryUrl;
+                btn.className = 'btn-ver-galeria';
+                btn.innerHTML = `
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; vertical-align: middle;">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>Ver ficha de artista
+                `;
+                
+                btnWrapper.appendChild(btn);
+                articleBody.appendChild(btnWrapper);
+            }
+
+            // 3. Actualizar la tarjeta activa en el carrusel
+            document.querySelectorAll('.related-card').forEach(card => {
+                if (card.dataset.id === id) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+
+            // Resetear scroll de lectura al inicio
+            scrollContainer.scrollTop = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
         // RENDERIZAR ARTÍCULO SELECCIONADO
-        const renderArticle = (id) => {
+        const renderArticle = (id, isInitial = false) => {
             const article = articlesDb[id];
             if (!article) return;
 
-            // Iniciar animación de fade-out
+            if (isInitial) {
+                // En el primer despliegue de la página, aplicar directamente sin fade-out para permitir
+                // la animación de entrada suave (fadeInSlideUp) idéntica a la página de galería
+                populateArticleContent(article, id);
+                return;
+            }
+
+            // Iniciar animación de fade-out para transiciones entre artículos
             artworkContainer.classList.add('fade-out');
 
             setTimeout(() => {
-                // 1. Aplicar variables de color de tema al body
-                const root = document.documentElement;
-                Object.keys(article.colors).forEach(key => {
-                    root.style.setProperty(key, article.colors[key]);
-                });
-
-                // 2. Cargar contenido del artículo
-                articleImage.src = article.image;
-                articleImage.alt = article.title;
-                articleTitle.innerText = article.title;
-                articleSubtitle.innerText = article.subtitle;
-                artistAvatar.src = article.artistAvatar;
-                artistAvatar.alt = article.artistName;
-                artistName.innerText = article.artistName;
-                articleMetaOrigin.innerText = article.origin;
-
-                metaColeccion.innerText = article.coleccion;
-                metaFormula.innerText = article.formula;
-                metaAutor.innerText = article.autor;
-                footerAuthorDate.innerText = `${article.autor}, ${article.fecha}`;
-
-                // Cargar tags
-                articleTags.innerHTML = '';
-                article.tags.forEach(tag => {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = '#';
-                    a.innerText = tag;
-                    a.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        setFilter(tag);
-                    });
-                    li.appendChild(a);
-                    articleTags.appendChild(li);
-                });
-
-                // Cargar texto del artículo
-                articleBody.innerHTML = article.body;
-
-                // Si existe un enlace a la galería, insertar el botón "Ver ficha de artista"
-                if (article.galleryUrl) {
-                    const btnWrapper = document.createElement('div');
-                    btnWrapper.className = 'article-gallery-btn-wrapper';
-                    btnWrapper.style.marginTop = '40px';
-                    btnWrapper.style.marginBottom = '20px';
-                    btnWrapper.style.textAlign = 'left';
-                    
-                    const btn = document.createElement('a');
-                    btn.href = article.galleryUrl;
-                    btn.className = 'btn-ver-galeria';
-                    btn.innerHTML = `
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; vertical-align: middle;">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V8a2 2 0 0 1 2-2h6"></path>
-                            <polyline points="15 3 21 3 21 9"></polyline>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>Ver ficha de artista
-                    `;
-                    
-                    btnWrapper.appendChild(btn);
-                    articleBody.appendChild(btnWrapper);
-                }
-
-                // 3. Actualizar la tarjeta activa en el carrusel
-                document.querySelectorAll('.related-card').forEach(card => {
-                    if (card.dataset.id === id) {
-                        card.classList.add('active');
-                    } else {
-                        card.classList.remove('active');
-                    }
-                });
-
-                // Resetear scroll de lectura al inicio
-                scrollContainer.scrollTop = 0;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                populateArticleContent(article, id);
 
                 // Finalizar animación de fade-in
                 artworkContainer.classList.remove('fade-out');
@@ -2045,9 +2093,9 @@
         // Cargar el artículo inicial según el hash, o "ana" por defecto
         const initialHash = window.location.hash.substring(1);
         if (articlesDb[initialHash]) {
-            renderArticle(initialHash);
+            renderArticle(initialHash, true);
         } else {
-            renderArticle('ana');
+            renderArticle('ana', true);
         }
 
         // Ajustar flechas inicialmente

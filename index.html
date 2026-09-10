@@ -157,8 +157,8 @@ Menú del Index: Líena 742
             letter-spacing: 4px;
             /* Ajuste de espaciado */
             color: var(--nav-logo-initial, #FFFFFF) !important;
-            background-color: transparent !important;
-            padding: 12px 0;
+            background-color: transparent;
+            padding: 10px 22px;
             border: none !important;
             text-transform: uppercase;
             transition: all 0.4s ease;
@@ -167,9 +167,20 @@ Menú del Index: Líena 742
             justify-content: center;
         }
 
+        .navbar-logo.active {
+            color: #000000 !important;
+            background-color: var(--accent-color) !important;
+            transform: scale(1.05);
+        }
+
         .navbar.scrolled .navbar-logo {
             color: var(--nav-logo-scrolled, #000000) !important;
-            background-color: transparent !important;
+            background-color: transparent;
+        }
+
+        .navbar.scrolled .navbar-logo.active {
+            color: #000000 !important;
+            background-color: var(--accent-color) !important;
         }
 
         .navbar-menu {
@@ -302,6 +313,11 @@ Menú del Index: Líena 742
             .navbar-link:not(.active):hover {
                 background-color: transparent !important;
                 color: #FFFFFF !important;
+            }
+
+            .navbar-logo.active {
+                padding: 8px 16px !important;
+                font-size: 12px !important;
             }
 
             /* Transformación del hamburguesa a X */
@@ -750,7 +766,7 @@ Menú del Index: Líena 742
            ========================================================================= -->
         <!-- NAVEGACIÓN PRINCIPAL -->
         <nav class="navbar" id="mainNavbar">
-            <a href="#" class="navbar-logo">DOXA</a>
+            <a href="index.html" class="navbar-logo active">DOXA</a>
 
             <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
                 <span></span>
@@ -825,7 +841,7 @@ Menú del Index: Líena 742
                     </p>
                 </div>
 
-                <a href="#productos" class="btn-oro" style="margin-top: 50px;">CONÓCELAS</a>
+                <a href="#productos" class="btn-oro" style="margin-top: 50px;">DESCÚBRELAS</a>
                 <p
                     style="font-family: 'Lexend', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 1.5px; color: #FFFFFF; opacity: 0.8; margin-top: 15px;">
 
@@ -1385,1511 +1401,1509 @@ Menú del Index: Líena 742
 
 
 
-    <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) con fondo dinámico === -->
-    <section id="cajas-activos" class="cajas-activos-section">
-        <div class="bg-layer" id="caja-bg" style="background-image: url('piel negra.jpg');">
-        </div>
-
-        <div class="content-grid">
-            <!-- Columna Izquierda: Rueda -->
-            <div class="wheel-column">
-                <div class="radial-wrapper">
-                    <img src="Galle choco.png" class="galleta-fija" alt="DOXA">
-                    <div id="rueda-fisica" class="rueda-giro"></div>
-                </div>
+        <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) con fondo dinámico === -->
+        <section id="cajas-activos" class="cajas-activos-section">
+            <div class="bg-layer" id="caja-bg" style="background-image: url('piel negra.jpg');">
             </div>
 
-            <!-- Columna Derecha: Texto dinámico -->
-            <div class="text-column">
-                <div class="text-box" id="caja-text">
-                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Piel & Elasticidad</h3>
-                    <p class="hero-value-prop-neg">Nutrición y firmeza desde el interior</p>
-                    <div class="hero-value-prop">
-                        Haz clic en cualquiera de las categorías para explorar los activos que componen la arquitectura
-                        de DOXA.
+            <div class="content-grid">
+                <!-- Columna Izquierda: Rueda -->
+                <div class="wheel-column">
+                    <div class="radial-wrapper">
+                        <img src="Galle choco.png" class="galleta-fija" alt="DOXA">
+                        <div id="rueda-fisica" class="rueda-giro"></div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Texto dinámico -->
+                <div class="text-column">
+                    <div class="text-box" id="caja-text">
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Piel & Elasticidad</h3>
+                        <p class="hero-value-prop-neg">Nutrición y firmeza desde el interior</p>
+                        <div class="hero-value-prop">
+                            Haz clic en cualquiera de las categorías para explorar los activos que componen la
+                            arquitectura
+                            de DOXA.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <script>
-            (function () {
-                const activos = [
-                    {
-                        n: "Piel Nutrida & Firme",
-                        bg: "Hidratación.jpg",
-                        title: "Piel & Elasticidad",
-                        neg: "Nutrición y firmeza desde el interior",
-                        prop: "Haz clic en este apartado para ver cómo actúan los Péptidos de Colágeno, el Ácido Hialurónico y la Vitamina C en tu piel.",
-                        subActivos: [
-                            { n: "Péptidos de colágeno — 10g", title: "Péptidos de colágeno — 10g", neg: "Estructura y elasticidad", prop: "10g de péptidos de colágeno hidrolizado de la máxima calidad para favorecer la elasticidad, firmeza y regeneración de la piel y tejidos conectivos." },
-                            { n: "Ácido hialurónico", title: "Ácido hialurónico", neg: "Hidratación profunda", prop: "Ayuda a retener el agua en los tejidos, mejorando visiblemente la hidratación, tersura y volumen de la dermis desde el interior." },
-                            { n: "Vitamina C", title: "Vitamina C", neg: "Co-factor esencial", prop: "Potente antioxidante para las células e imprescindible para poder formar colágeno" }
-                        ]
-                    },
-                    {
-                        n: "Claridad Mental",
-                        bg: "Claridad mental.jpg",
-                        title: "Claridad Mental",
-                        neg: "Foco y concentración constante",
-                        prop: "Haz clic en este apartado para ver cómo el Aceite MCT y la Vitamina D3 optimizan tu rendimiento cerebral y foco.",
-                        subActivos: [
-                            { n: "Aceite MCT", title: "Aceite MCT", neg: "Combustible cerebral", prop: "Aporta cetonas directas al cerebro, sirviendo como un excelente combustible mental para evitar la neblina cognitiva y potenciar el foco." },
-                            { n: "Vitamina D3", title: "Vitamina D3", neg: "Base esencial de bienestar", prop: "2000 UI de una de las vitaminas más deficitarias del estilo de vida moderno, clave para el equilibrio del sistema nervioso y el estado de ánimo." }
-                        ]
-                    },
-                    {
-                        n: "Energía Sostenida",
-                        bg: "Energía.jpg",
-                        title: "Energía Sostenida",
-                        neg: "Vitalidad sin picos ni caídas",
-                        prop: "Haz clic en este apartado para descubrir cómo el Aceite MCT y la Proteína te aportan energía constante y limpia.",
-                        subActivos: [
-                            { n: "Aceite MCT", title: "Aceite MCT", neg: "Energía directa", prop: "Ácidos grasos de cadena media de rápida absorción que se convierten directamente en cetonas, proporcionando energía limpia sin generar picos de insulina." },
-                            { n: "Proteína de suero", title: "Proteína de suero", neg: "Soporte muscular", prop: "10g de proteína de suero ultra-filtrada de alta biodisponibilidad para nutrir tus células y mantener la saciedad durante horas." }
-                        ]
-                    },
-                    {
-                        n: "Articulaciones mimadas",
-                        bg: "articulaciones.jpg",
-                        title: "Movimiento & Confort",
-                        neg: "Articulaciones y flexibilidad en calma",
-                        prop: "Haz clic en este apartado para explorar la acción antiinflamatoria de la Boswellia Serrata y el Jengibre.",
-                        subActivos: [
-                            { n: "Boswellia Serrata", title: "Boswellia Serrata", neg: "Tejidos en calma", prop: "Extracto botánico altamente purificado tradicionalmente valorado por su papel modulando la inflamación y cuidando las articulaciones." },
-                            { n: "Jengibre", title: "Jengibre", neg: "Flexibilidad y alivio", prop: "Compuestos fenólicos naturales con propiedades analgésicas y estimulantes que facilitan la recuperación del tejido articular y muscular." }
-                        ]
-                    },
-                    {
-                        n: "Pelo & Uñas Sanos",
+            <script>
+                (function () {
+                    const activos = [
+                        {
+                            n: "Piel Nutrida & Firme",
+                            bg: "Hidratación.jpg",
+                            title: "Piel & Elasticidad",
+                            neg: "Nutrición y firmeza desde el interior",
+                            prop: "Haz clic en este apartado para ver cómo actúan los Péptidos de Colágeno, el Ácido Hialurónico y la Vitamina C en tu piel.",
+                            subActivos: [
+                                { n: "Péptidos de colágeno — 10g", title: "Péptidos de colágeno — 10g", neg: "Estructura y elasticidad", prop: "10g de péptidos de colágeno hidrolizado de la máxima calidad para favorecer la elasticidad, firmeza y regeneración de la piel y tejidos conectivos." },
+                                { n: "Ácido hialurónico", title: "Ácido hialurónico", neg: "Hidratación profunda", prop: "Ayuda a retener el agua en los tejidos, mejorando visiblemente la hidratación, tersura y volumen de la dermis desde el interior." },
+                                { n: "Vitamina C", title: "Vitamina C", neg: "Co-factor esencial", prop: "Potente antioxidante para las células e imprescindible para poder formar colágeno" }
+                            ]
+                        },
+                        {
+                            n: "Claridad Mental",
+                            bg: "Claridad mental.jpg",
+                            title: "Claridad Mental",
+                            neg: "Foco y concentración constante",
+                            prop: "Haz clic en este apartado para ver cómo el Aceite MCT y la Vitamina D3 optimizan tu rendimiento cerebral y foco.",
+                            subActivos: [
+                                { n: "Aceite MCT", title: "Aceite MCT", neg: "Combustible cerebral", prop: "Aporta cetonas directas al cerebro, sirviendo como un excelente combustible mental para evitar la neblina cognitiva y potenciar el foco." },
+                                { n: "Vitamina D3", title: "Vitamina D3", neg: "Base esencial de bienestar", prop: "2000 UI de una de las vitaminas más deficitarias del estilo de vida moderno, clave para el equilibrio del sistema nervioso y el estado de ánimo." }
+                            ]
+                        },
+                        {
+                            n: "Energía Sostenida",
+                            bg: "Energía.jpg",
+                            title: "Energía Sostenida",
+                            neg: "Vitalidad sin picos ni caídas",
+                            prop: "Haz clic en este apartado para descubrir cómo el Aceite MCT y la Proteína te aportan energía constante y limpia.",
+                            subActivos: [
+                                { n: "Aceite MCT", title: "Aceite MCT", neg: "Energía directa", prop: "Ácidos grasos de cadena media de rápida absorción que se convierten directamente en cetonas, proporcionando energía limpia sin generar picos de insulina." },
+                                { n: "Proteína de suero", title: "Proteína de suero", neg: "Soporte muscular", prop: "10g de proteína de suero ultra-filtrada de alta biodisponibilidad para nutrir tus células y mantener la saciedad durante horas." }
+                            ]
+                        },
+                        {
+                            n: "Articulaciones mimadas",
+                            bg: "articulaciones.jpg",
+                            title: "Movimiento & Confort",
+                            neg: "Articulaciones y flexibilidad en calma",
+                            prop: "Haz clic en este apartado para explorar la acción antiinflamatoria de la Boswellia Serrata y el Jengibre.",
+                            subActivos: [
+                                { n: "Boswellia Serrata", title: "Boswellia Serrata", neg: "Tejidos en calma", prop: "Extracto botánico altamente purificado tradicionalmente valorado por su papel modulando la inflamación y cuidando las articulaciones." },
+                                { n: "Jengibre", title: "Jengibre", neg: "Flexibilidad y alivio", prop: "Compuestos fenólicos naturales con propiedades analgésicas y estimulantes que facilitan la recuperación del tejido articular y muscular." }
+                            ]
+                        },
+                        {
+                            n: "Pelo & Uñas Sanos",
 
-                        bg: "Pelo y uñas.jpg",
-                        title: "Cabello & Uñas",
-                        neg: "Vitalidad en pelo y uñas",
-                        prop: "Haz clic en este apartado para ver cómo la Biotina fortalece tu estructura queratínica externa.",
-                        subActivos: [
-                            { n: "Biotina", title: "Biotina", neg: "Estructura fuerte", prop: "Vitamina hidrosoluble indispensable para estimular la síntesis de queratina, mejorando de forma notable el grosor, brillo y resistencia de cabello y uñas." }
-                        ]
-                    },
-                    {
-                        n: "Recuperación & Tono Muscular",
-                        bg: "Creatina _ok.jpg",
-                        title: "Recuperación & Tono Muscular",
-                        neg: "Sostén y fuerza para tu musculatura",
-                        prop: "Haz clic en este apartado para ver cómo la Proteína de suero y la Creatina facilitan la síntesis muscular y evitan el cansancio.",
-                        subActivos: [
-                            { n: "Proteína de suero", title: "Proteína de suero", neg: "Aminoácidos esenciales", prop: "Aporte de proteínas clave indispensables para la reconstrucción de las fibras musculares tras una sesión de entrenamiento." },
-                            { n: "Creatina", title: "Creatina", neg: "Fuerza y recuperación celular", prop: "Monohidrato de creatina premium que favorece la producción de ATP celular, mejorando la resistencia y acelerando la recuperación física." }
-                        ]
-                    },
-                    {
-                        n: "Sin Inflamación",
-                        bg: "respeto.jpg",
-                        title: "Ingredientes que respetan el cuerpo",
-                        neg: "Sin añadidos estériles, solo lo que necesitas",
-                        prop: "Haz clic en este apartado para conocer las bases libres de inflamación y de impacto glucémico de nuestra masa.",
-                        subActivos: [
-                            { n: "Sin Azúcares Añadidos", title: "Sin Azúcares Añadidos", neg: "Salud metabólica", prop: "Endulzada exclusivamente con eritritol premium, ideal para satisfacer el paladar sin alterar la curva de glucosa ni la insulina." },
-                            { n: "Sin Aceites Refinados", title: "Sin Aceites Refinados", neg: "Nutrición limpia", prop: "Elaborada solo con grasas nobles y saludables como manteca de cacao pura y base de harina de almendras premium." }
-                        ]
-                    },
+                            bg: "Pelo y uñas.jpg",
+                            title: "Cabello & Uñas",
+                            neg: "Vitalidad en pelo y uñas",
+                            prop: "Haz clic en este apartado para ver cómo la Biotina fortalece tu estructura queratínica externa.",
+                            subActivos: [
+                                { n: "Biotina", title: "Biotina", neg: "Estructura fuerte", prop: "Vitamina hidrosoluble indispensable para estimular la síntesis de queratina, mejorando de forma notable el grosor, brillo y resistencia de cabello y uñas." }
+                            ]
+                        },
+                        {
+                            n: "Recuperación & Tono Muscular",
+                            bg: "Creatina _ok.jpg",
+                            title: "Recuperación & Tono Muscular",
+                            neg: "Sostén y fuerza para tu musculatura",
+                            prop: "Haz clic en este apartado para ver cómo la Proteína de suero y la Creatina facilitan la síntesis muscular y evitan el cansancio.",
+                            subActivos: [
+                                { n: "Proteína de suero", title: "Proteína de suero", neg: "Aminoácidos esenciales", prop: "Aporte de proteínas clave indispensables para la reconstrucción de las fibras musculares tras una sesión de entrenamiento." },
+                                { n: "Creatina", title: "Creatina", neg: "Fuerza y recuperación celular", prop: "Monohidrato de creatina premium que favorece la producción de ATP celular, mejorando la resistencia y acelerando la recuperación física." }
+                            ]
+                        },
+                        {
+                            n: "Sin Inflamación",
+                            bg: "respeto.jpg",
+                            title: "Ingredientes que respetan el cuerpo",
+                            neg: "Sin añadidos estériles, solo lo que necesitas",
+                            prop: "Haz clic en este apartado para conocer las bases libres de inflamación y de impacto glucémico de nuestra masa.",
+                            subActivos: [
+                                { n: "Sin Azúcares Añadidos", title: "Sin Azúcares Añadidos", neg: "Salud metabólica", prop: "Endulzada exclusivamente con eritritol premium, ideal para satisfacer el paladar sin alterar la curva de glucosa ni la insulina." },
+                                { n: "Sin Aceites Refinados", title: "Sin Aceites Refinados", neg: "Nutrición limpia", prop: "Elaborada solo con grasas nobles y saludables como manteca de cacao pura y base de harina de almendras premium." }
+                            ]
+                        },
 
-                ];
+                    ];
 
-                const rueda = document.getElementById('rueda-fisica');
-                const cajaBg = document.getElementById('caja-bg');
-                const cajaText = document.getElementById('caja-text');
+                    const rueda = document.getElementById('rueda-fisica');
+                    const cajaBg = document.getElementById('caja-bg');
+                    const cajaText = document.getElementById('caja-text');
 
-                const radioCategorias = 250;
-                let rotacionActual = 0;
-                let prevRot = 0;
-                let selectedCategoryIndex = 0;
+                    const radioCategorias = 250;
+                    let rotacionActual = 0;
+                    let prevRot = 0;
+                    let selectedCategoryIndex = 0;
 
-                function formatCategoryName(name) {
-                    let line1 = name;
-                    let line2 = "";
-                    if (name.includes(" & ")) {
-                        const parts = name.split(" & ");
-                        line1 = parts[0];
-                        line2 = "& " + parts[1];
-                    } else if (name.includes(" ")) {
-                        const parts = name.split(" ");
-                        line1 = parts[0];
-                        line2 = parts.slice(1).join(" ");
+                    function formatCategoryName(name) {
+                        let line1 = name;
+                        let line2 = "";
+                        if (name.includes(" & ")) {
+                            const parts = name.split(" & ");
+                            line1 = parts[0];
+                            line2 = "& " + parts[1];
+                        } else if (name.includes(" ")) {
+                            const parts = name.split(" ");
+                            line1 = parts[0];
+                            line2 = parts.slice(1).join(" ");
+                        }
+
+                        if (line2) {
+                            return `<span style="display: block; white-space: nowrap;">${line1}</span><span style="display: block; white-space: nowrap; margin-top: 3px;">${line2}</span>`;
+                        }
+                        return `<span style="display: block; white-space: nowrap;">${name}</span>`;
                     }
 
-                    if (line2) {
-                        return `<span style="display: block; white-space: nowrap;">${line1}</span><span style="display: block; white-space: nowrap; margin-top: 3px;">${line2}</span>`;
-                    }
-                    return `<span style="display: block; white-space: nowrap;">${name}</span>`;
-                }
+                    function selectCategory(index, initial = false) {
+                        selectedCategoryIndex = index;
+                        const a = activos[index];
 
-                function selectCategory(index, initial = false) {
-                    selectedCategoryIndex = index;
-                    const a = activos[index];
+                        const currentBg = a.bg;
+                        if (currentBg) {
+                            cajaBg.style.backgroundImage = `url('${currentBg}')`;
+                        } else {
+                            cajaBg.style.backgroundImage = 'none';
+                            cajaBg.style.backgroundColor = 'var(--dark-bg)';
+                        }
 
-                    const currentBg = a.bg;
-                    if (currentBg) {
-                        cajaBg.style.backgroundImage = `url('${currentBg}')`;
-                    } else {
-                        cajaBg.style.backgroundImage = 'none';
-                        cajaBg.style.backgroundColor = 'var(--dark-bg)';
-                    }
-
-                    if (initial) {
-                        cajaText.innerHTML = `
+                        if (initial) {
+                            cajaText.innerHTML = `
                             ${a.tagline ? `<h2 class="tagline">${a.tagline}</h2>` : ''}
                             <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">${a.title || a.n}</h3>
                             ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
                             <div class="hero-value-prop">${a.prop || ''}</div>
                         `;
-                        cajaText.style.opacity = '1';
-                    } else {
-                        cajaText.style.opacity = '0';
-                        setTimeout(() => {
-                            cajaText.innerHTML = `
+                            cajaText.style.opacity = '1';
+                        } else {
+                            cajaText.style.opacity = '0';
+                            setTimeout(() => {
+                                cajaText.innerHTML = `
                                 ${a.tagline ? `<h2 class="tagline">${a.tagline}</h2>` : ''}
                                 <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">${a.title || a.n}</h3>
                                 ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
                                 <div class="hero-value-prop">${a.prop || ''}</div>
                             `;
-                            cajaText.style.transition = 'opacity 0.4s ease-in-out';
-                            cajaText.style.opacity = '1';
-                        }, 300);
+                                cajaText.style.transition = 'opacity 0.4s ease-in-out';
+                                cajaText.style.opacity = '1';
+                            }, 300);
+                        }
+
+                        if (!initial) {
+                            prevRot = rotacionActual;
+                            const anguloPaso = 360 / activos.length;
+                            const grados = index * anguloPaso - 90;
+                            const angulo = grados * (Math.PI / 180);
+                            const x = Math.cos(angulo) * radioCategorias;
+                            const giroBrisa = x > 0 ? -15 : 15;
+                            rotacionActual += giroBrisa;
+                            rueda.style.transform = `rotate(${rotacionActual}deg)`;
+                        } else {
+                            prevRot = rotacionActual;
+                        }
+
+                        renderRueda();
                     }
 
-                    if (!initial) {
-                        prevRot = rotacionActual;
-                        const anguloPaso = 360 / activos.length;
-                        const grados = index * anguloPaso - 90;
-                        const angulo = grados * (Math.PI / 180);
-                        const x = Math.cos(angulo) * radioCategorias;
-                        const giroBrisa = x > 0 ? -15 : 15;
-                        rotacionActual += giroBrisa;
-                        rueda.style.transform = `rotate(${rotacionActual}deg)`;
-                    } else {
-                        prevRot = rotacionActual;
-                    }
+                    function resetToNeutral() {
+                        selectedCategoryIndex = -1;
 
-                    renderRueda();
-                }
-
-                function resetToNeutral() {
-                    selectedCategoryIndex = -1;
-
-                    cajaText.style.opacity = '0';
-                    setTimeout(() => {
-                        cajaText.innerHTML = `
+                        cajaText.style.opacity = '0';
+                        setTimeout(() => {
+                            cajaText.innerHTML = `
                             <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Descubre DOXA</h3>
                             <p class="hero-value-prop-neg">Arquitectura de Activos</p>
                             <div class="hero-value-prop">
                                 Haz clic en cualquiera de las categorías para explorar los activos funcionales y los beneficios que componen cada DOXA.
                             </div>
                         `;
-                        cajaText.style.transition = 'opacity 0.4s ease-in-out';
-                        cajaText.style.opacity = '1';
-                    }, 300);
+                            cajaText.style.transition = 'opacity 0.4s ease-in-out';
+                            cajaText.style.opacity = '1';
+                        }, 300);
 
-                    cajaBg.style.backgroundImage = "url('piel negra.jpg')";
-                    renderRueda();
-                }
-
-                function renderRueda() {
-                    // Remove all old sub-active nodes and sub-active lines
-                    const oldSubs = rueda.querySelectorAll('.nodo-subactivo, .sub-ray-line');
-                    oldSubs.forEach(el => el.remove());
-
-                    const anguloPaso = 360 / activos.length;
-                    // 1. Calcular la posición angular actual de la categoría seleccionada en la pantalla (en grados)
-                    const selGradosPadre = selectedCategoryIndex !== -1 ? (selectedCategoryIndex * anguloPaso - 90) : 0;
-                    let selNormPantalla = 0;
-                    if (selectedCategoryIndex !== -1) {
-                        selNormPantalla = (selGradosPadre + rotacionActual) % 360;
-                        if (selNormPantalla < -180) selNormPantalla += 360;
-                        if (selNormPantalla >= 180) selNormPantalla -= 360;
+                        cajaBg.style.backgroundImage = "url('piel negra.jpg')";
+                        renderRueda();
                     }
 
-                    // 2. Calcular la distancia angular absoluta de la categoría al plano horizontal (los laterales 0° y 180°)
-                    const anguloDesdeHorizontal = selectedCategoryIndex !== -1 ? Math.min(Math.abs(selNormPantalla), 180 - Math.abs(selNormPantalla)) : 0;
+                    function renderRueda() {
+                        // Remove all old sub-active nodes and sub-active lines
+                        const oldSubs = rueda.querySelectorAll('.nodo-subactivo, .sub-ray-line');
+                        oldSubs.forEach(el => el.remove());
 
-                    // 3. Transición dinámica inteligente y anticolisión en tiempo real basada en la cercanía de las palabras
-                    let isPole = false;
-                    if (selectedCategoryIndex !== -1) {
-                        // Solo permitimos despliegue en línea si no estamos en el ecuador de la rueda (ángulos muy horizontales < 22°)
-                        // para evitar por completo que los activos se amontonen y colisionen entre sí horizontalmente.
-                        const isInlineAllowed = anguloDesdeHorizontal > 22;
+                        const anguloPaso = 360 / activos.length;
+                        // 1. Calcular la posición angular actual de la categoría seleccionada en la pantalla (en grados)
+                        const selGradosPadre = selectedCategoryIndex !== -1 ? (selectedCategoryIndex * anguloPaso - 90) : 0;
+                        let selNormPantalla = 0;
+                        if (selectedCategoryIndex !== -1) {
+                            selNormPantalla = (selGradosPadre + rotacionActual) % 360;
+                            if (selNormPantalla < -180) selNormPantalla += 360;
+                            if (selNormPantalla >= 180) selNormPantalla -= 360;
+                        }
 
-                        if (isInlineAllowed) {
-                            // A: Forzar despliegue en línea automáticamente por geometría en los polos casi verticales extremos (> 56°)
-                            if (anguloDesdeHorizontal > 56) {
-                                isPole = true;
-                            } else {
-                                const a = activos[selectedCategoryIndex];
-                                if (a.subActivos) {
-                                    // Función auxiliar súper precisa para estimar dimensiones físicas en píxeles de cualquier etiqueta
-                                    const getLabelSize = (name, isSub) => {
-                                        if (isSub) {
-                                            // Subactivos: tamaño de fuente 9.5px, bold, prefijo "• "
-                                            const charWidth = 5.1;
-                                            const totalLen = name.length + 2; // Bullet + espacio
-                                            return {
-                                                w: totalLen * charWidth + 10,
-                                                h: 14
-                                            };
-                                        } else {
-                                            // Categorías: tamaño de fuente 11px, divisible en 1 o 2 líneas
-                                            let line1 = name;
-                                            let line2 = "";
-                                            if (name.includes(" & ")) {
-                                                const parts = name.split(" & ");
-                                                line1 = parts[0];
-                                                line2 = "& " + parts[1];
-                                            } else if (name.includes(" ")) {
-                                                const parts = name.split(" ");
-                                                line1 = parts[0];
-                                                line2 = parts.slice(1).join(" ");
+                        // 2. Calcular la distancia angular absoluta de la categoría al plano horizontal (los laterales 0° y 180°)
+                        const anguloDesdeHorizontal = selectedCategoryIndex !== -1 ? Math.min(Math.abs(selNormPantalla), 180 - Math.abs(selNormPantalla)) : 0;
+
+                        // 3. Transición dinámica inteligente y anticolisión en tiempo real basada en la cercanía de las palabras
+                        let isPole = false;
+                        if (selectedCategoryIndex !== -1) {
+                            // Solo permitimos despliegue en línea si no estamos en el ecuador de la rueda (ángulos muy horizontales < 22°)
+                            // para evitar por completo que los activos se amontonen y colisionen entre sí horizontalmente.
+                            const isInlineAllowed = anguloDesdeHorizontal > 22;
+
+                            if (isInlineAllowed) {
+                                // A: Forzar despliegue en línea automáticamente por geometría en los polos casi verticales extremos (> 56°)
+                                if (anguloDesdeHorizontal > 56) {
+                                    isPole = true;
+                                } else {
+                                    const a = activos[selectedCategoryIndex];
+                                    if (a.subActivos) {
+                                        // Función auxiliar súper precisa para estimar dimensiones físicas en píxeles de cualquier etiqueta
+                                        const getLabelSize = (name, isSub) => {
+                                            if (isSub) {
+                                                // Subactivos: tamaño de fuente 9.5px, bold, prefijo "• "
+                                                const charWidth = 5.1;
+                                                const totalLen = name.length + 2; // Bullet + espacio
+                                                return {
+                                                    w: totalLen * charWidth + 10,
+                                                    h: 14
+                                                };
+                                            } else {
+                                                // Categorías: tamaño de fuente 11px, divisible en 1 o 2 líneas
+                                                let line1 = name;
+                                                let line2 = "";
+                                                if (name.includes(" & ")) {
+                                                    const parts = name.split(" & ");
+                                                    line1 = parts[0];
+                                                    line2 = "& " + parts[1];
+                                                } else if (name.includes(" ")) {
+                                                    const parts = name.split(" ");
+                                                    line1 = parts[0];
+                                                    line2 = parts.slice(1).join(" ");
+                                                }
+                                                const charWidth = 6.1;
+                                                const maxLen = Math.max(line1.length, line2.length);
+                                                const numLines = line2 ? 2 : 1;
+                                                return {
+                                                    w: maxLen * charWidth + 12,
+                                                    h: numLines * 13 + 4
+                                                };
                                             }
-                                            const charWidth = 6.1;
-                                            const maxLen = Math.max(line1.length, line2.length);
-                                            const numLines = line2 ? 2 : 1;
-                                            return {
-                                                w: maxLen * charWidth + 12,
-                                                h: numLines * 13 + 4
-                                            };
-                                        }
-                                    };
+                                        };
 
-                                    // B: Simulación de coordenadas en abanico para detectar colisión física real en 2D
-                                    const subActivosCount = a.subActivos.length;
-                                    let offsets = [];
-                                    if (subActivosCount === 1) offsets = [11];
-                                    else if (subActivosCount === 2) offsets = [11, 22];
-                                    else if (subActivosCount === 3) offsets = [11, 22, 33];
+                                        // B: Simulación de coordenadas en abanico para detectar colisión física real en 2D
+                                        const subActivosCount = a.subActivos.length;
+                                        let offsets = [];
+                                        if (subActivosCount === 1) offsets = [11];
+                                        else if (subActivosCount === 2) offsets = [11, 22];
+                                        else if (subActivosCount === 3) offsets = [11, 22, 33];
 
-                                    const isLeftSide = Math.abs(selNormPantalla) > 112.5;
-                                    const signo = isLeftSide ? -1 : 1;
+                                        const isLeftSide = Math.abs(selNormPantalla) > 112.5;
+                                        const signo = isLeftSide ? -1 : 1;
 
-                                    for (let idx = 0; idx < subActivosCount; idx++) {
-                                        const sub = a.subActivos[idx];
-                                        const gradosSub = selGradosPadre + offsets[idx] * signo;
-                                        const anguloSubRotado = (gradosSub + rotacionActual) * (Math.PI / 180);
+                                        for (let idx = 0; idx < subActivosCount; idx++) {
+                                            const sub = a.subActivos[idx];
+                                            const gradosSub = selGradosPadre + offsets[idx] * signo;
+                                            const anguloSubRotado = (gradosSub + rotacionActual) * (Math.PI / 180);
 
-                                        // Determinar el radio hipotético
-                                        let normPadre = selGradosPadre % 360;
-                                        if (normPadre < -180) normPadre += 360;
-                                        if (normPadre >= 180) normPadre -= 360;
-                                        normPadre = Math.round(normPadre);
+                                            // Determinar el radio hipotético
+                                            let normPadre = selGradosPadre % 360;
+                                            if (normPadre < -180) normPadre += 360;
+                                            if (normPadre >= 180) normPadre -= 360;
+                                            normPadre = Math.round(normPadre);
 
-                                        const esDiagonal = Math.abs(normPadre) === 45 || Math.abs(normPadre) === 135;
-                                        const extraRadio = esDiagonal ? 45 : 25;
-                                        let subRadio = radioCategorias + extraRadio;
+                                            const esDiagonal = Math.abs(normPadre) === 45 || Math.abs(normPadre) === 135;
+                                            const extraRadio = esDiagonal ? 45 : 25;
+                                            let subRadio = radioCategorias + extraRadio;
 
-                                        const esReloj2o3 = normPadre === -45 || normPadre === 0;
-                                        if (esReloj2o3) {
-                                            subRadio = radioCategorias + 20 + idx * 25;
-                                        }
-
-                                        // Coordenadas 2D hipotéticas en el espacio absoluto de la rueda
-                                        const xSub = Math.cos(anguloSubRotado) * subRadio;
-                                        const ySub = Math.sin(anguloSubRotado) * subRadio;
-                                        const sizeSub = getLabelSize(sub.n, true);
-
-                                        // Comparar contra todas las demás categorías principales del mapa
-                                        for (let i = 0; i < activos.length; i++) {
-                                            if (i === selectedCategoryIndex) continue;
-
-                                            const gradosPadreRotadoAngle = (i * anguloPaso - 90 + rotacionActual) * (Math.PI / 180);
-                                            const xPadre = Math.cos(gradosPadreRotadoAngle) * radioCategorias;
-                                            const yPadre = Math.sin(gradosPadreRotadoAngle) * radioCategorias;
-                                            const sizePadre = getLabelSize(activos[i].n, false);
-
-                                            const dx = Math.abs(xSub - xPadre);
-                                            const dy = Math.abs(ySub - yPadre);
-
-                                            // Colisión AABB extremadamente ajustada: solo se activa si están a punto de tocarse físicamente (1px de margen)
-                                            const marginX = 1;
-                                            const marginY = 1;
-
-                                            if (dx < (sizeSub.w + sizePadre.w) / 2 + marginX &&
-                                                dy < (sizeSub.h + sizePadre.h) / 2 + marginY) {
-                                                isPole = true;
-                                                break;
+                                            const esReloj2o3 = normPadre === -45 || normPadre === 0;
+                                            if (esReloj2o3) {
+                                                subRadio = radioCategorias + 20 + idx * 25;
                                             }
+
+                                            // Coordenadas 2D hipotéticas en el espacio absoluto de la rueda
+                                            const xSub = Math.cos(anguloSubRotado) * subRadio;
+                                            const ySub = Math.sin(anguloSubRotado) * subRadio;
+                                            const sizeSub = getLabelSize(sub.n, true);
+
+                                            // Comparar contra todas las demás categorías principales del mapa
+                                            for (let i = 0; i < activos.length; i++) {
+                                                if (i === selectedCategoryIndex) continue;
+
+                                                const gradosPadreRotadoAngle = (i * anguloPaso - 90 + rotacionActual) * (Math.PI / 180);
+                                                const xPadre = Math.cos(gradosPadreRotadoAngle) * radioCategorias;
+                                                const yPadre = Math.sin(gradosPadreRotadoAngle) * radioCategorias;
+                                                const sizePadre = getLabelSize(activos[i].n, false);
+
+                                                const dx = Math.abs(xSub - xPadre);
+                                                const dy = Math.abs(ySub - yPadre);
+
+                                                // Colisión AABB extremadamente ajustada: solo se activa si están a punto de tocarse físicamente (1px de margen)
+                                                const marginX = 1;
+                                                const marginY = 1;
+
+                                                if (dx < (sizeSub.w + sizePadre.w) / 2 + marginX &&
+                                                    dy < (sizeSub.h + sizePadre.h) / 2 + marginY) {
+                                                    isPole = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (isPole) break;
                                         }
-                                        if (isPole) break;
                                     }
                                 }
                             }
                         }
-                    }
 
-                    activos.forEach((a, i) => {
-                        const gradosPadre = i * anguloPaso - 90;
-                        const anguloPadre = gradosPadre * (Math.PI / 180);
+                        activos.forEach((a, i) => {
+                            const gradosPadre = i * anguloPaso - 90;
+                            const anguloPadre = gradosPadre * (Math.PI / 180);
 
-                        const isSelected = (i === selectedCategoryIndex);
-                        const isNeutral = (selectedCategoryIndex === -1);
+                            const isSelected = (i === selectedCategoryIndex);
+                            const isNeutral = (selectedCategoryIndex === -1);
 
-                        // Si está seleccionado y en el polo, la línea del padre se alarga dinámicamente según la cantidad de activos
-                        const subActivosCount = a.subActivos ? a.subActivos.length : 0;
-                        const parentAdd = subActivosCount > 0 ? 15 + (subActivosCount - 1) * 20 : 0;
+                            // Si está seleccionado y en el polo, la línea del padre se alarga dinámicamente según la cantidad de activos
+                            const subActivosCount = a.subActivos ? a.subActivos.length : 0;
+                            const parentAdd = subActivosCount > 0 ? 15 + (subActivosCount - 1) * 20 : 0;
 
-                        let actualParentRadio = radioCategorias;
-                        if (isSelected && isPole) {
-                            actualParentRadio = radioCategorias + parentAdd;
-                        }
+                            let actualParentRadio = radioCategorias;
+                            if (isSelected && isPole) {
+                                actualParentRadio = radioCategorias + parentAdd;
+                            }
 
-                        // 1. Get or draw parent radial ray line
-                        let line = rueda.querySelector(`.ray-line[data-index="${i}"]`);
-                        if (!line) {
-                            line = document.createElement('div');
-                            line.className = 'ray-line';
-                            line.dataset.index = i;
-                            line.style.position = 'absolute';
-                            line.style.top = 'calc(50% - 0.5px)';
-                            line.style.left = '50%';
-                            line.style.height = '1px';
-                            line.style.transformOrigin = '0 50%';
-                            line.style.transform = `rotate(${gradosPadre}deg)`;
-                            line.style.zIndex = '0';
-                            line.style.pointerEvents = 'none';
-                            line.style.transition = 'width 0.6s ease, background 0.6s ease';
-                            rueda.appendChild(line);
-                        }
+                            // 1. Get or draw parent radial ray line
+                            let line = rueda.querySelector(`.ray-line[data-index="${i}"]`);
+                            if (!line) {
+                                line = document.createElement('div');
+                                line.className = 'ray-line';
+                                line.dataset.index = i;
+                                line.style.position = 'absolute';
+                                line.style.top = 'calc(50% - 0.5px)';
+                                line.style.left = '50%';
+                                line.style.height = '1px';
+                                line.style.transformOrigin = '0 50%';
+                                line.style.transform = `rotate(${gradosPadre}deg)`;
+                                line.style.zIndex = '0';
+                                line.style.pointerEvents = 'none';
+                                line.style.transition = 'width 0.6s ease, background 0.6s ease';
+                                rueda.appendChild(line);
+                            }
 
-                        line.style.width = `${actualParentRadio}px`;
-                        if (isSelected) {
-                            line.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.05) 42%, rgba(193, 155, 118, 0.2) 95%, transparent 100%)';
-                        } else {
-                            line.style.background = 'linear-gradient(90deg, transparent 62%, rgba(255, 255, 255, 0.03) 64%, rgba(255, 255, 255, 0.03) 95%, transparent 100%)';
-                        }
+                            line.style.width = `${actualParentRadio}px`;
+                            if (isSelected) {
+                                line.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.05) 42%, rgba(193, 155, 118, 0.2) 95%, transparent 100%)';
+                            } else {
+                                line.style.background = 'linear-gradient(90deg, transparent 62%, rgba(255, 255, 255, 0.03) 64%, rgba(255, 255, 255, 0.03) 95%, transparent 100%)';
+                            }
 
-                        // Parent category node coordinates
-                        const x = Math.cos(anguloPadre) * actualParentRadio;
-                        const y = Math.sin(anguloPadre) * actualParentRadio;
+                            // Parent category node coordinates
+                            const x = Math.cos(anguloPadre) * actualParentRadio;
+                            const y = Math.sin(anguloPadre) * actualParentRadio;
 
-                        // 2. Get or create parent category node
-                        let nodo = rueda.querySelector(`.nodo-activo[data-index="${i}"]`);
-                        if (!nodo) {
-                            nodo = document.createElement('div');
-                            nodo.className = 'nodo-activo';
-                            nodo.dataset.index = i;
-                            nodo.style.position = 'absolute';
+                            // 2. Get or create parent category node
+                            let nodo = rueda.querySelector(`.nodo-activo[data-index="${i}"]`);
+                            if (!nodo) {
+                                nodo = document.createElement('div');
+                                nodo.className = 'nodo-activo';
+                                nodo.dataset.index = i;
+                                nodo.style.position = 'absolute';
+                                nodo.style.left = `calc(50% + ${x}px)`;
+                                nodo.style.top = `calc(50% + ${y}px)`;
+                                nodo.style.transition = 'left 0.6s ease, top 0.6s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), scale 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease';
+
+                                nodo.innerHTML = `<span class="nodo-texto" style="display:inline-flex; flex-direction:column; align-items:center; text-align:center; line-height:1.25; transition:transform 3s ease-out, color 0.5s ease; font-size:11px; letter-spacing: 1px; text-transform: uppercase;">${formatCategoryName(a.n)}</span>`;
+
+                                rueda.appendChild(nodo);
+                            }
+
+                            // Always re-assign the click handler to avoid stale closures
+                            nodo.onclick = () => {
+                                if (i !== selectedCategoryIndex) {
+                                    selectCategory(i);
+                                }
+                            };
+
+                            // Update coordinate positions with transition
                             nodo.style.left = `calc(50% + ${x}px)`;
                             nodo.style.top = `calc(50% + ${y}px)`;
-                            nodo.style.transition = 'left 0.6s ease, top 0.6s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), scale 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease';
 
-                            nodo.innerHTML = `<span class="nodo-texto" style="display:inline-flex; flex-direction:column; align-items:center; text-align:center; line-height:1.25; transition:transform 3s ease-out, color 0.5s ease; font-size:11px; letter-spacing: 1px; text-transform: uppercase;">${formatCategoryName(a.n)}</span>`;
-
-                            rueda.appendChild(nodo);
-                        }
-
-                        // Always re-assign the click handler to avoid stale closures
-                        nodo.onclick = () => {
-                            if (i !== selectedCategoryIndex) {
-                                selectCategory(i);
-                            }
-                        };
-
-                        // Update coordinate positions with transition
-                        nodo.style.left = `calc(50% + ${x}px)`;
-                        nodo.style.top = `calc(50% + ${y}px)`;
-
-                        if (isNeutral) {
-                            nodo.style.opacity = '1';
-                            nodo.style.scale = '1';
-                        } else if (isSelected) {
-                            nodo.style.opacity = '1';
-                            nodo.style.scale = '1.05'; // Aumento sutil (la mitad de 1.1)
-                        } else {
-                            nodo.style.opacity = '0.85'; // Un poquito de transparencia (aumentado a 0.85 para mejor legibilidad)
-                            nodo.style.scale = '0.93'; // Disminución sutil (la mitad de 0.85)
-                        }
-
-                        const textSpan = nodo.querySelector('.nodo-texto');
-                        let fontWeight = '300'; // Fuente un pelín más fina en estado normal
-                        let color = '#ccc';
-                        if (isNeutral) {
-                            fontWeight = '300';
-                            color = '#fff';
-                        } else if (isSelected) {
-                            fontWeight = '400'; // Un pelín más gruesa/legible pero aún fina al clicar
-                            color = '#fff';
-                        }
-                        textSpan.style.fontWeight = fontWeight;
-                        textSpan.style.color = color;
-                        textSpan.style.transform = `rotate(${-rotacionActual}deg)`;
-
-                        // Render sub-actives flanking the parent category on their own rays
-                        if (isSelected && a.subActivos) {
-                            // Normalizar gradosPadre + rotacionActual a [-180, 180) para saber la posición en pantalla
-                            let normPantalla = (gradosPadre + rotacionActual) % 360;
-                            if (normPantalla < -180) normPantalla += 360;
-                            if (normPantalla >= 180) normPantalla -= 360;
-
-                            // Si está en la mitad izquierda de la pantalla, faneamos hacia abajo (signo negativo).
-                            // Usamos el umbral de 112.5° para separar el lado izquierdo del derecho/superior/inferior.
-                            const isLeftSide = Math.abs(normPantalla) > 112.5;
-                            const signo = isLeftSide ? -1 : 1;
-
-                            const subActivosCount = a.subActivos.length;
-                            let offsets = [];
-                            if (subActivosCount === 1) {
-                                offsets = [11];
-                            } else if (subActivosCount === 2) {
-                                offsets = [11, 22];
-                            } else if (subActivosCount === 3) {
-                                offsets = [11, 22, 33];
+                            if (isNeutral) {
+                                nodo.style.opacity = '1';
+                                nodo.style.scale = '1';
+                            } else if (isSelected) {
+                                nodo.style.opacity = '1';
+                                nodo.style.scale = '1.05'; // Aumento sutil (la mitad de 1.1)
+                            } else {
+                                nodo.style.opacity = '0.85'; // Un poquito de transparencia (aumentado a 0.85 para mejor legibilidad)
+                                nodo.style.scale = '0.93'; // Disminución sutil (la mitad de 0.85)
                             }
 
-                            a.subActivos.forEach((sub, idx) => {
-                                // Si estamos en el polo, todos se alinean en la misma línea vertical (gradosSub = gradosPadre)
-                                // y su radio se va acortando progresivamente en intervalos de 40px
-                                const gradosSub = isPole ? gradosPadre : gradosPadre + offsets[idx] * signo;
-                                const anguloSub = gradosSub * (Math.PI / 180);
+                            const textSpan = nodo.querySelector('.nodo-texto');
+                            let fontWeight = '300'; // Fuente un pelín más fina en estado normal
+                            let color = '#ccc';
+                            if (isNeutral) {
+                                fontWeight = '300';
+                                color = '#fff';
+                            } else if (isSelected) {
+                                fontWeight = '400'; // Un pelín más gruesa/legible pero aún fina al clicar
+                                color = '#fff';
+                            }
+                            textSpan.style.fontWeight = fontWeight;
+                            textSpan.style.color = color;
+                            textSpan.style.transform = `rotate(${-rotacionActual}deg)`;
 
-                                // Normalizar gradosPadre para determinar si es diagonal o lateral
-                                let normPadre = gradosPadre % 360;
-                                if (normPadre < -180) normPadre += 360;
-                                if (normPadre >= 180) normPadre -= 360;
-                                normPadre = Math.round(normPadre);
+                            // Render sub-actives flanking the parent category on their own rays
+                            if (isSelected && a.subActivos) {
+                                // Normalizar gradosPadre + rotacionActual a [-180, 180) para saber la posición en pantalla
+                                let normPantalla = (gradosPadre + rotacionActual) % 360;
+                                if (normPantalla < -180) normPantalla += 360;
+                                if (normPantalla >= 180) normPantalla -= 360;
 
-                                const esDiagonal = Math.abs(normPadre) === 45 || Math.abs(normPadre) === 135;
-                                const extraRadio = esDiagonal ? 45 : 25;
-                                let subRadio = isPole ? (radioCategorias + (parentAdd - 40) - idx * 40) : (radioCategorias + extraRadio);
+                                // Si está en la mitad izquierda de la pantalla, faneamos hacia abajo (signo negativo).
+                                // Usamos el umbral de 112.5° para separar el lado izquierdo del derecho/superior/inferior.
+                                const isLeftSide = Math.abs(normPantalla) > 112.5;
+                                const signo = isLeftSide ? -1 : 1;
 
-                                // En las posiciones 2 y 3 de un reloj (gradosPadre -45 y 0), extendemos progresivamente las líneas
-                                // para mantener una distancia proporcionada respecto al borde de la galleta (centro de la rueda)
-                                // y lograr que el primer y segundo activo queden perfectamente alineados y ordenados verticalmente.
-                                const esReloj2o3 = normPadre === -45 || normPadre === 0;
-                                if (!isPole && esReloj2o3) {
-                                    subRadio = radioCategorias + 20 + idx * 25;
+                                const subActivosCount = a.subActivos.length;
+                                let offsets = [];
+                                if (subActivosCount === 1) {
+                                    offsets = [11];
+                                } else if (subActivosCount === 2) {
+                                    offsets = [11, 22];
+                                } else if (subActivosCount === 3) {
+                                    offsets = [11, 22, 33];
                                 }
 
-                                const xSub = Math.cos(anguloSub) * subRadio;
-                                const ySub = Math.sin(anguloSub) * subRadio;
+                                a.subActivos.forEach((sub, idx) => {
+                                    // Si estamos en el polo, todos se alinean en la misma línea vertical (gradosSub = gradosPadre)
+                                    // y su radio se va acortando progresivamente en intervalos de 40px
+                                    const gradosSub = isPole ? gradosPadre : gradosPadre + offsets[idx] * signo;
+                                    const anguloSub = gradosSub * (Math.PI / 180);
 
-                                // 2.1. Draw extra ray line (only in fan-out mode, not in poles/inline mode to avoid double layering)
-                                const subLine = document.createElement('div');
-                                subLine.className = 'sub-ray-line';
-                                subLine.style.position = 'absolute';
-                                subLine.style.top = 'calc(50% - 0.5px)';
-                                subLine.style.left = '50%';
-                                subLine.style.width = `${subRadio}px`;
-                                subLine.style.height = '1px';
-                                subLine.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.05) 42%, rgba(193, 155, 118, 0.2) 95%, transparent 100%)';
-                                subLine.style.transformOrigin = '0 50%';
-                                subLine.style.transform = `rotate(${gradosSub}deg)`;
-                                subLine.style.zIndex = '0';
-                                subLine.style.pointerEvents = 'none';
-                                subLine.style.opacity = '0';
-                                subLine.style.transition = 'opacity 0.6s ease';
-                                if (!isPole) {
-                                    rueda.appendChild(subLine);
-                                }
+                                    // Normalizar gradosPadre para determinar si es diagonal o lateral
+                                    let normPadre = gradosPadre % 360;
+                                    if (normPadre < -180) normPadre += 360;
+                                    if (normPadre >= 180) normPadre -= 360;
+                                    normPadre = Math.round(normPadre);
 
-                                // 2.2. Create sub-active node
-                                const nodoSub = document.createElement('div');
-                                nodoSub.className = 'nodo-subactivo';
-                                nodoSub.style.left = `calc(50% + ${xSub}px)`;
-                                nodoSub.style.top = `calc(50% + ${ySub}px)`;
-                                nodoSub.style.opacity = '0';
-                                nodoSub.style.transition = 'opacity 0.5s ease, transform 0.3s ease';
+                                    const esDiagonal = Math.abs(normPadre) === 45 || Math.abs(normPadre) === 135;
+                                    const extraRadio = esDiagonal ? 45 : 25;
+                                    let subRadio = isPole ? (radioCategorias + (parentAdd - 40) - idx * 40) : (radioCategorias + extraRadio);
 
-                                nodoSub.innerHTML = `
+                                    // En las posiciones 2 y 3 de un reloj (gradosPadre -45 y 0), extendemos progresivamente las líneas
+                                    // para mantener una distancia proporcionada respecto al borde de la galleta (centro de la rueda)
+                                    // y lograr que el primer y segundo activo queden perfectamente alineados y ordenados verticalmente.
+                                    const esReloj2o3 = normPadre === -45 || normPadre === 0;
+                                    if (!isPole && esReloj2o3) {
+                                        subRadio = radioCategorias + 20 + idx * 25;
+                                    }
+
+                                    const xSub = Math.cos(anguloSub) * subRadio;
+                                    const ySub = Math.sin(anguloSub) * subRadio;
+
+                                    // 2.1. Draw extra ray line (only in fan-out mode, not in poles/inline mode to avoid double layering)
+                                    const subLine = document.createElement('div');
+                                    subLine.className = 'sub-ray-line';
+                                    subLine.style.position = 'absolute';
+                                    subLine.style.top = 'calc(50% - 0.5px)';
+                                    subLine.style.left = '50%';
+                                    subLine.style.width = `${subRadio}px`;
+                                    subLine.style.height = '1px';
+                                    subLine.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.05) 42%, rgba(193, 155, 118, 0.2) 95%, transparent 100%)';
+                                    subLine.style.transformOrigin = '0 50%';
+                                    subLine.style.transform = `rotate(${gradosSub}deg)`;
+                                    subLine.style.zIndex = '0';
+                                    subLine.style.pointerEvents = 'none';
+                                    subLine.style.opacity = '0';
+                                    subLine.style.transition = 'opacity 0.6s ease';
+                                    if (!isPole) {
+                                        rueda.appendChild(subLine);
+                                    }
+
+                                    // 2.2. Create sub-active node
+                                    const nodoSub = document.createElement('div');
+                                    nodoSub.className = 'nodo-subactivo';
+                                    nodoSub.style.left = `calc(50% + ${xSub}px)`;
+                                    nodoSub.style.top = `calc(50% + ${ySub}px)`;
+                                    nodoSub.style.opacity = '0';
+                                    nodoSub.style.transition = 'opacity 0.5s ease, transform 0.3s ease';
+
+                                    nodoSub.innerHTML = `
                                     <span class="sub-activo-link" style="display:inline-block; transition:transform 3s ease-out, color 0.3s ease, text-shadow 0.3s ease; font-size:9.5px; font-weight:500; color:#c19b76; letter-spacing: 1px; text-transform: uppercase;">
                                         <span style="color: #c19b76; margin-right: 5px; font-size: 11px;">•</span>${sub.n}
                                     </span>
                                 `;
 
-                                const textSpanSub = nodoSub.querySelector('.sub-activo-link');
-                                // Start rotation animation from the previous rotation angle
-                                textSpanSub.style.transform = `rotate(${-prevRot}deg)`;
+                                    const textSpanSub = nodoSub.querySelector('.sub-activo-link');
+                                    // Start rotation animation from the previous rotation angle
+                                    textSpanSub.style.transform = `rotate(${-prevRot}deg)`;
 
-                                nodoSub.onclick = (e) => {
-                                    e.stopPropagation();
+                                    nodoSub.onclick = (e) => {
+                                        e.stopPropagation();
 
-                                    cajaText.style.opacity = '0';
-                                    setTimeout(() => {
-                                        cajaText.innerHTML = `
+                                        cajaText.style.opacity = '0';
+                                        setTimeout(() => {
+                                            cajaText.innerHTML = `
                                             <h2 class="tagline" style="color: rgba(0, 0, 0, 0.6); font-size: 11px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">${a.n}</h2>
                                             <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">• ${sub.title || sub.n}</h3>
                                             ${sub.neg ? `<p class="hero-value-prop-neg">${sub.neg}</p>` : ''}
                                             <div class="hero-value-prop">${sub.prop || ''}</div>
                                         `;
-                                        cajaText.style.transition = 'opacity 0.4s ease-in-out';
-                                        cajaText.style.opacity = '1';
-                                    }, 300);
-                                };
+                                            cajaText.style.transition = 'opacity 0.4s ease-in-out';
+                                            cajaText.style.opacity = '1';
+                                        }, 300);
+                                    };
 
-                                rueda.appendChild(nodoSub);
+                                    rueda.appendChild(nodoSub);
 
-                                setTimeout(() => {
-                                    if (!isPole) {
-                                        subLine.style.opacity = '1';
-                                    }
-                                    nodoSub.style.opacity = '1';
-                                    // Transition rotation animation smoothly to the current rotation angle
-                                    textSpanSub.style.transform = `rotate(${-rotacionActual}deg)`;
-                                }, 50 + idx * 80);
-                            });
-                        }
-                    });
-                }
+                                    setTimeout(() => {
+                                        if (!isPole) {
+                                            subLine.style.opacity = '1';
+                                        }
+                                        nodoSub.style.opacity = '1';
+                                        // Transition rotation animation smoothly to the current rotation angle
+                                        textSpanSub.style.transform = `rotate(${-rotacionActual}deg)`;
+                                    }, 50 + idx * 80);
+                                });
+                            }
+                        });
+                    }
 
-                // Initial render with first category selected
-                selectCategory(0, true);
+                    // Initial render with first category selected
+                    selectCategory(0, true);
 
-                // Asignar evento click a la galleta central
-                const galletaCentral = document.querySelector('.galleta-fija');
-                if (galletaCentral) {
-                    galletaCentral.onclick = () => {
-                        resetToNeutral();
-                    };
-                }
-            })();
-        </script>
-    </section>
-    <!-- Antigravity: /* */ -->
-    <!-- Antigravity: /* SECCIÓN EL SABOR DOXA */ -->
-    <style>
-        .product-info-grid {
-            display: flex;
-            flex-direction: row;
-            gap: 60px;
-            max-width: 1000px;
-            margin: 0 auto;
-            align-items: center;
-        }
-
-        .product-info-grid .column-text {
-            text-align: left;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .product-info-grid .accordion {
-            text-align: left;
-        }
-
-        .product-info-grid .dietary-icons {
-            justify-content: flex-start;
-        }
-
-        @media (max-width: 768px) {
+                    // Asignar evento click a la galleta central
+                    const galletaCentral = document.querySelector('.galleta-fija');
+                    if (galletaCentral) {
+                        galletaCentral.onclick = () => {
+                            resetToNeutral();
+                        };
+                    }
+                })();
+            </script>
+        </section>
+        <!-- Antigravity: /* */ -->
+        <!-- Antigravity: /* SECCIÓN EL SABOR DOXA */ -->
+        <style>
             .product-info-grid {
-                flex-direction: column;
-                gap: 40px;
+                display: flex;
+                flex-direction: row;
+                gap: 60px;
+                max-width: 1000px;
+                margin: 0 auto;
+                align-items: center;
             }
 
             .product-info-grid .column-text {
-                text-align: center;
+                text-align: left;
+                width: 100%;
+                max-width: 600px;
             }
 
             .product-info-grid .accordion {
-                text-align: center;
+                text-align: left;
             }
 
             .product-info-grid .dietary-icons {
-                justify-content: center;
+                justify-content: flex-start;
             }
-        }
 
-        #varietyTitle {
-            font-size: clamp(24px, 3vw, 32px);
-            font-weight: 400;
-        }
-    </style>
+            @media (max-width: 768px) {
+                .product-info-grid {
+                    flex-direction: column;
+                    gap: 40px;
+                }
+
+                .product-info-grid .column-text {
+                    text-align: center;
+                }
+
+                .product-info-grid .accordion {
+                    text-align: center;
+                }
+
+                .product-info-grid .dietary-icons {
+                    justify-content: center;
+                }
+            }
+
+            #varietyTitle {
+                font-size: clamp(24px, 3vw, 32px);
+                font-weight: 400;
+            }
+        </style>
 
 
 
-    <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) === -->
-    <section id="descripcion-nutricional" class="coleccion-section" style="padding-top: 100px;">
-        <div class="container animate-appear">
-            <div style="text-align: center; margin-bottom: 80px;">
-                <h2
-                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 40px;">
-                    EL PLACER
-                </h2>
+        <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) === -->
+        <section id="descripcion-nutricional" class="coleccion-section" style="padding-top: 100px;">
+            <div class="container animate-appear">
+                <div style="text-align: center; margin-bottom: 80px;">
+                    <h2
+                        style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 40px;">
+                        EL PLACER
+                    </h2>
 
-                <p
-                    style="max-width: 550px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 300; line-height: 2; opacity: 0.9;">
-                    Porque es innegociable.
-                    <br><br>
-                    Reunir ingredientes excepcionales sin renunciar a la textura, la jugosidad y la experiencia que
-                    esperas de una gran cookie no era sencillo.
-                    <br>
-                    Cada ingrediente aporta su propia función.
+                    <p
+                        style="max-width: 550px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 300; line-height: 2; opacity: 0.9;">
+                        Porque es innegociable.
+                        <br><br>
+                        Reunir ingredientes excepcionales sin renunciar a la textura, la jugosidad y la experiencia que
+                        esperas de una gran cookie no era sencillo.
+                        <br>
+                        Cada ingrediente aporta su propia función.
 
-                    Cada matiz aporta su propia personalidad.
-                    <br>
-                    Una composición poco habitual donde cada elemento tiene sentido por sí solo y, aún más, cuando forma
-                    parte del conjunto.
-                    <br><br>
-                    El resultado es DOXA.
-                    <br>
-                    Donde disfrutar y cuidarse encuentran el mismo camino.
-                    <br><br>
-                    El capricho evoluciona.
-                    <br>
-                </p>
-            </div>
-            <div class="product-info-grid">
-                <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
-                    <img src="Galle choco.png" alt="DOXA Bésame Choco"
-                        style="width: 100%; max-width: 500px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5)); border-radius: 4px;">
+                        Cada matiz aporta su propia personalidad.
+                        <br>
+                        Una composición poco habitual donde cada elemento tiene sentido por sí solo y, aún más, cuando
+                        forma
+                        parte del conjunto.
+                        <br><br>
+                        El resultado es DOXA.
+                        <br>
+                        Donde disfrutar y cuidarse encuentran el mismo camino.
+                        <br><br>
+                        El capricho evoluciona.
+                        <br>
+                    </p>
                 </div>
-                <div class="column-text" style="flex: 1; display: flex; flex-direction: column;">
-                    <h3 class="variety-title" id="varietyTitle" style="margin-bottom: 25px;">BÉSAME CHOCO</h3>
-
-                    <div class="variety-desc" id="varietyDesc">
-                        La primera expresión DOXA. <br>
-                        <br>
-                        Una masa elaborada con almendra molida y mantequilla nutrida en pastos verdes,
-                        horneada hasta lograr un exterior delicadamente dorado y un interior húmedo y tierno. <br>
-                        <br>
-                        Pepitas de cacao puro se funden entre la masa mientras un centro cremoso de cacao, almendra
-                        y aceite mct cede lentamente con cada bocado. <br>
-                        <br>
-                        Profunda. Reconfortante. Difícil de olvidar.
+                <div class="product-info-grid">
+                    <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
+                        <img src="Galle choco.png" alt="DOXA Bésame Choco"
+                            style="width: 100%; max-width: 500px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5)); border-radius: 4px;">
                     </div>
+                    <div class="column-text" style="flex: 1; display: flex; flex-direction: column;">
+                        <h3 class="variety-title" id="varietyTitle" style="margin-bottom: 25px;">BÉSAME CHOCO</h3>
 
-                    <div class="accordion-item">
-                        <button class="accordion" onclick="toggleAccordion(this)">Ingredientes Comunes</button>
-                        <div class="panel">
-                            <p>Base de harina de almendra, manteca pura de cacao, eritritol premium, aceite
-                                MTC...<br>
-                                <br>
-                                Sin azúcares añadidos<br>
-                                Sin gluten<br>
-                                Sin ingredientes inflamatorios<br>
-                                Apta para dieta cetogénica<br>
-                                Ideal para el post-entrenamiento<br>
-
-
+                        <div class="variety-desc" id="varietyDesc">
+                            La primera expresión DOXA. <br>
+                            <br>
+                            Una masa elaborada con almendra molida y mantequilla nutrida en pastos verdes,
+                            horneada hasta lograr un exterior delicadamente dorado y un interior húmedo y tierno. <br>
+                            <br>
+                            Pepitas de cacao puro se funden entre la masa mientras un centro cremoso de cacao, almendra
+                            y aceite mct cede lentamente con cada bocado. <br>
+                            <br>
+                            Profunda. Reconfortante. Difícil de olvidar.
                         </div>
-                    </div>
 
-                    <div class="accordion-item">
-                        <button class="accordion" onclick="toggleAccordion(this)">Información Nutricional
-                            (Media)</button>
-                        <div class="panel">
-                            <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
+                        <div class="accordion-item">
+                            <button class="accordion" onclick="toggleAccordion(this)">Ingredientes Comunes</button>
+                            <div class="panel">
+                                <p>Base de harina de almendra, manteca pura de cacao, eritritol premium, aceite
+                                    MTC...<br>
+                                    <br>
+                                    Sin azúcares añadidos<br>
+                                    Sin gluten<br>
+                                    Sin ingredientes inflamatorios<br>
+                                    Apta para dieta cetogénica<br>
+                                    Ideal para el post-entrenamiento<br>
+
+
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="accordion-item">
-                        <button class="accordion" onclick="toggleAccordion(this)">La dosis DOXA</button>
-                        <div class="panel">
-                            <p style="padding-top: 15px; margin-bottom: 0; font-size: 11px; opacity: 0.8;">
-                                *Dosis diarias recomendadas por la OMS
-                            </p>
-                            <table class="comparative-table">
-                                <thead>
-                                    <tr>
-                                        <th>Activo</th>
-                                        <th>OMS</th>
-
-                                        <th>Doxa</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Proteína</td>
-                                        <td>0.000g</td>
-
-                                        <td>20.000g</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Colágeno (AA)</td>
-                                        <td>0.000g</td>
-
-                                        <td>10.000g</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vitamina C</td>
-                                        <td>0.000g</td>
-
-                                        <td>100.000mg</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vitamina D3</td>
-                                        <td>0.000g</td>
-
-                                        <td>50.000mcg</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Biotina</td>
-                                        <td>0.000g</td>
-
-                                        <td>5.000mg</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Creatina</td>
-                                        <td>0.000g</td>
-
-                                        <td>3.000g</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Aceite MCT</td>
-                                        <td>0.000g</td>
-
-                                        <td>5.000g</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Boswellia Serrata</td>
-                                        <td>0.000g</td>
-
-                                        <td>250.000mg</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jengibre</td>
-                                        <td>0.000g</td>
-
-                                        <td>100.000mg</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ácido Hialurónico</td>
-                                        <td>0.000g</td>
-
-                                        <td>120.000mg</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="accordion-item">
+                            <button class="accordion" onclick="toggleAccordion(this)">Información Nutricional
+                                (Media)</button>
+                            <div class="panel">
+                                <p>Carbos Netos: ~2.2g | Grasas: 16g | Proteína: 5g (Por unidad)</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <script>
-                        function toggleAccordion(el) {
-                            const item = el.closest('.accordion-item');
-                            const panel = el.nextElementSibling;
-                            const desc = document.getElementById('varietyDesc');
-                            const allItems = document.querySelectorAll('.accordion-item');
+                        <div class="accordion-item">
+                            <button class="accordion" onclick="toggleAccordion(this)">La dosis DOXA</button>
+                            <div class="panel">
+                                <p style="padding-top: 15px; margin-bottom: 0; font-size: 11px; opacity: 0.8;">
+                                    *Dosis diarias recomendadas por la OMS
+                                </p>
+                                <table class="comparative-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Activo</th>
+                                            <th>OMS</th>
 
-                            const isOpen = item.classList.contains('active-item');
+                                            <th>Doxa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Proteína</td>
+                                            <td>0.000g</td>
 
-                            // Close all other items and restore their orders
-                            allItems.forEach(i => {
-                                i.classList.remove('active-item');
-                                i.querySelector('.accordion').classList.remove('active');
-                                i.querySelector('.panel').style.maxHeight = null;
-                            });
+                                            <td>20.000g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Colágeno (AA)</td>
+                                            <td>0.000g</td>
 
-                            if (!isOpen) {
-                                // Open this item
-                                item.classList.add('active-item');
-                                el.classList.add('active');
-                                panel.style.maxHeight = panel.scrollHeight + "px";
+                                            <td>10.000g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vitamina C</td>
+                                            <td>0.000g</td>
 
-                                // Hide description smoothly using CSS transitions
-                                desc.classList.add('hidden');
-                            } else {
-                                // Show description again
-                                desc.classList.remove('hidden');
+                                            <td>100.000mg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vitamina D3</td>
+                                            <td>0.000g</td>
+
+                                            <td>50.000mcg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Biotina</td>
+                                            <td>0.000g</td>
+
+                                            <td>5.000mg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Creatina</td>
+                                            <td>0.000g</td>
+
+                                            <td>3.000g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Aceite MCT</td>
+                                            <td>0.000g</td>
+
+                                            <td>5.000g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Boswellia Serrata</td>
+                                            <td>0.000g</td>
+
+                                            <td>250.000mg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jengibre</td>
+                                            <td>0.000g</td>
+
+                                            <td>100.000mg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ácido Hialurónico</td>
+                                            <td>0.000g</td>
+
+                                            <td>120.000mg</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <script>
+                            function toggleAccordion(el) {
+                                const item = el.closest('.accordion-item');
+                                const panel = el.nextElementSibling;
+                                const desc = document.getElementById('varietyDesc');
+                                const allItems = document.querySelectorAll('.accordion-item');
+
+                                const isOpen = item.classList.contains('active-item');
+
+                                // Close all other items and restore their orders
+                                allItems.forEach(i => {
+                                    i.classList.remove('active-item');
+                                    i.querySelector('.accordion').classList.remove('active');
+                                    i.querySelector('.panel').style.maxHeight = null;
+                                });
+
+                                if (!isOpen) {
+                                    // Open this item
+                                    item.classList.add('active-item');
+                                    el.classList.add('active');
+                                    panel.style.maxHeight = panel.scrollHeight + "px";
+
+                                    // Hide description smoothly using CSS transitions
+                                    desc.classList.add('hidden');
+                                } else {
+                                    // Show description again
+                                    desc.classList.remove('hidden');
+                                }
                             }
-                        }
-                    </script>
+                        </script>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- =========================================================================
+        <!-- =========================================================================
        SECCIÓN "EL ALMA" (ARTE, MECENAZGO Y EVOLUCIÓN HUMANA)
        ========================================================================= -->
-    <style>
-        .alma-section {
-            background-color: var(--yeso-claro);
-            padding: 110px 0 140px 0;
-            color: var(--text-dark);
-            border-top: 1px solid rgba(60, 51, 42, 0.08);
-            border-bottom: 1px solid rgba(60, 51, 42, 0.08);
-        }
+        <style>
+            .alma-section {
+                background-color: var(--yeso-claro);
+                padding: 110px 0 140px 0;
+                color: var(--text-dark);
+                border-top: 1px solid rgba(60, 51, 42, 0.08);
+                border-bottom: 1px solid rgba(60, 51, 42, 0.08);
+            }
 
-        .btn-alma-coleccion {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #150e02;
-            color: #FFFFFF !important;
-            padding: 18px 40px;
-            font-family: 'Lato', sans-serif;
-            font-size: 11px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            border: 1px solid #150e02;
-            box-shadow: 0 4px 15px rgba(21, 14, 2, 0.15);
-            cursor: pointer;
-        }
+            .btn-alma-coleccion {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background-color: transparent;
+                color: #3C332A !important;
+                padding: 17px 40px;
+                font-family: 'Lato', sans-serif;
+                font-size: 11px;
+                font-weight: 400;
+                line-height: normal;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                text-decoration: none;
+                border-radius: 4px;
+                border: 1px solid #3C332A;
+                transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+                cursor: pointer;
+            }
 
-        .btn-alma-coleccion:hover {
-            background-color: #3C332A;
-            border-color: #3C332A;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(21, 14, 2, 0.22);
-        }
+            .btn-alma-coleccion:hover {
+                background-color: #3C332A;
+                color: #FFFFFF !important;
+                border-color: #3C332A;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(60, 51, 42, 0.15);
+            }
 
-        .alma-img-card {
-            max-width: 820px;
-            width: 100%;
-            margin: 0 auto;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.16);
-            transition: transform 0.6s ease, box-shadow 0.6s ease;
-        }
+            .alma-img-card {
+                max-width: 820px;
+                width: 100%;
+                margin: 0 auto;
+                border-radius: 6px;
+                overflow: hidden;
+                box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.16);
+                transition: transform 0.6s ease, box-shadow 0.6s ease;
+            }
 
-        .alma-img-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0px 36px 70px rgba(0, 0, 0, 0.22);
-        }
+            .alma-img-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0px 36px 70px rgba(0, 0, 0, 0.22);
+            }
 
-        .alma-img-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            filter: contrast(1.04);
-        }
-    </style>
+            .alma-img-card img {
+                width: 100%;
+                height: auto;
+                display: block;
+                filter: contrast(1.04);
+            }
+        </style>
 
-    <section id="el-alma" class="alma-section">
-        <div class="container animate-appear">
-            <!-- ESTRUCTURA IDÉNTICA A "EL PLACER": TÍTULO Y TEXTO CENTRADOS -->
-            <div style="text-align: center; margin-bottom: 50px;">
-                <h2
-                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 40px; color: var(--text-dark);">
-                    EL ALMA
-                </h2>
+        <section id="el-alma" class="alma-section">
+            <div class="container animate-appear">
+                <!-- ESTRUCTURA IDÉNTICA A "EL PLACER": TÍTULO Y TEXTO CENTRADOS -->
+                <div style="text-align: center; margin-bottom: 50px;">
+                    <h2
+                        style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 40px; color: var(--text-dark);">
+                        EL ALMA
+                    </h2>
 
-                <p
-                    style="max-width: 620px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 300; line-height: 2.1; opacity: 0.9; color: var(--text-dark);">
-                    Para <strong>DOXA</strong>, el arte no es un adorno superficial ni una disciplina aislada: es el alma misma de nuestra existencia y un pilar indispensable para la evolución y la consciencia humana.
-                    <br><br>
-                    Concebimos cada una de nuestras formulaciones como una obra escultórica efímera y de alta precisión biológica. Desde esta filosofía, ejercemos una labor activa de mecenazgo cultural, respaldando con devoción a artistas emergentes y creando espacios donde el talento contemporáneo encuentra impulso, libertad y proyección.
-                    <br><br>
-                    El arte ensancha los límites de la mente, despierta la sensibilidad y transforma el mundo interior. Nutrir el cuerpo físico sin alimentar el espíritu es un acto incompleto.
-                    <br><br>
-                    Nuestra misión entrelaza alta nutrición celular y devoción estética.
-                    <br><br>
-                    El arte evoluciona.
-                    <br>
-                </p>
-            </div>
+                    <p
+                        style="max-width: 620px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 300; line-height: 2.1; opacity: 0.9; color: var(--text-dark);">
+                        Para <strong>DOXA</strong>, el arte no es un adorno superficial ni una disciplina aislada: es el
+                        alma misma de nuestra existencia y un pilar indispensable para la evolución y la consciencia
+                        humana.
+                        <br><br>
+                        Concebimos cada una de nuestras formulaciones como una obra escultórica efímera y de alta
+                        precisión biológica. Desde esta filosofía, ejercemos una labor activa de mecenazgo cultural,
+                        respaldando con devoción a artistas emergentes y creando espacios donde el talento contemporáneo
+                        encuentra impulso, libertad y proyección.
+                        <br><br>
+                        El arte ensancha los límites de la mente, despierta la sensibilidad y transforma el mundo
+                        interior. Nutrir el cuerpo físico sin alimentar el espíritu es un acto incompleto.
+                        <br><br>
+                        Nuestra misión entrelaza alta nutrición celular y devoción estética.
+                        <br><br>
+                        El arte evoluciona.
+                        <br>
+                    </p>
+                </div>
 
-            <!-- IMAGEN ABAJO (sin la caja de características) -->
-            <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 30px;">
-                <div class="alma-img-card">
-                    <img src="ProtoDoxa.png" alt="DOXA — El Alma y el Arte">
+                <!-- IMAGEN ABAJO (sin la caja de características) -->
+                <div
+                    style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 30px;">
+                    <div class="alma-img-card">
+                        <img src="ProtoDoxa.png" alt="DOXA — El Alma y el Arte">
+                    </div>
+                </div>
+
+                <!-- BOTÓN CTA A LA COLECCIÓN DEBAJO DE LA IMAGEN CON MARGEN GENEROSO -->
+                <div style="text-align: center; margin-top: 60px; margin-bottom: 10px;">
+                    <a href="coleccion.html" class="btn-alma-coleccion">
+                        Descubre la colección
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24" style="margin-left: 10px;">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
                 </div>
             </div>
+        </section>
 
-            <!-- BOTÓN CTA A LA COLECCIÓN DEBAJO DE LA IMAGEN CON MARGEN GENEROSO -->
-            <div style="text-align: center; margin-top: 60px; margin-bottom: 10px;">
-                <a href="coleccion.html" class="btn-alma-coleccion">
-                    Descubre la colección
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left: 10px;">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </section>
+        <!-- Antigravity: /* */ -->
+        <!-- Antigravity: /* SECCIÓN RESERVA TUS DOXAS */ -->
 
-    <!-- Antigravity: /* */ -->
-    <!-- Antigravity: /* SECCIÓN RESERVA TUS DOXAS */ -->
-
-    <style>
-        .checkout-section {
-            background-color: var(--yeso-oscuro);
-            /* COLOR DE FONDO: YESO OSCURO (#e6e7e1) igual que "El Placer" */
-            padding: 100px 20px;
-            text-align: center;
-            font-family: 'Lexend', sans-serif;
-            color: #444;
-        }
-
-        .checkout-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-            max-width: 1000px;
-            margin: 0 auto 60px auto;
-        }
-
-        /* Estado inicial de las galletas (invisibles y un poco abajo) */
-        .grid-item {
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        /* Clase que activa la aparición */
-        .grid-item.aparece {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .grid-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.1));
-        }
-
-        .grid-title {
-            font-size: 11px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #000;
-        }
-
-        /* Tiempos de espera para el efecto cascada */
-        .d-1 {
-            transition-delay: 0.1s;
-        }
-
-        .d-2 {
-            transition-delay: 0.3s;
-        }
-
-        .d-3 {
-            transition-delay: 0.5s;
-        }
-
-        .d-4 {
-            transition-delay: 0.7s;
-        }
-
-        .btn-jotform {
-            display: inline-block;
-            background-color: #000;
-            color: #fff;
-            text-decoration: none;
-            font-family: 'Lato', sans-serif;
-            /* Fuente Lato */
-            font-weight: 300;
-            /* Fina */
-            font-size: 11px;
-            letter-spacing: 3px;
-            width: 100%;
-            max-width: 500px;
-            padding: 20px 0;
-            margin-top: 40px;
-            border: 1px solid #000;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-
-        .btn-jotform:hover {
-            background-color: #524b3f;
-            transform: translateY(-3px);
-        }
-
-        @media (max-width: 768px) {
-            .checkout-grid {
-                grid-template-columns: repeat(2, 1fr);
+        <style>
+            .checkout-section {
+                background-color: var(--yeso-oscuro);
+                /* COLOR DE FONDO: YESO OSCURO (#e6e7e1) igual que "El Placer" */
+                padding: 100px 20px;
+                text-align: center;
+                font-family: 'Lexend', sans-serif;
+                color: #444;
             }
-        }
 
-        @media (max-width: 480px) {
             .checkout-grid {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 25px;
+                max-width: 1000px;
+                margin: 0 auto 60px auto;
             }
-        }
 
-        .col-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
+            /* Estado inicial de las galletas (invisibles y un poco abajo) */
+            .grid-item {
+                text-align: center;
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.8s ease-out;
+            }
 
-        .col-title {
-            font-size: clamp(30px, 4vw, 40px);
-            font-weight: 300;
-            letter-spacing: 10px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: #fff;
-        }
+            /* Clase que activa la aparición */
+            .grid-item.aparece {
+                opacity: 1;
+                transform: translateY(0);
+            }
 
-        .col-desc {
-            font-size: 15px;
-            font-weight: 300;
-            line-height: 2;
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0.9;
-        }
+            .grid-item img {
+                width: 100%;
+                height: auto;
+                border-radius: 4px;
+                margin-bottom: 20px;
+                filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.1));
+            }
 
-        /* FOOTER STYLES */
-        /* =========================================
+            .grid-title {
+                font-size: 11px;
+                font-weight: 400;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #000;
+            }
+
+            /* Tiempos de espera para el efecto cascada */
+            .d-1 {
+                transition-delay: 0.1s;
+            }
+
+            .d-2 {
+                transition-delay: 0.3s;
+            }
+
+            .d-3 {
+                transition-delay: 0.5s;
+            }
+
+            .d-4 {
+                transition-delay: 0.7s;
+            }
+
+            .btn-jotform {
+                display: inline-block;
+                background-color: #000;
+                color: #fff;
+                text-decoration: none;
+                font-family: 'Lato', sans-serif;
+                /* Fuente Lato */
+                font-weight: 300;
+                /* Fina */
+                font-size: 11px;
+                letter-spacing: 3px;
+                width: 100%;
+                max-width: 500px;
+                padding: 20px 0;
+                margin-top: 40px;
+                border: 1px solid #000;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+            }
+
+            .btn-jotform:hover {
+                background-color: #524b3f;
+                transform: translateY(-3px);
+            }
+
+            @media (max-width: 768px) {
+                .checkout-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 480px) {
+                .checkout-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .col-header {
+                text-align: center;
+                margin-bottom: 80px;
+            }
+
+            .col-title {
+                font-size: clamp(30px, 4vw, 40px);
+                font-weight: 300;
+                letter-spacing: 10px;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+                color: #fff;
+            }
+
+            .col-desc {
+                font-size: 15px;
+                font-weight: 300;
+                line-height: 2;
+                max-width: 600px;
+                margin: 0 auto;
+                opacity: 0.9;
+            }
+
+            /* FOOTER STYLES */
+            /* =========================================
            PIE DE PÁGINA DE LUJO SIMPLIFICADO
            ========================================= */
-        .gallery-footer {
-            background-color: #caccc3;
-            /* Gris Claro Cementoso / Yeso Oscuro */
-            color: #3C332A;
-            padding: 40px 0 25px 0;
-            /* Menor altura */
-            text-align: left;
-        }
-
-        .footer-grid-container {
-            max-width: 1400px;
-            /* Ampliado de 1200px para mayor amplitud */
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .footer-columns-row {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            /* Columnas perfectamente equidistantes */
-            gap: 30px;
-            /* Mayor espacio entre columnas */
-            margin-bottom: 30px;
-            align-items: start;
-        }
-
-        .footer-column {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .footer-column-title {
-            font-family: 'Lato', sans-serif;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #3C332A;
-            margin-bottom: 20px;
-        }
-
-        .footer-column-links {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-        }
-
-        .footer-column-links .footer-link {
-            font-family: 'Lexend', sans-serif;
-            font-size: 11px;
-            color: #3C332A;
-            text-decoration: none;
-            opacity: 0.7;
-            line-height: 1.4;
-            transition: all 0.3s ease;
-            font-weight: 300;
-        }
-
-        .footer-column-links .footer-link:hover {
-            opacity: 1;
-        }
-
-        .footer-newsletter-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .footer-newsletter-info p {
-            font-family: 'Lexend', sans-serif;
-            font-size: 10px;
-            color: #3C332A;
-            opacity: 0.8;
-            margin-bottom: 0;
-            font-weight: 300;
-            letter-spacing: 0.2px;
-        }
-
-        .footer-link-underline {
-            font-family: 'Lexend', sans-serif;
-            font-size: 11px;
-            color: #3C332A;
-            text-decoration: underline;
-            opacity: 0.7;
-            font-weight: 300;
-            transition: opacity 0.3s ease;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-
-        .footer-link-underline:hover {
-            opacity: 1;
-        }
-
-        .btn-newsletter-subscribe {
-            display: inline-block;
-            background-color: transparent;
-            border: 1px solid #3C332A;
-            color: #3C332A;
-            padding: 8px 20px;
-            font-family: 'Lexend', sans-serif;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            font-weight: 400;
-            transition: all 0.3s ease;
-            text-align: center;
-            width: fit-content;
-        }
-
-        .btn-newsletter-subscribe:hover {
-            background-color: #3C332A;
-            color: #caccc3;
-        }
-
-        .footer-social-icons {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            margin-top: 5px;
-        }
-
-        .social-icon {
-            color: #3C332A;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .social-icon:hover {
-            opacity: 1;
-        }
-
-        .footer-bottom-row {
-            display: flex;
-            justify-content: flex-end;
-            /* Alinear a la derecha como en la captura */
-            align-items: center;
-            border-top: 1px solid rgba(60, 51, 42, 0.1);
-            padding-top: 20px;
-            margin-top: 10px;
-        }
-
-        .footer-copy {
-            font-family: 'Lexend', sans-serif;
-            font-size: 10px;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            color: #3C332A;
-            opacity: 0.8;
-            text-align: right;
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 992px) {
-            .footer-columns-row {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 30px;
-            }
-
-            .footer-column:nth-child(5) {
-                align-items: flex-start;
+            .gallery-footer {
+                background-color: #caccc3;
+                /* Gris Claro Cementoso / Yeso Oscuro */
+                color: #3C332A;
+                padding: 40px 0 25px 0;
+                /* Menor altura */
                 text-align: left;
             }
-        }
 
-        @media (max-width: 768px) {
+            .footer-grid-container {
+                max-width: 1400px;
+                /* Ampliado de 1200px para mayor amplitud */
+                margin: 0 auto;
+                padding: 0 40px;
+            }
+
             .footer-columns-row {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                text-align: center;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                /* Columnas perfectamente equidistantes */
+                gap: 30px;
+                /* Mayor espacio entre columnas */
+                margin-bottom: 30px;
+                align-items: start;
             }
 
             .footer-column {
-                align-items: center !important;
-                text-align: center !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-column-title {
+                font-family: 'Lato', sans-serif;
+                font-size: 10px;
+                font-weight: 600;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #3C332A;
+                margin-bottom: 20px;
+            }
+
+            .footer-column-links {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                width: 100%;
+            }
+
+            .footer-column-links .footer-link {
+                font-family: 'Lexend', sans-serif;
+                font-size: 11px;
+                color: #3C332A;
+                text-decoration: none;
+                opacity: 0.7;
+                line-height: 1.4;
+                transition: all 0.3s ease;
+                font-weight: 300;
+            }
+
+            .footer-column-links .footer-link:hover {
+                opacity: 1;
+            }
+
+            .footer-newsletter-info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .footer-newsletter-info p {
+                font-family: 'Lexend', sans-serif;
+                font-size: 10px;
+                color: #3C332A;
+                opacity: 0.8;
+                margin-bottom: 0;
+                font-weight: 300;
+                letter-spacing: 0.2px;
+            }
+
+            .footer-link-underline {
+                font-family: 'Lexend', sans-serif;
+                font-size: 11px;
+                color: #3C332A;
+                text-decoration: underline;
+                opacity: 0.7;
+                font-weight: 300;
+                transition: opacity 0.3s ease;
+                display: inline-block;
+                margin-bottom: 12px;
+            }
+
+            .footer-link-underline:hover {
+                opacity: 1;
+            }
+
+            .btn-newsletter-subscribe {
+                display: inline-block;
+                background-color: transparent;
+                border: 1px solid #3C332A;
+                color: #3C332A;
+                padding: 8px 20px;
+                font-family: 'Lexend', sans-serif;
+                font-size: 10px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                text-decoration: none;
+                font-weight: 400;
+                transition: all 0.3s ease;
+                text-align: center;
+                width: fit-content;
+            }
+
+            .btn-newsletter-subscribe:hover {
+                background-color: #3C332A;
+                color: #caccc3;
+            }
+
+            .footer-social-icons {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                margin-top: 5px;
+            }
+
+            .social-icon {
+                color: #3C332A;
+                opacity: 0.7;
+                transition: opacity 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .social-icon:hover {
+                opacity: 1;
             }
 
             .footer-bottom-row {
-                justify-content: center;
-                text-align: center;
+                display: flex;
+                justify-content: flex-end;
+                /* Alinear a la derecha como en la captura */
+                align-items: center;
+                border-top: 1px solid rgba(60, 51, 42, 0.1);
+                padding-top: 20px;
+                margin-top: 10px;
             }
 
             .footer-copy {
-                text-align: center;
+                font-family: 'Lexend', sans-serif;
+                font-size: 10px;
+                font-weight: 300;
+                letter-spacing: 0.5px;
+                color: #3C332A;
+                opacity: 0.8;
+                text-align: right;
+                text-transform: uppercase;
             }
-        }
 
-        @media (max-width: 576px) {
-            .footer-columns-row {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .footer-bottom-row {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-        }
-    </style>
-
-    <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) igual que "El Placer" === -->
-    <section class="checkout-section" id="reserva">
-        <div class="container">
-
-
-            <h2
-                style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(22px, 5vw, 45px); letter-spacing: clamp(2px, 2vw, 12px); text-transform: uppercase; margin-bottom: 60px; color: #3C332A;">
-                RESERVAS
-            </h2>
-
-
-            <div class="col-header">
-                <h2 class="col-title" style="color: #3C332A;"></h2>
-                <p class="col-desc">
-
-                    DOXAS se presentan en una caja de 4 unidades.<br>
-                    <br>
-                    Pensada para acompañarte durante la semana.<br>
-                    Como tu impulso después del entrenamiento,<br>
-                    como pausa consciente,<br>
-                    o simplemente cuando te apetece un carpricho...que no rompe tus normas.<br>
-                    <br>
-
-                </p>
-            </div>
-
-            <div class="checkout-texts" style="opacity: 0; transition: opacity 1s ease 1s;">
-                <p class="variety-desc" style="font-weight: 500; min-height: auto; margin-bottom: 30px;">
-                    DOXAS se elaboran artesanalmente y bajo pedido.
-                </p>
-                <p class="variety-desc" style="min-height: auto; margin-bottom: 0;">
-                    Las tuyas te serán enviadas en cuanto hayan enfriado tras su horneado.<br><br>
-                    Un golpe de calor en el
-                    microondas antes de ser consumidas les devuelve ese punto fresco del recién
-                    hecho.<br><br><br>
-                    Te informaremos por correo del momento en que estén listas para su envío
-                </p>
-                <a href="compra.html" class="btn-jotform">
-                    COMPRAR
-                </a>
-            </div>
-
-        </div>
-    </section>
-
-    <script>
-        // Este pequeño script detecta cuando llegas a la sección de reserva
-        const observerReserva = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Activa las galletas
-                    const items = entry.target.querySelectorAll('.grid-item');
-                    items.forEach(item => item.classList.add('aparece'));
-
-                    // Activa el bloque de texto con un ligero retraso extra
-                    const texto = entry.target.querySelector('.checkout-texts');
-                    if (texto) texto.style.opacity = "1";
-
-                    observerReserva.unobserve(entry.target);
+            @media (max-width: 992px) {
+                .footer-columns-row {
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 30px;
                 }
-            });
-        }, { threshold: 0.2 });
 
-        observerReserva.observe(document.querySelector('#reserva'));
-    </script>
+                .footer-column:nth-child(5) {
+                    align-items: flex-start;
+                    text-align: left;
+                }
+            }
 
-    <!-- =========================================================================
+            @media (max-width: 768px) {
+                .footer-columns-row {
+                    grid-template-columns: 1fr;
+                    gap: 25px;
+                    text-align: center;
+                }
+
+                .footer-column {
+                    align-items: center !important;
+                    text-align: center !important;
+                }
+
+                .footer-bottom-row {
+                    justify-content: center;
+                    text-align: center;
+                }
+
+                .footer-copy {
+                    text-align: center;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .footer-columns-row {
+                    grid-template-columns: 1fr;
+                    gap: 30px;
+                }
+
+                .footer-bottom-row {
+                    flex-direction: column;
+                    gap: 15px;
+                    text-align: center;
+                }
+            }
+        </style>
+
+        <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) igual que "El Placer" === -->
+        <section class="checkout-section" id="reserva">
+            <div class="container">
+
+
+                <h2
+                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(22px, 5vw, 45px); letter-spacing: clamp(2px, 2vw, 12px); text-transform: uppercase; margin-bottom: 60px; color: #3C332A;">
+                    RESERVAS
+                </h2>
+
+
+                <div class="col-header">
+                    <h2 class="col-title" style="color: #3C332A;"></h2>
+                    <p class="col-desc">
+
+                        DOXAS se presentan en una caja de 4 unidades.<br>
+                        <br>
+                        Pensada para acompañarte durante la semana.<br>
+                        Como tu impulso después del entrenamiento,<br>
+                        como pausa consciente,<br>
+                        o simplemente cuando te apetece un carpricho...que no rompe tus normas.<br>
+                        <br>
+
+                    </p>
+                </div>
+
+                <div class="checkout-texts" style="opacity: 0; transition: opacity 1s ease 1s;">
+                    <p class="variety-desc" style="font-weight: 500; min-height: auto; margin-bottom: 30px;">
+                        DOXAS se elaboran artesanalmente y bajo pedido.
+                    </p>
+                    <p class="variety-desc" style="min-height: auto; margin-bottom: 0;">
+                        Las tuyas te serán enviadas en cuanto hayan enfriado tras su horneado.<br><br>
+                        Un golpe de calor en el
+                        microondas antes de ser consumidas les devuelve ese punto fresco del recién
+                        hecho.<br><br><br>
+                        Te informaremos por correo del momento en que estén listas para su envío
+                    </p>
+                    <a href="compra.html" class="btn-jotform">
+                        Reserva tu caja
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <script>
+            // Este pequeño script detecta cuando llegas a la sección de reserva
+            const observerReserva = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Activa las galletas
+                        const items = entry.target.querySelectorAll('.grid-item');
+                        items.forEach(item => item.classList.add('aparece'));
+
+                        // Activa el bloque de texto con un ligero retraso extra
+                        const texto = entry.target.querySelector('.checkout-texts');
+                        if (texto) texto.style.opacity = "1";
+
+                        observerReserva.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            observerReserva.observe(document.querySelector('#reserva'));
+        </script>
+
+        <!-- =========================================================================
        [INICIO] SECCIÓN DEL FOOTER
        ========================================================================= -->
-    <footer class="gallery-footer">
-        <div class="footer-grid-container">
+        <footer class="gallery-footer">
+            <div class="footer-grid-container">
 
-            <!-- Fila única con las 5 columnas en la misma banda -->
-            <div class="footer-columns-row">
+                <!-- Fila única con las 5 columnas en la misma banda -->
+                <div class="footer-columns-row">
 
-                <!-- [COLUMNA 1] CONTACTO -->
-                <div class="footer-column">
-                    <h4 class="footer-column-title">Contacto</h4>
-                    <div class="footer-column-links">
-                        <a href="mailto:tu-correo@ejemplo.com" class="footer-link-underline">Envíanos un correo</a>
-                        <div class="footer-social-icons">
-                            <a href="https://instagram.com" class="social-icon" target="_blank" aria-label="Instagram">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                                </svg>
-                            </a>
+                    <!-- [COLUMNA 1] CONTACTO -->
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Contacto</h4>
+                        <div class="footer-column-links">
+                            <a href="mailto:tu-correo@ejemplo.com" class="footer-link-underline">Envíanos un correo</a>
+                            <div class="footer-social-icons">
+                                <a href="https://instagram.com" class="social-icon" target="_blank"
+                                    aria-label="Instagram">
+                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- [COLUMNA 2] MIS PEDIDOS -->
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Mis Pedidos</h4>
+                        <div class="footer-column-links">
+                            <a href="#pagos" class="footer-link">Opciones de pago</a>
+                            <a href="#entregas" class="footer-link">Opciones de entrega</a>
+                            <a href="#seguimiento" class="footer-link">Seguimiento de pedidos</a>
+                            <a href="#devoluciones" class="footer-link">Cambios y devoluciones</a>
+                        </div>
+                    </div>
+
+                    <!-- [COLUMNA 3] NEWSLETTER -->
+                    <div class="footer-column newsletter-col">
+                        <h4 class="footer-column-title">Newsletter</h4>
+                        <div class="footer-newsletter-info">
+                            <p>Mantente en contacto con nuestro ecosistema</p>
+                            <a href="#newsletter-signup" class="btn-newsletter-subscribe">Suscríbete</a>
+                        </div>
+                    </div>
+
+                    <!-- [COLUMNA 4] LA MAISON -->
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">DOXA, la Misión</h4>
+                        <div class="footer-column-links">
+                            <a href="sobre-doxa.html" class="footer-link">La Misión</a>
+                        </div>
+                    </div>
+
+                    <!-- [COLUMNA 5] AVISO LEGAL -->
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Aviso Legal</h4>
+                        <div class="footer-column-links">
+                            <a href="#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
+                            <a href="#privacidad" class="footer-link">Política de privacidad</a>
+                            <a href="#cookies" class="footer-link">Cookies</a>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- [COLUMNA 2] MIS PEDIDOS -->
-                <div class="footer-column">
-                    <h4 class="footer-column-title">Mis Pedidos</h4>
-                    <div class="footer-column-links">
-                        <a href="#pagos" class="footer-link">Opciones de pago</a>
-                        <a href="#entregas" class="footer-link">Opciones de entrega</a>
-                        <a href="#seguimiento" class="footer-link">Seguimiento de pedidos</a>
-                        <a href="#devoluciones" class="footer-link">Cambios y devoluciones</a>
-                    </div>
-                </div>
-
-                <!-- [COLUMNA 3] NEWSLETTER -->
-                <div class="footer-column newsletter-col">
-                    <h4 class="footer-column-title">Newsletter</h4>
-                    <div class="footer-newsletter-info">
-                        <p>Mantente en contacto con nuestro ecosistema</p>
-                        <a href="#newsletter-signup" class="btn-newsletter-subscribe">Suscríbete</a>
-                    </div>
-                </div>
-
-                <!-- [COLUMNA 4] LA MAISON -->
-                <div class="footer-column">
-                    <h4 class="footer-column-title">DOXA, la Misión</h4>
-                    <div class="footer-column-links">
-                        <a href="sobre-doxa.html" class="footer-link">La Misión</a>
-                    </div>
-                </div>
-
-                <!-- [COLUMNA 5] AVISO LEGAL -->
-                <div class="footer-column">
-                    <h4 class="footer-column-title">Aviso Legal</h4>
-                    <div class="footer-column-links">
-                        <a href="#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
-                        <a href="#privacidad" class="footer-link">Política de privacidad</a>
-                        <a href="#cookies" class="footer-link">Cookies</a>
-                    </div>
+                <!-- Fila inferior: copyright alineado a la derecha -->
+                <div class="footer-bottom-row">
+                    <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
                 </div>
 
             </div>
-
-            <!-- Fila inferior: copyright alineado a la derecha -->
-            <div class="footer-bottom-row">
-                <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
-            </div>
-
-        </div>
-    </footer>
-    <!-- =========================================================================
+        </footer>
+        <!-- =========================================================================
        [FIN] FIN DE SECCIÓN DEL FOOTER
        ========================================================================= -->
 
-    <!-- =========================================================================
+        <!-- =========================================================================
        [INICIO] página GALERÍA (SCRIPT JS DE LA BARRA DE NAVEGACIÓN)
        Controla el efecto de cambio de fondo al hacer scroll y el menú móvil.
        ========================================================================= -->
-    <script>
-        // Control de Navbar (Scroll y Menú Móvil)
-        (function () {
-            const navbar = document.getElementById('mainNavbar');
-            const mobileToggle = document.getElementById('mobileToggle');
-            const navbarMenu = document.getElementById('navbarMenu');
-            const navLinks = document.querySelectorAll('.navbar-link');
+        <script>
+            // Control de Navbar (Scroll y Menú Móvil)
+            (function () {
+                const navbar = document.getElementById('mainNavbar');
+                const mobileToggle = document.getElementById('mobileToggle');
+                const navbarMenu = document.getElementById('navbarMenu');
+                const navLinks = document.querySelectorAll('.navbar-link');
 
-            // Scroll listener para cambiar aspecto de la barra al superar el hero y Scrollspy
-            const hero = document.querySelector('.hero-container');
-            const sections = document.querySelectorAll('section[id]');
+                // Scroll listener para cambiar aspecto de la barra al superar el hero y Scrollspy
+                const hero = document.querySelector('.hero-container');
+                const sections = document.querySelectorAll('section[id]');
 
-            let disableScrollspy = false;
-            let scrollspyTimeout;
+                let disableScrollspy = false;
+                let scrollspyTimeout;
 
-            function tempDisableScrollspy() {
-                disableScrollspy = true;
-                clearTimeout(scrollspyTimeout);
-                scrollspyTimeout = setTimeout(() => {
-                    disableScrollspy = false;
-                }, 1000);
-            }
+                function tempDisableScrollspy() {
+                    disableScrollspy = true;
+                    clearTimeout(scrollspyTimeout);
+                    scrollspyTimeout = setTimeout(() => {
+                        disableScrollspy = false;
+                    }, 1000);
+                }
 
-            // Resaltado inmediato al cargar con un hash en la URL (ej: #coleccion)
-            if (window.location.hash && window.location.hash !== '#') {
-                const currentHash = window.location.hash;
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    const href = link.getAttribute('href');
-                    if (href === currentHash || (href && href.startsWith('#') && href === currentHash)) {
-                        link.classList.add('active');
-                    }
-                });
-                tempDisableScrollspy();
-            } else {
-                // Resaltar 'Colección' por defecto al cargar en la cabecera sin hash
-                navLinks.forEach(link => {
-                    if (link.classList.contains('btn-coleccion')) {
-                        link.classList.add('active');
-                    } else {
+                // Resaltado inmediato al cargar con un hash en la URL (ej: #coleccion)
+                if (window.location.hash && window.location.hash !== '#') {
+                    const currentHash = window.location.hash;
+                    navLinks.forEach(link => {
                         link.classList.remove('active');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', () => {
-                const threshold = (hero ? hero.offsetHeight : window.innerHeight) - 90;
-                if (window.scrollY > threshold) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-
-                if (disableScrollspy) return;
-
-                // Scrollspy para resaltar el enlace activo
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (window.scrollY >= sectionTop - 150) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                // Si estamos arriba del todo (hero), resaltar 'Colección' por defecto
-                if (current === '') {
-                    current = 'coleccion';
-                }
-
-                // Mapear subsecciones de colección al botón "Colección"
-                if (current === 'cajas-activos' || current === 'descripcion-nutricional') {
-                    current = 'coleccion';
-                }
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    const href = link.getAttribute('href');
-                    if (href && href.startsWith('#') && href.slice(1) === current) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-            // Toggle del menú móvil
-            mobileToggle.addEventListener('click', () => {
-                mobileToggle.classList.toggle('active');
-                navbarMenu.classList.toggle('active');
-            });
-
-            // Cerrar menú móvil al hacer click en un enlace y establecer el botón activo inmediatamente
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
-                    mobileToggle.classList.remove('active');
-                    navbarMenu.classList.remove('active');
+                        const href = link.getAttribute('href');
+                        if (href === currentHash || (href && href.startsWith('#') && href === currentHash)) {
+                            link.classList.add('active');
+                        }
+                    });
                     tempDisableScrollspy();
+                } else {
+                    // En el index sin hash, los enlaces a otras páginas no se activan por defecto
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+                }
+
+                window.addEventListener('scroll', () => {
+                    const threshold = (hero ? hero.offsetHeight : window.innerHeight) - 90;
+                    if (window.scrollY > threshold) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+
+                    if (disableScrollspy) return;
+
+                    // Scrollspy para resaltar enlaces internos si existen
+                    let current = '';
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        if (window.scrollY >= sectionTop - 150) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        const href = link.getAttribute('href');
+                        if (current && href && href.startsWith('#') && href.slice(1) === current) {
+                            link.classList.add('active');
+                        }
+                    });
                 });
-            });
-        })();
-    </script>
-    <!-- =========================================================================
+
+                // Toggle del menú móvil
+                mobileToggle.addEventListener('click', () => {
+                    mobileToggle.classList.toggle('active');
+                    navbarMenu.classList.toggle('active');
+                });
+
+                // Cerrar menú móvil al hacer click en un enlace y establecer el botón activo inmediatamente
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                        mobileToggle.classList.remove('active');
+                        navbarMenu.classList.remove('active');
+                        tempDisableScrollspy();
+                    });
+                });
+            })();
+        </script>
+        <!-- =========================================================================
        [FIN] página GALERÍA (SCRIPT JS DE LA BARRA DE NAVEGACIÓN)
        ========================================================================= -->
 
