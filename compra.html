@@ -2045,7 +2045,9 @@
         // Ejecutar carga inicial al cargar la página
         renderShopUI();
 
-        // --- PROCESAMIENTO DE PAGO Y ENVÍO A FORMSPREE ---
+        // --- PROCESAMIENTO DE PAGO MEDIANTE STRIPE CHECKOUT ---
+        const STRIPE_ENDPOINT = '/api/create-checkout-session';
+
         async function handlePayment(event) {
             event.preventDefault(); // Detener envío por defecto
 
@@ -2059,10 +2061,9 @@
             const loadingOverlay = document.getElementById('loadingOverlay');
             const loadingText = document.getElementById('loadingText');
 
-            // Deshabilitar botón
+            // Deshabilitar botón y mostrar pantalla de carga
             submitBtn.disabled = true;
-
-            // Mostrar pantalla de carga
+            if (loadingText) loadingText.innerText = 'Conectando con la pasarela segura de Stripe...';
             loadingOverlay.style.display = 'flex';
             setTimeout(() => {
                 loadingOverlay.classList.add('active');
@@ -2071,91 +2072,67 @@
             // Obtener variables de compra
             const select = document.getElementById('varietySelect');
             const varietyText = select.options[select.selectedIndex].text.split(' — ')[0];
-            const subtotal = document.getElementById('itemsSubtotal').innerText;
-            const shipping = document.getElementById('shippingCost').innerText;
-            const total = document.getElementById('totalCost').innerText;
-            const email = document.getElementById('emailInput').value;
-            const name = document.getElementById('nameInput').value;
-            const phone = document.getElementById('phoneInput').value;
-            const address = document.getElementById('addressInput').value;
-            const zip = document.getElementById('zipInput').value;
-            const city = document.getElementById('cityInput').value;
+            const unitPrice = getSelectedPrice();
+            const email = document.getElementById('emailInput').value.trim();
+            const name = document.getElementById('nameInput').value.trim();
+            const phone = document.getElementById('phoneInput').value.trim();
+            const address = document.getElementById('addressInput').value.trim();
+            const zip = document.getElementById('zipInput').value.trim();
+            const city = document.getElementById('cityInput').value.trim();
 
-            // Resumen de regalos en texto estructurado
-            let regalosTexto = "Ninguno";
-            if (giftOrders.length > 0) {
-                regalosTexto = giftOrders.map((g, i) =>
-                    `[REGALO #${i + 1}] Destinatario: ${g.recipientName} (Tel: ${g.phone}) | Envío a: ${g.address}, ${g.zip} ${g.city} | Cajas: ${g.qty}x ${g.variety} | Dedicatoria: ${g.message ? `"${g.message}"` : 'Sin dedicatoria'}`
-                ).join('\n\n');
-            }
+            const config = getShopConfig();
+            const baseShipping = parseFloat(config.shippingCost) || 0;
+            const personalDestinations = personalQty > 0 ? 1 : 0;
+            const totalDestinations = personalDestinations + giftOrders.length;
+            const totalShipping = totalDestinations * baseShipping;
+            const personalSubtotal = personalQty * unitPrice;
+            const giftsSubtotal = giftOrders.reduce((sum, g) => sum + (g.unitPrice * g.qty), 0);
+            const total = personalSubtotal + giftsSubtotal + totalShipping;
 
-            // Preparar los datos estructurados para el correo a Formspree
+            // Preparar el paquete de datos para la función serverless de Stripe
             const payload = {
-                _subject: `Nuevo Pedido DOXA (${total}) - ${name}${giftOrders.length > 0 ? ` [${giftOrders.length} regalo(s)]` : ''}`,
-                email: email,
-                _replyto: email,
-                comprador_nombre: name,
-                comprador_telefono: phone,
-                comprador_direccion: address,
-                comprador_codigo_postal: zip,
-                comprador_ciudad: city,
-                cajas_personales_comprador: personalQty > 0 ? `${personalQty}x ${varietyText}` : 'Ninguna (Solo regalos)',
-                total_regalos_incluidos: giftOrders.length,
-                resumen_regalos: regalosTexto,
-                mensaje_notificacion_destinatario: giftOrders.length > 0 ? "Un regalo está en camino hacia tí... Te hemos enviado un correo y SMS con el enlace de seguimiento en tiempo real. Si algo se dificultase para entregártelo podrían llamarte. Espero que sea de tu agrado. Alguien te aprecia mucho..." : 'N/A',
-                subtotal_articulos: subtotal,
-                gastos_envio: shipping,
-                total_pagado: total,
-                fecha_pedido: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })
+                personalQty: personalQty,
+                varietyName: varietyText,
+                unitPrice: unitPrice,
+                giftOrders: giftOrders,
+                shippingCost: totalShipping,
+                totalAmount: total,
+                totalFormatted: total.toFixed(2) + " €",
+                buyer: {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    address: address,
+                    zip: zip,
+                    city: city
+                }
             };
 
-            // Desglose de cada regalo en campos dedicados para fácil lectura
-            giftOrders.forEach((g, idx) => {
-                const num = idx + 1;
-                payload[`regalo_${num}_destinatario`] = g.recipientName;
-                payload[`regalo_${num}_telefono`] = g.phone;
-                payload[`regalo_${num}_direccion`] = `${g.address}, ${g.zip} ${g.city}`;
-                payload[`regalo_${num}_cajas`] = `${g.qty}x ${g.variety}`;
-                payload[`regalo_${num}_dedicatoria`] = g.message || 'Sin dedicatoria';
-            });
-
-            // Parámetros para la URL de gracias.html
-            const redirectParams = new URLSearchParams({
-                variety: varietyText,
-                qty: personalQty.toString(),
-                total: total,
-                name: name,
-                email: email,
-                gifts: encodeURIComponent(JSON.stringify(giftOrders))
-            });
-
             try {
-                const response = await fetch(FORMSPREE_ENDPOINT, {
+                const response = await fetch(STRIPE_ENDPOINT, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(payload)
                 });
 
-                if (response.ok) {
-                    // Pedido enviado correctamente a Formspree: redirigir al recibo
-                    window.location.href = 'gracias.html?' + redirectParams.toString();
+                const data = await response.json().catch(() => ({}));
+
+                if (response.ok && data.url) {
+                    // Redirección inmediata a Stripe Checkout
+                    if (loadingText) loadingText.innerText = 'Redirigiendo a Stripe...';
+                    window.location.href = data.url;
                 } else {
-                    const data = await response.json().catch(() => ({}));
-                    let errorMsg = 'Hubo un inconveniente al tramitar el pedido.';
-                    if (data && data.errors && data.errors.length > 0) {
-                        errorMsg = data.errors.map(e => e.message).join('. ');
-                    }
-                    alert(errorMsg + ' Por favor, inténtalo de nuevo.');
+                    const errorMsg = (data && data.error) ? data.error : 'No se pudo iniciar la sesión de pago en Stripe.';
+                    alert(errorMsg + '\n\nSi estás probando en local, asegúrate de haber ejecutado "iniciar-servidor.bat" o "node server.js".');
                     loadingOverlay.classList.remove('active');
                     setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
                     submitBtn.disabled = false;
                 }
             } catch (err) {
-                console.error('Error enviando formulario a Formspree:', err);
-                alert('No se pudo conectar con el servicio de tramitación. Por favor, comprueba tu conexión e inténtalo de nuevo.');
+                console.error('Error conectando con la pasarela de Stripe:', err);
+                alert('No se pudo conectar con el servidor local de pagos.\n\nPara probar Stripe en local:\n1. Abre la carpeta del proyecto.\n2. Ejecuta "iniciar-servidor.bat" o el comando "node server.js".\n3. Accede desde http://localhost:3000/compra.html');
                 loadingOverlay.classList.remove('active');
                 setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
                 submitBtn.disabled = false;

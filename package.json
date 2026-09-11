@@ -1,0 +1,12 @@
+{
+  "name": "doxa-shop",
+  "version": "1.0.0",
+  "description": "DOXA Atelier — Alta Repostería Molecular",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["doxa", "stripe", "checkout"],
+  "author": "DOXA",
+  "license": "ISC"
+}

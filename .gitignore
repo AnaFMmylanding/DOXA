@@ -2,3 +2,8 @@
 RUEDA DE ACTIVOS_PLANTILLA*
 .DS_Store
 Thumbs.db
+.env
+.env.*
+!.env.example
+node_modules/
+
