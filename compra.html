@@ -1060,12 +1060,13 @@
             color: #FFFFFF;
             border: 1px solid #150e02;
             width: 100%;
-            padding: 15px 22px;
+            padding: 15px 14px;
             font-size: 11px;
             font-family: 'Lato', sans-serif;
             font-weight: 400;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            white-space: nowrap;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
@@ -1073,7 +1074,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
         }
 
         .btn-gift-trigger:hover {
@@ -1323,11 +1323,7 @@
 
                             <button type="button" class="btn-gift-trigger" id="btnOpenGiftModal"
                                 onclick="openGiftModal()">
-                                <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.65-.5-.65C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1h-2.22l.85-1.14c.26-.36.69-.86 1.37-.86zM9 4c.68 0 1.11.5 1.37.86L11.22 6H9c-.55 0-1-.45-1-1s.45-1 1-1zm11 15H4V8h7v13h2V8h7v11z" />
-                                </svg>
-                                Quiero enviar Doxas como regalo
+                                Si, quiero regalar Doxas
                             </button>
 
                             <!-- Contenedor con lista de regalos añadidos -->
@@ -1490,7 +1486,7 @@
                     <div class="footer-column">
                         <h4 class="footer-column-title">DOXA, la Misión</h4>
                         <div class="footer-column-links">
-                            <a href="sobre-doxa.html" class="footer-link">La Misión</a>
+                            <a href="mision.html" class="footer-link">La Misión</a>
                         </div>
                     </div>
 
