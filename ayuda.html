@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda e Información | DOXA — Alta Repostería Nutricosmética</title>
+    <meta name="description"
+        content="Centro de ayuda, pedidos, envíos, pagos, devoluciones y condiciones legales de DOXA.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&family=Lato:wght@100;300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================================
+           VARIABLES Y RESET
+           Color de fondo idéntico al footer (#caccc3)
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #caccc3;
+            /* Color del footer */
+            --bg-elevated: #d2d4cb;
+            --text-main: #3C332A;
+            /* Texto DOXA */
+            --text-muted: rgba(60, 51, 42, 0.72);
+            --border-subtle: rgba(60, 51, 42, 0.15);
+            --border-active: rgba(60, 51, 42, 0.45);
+            --accent-gold: #c19b76;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Lexend', sans-serif;
+            font-size: 15px;
+            line-height: 1.8;
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================================
+           BARRA DE NAVEGACIÓN SUPERIOR (NAVBAR)
+           ========================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 85px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            background-color: rgba(202, 204, 195, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-logo {
+            font-family: 'Lato', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 6px;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .navbar-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-main);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .navbar-link:hover {
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 16px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        /* =========================================
+           ESTRUCTURA PRINCIPAL (HERMÈS FAQ LAYOUT)
+           ========================================= */
+        .faq-page-wrapper {
+            flex: 1;
+            padding-top: 120px;
+            padding-bottom: 80px;
+            max-width: 1350px;
+            width: 100%;
+            margin: 0 auto;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        /* Migas de pan / Cabecera pequeña */
+        .faq-breadcrumbs {
+            font-family: 'Lato', sans-serif;
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .faq-breadcrumbs a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .faq-breadcrumbs a:hover {
+            color: var(--text-main);
+        }
+
+        .faq-layout-grid {
+            display: grid;
+            grid-template-columns: 290px 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* =========================================
+           COLUMNA IZQUIERDA: SIDEBAR DE NAVEGACIÓN
+           ========================================= */
+        .faq-sidebar {
+            position: sticky;
+            top: 110px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            border-right: 1px solid var(--border-subtle);
+            padding-right: 25px;
+        }
+
+        .faq-nav-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .faq-nav-group-title {
+            font-family: 'Lato', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-nav-group-title svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.85;
+        }
+
+        .faq-nav-link {
+            display: block;
+            padding: 8px 12px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .faq-nav-link:hover {
+            color: var(--text-main);
+            background-color: rgba(60, 51, 42, 0.05);
+            padding-left: 16px;
+        }
+
+        .faq-nav-link.active {
+            color: var(--text-main);
+            font-weight: 500;
+            background-color: rgba(60, 51, 42, 0.08);
+            border-left: 3px solid var(--text-main);
+            padding-left: 14px;
+        }
+
+        /* =========================================
+           COLUMNA DERECHA: CONTENIDO PRINCIPAL
+           ========================================= */
+        .faq-content-area {
+            min-height: 500px;
+        }
+
+        .faq-section-panel {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .faq-section-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .faq-section-header {
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .faq-section-category {
+            font-family: 'Lato', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .faq-section-title {
+            font-family: 'Lato', sans-serif;
+            font-size: clamp(24px, 3.2vw, 34px);
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-main);
+            line-height: 1.25;
+        }
+
+        .faq-section-intro {
+            margin-top: 14px;
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 780px;
+        }
+
+        /* =========================================
+           ACORDEONES DE PREGUNTAS (ESTILO HERMÈS)
+           ========================================= */
+        .faq-accordion-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-subtle);
+            transition: background-color 0.25s ease;
+        }
+
+        .faq-item:first-child {
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .faq-question-btn {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 22px 10px 22px 0;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-main);
+            transition: opacity 0.2s ease;
+        }
+
+        .faq-question-btn:hover {
+            opacity: 0.8;
+        }
+
+        .faq-icon-wrapper {
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .faq-icon-wrapper::before,
+        .faq-icon-wrapper::after {
+            content: '';
+            position: absolute;
+            background-color: var(--text-main);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Línea horizontal del + */
+        .faq-icon-wrapper::before {
+            width: 13px;
+            height: 1.5px;
+        }
+
+        /* Línea vertical del + */
+        .faq-icon-wrapper::after {
+            width: 1.5px;
+            height: 13px;
+        }
+
+        /* Cuando está abierto el acordeón, la vertical gira a horizontal para formar '-' */
+        .faq-item.open .faq-icon-wrapper::after {
+            transform: rotate(90deg);
+            opacity: 0;
+        }
+
+        .faq-answer-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .faq-item.open .faq-answer-panel {
+            opacity: 1;
+        }
+
+        .faq-answer-inner {
+            padding: 0 10px 26px 0;
+            font-size: 14.5px;
+            color: rgba(60, 51, 42, 0.88);
+            line-height: 1.85;
+        }
+
+        .faq-answer-inner p {
+            margin-bottom: 12px;
+        }
+
+        .faq-answer-inner p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer-inner ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .faq-answer-inner li {
+            margin-bottom: 6px;
+        }
+
+        .faq-highlight-card {
+            background-color: rgba(60, 51, 42, 0.05);
+            border-left: 3px solid var(--text-main);
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        /* =========================================
+           FORMULARIOS (NEWSLETTER & CONTACTO)
+           ========================================= */
+        .faq-form-card {
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--border-subtle);
+            padding: 30px;
+            border-radius: 6px;
+            margin-top: 25px;
+            max-width: 650px;
+        }
+
+        .faq-form-row {
+            margin-bottom: 18px;
+        }
+
+        .faq-form-label {
+            display: block;
+            font-family: 'Lato', sans-serif;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        .faq-input,
+        .faq-textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-subtle);
+            border-radius: 3px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 13.5px;
+            color: var(--text-main);
+            transition: all 0.25s ease;
+            outline: none;
+        }
+
+        .faq-input:focus,
+        .faq-textarea:focus {
+            background-color: #fff;
+            border-color: var(--text-main);
+        }
+
+        .faq-checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--text-muted);
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .faq-checkbox-label input {
+            margin-top: 3px;
+        }
+
+        .faq-btn-submit {
+            display: inline-block;
+            background-color: var(--text-main);
+            color: #caccc3;
+            border: none;
+            padding: 12px 28px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .faq-btn-submit:hover {
+            background-color: #231e18;
+            transform: translateY(-1px);
+        }
+
+        .faq-feedback-msg {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 15px;
+            background-color: rgba(60, 51, 42, 0.1);
+            border-radius: 3px;
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        /* =========================================
+           BLOQUE HERMÈS: "¿MÁS PREGUNTAS?"
+           ========================================= */
+        .faq-contact-hero-banner {
+            margin-top: 60px;
+            padding: 45px 30px;
+            border: 1px solid var(--border-subtle);
+            background-color: rgba(255, 255, 255, 0.2);
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .faq-contact-hero-banner h3 {
+            font-family: 'Lato', sans-serif;
+            font-size: 22px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .faq-contact-hero-banner p {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin: 0 auto 20px auto;
+        }
+
+        .faq-contact-btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 10px 26px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .faq-contact-btn:hover {
+            background: var(--text-main);
+            color: #caccc3;
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 950px) {
+            .faq-layout-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .faq-sidebar {
+                position: static;
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid var(--border-subtle);
+                padding-bottom: 25px;
+            }
+
+            .faq-nav-group {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 25px;
+                height: 70px;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .navbar-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #caccc3;
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 20px;
+                display: none;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+
+            .faq-page-wrapper {
+                padding-top: 95px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .faq-question-btn {
+                font-size: 14.5px;
+            }
+        }
+
+        /* =========================================
+           PIE DE PÁGINA (FOOTER IDÉNTICO)
+           ========================================= */
+        .gallery-footer {
+            background-color: #caccc3;
+            color: #3C332A;
+            padding: 40px 0 25px 0;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: auto;
+        }
+
+        .footer-grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .footer-columns-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: start;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-column-title {
+            font-family: 'Lato', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #3C332A;
+            margin-bottom: 20px;
+        }
+
+        .footer-column-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .footer-column-links .footer-link {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            color: #3C332A;
+            text-decoration: none;
+            opacity: 0.7;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+
+        .footer-column-links .footer-link:hover {
+            opacity: 1;
+        }
+
+        .footer-newsletter-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-newsletter-info p {
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            color: #3C332A;
+            opacity: 0.8;
+            margin-bottom: 0;
+            font-weight: 300;
+            letter-spacing: 0.2px;
+        }
+
+        .footer-link-underline {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            color: #3C332A;
+            text-decoration: underline;
+            opacity: 0.7;
+            font-weight: 300;
+            transition: opacity 0.3s ease;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .footer-link-underline:hover {
+            opacity: 1;
+        }
+
+        .btn-newsletter-subscribe {
+            display: inline-block;
+            background-color: transparent;
+            border: 1px solid #3C332A;
+            color: #3C332A;
+            padding: 8px 20px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .btn-newsletter-subscribe:hover {
+            background-color: #3C332A;
+            color: #caccc3;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .social-icon {
+            color: #3C332A;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            border-top: 1px solid rgba(60, 51, 42, 0.1);
+            padding-top: 20px;
+            margin-top: 10px;
+        }
+
+        .footer-copy {
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            color: #3C332A;
+            opacity: 0.6;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+        }
+
+        @media (max-width: 900px) {
+            .footer-columns-row {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-columns-row {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+
+            .footer-bottom-row {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+    <nav class="navbar" id="mainNavbar">
+        <a href="index.html" class="navbar-logo">DOXA</a>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="coleccion.html" class="navbar-link">La Colección</a>
+            <a href="galeria.html" class="navbar-link">Galería</a>
+            <a href="articulos.html" class="navbar-link">Artículos</a>
+            <a href="mision.html" class="navbar-link">La Misión</a>
+        </div>
+    </nav>
+
+    <!-- CUERPO PRINCIPAL DEL CENTRO DE AYUDA -->
+    <main class="faq-page-wrapper">
+
+        <!-- MIGA DE PAN DINÁMICA -->
+        <div class="faq-breadcrumbs">
+            <a href="index.html">DOXA</a>
+            <span>/</span>
+            <a href="ayuda.html">Centro de Información</a>
+            <span>/</span>
+            <span id="breadcrumbCurrent">Mis Pedidos</span>
+        </div>
+
+        <div class="faq-layout-grid">
+
+            <!-- SIDEBAR IZQUIERDO DE NAVEGACIÓN (ESTILO HERMÈS) -->
+            <aside class="faq-sidebar">
+
+                <!-- GRUPO: MIS PEDIDOS -->
+                <div class="faq-nav-group">
+                    <div class="faq-nav-group-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                            <line x1="2" y1="10" x2="22" y2="10"></line>
+                        </svg>
+                        <span>Mis Pedidos</span>
+                    </div>
+                    <a href="#pagos" class="faq-nav-link" data-section="pagos">Opciones de pago</a>
+                    <a href="#entregas" class="faq-nav-link" data-section="entregas">Opciones de entrega</a>
+                    <a href="#seguimiento" class="faq-nav-link" data-section="seguimiento">Seguimiento de pedidos</a>
+                    <a href="#devoluciones" class="faq-nav-link" data-section="devoluciones">Cambios y devoluciones</a>
+                </div>
+
+                <!-- GRUPO: NEWSLETTER -->
+                <div class="faq-nav-group">
+                    <div class="faq-nav-group-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span>Newsletter</span>
+                    </div>
+                    <a href="#newsletter" class="faq-nav-link" data-section="newsletter">Suscripción al Club DOXA</a>
+                </div>
+
+                <!-- GRUPO: LA MAISON -->
+                <div class="faq-nav-group">
+                    <div class="faq-nav-group-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                            <path d="M2 12h20"></path>
+                        </svg>
+                        <span>La Maison</span>
+                    </div>
+                    <a href="#mision" class="faq-nav-link" data-section="mision">La Misión & Filosofía</a>
+                </div>
+
+                <!-- GRUPO: AVISO LEGAL -->
+                <div class="faq-nav-group">
+                    <div class="faq-nav-group-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <span>Aviso Legal</span>
+                    </div>
+                    <a href="#condiciones-venta" class="faq-nav-link" data-section="condiciones-venta">Condiciones de venta</a>
+                    <a href="#privacidad" class="faq-nav-link" data-section="privacidad">Política de privacidad</a>
+                    <a href="#cookies" class="faq-nav-link" data-section="cookies">Política de cookies</a>
+                </div>
+
+                <!-- GRUPO: CONTACTO -->
+                <div class="faq-nav-group">
+                    <div class="faq-nav-group-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span>Contacto</span>
+                    </div>
+                    <a href="#contacto" class="faq-nav-link" data-section="contacto">Atención personalizada</a>
+                </div>
+
+            </aside>
+
+            <!-- CONTENIDO DINÁMICO SEGÚN LA SECCIÓN SELECCIONADA -->
+            <section class="faq-content-area">
+
+                <!-- 1. OPCIONES DE PAGO -->
+                <article class="faq-section-panel" id="panel-pagos">
+                    <div class="faq-section-header">
+                        <div class="faq-section-category">Mis Pedidos</div>
+                        <h1 class="faq-section-title">Opciones de Pago</h1>
+                        <p class="faq-section-intro">
+                            Garantizamos la máxima seguridad y confidencialidad en todas las transacciones dentro de nuestro ecosistema.
+                        </p>
+                    </div>
+
+                    <div class="faq-accordion-group">
+                        <div class="faq-item open">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Qué métodos de pago se aceptan en DOXA?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Aceptamos los principales métodos de pago digitales e internacionales a través de nuestra pasarela cifrada de alta seguridad:</p>
+                                    <ul>
+                                        <li><strong>Tarjetas de crédito y débito:</strong> Visa, MasterCard, Maestro y American Express.</li>
+                                        <li><strong>Carteras digitales:</strong> Apple Pay y Google Pay para un proceso de confirmación ágil con verificación biométrica en un clic.</li>
+                                        <li><strong>Seguridad de extremo a extremo:</strong> Todos los pagos están procesados bajo el protocolo SSL de 256 bits y cumplen con el estándar PCI-DSS Nivel 1.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿En qué momento se efectúa el cargo en mi cuenta?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>El importe de tu caja o suscripción se carga inmediatamente tras completar la autorización de pago en el proceso de reserva. Recibirás un correo electrónico de confirmación con el resumen desglosado de tu pedido y el número de reserva asignado.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Puedo solicitar una factura oficial con NIF / CIF?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Por defecto, emitimos un recibo simplificado adjunto a tu email de confirmación. Si necesitas una factura con desglose de IVA y datos fiscales de tu empresa o actividad profesional, solo debes indicarlo en las notas del pedido o enviarnos un email a <a href="mailto:facturacion@doxafoods.com" style="color:var(--text-main); font-weight:500;">facturacion@doxafoods.com</a> con tus datos fiscales y el número de orden.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Mis datos bancarios quedan guardados en vuestros servidores?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>No. DOXA nunca almacena los números ni los códigos de seguridad (CVV) de tus tarjetas. Toda la pasarela de procesamiento es gestionada de forma directa y cifrada por Stripe, el estándar líder global en pagos seguros.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. OPCIONES DE ENTREGA -->
+                <article class="faq-section-panel" id="panel-entregas">
+                    <div class="faq-section-header">
+                        <div class="faq-section-category">Mis Pedidos</div>
+                        <h1 class="faq-section-title">Opciones de Entrega</h1>
+                        <p class="faq-section-intro">
+                            DOXAS se elaboran artesanalmente bajo pedido. Conoce nuestros tiempos de obrador y transporte garantizado.
+                        </p>
+                    </div>
+
+                    <div class="faq-accordion-group">
+                        <div class="faq-item open">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Por qué horneamos bajo pedido y cuándo saldrá mi caja?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>A diferencia de la bollería industrializada, en DOXA no almacenamos producto terminado. Cada caja se hornea de forma personalizada para que los péptidos de colágeno, los activos funcionales y la jugosidad de la masa de almendra lleguen a ti en su punto óptimo.</p>
+                                    <p>Una vez horneadas y alcanzada la temperatura de reposo adecuada, las cajas se envían inmediatamente mediante mensajería urgente refrigerada o exprés protegida en un plazo de 24 a 48 horas laborales.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Cuáles son las tarifas de envío?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <ul>
+                                        <li><strong>España Peninsular:</strong> Envío estándar premium 24/48h: 4,90 €.</li>
+                                        <li><strong>Envíos gratuitos:</strong> En pedidos de 2 o más cajas, o mediante reservas de suscripción periódica.</li>
+                                        <li><strong>Islas Baleares:</strong> Tarifa de envío de 7,90 € (plazo de 48-72h).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Cómo vienen protegidas las DOXAS durante el viaje?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Utilizamos un embalaje protector térmico y sellado de alta densidad diseñado especialmente para preservar la textura tierna del interior y la corteza sutil sin necesidad de conservantes químicos ni estabilizantes artificiales.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Cómo consumir tu DOXA al recibirla?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <div class="faq-highlight-card">
+                                        <strong>Consejo del Obrador:</strong> Un golpe de calor de 10 a 15 segundos en el microondas (o 3 minutos en horno a 150°C) despierta los aceites nobles de cacao y MCT, devolviéndole la temperatura y aroma del recién horneado.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3. SEGUIMIENTO DE PEDIDOS -->
+                <article class="faq-section-panel" id="panel-seguimiento">
+                    <div class="faq-section-header">
+                        <div class="faq-section-category">Mis Pedidos</div>
+                        <h1 class="faq-section-title">Seguimiento de Pedidos</h1>
+                        <p class="faq-section-intro">
+                            Supervisa en tiempo real el proceso desde la sesión de horneado en el obrador hasta la entrega en tu puerta.
+                        </p>
+                    </div>
+
+                    <div class="faq-accordion-group">
+                        <div class="faq-item open">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Cómo recibo el número de seguimiento de mi caja?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>En cuanto tu lote de DOXAS finaliza el reposo y es entregado a nuestro operador logístico, recibirás un correo electrónico automático con el número de localizador y un enlace directo para rastrear el paquete en tiempo real.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Qué sucede si no me encuentro en mi domicilio en el momento de la entrega?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>La empresa de mensajería te enviará un SMS o correo avisándote del tramo horario estimado. Si no estuvieras disponible, realizarán un segundo intento sin coste o podrás coordinar la recogida en un punto de entrega cercano o concertar una fecha alternativa.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>He completado mi reserva pero no veo el email de confirmación</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Te recomendamos verificar tu bandeja de correo no deseado (Spam o Promociones). Si tras 15 minutos no lo has recibido, escríbenos a <a href="mailto:hola@doxafoods.com" style="color:var(--text-main); font-weight:500;">hola@doxafoods.com</a> indicando tu nombre y te confirmaremos el estado de tu pedido al instante.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 4. CAMBIOS Y DEVOLUCIONES -->
+                <article class="faq-section-panel" id="panel-devoluciones">
+                    <div class="faq-section-header">
+                        <div class="faq-section-category">Mis Pedidos</div>
+                        <h1 class="faq-section-title">Cambios y Devoluciones</h1>
+                        <p class="faq-section-intro">
+                            Transparencia y compromiso sobre la política de producto fresco y garantía de satisfacción DOXA.
+                        </p>
+                    </div>
+
+                    <div class="faq-accordion-group">
+                        <div class="faq-item open">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Puedo devolver una caja una vez entregada?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Al tratarse de alimentos frescos, elaborados artesanalmente y de consumo perecedero sin conservantes, la normativa sanitaria de la Unión Europea y el Real Decreto Legislativo 1/2007 (Ley de Consumidores) <strong>exceptúan el derecho de desistimiento una vez el producto ha salido de nuestras instalaciones o ha sido entregado</strong>, con el fin de proteger la seguridad alimentaria.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Qué ocurre si el paquete llega dañado o con alguna anomalía?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Nuestra garantía de satisfacción es absoluta. Si por un percance en el transporte tu caja llega deteriorada o con el precinto alterado:</p>
+                                    <ul>
+                                        <li>Envíanos un correo a <a href="mailto:incidencias@doxafoods.com" style="color:var(--text-main); font-weight:500;">incidencias@doxafoods.com</a> dentro de las primeras 24 horas tras la entrega.</li>
+                                        <li>Adjunta una fotografía del paquete y el albarán de entrega.</li>
+                                        <li>Te enviaremos una nueva caja horneada en la siguiente tanda sin coste alguno, o te reembolsaremos el 100% de tu dinero de manera inmediata.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Es posible cancelar o modificar mi pedido antes del horneado?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Sí. Puedes modificar tu dirección de entrega o cancelar tu reserva siempre que lo solicites con al menos <strong>12 horas de antelación</strong> al inicio del turno de horneado programado. Escríbenos directamente indicando tu número de pedido.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5. NEWSLETTER -->
+                <article class="faq-section-panel" id="panel-newsletter">
+                    <div class="faq-section-header">
+                        <div class="faq-section-category">Newsletter</div>
+                        <h1 class="faq-section-title">El Ecosistema DOXA</h1>
+                        <p class="faq-section-intro">
+                            Forma parte de nuestra comunidad privada. Divulgación en nutricosmética, salud metabólica, arte contemporáneo y acceso preferente a lotes limitados.
+                        </p>
+                    </div>
+
+                    <div class="faq-accordion-group">
+                        <div class="faq-item open">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Qué recibirás al suscribirte?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <ul>
+                                        <li><strong>Lotes de obrador exclusivos:</strong> Notificación prioritaria antes de que se agoten las plazas de horneado semanal.</li>
+                                        <li><strong>Nuevas creaciones:</strong> Acceso previo a recetas estacionales y combinaciones moleculares de activos.</li>
+                                        <li><strong>Divulgación de rigor:</strong> Artículos sobre longevidad, péptidos bioactivos y hábitos conscientes elaborados por nuestro equipo.</li>
+                                        <li><strong>Cero spam:</strong> Enviamos comunicaciones únicamente cuando tenemos algo de auténtico valor que compartir.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Cómo puedo darme de baja?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Cada correo incluye un enlace al final para cancelar tu suscripción con un solo clic en cualquier instante, respetando escrupulosamente tu privacidad.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FORMULARIO DE SUSCRIPCIÓN -->
+                    <div class="faq-form-card">
+                        <h3 style="font-family:'Lato',sans-serif; font-size:16px; letter-spacing:3px; text-transform:uppercase; margin-bottom:12px; font-weight:500;">
+                            Únete al Manifiesto DOXA
+                        </h3>
+                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:20px;">
+                            Introduce tu correo electrónico para recibir nuestras notas de investigación y aperturas de reserva.
+                        </p>
+
+                        <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)">
+                            <div class="faq-form-row">
+                                <label class="faq-form-label" for="newsEmail">Tu correo electrónico</label>
+                                <input type="email" id="newsEmail" class="faq-input" placeholder="ejemplo@correo.com" required>
+                            </div>
+                            <label class="faq-checkbox-label">
+                                <input type="checkbox" required>
+                                <span>Acepto la <a href="#privacidad" onclick="activateSection('privacidad')" style="color:var(--text-main); text-decoration:underline;">política de privacidad</a> y el tratamiento confidencial de mis datos.</span>
+                            </label>
+                            <button type="submit" class="faq-btn-submit">Suscribirme</button>
+                            <div class="faq-feedback-msg" id="newsletterMsg">
+                                ✓ Gracias por suscribirte. Te hemos enviado un correo de bienvenida.
+                            </div>
+                        </form>
+                    </div>
+                </article>
+
+                <!-- 6. LA MISIÓN -->
+                <article class="faq-section-panel" id="panel-mision">
+                    <div class="faq-section-header">
+                        <div class="faq-section-category">La Maison</div>
+                        <h1 class="faq-section-title">La Misión DOXA</h1>
+                        <p class="faq-section-intro">
+                            Donde la alta repostería y la nutricosmética celular encuentran un mismo lenguaje.
+                        </p>
+                    </div>
+
+                    <div class="faq-accordion-group">
+                        <div class="faq-item open">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Qué define a la Repostería Nutricosmética?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>DOXA nació de una pregunta esencial: ¿por qué el momento de mayor placer gastronómico del día tiene que comprometer tu energía, generar picos de glucosa o inflamación celular?</p>
+                                    <p>Cada una de nuestras galletas sustituye las harinas refinadas por almendra molida en frío, los azúcares industriales por eritritol puro no glucémico, e incorpora dosis biodisponibles de activos clave: colágeno hidrolizado, creatina, biotina, vitamina C, vitamina D3 y triglicéridos de cadena media (MCT).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Son aptas para deportistas y dietas cetogénicas o bajas en carbohidratos?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Sí. Con apenas ~2.2g de carbohidratos netos por pieza y 20g de proteína de máxima asimilación celular, DOXA está específicamente formulada para quienes cuidan su salud metabólica sin renunciar al lujo de una gran galleta de autor.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>El diálogo con el arte contemporáneo</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>En DOXA concebimos cada receta como una obra matérica. Nos inspiramos en la fuerza plástica de artistas como Anselm Kiefer, Miquel Barceló o Antonio García Villarán, reivindicando la textura, la materia noble y la verdad en los procesos.</p>
+                                    <div style="margin-top:20px;">
+                                        <a href="mision.html" class="faq-contact-btn">Leer el Manifiesto Completo</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 7. CONDICIONES DE VENTA -->
+                <article class="faq-section-panel" id="panel-condiciones-venta">
+                    <div class="faq-section-header">
+                        <div class="faq-section-category">Aviso Legal</div>
+                        <h1 class="faq-section-title">Condiciones Generales de Venta</h1>
+                        <p class="faq-section-intro">
+                            Términos contractuales aplicables a todas las compras y reservas realizadas en el portal de DOXA.
+                        </p>
+                    </div>
+
+                    <div class="faq-accordion-group">
+                        <div class="faq-item open">
+                            <button class="faq-question-btn" type="button">
+                                <span>1. Ámbito de aplicación y titularidad</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Las presentes Condiciones Generales de Contratación regulan la relación comercial entre los usuarios del sitio web y <strong>DOXA FOODS S.L.</strong> con domicilio fiscal en España, para la adquisición de productos alimentarios de alta repostería nutricosmética.</p>
+                                    <p>La realización de un pedido implica la aceptación plena e incondicional de estas condiciones por parte del comprador.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>2. Precios e impuestos</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Todos los precios expuestos en el sitio web se expresan en Euros (€) e incluyen el Impuesto sobre el Valor Añadido (IVA) vigente en España para productos alimenticios (10%). Los gastos de transporte se calculan y desglosan explícitamente antes de formalizar la compra.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>3. Proceso de elaboración y entrega</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Debido a la naturaleza artesanal y bajo demanda de las DOXAS, los plazos de entrega indicados son estimativos y condicionados a la finalización del horneado y reposo térmico del lote. La empresa responderá de la entrega puntual dentro de los estándares de transporte urgente contratados.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>4. Legislación aplicable y resolución de litigios</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Las compras se rigen por la legislación española. De conformidad con el Reglamento (UE) 524/2013, se informa al usuario de la existencia de la plataforma europea de resolución de litigios en línea en materia de consumo accesible en <a href="https://ec.europa.eu/consumers/odr" target="_blank" style="color:var(--text-main); text-decoration:underline;">ec.europa.eu/consumers/odr</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 8. POLÍTICA DE PRIVACIDAD -->
+                <article class="faq-section-panel" id="panel-privacidad">
+                    <div class="faq-section-header">
+                        <div class="faq-section-category">Aviso Legal</div>
+                        <h1 class="faq-section-title">Política de Privacidad</h1>
+                        <p class="faq-section-intro">
+                            Información detallada sobre el tratamiento de tus datos personales conforme al RGPD (UE 2016/679) y la LOPDGDD 3/2018.
+                        </p>
+                    </div>
+
+                    <div class="faq-accordion-group">
+                        <div class="faq-item open">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Quién es el Responsable del tratamiento de tus datos?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p><strong>Identidad:</strong> DOXA FOODS S.L.<br>
+                                    <strong>Finalidad principal:</strong> Gestión de reservas, elaboración personalizada, envío de pedidos, atención a consultas y envío de newsletters informativas si media consentimiento expreso.<br>
+                                    <strong>Contacto de Privacidad:</strong> <a href="mailto:privacidad@doxafoods.com" style="color:var(--text-main); font-weight:500;">privacidad@doxafoods.com</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Con qué base legal tratamos tus datos?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <ul>
+                                        <li><strong>Ejecución del contrato:</strong> Para procesar el pedido, facturarlo y coordinar el transporte.</li>
+                                        <li><strong>Consentimiento del interesado:</strong> Para el envío de boletines o respuestas a formularios de contacto.</li>
+                                        <li><strong>Obligación legal:</strong> Para la conservación de justificantes contables y fiscales exigidos por la normativa tributaria española.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿A qué destinatarios se comunicarán tus datos?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Tus datos únicamente se cederán a proveedores necesarios para la prestación del servicio: pasarelas de pago seguro (Stripe), empresas de mensajería para el transporte físico, y entidades tributarias según imperativo legal. Nunca comercializamos ni cedemos tus datos a terceros con fines publicitarios.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Cuáles son tus derechos y cómo ejercerlos?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Tienes derecho a acceder a tus datos, solicitar la rectificación de datos inexactos o pedir su supresión cuando ya no sean necesarios. Para ejercerlos, basta con remitir un correo electrónico a <a href="mailto:privacidad@doxafoods.com" style="color:var(--text-main); font-weight:500;">privacidad@doxafoods.com</a> indicando tu petición junto a un documento que acredite tu identidad.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 9. POLÍTICA DE COOKIES -->
+                <article class="faq-section-panel" id="panel-cookies">
+                    <div class="faq-section-header">
+                        <div class="faq-section-category">Aviso Legal</div>
+                        <h1 class="faq-section-title">Política de Cookies</h1>
+                        <p class="faq-section-intro">
+                            Transparencia en el uso de cookies y dispositivos de almacenamiento y recuperación de datos en tu navegador.
+                        </p>
+                    </div>
+
+                    <div class="faq-accordion-group">
+                        <div class="faq-item open">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Qué son las cookies y para qué se utilizan?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Una cookie es un pequeño archivo de texto que se almacena en tu navegador cuando visitas casi cualquier página web. Su utilidad es que la web sea capaz de recordar tu visita cuando vuelvas a navegar por esa página, como mantener los artículos en el carrito o recordar tus preferencias.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Qué tipos de cookies utiliza este sitio web?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <ul>
+                                        <li><strong>Cookies técnicas (estrictamente necesarias):</strong> Permiten la navegación a través del sitio web y la utilización de las diferentes opciones o servicios, como el control de tráfico, la identificación de sesión y el proceso de compra seguro.</li>
+                                        <li><strong>Cookies de personalización:</strong> Permiten al usuario acceder al servicio con algunas características de carácter general predefinidas (idioma, tipografía o región).</li>
+                                        <li><strong>Cookies analíticas anónimas:</strong> Nos permiten cuantificar el número de usuarios y realizar la medición y análisis estadístico de la utilización del servicio, siempre de forma agregada y no vinculada a identidades personales.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question-btn" type="button">
+                                <span>¿Cómo configurar o desactivar las cookies en tu navegador?</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p>Puedes restringir, bloquear o borrar las cookies de cualquier sitio web configurando las opciones del navegador instalado en tu ordenador o dispositivo móvil (Google Chrome, Apple Safari, Mozilla Firefox o Microsoft Edge). Si bloqueas las cookies técnicas necesarias, es posible que algunas funciones de la tienda no operen correctamente.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 10. CONTACTO -->
+                <article class="faq-section-panel" id="panel-contacto">
+                    <div class="faq-section-header">
+                        <div class="faq-section-category">Atención Personalizada</div>
+                        <h1 class="faq-section-title">Contacto</h1>
+                        <p class="faq-section-intro">
+                            Nuestro equipo de asesores y el obrador de DOXA están a tu disposición para cualquier consulta sobre reservas, pedidos o ingredientes.
+                        </p>
+                    </div>
+
+                    <div class="faq-accordion-group">
+                        <div class="faq-item open">
+                            <button class="faq-question-btn" type="button">
+                                <span>Canales directos de atención</span>
+                                <div class="faq-icon-wrapper"></div>
+                            </button>
+                            <div class="faq-answer-panel">
+                                <div class="faq-answer-inner">
+                                    <p><strong>Correo electrónico general:</strong> <a href="mailto:hola@doxafoods.com" style="color:var(--text-main); font-weight:500;">hola@doxafoods.com</a></p>
+                                    <p><strong>Incidencias y pedidos:</strong> <a href="mailto:atencion@doxafoods.com" style="color:var(--text-main); font-weight:500;">atencion@doxafoods.com</a></p>
+                                    <p><strong>Horario de atención:</strong> Lunes a Viernes de 09:00 a 19:00 (CET).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FORMULARIO DE CONTACTO DIRECTO -->
+                    <div class="faq-form-card">
+                        <h3 style="font-family:'Lato',sans-serif; font-size:16px; letter-spacing:3px; text-transform:uppercase; margin-bottom:12px; font-weight:500;">
+                            Envíanos un mensaje
+                        </h3>
+                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:20px;">
+                            Respondemos a todas las consultas en un plazo inferior a 24 horas laborables.
+                        </p>
+
+                        <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                            <div class="faq-form-row">
+                                <label class="faq-form-label" for="contactName">Nombre y Apellidos</label>
+                                <input type="text" id="contactName" class="faq-input" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="faq-form-row">
+                                <label class="faq-form-label" for="contactEmail">Correo electrónico</label>
+                                <input type="email" id="contactEmail" class="faq-input" placeholder="ejemplo@correo.com" required>
+                            </div>
+                            <div class="faq-form-row">
+                                <label class="faq-form-label" for="contactOrder">Nº de Reserva o Pedido (Opcional)</label>
+                                <input type="text" id="contactOrder" class="faq-input" placeholder="Ej: #DX-2026-08">
+                            </div>
+                            <div class="faq-form-row">
+                                <label class="faq-form-label" for="contactMsg">¿En qué podemos ayudarte?</label>
+                                <textarea id="contactMsg" class="faq-textarea" rows="4" placeholder="Escribe tu mensaje..." required></textarea>
+                            </div>
+                            <label class="faq-checkbox-label">
+                                <input type="checkbox" required>
+                                <span>Acepto la <a href="#privacidad" onclick="activateSection('privacidad')" style="color:var(--text-main); text-decoration:underline;">política de privacidad</a>.</span>
+                            </label>
+                            <button type="submit" class="faq-btn-submit">Enviar Mensaje</button>
+                            <div class="faq-feedback-msg" id="contactFeedback">
+                                ✓ Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo a la mayor brevedad.
+                            </div>
+                        </form>
+                    </div>
+                </article>
+
+                <!-- BLOQUE "¿MÁS PREGUNTAS?" INSPIRADO EN HERMÈS -->
+                <div class="faq-contact-hero-banner" id="bannerMasPreguntas">
+                    <h3>¿Necesitas más información?</h3>
+                    <p>
+                        Si no encuentras respuesta a tu duda o deseas una atención personalizada sobre formulación o pedidos corporativos, contáctanos.
+                    </p>
+                    <a href="#contacto" class="faq-contact-btn" onclick="activateSection('contacto')">Contactar con Asesores</a>
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- =========================================================================
+       PIE DE PÁGINA DE LUJO (FOOTER)
+       ========================================================================= -->
+    <footer class="gallery-footer">
+        <div class="footer-grid-container">
+
+            <div class="footer-columns-row">
+
+                <!-- [COLUMNA 1] CONTACTO -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">Contacto</h4>
+                    <div class="footer-column-links">
+                        <a href="ayuda.html#contacto" class="footer-link-underline">Envíanos un correo</a>
+                        <div class="footer-social-icons">
+                            <a href="https://instagram.com" class="social-icon" target="_blank" aria-label="Instagram">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- [COLUMNA 2] MIS PEDIDOS -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">Mis Pedidos</h4>
+                    <div class="footer-column-links">
+                        <a href="ayuda.html#pagos" class="footer-link">Opciones de pago</a>
+                        <a href="ayuda.html#entregas" class="footer-link">Opciones de entrega</a>
+                        <a href="ayuda.html#seguimiento" class="footer-link">Seguimiento de pedidos</a>
+                        <a href="ayuda.html#devoluciones" class="footer-link">Cambios y devoluciones</a>
+                    </div>
+                </div>
+
+                <!-- [COLUMNA 3] NEWSLETTER -->
+                <div class="footer-column newsletter-col">
+                    <h4 class="footer-column-title">Newsletter</h4>
+                    <div class="footer-newsletter-info">
+                        <p>Mantente en contacto con nuestro ecosistema</p>
+                        <a href="ayuda.html#newsletter" class="btn-newsletter-subscribe">Suscríbete</a>
+                    </div>
+                </div>
+
+                <!-- [COLUMNA 4] DOXA, LA MISIÓN -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">DOXA, la Misión</h4>
+                    <div class="footer-column-links">
+                        <a href="mision.html" class="footer-link">La Misión</a>
+                    </div>
+                </div>
+
+                <!-- [COLUMNA 5] AVISO LEGAL -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">Aviso Legal</h4>
+                    <div class="footer-column-links">
+                        <a href="ayuda.html#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
+                        <a href="ayuda.html#privacidad" class="footer-link">Política de privacidad</a>
+                        <a href="ayuda.html#cookies" class="footer-link">Cookies</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Fila inferior: copyright alineado a la derecha -->
+            <div class="footer-bottom-row">
+                <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- =========================================================================
+       SCRIPTS: LÓGICA DE NAVEGACIÓN Y ACORDEÓN
+       ========================================================================= -->
+    <script>
+        // Mapeo de nombres descriptivos para el breadcrumb
+        const sectionTitles = {
+            'pagos': 'Opciones de pago',
+            'entregas': 'Opciones de entrega',
+            'seguimiento': 'Seguimiento de pedidos',
+            'devoluciones': 'Cambios y devoluciones',
+            'newsletter': 'Newsletter & Comunidad',
+            'mision': 'La Misión DOXA',
+            'condiciones-venta': 'Condiciones de venta',
+            'privacidad': 'Política de privacidad',
+            'cookies': 'Política de cookies',
+            'contacto': 'Atención y Contacto'
+        };
+
+        // Función para cambiar de sección activa
+        function activateSection(sectionId, updateHash = true) {
+            if (!sectionTitles[sectionId]) {
+                sectionId = 'pagos'; // Fallback por defecto
+            }
+
+            // Ocultar todos los paneles y mostrar el seleccionado
+            const allPanels = document.querySelectorAll('.faq-section-panel');
+            allPanels.forEach(panel => panel.classList.remove('active'));
+
+            const targetPanel = document.getElementById('panel-' + sectionId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+
+            // Actualizar enlaces del sidebar
+            const allLinks = document.querySelectorAll('.faq-nav-link');
+            allLinks.forEach(link => {
+                if (link.getAttribute('data-section') === sectionId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Actualizar texto del breadcrumb
+            const breadcrumbEl = document.getElementById('breadcrumbCurrent');
+            if (breadcrumbEl) {
+                breadcrumbEl.textContent = sectionTitles[sectionId];
+            }
+
+            // Si se activa contacto o newsletter, podemos ajustar la visibilidad del banner
+            const banner = document.getElementById('bannerMasPreguntas');
+            if (banner) {
+                banner.style.display = (sectionId === 'contacto') ? 'none' : 'block';
+            }
+
+            // Actualizar URL hash si procede
+            if (updateHash && window.location.hash.slice(1) !== sectionId) {
+                history.pushState(null, null, '#' + sectionId);
+            }
+
+            // Auto-ajustar alturas de los acordeones abiertos del nuevo panel
+            setTimeout(refreshAccordionHeights, 60);
+
+            // Si estamos en pantallas pequeñas, scroll suave hacia el contenido
+            if (window.innerWidth <= 950) {
+                const contentArea = document.querySelector('.faq-content-area');
+                if (contentArea) {
+                    contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+
+        // Lógica para desplegar / contraer preguntas (Acordeón estilo Hermès)
+        function initAccordions() {
+            const accordionButtons = document.querySelectorAll('.faq-question-btn');
+            accordionButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item = btn.closest('.faq-item');
+                    const isOpen = item.classList.contains('open');
+
+                    // Cerrar o abrir solo este item
+                    if (isOpen) {
+                        item.classList.remove('open');
+                        const panel = item.querySelector('.faq-answer-panel');
+                        if (panel) panel.style.maxHeight = null;
+                    } else {
+                        item.classList.add('open');
+                        const panel = item.querySelector('.faq-answer-panel');
+                        if (panel) {
+                            panel.style.maxHeight = panel.scrollHeight + "px";
+                        }
+                    }
+                });
+            });
+
+            refreshAccordionHeights();
+        }
+
+        function refreshAccordionHeights() {
+            const openPanels = document.querySelectorAll('.faq-section-panel.active .faq-item.open .faq-answer-panel');
+            openPanels.forEach(panel => {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            });
+        }
+
+        // Manejador del hash en la URL al cargar o cambiar el hash
+        function handleHashChange() {
+            let hash = window.location.hash.replace('#', '').trim();
+            // Normalizar alias de enlaces
+            if (hash === 'newsletter-signup') hash = 'newsletter';
+            if (hash === 'reserva') hash = 'entregas';
+
+            if (hash && sectionTitles[hash]) {
+                activateSection(hash, false);
+            } else {
+                activateSection('pagos', false);
+            }
+        }
+
+        // Click en enlaces del sidebar
+        document.querySelectorAll('.faq-nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sec = link.getAttribute('data-section');
+                activateSection(sec, true);
+            });
+        });
+
+        // Click en enlaces del footer dentro de esta página
+        document.querySelectorAll('.footer-link, .btn-newsletter-subscribe, .footer-link-underline').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && href.includes('#')) {
+                    const hash = href.split('#')[1];
+                    if (sectionTitles[hash] || hash === 'newsletter') {
+                        e.preventDefault();
+                        activateSection(hash === 'newsletter-signup' ? 'newsletter' : hash, true);
+                        window.scrollTo({ top: 100, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Toggle menú móvil
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navbarMenu = document.getElementById('navbarMenu');
+        if (mobileToggle && navbarMenu) {
+            mobileToggle.addEventListener('click', () => {
+                navbarMenu.classList.toggle('active');
+            });
+        }
+
+        // Simulación de envío de newsletter
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const msg = document.getElementById('newsletterMsg');
+            if (msg) {
+                msg.style.display = 'block';
+                document.getElementById('newsEmail').value = '';
+            }
+        }
+
+        // Simulación de envío de formulario de contacto
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const msg = document.getElementById('contactFeedback');
+            if (msg) {
+                msg.style.display = 'block';
+                e.target.reset();
+            }
+        }
+
+        // Inicializar al cargar
+        window.addEventListener('DOMContentLoaded', () => {
+            initAccordions();
+            handleHashChange();
+        });
+
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('resize', refreshAccordionHeights);
+    </script>
+
+</body>
+
+</html>
