@@ -1,3 +1,76 @@
+<!-- 
+========================================================================================
+ÍNDICE Y GUÍA DE COPYWRITING: TEXTOS EDITABLES DE CADA APARTADO DEL FOOTER
+========================================================================================
+En este archivo (ayuda.html) se encuentra alojada toda la información que se abre al
+hacer clic en cualquiera de los enlaces del pie de página (footer) de la web.
+
+A continuación tienes el mapa de apartados para saber exactamente en qué sección
+debes pegar o modificar los textos reales:
+
+----------------------------------------------------------------------------------------
+[COLUMNA 1 DEL FOOTER: CONTACTO]
+----------------------------------------------------------------------------------------
+• APARTADO 10: ATENCIÓN Y CONTACTO DIRECTO
+  - ID / Hash: #contacto
+  - Contiene: Emails de atención, horarios de obrador y formulario directo de contacto.
+
+----------------------------------------------------------------------------------------
+[COLUMNA 2 DEL FOOTER: MIS PEDIDOS]
+----------------------------------------------------------------------------------------
+• APARTADO 1: OPCIONES DE PAGO
+  - ID / Hash: #pagos
+  - Contiene: Métodos aceptados (tarjetas/Apple Pay), momento del cobro, facturación con CIF/NIF y seguridad.
+
+• APARTADO 2: OPCIONES DE ENTREGA
+  - ID / Hash: #entregas
+  - Contiene: Tiempos de horneado y envío 24/48h, tarifas, conservación y golpe de calor.
+
+• APARTADO 3: SEGUIMIENTO DE PEDIDOS
+  - ID / Hash: #seguimiento
+  - Contiene: Recepción del tracking, qué hacer si no estás en casa, confirmación de reserva.
+
+• APARTADO 4: CAMBIOS Y DEVOLUCIONES
+  - ID / Hash: #devoluciones
+  - Contiene: Normativa de producto fresco perecedero, incidencias/daños y cancelaciones previas al horneado.
+
+----------------------------------------------------------------------------------------
+[COLUMNA 3 DEL FOOTER: NEWSLETTER]
+----------------------------------------------------------------------------------------
+• APARTADO 5: SUSCRIPCIÓN NEWSLETTER & ECOSISTEMA
+  - ID / Hash: #newsletter
+  - Contiene: Beneficios de suscripción, periodicidad/baja y formulario interactivo.
+
+----------------------------------------------------------------------------------------
+[COLUMNA 4 DEL FOOTER: DOXA, LA MISIÓN]
+----------------------------------------------------------------------------------------
+• APARTADO 6: LA MISIÓN & FILOSOFÍA DOXA
+  - ID / Hash: #mision
+  - Contiene: Concepto de repostería nutricosmética, apto para keto/deporte, arte contemporáneo y botón a mision.html.
+
+----------------------------------------------------------------------------------------
+[COLUMNA 5 DEL FOOTER: AVISO LEGAL]
+----------------------------------------------------------------------------------------
+• APARTADO 7: CONDICIONES GENERALES DE VENTA
+  - ID / Hash: #condiciones-venta
+  - Contiene: Titularidad, precios con IVA, elaboración/entrega y resolución de litigios.
+
+• APARTADO 8: POLÍTICA DE PRIVACIDAD
+  - ID / Hash: #privacidad
+  - Contiene: Responsable de datos, finalidades, cesiones y derechos RGPD / LOPD.
+
+• APARTADO 9: POLÍTICA DE COOKIES
+  - ID / Hash: #cookies
+  - Contiene: Qué son las cookies, tipología y cómo desactivarlas en navegadores.
+
+----------------------------------------------------------------------------------------
+[BLOQUE COMÚN INFERIOR]
+----------------------------------------------------------------------------------------
+• BANNER: ¿NECESITAS MÁS INFORMACIÓN?
+  - ID: #bannerMasPreguntas
+  - Contiene: Mensaje de llamada a la acción y botón de contacto.
+========================================================================================
+-->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -891,26 +964,42 @@
 
             </aside>
 
-            <!-- CONTENIDO DINÁMICO SEGÚN LA SECCIÓN SELECCIONADA -->
+            <!-- =========================================================================
+                 ÁREA DE CONTENIDO DINÁMICO (PANELES EDITABLES DE CADA SECCIÓN)
+                 Cada panel corresponde a un botón/enlace del footer.
+                 Modifica los textos dentro de cada bloque según tus necesidades de copy.
+                 ========================================================================= -->
             <section class="faq-content-area">
 
-                <!-- 1. OPCIONES DE PAGO -->
+                <!-- =====================================================================
+                     [SECCIÓN 1] OPCIONES DE PAGO
+                     Enlace del Footer: Mis Pedidos -> Opciones de pago
+                     URL directa: ayuda.html#pagos
+                     ===================================================================== -->
                 <article class="faq-section-panel" id="panel-pagos">
+                    <!-- ENCABEZADO DE LA SECCIÓN (Categoría, Título e Introducción) -->
                     <div class="faq-section-header">
                         <div class="faq-section-category">Mis Pedidos</div>
+                        <!-- COPY: TÍTULO PRINCIPAL DE LA SECCIÓN -->
                         <h1 class="faq-section-title">Opciones de Pago</h1>
+                        <!-- COPY: INTRODUCCIÓN / SUBTÍTULO -->
                         <p class="faq-section-intro">
                             Garantizamos la máxima seguridad y confidencialidad en todas las transacciones dentro de nuestro ecosistema.
                         </p>
                     </div>
 
+                    <!-- LISTA DE PREGUNTAS Y RESPUESTAS DESPLEGABLES (ACORDEÓN) -->
                     <div class="faq-accordion-group">
+
+                        <!-- [PREGUNTA 1.1] Métodos de pago aceptados -->
                         <div class="faq-item open">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Qué métodos de pago se aceptan en DOXA?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Aceptamos los principales métodos de pago digitales e internacionales a través de nuestra pasarela cifrada de alta seguridad:</p>
                                     <ul>
@@ -922,61 +1011,85 @@
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 1.2] Momento del cargo -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿En qué momento se efectúa el cargo en mi cuenta?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>El importe de tu caja o suscripción se carga inmediatamente tras completar la autorización de pago en el proceso de reserva. Recibirás un correo electrónico de confirmación con el resumen desglosado de tu pedido y el número de reserva asignado.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 1.3] Factura oficial con NIF / CIF -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Puedo solicitar una factura oficial con NIF / CIF?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Por defecto, emitimos un recibo simplificado adjunto a tu email de confirmación. Si necesitas una factura con desglose de IVA y datos fiscales de tu empresa o actividad profesional, solo debes indicarlo en las notas del pedido o enviarnos un email a <a href="mailto:facturacion@doxafoods.com" style="color:var(--text-main); font-weight:500;">facturacion@doxafoods.com</a> con tus datos fiscales y el número de orden.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 1.4] Seguridad de datos bancarios -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Mis datos bancarios quedan guardados en vuestros servidores?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>No. DOXA nunca almacena los números ni los códigos de seguridad (CVV) de tus tarjetas. Toda la pasarela de procesamiento es gestionada de forma directa y cifrada por Stripe, el estándar líder global en pagos seguros.</p>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </article>
+                <!-- FIN [SECCIÓN 1: OPCIONES DE PAGO] -->
 
-                <!-- 2. OPCIONES DE ENTREGA -->
+
+                <!-- =====================================================================
+                     [SECCIÓN 2] OPCIONES DE ENTREGA
+                     Enlace del Footer: Mis Pedidos -> Opciones de entrega
+                     URL directa: ayuda.html#entregas
+                     ===================================================================== -->
                 <article class="faq-section-panel" id="panel-entregas">
+                    <!-- ENCABEZADO DE LA SECCIÓN -->
                     <div class="faq-section-header">
                         <div class="faq-section-category">Mis Pedidos</div>
+                        <!-- COPY: TÍTULO PRINCIPAL DE LA SECCIÓN -->
                         <h1 class="faq-section-title">Opciones de Entrega</h1>
+                        <!-- COPY: INTRODUCCIÓN / SUBTÍTULO -->
                         <p class="faq-section-intro">
                             DOXAS se elaboran artesanalmente bajo pedido. Conoce nuestros tiempos de obrador y transporte garantizado.
                         </p>
                     </div>
 
+                    <!-- LISTA DE PREGUNTAS Y RESPUESTAS DESPLEGABLES (ACORDEÓN) -->
                     <div class="faq-accordion-group">
+
+                        <!-- [PREGUNTA 2.1] Horneado bajo demanda y plazos -->
                         <div class="faq-item open">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Por qué horneamos bajo pedido y cuándo saldrá mi caja?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>A diferencia de la bollería industrializada, en DOXA no almacenamos producto terminado. Cada caja se hornea de forma personalizada para que los péptidos de colágeno, los activos funcionales y la jugosidad de la masa de almendra lleguen a ti en su punto óptimo.</p>
                                     <p>Una vez horneadas y alcanzada la temperatura de reposo adecuada, las cajas se envían inmediatamente mediante mensajería urgente refrigerada o exprés protegida en un plazo de 24 a 48 horas laborales.</p>
@@ -984,12 +1097,15 @@
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 2.2] Tarifas de envío -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Cuáles son las tarifas de envío?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <ul>
                                         <li><strong>España Peninsular:</strong> Envío estándar premium 24/48h: 4,90 €.</li>
@@ -1000,24 +1116,30 @@
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 2.3] Protección y embalaje térmico -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Cómo vienen protegidas las DOXAS durante el viaje?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Utilizamos un embalaje protector térmico y sellado de alta densidad diseñado especialmente para preservar la textura tierna del interior y la corteza sutil sin necesidad de conservantes químicos ni estabilizantes artificiales.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 2.4] Consejo de consumo y golpe de calor -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Cómo consumir tu DOXA al recibirla?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <div class="faq-highlight-card">
                                         <strong>Consejo del Obrador:</strong> Un golpe de calor de 10 a 15 segundos en el microondas (o 3 minutos en horno a 150°C) despierta los aceites nobles de cacao y MCT, devolviéndole la temperatura y aroma del recién horneado.
@@ -1025,87 +1147,126 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </article>
+                <!-- FIN [SECCIÓN 2: OPCIONES DE ENTREGA] -->
 
-                <!-- 3. SEGUIMIENTO DE PEDIDOS -->
+
+                <!-- =====================================================================
+                     [SECCIÓN 3] SEGUIMIENTO DE PEDIDOS
+                     Enlace del Footer: Mis Pedidos -> Seguimiento de pedidos
+                     URL directa: ayuda.html#seguimiento
+                     ===================================================================== -->
                 <article class="faq-section-panel" id="panel-seguimiento">
+                    <!-- ENCABEZADO DE LA SECCIÓN -->
                     <div class="faq-section-header">
                         <div class="faq-section-category">Mis Pedidos</div>
+                        <!-- COPY: TÍTULO PRINCIPAL DE LA SECCIÓN -->
                         <h1 class="faq-section-title">Seguimiento de Pedidos</h1>
+                        <!-- COPY: INTRODUCCIÓN / SUBTÍTULO -->
                         <p class="faq-section-intro">
                             Supervisa en tiempo real el proceso desde la sesión de horneado en el obrador hasta la entrega en tu puerta.
                         </p>
                     </div>
 
+                    <!-- LISTA DE PREGUNTAS Y RESPUESTAS DESPLEGABLES (ACORDEÓN) -->
                     <div class="faq-accordion-group">
+
+                        <!-- [PREGUNTA 3.1] Obtención del tracking -->
                         <div class="faq-item open">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Cómo recibo el número de seguimiento de mi caja?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>En cuanto tu lote de DOXAS finaliza el reposo y es entregado a nuestro operador logístico, recibirás un correo electrónico automático con el número de localizador y un enlace directo para rastrear el paquete en tiempo real.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 3.2] Ausencia en el domicilio -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Qué sucede si no me encuentro en mi domicilio en el momento de la entrega?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>La empresa de mensajería te enviará un SMS o correo avisándote del tramo horario estimado. Si no estuvieras disponible, realizarán un segundo intento sin coste o podrás coordinar la recogida en un punto de entrega cercano o concertar una fecha alternativa.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 3.3] Correo de confirmación no recibido -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>He completado mi reserva pero no veo el email de confirmación</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Te recomendamos verificar tu bandeja de correo no deseado (Spam o Promociones). Si tras 15 minutos no lo has recibido, escríbenos a <a href="mailto:hola@doxafoods.com" style="color:var(--text-main); font-weight:500;">hola@doxafoods.com</a> indicando tu nombre y te confirmaremos el estado de tu pedido al instante.</p>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </article>
+                <!-- FIN [SECCIÓN 3: SEGUIMIENTO DE PEDIDOS] -->
 
-                <!-- 4. CAMBIOS Y DEVOLUCIONES -->
+
+                <!-- =====================================================================
+                     [SECCIÓN 4] CAMBIOS Y DEVOLUCIONES
+                     Enlace del Footer: Mis Pedidos -> Cambios y devoluciones
+                     URL directa: ayuda.html#devoluciones
+                     ===================================================================== -->
                 <article class="faq-section-panel" id="panel-devoluciones">
+                    <!-- ENCABEZADO DE LA SECCIÓN -->
                     <div class="faq-section-header">
                         <div class="faq-section-category">Mis Pedidos</div>
+                        <!-- COPY: TÍTULO PRINCIPAL DE LA SECCIÓN -->
                         <h1 class="faq-section-title">Cambios y Devoluciones</h1>
+                        <!-- COPY: INTRODUCCIÓN / SUBTÍTULO -->
                         <p class="faq-section-intro">
                             Transparencia y compromiso sobre la política de producto fresco y garantía de satisfacción DOXA.
                         </p>
                     </div>
 
+                    <!-- LISTA DE PREGUNTAS Y RESPUESTAS DESPLEGABLES (ACORDEÓN) -->
                     <div class="faq-accordion-group">
+
+                        <!-- [PREGUNTA 4.1] Devolución de producto fresco y ley -->
                         <div class="faq-item open">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Puedo devolver una caja una vez entregada?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Al tratarse de alimentos frescos, elaborados artesanalmente y de consumo perecedero sin conservantes, la normativa sanitaria de la Unión Europea y el Real Decreto Legislativo 1/2007 (Ley de Consumidores) <strong>exceptúan el derecho de desistimiento una vez el producto ha salido de nuestras instalaciones o ha sido entregado</strong>, con el fin de proteger la seguridad alimentaria.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 4.2] Paquete dañado o incidencia en el transporte -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Qué ocurre si el paquete llega dañado o con alguna anomalía?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Nuestra garantía de satisfacción es absoluta. Si por un percance en el transporte tu caja llega deteriorada o con el precinto alterado:</p>
                                     <ul>
@@ -1117,37 +1278,55 @@
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 4.3] Cancelación previa al horneado -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Es posible cancelar o modificar mi pedido antes del horneado?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Sí. Puedes modificar tu dirección de entrega o cancelar tu reserva siempre que lo solicites con al menos <strong>12 horas de antelación</strong> al inicio del turno de horneado programado. Escríbenos directamente indicando tu número de pedido.</p>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </article>
+                <!-- FIN [SECCIÓN 4: CAMBIOS Y DEVOLUCIONES] -->
 
-                <!-- 5. NEWSLETTER -->
+
+                <!-- =====================================================================
+                     [SECCIÓN 5] NEWSLETTER & MANIFIESTO
+                     Enlace del Footer: Newsletter -> Suscríbete
+                     URL directa: ayuda.html#newsletter
+                     ===================================================================== -->
                 <article class="faq-section-panel" id="panel-newsletter">
+                    <!-- ENCABEZADO DE LA SECCIÓN -->
                     <div class="faq-section-header">
                         <div class="faq-section-category">Newsletter</div>
+                        <!-- COPY: TÍTULO PRINCIPAL DE LA SECCIÓN -->
                         <h1 class="faq-section-title">El Ecosistema DOXA</h1>
+                        <!-- COPY: INTRODUCCIÓN / SUBTÍTULO -->
                         <p class="faq-section-intro">
                             Forma parte de nuestra comunidad privada. Divulgación en nutricosmética, salud metabólica, arte contemporáneo y acceso preferente a lotes limitados.
                         </p>
                     </div>
 
+                    <!-- LISTA DE PREGUNTAS Y RESPUESTAS DESPLEGABLES (ACORDEÓN) -->
                     <div class="faq-accordion-group">
+
+                        <!-- [PREGUNTA 5.1] Beneficios de la suscripción -->
                         <div class="faq-item open">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Qué recibirás al suscribirte?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <ul>
                                         <li><strong>Lotes de obrador exclusivos:</strong> Notificación prioritaria antes de que se agoten las plazas de horneado semanal.</li>
@@ -1159,62 +1338,86 @@
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 5.2] Baja y privacidad -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Cómo puedo darme de baja?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Cada correo incluye un enlace al final para cancelar tu suscripción con un solo clic en cualquier instante, respetando escrupulosamente tu privacidad.</p>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
-                    <!-- FORMULARIO DE SUSCRIPCIÓN -->
+                    <!-- COPY: FORMULARIO INTERACTIVO DE SUSCRIPCIÓN NEWSLETTER -->
                     <div class="faq-form-card">
+                        <!-- COPY: TÍTULO DE LA TARJETA DEL FORMULARIO -->
                         <h3 style="font-family:'Lato',sans-serif; font-size:16px; letter-spacing:3px; text-transform:uppercase; margin-bottom:12px; font-weight:500;">
                             Únete al Manifiesto DOXA
                         </h3>
+                        <!-- COPY: DESCRIPCIÓN DEL FORMULARIO -->
                         <p style="font-size:13px; color:var(--text-muted); margin-bottom:20px;">
                             Introduce tu correo electrónico para recibir nuestras notas de investigación y aperturas de reserva.
                         </p>
 
                         <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)">
                             <div class="faq-form-row">
+                                <!-- COPY: ETIQUETA DEL CAMPO EMAIL -->
                                 <label class="faq-form-label" for="newsEmail">Tu correo electrónico</label>
                                 <input type="email" id="newsEmail" class="faq-input" placeholder="ejemplo@correo.com" required>
                             </div>
                             <label class="faq-checkbox-label">
                                 <input type="checkbox" required>
+                                <!-- COPY: TEXTO DE ACEPTACIÓN DE PRIVACIDAD -->
                                 <span>Acepto la <a href="#privacidad" onclick="activateSection('privacidad')" style="color:var(--text-main); text-decoration:underline;">política de privacidad</a> y el tratamiento confidencial de mis datos.</span>
                             </label>
+                            <!-- COPY: BOTÓN DE ENVÍO -->
                             <button type="submit" class="faq-btn-submit">Suscribirme</button>
+                            <!-- COPY: MENSAJE DE CONFIRMACIÓN TRAS SUSCRIBIRSE -->
                             <div class="faq-feedback-msg" id="newsletterMsg">
                                 ✓ Gracias por suscribirte. Te hemos enviado un correo de bienvenida.
                             </div>
                         </form>
                     </div>
                 </article>
+                <!-- FIN [SECCIÓN 5: NEWSLETTER] -->
 
-                <!-- 6. LA MISIÓN -->
+
+                <!-- =====================================================================
+                     [SECCIÓN 6] LA MISIÓN DOXA
+                     Enlace del Footer: Doxa, la misión -> La misión
+                     URL directa: ayuda.html#mision
+                     ===================================================================== -->
                 <article class="faq-section-panel" id="panel-mision">
+                    <!-- ENCABEZADO DE LA SECCIÓN -->
                     <div class="faq-section-header">
                         <div class="faq-section-category">La Maison</div>
+                        <!-- COPY: TÍTULO PRINCIPAL DE LA SECCIÓN -->
                         <h1 class="faq-section-title">La Misión DOXA</h1>
+                        <!-- COPY: INTRODUCCIÓN / SUBTÍTULO -->
                         <p class="faq-section-intro">
                             Donde la alta repostería y la nutricosmética celular encuentran un mismo lenguaje.
                         </p>
                     </div>
 
+                    <!-- LISTA DE PREGUNTAS Y RESPUESTAS DESPLEGABLES (ACORDEÓN) -->
                     <div class="faq-accordion-group">
+
+                        <!-- [PREGUNTA 6.1] Definición de repostería nutricosmética -->
                         <div class="faq-item open">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Qué define a la Repostería Nutricosmética?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>DOXA nació de una pregunta esencial: ¿por qué el momento de mayor placer gastronómico del día tiene que comprometer tu energía, generar picos de glucosa o inflamación celular?</p>
                                     <p>Cada una de nuestras galletas sustituye las harinas refinadas por almendra molida en frío, los azúcares industriales por eritritol puro no glucémico, e incorpora dosis biodisponibles de activos clave: colágeno hidrolizado, creatina, biotina, vitamina C, vitamina D3 y triglicéridos de cadena media (MCT).</p>
@@ -1222,52 +1425,74 @@
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 6.2] Compatibilidad nutricional y deportistas -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Son aptas para deportistas y dietas cetogénicas o bajas en carbohidratos?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Sí. Con apenas ~2.2g de carbohidratos netos por pieza y 20g de proteína de máxima asimilación celular, DOXA está específicamente formulada para quienes cuidan su salud metabólica sin renunciar al lujo de una gran galleta de autor.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 6.3] Diálogo con el arte contemporáneo -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>El diálogo con el arte contemporáneo</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>En DOXA concebimos cada receta como una obra matérica. Nos inspiramos en la fuerza plástica de artistas como Anselm Kiefer, Miquel Barceló o Antonio García Villarán, reivindicando la textura, la materia noble y la verdad en los procesos.</p>
                                     <div style="margin-top:20px;">
+                                        <!-- COPY: ENLACE / BOTÓN AL MANIFIESTO COMPLETO -->
                                         <a href="mision.html" class="faq-contact-btn">Leer el Manifiesto Completo</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </article>
+                <!-- FIN [SECCIÓN 6: LA MISIÓN DOXA] -->
 
-                <!-- 7. CONDICIONES DE VENTA -->
+
+                <!-- =====================================================================
+                     [SECCIÓN 7] CONDICIONES GENERALES DE VENTA
+                     Enlace del Footer: Aviso legal -> Condiciones de venta
+                     URL directa: ayuda.html#condiciones-venta
+                     ===================================================================== -->
                 <article class="faq-section-panel" id="panel-condiciones-venta">
+                    <!-- ENCABEZADO DE LA SECCIÓN -->
                     <div class="faq-section-header">
                         <div class="faq-section-category">Aviso Legal</div>
+                        <!-- COPY: TÍTULO PRINCIPAL DE LA SECCIÓN -->
                         <h1 class="faq-section-title">Condiciones Generales de Venta</h1>
+                        <!-- COPY: INTRODUCCIÓN / SUBTÍTULO -->
                         <p class="faq-section-intro">
                             Términos contractuales aplicables a todas las compras y reservas realizadas en el portal de DOXA.
                         </p>
                     </div>
 
+                    <!-- LISTA DE PREGUNTAS Y RESPUESTAS DESPLEGABLES (ACORDEÓN) -->
                     <div class="faq-accordion-group">
+
+                        <!-- [PREGUNTA 7.1] Ámbito y titularidad -->
                         <div class="faq-item open">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>1. Ámbito de aplicación y titularidad</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Las presentes Condiciones Generales de Contratación regulan la relación comercial entre los usuarios del sitio web y <strong>DOXA FOODS S.L.</strong> con domicilio fiscal en España, para la adquisición de productos alimentarios de alta repostería nutricosmética.</p>
                                     <p>La realización de un pedido implica la aceptación plena e incondicional de estas condiciones por parte del comprador.</p>
@@ -1275,61 +1500,85 @@
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 7.2] Precios e impuestos -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>2. Precios e impuestos</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Todos los precios expuestos en el sitio web se expresan en Euros (€) e incluyen el Impuesto sobre el Valor Añadido (IVA) vigente en España para productos alimenticios (10%). Los gastos de transporte se calculan y desglosan explícitamente antes de formalizar la compra.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 7.3] Proceso de elaboración y entrega -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>3. Proceso de elaboración y entrega</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Debido a la naturaleza artesanal y bajo demanda de las DOXAS, los plazos de entrega indicados son estimativos y condicionados a la finalización del horneado y reposo térmico del lote. La empresa responderá de la entrega puntual dentro de los estándares de transporte urgente contratados.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 7.4] Legislación aplicable y litigios -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>4. Legislación aplicable y resolución de litigios</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Las compras se rigen por la legislación española. De conformidad con el Reglamento (UE) 524/2013, se informa al usuario de la existencia de la plataforma europea de resolución de litigios en línea en materia de consumo accesible en <a href="https://ec.europa.eu/consumers/odr" target="_blank" style="color:var(--text-main); text-decoration:underline;">ec.europa.eu/consumers/odr</a>.</p>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </article>
+                <!-- FIN [SECCIÓN 7: CONDICIONES GENERALES DE VENTA] -->
 
-                <!-- 8. POLÍTICA DE PRIVACIDAD -->
+
+                <!-- =====================================================================
+                     [SECCIÓN 8] POLÍTICA DE PRIVACIDAD
+                     Enlace del Footer: Aviso legal -> Política de privacidad
+                     URL directa: ayuda.html#privacidad
+                     ===================================================================== -->
                 <article class="faq-section-panel" id="panel-privacidad">
+                    <!-- ENCABEZADO DE LA SECCIÓN -->
                     <div class="faq-section-header">
                         <div class="faq-section-category">Aviso Legal</div>
+                        <!-- COPY: TÍTULO PRINCIPAL DE LA SECCIÓN -->
                         <h1 class="faq-section-title">Política de Privacidad</h1>
+                        <!-- COPY: INTRODUCCIÓN / SUBTÍTULO -->
                         <p class="faq-section-intro">
                             Información detallada sobre el tratamiento de tus datos personales conforme al RGPD (UE 2016/679) y la LOPDGDD 3/2018.
                         </p>
                     </div>
 
+                    <!-- LISTA DE PREGUNTAS Y RESPUESTAS DESPLEGABLES (ACORDEÓN) -->
                     <div class="faq-accordion-group">
+
+                        <!-- [PREGUNTA 8.1] Responsable del tratamiento -->
                         <div class="faq-item open">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Quién es el Responsable del tratamiento de tus datos?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p><strong>Identidad:</strong> DOXA FOODS S.L.<br>
                                     <strong>Finalidad principal:</strong> Gestión de reservas, elaboración personalizada, envío de pedidos, atención a consultas y envío de newsletters informativas si media consentimiento expreso.<br>
@@ -1338,12 +1587,15 @@
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 8.2] Base legal del tratamiento -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Con qué base legal tratamos tus datos?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <ul>
                                         <li><strong>Ejecución del contrato:</strong> Para procesar el pedido, facturarlo y coordinar el transporte.</li>
@@ -1354,61 +1606,85 @@
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 8.3] Destinatarios y cesión de datos -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿A qué destinatarios se comunicarán tus datos?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Tus datos únicamente se cederán a proveedores necesarios para la prestación del servicio: pasarelas de pago seguro (Stripe), empresas de mensajería para el transporte físico, y entidades tributarias según imperativo legal. Nunca comercializamos ni cedemos tus datos a terceros con fines publicitarios.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 8.4] Derechos ARCO / RGPD -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Cuáles son tus derechos y cómo ejercerlos?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Tienes derecho a acceder a tus datos, solicitar la rectificación de datos inexactos o pedir su supresión cuando ya no sean necesarios. Para ejercerlos, basta con remitir un correo electrónico a <a href="mailto:privacidad@doxafoods.com" style="color:var(--text-main); font-weight:500;">privacidad@doxafoods.com</a> indicando tu petición junto a un documento que acredite tu identidad.</p>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </article>
+                <!-- FIN [SECCIÓN 8: POLÍTICA DE PRIVACIDAD] -->
 
-                <!-- 9. POLÍTICA DE COOKIES -->
+
+                <!-- =====================================================================
+                     [SECCIÓN 9] POLÍTICA DE COOKIES
+                     Enlace del Footer: Aviso legal -> Política de cookies
+                     URL directa: ayuda.html#cookies
+                     ===================================================================== -->
                 <article class="faq-section-panel" id="panel-cookies">
+                    <!-- ENCABEZADO DE LA SECCIÓN -->
                     <div class="faq-section-header">
                         <div class="faq-section-category">Aviso Legal</div>
+                        <!-- COPY: TÍTULO PRINCIPAL DE LA SECCIÓN -->
                         <h1 class="faq-section-title">Política de Cookies</h1>
+                        <!-- COPY: INTRODUCCIÓN / SUBTÍTULO -->
                         <p class="faq-section-intro">
                             Transparencia en el uso de cookies y dispositivos de almacenamiento y recuperación de datos en tu navegador.
                         </p>
                     </div>
 
+                    <!-- LISTA DE PREGUNTAS Y RESPUESTAS DESPLEGABLES (ACORDEÓN) -->
                     <div class="faq-accordion-group">
+
+                        <!-- [PREGUNTA 9.1] Qué son las cookies -->
                         <div class="faq-item open">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Qué son las cookies y para qué se utilizan?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Una cookie es un pequeño archivo de texto que se almacena en tu navegador cuando visitas casi cualquier página web. Su utilidad es que la web sea capaz de recordar tu visita cuando vuelvas a navegar por esa página, como mantener los artículos en el carrito o recordar tus preferencias.</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 9.2] Tipos de cookies utilizadas -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Qué tipos de cookies utiliza este sitio web?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <ul>
                                         <li><strong>Cookies técnicas (estrictamente necesarias):</strong> Permiten la navegación a través del sitio web y la utilización de las diferentes opciones o servicios, como el control de tráfico, la identificación de sesión y el proceso de compra seguro.</li>
@@ -1419,37 +1695,55 @@
                             </div>
                         </div>
 
+                        <!-- [PREGUNTA 9.3] Configuración y desactivación en el navegador -->
                         <div class="faq-item">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>¿Cómo configurar o desactivar las cookies en tu navegador?</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA -->
                                 <div class="faq-answer-inner">
                                     <p>Puedes restringir, bloquear o borrar las cookies de cualquier sitio web configurando las opciones del navegador instalado en tu ordenador o dispositivo móvil (Google Chrome, Apple Safari, Mozilla Firefox o Microsoft Edge). Si bloqueas las cookies técnicas necesarias, es posible que algunas funciones de la tienda no operen correctamente.</p>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </article>
+                <!-- FIN [SECCIÓN 9: POLÍTICA DE COOKIES] -->
 
-                <!-- 10. CONTACTO -->
+
+                <!-- =====================================================================
+                     [SECCIÓN 10] CONTACTO & ATENCIÓN DIRECTA
+                     Enlace del Footer: Contacto -> Envíanos un correo
+                     URL directa: ayuda.html#contacto
+                     ===================================================================== -->
                 <article class="faq-section-panel" id="panel-contacto">
+                    <!-- ENCABEZADO DE LA SECCIÓN -->
                     <div class="faq-section-header">
                         <div class="faq-section-category">Atención Personalizada</div>
+                        <!-- COPY: TÍTULO PRINCIPAL DE LA SECCIÓN -->
                         <h1 class="faq-section-title">Contacto</h1>
+                        <!-- COPY: INTRODUCCIÓN / SUBTÍTULO -->
                         <p class="faq-section-intro">
                             Nuestro equipo de asesores y el obrador de DOXA están a tu disposición para cualquier consulta sobre reservas, pedidos o ingredientes.
                         </p>
                     </div>
 
+                    <!-- LISTA DE PREGUNTAS Y DATOS DE CONTACTO (ACORDEÓN) -->
                     <div class="faq-accordion-group">
+
+                        <!-- [PREGUNTA 10.1] Canales directos de atención -->
                         <div class="faq-item open">
                             <button class="faq-question-btn" type="button">
+                                <!-- COPY: TEXTO DE LA PREGUNTA -->
                                 <span>Canales directos de atención</span>
                                 <div class="faq-icon-wrapper"></div>
                             </button>
                             <div class="faq-answer-panel">
+                                <!-- COPY: TEXTO DE LA RESPUESTA (Emails y Horarios) -->
                                 <div class="faq-answer-inner">
                                     <p><strong>Correo electrónico general:</strong> <a href="mailto:hola@doxafoods.com" style="color:var(--text-main); font-weight:500;">hola@doxafoods.com</a></p>
                                     <p><strong>Incidencias y pedidos:</strong> <a href="mailto:atencion@doxafoods.com" style="color:var(--text-main); font-weight:500;">atencion@doxafoods.com</a></p>
@@ -1457,54 +1751,73 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
-                    <!-- FORMULARIO DE CONTACTO DIRECTO -->
+                    <!-- COPY: FORMULARIO INTERACTIVO DE CONTACTO DIRECTO -->
                     <div class="faq-form-card">
+                        <!-- COPY: TÍTULO DEL FORMULARIO -->
                         <h3 style="font-family:'Lato',sans-serif; font-size:16px; letter-spacing:3px; text-transform:uppercase; margin-bottom:12px; font-weight:500;">
                             Envíanos un mensaje
                         </h3>
+                        <!-- COPY: SUBTÍTULO DEL FORMULARIO -->
                         <p style="font-size:13px; color:var(--text-muted); margin-bottom:20px;">
                             Respondemos a todas las consultas en un plazo inferior a 24 horas laborables.
                         </p>
 
                         <form id="contactForm" onsubmit="handleContactSubmit(event)">
                             <div class="faq-form-row">
+                                <!-- COPY: ETIQUETA NOMBRE -->
                                 <label class="faq-form-label" for="contactName">Nombre y Apellidos</label>
                                 <input type="text" id="contactName" class="faq-input" placeholder="Tu nombre" required>
                             </div>
                             <div class="faq-form-row">
+                                <!-- COPY: ETIQUETA EMAIL -->
                                 <label class="faq-form-label" for="contactEmail">Correo electrónico</label>
                                 <input type="email" id="contactEmail" class="faq-input" placeholder="ejemplo@correo.com" required>
                             </div>
                             <div class="faq-form-row">
+                                <!-- COPY: ETIQUETA Nº DE PEDIDO -->
                                 <label class="faq-form-label" for="contactOrder">Nº de Reserva o Pedido (Opcional)</label>
                                 <input type="text" id="contactOrder" class="faq-input" placeholder="Ej: #DX-2026-08">
                             </div>
                             <div class="faq-form-row">
+                                <!-- COPY: ETIQUETA MENSAJE -->
                                 <label class="faq-form-label" for="contactMsg">¿En qué podemos ayudarte?</label>
                                 <textarea id="contactMsg" class="faq-textarea" rows="4" placeholder="Escribe tu mensaje..." required></textarea>
                             </div>
                             <label class="faq-checkbox-label">
                                 <input type="checkbox" required>
+                                <!-- COPY: TEXTO DE ACEPTACIÓN DE PRIVACIDAD -->
                                 <span>Acepto la <a href="#privacidad" onclick="activateSection('privacidad')" style="color:var(--text-main); text-decoration:underline;">política de privacidad</a>.</span>
                             </label>
+                            <!-- COPY: BOTÓN DE ENVÍO -->
                             <button type="submit" class="faq-btn-submit">Enviar Mensaje</button>
+                            <!-- COPY: MENSAJE DE CONFIRMACIÓN TRAS ENVIAR -->
                             <div class="faq-feedback-msg" id="contactFeedback">
                                 ✓ Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo a la mayor brevedad.
                             </div>
                         </form>
                     </div>
                 </article>
+                <!-- FIN [SECCIÓN 10: CONTACTO] -->
 
-                <!-- BLOQUE "¿MÁS PREGUNTAS?" INSPIRADO EN HERMÈS -->
+
+                <!-- =====================================================================
+                     [BLOQUE COMÚN INFERIOR] ¿NECESITAS MÁS INFORMACIÓN?
+                     Visible al final de cualquier sección
+                     ===================================================================== -->
                 <div class="faq-contact-hero-banner" id="bannerMasPreguntas">
+                    <!-- COPY: TÍTULO DEL BANNER -->
                     <h3>¿Necesitas más información?</h3>
+                    <!-- COPY: TEXTO DESCRIPTIVO -->
                     <p>
                         Si no encuentras respuesta a tu duda o deseas una atención personalizada sobre formulación o pedidos corporativos, contáctanos.
                     </p>
+                    <!-- COPY: BOTÓN DE ACCIÓN -->
                     <a href="#contacto" class="faq-contact-btn" onclick="activateSection('contacto')">Contactar con Asesores</a>
                 </div>
+                <!-- FIN [BLOQUE COMÚN INFERIOR] -->
 
             </section>
 
