@@ -61,7 +61,8 @@ Menú del Index: Líena 742
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#150e02">
     <title>DOXA | Repostería NutriCosmética</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@100;300;400;500;700&display=swap"
@@ -77,6 +78,7 @@ Menú del Index: Líena 742
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
@@ -100,11 +102,18 @@ Menú del Index: Líena 742
         body,
         html {
             width: 100%;
+            max-width: 100%;
             overflow-x: hidden;
             /* Evita el scroll horizontal */
             background-color: var(--dark-bg);
             font-family: 'Lexend', sans-serif;
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body.menu-open {
+            overflow: hidden !important;
+            touch-action: none;
         }
 
         /* Escalado proporcional para pantallas de escritorio */
@@ -249,29 +258,54 @@ Menú del Index: Líena 742
             display: none;
             flex-direction: column;
             justify-content: space-between;
-            width: 24px;
-            height: 16px;
+            width: 44px;
+            height: 44px;
+            padding: 13px 9px;
             background: transparent;
             border: none;
             cursor: pointer;
             z-index: 1001;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .mobile-toggle span {
             width: 100%;
             height: 2px;
             background-color: #FFFFFF;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-origin: center;
         }
 
         .navbar.scrolled .mobile-toggle span {
             background-color: #000000 !important;
         }
 
+        /* Overlay oscuro detrás del menú móvil */
+        .navbar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+            z-index: 998;
+        }
+
+        .navbar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Estilos del menú móvil desplegable */
         @media (max-width: 768px) {
             .navbar {
-                padding: 0 25px;
+                padding: 0 20px;
                 height: 70px;
             }
 
@@ -287,15 +321,19 @@ Menú del Index: Líena 742
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 70%;
+                width: 82%;
+                max-width: 320px;
                 height: 100vh;
-                background-color: rgba(21, 14, 2, 0.95);
+                height: 100dvh;
+                background-color: rgba(21, 14, 2, 0.96);
                 /* Fondo oscuro premium */
-                backdrop-filter: blur(15px);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
                 flex-direction: column;
                 justify-content: center;
-                gap: 40px;
-                padding: 40px;
+                gap: 20px;
+                padding: 50px 30px;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
                 transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
                 z-index: 999;
             }
@@ -306,45 +344,55 @@ Menú del Index: Líena 742
 
             .navbar-link {
                 font-family: 'Lexend', sans-serif;
-                font-size: 14px !important;
-                color: rgba(255, 255, 255, 0.8) !important;
+                font-size: 13px !important;
+                letter-spacing: 2px !important;
+                color: rgba(255, 255, 255, 0.85) !important;
                 background-color: transparent !important;
                 width: 100%;
                 text-align: center;
-                padding: 15px 0 !important;
+                padding: 14px 20px !important;
                 transition: all 0.3s ease;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
+                border-radius: 2px;
             }
 
             .navbar-link.active {
                 background-color: var(--accent-color) !important;
                 color: #150e02 !important;
+                font-weight: 600;
             }
 
             .navbar-link:not(.active):hover {
-                background-color: transparent !important;
+                background-color: rgba(255, 255, 255, 0.08) !important;
                 color: #FFFFFF !important;
             }
 
+            .navbar-logo {
+                padding: 8px 14px !important;
+                font-size: 13px !important;
+                letter-spacing: 3px !important;
+            }
+
             .navbar-logo.active {
-                padding: 8px 16px !important;
+                padding: 8px 14px !important;
                 font-size: 12px !important;
             }
 
             /* Transformación del hamburguesa a X */
             .mobile-toggle.active span:nth-child(1) {
-                transform: translateY(7px) rotate(45deg);
+                transform: translateY(6px) rotate(45deg);
                 background-color: #FFFFFF !important;
             }
 
             .mobile-toggle.active span:nth-child(2) {
                 opacity: 0;
+                transform: scale(0);
             }
 
             .mobile-toggle.active span:nth-child(3) {
-                transform: translateY(-7px) rotate(-45deg);
+                transform: translateY(-6px) rotate(-45deg);
                 background-color: #FFFFFF !important;
             }
         }
@@ -519,10 +567,151 @@ Menú del Index: Líena 742
         }
 
         /* =========================================
+           HERO & TIPOGRAFÍA RESPONSIVE
+           ========================================= */
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            height: 100svh;
+            min-height: 580px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #FFFFFF;
+            padding: 0 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .hero-title {
+            margin: 0 0 25px 0;
+            line-height: 1.1;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .hero-doxa {
+            font-size: clamp(52px, 14vw, 80px);
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            letter-spacing: clamp(8px, 2.8vw, 15px);
+            margin-right: calc(-1 * clamp(8px, 2.8vw, 15px));
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .hero-sub {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: clamp(8px, 2.3vw, 12px);
+            margin-top: 12px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            opacity: 1;
+            letter-spacing: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding: 0 4px;
+            width: 100%;
+        }
+
+        .hero-tagline {
+            font-family: 'Lexend', sans-serif;
+            font-weight: 300;
+            font-size: clamp(12px, 3.2vw, 13px);
+            color: #FFFFFF;
+            margin: 22px auto 0 auto;
+            line-height: 1.9;
+            opacity: 0.9;
+            text-align: center;
+            max-width: 580px;
+            padding: 0 10px;
+        }
+
+        .section-title {
+            font-family: 'Lexend', sans-serif;
+            font-weight: 300;
+            font-size: clamp(20px, 4.5vw, 45px);
+            letter-spacing: clamp(3px, 1.8vw, 12px);
+            text-transform: uppercase;
+            margin-bottom: clamp(30px, 5vw, 60px);
+            line-height: 1.3;
+        }
+
+        .section-lead-text {
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Lexend', sans-serif;
+            font-weight: 300;
+            line-height: 2;
+            font-size: clamp(14px, 3.5vw, 15px);
+            opacity: 0.9;
+            padding: 0 10px;
+        }
+
+        .sobre-doxa-section {
+            padding: 100px 0;
+            background-color: #e0e1db;
+            color: var(--text-light);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .sobre-doxa-img-wrap {
+            margin-bottom: 50px;
+        }
+
+        .sobre-doxa-img {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5));
+        }
+
+        /* =========================================
            ADAPTACIÓN PARA MÓVILES (Responsiveness)
            Media Queries: Aquí está el truco
            ========================================= */
         @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .btn-oro {
+                padding: 13px 40px !important;
+                margin-top: 35px !important;
+                font-size: 10.5px !important;
+                letter-spacing: 2.5px !important;
+            }
+
+            .sobre-doxa-section {
+                padding: 65px 0 !important;
+            }
+
+            .sobre-doxa-img-wrap {
+                margin-bottom: 30px !important;
+            }
+
+            .sobre-doxa-img {
+                max-width: 320px !important;
+                width: 82% !important;
+            }
+
+            .desktop-only {
+                display: none !important;
+            }
 
             /* En móvil, la cuadrícula de ingredientes es de 1 sola columna */
             .ingredient-grid {
@@ -531,16 +720,16 @@ Menú del Index: Líena 742
 
             /* Los textos grandes se hacen más pequeños */
             h1 {
-                font-size: 2.5rem !important;
+                font-size: 2.2rem !important;
             }
 
             h2 {
-                font-size: 2rem !important;
+                font-size: 1.8rem !important;
             }
 
             /* Aumentamos el padding para que no se pegue al borde */
             .ingredient-box {
-                padding: 30px;
+                padding: 25px;
             }
         }
 
@@ -794,6 +983,7 @@ Menú del Index: Líena 742
                 <a href="articulos.html" class="navbar-link">Artículos</a>
             </div>
         </nav>
+        <div class="navbar-overlay" id="navbarOverlay"></div>
         <!-- =========================================================================
            [FIN] página GALERÍA (BARRA DE NAVEGACIÓN HTML)
            Nota: En index.html no hay enlaces a artistas ni fotos de la galería.
@@ -802,45 +992,19 @@ Menú del Index: Líena 742
 
         <!-- Antigravity: /*SECCIÓN HEADER_ABOBE THE FOLD*/ -->
 
-
-
-        <header class="hero-container"
-            style="position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <header class="hero-container">
 
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
                 <img src="cabecera_index.jpg" alt="Fondo Doxa"
                     style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4);">
             </div>
 
-            <div class="hero-content animate-appear"
-                style="position: relative; z-index: 2; text-align: center; color: #FFFFFF; padding: 0 20px;">
+            <div class="hero-content animate-appear">
 
-                <h1
-                    style="margin: 0 0 30px 0; line-height: 1.1; display: inline-flex; flex-direction: column; align-items: stretch; width: fit-content;">
-                    <span
-                        style="font-size: clamp(75px, 10vw, 80px); font-family: 'Lato', sans-serif; font-weight: 500; letter-spacing: 15px; margin-right: -15px; display: block; text-transform: uppercase;">DOXA</span>
+                <h1 class="hero-title">
+                    <span class="hero-doxa">DOXA</span>
 
-                    <!-- CÁPSULA RESPALDO: REPOSTERÍA MOLECULAR (INVISIBLE)
-                    <span style="display: flex; justify-content: space-between; font-family: 'Lato', sans-serif; font-weight: 100; font-size: clamp(9px, 1.8vw, 13px); margin-top: 10px; text-transform: uppercase; color: #FFFFFF; opacity: 0.9; letter-spacing: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-                        <span>R</span><span>E</span><span>P</span><span>O</span><span>S</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
-                    </span>
-                    <span style="display: flex; justify-content: space-between; font-family: 'Lato', sans-serif; font-weight: 100; font-size: clamp(9px, 1.8vw, 13px); margin-top: 5px; text-transform: uppercase; color: #FFFFFF; opacity: 0.9; letter-spacing: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-                        <span>M</span><span>O</span><span>L</span><span>E</span><span>C</span><span>U</span><span>L</span><span>A</span><span>R</span>
-                    </span>
-                    -->
-                    <!-- 
-                    <span
-                        style="display: flex; justify-content: space-between; font-family: 'Lato', sans-serif; font-weight: 120; font-size: clamp(10px, 1.5vw, 11px); margin-top: 12px; text-transform: uppercase; color: #FFFFFF; opacity: 1; letter-spacing: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; padding: 0 5px;">
-                        <span>A</span><span>L</span><span>T</span><span>A</span>
-                        <span style="width: 0.6em;"></span>
-                        <span>R</span><span>E</span><span>P</span><span>O</span><span>S</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
-                        <span style="width: 0.6em;"></span>
-                        <span>M</span><span>O</span><span>L</span><span>E</span><span>C</span><span>U</span><span>L</span><span>A</span><span>R</span>
-                    </span>
-                    -->
-
-                    <span
-                        style="display: flex; justify-content: space-between; font-family: 'Lato', sans-serif; font-weight: 300; font-size: clamp(12px, 1.8vw, 12px); margin-top: 12px; text-transform: uppercase; color: #FFFFFF; opacity: 1; letter-spacing: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; padding: 0 5px;">
+                    <span class="hero-sub">
                         <span>R</span><span>E</span><span>P</span><span>O</span><span>S</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
                         <span style="width: 0.3em;"></span>
                         <span>N</span><span>U</span><span>T</span><span>R</span><span>I</span><span>C</span><span>O</span><span>S</span><span>M</span><span>É</span><span>T</span><span>I</span><span>C</span><span>A</span>
@@ -848,61 +1012,43 @@ Menú del Index: Líena 742
 
                 </h1>
 
-                <div
-                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(11px, 1.5vw, 13px); color: #FFFFFF; margin: 25px auto 0 auto; line-height: 2; opacity: 0.9; text-align: center; max-width: 600px;">
-                    <p>
-                        Donde placer, propósito y alma se encuentran
-                    </p>
-                </div>
-
-                <a href="coleccion.html" class="btn-oro" style="margin-top: 50px;">DESCÚBRELAS</a>
-                <p
-                    style="font-family: 'Lexend', sans-serif; font-size: 11px; font-weight: 300; letter-spacing: 1.5px; color: #FFFFFF; opacity: 0.8; margin-top: 15px;">
-
+                <p class="hero-tagline">
+                    Donde placer, propósito y alma se encuentran
                 </p>
+
+                <a href="coleccion.html" class="btn-oro">DESCÚBRELAS</a>
 
             </div>
         </header>
 
-
-
-
-
         <!-- Antigravity: /* SECCIÓN PRESENTACIÓN DE LA DOXA */ -->
 
         <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: #e0e1db (Tono yeso grisáceo alternativo) === -->
-        <section id="sobre-doxa"
-            style="padding: 100px 0; background-color: #e0e1db; color: var(--text-light); border-top: 1px solid rgba(0, 0, 0, 0.05);">
+        <section id="sobre-doxa" class="sobre-doxa-section">
             <div class="container animate-appear" style="text-align: center;">
 
-                <div style="margin-bottom: 50px;">
-                    <img src="Galle portada.png" alt="Doxa Galleta Portada"
-                        style="max-width: 500px; width: 100%; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5));">
+                <div class="sobre-doxa-img-wrap">
+                    <img src="Galle portada.png" alt="Doxa Galleta Portada" class="sobre-doxa-img">
                 </div>
 
-
-                <h2
-                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 60px;">
+                <h2 class="section-title">
                     DOXAS: LA MAGIA EXISTE
                 </h2>
 
-                <div
-                    style="max-width: 600px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-weight: 300; line-height: 2; font-size: 15px; opacity: 0.9;">
-                    <p style="margin-bottom: 40px;">
-                    <p style="margin-bottom: 40px;">
-                    <p style="margin-bottom: 40px;">DOXA es la reinterpretación más audaz de la icónica cookie
-                        neoyorquina:<br>
+                <div class="section-lead-text">
+                    <p style="margin-bottom: 30px;">
+                        DOXA es la reinterpretación más audaz de la icónica cookie neoyorquina:<br class="desktop-only">
                         apetitosa, húmeda, indecentemente jugosa…
                     </p>
 
-                    <p style="margin-bottom: 40px;">Pero con intención, significado, valor.<br></p>
+                    <p style="margin-bottom: 30px;">
+                        Pero con intención, significado, valor.
+                    </p>
 
-                    <p>Alta repostería y ciencia se fusionan para que pecar <br>se transforme en todo un regalo para
-                        tu
-                        cuerpo.</p>
+                    <p>
+                        Alta repostería y ciencia se fusionan para que pecar <br class="desktop-only">se transforme en todo un regalo para tu cuerpo.
+                    </p>
                 </div>
-
-
 
             </div>
         </section>
@@ -1143,7 +1289,8 @@ Menú del Index: Líena 742
         <style>
             .cajas-activos-section {
                 position: relative;
-                width: 100vw;
+                width: 100%;
+                max-width: 100%;
                 min-height: 700px;
                 display: flex;
                 align-items: center;
@@ -1382,29 +1529,19 @@ Menú del Index: Líena 742
         <section class="coleccion-section" id="proposito" style="padding-bottom: 90px;">
             <div class="container animate-appear" style="text-align: center;">
 
-                <h2
-                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(22px, 5vw, 45px); letter-spacing: clamp(2px, 2vw, 12px); text-transform: uppercase; margin-bottom: 60px;">
+                <h2 class="section-title">
                     EL PROPÓSITO
                 </h2>
 
                 <p class="col-desc" style="margin-bottom: 40px;">
-                    DOXA reúne ingredientes seleccionados
-                    por cómo nutren, sostienen y acompañan el cuerpo.<Br>
-
-                    <Br>
+                    DOXA reúne ingredientes seleccionados por cómo nutren, sostienen y acompañan el cuerpo.<br><br>
                     Activos que normalmente se consumen por separado, en distintos formatos y tomas a lo largo del día,
-                    integrados aquí en una sola pieza, una cookie jugosa, keto y profundamente satisfactoria.<br>
-                    <Br>
-                    Activos en las cantidades adecuadas o más que suficientes para ejercer su efecto en el cuerpo<br>
-                    En DOXA nada está presente sólo por figurar<Br>
-                    <Br>
-                    Un producto healthy que sin embargo no sacrifica la textura<br>
-                    Un suplemento que no sacrifica el placer<br>
-                    <Br>
-                    Una forma distinta de disfrutar,
-                    compatible con una alimentación consciente,
-                    con el entrenamiento,
-                    y con el cuidado a largo plazo.<Br>
+                    integrados aquí en una sola pieza: una cookie jugosa, keto y profundamente satisfactoria.<br><br>
+                    Activos en las cantidades adecuadas o más que suficientes para ejercer su efecto en el cuerpo.<br>
+                    En DOXA nada está presente sólo por figurar.<br><br>
+                    Un producto healthy que sin embargo no sacrifica la textura.<br>
+                    Un suplemento que no sacrifica el placer.<br><br>
+                    Una forma distinta de disfrutar, compatible con una alimentación consciente, con el entrenamiento, y con el cuidado a largo plazo.
                 </p>
             </div>
         </section>
@@ -1991,10 +2128,21 @@ Menú del Index: Líena 742
                 justify-content: flex-start;
             }
 
+            .table-responsive {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
             @media (max-width: 768px) {
+                #descripcion-nutricional {
+                    padding-top: 65px !important;
+                    padding-bottom: 65px !important;
+                }
+
                 .product-info-grid {
                     flex-direction: column;
-                    gap: 40px;
+                    gap: 35px;
                 }
 
                 .product-info-grid .column-text {
@@ -2008,10 +2156,16 @@ Menú del Index: Líena 742
                 .product-info-grid .dietary-icons {
                     justify-content: center;
                 }
+
+                .placer-cookie-img {
+                    max-width: 300px !important;
+                    width: 82% !important;
+                    margin: 0 auto;
+                }
             }
 
             #varietyTitle {
-                font-size: clamp(24px, 3vw, 32px);
+                font-size: clamp(22px, 3.5vw, 32px);
                 font-weight: 400;
             }
         </style>
@@ -2021,38 +2175,33 @@ Menú del Index: Líena 742
         <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) === -->
         <section id="descripcion-nutricional" class="coleccion-section" style="padding-top: 100px;">
             <div class="container animate-appear">
-                <div style="text-align: center; margin-bottom: 80px;">
-                    <h2
-                        style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 40px;">
+                <div style="text-align: center; margin-bottom: 60px;">
+                    <h2 class="section-title">
                         EL PLACER
                     </h2>
 
-                    <p
-                        style="max-width: 550px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 300; line-height: 2; opacity: 0.9;">
+                    <p class="section-lead-text" style="max-width: 550px;">
                         Porque es innegociable.
                         <br><br>
                         Reunir ingredientes excepcionales sin renunciar a la textura, la jugosidad y la experiencia que
                         esperas de una gran cookie no era sencillo.
-                        <br>
+                        <br><br>
                         Cada ingrediente aporta su propia función.
-
                         Cada matiz aporta su propia personalidad.
-                        <br>
+                        <br><br>
                         Una composición poco habitual donde cada elemento tiene sentido por sí solo y, aún más, cuando
-                        forma
-                        parte del conjunto.
+                        forma parte del conjunto.
                         <br><br>
                         El resultado es DOXA.
                         <br>
                         Donde disfrutar y cuidarse encuentran el mismo camino.
                         <br><br>
                         El capricho evoluciona.
-                        <br>
                     </p>
                 </div>
                 <div class="product-info-grid">
                     <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
-                        <img src="Galle choco.png" alt="DOXA Bésame Choco"
+                        <img src="Galle choco.png" alt="DOXA Bésame Choco" class="placer-cookie-img"
                             style="width: 100%; max-width: 500px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5)); border-radius: 4px;">
                     </div>
                     <div class="column-text" style="flex: 1; display: flex; flex-direction: column;">
@@ -2081,8 +2230,6 @@ Menú del Index: Líena 742
                                     Sin ingredientes inflamatorios<br>
                                     Apta para dieta cetogénica<br>
                                     Ideal para el post-entrenamiento<br>
-
-
                             </div>
                         </div>
 
@@ -2100,78 +2247,69 @@ Menú del Index: Líena 742
                                 <p style="padding-top: 15px; margin-bottom: 0; font-size: 11px; opacity: 0.8;">
                                     *Dosis diarias recomendadas por la OMS
                                 </p>
-                                <table class="comparative-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Activo</th>
-                                            <th>OMS</th>
-
-                                            <th>Doxa</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Proteína</td>
-                                            <td>0.000g</td>
-
-                                            <td>20.000g</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colágeno (AA)</td>
-                                            <td>0.000g</td>
-
-                                            <td>10.000g</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vitamina C</td>
-                                            <td>0.000g</td>
-
-                                            <td>100.000mg</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vitamina D3</td>
-                                            <td>0.000g</td>
-
-                                            <td>50.000mcg</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Biotina</td>
-                                            <td>0.000g</td>
-
-                                            <td>5.000mg</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Creatina</td>
-                                            <td>0.000g</td>
-
-                                            <td>3.000g</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aceite MCT</td>
-                                            <td>0.000g</td>
-
-                                            <td>5.000g</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Boswellia Serrata</td>
-                                            <td>0.000g</td>
-
-                                            <td>250.000mg</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jengibre</td>
-                                            <td>0.000g</td>
-
-                                            <td>100.000mg</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ácido Hialurónico</td>
-                                            <td>0.000g</td>
-
-                                            <td>120.000mg</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="comparative-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Activo</th>
+                                                <th>OMS</th>
+                                                <th>Doxa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Proteína</td>
+                                                <td>0.000g</td>
+                                                <td>20.000g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Colágeno (AA)</td>
+                                                <td>0.000g</td>
+                                                <td>10.000g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vitamina C</td>
+                                                <td>0.000g</td>
+                                                <td>100.000mg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vitamina D3</td>
+                                                <td>0.000g</td>
+                                                <td>50.000mcg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Biotina</td>
+                                                <td>0.000g</td>
+                                                <td>5.000mg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Creatina</td>
+                                                <td>0.000g</td>
+                                                <td>3.000g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Aceite MCT</td>
+                                                <td>0.000g</td>
+                                                <td>5.000g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Boswellia Serrata</td>
+                                                <td>0.000g</td>
+                                                <td>250.000mg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jengibre</td>
+                                                <td>0.000g</td>
+                                                <td>100.000mg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ácido Hialurónico</td>
+                                                <td>0.000g</td>
+                                                <td>120.000mg</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
@@ -2271,19 +2409,33 @@ Menú del Index: Líena 742
                 display: block;
                 filter: contrast(1.04);
             }
+
+            @media (max-width: 768px) {
+                .alma-section {
+                    padding: 65px 0 75px 0 !important;
+                }
+
+                .alma-img-card {
+                    box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.12);
+                }
+
+                .btn-alma-coleccion {
+                    padding: 14px 28px !important;
+                    font-size: 10.5px !important;
+                    letter-spacing: 2px !important;
+                }
+            }
         </style>
 
         <section id="el-alma" class="alma-section">
             <div class="container animate-appear">
                 <!-- ESTRUCTURA IDÉNTICA A "EL PLACER": TÍTULO Y TEXTO CENTRADOS -->
                 <div style="text-align: center; margin-bottom: 50px;">
-                    <h2
-                        style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 45px); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 40px; color: var(--text-dark);">
+                    <h2 class="section-title" style="color: var(--text-dark);">
                         EL ALMA
                     </h2>
 
-                    <p
-                        style="max-width: 620px; margin: 0 auto; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 300; line-height: 2.1; opacity: 0.9; color: var(--text-dark);">
+                    <p class="section-lead-text" style="max-width: 620px; color: var(--text-dark);">
                         Para <strong>DOXA</strong>, el arte no es un adorno superficial ni una disciplina aislada: es el
                         alma misma de nuestra existencia y un pilar indispensable para la evolución y la consciencia
                         humana.
@@ -2299,7 +2451,6 @@ Menú del Index: Líena 742
                         Nuestra misión entrelaza alta nutrición celular y devoción estética.
                         <br><br>
                         El arte evoluciona.
-                        <br>
                     </p>
                 </div>
 
@@ -2312,7 +2463,7 @@ Menú del Index: Líena 742
                 </div>
 
                 <!-- BOTÓN CTA A LA COLECCIÓN DEBAJO DE LA IMAGEN CON MARGEN GENEROSO -->
-                <div style="text-align: center; margin-top: 60px; margin-bottom: 10px;">
+                <div style="text-align: center; margin-top: 45px; margin-bottom: 10px;">
                     <a href="coleccion.html" class="btn-alma-coleccion">
                         Descubre la colección
                         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
@@ -2632,9 +2783,28 @@ Menú del Index: Líena 742
             }
 
             @media (max-width: 768px) {
+                .checkout-section {
+                    padding: 65px 20px !important;
+                }
+
+                .btn-jotform {
+                    padding: 16px 20px !important;
+                    font-size: 10.5px !important;
+                    letter-spacing: 2.5px !important;
+                    margin-top: 30px !important;
+                }
+
+                .gallery-footer {
+                    padding: 45px 0 25px 0 !important;
+                }
+
+                .footer-grid-container {
+                    padding: 0 20px !important;
+                }
+
                 .footer-columns-row {
                     grid-template-columns: 1fr;
-                    gap: 25px;
+                    gap: 28px;
                     text-align: center;
                 }
 
@@ -2643,26 +2813,30 @@ Menú del Index: Líena 742
                     text-align: center !important;
                 }
 
+                .footer-column-links .footer-link {
+                    padding: 5px 10px;
+                    font-size: 11.5px;
+                    display: inline-block;
+                }
+
                 .footer-bottom-row {
                     justify-content: center;
                     text-align: center;
+                    padding-top: 20px;
+                    margin-top: 20px;
                 }
 
                 .footer-copy {
                     text-align: center;
+                    font-size: 9.5px;
+                    line-height: 1.6;
                 }
             }
 
             @media (max-width: 576px) {
                 .footer-columns-row {
                     grid-template-columns: 1fr;
-                    gap: 30px;
-                }
-
-                .footer-bottom-row {
-                    flex-direction: column;
-                    gap: 15px;
-                    text-align: center;
+                    gap: 28px;
                 }
             }
         </style>
@@ -2671,38 +2845,28 @@ Menú del Index: Líena 742
         <section class="checkout-section" id="reserva">
             <div class="container">
 
-
-                <h2
-                    style="font-family: 'Lexend', sans-serif; font-weight: 300; font-size: clamp(22px, 5vw, 45px); letter-spacing: clamp(2px, 2vw, 12px); text-transform: uppercase; margin-bottom: 60px; color: #3C332A;">
+                <h2 class="section-title" style="color: #3C332A;">
                     RESERVAS
                 </h2>
 
-
-                <div class="col-header">
-                    <h2 class="col-title" style="color: #3C332A;"></h2>
+                <div class="col-header" style="margin-bottom: 35px;">
                     <p class="col-desc">
-
-                        DOXAS se presentan en una caja de 4 unidades.<br>
-                        <br>
+                        DOXAS se presentan en una caja de 4 unidades.<br><br>
                         Pensada para acompañarte durante la semana.<br>
                         Como tu impulso después del entrenamiento,<br>
                         como pausa consciente,<br>
-                        o simplemente cuando te apetece un carpricho...que no rompe tus normas.<br>
-                        <br>
-
+                        o simplemente cuando te apetece un capricho... que no rompe tus normas.<br>
                     </p>
                 </div>
 
                 <div class="checkout-texts">
-                    <p class="variety-desc" style="font-weight: 500; min-height: auto; margin-bottom: 30px;">
+                    <p class="variety-desc" style="font-weight: 500; min-height: auto; margin-bottom: 25px;">
                         DOXAS se elaboran artesanalmente y bajo pedido.
                     </p>
                     <p class="variety-desc" style="min-height: auto; margin-bottom: 0;">
                         Las tuyas te serán enviadas en cuanto hayan enfriado tras su horneado.<br><br>
-                        Un golpe de calor en el
-                        microondas antes de ser consumidas les devuelve ese punto fresco del recién
-                        hecho.<br><br><br>
-                        Te informaremos por correo del momento en que estén listas para su envío
+                        Un golpe de calor en el microondas antes de ser consumidas les devuelve ese punto fresco del recién hecho.<br><br>
+                        Te informaremos por correo del momento en que estén listas para su envío.
                     </p>
                     <a href="compra.html" class="btn-jotform">
                         Reserva tu caja
@@ -2862,19 +3026,37 @@ Menú del Index: Líena 742
                     });
                 });
 
+                const navbarOverlay = document.getElementById('navbarOverlay');
+
+                function toggleMobileMenu() {
+                    const isOpen = navbarMenu.classList.toggle('active');
+                    mobileToggle.classList.toggle('active', isOpen);
+                    if (navbarOverlay) navbarOverlay.classList.toggle('active', isOpen);
+                    document.body.classList.toggle('menu-open', isOpen);
+                }
+
+                function closeMobileMenu() {
+                    navbarMenu.classList.remove('active');
+                    mobileToggle.classList.remove('active');
+                    if (navbarOverlay) navbarOverlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                }
+
                 // Toggle del menú móvil
-                mobileToggle.addEventListener('click', () => {
-                    mobileToggle.classList.toggle('active');
-                    navbarMenu.classList.toggle('active');
-                });
+                if (mobileToggle) {
+                    mobileToggle.addEventListener('click', toggleMobileMenu);
+                }
+
+                if (navbarOverlay) {
+                    navbarOverlay.addEventListener('click', closeMobileMenu);
+                }
 
                 // Cerrar menú móvil al hacer click en un enlace y establecer el botón activo inmediatamente
                 navLinks.forEach(link => {
                     link.addEventListener('click', () => {
                         navLinks.forEach(l => l.classList.remove('active'));
                         link.classList.add('active');
-                        mobileToggle.classList.remove('active');
-                        navbarMenu.classList.remove('active');
+                        closeMobileMenu();
                         tempDisableScrollspy();
                     });
                 });
