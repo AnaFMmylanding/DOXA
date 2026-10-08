@@ -1604,13 +1604,15 @@ Menú del Index: Líena 742
                     height: auto !important;
                     object-fit: contain !important;
                     filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.22)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.12)) !important;
-                    pointer-events: none !important;
+                    pointer-events: auto !important;
+                    cursor: pointer !important;
                     z-index: 10 !important;
                     transition: transform 0.3s ease, filter 0.3s ease !important;
                 }
 
                 .galleta-fija:hover {
-                    transform: translate(-50%, -50%) scale(1.02) !important;
+                    transform: translate(-50%, -50%) scale(1.03) !important;
+                    filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.3)) brightness(1.04) !important;
                 }
 
                 .nodo-activo {
@@ -1619,6 +1621,18 @@ Menú del Index: Líena 742
                     touch-action: none !important;
                     padding: 8px 12px !important;
                     border-radius: 12px !important;
+                    transition: left 0.6s ease, top 0.6s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), scale 0.3s ease, opacity 0.6s ease !important;
+                }
+
+                .nodo-activo:hover {
+                    scale: 1.15 !important;
+                    opacity: 1 !important;
+                    z-index: 50 !important;
+                }
+
+                .nodo-activo:hover .nodo-texto {
+                    color: #c19b76 !important;
+                    text-shadow: 0 0 12px rgba(255, 255, 255, 0.85) !important;
                 }
 
                 .nodo-subactivo {
@@ -1627,11 +1641,24 @@ Menú del Index: Líena 742
                     touch-action: none !important;
                     padding: 8px 12px !important;
                     border-radius: 12px !important;
+                    transition: transform 0.3s ease, opacity 0.5s ease, scale 0.3s ease !important;
+                }
+
+                .nodo-subactivo:hover {
+                    scale: 1.15 !important;
+                    opacity: 1 !important;
+                    z-index: 60 !important;
+                }
+
+                .nodo-subactivo:hover .sub-activo-link {
+                    color: #c19b76 !important;
+                    text-shadow: 0 0 12px rgba(255, 255, 255, 0.85) !important;
                 }
 
                 .sub-activo-link {
                     cursor: pointer !important;
                     pointer-events: auto !important;
+                    transition: color 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease !important;
                 }
 
                 .text-column {
@@ -2148,6 +2175,56 @@ Menú del Index: Líena 742
                                 }
                             };
 
+                            // Reacción interactiva inmediata al cursor on-hover (simulador móvil y PC)
+                            let hoverTimer = null;
+                            nodo.onmouseenter = (e) => {
+                                if (isDraggingWheel) return;
+                                nodo.style.opacity = '1';
+                                nodo.style.scale = '1.18';
+                                nodo.style.zIndex = '50';
+                                if (line) {
+                                    line.style.opacity = '0.85';
+                                }
+                                const textEl = nodo.querySelector('.nodo-texto');
+                                if (textEl) {
+                                    textEl.style.color = '#c19b76';
+                                    textEl.style.textShadow = '0 0 14px rgba(255, 255, 255, 0.85)';
+                                }
+
+                                if (i !== selectedCategoryIndex) {
+                                    // Sutil brisa / inclinación reactiva de la rueda hacia el nodo
+                                    const sway = (x > 0 ? -3 : 3);
+                                    rueda.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+                                    rueda.style.transform = `rotate(${rotacionActual + sway}deg)`;
+                                }
+                            };
+
+                            nodo.onmouseleave = (e) => {
+                                clearTimeout(hoverTimer);
+                                nodo.style.zIndex = isSelected ? '35' : '30';
+                                const textEl = nodo.querySelector('.nodo-texto');
+                                if (textEl) {
+                                    textEl.style.color = isSelected ? '#fff' : (isMobile ? 'rgba(255, 255, 255, 0.85)' : '#ccc');
+                                    textEl.style.textShadow = 'none';
+                                }
+                                if (isMobile) {
+                                    let degPantalla = ((gradosPadre + rotacionActual) % 360 + 360) % 360;
+                                    const distFromBottom = Math.abs(degPantalla - 90);
+                                    const arcOpacity = Math.max(0.4, 1 - (distFromBottom / 72));
+                                    nodo.style.opacity = isSelected ? '1' : String(arcOpacity * 0.65);
+                                    nodo.style.scale = isSelected ? '1.04' : '0.92';
+                                    if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : '0.25';
+                                } else {
+                                    nodo.style.opacity = isNeutral ? '1' : (isSelected ? '1' : '0.85');
+                                    nodo.style.scale = isNeutral ? '1' : (isSelected ? '1.05' : '0.93');
+                                    if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : '1';
+                                }
+                                if (i !== selectedCategoryIndex) {
+                                    rueda.style.transition = 'transform 0.6s ease-out';
+                                    rueda.style.transform = `rotate(${rotacionActual}deg)`;
+                                }
+                            };
+
                             nodo.style.left = `calc(50% + ${x}px)`;
                             nodo.style.top = `calc(50% + ${y}px)`;
 
@@ -2165,10 +2242,10 @@ Menú del Index: Líena 742
                                     if (line) line.style.opacity = '0';
                                 } else {
                                     const distFromBottom = Math.abs(degPantalla - 90);
-                                    const arcOpacity = Math.max(0.3, 1 - (distFromBottom / 72));
-                                    nodo.style.opacity = isSelected ? '1' : String(arcOpacity * 0.35);
+                                    const arcOpacity = Math.max(0.4, 1 - (distFromBottom / 72));
+                                    nodo.style.opacity = isSelected ? '1' : String(arcOpacity * 0.65);
                                     nodo.style.pointerEvents = 'auto';
-                                    if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : '0.2';
+                                    if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : '0.25';
                                 }
                                 nodo.style.scale = isSelected ? '1.04' : '0.92';
                             } else {
@@ -2266,6 +2343,24 @@ Menú del Index: Líena 742
                                                 cajaText.style.transition = 'opacity 0.4s ease-in-out';
                                                 cajaText.style.opacity = '1';
                                             }, 300);
+                                        };
+
+                                        nodoSub.onmouseenter = () => {
+                                            const textSub = nodoSub.querySelector('.sub-activo-link');
+                                            if (textSub) {
+                                                textSub.style.color = '#c19b76';
+                                                textSub.style.textShadow = '0 0 12px rgba(255, 255, 255, 0.8)';
+                                            }
+                                            nodoSub.style.scale = '1.15';
+                                        };
+
+                                        nodoSub.onmouseleave = () => {
+                                            const textSub = nodoSub.querySelector('.sub-activo-link');
+                                            if (textSub) {
+                                                textSub.style.color = '#fff';
+                                                textSub.style.textShadow = 'none';
+                                            }
+                                            nodoSub.style.scale = '1';
                                         };
 
                                         rueda.appendChild(nodoSub);
@@ -2460,6 +2555,25 @@ Menú del Index: Líena 742
                         let pointerStartRot = 0;
                         let isDragDecided = false;
                         let activePointerId = null;
+
+                        // Reacción interactiva fluida al movimiento libre del cursor en simulador y PC
+                        radialWrapper.addEventListener('mousemove', (e) => {
+                            if (activePointerId !== null || isDraggingWheel) return;
+                            if (e.target.closest('.nodo-activo') || e.target.closest('.nodo-subactivo')) return;
+                            const rect = radialWrapper.getBoundingClientRect();
+                            const centerX = rect.left + rect.width / 2;
+                            const mouseDeltaX = (e.clientX - centerX) / (rect.width / 2);
+                            const sway = -mouseDeltaX * 4.5;
+                            rueda.style.transition = 'transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)';
+                            rueda.style.transform = `rotate(${rotacionActual + sway}deg)`;
+                        });
+
+                        radialWrapper.addEventListener('mouseleave', () => {
+                            if (!isDraggingWheel && activePointerId === null) {
+                                rueda.style.transition = 'transform 0.6s ease-out';
+                                rueda.style.transform = `rotate(${rotacionActual}deg)`;
+                            }
+                        });
 
                         radialWrapper.addEventListener('pointerdown', (e) => {
                             if (window.innerWidth > 768) return;
