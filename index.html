@@ -1508,7 +1508,7 @@ Menú del Index: Líena 742
                     height: 100svh !important;
                     min-height: 640px !important;
                     max-height: 100svh !important;
-                    overflow: hidden !important;
+                    overflow: visible !important;
                     position: relative;
                     background-color: var(--yeso-oscuro, #e6e7e1) !important;
                     display: flex !important;
@@ -1549,6 +1549,7 @@ Menú del Index: Líena 742
                     padding: 0 16px 20px 16px !important;
                     gap: 0 !important;
                     box-sizing: border-box !important;
+                    overflow: visible !important;
                 }
 
                 .wheel-column {
@@ -1557,10 +1558,11 @@ Menú del Index: Líena 742
                     height: 380px !important;
                     display: flex !important;
                     justify-content: center !important;
-                    align-items: flex-start !important;
+                    align-items: center !important;
                     margin-top: -125px !important;
                     position: relative !important;
                     z-index: 10 !important;
+                    overflow: visible !important;
                 }
 
                 .radial-wrapper {
@@ -1572,6 +1574,10 @@ Menú del Index: Líena 742
                     user-select: none !important;
                     -webkit-user-select: none !important;
                     cursor: grab !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    overflow: visible !important;
                 }
 
                 .radial-wrapper:active {
@@ -1579,21 +1585,32 @@ Menú del Index: Líena 742
                 }
 
                 .rueda-giro {
+                    position: absolute !important;
+                    top: 0 !important;
+                    left: 0 !important;
                     width: 100% !important;
                     height: 100% !important;
                     z-index: 20 !important;
                 }
 
                 .galleta-fija {
-                    width: 310px !important;
-                    max-width: 82vw !important;
-                    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6)) !important;
+                    position: absolute !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                    transform: translate(-50%, -50%) !important;
+                    width: 295px !important;
+                    max-width: 80vw !important;
+                    max-height: 295px !important;
+                    height: auto !important;
+                    object-fit: contain !important;
+                    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.22)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.12)) !important;
                     pointer-events: none !important;
                     z-index: 10 !important;
+                    transition: transform 0.3s ease, filter 0.3s ease !important;
                 }
 
                 .galleta-fija:hover {
-                    transform: scale(1.02) !important;
+                    transform: translate(-50%, -50%) scale(1.02) !important;
                 }
 
                 .nodo-activo {
@@ -1867,6 +1884,7 @@ Menú del Index: Líena 742
                     let rotacionActual = 0;
                     let prevRot = 0;
                     let selectedCategoryIndex = 0;
+                    let childrenVisible = true;
                     let isDraggingWheel = false;
                     let wasDragging = false;
 
@@ -1875,14 +1893,34 @@ Menú del Index: Líena 742
                             const sec = document.getElementById('cajas-activos');
                             if (sec) {
                                 const rect = sec.getBoundingClientRect();
-                                if (Math.abs(rect.top) > 8) {
-                                    const targetY = window.pageYOffset + rect.top;
+                                const idealTop = 110;
+                                if (Math.abs(rect.top - idealTop) > 25) {
+                                    const targetY = window.pageYOffset + rect.top - idealTop;
                                     window.scrollTo({
                                         top: targetY,
                                         behavior: 'smooth'
                                     });
                                 }
                             }
+                        }
+                    }
+
+                    function updateCategoryText(index) {
+                        if (index < 0 || index >= activos.length) return;
+                        const a = activos[index];
+                        const newHTML = `
+                            ${a.tagline ? `<div class="tagline" style="font-family:'Lexend',sans-serif;font-size:10.5px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:8px;display:block;">${a.tagline}</div>` : ''}
+                            <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">${a.title || a.n}</h3>
+                            ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
+                            <div class="hero-value-prop">${a.prop || ''}</div>
+                        `;
+                        if (cajaText.innerHTML.trim() !== newHTML.trim()) {
+                            cajaText.style.opacity = '0';
+                            setTimeout(() => {
+                                cajaText.innerHTML = newHTML;
+                                cajaText.style.transition = 'opacity 0.4s ease-in-out';
+                                cajaText.style.opacity = '1';
+                            }, 200);
                         }
                     }
 
@@ -1926,6 +1964,7 @@ Menú del Index: Líena 742
 
                     function selectCategory(index, initial = false) {
                         selectedCategoryIndex = index;
+                        childrenVisible = true;
                         const a = activos[index];
                         const isMobile = window.innerWidth <= 768;
 
@@ -1985,6 +2024,7 @@ Menú del Index: Líena 742
 
                     function resetToNeutral() {
                         selectedCategoryIndex = -1;
+                        childrenVisible = false;
 
                         cajaText.style.opacity = '0';
                         setTimeout(() => {
@@ -2099,7 +2139,12 @@ Menú del Index: Líena 742
                                 if (wasDragging || isDraggingWheel) return;
                                 alignToCajasActivos();
                                 if (i !== selectedCategoryIndex) {
+                                    childrenVisible = true;
                                     selectCategory(i);
+                                } else {
+                                    childrenVisible = !childrenVisible;
+                                    updateCategoryText(i);
+                                    renderRueda();
                                 }
                             };
 
@@ -2113,7 +2158,7 @@ Menú del Index: Líena 742
                                     nodo.style.opacity = '0';
                                     nodo.style.pointerEvents = 'none';
                                     if (line) line.style.opacity = '0';
-                                } else if (!isSelected && selectedCategoryIndex !== -1 && degPantalla >= 45 && degPantalla <= 115) {
+                                } else if (!isSelected && selectedCategoryIndex !== -1 && childrenVisible && degPantalla >= 45 && degPantalla <= 115) {
                                     // En móvil: ocultar categorías padre no seleccionadas que coincidirían en el arco de las hijas
                                     nodo.style.opacity = '0';
                                     nodo.style.pointerEvents = 'none';
@@ -2123,7 +2168,7 @@ Menú del Index: Líena 742
                                     const arcOpacity = Math.max(0.3, 1 - (distFromBottom / 72));
                                     nodo.style.opacity = isSelected ? '1' : String(arcOpacity * 0.35);
                                     nodo.style.pointerEvents = 'auto';
-                                    if (line) line.style.opacity = isSelected ? '1' : '0.2';
+                                    if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : '0.2';
                                 }
                                 nodo.style.scale = isSelected ? '1.04' : '0.92';
                             } else {
@@ -2137,7 +2182,7 @@ Menú del Index: Líena 742
                                     nodo.style.opacity = '0.85';
                                     nodo.style.scale = '0.93';
                                 }
-                                if (line) line.style.opacity = '1';
+                                if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : '1';
                             }
 
                             const textSpan = nodo.querySelector('.nodo-texto');
@@ -2157,7 +2202,7 @@ Menú del Index: Líena 742
                             textSpan.style.transform = `rotate(${-rotacionActual}deg)`;
 
                             // 3. Renderizar activos hijos de la categoría seleccionada
-                            if (isSelected && a.subActivos) {
+                            if (isSelected && a.subActivos && childrenVisible) {
                                 if (isMobile) {
                                     // MODO MOBILE: despliegue de las hijas hacia abajo y a la derecha de la madre
                                     const subRadio = actualParentRadio + 24;
@@ -2473,7 +2518,7 @@ Menú del Index: Líena 742
                                         const o = Math.max(0.3, 1 - (d / 72));
                                         n.style.opacity = (idx === selectedCategoryIndex) ? '1' : String(o * 0.85);
                                         n.style.pointerEvents = 'auto';
-                                        if (l) l.style.opacity = (idx === selectedCategoryIndex) ? '1' : '0.4';
+                                        if (l) l.style.opacity = (idx === selectedCategoryIndex) ? (childrenVisible ? '0' : '1') : '0.4';
                                     }
                                 });
 
