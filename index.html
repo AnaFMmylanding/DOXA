@@ -1436,16 +1436,16 @@ Menú del Index: Líena 742
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), scale 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+                transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), scale 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
                 white-space: nowrap;
                 transform: translate(-50%, -50%);
                 z-index: 15;
             }
 
             .nodo-activo:hover {
-                transform: translate(-50%, -50%) scale(1.15);
-                color: #c19b76;
-                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                transform: translate(-50%, -50%);
+                color: #fff;
+                text-shadow: 0 0 14px rgba(255, 255, 255, 0.95);
             }
 
             .nodo-subactivo {
@@ -1922,7 +1922,7 @@ Menú del Index: Líena 742
                             if (sec) {
                                 const rect = sec.getBoundingClientRect();
                                 const idealTop = 0;
-                                if (Math.abs(rect.top - idealTop) > 40) {
+                                if (Math.abs(rect.top - idealTop) > 4) {
                                     const targetY = window.pageYOffset + rect.top - idealTop;
                                     window.scrollTo({
                                         top: targetY,
@@ -2175,7 +2175,7 @@ Menú del Index: Líena 742
                                 nodo.style.position = 'absolute';
                                 nodo.style.left = `calc(50% + ${x}px)`;
                                 nodo.style.top = `calc(50% + ${y}px)`;
-                                nodo.style.transition = 'left 1.1s cubic-bezier(0.25, 1, 0.5, 1), top 1.1s cubic-bezier(0.25, 1, 0.5, 1), transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), scale 0.9s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1)';
+                                nodo.style.transition = 'left 1.1s cubic-bezier(0.25, 1, 0.5, 1), top 1.1s cubic-bezier(0.25, 1, 0.5, 1), transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), scale 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease';
 
                                 nodo.innerHTML = `<span class="nodo-texto" style="display:inline-flex; flex-direction:column; align-items:center; text-align:center; line-height:1.25; font-size:${isMobile ? '10px' : '11px'}; letter-spacing: 1.2px; text-transform: uppercase;">${formatCategoryName(a.n)}</span>`;
 
@@ -2194,29 +2194,30 @@ Menú del Index: Líena 742
                                 }
                             };
 
-                            // Reacción interactiva on-hover (solo en desktop con hover real)
+                            // Reacción interactiva on-hover suave y estable (solo en desktop con hover real)
                             nodo.onmouseenter = (e) => {
                                 if (isDraggingWheel || isMobile) return;
                                 nodo.style.opacity = '1';
-                                nodo.style.scale = '1.16';
+                                nodo.style.scale = '1.05';
                                 nodo.style.zIndex = '50';
                                 if (line) {
                                     line.style.opacity = '0.85';
                                 }
                                 const textEl = nodo.querySelector('.nodo-texto');
                                 if (textEl) {
-                                    textEl.style.color = '#c19b76';
-                                    textEl.style.textShadow = '0 0 14px rgba(255, 255, 255, 0.85)';
+                                    textEl.style.color = '#fff';
+                                    textEl.style.textShadow = '0 0 14px rgba(255, 255, 255, 0.95)';
                                 }
                             };
 
                             nodo.onmouseleave = (e) => {
                                 if (isDraggingWheel || isMobile) return;
                                 nodo.style.zIndex = isSelected ? '35' : '30';
+                                nodo.style.scale = isSelected ? '1.05' : (isNeutral ? '1' : '0.9');
                                 const textEl = nodo.querySelector('.nodo-texto');
                                 if (textEl) {
                                     textEl.style.color = isSelected ? '#fff' : (isNeutral ? '#fff' : (isMobile ? 'rgba(255, 255, 255, 0.45)' : 'rgba(255, 255, 255, 0.65)'));
-                                    textEl.style.textShadow = 'none';
+                                    textEl.style.textShadow = isSelected ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none';
                                 }
                                 if (isMobile) {
                                     let degPantalla = ((gradosPadre + rotacionActual) % 360 + 360) % 360;
@@ -2309,7 +2310,8 @@ Menú del Index: Líena 742
                             textSpan.style.fontWeight = fontWeight;
                             textSpan.style.color = color;
                             textSpan.style.fontSize = isMobile ? '10px' : '11px';
-                            textSpan.style.transition = 'transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.5s ease';
+                            textSpan.style.textShadow = isSelected ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none';
+                            textSpan.style.transition = 'transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease, text-shadow 0.4s ease';
                             textSpan.style.transform = `rotate(${-rotacionActual}deg)`;
 
                             // 3. Renderizar activos hijos de la categoría seleccionada
@@ -2375,6 +2377,7 @@ Menú del Index: Líena 742
                                         nodoSub.onclick = (e) => {
                                             e.stopPropagation();
                                             if (wasDragging || isDraggingWheel) return;
+                                            alignToCajasActivos();
                                             if (selectedSubIndex === idx) {
                                                 selectedSubIndex = -1;
                                                 updateCategoryText(i);
@@ -2502,6 +2505,7 @@ Menú del Index: Líena 742
                                         nodoSub.onclick = (e) => {
                                             e.stopPropagation();
                                             if (wasDragging || isDraggingWheel) return;
+                                            alignToCajasActivos();
                                             selectedSubIndex = idx;
                                             const poleDaughterHTML = `
                                                 <div class="tagline" style="font-family:'Lexend',sans-serif;font-size:11px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:10px;display:block;">${a.n}</div>
@@ -2609,6 +2613,7 @@ Menú del Index: Líena 742
                                         nodoSub.onclick = (e) => {
                                             e.stopPropagation();
                                             if (wasDragging || isDraggingWheel) return;
+                                            alignToCajasActivos();
                                             if (selectedSubIndex === idx) {
                                                 selectedSubIndex = -1;
                                                 updateCategoryText(i);
@@ -2762,23 +2767,21 @@ Menú del Index: Líena 742
                             });
                         }
 
-                        // Reacción sutil al movimiento libre del cursor en PC/simulador (solo cuando no se arrastra ni se está sobre nodos)
-                        radialWrapper.addEventListener('mousemove', (e) => {
-                            if (activePointerId !== null || isDraggingWheel) return;
-                            if (e.target.closest('.nodo-activo') || e.target.closest('.nodo-subactivo')) return;
-                            const center = getCenter();
-                            const mouseDeltaX = (e.clientX - center.x) / center.radius;
-                            const sway = -mouseDeltaX * 3.2;
-                            rueda.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
-                            rueda.style.transform = `rotate(${rotacionActual + sway}deg)`;
-                        });
-
-                        radialWrapper.addEventListener('mouseleave', () => {
-                            if (!isDraggingWheel && activePointerId === null) {
-                                rueda.style.transition = 'transform 0.5s ease-out';
-                                rueda.style.transform = `rotate(${rotacionActual}deg)`;
-                            }
-                        });
+                        // Mantener orientación horizontal perfecta de todos los textos
+                        function returnToHorizontal(smooth = true) {
+                            if (isDraggingWheel || activePointerId !== null) return;
+                            const dur = smooth ? '0.35s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+                            rueda.style.transition = `transform ${dur}`;
+                            rueda.style.transform = `rotate(${rotacionActual}deg)`;
+                            rueda.querySelectorAll('.nodo-texto').forEach(t => {
+                                t.style.transition = `transform ${dur}`;
+                                t.style.transform = `rotate(${-rotacionActual}deg)`;
+                            });
+                            rueda.querySelectorAll('.sub-activo-link').forEach(t => {
+                                t.style.transition = `transform ${dur}`;
+                                t.style.transform = `rotate(${-rotacionActual}deg)`;
+                            });
+                        }
 
                         radialWrapper.addEventListener('pointerdown', (e) => {
                             if (window.innerWidth > 768) return;
