@@ -1411,12 +1411,14 @@ Menú del Index: Líena 742
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                z-index: 10;
             }
 
             .galleta-fija {
                 position: absolute;
                 width: 340px;
-                z-index: 12;
+                border-radius: 50%;
+                z-index: 20;
                 filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
                 pointer-events: auto;
                 cursor: pointer;
@@ -1561,7 +1563,7 @@ Menú del Index: Líena 742
                     align-items: center !important;
                     margin-top: -125px !important;
                     position: relative !important;
-                    z-index: 10 !important;
+                    z-index: 40 !important;
                     overflow: visible !important;
                 }
 
@@ -1578,6 +1580,7 @@ Menú del Index: Líena 742
                     align-items: center !important;
                     justify-content: center !important;
                     overflow: visible !important;
+                    z-index: 20 !important;
                 }
 
                 .radial-wrapper:active {
@@ -1591,7 +1594,7 @@ Menú del Index: Líena 742
                     width: 100% !important;
                     height: 100% !important;
                     touch-action: none !important;
-                    z-index: 20 !important;
+                    z-index: 25 !important;
                 }
 
                 .galleta-fija {
@@ -1604,10 +1607,11 @@ Menú del Index: Líena 742
                     max-height: 295px !important;
                     height: auto !important;
                     object-fit: contain !important;
+                    border-radius: 50% !important;
                     filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.22)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.12)) !important;
                     pointer-events: auto !important;
                     cursor: pointer !important;
-                    z-index: 10 !important;
+                    z-index: 15 !important;
                     transition: transform 0.3s ease, filter 0.3s ease !important;
                 }
 
@@ -1618,60 +1622,70 @@ Menú del Index: Líena 742
 
                 .nodo-activo {
                     cursor: pointer !important;
-                    z-index: 30 !important;
-                    touch-action: none !important;
-                    padding: 8px 12px !important;
-                    border-radius: 12px !important;
-                    transition: left 0.6s ease, top 0.6s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), scale 0.3s ease, opacity 0.4s ease !important;
+                    z-index: 35 !important;
+                    touch-action: manipulation !important;
+                    padding: 10px 14px !important;
+                    border-radius: 14px !important;
+                    -webkit-tap-highlight-color: transparent !important;
+                    transition: left 1.1s cubic-bezier(0.25, 1, 0.5, 1), top 1.1s cubic-bezier(0.25, 1, 0.5, 1), transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), scale 0.9s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1) !important;
                 }
 
-                .nodo-activo:hover {
-                    scale: 1.15 !important;
-                    opacity: 1 !important;
-                    z-index: 50 !important;
+                @media (hover: hover) {
+                    .nodo-activo:hover {
+                        scale: 1.12 !important;
+                        opacity: 1 !important;
+                        z-index: 50 !important;
+                    }
                 }
 
-                .nodo-activo:hover .nodo-texto {
-                    color: #c19b76 !important;
-                    text-shadow: 0 0 12px rgba(255, 255, 255, 0.85) !important;
+                .nodo-activo .nodo-texto {
+                    transition: transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.6s ease, text-shadow 0.6s ease !important;
                 }
 
                 .nodo-subactivo {
                     cursor: pointer !important;
-                    z-index: 45 !important;
-                    touch-action: none !important;
-                    padding: 8px 12px !important;
-                    border-radius: 12px !important;
-                    transition: transform 0.3s ease, opacity 0.4s ease, scale 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+                    z-index: 55 !important;
+                    touch-action: manipulation !important;
+                    padding: 10px 14px !important;
+                    border-radius: 14px !important;
+                    min-height: 38px !important;
+                    min-width: 60px !important;
+                    display: inline-flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    -webkit-tap-highlight-color: transparent !important;
+                    transition: transform 1.1s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1), scale 0.85s cubic-bezier(0.25, 1, 0.5, 1) !important;
                 }
 
-                .nodo-subactivo:hover {
-                    scale: 1.18 !important;
-                    opacity: 1 !important;
-                    z-index: 60 !important;
+                @media (hover: hover) {
+                    .nodo-subactivo:hover {
+                        scale: 1.15 !important;
+                        opacity: 1 !important;
+                        z-index: 65 !important;
+                    }
                 }
 
-                .nodo-subactivo:hover .sub-activo-link {
-                    color: #c19b76 !important;
-                    text-shadow: 0 0 14px rgba(255, 255, 255, 0.9) !important;
+                .nodo-subactivo .sub-activo-link {
+                    transition: transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.45s ease, text-shadow 0.45s ease !important;
                 }
 
                 .sub-activo-link {
                     cursor: pointer !important;
-                    pointer-events: auto !important;
-                    transition: color 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease !important;
+                    pointer-events: none !important;
+                    transition: color 0.45s ease, text-shadow 0.45s ease, scale 0.85s cubic-bezier(0.25, 1, 0.5, 1) !important;
                 }
 
                 .text-column {
                     width: 100% !important;
                     flex: 1 !important;
                     display: flex !important;
-                    align-items: flex-end !important;
+                    align-items: flex-start !important;
                     justify-content: center !important;
-                    padding-top: 0 !important;
-                    padding-bottom: clamp(30px, 5vh, 50px) !important;
+                    padding-top: clamp(165px, calc(7vh + 125px), 195px) !important;
+                    padding-bottom: 25px !important;
                     position: relative !important;
-                    z-index: 25 !important;
+                    z-index: 20 !important;
+                    pointer-events: none !important;
                 }
 
                 .text-box {
@@ -1679,6 +1693,7 @@ Menú del Index: Líena 742
                     max-width: 330px !important;
                     margin: 0 auto !important;
                     color: #181818 !important;
+                    pointer-events: auto !important;
                 }
 
                 .text-box .tagline,
@@ -1731,20 +1746,6 @@ Menú del Index: Líena 742
                     max-width: 310px !important;
                     margin: 0 auto !important;
                 }
-
-                .nodo-activo {
-                    padding: 10px 14px !important;
-                    -webkit-tap-highlight-color: transparent !important;
-                    cursor: pointer !important;
-                    z-index: 30 !important;
-                }
-
-                .nodo-subactivo {
-                    padding: 8px 12px !important;
-                    -webkit-tap-highlight-color: transparent !important;
-                    cursor: pointer !important;
-                    z-index: 35 !important;
-                }
             }
         </style>
 
@@ -1794,12 +1795,10 @@ Menú del Index: Líena 742
                 <!-- Columna Derecha: Texto dinámico -->
                 <div class="text-column">
                     <div class="text-box" id="caja-text">
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Piel & Elasticidad</h3>
-                        <p class="hero-value-prop-neg">Nutrición y firmeza desde el interior</p>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Descubre DOXA</h3>
+                        <p class="hero-value-prop-neg">Arquitectura de Activos</p>
                         <div class="hero-value-prop">
-                            Haz clic en cualquiera de las categorías para explorar los activos que componen la
-                            arquitectura
-                            de DOXA.
+                            Haz clic en cualquiera de las categorías para explorar los activos que componen la arquitectura de DOXA.
                         </div>
                     </div>
                 </div>
@@ -1911,9 +1910,9 @@ Menú del Index: Líena 742
                     const getRadioCategorias = () => (window.innerWidth <= 768 ? 205 : 250);
                     let rotacionActual = 0;
                     let prevRot = 0;
-                    let selectedCategoryIndex = 0;
+                    let selectedCategoryIndex = -1;
                     let selectedSubIndex = -1;
-                    let childrenVisible = true;
+                    let childrenVisible = false;
                     let isDraggingWheel = false;
                     let wasDragging = false;
 
@@ -1922,8 +1921,8 @@ Menú del Index: Líena 742
                             const sec = document.getElementById('cajas-activos');
                             if (sec) {
                                 const rect = sec.getBoundingClientRect();
-                                const idealTop = 110;
-                                if (Math.abs(rect.top - idealTop) > 35) {
+                                const idealTop = 0;
+                                if (Math.abs(rect.top - idealTop) > 40) {
                                     const targetY = window.pageYOffset + rect.top - idealTop;
                                     window.scrollTo({
                                         top: targetY,
@@ -1932,6 +1931,21 @@ Menú del Index: Líena 742
                                 }
                             }
                         }
+                    }
+
+                    let cajaTextTimeout = null;
+                    function transitionCajaText(newHTML) {
+                        if (cajaText.innerHTML.trim() === newHTML.trim()) return;
+                        if (cajaTextTimeout) clearTimeout(cajaTextTimeout);
+                        cajaText.style.transition = 'opacity 0.26s cubic-bezier(0.25, 1, 0.5, 1), transform 0.26s cubic-bezier(0.25, 1, 0.5, 1)';
+                        cajaText.style.opacity = '0';
+                        cajaText.style.transform = 'translateY(5px)';
+                        cajaTextTimeout = setTimeout(() => {
+                            cajaText.innerHTML = newHTML;
+                            cajaText.style.transition = 'opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)';
+                            cajaText.style.opacity = '1';
+                            cajaText.style.transform = 'translateY(0)';
+                        }, 220);
                     }
 
                     function updateCategoryText(index) {
@@ -1943,14 +1957,7 @@ Menú del Index: Líena 742
                             ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
                             <div class="hero-value-prop">${a.prop || ''}</div>
                         `;
-                        if (cajaText.innerHTML.trim() !== newHTML.trim()) {
-                            cajaText.style.opacity = '0';
-                            setTimeout(() => {
-                                cajaText.innerHTML = newHTML;
-                                cajaText.style.transition = 'opacity 0.3s ease-in-out';
-                                cajaText.style.opacity = '1';
-                            }, 150);
-                        }
+                        transitionCajaText(newHTML);
                     }
 
                     function formatCategoryName(name) {
@@ -2016,13 +2023,9 @@ Menú del Index: Líena 742
                         if (initial) {
                             cajaText.innerHTML = newHTML;
                             cajaText.style.opacity = '1';
+                            cajaText.style.transform = 'translateY(0)';
                         } else {
-                            cajaText.style.opacity = '0';
-                            setTimeout(() => {
-                                cajaText.innerHTML = newHTML;
-                                cajaText.style.transition = 'opacity 0.3s ease-in-out';
-                                cajaText.style.opacity = '1';
-                            }, 150);
+                            transitionCajaText(newHTML);
                         }
 
                         prevRot = rotacionActual;
@@ -2035,8 +2038,19 @@ Menú del Index: Líena 742
                             if (diff > 180) diff -= 360;
                             if (diff < -180) diff += 360;
                             rotacionActual += diff;
-                            rueda.style.transition = initial ? 'none' : 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+                            const rotDur = initial ? 0 : Math.min(1.45, Math.max(1.15, 1.05 + Math.abs(diff) * 0.0035));
+                            rueda.style.transition = initial ? 'none' : `transform ${rotDur}s cubic-bezier(0.25, 1, 0.5, 1)`;
                             rueda.style.transform = `rotate(${rotacionActual}deg)`;
+
+                            // Sincronizar el contra-giro de los textos con la misma duración y curva fluida
+                            rueda.querySelectorAll('.nodo-texto').forEach(t => {
+                                t.style.transition = initial ? 'none' : `transform ${rotDur}s cubic-bezier(0.25, 1, 0.5, 1), color 0.5s ease`;
+                                t.style.transform = `rotate(${-rotacionActual}deg)`;
+                            });
+                            rueda.querySelectorAll('.sub-activo-link').forEach(t => {
+                                t.style.transition = initial ? 'none' : `transform ${rotDur}s cubic-bezier(0.25, 1, 0.5, 1), color 0.45s ease, text-shadow 0.45s ease`;
+                                t.style.transform = `rotate(${-rotacionActual}deg)`;
+                            });
                         } else {
                             if (!initial) {
                                 const grados = index * anguloPaso - 90;
@@ -2044,7 +2058,7 @@ Menú del Index: Líena 742
                                 const x = Math.cos(angulo) * getRadioCategorias();
                                 const giroBrisa = x > 0 ? -15 : 15;
                                 rotacionActual += giroBrisa;
-                                rueda.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+                                rueda.style.transition = 'transform 1.15s cubic-bezier(0.25, 1, 0.5, 1)';
                                 rueda.style.transform = `rotate(${rotacionActual}deg)`;
                             }
                         }
@@ -2057,18 +2071,14 @@ Menú del Index: Líena 742
                         selectedSubIndex = -1;
                         childrenVisible = false;
 
-                        cajaText.style.opacity = '0';
-                        setTimeout(() => {
-                            cajaText.innerHTML = `
+                        const neutralHTML = `
                             <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Descubre DOXA</h3>
                             <p class="hero-value-prop-neg">Arquitectura de Activos</p>
                             <div class="hero-value-prop">
                                 Haz clic en cualquiera de las categorías para explorar los activos funcionales y los beneficios que componen cada DOXA.
                             </div>
                         `;
-                            cajaText.style.transition = 'opacity 0.3s ease-in-out';
-                            cajaText.style.opacity = '1';
-                        }, 150);
+                        transitionCajaText(neutralHTML);
 
                         cajaBg.style.backgroundImage = "url('piel negra.jpg')";
                         renderRueda();
@@ -2078,9 +2088,15 @@ Menú del Index: Líena 742
                         const isMobile = window.innerWidth <= 768;
                         const radioCategorias = getRadioCategorias();
 
-                        // Eliminar nodos y líneas anteriores de activos hijos
-                        const oldSubs = rueda.querySelectorAll('.nodo-subactivo, .sub-ray-line');
-                        oldSubs.forEach(el => el.remove());
+                        // Eliminar nodos y líneas anteriores de activos hijos con desvanecimiento suave
+                        const oldSubs = rueda.querySelectorAll('.nodo-subactivo:not(.fading-out), .sub-ray-line:not(.fading-out)');
+                        oldSubs.forEach(el => {
+                            el.classList.add('fading-out');
+                            el.style.pointerEvents = 'none';
+                            el.style.transition = 'opacity 0.38s ease, transform 0.38s ease';
+                            el.style.opacity = '0';
+                            setTimeout(() => el.remove(), 400);
+                        });
 
                         const anguloPaso = 360 / activos.length;
 
@@ -2135,7 +2151,7 @@ Menú del Index: Líena 742
                                 line.style.transform = `rotate(${gradosPadre}deg)`;
                                 line.style.zIndex = '0';
                                 line.style.pointerEvents = 'none';
-                                line.style.transition = 'width 0.6s ease, background 0.4s ease, opacity 0.4s ease';
+                                line.style.transition = 'width 0.75s ease, background 0.5s ease, opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1)';
                                 rueda.appendChild(line);
                             }
 
@@ -2159,7 +2175,7 @@ Menú del Index: Líena 742
                                 nodo.style.position = 'absolute';
                                 nodo.style.left = `calc(50% + ${x}px)`;
                                 nodo.style.top = `calc(50% + ${y}px)`;
-                                nodo.style.transition = 'left 0.6s ease, top 0.6s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), scale 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease';
+                                nodo.style.transition = 'left 1.1s cubic-bezier(0.25, 1, 0.5, 1), top 1.1s cubic-bezier(0.25, 1, 0.5, 1), transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), scale 0.9s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1)';
 
                                 nodo.innerHTML = `<span class="nodo-texto" style="display:inline-flex; flex-direction:column; align-items:center; text-align:center; line-height:1.25; font-size:${isMobile ? '10px' : '11px'}; letter-spacing: 1.2px; text-transform: uppercase;">${formatCategoryName(a.n)}</span>`;
 
@@ -2174,18 +2190,15 @@ Menú del Index: Líena 742
                                     childrenVisible = true;
                                     selectCategory(i);
                                 } else {
-                                    childrenVisible = !childrenVisible;
-                                    selectedSubIndex = -1;
-                                    updateCategoryText(i);
-                                    renderRueda();
+                                    resetToNeutral();
                                 }
                             };
 
-                            // Reacción interactiva inmediata al cursor on-hover (simulador móvil y PC)
+                            // Reacción interactiva on-hover (solo en desktop con hover real)
                             nodo.onmouseenter = (e) => {
-                                if (isDraggingWheel) return;
+                                if (isDraggingWheel || isMobile) return;
                                 nodo.style.opacity = '1';
-                                nodo.style.scale = '1.18';
+                                nodo.style.scale = '1.16';
                                 nodo.style.zIndex = '50';
                                 if (line) {
                                     line.style.opacity = '0.85';
@@ -2195,37 +2208,45 @@ Menú del Index: Líena 742
                                     textEl.style.color = '#c19b76';
                                     textEl.style.textShadow = '0 0 14px rgba(255, 255, 255, 0.85)';
                                 }
-
-                                if (i !== selectedCategoryIndex) {
-                                    const sway = (x > 0 ? -2.5 : 2.5);
-                                    rueda.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
-                                    rueda.style.transform = `rotate(${rotacionActual + sway}deg)`;
-                                }
                             };
 
                             nodo.onmouseleave = (e) => {
-                                if (isDraggingWheel) return;
+                                if (isDraggingWheel || isMobile) return;
                                 nodo.style.zIndex = isSelected ? '35' : '30';
                                 const textEl = nodo.querySelector('.nodo-texto');
                                 if (textEl) {
-                                    textEl.style.color = isSelected ? '#fff' : (isMobile ? 'rgba(255, 255, 255, 0.85)' : '#ccc');
+                                    textEl.style.color = isSelected ? '#fff' : (isNeutral ? '#fff' : (isMobile ? 'rgba(255, 255, 255, 0.45)' : 'rgba(255, 255, 255, 0.65)'));
                                     textEl.style.textShadow = 'none';
                                 }
                                 if (isMobile) {
                                     let degPantalla = ((gradosPadre + rotacionActual) % 360 + 360) % 360;
-                                    const distFromBottom = Math.abs(degPantalla - 90);
-                                    const arcOpacity = Math.max(0.4, 1 - (distFromBottom / 72));
-                                    nodo.style.opacity = isSelected ? '1' : String(arcOpacity * 0.65);
-                                    nodo.style.scale = isSelected ? '1.04' : '0.92';
-                                    if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : '0.25';
+                                    if (degPantalla < 18 || degPantalla > 162) {
+                                        nodo.style.opacity = '0';
+                                        nodo.style.pointerEvents = 'none';
+                                        if (line) line.style.opacity = '0';
+                                    } else if (isNeutral) {
+                                        const distFromBottom = Math.abs(degPantalla - 90);
+                                        const arcOpacity = Math.max(0.45, 1 - (distFromBottom / 72));
+                                        nodo.style.opacity = String(arcOpacity * 0.95);
+                                        nodo.style.scale = '1';
+                                        nodo.style.pointerEvents = 'auto';
+                                        if (line) line.style.opacity = '0.35';
+                                    } else if (isSelected) {
+                                        nodo.style.opacity = '1';
+                                        nodo.style.scale = '1.05';
+                                        nodo.style.pointerEvents = 'auto';
+                                        if (line) line.style.opacity = childrenVisible ? '0' : '0.85';
+                                    } else {
+                                        // Suavizadas
+                                        nodo.style.opacity = '0.28';
+                                        nodo.style.scale = '0.88';
+                                        nodo.style.pointerEvents = 'auto';
+                                        if (line) line.style.opacity = '0.12';
+                                    }
                                 } else {
-                                    nodo.style.opacity = isNeutral ? '1' : (isSelected ? '1' : '0.85');
-                                    nodo.style.scale = isNeutral ? '1' : (isSelected ? '1.05' : '0.93');
-                                    if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : '1';
-                                }
-                                if (i !== selectedCategoryIndex) {
-                                    rueda.style.transition = 'transform 0.5s ease-out';
-                                    rueda.style.transform = `rotate(${rotacionActual}deg)`;
+                                    nodo.style.opacity = isNeutral ? '1' : (isSelected ? '1' : '0.35');
+                                    nodo.style.scale = isNeutral ? '1' : (isSelected ? '1.05' : '0.9');
+                                    if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : (isNeutral ? '1' : '0.2');
                                 }
                             };
 
@@ -2233,25 +2254,31 @@ Menú del Index: Líena 742
                             nodo.style.top = `calc(50% + ${y}px)`;
 
                             if (isMobile) {
-                                // En móvil: solo los nodos en el arco inferior visible (entre 18° y 162°) se muestran
                                 let degPantalla = ((gradosPadre + rotacionActual) % 360 + 360) % 360;
                                 if (degPantalla < 18 || degPantalla > 162) {
                                     nodo.style.opacity = '0';
                                     nodo.style.pointerEvents = 'none';
                                     if (line) line.style.opacity = '0';
-                                } else if (!isSelected && selectedCategoryIndex !== -1 && childrenVisible && degPantalla >= 45 && degPantalla <= 115) {
-                                    // En móvil: ocultar categorías padre no seleccionadas que coincidirían en el arco de las hijas
-                                    nodo.style.opacity = '0';
-                                    nodo.style.pointerEvents = 'none';
-                                    if (line) line.style.opacity = '0';
-                                } else {
+                                } else if (isNeutral) {
+                                    // Solo categorías padre con total claridad
                                     const distFromBottom = Math.abs(degPantalla - 90);
-                                    const arcOpacity = Math.max(0.4, 1 - (distFromBottom / 72));
-                                    nodo.style.opacity = isSelected ? '1' : String(arcOpacity * 0.65);
+                                    const arcOpacity = Math.max(0.45, 1 - (distFromBottom / 72));
+                                    nodo.style.opacity = String(arcOpacity * 0.95);
+                                    nodo.style.scale = '1';
                                     nodo.style.pointerEvents = 'auto';
-                                    if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : '0.25';
+                                    if (line) line.style.opacity = '0.35';
+                                } else if (isSelected) {
+                                    nodo.style.opacity = '1';
+                                    nodo.style.scale = '1.05';
+                                    nodo.style.pointerEvents = 'auto';
+                                    if (line) line.style.opacity = childrenVisible ? '0' : '0.85';
+                                } else {
+                                    // Categorías padre se suavizan ("y se suavizan las padres")
+                                    nodo.style.opacity = '0.28';
+                                    nodo.style.scale = '0.88';
+                                    nodo.style.pointerEvents = 'auto';
+                                    if (line) line.style.opacity = '0.12';
                                 }
-                                nodo.style.scale = isSelected ? '1.04' : '0.92';
                             } else {
                                 if (isNeutral) {
                                     nodo.style.opacity = '1';
@@ -2260,10 +2287,10 @@ Menú del Index: Líena 742
                                     nodo.style.opacity = '1';
                                     nodo.style.scale = '1.05';
                                 } else {
-                                    nodo.style.opacity = '0.85';
-                                    nodo.style.scale = '0.93';
+                                    nodo.style.opacity = '0.35';
+                                    nodo.style.scale = '0.9';
                                 }
-                                if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : '1';
+                                if (line) line.style.opacity = isSelected ? (childrenVisible ? '0' : '1') : (isNeutral ? '1' : '0.2');
                             }
 
                             const textSpan = nodo.querySelector('.nodo-texto');
@@ -2275,20 +2302,23 @@ Menú del Index: Líena 742
                             } else if (isSelected) {
                                 fontWeight = '500';
                                 color = '#fff';
+                            } else {
+                                fontWeight = '300';
+                                color = isMobile ? 'rgba(255, 255, 255, 0.45)' : 'rgba(255, 255, 255, 0.65)';
                             }
                             textSpan.style.fontWeight = fontWeight;
                             textSpan.style.color = color;
                             textSpan.style.fontSize = isMobile ? '10px' : '11px';
-                            textSpan.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s ease';
+                            textSpan.style.transition = 'transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.5s ease';
                             textSpan.style.transform = `rotate(${-rotacionActual}deg)`;
 
                             // 3. Renderizar activos hijos de la categoría seleccionada
                             if (isSelected && a.subActivos && childrenVisible) {
                                 if (isMobile) {
                                     // MODO MOBILE: despliegue de las hijas hacia abajo y a la derecha de la madre
-                                    const subRadio = actualParentRadio + 24;
+                                    const subRadio = actualParentRadio + 25;
                                     const subCount = a.subActivos.length;
-                                    const stepOffset = subCount === 3 ? 27 : 26;
+                                    const stepOffset = subCount === 3 ? 26 : 25;
                                     const baseOffset = subCount === 3 ? 16 : 22;
 
                                     a.subActivos.forEach((sub, idx) => {
@@ -2310,14 +2340,14 @@ Menú del Index: Líena 742
                                         subLine.style.width = `${subRadio}px`;
                                         subLine.style.height = '1px';
                                         subLine.style.background = isSubSelected
-                                            ? 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.18) 42%, rgba(193, 155, 118, 0.85) 95%, transparent 100%)'
-                                            : 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.08) 42%, rgba(193, 155, 118, 0.5) 95%, transparent 100%)';
+                                            ? 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.25) 42%, rgba(193, 155, 118, 0.95) 95%, transparent 100%)'
+                                            : 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.12) 42%, rgba(193, 155, 118, 0.6) 95%, transparent 100%)';
                                         subLine.style.transformOrigin = '0 50%';
                                         subLine.style.transform = `rotate(${gradosSub}deg)`;
-                                        subLine.style.zIndex = '0';
+                                        subLine.style.zIndex = '5';
                                         subLine.style.pointerEvents = 'none';
                                         subLine.style.opacity = '0';
-                                        subLine.style.transition = 'opacity 0.4s ease, background 0.3s ease';
+                                        subLine.style.transition = 'opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), background 0.45s ease';
                                         rueda.appendChild(subLine);
 
                                         const nodoSub = document.createElement('div');
@@ -2327,13 +2357,14 @@ Menú del Index: Líena 742
                                         nodoSub.style.left = `calc(50% + ${xSub}px)`;
                                         nodoSub.style.top = `calc(50% + ${ySub}px)`;
                                         nodoSub.style.opacity = '0';
-                                        nodoSub.style.scale = isSubSelected ? '1.14' : '0.9';
-                                        nodoSub.style.zIndex = isSubSelected ? '55' : '45';
+                                        nodoSub.style.scale = isSubSelected ? '1.15' : '0.88';
+                                        nodoSub.style.zIndex = isSubSelected ? '65' : '55';
                                         nodoSub.style.cursor = 'pointer';
-                                        nodoSub.style.transition = 'opacity 0.4s ease, scale 0.3s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.2s ease';
+                                        nodoSub.style.touchAction = 'manipulation';
+                                        nodoSub.style.transition = 'opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1), scale 0.85s cubic-bezier(0.25, 1, 0.5, 1), transform 1.1s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.2s ease';
 
                                         nodoSub.innerHTML = `
-                                            <span class="sub-activo-link" style="display:inline-flex; flex-direction:column; align-items:center; text-align:center; line-height:1.15; font-size:9.5px; font-weight:${isSubSelected ? '600' : '500'}; color:${isSubSelected ? '#c19b76' : '#fff'}; letter-spacing: 0.8px; text-transform: capitalize; pointer-events:none; transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease, text-shadow 0.3s ease; text-shadow: ${isSubSelected ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none'};">
+                                            <span class="sub-activo-link" style="display:inline-flex; flex-direction:column; align-items:center; text-align:center; line-height:1.15; font-size:9.5px; font-weight:${isSubSelected ? '600' : '500'}; color:${isSubSelected ? '#c19b76' : '#fff'}; letter-spacing: 0.8px; text-transform: capitalize; pointer-events:none; transition: transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.45s ease, text-shadow 0.45s ease; text-shadow: ${isSubSelected ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none'};">
                                                 ${formatSubActivoMobile(sub.n)}
                                             </span>
                                         `;
@@ -2344,69 +2375,92 @@ Menú del Index: Líena 742
                                         nodoSub.onclick = (e) => {
                                             e.stopPropagation();
                                             if (wasDragging || isDraggingWheel) return;
-                                            alignToCajasActivos();
                                             if (selectedSubIndex === idx) {
                                                 selectedSubIndex = -1;
                                                 updateCategoryText(i);
-                                                renderRueda();
+                                                rueda.querySelectorAll('.nodo-subactivo:not(.fading-out)').forEach(ns => {
+                                                    ns.style.scale = '0.95';
+                                                    ns.style.zIndex = '55';
+                                                    const textSub = ns.querySelector('.sub-activo-link');
+                                                    if (textSub) {
+                                                        textSub.style.color = '#fff';
+                                                        textSub.style.fontWeight = '500';
+                                                        textSub.style.textShadow = 'none';
+                                                    }
+                                                });
+                                                rueda.querySelectorAll('.sub-ray-line:not(.fading-out)').forEach(sl => {
+                                                    sl.style.opacity = '0.55';
+                                                    sl.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.12) 42%, rgba(193, 155, 118, 0.6) 95%, transparent 100%)';
+                                                });
                                             } else {
                                                 selectedSubIndex = idx;
-                                                renderRueda();
-                                                cajaText.style.opacity = '0';
-                                                setTimeout(() => {
-                                                    cajaText.innerHTML = `
-                                                        <div class="tagline" style="font-family:'Lexend',sans-serif;font-size:10.5px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:8px;display:block;">${a.n}</div>
-                                                        <h3 class="variety-title" style="margin-bottom: 14px; line-height: 1.25;">${sub.title || sub.n}</h3>
-                                                        ${sub.neg ? `<p class="hero-value-prop-neg">${sub.neg}</p>` : ''}
-                                                        <div class="hero-value-prop">${sub.prop || ''}</div>
-                                                    `;
-                                                    cajaText.style.transition = 'opacity 0.3s ease-in-out';
-                                                    cajaText.style.opacity = '1';
-                                                }, 150);
+                                                rueda.querySelectorAll('.nodo-subactivo:not(.fading-out)').forEach(ns => {
+                                                    const sIdx = parseInt(ns.dataset.subIndex);
+                                                    const isNow = (sIdx === selectedSubIndex);
+                                                    ns.style.scale = isNow ? '1.15' : '0.95';
+                                                    ns.style.zIndex = isNow ? '65' : '55';
+                                                    const textSub = ns.querySelector('.sub-activo-link');
+                                                    if (textSub) {
+                                                        textSub.style.color = isNow ? '#c19b76' : '#fff';
+                                                        textSub.style.fontWeight = isNow ? '600' : '500';
+                                                        textSub.style.textShadow = isNow ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none';
+                                                    }
+                                                });
+                                                rueda.querySelectorAll('.sub-ray-line:not(.fading-out)').forEach(sl => {
+                                                    const sIdx = parseInt(sl.dataset.subIndex);
+                                                    const isNow = (sIdx === selectedSubIndex);
+                                                    sl.style.opacity = isNow ? '0.9' : '0.55';
+                                                    sl.style.background = isNow
+                                                        ? 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.25) 42%, rgba(193, 155, 118, 0.95) 95%, transparent 100%)'
+                                                        : 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.12) 42%, rgba(193, 155, 118, 0.6) 95%, transparent 100%)';
+                                                });
+
+                                                const daughterHTML = `
+                                                    <div class="tagline" style="font-family:'Lexend',sans-serif;font-size:10.5px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:8px;display:block;">${a.title || a.n}</div>
+                                                    <h3 class="variety-title" style="margin-bottom: 14px; line-height: 1.25;">${sub.title || sub.n}</h3>
+                                                    ${sub.neg ? `<p class="hero-value-prop-neg">${sub.neg}</p>` : ''}
+                                                    <div class="hero-value-prop">${sub.prop || ''}</div>
+                                                `;
+                                                transitionCajaText(daughterHTML);
                                             }
                                         };
 
                                         nodoSub.onmouseenter = () => {
-                                            if (isDraggingWheel) return;
+                                            if (isDraggingWheel || isMobile) return;
                                             nodoSub.style.scale = '1.18';
-                                            nodoSub.style.zIndex = '60';
+                                            nodoSub.style.zIndex = '70';
                                             subLine.style.opacity = '0.95';
-                                            subLine.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.18) 42%, rgba(193, 155, 118, 0.9) 95%, transparent 100%)';
+                                            subLine.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.25) 42%, rgba(193, 155, 118, 0.95) 95%, transparent 100%)';
                                             const textSub = nodoSub.querySelector('.sub-activo-link');
                                             if (textSub) {
                                                 textSub.style.color = '#c19b76';
                                                 textSub.style.textShadow = '0 0 14px rgba(255, 255, 255, 0.9)';
                                             }
-                                            const swaySub = (xSub > 0 ? -2.2 : 2.2);
-                                            rueda.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
-                                            rueda.style.transform = `rotate(${rotacionActual + swaySub}deg)`;
                                         };
 
                                         nodoSub.onmouseleave = () => {
-                                            if (isDraggingWheel) return;
+                                            if (isDraggingWheel || isMobile) return;
                                             const isNowSelected = (selectedSubIndex === idx);
-                                            nodoSub.style.scale = isNowSelected ? '1.14' : '1';
-                                            nodoSub.style.zIndex = isNowSelected ? '55' : '45';
-                                            subLine.style.opacity = isNowSelected ? '0.9' : '0.45';
+                                            nodoSub.style.scale = isNowSelected ? '1.15' : '1';
+                                            nodoSub.style.zIndex = isNowSelected ? '65' : '55';
+                                            subLine.style.opacity = isNowSelected ? '0.9' : '0.55';
                                             subLine.style.background = isNowSelected
-                                                ? 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.18) 42%, rgba(193, 155, 118, 0.85) 95%, transparent 100%)'
-                                                : 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.08) 42%, rgba(193, 155, 118, 0.5) 95%, transparent 100%)';
+                                                ? 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.25) 42%, rgba(193, 155, 118, 0.95) 95%, transparent 100%)'
+                                                : 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.12) 42%, rgba(193, 155, 118, 0.6) 95%, transparent 100%)';
                                             const textSub = nodoSub.querySelector('.sub-activo-link');
                                             if (textSub) {
                                                 textSub.style.color = isNowSelected ? '#c19b76' : '#fff';
                                                 textSub.style.textShadow = isNowSelected ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none';
                                             }
-                                            rueda.style.transition = 'transform 0.5s ease-out';
-                                            rueda.style.transform = `rotate(${rotacionActual}deg)`;
                                         };
 
                                         rueda.appendChild(nodoSub);
 
                                         setTimeout(() => {
-                                            subLine.style.opacity = isSubSelected ? '0.9' : '0.45';
+                                            subLine.style.opacity = isSubSelected ? '0.9' : '0.55';
                                             nodoSub.style.opacity = '1';
-                                            nodoSub.style.scale = isSubSelected ? '1.14' : '1';
-                                        }, 30 + idx * 50);
+                                            nodoSub.style.scale = isSubSelected ? '1.15' : '1';
+                                        }, 320 + idx * 85);
                                     });
                                 } else if (isPole) {
                                     // A. MODO POLO VERTICAL DESKTOP
@@ -2429,13 +2483,15 @@ Menú del Index: Líena 742
 
                                         const nodoSub = document.createElement('div');
                                         nodoSub.className = 'nodo-subactivo';
+                                        nodoSub.dataset.subIndex = idx;
                                         nodoSub.style.left = `calc(50% + ${xSub}px)`;
                                         nodoSub.style.top = `calc(50% + ${ySub}px)`;
                                         nodoSub.style.opacity = '0';
-                                        nodoSub.style.transition = 'opacity 0.4s ease, transform 0.3s ease';
+                                        nodoSub.style.scale = isSubSelected ? '1.15' : '0.88';
+                                        nodoSub.style.transition = 'opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1), transform 1.1s cubic-bezier(0.25, 1, 0.5, 1), scale 0.85s cubic-bezier(0.25, 1, 0.5, 1)';
 
                                         nodoSub.innerHTML = `
-                                            <span class="sub-activo-link" style="display:inline-block; transition:transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease, text-shadow 0.3s ease; font-size:9.5px; font-weight:${isSubSelected ? '600' : '500'}; color:${isSubSelected ? '#c19b76' : '#fff'}; letter-spacing: 1px; text-transform: capitalize;">
+                                            <span class="sub-activo-link" style="display:inline-block; transition:transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.45s ease, text-shadow 0.45s ease; font-size:9.5px; font-weight:${isSubSelected ? '600' : '500'}; color:${isSubSelected ? '#c19b76' : '#fff'}; letter-spacing: 1px; text-transform: capitalize;">
                                                 ${sub.n}
                                             </span>
                                         `;
@@ -2447,24 +2503,21 @@ Menú del Index: Líena 742
                                             e.stopPropagation();
                                             if (wasDragging || isDraggingWheel) return;
                                             selectedSubIndex = idx;
-                                            cajaText.style.opacity = '0';
-                                            setTimeout(() => {
-                                                cajaText.innerHTML = `
-                                                    <div class="tagline" style="font-family:'Lexend',sans-serif;font-size:11px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:10px;display:block;">${a.n}</div>
-                                                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">${sub.title || sub.n}</h3>
-                                                    ${sub.neg ? `<p class="hero-value-prop-neg">${sub.neg}</p>` : ''}
-                                                    <div class="hero-value-prop">${sub.prop || ''}</div>
-                                                `;
-                                                cajaText.style.transition = 'opacity 0.3s ease-in-out';
-                                                cajaText.style.opacity = '1';
-                                            }, 150);
+                                            const poleDaughterHTML = `
+                                                <div class="tagline" style="font-family:'Lexend',sans-serif;font-size:11px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:10px;display:block;">${a.n}</div>
+                                                <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">${sub.title || sub.n}</h3>
+                                                ${sub.neg ? `<p class="hero-value-prop-neg">${sub.neg}</p>` : ''}
+                                                <div class="hero-value-prop">${sub.prop || ''}</div>
+                                            `;
+                                            transitionCajaText(poleDaughterHTML);
                                         };
 
                                         rueda.appendChild(nodoSub);
 
                                         setTimeout(() => {
                                             nodoSub.style.opacity = '1';
-                                        }, 30 + idx * 50);
+                                            nodoSub.style.scale = isSubSelected ? '1.15' : '1';
+                                        }, 140 + idx * 75);
                                     });
                                 } else {
                                     // B. MODO ABANICO DESKTOP
@@ -2518,29 +2571,34 @@ Menú del Index: Líena 742
 
                                         const subLine = document.createElement('div');
                                         subLine.className = 'sub-ray-line';
+                                        subLine.dataset.subIndex = idx;
                                         subLine.style.position = 'absolute';
                                         subLine.style.top = 'calc(50% - 0.5px)';
                                         subLine.style.left = '50%';
                                         subLine.style.width = `${subRadio}px`;
                                         subLine.style.height = '1px';
-                                        subLine.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.05) 42%, rgba(193, 155, 118, 0.2) 95%, transparent 100%)';
+                                        subLine.style.background = isSubSelected
+                                            ? 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.25) 42%, rgba(193, 155, 118, 0.95) 95%, transparent 100%)'
+                                            : 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.05) 42%, rgba(193, 155, 118, 0.2) 95%, transparent 100%)';
                                         subLine.style.transformOrigin = '0 50%';
                                         subLine.style.transform = `rotate(${gradosSub}deg)`;
                                         subLine.style.zIndex = '0';
                                         subLine.style.pointerEvents = 'none';
                                         subLine.style.opacity = '0';
-                                        subLine.style.transition = 'opacity 0.4s ease';
+                                        subLine.style.transition = 'opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), background 0.45s ease';
                                         rueda.appendChild(subLine);
 
                                         const nodoSub = document.createElement('div');
                                         nodoSub.className = 'nodo-subactivo';
+                                        nodoSub.dataset.subIndex = idx;
                                         nodoSub.style.left = `calc(50% + ${xSub}px)`;
                                         nodoSub.style.top = `calc(50% + ${ySub}px)`;
                                         nodoSub.style.opacity = '0';
-                                        nodoSub.style.transition = 'opacity 0.4s ease, transform 0.3s ease';
+                                        nodoSub.style.scale = isSubSelected ? '1.15' : '0.88';
+                                        nodoSub.style.transition = 'opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1), transform 1.1s cubic-bezier(0.25, 1, 0.5, 1), scale 0.85s cubic-bezier(0.25, 1, 0.5, 1)';
 
                                         nodoSub.innerHTML = `
-                                            <span class="sub-activo-link" style="display:inline-block; transition:transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease, text-shadow 0.3s ease; font-size:9.5px; font-weight:${isSubSelected ? '600' : '500'}; color:${isSubSelected ? '#c19b76' : '#fff'}; letter-spacing: 1px; text-transform: capitalize;">
+                                            <span class="sub-activo-link" style="display:inline-block; transition:transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.45s ease, text-shadow 0.45s ease; font-size:9.5px; font-weight:${isSubSelected ? '600' : '500'}; color:${isSubSelected ? '#c19b76' : '#fff'}; letter-spacing: 1px; text-transform: capitalize; text-shadow:${isSubSelected ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none'};">
                                                 ${sub.n}
                                             </span>
                                         `;
@@ -2551,18 +2609,50 @@ Menú del Index: Líena 742
                                         nodoSub.onclick = (e) => {
                                             e.stopPropagation();
                                             if (wasDragging || isDraggingWheel) return;
-                                            selectedSubIndex = idx;
-                                            cajaText.style.opacity = '0';
-                                            setTimeout(() => {
-                                                cajaText.innerHTML = `
+                                            if (selectedSubIndex === idx) {
+                                                selectedSubIndex = -1;
+                                                updateCategoryText(i);
+                                                rueda.querySelectorAll('.nodo-subactivo:not(.fading-out)').forEach(ns => {
+                                                    ns.style.scale = '1';
+                                                    const textSub = ns.querySelector('.sub-activo-link');
+                                                    if (textSub) {
+                                                        textSub.style.color = '#fff';
+                                                        textSub.style.fontWeight = '500';
+                                                        textSub.style.textShadow = 'none';
+                                                    }
+                                                });
+                                                rueda.querySelectorAll('.sub-ray-line:not(.fading-out)').forEach(sl => {
+                                                    sl.style.opacity = '0.45';
+                                                });
+                                            } else {
+                                                selectedSubIndex = idx;
+                                                rueda.querySelectorAll('.nodo-subactivo:not(.fading-out)').forEach(ns => {
+                                                    const sIdx = parseInt(ns.dataset.subIndex);
+                                                    const isNow = (sIdx === selectedSubIndex);
+                                                    ns.style.scale = isNow ? '1.15' : '1';
+                                                    const textSub = ns.querySelector('.sub-activo-link');
+                                                    if (textSub) {
+                                                        textSub.style.color = isNow ? '#c19b76' : '#fff';
+                                                        textSub.style.fontWeight = isNow ? '600' : '500';
+                                                        textSub.style.textShadow = isNow ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none';
+                                                    }
+                                                });
+                                                rueda.querySelectorAll('.sub-ray-line:not(.fading-out)').forEach(sl => {
+                                                    const sIdx = parseInt(sl.dataset.subIndex);
+                                                    const isNow = (sIdx === selectedSubIndex);
+                                                    sl.style.opacity = isNow ? '0.9' : '0.45';
+                                                    sl.style.background = isNow
+                                                        ? 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.25) 42%, rgba(193, 155, 118, 0.95) 95%, transparent 100%)'
+                                                        : 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.05) 42%, rgba(193, 155, 118, 0.2) 95%, transparent 100%)';
+                                                });
+                                                const fanDaughterHTML = `
                                                     <div class="tagline" style="font-family:'Lexend',sans-serif;font-size:11px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:10px;display:block;">${a.n}</div>
                                                     <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">${sub.title || sub.n}</h3>
                                                     ${sub.neg ? `<p class="hero-value-prop-neg">${sub.neg}</p>` : ''}
                                                     <div class="hero-value-prop">${sub.prop || ''}</div>
                                                 `;
-                                                cajaText.style.transition = 'opacity 0.3s ease-in-out';
-                                                cajaText.style.opacity = '1';
-                                            }, 150);
+                                                transitionCajaText(fanDaughterHTML);
+                                            }
                                         };
 
                                         rueda.appendChild(nodoSub);
@@ -2570,20 +2660,22 @@ Menú del Index: Líena 742
                                         setTimeout(() => {
                                             subLine.style.opacity = '1';
                                             nodoSub.style.opacity = '1';
-                                        }, 30 + idx * 50);
+                                            nodoSub.style.scale = isSubSelected ? '1.15' : '1';
+                                        }, 140 + idx * 75);
                                     });
                                 }
                             }
                         });
                     }
 
-                    // Initial render with first category selected
-                    selectCategory(0, true);
+                    // Renderizado inicial neutral: SOLO aparecen las categorías padre
+                    resetToNeutral();
 
                     // Asignar evento click a la galleta central
                     const galletaCentral = document.querySelector('.galleta-fija');
                     if (galletaCentral) {
                         galletaCentral.onclick = () => {
+                            alignToCajasActivos();
                             resetToNeutral();
                         };
                     }
@@ -2591,6 +2683,11 @@ Menú del Index: Líena 742
                     // Control de arrastre unificado y de alta precisión (Táctil y Ratón/Cursor) en móvil
                     const radialWrapper = document.querySelector('.radial-wrapper');
                     if (radialWrapper) {
+                        radialWrapper.addEventListener('click', () => {
+                            if (!wasDragging && !isDraggingWheel) {
+                                alignToCajasActivos();
+                            }
+                        });
                         let activePointerId = null;
                         let pointerStartX = 0;
                         let pointerStartY = 0;
@@ -2611,6 +2708,7 @@ Menú del Index: Líena 742
                         // Actualiza posiciones relativas, rotación y opacidad en vivo durante el arrastre
                         function updateLivePositions(tempRot) {
                             const angPasoLive = 360 / activos.length;
+                            const isNeutral = (selectedCategoryIndex === -1 || !childrenVisible);
                             rueda.querySelectorAll('.nodo-activo').forEach(n => {
                                 const idx = parseInt(n.dataset.index);
                                 const grPadre = idx * angPasoLive - 90;
@@ -2622,21 +2720,27 @@ Menú del Index: Líena 742
                                     n.style.opacity = '0';
                                     n.style.pointerEvents = 'none';
                                     if (l) l.style.opacity = '0';
-                                } else if (!isSel && selectedCategoryIndex !== -1 && childrenVisible && sDeg >= 45 && sDeg <= 115) {
-                                    n.style.opacity = '0';
-                                    n.style.pointerEvents = 'none';
-                                    if (l) l.style.opacity = '0';
                                 } else {
                                     const d = Math.abs(sDeg - 90);
                                     const o = Math.max(0.4, 1 - (d / 72));
-                                    n.style.opacity = isSel ? '1' : String(o * 0.65);
-                                    n.style.pointerEvents = 'auto';
-                                    if (l) l.style.opacity = isSel ? (childrenVisible ? '0' : '1') : '0.25';
+                                    if (isNeutral) {
+                                        n.style.opacity = String(o * 0.95);
+                                        n.style.scale = '1';
+                                        n.style.color = '#fff';
+                                        n.style.pointerEvents = 'auto';
+                                        if (l) l.style.opacity = String(o * 0.35);
+                                    } else {
+                                        n.style.opacity = isSel ? '1' : '0.28';
+                                        n.style.scale = isSel ? '1.05' : '0.88';
+                                        n.style.color = isSel ? '#c19b76' : 'rgba(255, 255, 255, 0.45)';
+                                        n.style.pointerEvents = 'auto';
+                                        if (l) l.style.opacity = isSel ? '0.45' : '0.12';
+                                    }
                                 }
                             });
 
                             // Desvanecer subactivos de forma limpia si la madre gira fuera del arco visible
-                            if (selectedCategoryIndex !== -1 && childrenVisible) {
+                            if (!isNeutral) {
                                 const motherAngle = ((selectedCategoryIndex * angPasoLive - 90 + tempRot) % 360 + 360) % 360;
                                 const motherInView = (motherAngle >= 25 && motherAngle <= 155);
                                 rueda.querySelectorAll('.nodo-subactivo').forEach(ns => {
@@ -2693,10 +2797,6 @@ Menú del Index: Líena 742
                             angularVelocity = 0;
                             lastMoveTime = performance.now();
                             isDraggingWheel = false;
-
-                            try {
-                                radialWrapper.setPointerCapture(e.pointerId);
-                            } catch (err) {}
                         });
 
                         window.addEventListener('pointermove', (e) => {
@@ -2711,10 +2811,13 @@ Menú del Index: Líena 742
                             const totalDist = Math.hypot(e.clientX - pointerStartX, e.clientY - pointerStartY);
 
                             if (!isDraggingWheel) {
-                                if (totalDist > 6) {
+                                if (totalDist > 8) {
                                     isDraggingWheel = true;
                                     wasDragging = true;
                                     radialWrapper.style.cursor = 'grabbing';
+                                    try {
+                                        radialWrapper.setPointerCapture(activePointerId);
+                                    } catch (err) {}
                                 }
                             }
 
@@ -2785,23 +2888,28 @@ Menú del Index: Líena 742
                                     if (diff < -180) diff += 360;
                                     rotacionActual += diff;
 
-                                    rueda.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+                                    rueda.style.transition = 'transform 1.1s cubic-bezier(0.25, 1, 0.5, 1)';
                                     rueda.style.transform = `rotate(${rotacionActual}deg)`;
 
                                     rueda.querySelectorAll('.nodo-texto').forEach(t => {
-                                        t.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+                                        t.style.transition = 'transform 1.1s cubic-bezier(0.25, 1, 0.5, 1)';
                                         t.style.transform = `rotate(${-rotacionActual}deg)`;
                                     });
                                     rueda.querySelectorAll('.sub-activo-link').forEach(t => {
-                                        t.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+                                        t.style.transition = 'transform 1.1s cubic-bezier(0.25, 1, 0.5, 1)';
                                         t.style.transform = `rotate(${-rotacionActual}deg)`;
                                     });
 
-                                    if (closestIdx !== selectedCategoryIndex) {
-                                        selectCategory(closestIdx);
-                                    } else {
+                                    if (selectedCategoryIndex === -1 || !childrenVisible) {
                                         renderRueda();
+                                    } else {
+                                        if (closestIdx !== selectedCategoryIndex) {
+                                            selectCategory(closestIdx);
+                                        } else {
+                                            renderRueda();
+                                        }
                                     }
+                                    alignToCajasActivos();
 
                                     setTimeout(() => {
                                         wasDragging = false;
@@ -2829,7 +2937,11 @@ Menú del Index: Líena 742
                         const currIsMobile = window.innerWidth <= 768;
                         if (currIsMobile !== lastIsMobile) {
                             lastIsMobile = currIsMobile;
-                            selectCategory(selectedCategoryIndex !== -1 ? selectedCategoryIndex : 0, true);
+                            if (selectedCategoryIndex !== -1 && childrenVisible) {
+                                selectCategory(selectedCategoryIndex, true);
+                            } else {
+                                resetToNeutral();
+                            }
                         }
                     });
                 })();
