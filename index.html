@@ -209,6 +209,19 @@ Menú del Index: Líena 742
             display: flex;
             align-items: center;
             gap: 35px;
+            margin-left: auto;
+            justify-content: flex-end;
+        }
+
+        /* =========================================================================
+           [INTERRUPTOR DE VISIBILIDAD DE BOTONES DEL MENÚ]
+           Cualquier botón con data-visible="off" queda 100% oculto e inactivo.
+           Para MOSTRARLO / LIBERARLO, cámbialo a data-visible="on" en el HTML.
+           ========================================================================= */
+        .navbar-link[data-visible="off"],
+        .navbar-item[data-visible="off"] {
+            display: none !important;
+            pointer-events: none !important;
         }
 
         .navbar-link {
@@ -224,6 +237,9 @@ Menú del Index: Líena 742
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
         }
 
         .navbar-link.active {
@@ -251,6 +267,127 @@ Menú del Index: Líena 742
         .navbar.scrolled .navbar-link:not(.active):hover {
             color: var(--nav-text-scrolled-hover, #524b3f) !important;
             background-color: transparent !important;
+        }
+
+        /* =========================================================================
+           ESTILOS DEL BOTÓN "PRODUCTOS" Y MENÚ SECUNDARIO HORIZONTAL
+           ========================================================================= */
+        .navbar-dropdown-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .navbar-dropdown-btn {
+            gap: 8px;
+        }
+
+        .dropdown-chevron {
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            margin-left: 2px;
+        }
+
+        .navbar-dropdown-wrapper:hover .dropdown-chevron,
+        .navbar-dropdown-wrapper.active .dropdown-chevron {
+            transform: rotate(180deg);
+        }
+
+        .productos-submenu-horizontal {
+            position: absolute;
+            top: calc(100% + 14px);
+            right: 0;
+            background: rgba(21, 14, 2, 0.94);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 14px 18px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55), 0 0 25px rgba(193, 155, 118, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px) scale(0.98);
+            transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1), transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.35s ease;
+            z-index: 1002;
+            pointer-events: none;
+        }
+
+        .navbar-dropdown-wrapper:hover .productos-submenu-horizontal,
+        .navbar-dropdown-wrapper.active .productos-submenu-horizontal {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .productos-submenu-track {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .producto-sub-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            padding: 10px 14px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
+            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            min-width: 88px;
+            cursor: pointer;
+        }
+
+        .producto-sub-thumb {
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(193, 155, 118, 0.14) 0%, transparent 72%);
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), filter 0.35s ease;
+        }
+
+        .producto-sub-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .producto-sub-title {
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .producto-sub-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(193, 155, 118, 0.35);
+            transform: translateY(-4px) scale(1.05);
+        }
+
+        .producto-sub-card:hover .producto-sub-thumb img {
+            transform: scale(1.12);
+            filter: drop-shadow(0 8px 16px rgba(193, 155, 118, 0.35));
+        }
+
+        .producto-sub-card:hover .producto-sub-title {
+            color: #FFFFFF;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.95);
+        }
+
+        .producto-sub-card:active {
+            transform: scale(0.96);
         }
 
         /* Menú Hamburguesa Móvil */
@@ -394,6 +531,58 @@ Menú del Index: Líena 742
             .mobile-toggle.active span:nth-child(3) {
                 transform: translateY(-6px) rotate(-45deg);
                 background-color: #FFFFFF !important;
+            }
+
+            /* Adaptación del menú desplegable de Productos en móvil */
+            .navbar-dropdown-wrapper {
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar-dropdown-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .productos-submenu-horizontal {
+                position: static;
+                transform: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 14px;
+                padding: 12px 8px;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                box-shadow: none;
+                margin-top: 6px;
+            }
+
+            .productos-submenu-track {
+                gap: 10px;
+                justify-content: flex-start;
+                padding: 2px;
+            }
+
+            .producto-sub-card {
+                min-width: 72px;
+                padding: 6px 8px;
+            }
+
+            .producto-sub-thumb {
+                width: 44px;
+                height: 44px;
+                margin-bottom: 5px;
+            }
+
+            .producto-sub-title {
+                font-size: 8.5px;
+                letter-spacing: 1px;
             }
         }
 
@@ -977,10 +1166,63 @@ Menú del Index: Líena 742
             </button>
 
             <div class="navbar-menu" id="navbarMenu">
-                <a href="coleccion.html" class="navbar-link btn-coleccion">La Colección</a>
+                <!-- =========================================================================
+                   [BOTÓN Y SUBMENÚ HORIZONTAL DE PRODUCTOS]
+                   ========================================================================= -->
+                <div class="navbar-dropdown-wrapper" id="productosDropdownWrapper">
+                    <button class="navbar-link navbar-dropdown-btn" id="btnProductos" type="button" aria-expanded="false">
+                        <span>Productos</span>
+                        <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                    <!-- Submenú horizontal desplegable -->
+                    <div class="productos-submenu-horizontal" id="productosSubmenu">
+                        <div class="productos-submenu-track">
+                            <a href="doxa/index.html" class="producto-sub-card">
+                                <div class="producto-sub-thumb">
+                                    <img src="ProtoDoxa.png" alt="Doxa">
+                                </div>
+                                <span class="producto-sub-title">Doxa</span>
+                            </a>
+                            <a href="bombonbloom/index.html" class="producto-sub-card">
+                                <div class="producto-sub-thumb">
+                                    <img src="Galle choco.png" alt="BombónBloom">
+                                </div>
+                                <span class="producto-sub-title">BombónBloom</span>
+                            </a>
+                            <a href="lingote/index.html" class="producto-sub-card">
+                                <div class="producto-sub-thumb">
+                                    <img src="Galle choco negro.png" alt="Lingote">
+                                </div>
+                                <span class="producto-sub-title">Lingote</span>
+                            </a>
+                            <a href="oblea/index.html" class="producto-sub-card">
+                                <div class="producto-sub-thumb">
+                                    <img src="Galle cafe.png" alt="Oblea">
+                                </div>
+                                <span class="producto-sub-title">Oblea</span>
+                            </a>
+                            <a href="cookie/index.html" class="producto-sub-card">
+                                <div class="producto-sub-thumb">
+                                    <img src="Galle frutos bosque.png" alt="Cookie">
+                                </div>
+                                <span class="producto-sub-title">Cookie</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =========================================================================
+                   [INTERRUPTORES DE BOTONES DEL MENÚ]
+                   Para MOSTRAR / LIBERAR un botón en la web: cambia data-visible="off" por data-visible="on"
+                   Para OCULTAR un botón de la web: cambia data-visible="on" por data-visible="off"
+                   ========================================================================= -->
+                <a href="coleccion.html" class="navbar-link btn-coleccion" data-visible="off">La Colección</a>
                 <!-- NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
-                <a href="galeria.html" class="navbar-link btn-gallery">Galería</a>
-                <a href="articulos.html" class="navbar-link">Artículos</a>
+                <a href="galeria.html" class="navbar-link btn-gallery" data-visible="off">Galería</a>
+                <a href="articulos.html" class="navbar-link btn-articulos" data-visible="off">Artículos</a>
             </div>
         </nav>
         <div class="navbar-overlay" id="navbarOverlay"></div>
@@ -4046,13 +4288,32 @@ Menú del Index: Líena 742
                     navbarOverlay.addEventListener('click', closeMobileMenu);
                 }
 
-                // Cerrar menú móvil al hacer click en un enlace y establecer el botón activo inmediatamente
-                navLinks.forEach(link => {
+                // Toggle interactivo del desplegable de Productos (por clic o toque)
+                const productosDropdown = document.getElementById('productosDropdownWrapper');
+                const btnProductos = document.getElementById('btnProductos');
+                if (btnProductos && productosDropdown) {
+                    btnProductos.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isExpanded = productosDropdown.classList.toggle('active');
+                        btnProductos.setAttribute('aria-expanded', isExpanded);
+                    });
+
+                    // Cerrar el desplegable al hacer clic fuera
+                    document.addEventListener('click', (e) => {
+                        if (!productosDropdown.contains(e.target)) {
+                            productosDropdown.classList.remove('active');
+                            btnProductos.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                }
+
+                // Cerrar menú móvil al hacer click en cualquier enlace del menú o submenú
+                document.querySelectorAll('.navbar-link:not(.navbar-dropdown-btn), .producto-sub-card').forEach(link => {
                     link.addEventListener('click', () => {
                         navLinks.forEach(l => l.classList.remove('active'));
-                        link.classList.add('active');
+                        if (link.classList.contains('navbar-link')) link.classList.add('active');
                         closeMobileMenu();
-                        tempDisableScrollspy();
+                        if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
                     });
                 });
             })();
