@@ -219,7 +219,8 @@ Menú del Index: Líena 742
            Para MOSTRARLO / LIBERARLO, cámbialo a data-visible="on" en el HTML.
            ========================================================================= */
         .navbar-link[data-visible="off"],
-        .navbar-item[data-visible="off"] {
+        .navbar-item[data-visible="off"],
+        .producto-sub-card[data-visible="off"] {
             display: none !important;
             pointer-events: none !important;
         }
@@ -280,6 +281,10 @@ Menú del Index: Líena 742
 
         .navbar-dropdown-btn {
             gap: 8px;
+            font-family: 'Lato', sans-serif !important;
+            font-weight: 300 !important;
+            letter-spacing: 3px !important;
+            -webkit-font-smoothing: antialiased;
         }
 
         .dropdown-chevron {
@@ -296,19 +301,20 @@ Menú del Index: Líena 742
             position: absolute;
             top: calc(100% + 14px);
             right: 0;
-            background: rgba(21, 14, 2, 0.94);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 18px;
-            padding: 14px 18px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55), 0 0 25px rgba(193, 155, 118, 0.15);
+            background: rgba(10, 10, 10, 0.45);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: none;
+            border-radius: 0;
+            padding: 10px 12px;
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.6);
             opacity: 0;
             visibility: hidden;
             transform: translateY(12px) scale(0.98);
             transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1), transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.35s ease;
             z-index: 1002;
             pointer-events: none;
+            width: max-content;
         }
 
         .navbar-dropdown-wrapper:hover .productos-submenu-horizontal,
@@ -322,7 +328,7 @@ Menú del Index: Líena 742
         .productos-submenu-track {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
         }
 
         .producto-sub-card {
@@ -330,24 +336,25 @@ Menú del Index: Líena 742
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            padding: 10px 14px;
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid transparent;
+            padding: 8px 10px;
+            border-radius: 0;
+            background: transparent;
+            border: none;
             transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-            min-width: 88px;
+            min-width: 68px;
             cursor: pointer;
         }
 
         .producto-sub-thumb {
-            width: 54px;
-            height: 54px;
+            width: 46px;
+            height: 46px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 8px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(193, 155, 118, 0.14) 0%, transparent 72%);
+            margin-bottom: 7px;
+            border-radius: 0;
+            border: none;
+            background: transparent;
             transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), filter 0.35s ease;
         }
 
@@ -360,19 +367,20 @@ Menú del Index: Líena 742
         }
 
         .producto-sub-title {
-            font-family: 'Lexend', sans-serif;
+            font-family: 'Lato', sans-serif;
             font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 1.5px;
+            font-weight: 300;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.88);
             transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
             white-space: nowrap;
+            -webkit-font-smoothing: antialiased;
         }
 
         .producto-sub-card:hover {
             background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(193, 155, 118, 0.35);
+            border: none;
             transform: translateY(-4px) scale(1.05);
         }
 
@@ -417,7 +425,7 @@ Menú del Index: Líena 742
             background-color: #000000 !important;
         }
 
-        /* Overlay oscuro detrás del menú móvil */
+        /* Overlay detrás del menú móvil: transparente para no oscurecer el fondo */
         .navbar-overlay {
             position: fixed;
             top: 0;
@@ -425,9 +433,9 @@ Menú del Index: Líena 742
             width: 100%;
             height: 100vh;
             height: 100dvh;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.35s ease, visibility 0.35s ease;
@@ -456,27 +464,34 @@ Menú del Index: Líena 742
 
             .navbar-menu {
                 position: fixed;
-                top: 0;
-                right: -100%;
-                width: 82%;
-                max-width: 320px;
-                height: 100vh;
-                height: 100dvh;
-                background-color: rgba(21, 14, 2, 0.96);
-                /* Fondo oscuro premium */
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
+                top: 70px;
+                right: -120%;
+                width: calc(100% - 32px);
+                max-width: 270px;
+                height: auto;
+                max-height: calc(100vh - 85px);
+                background: rgba(10, 10, 10, 0.45);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
                 flex-direction: column;
-                justify-content: center;
-                gap: 20px;
-                padding: 50px 30px;
-                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-                transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+                justify-content: flex-start;
+                gap: 12px;
+                padding: 16px 14px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+                transition: right 0.35s cubic-bezier(0.25, 1, 0.5, 1);
                 z-index: 999;
+                border: none;
+                border-radius: 0;
+            }
+
+            .navbar.scrolled .navbar-menu {
+                top: 65px;
             }
 
             .navbar-menu.active {
-                right: 0;
+                right: 16px;
             }
 
             .navbar-link {
@@ -543,6 +558,11 @@ Menú del Index: Líena 742
             .navbar-dropdown-btn {
                 width: 100%;
                 justify-content: center;
+                font-family: 'Lato', sans-serif !important;
+                font-weight: 300 !important;
+                letter-spacing: 3px !important;
+                font-size: 12px !important;
+                -webkit-font-smoothing: antialiased;
             }
 
             .productos-submenu-horizontal {
@@ -551,38 +571,56 @@ Menú del Index: Líena 742
                 opacity: 1 !important;
                 visibility: visible !important;
                 pointer-events: auto !important;
-                background: rgba(255, 255, 255, 0.04);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 14px;
-                padding: 12px 8px;
+                background: transparent;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                border: none;
+                border-radius: 0;
+                padding: 4px 0 0 0;
                 width: 100%;
                 max-width: 100%;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
+                overflow: visible;
                 box-shadow: none;
-                margin-top: 6px;
+                margin: 0 auto;
             }
 
             .productos-submenu-track {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
-                justify-content: flex-start;
-                padding: 2px;
+                width: 100%;
+                padding: 0;
             }
 
             .producto-sub-card {
-                min-width: 72px;
-                padding: 6px 8px;
+                min-width: unset;
+                width: 100%;
+                padding: 8px 6px;
+                border: none;
+                border-radius: 0;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background: transparent;
             }
 
             .producto-sub-thumb {
                 width: 44px;
                 height: 44px;
                 margin-bottom: 5px;
+                border: none;
+                background: transparent;
             }
 
             .producto-sub-title {
-                font-size: 8.5px;
-                letter-spacing: 1px;
+                font-family: 'Lato', sans-serif;
+                font-size: 9px;
+                font-weight: 300;
+                letter-spacing: 1.8px;
+                text-align: center;
+                -webkit-font-smoothing: antialiased;
             }
         }
 
@@ -1180,31 +1218,51 @@ Menú del Index: Líena 742
                     <!-- Submenú horizontal desplegable -->
                     <div class="productos-submenu-horizontal" id="productosSubmenu">
                         <div class="productos-submenu-track">
-                            <a href="doxa/index.html" class="producto-sub-card">
+                            <!-- =========================================================================
+                               PRODUCTOS ACTIVOS (data-visible="on")
+                               Para ocultar un producto de la web: cambia data-visible="on" por "off"
+                               ========================================================================= -->
+
+                            <!-- PRODUCTO 1: DOXA (Activo) -->
+                            <a href="doxa/index.html" class="producto-sub-card" data-visible="on">
                                 <div class="producto-sub-thumb">
                                     <img src="ProtoDoxa.png" alt="Doxa">
                                 </div>
                                 <span class="producto-sub-title">Doxa</span>
                             </a>
-                            <a href="bombonbloom/index.html" class="producto-sub-card">
+
+                            <!-- PRODUCTO 2: BOMBÓNBLOOM (Activo) -->
+                            <a href="bombonbloom/index.html" class="producto-sub-card" data-visible="on">
                                 <div class="producto-sub-thumb">
                                     <img src="Galle choco.png" alt="BombónBloom">
                                 </div>
                                 <span class="producto-sub-title">BombónBloom</span>
                             </a>
-                            <a href="lingote/index.html" class="producto-sub-card">
+
+                            <!-- =========================================================================
+                               [INTERRUPTOR OFF/ON] BOTONES DESACTIVADOS TEMPORALMENTE (data-visible="off")
+                               Para reactivar cualquiera de estos botones:
+                               Cambia simplemente data-visible="off" por data-visible="on"
+                               ========================================================================= -->
+
+                            <!-- PRODUCTO 3: LINGOTE [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
+                            <a href="lingote/index.html" class="producto-sub-card" data-visible="off">
                                 <div class="producto-sub-thumb">
                                     <img src="Galle choco negro.png" alt="Lingote">
                                 </div>
                                 <span class="producto-sub-title">Lingote</span>
                             </a>
-                            <a href="oblea/index.html" class="producto-sub-card">
+
+                            <!-- PRODUCTO 4: OBLEA [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
+                            <a href="oblea/index.html" class="producto-sub-card" data-visible="off">
                                 <div class="producto-sub-thumb">
                                     <img src="Galle cafe.png" alt="Oblea">
                                 </div>
                                 <span class="producto-sub-title">Oblea</span>
                             </a>
-                            <a href="cookie/index.html" class="producto-sub-card">
+
+                            <!-- PRODUCTO 5: COOKIE [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
+                            <a href="cookie/index.html" class="producto-sub-card" data-visible="off">
                                 <div class="producto-sub-thumb">
                                     <img src="Galle frutos bosque.png" alt="Cookie">
                                 </div>
