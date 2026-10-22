@@ -451,13 +451,38 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 height: 65px;
             }
 
+            .navbar {
+                padding: 0 16px;
+                height: 70px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 12px;
+            }
+
             .mobile-toggle {
                 display: flex;
+                order: 1;
                 margin-left: auto;
             }
 
-            .navbar-menu .navbar-logo {
-                display: none !important;
+            .navbar-logo {
+                display: inline-flex !important;
+                order: 2;
+                padding: 6px 14px !important;
+                font-size: 11px !important;
+                letter-spacing: 2.5px !important;
+                border-radius: 2px;
+            }
+
+            .navbar-logo.active {
+                display: inline-flex !important;
+                order: 2;
+                padding: 6px 14px !important;
+                font-size: 11px !important;
+                background-color: var(--accent-color) !important;
+                color: #000000 !important;
+                transform: none !important;
             }
 
             .navbar-menu {
@@ -1418,10 +1443,10 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 <!-- NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
                 <a href="../galeria.html" class="navbar-link btn-gallery" data-visible="off">Galería</a>
                 <a href="../articulos.html" class="navbar-link btn-articulos" data-visible="off">Artículos</a>
-
-                <!-- BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
-                <a href="../index.html" class="navbar-logo active">DOXA</a>
             </div>
+
+            <!-- BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
+            <a href="../index.html" class="navbar-logo active">DOXA</a>
         </nav>
         <div class="navbar-overlay" id="navbarOverlay"></div>
 
@@ -2539,18 +2564,45 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 let wasDragging = false;
 
                 function calculateMobileArcOpacity(degPantalla) {
-                    if (degPantalla < 18 || degPantalla > 162) return 0;
-                    const distFromBottom = Math.abs(degPantalla - 90);
-                    return Math.max(0.45, 1 - (distFromBottom / 72));
+                    if (degPantalla < 8 || degPantalla > 172) return 0;
+                    return 1;
+                }
+
+                function getMobileParentAngle(idx) {
+                    // Distribución del abanico inferior bajo el bombón (18° a 162°)
+                    // con paso ergonómico y equilibrado en la pantalla móvil
+                    // Índice 0: BBB Piel, Pelo & Uñas (90° centro inferior)
+                    // Índice 1: BBB Stop-loss Mujer (115° lado izquierdo)
+                    // Índice 2: BBB Menopausia (139° ubicado en el hueco superior izquierdo)
+                    // Índice 3: BBB Regla (162° extremo izquierdo)
+                    // Índice 6: BBB Stop-loss Hombre (65° lado derecho)
+                    // Índice 5: BBB Relajación (41° ubicado en el hueco superior derecho)
+                    // Índice 4: BBB Pre-entreno (18° extremo derecho)
+                    const angles = [90, 115, 139, 162, 18, 41, 65];
+                    return angles[idx];
+                }
+
+                function getMobileParentRadius(idx) {
+                    // Radios optimizados para situar Menopausia y Relajación en sus huecos
+                    // naturales elevados (170px), evitando solapes y cortes en pantalla
+                    const radii = [218, 176, 170, 172, 172, 170, 176];
+                    return radii[idx];
+                }
+
+                function getGradosPadre(idx) {
+                    if (window.innerWidth <= 768) {
+                        return getMobileParentAngle(idx);
+                    }
+                    const anguloPaso = 360 / bbbCategorias.length;
+                    return idx * anguloPaso - 90;
                 }
 
                 function updateMobileArcVisibility(tempRot) {
                     if (window.innerWidth > 768) return;
-                    const angPaso = 360 / bbbCategorias.length;
                     const isNeutral = (selectedCategoryIndex === -1);
                     rueda.querySelectorAll('.nodo-activo').forEach(nodo => {
                         const idx = parseInt(nodo.dataset.index);
-                        const grPadre = idx * angPaso - 90;
+                        const grPadre = getGradosPadre(idx);
                         let sDeg = ((grPadre + tempRot) % 360 + 360) % 360;
                         const line = rueda.querySelector(`.ray-line[data-index="${idx}"]`);
                         const isSel = (idx === selectedCategoryIndex);
@@ -2669,8 +2721,8 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     const anguloPaso = 360 / bbbCategorias.length;
 
                     if (isMobile) {
-                        // En móvil: la categoría seleccionada se ubica en el arco inferior visible
-                        const targetRot = 212 - index * anguloPaso;
+                        // En móvil: la categoría seleccionada se ubica en el cuadrante inferior izquierdo visible (145°)
+                        const targetRot = 145 - getGradosPadre(index);
                         let diff = (targetRot - rotacionActual) % 360;
                         if (diff > 180) diff -= 360;
                         if (diff < -180) diff += 360;
@@ -2748,6 +2800,16 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                         btnVolver.style.display = 'none';
                     }
 
+                    if (window.innerWidth <= 768) {
+                        rotacionActual = 0;
+                        rueda.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                        rueda.style.transform = 'rotate(0deg)';
+                        rueda.querySelectorAll('.nodo-texto').forEach(t => {
+                            t.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s ease';
+                            t.style.transform = 'rotate(0deg)';
+                        });
+                    }
+
                     // Resetear la foto central a BBB.png
                     if (galletaFija) {
                         galletaFija.style.transition = 'opacity 0.25s ease, transform 0.3s ease';
@@ -2815,19 +2877,18 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     }
 
                     bbbCategorias.forEach((a, i) => {
-                        const gradosPadre = i * anguloPaso - 90;
+                        const gradosPadre = getGradosPadre(i);
                         const anguloPadre = gradosPadre * (Math.PI / 180);
                         const isSelected = (i === selectedCategoryIndex);
                         const isNeutral = (selectedCategoryIndex === -1);
 
                         // Radios intercalados en zigzag para aprovechar el espacio visual
-                        const mobileRadii = [182, 228, 182, 228, 182, 228, 205];
                         const desktopRadii = [240, 282, 240, 282, 240, 282, 260];
                         let actualParentRadio;
                         if (isSelected) {
                             actualParentRadio = isMobile ? 180 : (radioCategorias + 25);
                         } else {
-                            actualParentRadio = isMobile ? mobileRadii[i % mobileRadii.length] : desktopRadii[i % desktopRadii.length];
+                            actualParentRadio = isMobile ? getMobileParentRadius(i) : desktopRadii[i % desktopRadii.length];
                         }
 
                         // Línea rayo de la categoría padre

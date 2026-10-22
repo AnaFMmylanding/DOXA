@@ -459,13 +459,38 @@ Menú del Index: Líena 742
                 height: 65px;
             }
 
+            .navbar {
+                padding: 0 16px;
+                height: 70px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 12px;
+            }
+
             .mobile-toggle {
                 display: flex;
+                order: 1;
                 margin-left: auto;
             }
 
-            .navbar-menu .navbar-logo {
-                display: none !important;
+            .navbar-logo {
+                display: inline-flex !important;
+                order: 2;
+                padding: 6px 14px !important;
+                font-size: 11px !important;
+                letter-spacing: 2.5px !important;
+                border-radius: 2px;
+            }
+
+            .navbar-logo.active {
+                display: inline-flex !important;
+                order: 2;
+                padding: 6px 14px !important;
+                font-size: 11px !important;
+                background-color: var(--accent-color) !important;
+                color: #000000 !important;
+                transform: none !important;
             }
 
             .navbar-menu {
@@ -1285,10 +1310,9 @@ Menú del Index: Líena 742
                 <!-- NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
                 <a href="galeria.html" class="navbar-link btn-gallery" data-visible="off">Galería</a>
                 <a href="articulos.html" class="navbar-link btn-articulos" data-visible="off">Artículos</a>
-
-                <!-- BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
-                <a href="index.html" class="navbar-logo active">DOXA</a>
             </div>
+<!-- BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
+                <a href="index.html" class="navbar-logo active">DOXA</a>
         </nav>
         <div class="navbar-overlay" id="navbarOverlay"></div>
         <!-- =========================================================================
