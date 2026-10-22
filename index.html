@@ -152,7 +152,7 @@ Menú del Index: Líena 742
             height: 90px;
             z-index: 1000;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             padding: 0 50px;
             background-color: transparent;
@@ -452,6 +452,7 @@ Menú del Index: Líena 742
             .navbar {
                 padding: 0 20px;
                 height: 70px;
+                justify-content: flex-end;
             }
 
             .navbar.scrolled {
@@ -460,6 +461,11 @@ Menú del Index: Líena 742
 
             .mobile-toggle {
                 display: flex;
+                margin-left: auto;
+            }
+
+            .navbar-menu .navbar-logo {
+                display: none !important;
             }
 
             .navbar-menu {
@@ -1195,8 +1201,6 @@ Menú del Index: Líena 742
            ========================================================================= -->
         <!-- NAVEGACIÓN PRINCIPAL -->
         <nav class="navbar" id="mainNavbar">
-            <a href="index.html" class="navbar-logo active">DOXA</a>
-
             <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
                 <span></span>
                 <span></span>
@@ -1223,20 +1227,20 @@ Menú del Index: Líena 742
                                Para ocultar un producto de la web: cambia data-visible="on" por "off"
                                ========================================================================= -->
 
-                            <!-- PRODUCTO 1: DOXA (Activo) -->
-                            <a href="doxa/index.html" class="producto-sub-card" data-visible="on">
-                                <div class="producto-sub-thumb">
-                                    <img src="ProtoDoxa.png" alt="Doxa">
-                                </div>
-                                <span class="producto-sub-title">Doxa</span>
-                            </a>
-
-                            <!-- PRODUCTO 2: BOMBÓNBLOOM (Activo) -->
+                            <!-- PRODUCTO 1: BOMBÓNBLOOM (Activo) -->
                             <a href="bombonbloom/index.html" class="producto-sub-card" data-visible="on">
                                 <div class="producto-sub-thumb">
                                     <img src="Galle choco.png" alt="BombónBloom">
                                 </div>
                                 <span class="producto-sub-title">BombónBloom</span>
+                            </a>
+
+                            <!-- PRODUCTO 2: DOXA (INDEX) (Activo - a la derecha) -->
+                            <a href="index.html" class="producto-sub-card" data-visible="on">
+                                <div class="producto-sub-thumb">
+                                    <img src="ProtoDoxa.png" alt="Doxa">
+                                </div>
+                                <span class="producto-sub-title">Doxa</span>
                             </a>
 
                             <!-- =========================================================================
@@ -1281,6 +1285,9 @@ Menú del Index: Líena 742
                 <!-- NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
                 <a href="galeria.html" class="navbar-link btn-gallery" data-visible="off">Galería</a>
                 <a href="articulos.html" class="navbar-link btn-articulos" data-visible="off">Artículos</a>
+
+                <!-- BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
+                <a href="index.html" class="navbar-logo active">DOXA</a>
             </div>
         </nav>
         <div class="navbar-overlay" id="navbarOverlay"></div>
@@ -2436,8 +2443,9 @@ Menú del Index: Líena 742
                             const isSelected = (i === selectedCategoryIndex);
                             const isNeutral = (selectedCategoryIndex === -1);
 
-                            // Ajuste del radio del nodo padre según su estado y posición
-                            let actualParentRadio = radioCategorias;
+                            // Ajuste del radio del nodo padre intercalado según su estado y posición
+                            const isOdd = (i % 2 !== 0);
+                            let actualParentRadio;
                             if (isSelected) {
                                 if (isMobile) {
                                     actualParentRadio = radioCategorias;
@@ -2448,6 +2456,8 @@ Menú del Index: Líena 742
                                 } else {
                                     actualParentRadio = radioCategorias - 5;
                                 }
+                            } else {
+                                actualParentRadio = isOdd ? (isMobile ? 228 : 282) : (isMobile ? 182 : 240);
                             }
 
                             // 1. Línea rayo de la categoría padre
