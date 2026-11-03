@@ -1,4 +1,4 @@
-<!-- 
+﻿<!-- 
 =========================================================================
 ÍNDICE DE CONTENIDO EDITABLE E IMPORTANTE (LÍNEAS DE CÓDIGO)
 =========================================================================
@@ -271,8 +271,8 @@ Menú del Index: Líena 742
         }
 
         /* =========================================================================
-           ESTILOS DEL BOTÓN "PRODUCTOS" Y MENÚ SECUNDARIO HORIZONTAL
-           ========================================================================= */
+       ESTILOS DEL BOTÓN "PRODUCTOS" Y MENÚ SECUNDARIO HORIZONTAL
+       ========================================================================= */
         .navbar-dropdown-wrapper {
             position: relative;
             display: inline-flex;
@@ -317,6 +317,17 @@ Menú del Index: Líena 742
             width: max-content;
         }
 
+        /* Puente invisible para conectar el botón con el submenú y evitar perder el foco al mover el cursor */
+        .productos-submenu-horizontal::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: transparent;
+        }
+
         .navbar-dropdown-wrapper:hover .productos-submenu-horizontal,
         .navbar-dropdown-wrapper.active .productos-submenu-horizontal {
             opacity: 1;
@@ -327,7 +338,7 @@ Menú del Index: Líena 742
 
         .productos-submenu-track {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
         }
 
@@ -374,7 +385,8 @@ Menú del Index: Líena 742
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.88);
             transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
-            white-space: nowrap;
+            text-align: center;
+            line-height: 1.25;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -656,8 +668,8 @@ Menú del Index: Líena 742
         }
 
         /* =========================================================================
-           [FIN] página GALERÍA (ESTILOS CSS DEL MENÚ DE ACCESO)
-           ========================================================================= */
+       [FIN] página GALERÍA (ESTILOS CSS DEL MENÚ DE ACCESO)
+       ========================================================================= */
 
         /* Contenedor principal que permite el 100% de ancho */
         .page-wrapper {
@@ -673,8 +685,8 @@ Menú del Index: Líena 742
         }
 
         /* =========================================
-           LÓGICA DE ANIMACIONES (Cascada y Aparición)
-           ========================================= */
+       LÓGICA DE ANIMACIONES (Cascada y Aparición)
+       ========================================= */
 
         /* Definición de la animación: aparecer, deslizarse hacia arriba y delay */
         @keyframes fadeInSlideUp {
@@ -739,9 +751,9 @@ Menú del Index: Líena 742
         }
 
         /* =========================================
-           ESTILOS GENERALES DE ESTRUCTURA
-           (Simplificados para que tú pegues tu código)
-           ========================================= */
+       ESTILOS GENERALES DE ESTRUCTURA
+       (Simplificados para que tú pegues tu código)
+       ========================================= */
 
         /* Contenedores para centralizar el contenido pero sin márgenes forzados */
         .container {
@@ -825,8 +837,8 @@ Menú del Index: Líena 742
         }
 
         /* =========================================
-           HERO & TIPOGRAFÍA RESPONSIVE
-           ========================================= */
+       HERO & TIPOGRAFÍA RESPONSIVE
+       ========================================= */
         .hero-container {
             position: relative;
             width: 100%;
@@ -837,6 +849,42 @@ Menú del Index: Líena 742
             align-items: center;
             justify-content: center;
             overflow: hidden;
+        }
+
+        /* Fondo dinámico sutil (efecto Ken Burns estilo To'ak Chocolate) y soporte para vídeo */
+        .hero-media-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-bg-media {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+            transform: scale(1);
+            animation: heroZoomIn 5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        @keyframes heroZoomIn {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.08);
+            }
         }
 
         .hero-content {
@@ -935,13 +983,13 @@ Menú del Index: Líena 742
             max-width: 500px;
             width: 100%;
             height: auto;
-            filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5));
+            filter: drop-shadow(0px 20px 30px rgba(0, 0, 0, 0.5));
         }
 
         /* =========================================
-           ADAPTACIÓN PARA MÓVILES (Responsiveness)
-           Media Queries: Aquí está el truco
-           ========================================= */
+       ADAPTACIÓN PARA MÓVILES (Responsiveness)
+       Media Queries: Aquí está el truco
+       ========================================= */
         @media (max-width: 768px) {
             .container {
                 padding: 0 16px;
@@ -1237,10 +1285,12 @@ Menú del Index: Líena 742
                    [BOTÓN Y SUBMENÚ HORIZONTAL DE PRODUCTOS]
                    ========================================================================= -->
                 <div class="navbar-dropdown-wrapper" id="productosDropdownWrapper">
-                    <button class="navbar-link navbar-dropdown-btn" id="btnProductos" type="button" aria-expanded="false">
+                    <button class="navbar-link navbar-dropdown-btn" id="btnProductos" type="button"
+                        aria-expanded="false">
                         <span>Productos</span>
                         <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
                         </svg>
                     </button>
 
@@ -1255,15 +1305,15 @@ Menú del Index: Líena 742
                             <!-- PRODUCTO 1: BOMBÓNBLOOM (Activo) -->
                             <a href="bombonbloom/index.html" class="producto-sub-card" data-visible="on">
                                 <div class="producto-sub-thumb">
-                                    <img src="Galle choco.png" alt="BombónBloom">
+                                    <img src="BBB 1.png" alt="Bombón Blooms">
                                 </div>
-                                <span class="producto-sub-title">BombónBloom</span>
+                                <span class="producto-sub-title">Bombón<br>Blooms</span>
                             </a>
 
                             <!-- PRODUCTO 2: DOXA (INDEX) (Activo - a la derecha) -->
                             <a href="index.html" class="producto-sub-card" data-visible="on">
                                 <div class="producto-sub-thumb">
-                                    <img src="ProtoDoxa.png" alt="Doxa">
+                                    <img src="Doxa.png" alt="Doxa">
                                 </div>
                                 <span class="producto-sub-title">Doxa</span>
                             </a>
@@ -1311,8 +1361,8 @@ Menú del Index: Líena 742
                 <a href="galeria.html" class="navbar-link btn-gallery" data-visible="off">Galería</a>
                 <a href="articulos.html" class="navbar-link btn-articulos" data-visible="off">Artículos</a>
             </div>
-<!-- BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
-                <a href="index.html" class="navbar-logo active">DOXA</a>
+            <!-- BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
+            <a href="index.html" class="navbar-logo active">DOXA</a>
         </nav>
         <div class="navbar-overlay" id="navbarOverlay"></div>
         <!-- =========================================================================
@@ -1325,29 +1375,40 @@ Menú del Index: Líena 742
 
         <header class="hero-container">
 
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
-                <img src="cabecera_index.jpg" alt="Fondo Doxa"
-                    style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4);">
+            <div class="hero-media-wrapper">
+                <!-- =========================================================================
+                   [FONDO DE CABECERA: IMAGEN O VÍDEO]
+                   - Animación sutil activa: efecto continuo Ken Burns (To'ak Chocolate).
+                   - PARA ACTIVAR VÍDEO EN EL FUTURO:
+                     1. Descomenta la etiqueta <video> inferior y pon la ruta de tu vídeo en 'src'.
+                     2. Comenta o elimina la etiqueta <img>.
+                   ========================================================================= -->
+                <!-- 
+                <video class="hero-bg-media" autoplay muted loop playsinline poster="cabecera_index.jpg">
+                    <source src="tu_video.mp4" type="video/mp4">
+                </video> 
+                -->
+                <img src="cabecera_index.jpg" alt="Fondo Doxa" class="hero-bg-media">
             </div>
 
             <div class="hero-content animate-appear">
 
                 <h1 class="hero-title">
-                    <span class="hero-doxa">DOXA</span>
+                    <span class="hero-doxa">SUMUM</span>
 
                     <span class="hero-sub">
                         <span>R</span><span>E</span><span>P</span><span>O</span><span>S</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
-                        <span style="width: 0.3em;"></span>
+                        <span></span>
                         <span>N</span><span>U</span><span>T</span><span>R</span><span>I</span><span>C</span><span>O</span><span>S</span><span>M</span><span>É</span><span>T</span><span>I</span><span>C</span><span>A</span>
                     </span>
 
                 </h1>
 
                 <p class="hero-tagline">
-                    Donde placer, propósito y alma se encuentran
+                    Cuando tomarte tus activos diarios deja de ser un esfuerzo...
                 </p>
 
-                <a href="coleccion.html" class="btn-oro">DESCÚBRELAS</a>
+                <a href="compra.html" class="btn-oro">HAZ TU SELECCIÓN</a>
 
             </div>
         </header>
@@ -1377,7 +1438,8 @@ Menú del Index: Líena 742
                     </p>
 
                     <p>
-                        Alta repostería y ciencia se fusionan para que pecar <br class="desktop-only">se transforme en todo un regalo para tu cuerpo.
+                        Alta repostería y ciencia se fusionan para que pecar <br class="desktop-only">se transforme en
+                        todo un regalo para tu cuerpo.
                     </p>
                 </div>
 
@@ -1678,12 +1740,55 @@ Menú del Index: Líena 742
             .text-column {
                 flex: 1;
                 display: flex;
-                justify-content: flex-end;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: flex-start;
+                padding-top: 35px;
+                min-height: 420px;
             }
+
+            .rueda-cta-wrapper {
+                margin-top: 35px;
+                text-align: right;
+                width: 100%;
+                max-width: 420px;
+                pointer-events: auto;
+            }
+
+            .btn-reserva-rueda {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background-color: transparent;
+                color: #181818 !important;
+                padding: 15px 36px;
+                font-family: 'Lato', sans-serif;
+                font-size: 11px;
+                font-weight: 500;
+                line-height: normal;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                text-decoration: none;
+                border-radius: 4px;
+                border: 1px solid #181818;
+                transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+                cursor: pointer;
+            }
+
+            .btn-reserva-rueda:hover,
+            .btn-reserva-rueda:active {
+                background-color: #181818;
+                color: #FFFFFF !important;
+                border-color: #181818;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+            }
+
 
             .text-box {
                 width: 100%;
                 max-width: 420px;
+                min-height: 235px;
                 color: #000;
                 font-family: 'Lexend', sans-serif;
                 text-align: right;
@@ -1859,13 +1964,13 @@ Menú del Index: Líena 742
                     left: 0 !important;
                     width: 100% !important;
                     height: 100% !important;
-                    background: linear-gradient(to bottom, 
-                        rgba(230, 231, 225, 0) 0%, 
-                        rgba(230, 231, 225, 0) 45%, 
-                        rgba(230, 231, 225, 0.35) 58%, 
-                        rgba(230, 231, 225, 0.82) 70%, 
-                        var(--yeso-oscuro, #e6e7e1) 78%, 
-                        var(--yeso-oscuro, #e6e7e1) 100%) !important;
+                    background: linear-gradient(to bottom,
+                            rgba(230, 231, 225, 0) 0%,
+                            rgba(230, 231, 225, 0) 45%,
+                            rgba(230, 231, 225, 0.35) 58%,
+                            rgba(230, 231, 225, 0.82) 70%,
+                            var(--yeso-oscuro, #e6e7e1) 78%,
+                            var(--yeso-oscuro, #e6e7e1) 100%) !important;
                     z-index: 2 !important;
                     pointer-events: none !important;
                 }
@@ -2013,18 +2118,33 @@ Menú del Index: Líena 742
                     width: 100% !important;
                     flex: 1 !important;
                     display: flex !important;
-                    align-items: flex-start !important;
-                    justify-content: center !important;
-                    padding-top: clamp(165px, calc(7vh + 125px), 195px) !important;
+                    flex-direction: column !important;
+                    align-items: center !important;
+                    justify-content: flex-start !important;
+                    padding-top: clamp(120px, calc(6vh + 90px), 150px) !important;
                     padding-bottom: 25px !important;
                     position: relative !important;
                     z-index: 20 !important;
                     pointer-events: none !important;
                 }
 
+                .rueda-cta-wrapper {
+                    text-align: center !important;
+                    margin-top: 20px !important;
+                    pointer-events: auto !important;
+                }
+
+                .btn-reserva-rueda {
+                    padding: 12px 26px !important;
+                    font-size: 10px !important;
+                    letter-spacing: 2px !important;
+                }
+
+
                 .text-box {
                     text-align: center !important;
                     max-width: 330px !important;
+                    min-height: 190px !important;
                     margin: 0 auto !important;
                     color: #181818 !important;
                     pointer-events: auto !important;
@@ -2101,7 +2221,8 @@ Menú del Index: Líena 742
                     En DOXA nada está presente sólo por figurar.<br><br>
                     Un producto healthy que sin embargo no sacrifica la textura.<br>
                     Un suplemento que no sacrifica el placer.<br><br>
-                    Una forma distinta de disfrutar, compatible con una alimentación consciente, con el entrenamiento, y con el cuidado a largo plazo.
+                    Una forma distinta de disfrutar, compatible con una alimentación consciente, con el entrenamiento, y
+                    con el cuidado a largo plazo.
                 </p>
             </div>
         </section>
@@ -2132,8 +2253,19 @@ Menú del Index: Líena 742
                         <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Descubre DOXA</h3>
                         <p class="hero-value-prop-neg">Arquitectura de Activos</p>
                         <div class="hero-value-prop">
-                            Haz clic en cualquiera de las categorías para explorar los activos que componen la arquitectura de DOXA.
+                            Haz clic en cualquiera de las categorías para explorar los activos que componen la
+                            arquitectura de DOXA.
                         </div>
+                    </div>
+                    <div class="rueda-cta-wrapper">
+                        <a href="compra.html" class="btn-reserva-rueda">
+                            RESERVA TU CAJA
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24" style="margin-left: 10px;">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -3288,7 +3420,7 @@ Menú del Index: Líena 742
                                     radialWrapper.style.cursor = 'grabbing';
                                     try {
                                         radialWrapper.setPointerCapture(activePointerId);
-                                    } catch (err) {}
+                                    } catch (err) { }
                                 }
                             }
 
@@ -3318,7 +3450,7 @@ Menú del Index: Líena 742
                                 if (radialWrapper.hasPointerCapture(e.pointerId)) {
                                     radialWrapper.releasePointerCapture(e.pointerId);
                                 }
-                            } catch (err) {}
+                            } catch (err) { }
 
                             if (isDraggingWheel) {
                                 isDraggingWheel = false;
@@ -4194,7 +4326,8 @@ Menú del Index: Líena 742
                     </p>
                     <p class="variety-desc" style="min-height: auto; margin-bottom: 0;">
                         Las tuyas te serán enviadas en cuanto hayan enfriado tras su horneado.<br><br>
-                        Un golpe de calor en el microondas antes de ser consumidas les devuelve ese punto fresco del recién hecho.<br><br>
+                        Un golpe de calor en el microondas antes de ser consumidas les devuelve ese punto fresco del
+                        recién hecho.<br><br>
                         Te informaremos por correo del momento en que estén listas para su envío.
                     </p>
                     <a href="compra.html" class="btn-jotform">
@@ -4263,7 +4396,8 @@ Menú del Index: Líena 742
                     <div class="footer-column">
                         <h4 class="footer-column-title">Aviso Legal</h4>
                         <div class="footer-column-links">
-                            <a href="ayuda.html#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
+                            <a href="ayuda.html#condiciones-venta" class="footer-link">Condiciones generales de
+                                venta</a>
                             <a href="ayuda.html#privacidad" class="footer-link">Política de privacidad</a>
                             <a href="ayuda.html#cookies" class="footer-link">Cookies</a>
                         </div>
@@ -4380,12 +4514,41 @@ Menú del Index: Líena 742
                     navbarOverlay.addEventListener('click', closeMobileMenu);
                 }
 
-                // Toggle interactivo del desplegable de Productos (por clic o toque)
+                // Toggle y hover interactivo del desplegable de Productos
                 const productosDropdown = document.getElementById('productosDropdownWrapper');
                 const btnProductos = document.getElementById('btnProductos');
                 if (btnProductos && productosDropdown) {
+                    let closeDropdownTimer = null;
+
+                    const openDropdown = () => {
+                        if (closeDropdownTimer) {
+                            clearTimeout(closeDropdownTimer);
+                            closeDropdownTimer = null;
+                        }
+                        productosDropdown.classList.add('active');
+                        btnProductos.setAttribute('aria-expanded', 'true');
+                    };
+
+                    const closeDropdown = () => {
+                        productosDropdown.classList.remove('active');
+                        btnProductos.setAttribute('aria-expanded', 'false');
+                    };
+
+                    // Abrir de inmediato al pasar el ratón por el botón "Productos" o su submenú
+                    productosDropdown.addEventListener('mouseenter', openDropdown);
+
+                    // Desaparece sólo cuando ya no estás onhover ni sobre el botón ni sobre el menú
+                    productosDropdown.addEventListener('mouseleave', () => {
+                        closeDropdownTimer = setTimeout(closeDropdown, 180);
+                    });
+
+                    // Permitir también clic (útil en móviles o toque)
                     btnProductos.addEventListener('click', (e) => {
                         e.stopPropagation();
+                        if (closeDropdownTimer) {
+                            clearTimeout(closeDropdownTimer);
+                            closeDropdownTimer = null;
+                        }
                         const isExpanded = productosDropdown.classList.toggle('active');
                         btnProductos.setAttribute('aria-expanded', isExpanded);
                     });
@@ -4393,9 +4556,23 @@ Menú del Index: Líena 742
                     // Cerrar el desplegable al hacer clic fuera
                     document.addEventListener('click', (e) => {
                         if (!productosDropdown.contains(e.target)) {
-                            productosDropdown.classList.remove('active');
-                            btnProductos.setAttribute('aria-expanded', 'false');
+                            if (closeDropdownTimer) {
+                                clearTimeout(closeDropdownTimer);
+                                closeDropdownTimer = null;
+                            }
+                            closeDropdown();
                         }
+                    });
+
+                    // Desaparece inmediatamente una vez que se pincha en uno de sus productos
+                    productosDropdown.querySelectorAll('.producto-sub-card').forEach(card => {
+                        card.addEventListener('click', () => {
+                            if (closeDropdownTimer) {
+                                clearTimeout(closeDropdownTimer);
+                                closeDropdownTimer = null;
+                            }
+                            closeDropdown();
+                        });
                     });
                 }
 

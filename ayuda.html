@@ -131,9 +131,10 @@ debes pegar o modificar los textos reales:
             height: 85px;
             z-index: 1000;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             padding: 0 50px;
+            gap: 25px;
             background-color: rgba(202, 204, 195, 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -143,18 +144,24 @@ debes pegar o modificar los textos reales:
 
         .navbar-logo {
             font-family: 'Lato', sans-serif;
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 500;
-            letter-spacing: 6px;
+            letter-spacing: 4px;
             color: var(--text-main);
             text-decoration: none;
             text-transform: uppercase;
+            padding: 10px 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .navbar-menu {
             display: flex;
             align-items: center;
             gap: 32px;
+            margin-left: auto;
+            justify-content: flex-end;
         }
 
         .navbar-link {
@@ -645,12 +652,27 @@ debes pegar o modificar los textos reales:
 
         @media (max-width: 768px) {
             .navbar {
-                padding: 0 25px;
+                padding: 0 16px;
                 height: 70px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 12px;
             }
 
             .mobile-toggle {
                 display: flex;
+                order: 1;
+                margin-left: auto;
+            }
+
+            .navbar-logo {
+                display: inline-flex !important;
+                order: 2;
+                padding: 6px 14px !important;
+                font-size: 11px !important;
+                letter-spacing: 2.5px !important;
+                border-radius: 2px;
             }
 
             .navbar-menu {
@@ -865,8 +887,6 @@ debes pegar o modificar los textos reales:
 
     <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
     <nav class="navbar" id="mainNavbar">
-        <a href="index.html" class="navbar-logo">DOXA</a>
-
         <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
             <span></span>
             <span></span>
@@ -879,6 +899,9 @@ debes pegar o modificar los textos reales:
             <a href="articulos.html" class="navbar-link">Artículos</a>
             <a href="mision.html" class="navbar-link">La Misión</a>
         </div>
+
+        <!-- BOTÓN DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
+        <a href="index.html" class="navbar-logo">DOXA</a>
     </nav>
 
     <!-- CUERPO PRINCIPAL DEL CENTRO DE AYUDA -->

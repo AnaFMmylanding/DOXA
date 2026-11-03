@@ -1,4 +1,4 @@
-<!-- 
+﻿<!-- 
 =========================================================================
 INDICE DE CONTENIDO EDITABLE E IMPORTANTE (BOMBON BLOOM)
 =========================================================================
@@ -17,7 +17,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 - Imagen de fondo y textos: Linea 1420
 
 -------------------------------------------------------------------------
-3. SUBMENU DE 7 VARIEDADES DE BOMBON BLOOM (DEBAJO DEL HERO)
+3. SUBMENU DE 8 VARIEDADES DE BOMBON BLOOM (DEBAJO DEL HERO)
 -------------------------------------------------------------------------
 - Contenedor del submenu: Linea 1450
 - Fotos grandes y nombres en columna.
@@ -29,6 +29,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
   * VARIEDAD 5: BBB Pre-entreno ........... Linea 1495 [data-visible="on"]
   * VARIEDAD 6: BBB Relajacion ............ Linea 1505 [data-visible="on"]
   * VARIEDAD 7: BBB Stop-loss Hombre ...... Linea 1515 [data-visible="on"]
+  * VARIEDAD 8: BBB Articulaciones ........ [data-visible="on"]
 
 -------------------------------------------------------------------------
 4. SECCION UNICA: RUEDA RADIAL DE ACTIVOS (#rueda-activos)
@@ -1281,7 +1282,9 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
         .bbb-submenu-name {
             font-family: 'Lato', sans-serif;
             font-size: 9.5px;
-            font-weight: 600;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             letter-spacing: 1.2px;
             text-transform: uppercase;
             color: #1a1a1a;
@@ -1296,6 +1299,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
         .bbb-submenu-name .bbb-brand {
             font-size: 9px;
+            font-weight: 400;
             letter-spacing: 2px;
             color: #8c6239;
             margin-bottom: 2px;
@@ -1304,6 +1308,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
         .bbb-submenu-name .bbb-line {
             display: block;
+            font-weight: 400;
             white-space: nowrap;
         }
 
@@ -1573,6 +1578,16 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                         <span class="bbb-brand">BBB</span>
                         <span class="bbb-line">Stop-loss</span>
                         <span class="bbb-line">Hombre</span>
+                    </span>
+                </a>
+                <!-- VARIEDAD 8: BBB Articulaciones [ESTADO: ON] -->
+                <a href="#rueda-activos" class="bbb-submenu-item" id="btn-bbb-8" data-category="7" data-visible="on">
+                    <div class="bbb-submenu-thumb">
+                        <img src="../BBB 1.png" alt="BBB Articulaciones" onerror="this.src='../BBB.png'">
+                    </div>
+                    <span class="bbb-submenu-name">
+                        <span class="bbb-brand">BBB</span>
+                        <span class="bbb-line">Articulaciones</span>
                     </span>
                 </a>
             </div>
