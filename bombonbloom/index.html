@@ -2435,8 +2435,8 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
             .text-box .hero-value-prop-neg {
                 font-family: 'Lexend', sans-serif !important;
-                font-size: 14.5px !important;
-                font-weight: 600 !important;
+                font-size: 14px !important;
+                font-weight: 300 !important;
                 color: #181818 !important;
                 text-shadow: none !important;
                 margin-bottom: 12px !important;
@@ -2452,6 +2452,33 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 text-shadow: none !important;
                 max-width: 310px !important;
                 margin: 0 auto !important;
+            }
+
+            /* Transicion fluida de color para textos adaptativos */
+            .text-box .tagline,
+            .text-box h2.tagline,
+            .text-box div.tagline,
+            .text-box .variety-title,
+            .text-box .hero-value-prop-neg {
+                transition: color 0.45s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.45s cubic-bezier(0.25, 1, 0.5, 1) !important;
+            }
+
+            /* Cabecera adaptativa en blanco para fondos oscuros medidos */
+            .text-box[data-header-theme="light"] .tagline,
+            .text-box[data-header-theme="light"] h2.tagline,
+            .text-box[data-header-theme="light"] div.tagline {
+                color: rgba(255, 255, 255, 0.85) !important;
+                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45) !important;
+            }
+
+            .text-box[data-header-theme="light"] .variety-title {
+                color: #FFFFFF !important;
+                text-shadow: 0 2px 18px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.5) !important;
+            }
+
+            .text-box[data-header-theme="light"] .hero-value-prop-neg {
+                color: rgba(255, 255, 255, 0.95) !important;
+                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45) !important;
             }
         }
 
@@ -2731,7 +2758,21 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             let activeBgUrl = '../piel negra.jpg';
             let bgTransitionTimer = null;
 
+            function updateTextTheme(bgUrl) {
+                if (!cajaText) return;
+                const isMobile = window.innerWidth <= 768;
+                if (!isMobile) {
+                    cajaText.setAttribute('data-header-theme', 'dark');
+                    return;
+                }
+                const isLightBg = bgUrl && bgUrl.indexOf('amazona') !== -1;
+                cajaText.setAttribute('data-header-theme', isLightBg ? 'dark' : 'light');
+            }
+
+            updateTextTheme(activeBgUrl);
+
             function transitionBg(newBgUrl) {
+                updateTextTheme(newBgUrl);
                 if (!newBgUrl) newBgUrl = '../piel negra.jpg';
                 if (!cajaBg) return;
 
