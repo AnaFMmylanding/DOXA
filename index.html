@@ -1,4 +1,4 @@
-﻿<!-- 
+<!--
 =========================================================================
 ÍNDICE DE CONTENIDO EDITABLE E IMPORTANTE (LÍNEAS DE CÓDIGO)
 =========================================================================
@@ -301,13 +301,13 @@ Menú del Index: Líena 742
             position: absolute;
             top: calc(100% + 14px);
             right: 0;
-            background: rgba(10, 10, 10, 0.45);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
             border: none;
             border-radius: 0;
-            padding: 10px 12px;
-            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.6);
+            padding: 6px 4px;
+            box-shadow: none;
             opacity: 0;
             visibility: hidden;
             transform: translateY(12px) scale(0.98);
@@ -339,42 +339,41 @@ Menú del Index: Líena 742
         .productos-submenu-track {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 14px;
         }
 
         .producto-sub-card {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: flex-start;
             text-decoration: none;
             padding: 8px 10px;
-            border-radius: 0;
-            background: transparent;
+            background: transparent !important;
             border: none;
-            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
             min-width: 68px;
             cursor: pointer;
         }
 
         .producto-sub-thumb {
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 7px;
-            border-radius: 0;
-            border: none;
             background: transparent;
-            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), filter 0.35s ease;
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
+        /* Sombreado suave y natural idÃ©ntico al de la galleta (drop-shadow orgÃ¡nico) */
         .producto-sub-thumb img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
-            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: drop-shadow(0px 8px 14px rgba(0, 0, 0, 0.42));
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), filter 0.35s ease;
         }
 
         .producto-sub-title {
@@ -383,27 +382,38 @@ Menú del Index: Líena 742
             font-weight: 300;
             letter-spacing: 2.5px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.88);
+            color: var(--nav-text-initial, rgba(255, 255, 255, 0.9));
+            text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.45);
             transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
             text-align: center;
             line-height: 1.25;
             -webkit-font-smoothing: antialiased;
         }
 
+        /* En cabecera clara / scrolled, el texto adopta el tono oscuro y sombra natural */
+        .navbar.scrolled .producto-sub-title {
+            color: var(--nav-text-scrolled, #111111) !important;
+            text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.18) !important;
+        }
+
         .producto-sub-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border: none;
+            background: transparent !important;
             transform: translateY(-4px) scale(1.05);
         }
 
         .producto-sub-card:hover .producto-sub-thumb img {
-            transform: scale(1.12);
-            filter: drop-shadow(0 8px 16px rgba(193, 155, 118, 0.35));
+            transform: scale(1.1);
+            filter: drop-shadow(0px 12px 20px rgba(0, 0, 0, 0.52));
         }
 
         .producto-sub-card:hover .producto-sub-title {
             color: #FFFFFF;
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.95);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0px 2px 6px rgba(0, 0, 0, 0.45);
+        }
+
+        .navbar.scrolled .producto-sub-card:hover .producto-sub-title {
+            color: #000000 !important;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25) !important;
         }
 
         .producto-sub-card:active {
@@ -1268,11 +1278,11 @@ Menú del Index: Líena 742
 
     <div class="page-wrapper">
 
-        <!-- =========================================================================
+        <!--=========================================================================
            [INICIO] MENÚ: página GALERÍA (BARRA DE NAVEGACIÓN HTML)
            Aquí se encuentra el botón "Galería" que redirige a la página galeria.html.
            ========================================================================= -->
-        <!-- NAVEGACIÓN PRINCIPAL -->
+        <!--NAVEGACIÓN PRINCIPAL -->
         <nav class="navbar" id="mainNavbar">
             <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
                 <span></span>
@@ -1281,7 +1291,7 @@ Menú del Index: Líena 742
             </button>
 
             <div class="navbar-menu" id="navbarMenu">
-                <!-- =========================================================================
+                <!--=========================================================================
                    [BOTÓN Y SUBMENÚ HORIZONTAL DE PRODUCTOS]
                    ========================================================================= -->
                 <div class="navbar-dropdown-wrapper" id="productosDropdownWrapper">
@@ -1294,15 +1304,15 @@ Menú del Index: Líena 742
                         </svg>
                     </button>
 
-                    <!-- Submenú horizontal desplegable -->
+                    <!--Submenú horizontal desplegable -->
                     <div class="productos-submenu-horizontal" id="productosSubmenu">
                         <div class="productos-submenu-track">
-                            <!-- =========================================================================
+                            <!--=========================================================================
                                PRODUCTOS ACTIVOS (data-visible="on")
                                Para ocultar un producto de la web: cambia data-visible="on" por "off"
                                ========================================================================= -->
 
-                            <!-- PRODUCTO 1: BOMBÓNBLOOM (Activo) -->
+                            <!--PRODUCTO 1: BOMBÓNBLOOM (Activo) -->
                             <a href="bombonbloom/index.html" class="producto-sub-card" data-visible="on">
                                 <div class="producto-sub-thumb">
                                     <img src="BBB 1.png" alt="Bombón Blooms">
@@ -1310,7 +1320,7 @@ Menú del Index: Líena 742
                                 <span class="producto-sub-title">Bombón<br>Blooms</span>
                             </a>
 
-                            <!-- PRODUCTO 2: DOXA (INDEX) (Activo - a la derecha) -->
+                            <!--PRODUCTO 2: DOXA (INDEX) (Activo - a la derecha) -->
                             <a href="index.html" class="producto-sub-card" data-visible="on">
                                 <div class="producto-sub-thumb">
                                     <img src="Doxa.png" alt="Doxa">
@@ -1318,13 +1328,13 @@ Menú del Index: Líena 742
                                 <span class="producto-sub-title">Doxa</span>
                             </a>
 
-                            <!-- =========================================================================
+                            <!--=========================================================================
                                [INTERRUPTOR OFF/ON] BOTONES DESACTIVADOS TEMPORALMENTE (data-visible="off")
                                Para reactivar cualquiera de estos botones:
                                Cambia simplemente data-visible="off" por data-visible="on"
                                ========================================================================= -->
 
-                            <!-- PRODUCTO 3: LINGOTE [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
+                            <!--PRODUCTO 3: LINGOTE [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
                             <a href="lingote/index.html" class="producto-sub-card" data-visible="off">
                                 <div class="producto-sub-thumb">
                                     <img src="Galle choco negro.png" alt="Lingote">
@@ -1332,7 +1342,7 @@ Menú del Index: Líena 742
                                 <span class="producto-sub-title">Lingote</span>
                             </a>
 
-                            <!-- PRODUCTO 4: OBLEA [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
+                            <!--PRODUCTO 4: OBLEA [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
                             <a href="oblea/index.html" class="producto-sub-card" data-visible="off">
                                 <div class="producto-sub-thumb">
                                     <img src="Galle cafe.png" alt="Oblea">
@@ -1340,7 +1350,7 @@ Menú del Index: Líena 742
                                 <span class="producto-sub-title">Oblea</span>
                             </a>
 
-                            <!-- PRODUCTO 5: COOKIE [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
+                            <!--PRODUCTO 5: COOKIE [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
                             <a href="cookie/index.html" class="producto-sub-card" data-visible="off">
                                 <div class="producto-sub-thumb">
                                     <img src="Galle frutos bosque.png" alt="Cookie">
@@ -1351,39 +1361,39 @@ Menú del Index: Líena 742
                     </div>
                 </div>
 
-                <!-- =========================================================================
+                <!--=========================================================================
                    [INTERRUPTORES DE BOTONES DEL MENÚ]
                    Para MOSTRAR / LIBERAR un botón en la web: cambia data-visible="off" por data-visible="on"
                    Para OCULTAR un botón de la web: cambia data-visible="on" por data-visible="off"
                    ========================================================================= -->
                 <a href="coleccion.html" class="navbar-link btn-coleccion" data-visible="off">La Colección</a>
-                <!-- NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
+                <!--NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
                 <a href="galeria.html" class="navbar-link btn-gallery" data-visible="off">Galería</a>
                 <a href="articulos.html" class="navbar-link btn-articulos" data-visible="off">Artículos</a>
             </div>
-            <!-- BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
+            <!--BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
             <a href="index.html" class="navbar-logo active">DOXA</a>
         </nav>
         <div class="navbar-overlay" id="navbarOverlay"></div>
-        <!-- =========================================================================
+        <!--=========================================================================
            [FIN] página GALERÍA (BARRA DE NAVEGACIÓN HTML)
            Nota: En index.html no hay enlaces a artistas ni fotos de la galería.
            Esos elementos los encontrarás detallados en "galeria.html".
            ========================================================================= -->
 
-        <!-- Antigravity: /*SECCIÓN HEADER_ABOBE THE FOLD*/ -->
+        <!--Antigravity: /*SECCIÓN HEADER_ABOBE THE FOLD*/ -->
 
         <header class="hero-container">
 
             <div class="hero-media-wrapper">
-                <!-- =========================================================================
+                <!--=========================================================================
                    [FONDO DE CABECERA: IMAGEN O VÍDEO]
                    - Animación sutil activa: efecto continuo Ken Burns (To'ak Chocolate).
                    - PARA ACTIVAR VÍDEO EN EL FUTURO:
                      1. Descomenta la etiqueta <video> inferior y pon la ruta de tu vídeo en 'src'.
                      2. Comenta o elimina la etiqueta <img>.
                    ========================================================================= -->
-                <!-- 
+                <!--
                 <video class="hero-bg-media" autoplay muted loop playsinline poster="cabecera_index.jpg">
                     <source src="tu_video.mp4" type="video/mp4">
                 </video> 
@@ -1397,15 +1407,14 @@ Menú del Index: Líena 742
                     <span class="hero-doxa">SUMUM</span>
 
                     <span class="hero-sub">
-                        <span>R</span><span>E</span><span>P</span><span>O</span><span>S</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
+                        <span>C</span><span>O</span><span>N</span><span>F</span><span>I</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
                         <span></span>
-                        <span>N</span><span>U</span><span>T</span><span>R</span><span>I</span><span>C</span><span>O</span><span>S</span><span>M</span><span>É</span><span>T</span><span>I</span><span>C</span><span>A</span>
-                    </span>
+                        <span>B</span><span>I</span><span>O</span><span>I</span><span>N</span><span>D</span><span>U</span><span>C</span><span>T</span><span>I</span><span>V</span><span>A</span>
 
                 </h1>
 
                 <p class="hero-tagline">
-                    Cuando tomarte tus activos diarios deja de ser un esfuerzo...
+                    Lo que antes era un esfuerzo... ahora es tu momento de placer
                 </p>
 
                 <a href="compra.html" class="btn-oro">HAZ TU SELECCIÓN</a>
@@ -1413,9 +1422,9 @@ Menú del Index: Líena 742
             </div>
         </header>
 
-        <!-- Antigravity: /* SECCIÓN PRESENTACIÓN DE LA DOXA */ -->
+        <!--Antigravity: /* SECCIÓN PRESENTACIÓN DE LA DOXA */ -->
 
-        <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: #e0e1db (Tono yeso grisáceo alternativo) === -->
+        <!--=== [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: #e0e1db (Tono yeso grisáceo alternativo) === -->
         <section id="sobre-doxa" class="sobre-doxa-section">
             <div class="container animate-appear" style="text-align: center;">
 
@@ -1449,7 +1458,7 @@ Menú del Index: Líena 742
 
 
 
-        <!-- Antigravity: /* SECCIÓN FORMULACIÓN DOXA */ -->
+        <!--Antigravity: /* SECCIÓN FORMULACIÓN DOXA */ -->
 
 
         <style>
@@ -1678,7 +1687,7 @@ Menú del Index: Líena 742
 
 
 
-        <!-- Antigravity: /* SUB-SECCIÓN RUEDA DE ACTIVOS + DESCRIPCIÓN + INGREDIENTES */ -->
+        <!--Antigravity: /* SUB-SECCIÓN RUEDA DE ACTIVOS + DESCRIPCIÓN + INGREDIENTES */ -->
         <style>
             .cajas-activos-section {
                 position: relative;
@@ -1858,7 +1867,7 @@ Menú del Index: Líena 742
                 position: absolute;
                 width: 340px;
                 border-radius: 50%;
-                z-index: 20;
+                z-index: 30;
                 filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
                 pointer-events: auto;
                 cursor: pointer;
@@ -1917,31 +1926,7 @@ Menú del Index: Líena 742
                 transition: transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease, text-shadow 0.4s ease;
             }
 
-            .btn-volver {
-                display: none;
-                position: absolute;
-                top: 20px;
-                left: 20px;
-                z-index: 30;
-                background: rgba(255, 255, 255, 0.08);
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                color: #fff;
-                padding: 10px 20px;
-                font-size: 10px;
-                font-family: 'Lexend', sans-serif;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                cursor: pointer;
-                border-radius: 20px;
-                backdrop-filter: blur(5px);
-                transition: all 0.3s ease;
-            }
 
-            .btn-volver:hover {
-                background: rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 255, 255, 0.5);
-                transform: scale(1.05);
-            }
 
             /* Adaptación móvil exclusiva y de máxima prioridad para Rueda de Activos */
             @media (max-width: 768px) {
@@ -1966,10 +1951,14 @@ Menú del Index: Líena 742
                     height: 100% !important;
                     background: linear-gradient(to bottom,
                             rgba(230, 231, 225, 0) 0%,
-                            rgba(230, 231, 225, 0) 45%,
-                            rgba(230, 231, 225, 0.35) 58%,
-                            rgba(230, 231, 225, 0.82) 70%,
-                            var(--yeso-oscuro, #e6e7e1) 78%,
+                            rgba(230, 231, 225, 0) 30%,
+                            rgba(230, 231, 225, 0.08) 40%,
+                            rgba(230, 231, 225, 0.20) 50%,
+                            rgba(230, 231, 225, 0.36) 60%,
+                            rgba(230, 231, 225, 0.54) 70%,
+                            rgba(230, 231, 225, 0.72) 80%,
+                            rgba(230, 231, 225, 0.88) 90%,
+                            var(--yeso-oscuro, #e6e7e1) 96%,
                             var(--yeso-oscuro, #e6e7e1) 100%) !important;
                     z-index: 2 !important;
                     pointer-events: none !important;
@@ -2033,7 +2022,7 @@ Menú del Index: Líena 742
                     width: 100% !important;
                     height: 100% !important;
                     touch-action: none !important;
-                    z-index: 25 !important;
+                    z-index: 20 !important;
                 }
 
                 .galleta-fija {
@@ -2050,7 +2039,7 @@ Menú del Index: Líena 742
                     filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.22)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.12)) !important;
                     pointer-events: auto !important;
                     cursor: pointer !important;
-                    z-index: 15 !important;
+                    z-index: 30 !important;
                     transition: transform 0.3s ease, filter 0.3s ease !important;
                 }
 
@@ -2205,7 +2194,7 @@ Menú del Index: Líena 742
 
 
 
-        <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) === -->
+        <!--=== [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) === -->
         <section class="coleccion-section" id="proposito" style="padding-bottom: 90px;">
             <div class="container animate-appear" style="text-align: center;">
 
@@ -2233,13 +2222,13 @@ Menú del Index: Líena 742
 
 
 
-        <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) con fondo dinámico === -->
+        <!--=== [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) con fondo dinámico === -->
         <section id="cajas-activos" class="cajas-activos-section">
             <div class="bg-layer" id="caja-bg" style="background-image: url('piel negra.jpg');">
             </div>
 
             <div class="content-grid">
-                <!-- Columna Izquierda: Rueda -->
+                <!--Columna Izquierda: Rueda -->
                 <div class="wheel-column">
                     <div class="radial-wrapper">
                         <img src="Galle choco.png" class="galleta-fija" alt="DOXA">
@@ -2247,7 +2236,7 @@ Menú del Index: Líena 742
                     </div>
                 </div>
 
-                <!-- Columna Derecha: Texto dinámico -->
+                <!--Columna Derecha: Texto dinámico -->
                 <div class="text-column">
                     <div class="text-box" id="caja-text">
                         <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Descubre DOXA</h3>
@@ -2661,10 +2650,11 @@ Menú del Index: Líena 742
                                 rueda.appendChild(nodo);
                             }
 
-                            nodo.onclick = () => {
+                            nodo.onclick = (e) => {
+                                if (e) e.stopPropagation();
                                 if (wasDragging || isDraggingWheel) return;
                                 alignToCajasActivos();
-                                if (i !== selectedCategoryIndex) {
+                                if (selectedCategoryIndex === -1) {
                                     selectedSubIndex = -1;
                                     childrenVisible = true;
                                     selectCategory(i);
@@ -3262,7 +3252,15 @@ Menú del Index: Líena 742
                     // Asignar evento click a la galleta central
                     const galletaCentral = document.querySelector('.galleta-fija');
                     if (galletaCentral) {
-                        galletaCentral.onclick = () => {
+                        galletaCentral.style.cursor = 'pointer';
+                        galletaCentral.onpointerdown = (e) => {
+                            e.stopPropagation();
+                        };
+                        galletaCentral.ontouchstart = (e) => {
+                            e.stopPropagation();
+                        };
+                        galletaCentral.onclick = (e) => {
+                            e.stopPropagation();
                             alignToCajasActivos();
                             resetToNeutral();
                         };
@@ -3563,8 +3561,8 @@ Menú del Index: Líena 742
                 })();
             </script>
         </section>
-        <!-- Antigravity: /* */ -->
-        <!-- Antigravity: /* SECCIÓN EL SABOR DOXA */ -->
+        <!--Antigravity: /* */ -->
+        <!--Antigravity: /* SECCIÓN EL SABOR DOXA */ -->
         <style>
             .product-info-grid {
                 display: flex;
@@ -3633,7 +3631,7 @@ Menú del Index: Líena 742
 
 
 
-        <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) === -->
+        <!--=== [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) === -->
         <section id="descripcion-nutricional" class="coleccion-section" style="padding-top: 100px;">
             <div class="container animate-appear">
                 <div style="text-align: center; margin-bottom: 60px;">
@@ -3809,7 +3807,7 @@ Menú del Index: Líena 742
             </div>
         </section>
 
-        <!-- =========================================================================
+        <!--=========================================================================
        SECCIÓN "EL ALMA" (ARTE, MECENAZGO Y EVOLUCIÓN HUMANA)
        ========================================================================= -->
         <style>
@@ -3890,7 +3888,7 @@ Menú del Index: Líena 742
 
         <section id="el-alma" class="alma-section">
             <div class="container animate-appear">
-                <!-- ESTRUCTURA IDÉNTICA A "EL PLACER": TÍTULO Y TEXTO CENTRADOS -->
+                <!--ESTRUCTURA IDÉNTICA A "EL PLACER": TÍTULO Y TEXTO CENTRADOS -->
                 <div style="text-align: center; margin-bottom: 50px;">
                     <h2 class="section-title" style="color: var(--text-dark);">
                         EL ALMA
@@ -3915,7 +3913,7 @@ Menú del Index: Líena 742
                     </p>
                 </div>
 
-                <!-- IMAGEN ABAJO (sin la caja de características) -->
+                <!--IMAGEN ABAJO (sin la caja de características) -->
                 <div
                     style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 30px;">
                     <div class="alma-img-card">
@@ -3923,7 +3921,7 @@ Menú del Index: Líena 742
                     </div>
                 </div>
 
-                <!-- BOTÓN CTA A LA COLECCIÓN DEBAJO DE LA IMAGEN CON MARGEN GENEROSO -->
+                <!--BOTÓN CTA A LA COLECCIÓN DEBAJO DE LA IMAGEN CON MARGEN GENEROSO -->
                 <div style="text-align: center; margin-top: 45px; margin-bottom: 10px;">
                     <a href="coleccion.html" class="btn-alma-coleccion">
                         Descubre la colección
@@ -3937,8 +3935,8 @@ Menú del Index: Líena 742
             </div>
         </section>
 
-        <!-- Antigravity: /* */ -->
-        <!-- Antigravity: /* SECCIÓN RESERVA TUS DOXAS */ -->
+        <!--Antigravity: /* */ -->
+        <!--Antigravity: /* SECCIÓN RESERVA TUS DOXAS */ -->
 
         <style>
             .checkout-section {
@@ -4302,7 +4300,7 @@ Menú del Index: Líena 742
             }
         </style>
 
-        <!-- === [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) igual que "El Placer" === -->
+        <!--=== [PUNTO 4] COLOR DE FONDO DE ESTA SECCIÓN: var(--yeso-oscuro) (Yeso Oscuro: #e6e7e1) igual que "El Placer" === -->
         <section class="checkout-section" id="reserva">
             <div class="container">
 
@@ -4338,16 +4336,16 @@ Menú del Index: Líena 742
             </div>
         </section>
 
-        <!-- =========================================================================
+        <!--=========================================================================
        [INICIO] SECCIÓN DEL FOOTER
        ========================================================================= -->
         <footer class="gallery-footer">
             <div class="footer-grid-container">
 
-                <!-- Fila única con las 5 columnas en la misma banda -->
+                <!--Fila única con las 5 columnas en la misma banda -->
                 <div class="footer-columns-row">
 
-                    <!-- [COLUMNA 1] CONTACTO -->
+                    <!--[COLUMNA 1] CONTACTO -->
                     <div class="footer-column">
                         <h4 class="footer-column-title">Contacto</h4>
                         <div class="footer-column-links">
@@ -4364,7 +4362,7 @@ Menú del Index: Líena 742
                         </div>
                     </div>
 
-                    <!-- [COLUMNA 2] MIS PEDIDOS -->
+                    <!--[COLUMNA 2] MIS PEDIDOS -->
                     <div class="footer-column">
                         <h4 class="footer-column-title">Mis Pedidos</h4>
                         <div class="footer-column-links">
@@ -4375,7 +4373,7 @@ Menú del Index: Líena 742
                         </div>
                     </div>
 
-                    <!-- [COLUMNA 3] NEWSLETTER -->
+                    <!--[COLUMNA 3] NEWSLETTER -->
                     <div class="footer-column newsletter-col">
                         <h4 class="footer-column-title">Newsletter</h4>
                         <div class="footer-newsletter-info">
@@ -4384,7 +4382,7 @@ Menú del Index: Líena 742
                         </div>
                     </div>
 
-                    <!-- [COLUMNA 4] LA MAISON -->
+                    <!--[COLUMNA 4] LA MAISON -->
                     <div class="footer-column">
                         <h4 class="footer-column-title">DOXA, la Misión</h4>
                         <div class="footer-column-links">
@@ -4392,7 +4390,7 @@ Menú del Index: Líena 742
                         </div>
                     </div>
 
-                    <!-- [COLUMNA 5] AVISO LEGAL -->
+                    <!--[COLUMNA 5] AVISO LEGAL -->
                     <div class="footer-column">
                         <h4 class="footer-column-title">Aviso Legal</h4>
                         <div class="footer-column-links">
@@ -4405,18 +4403,18 @@ Menú del Index: Líena 742
 
                 </div>
 
-                <!-- Fila inferior: copyright alineado a la derecha -->
+                <!--Fila inferior: copyright alineado a la derecha -->
                 <div class="footer-bottom-row">
                     <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
                 </div>
 
             </div>
         </footer>
-        <!-- =========================================================================
+        <!--=========================================================================
        [FIN] FIN DE SECCIÓN DEL FOOTER
        ========================================================================= -->
 
-        <!-- =========================================================================
+        <!--=========================================================================
        [INICIO] página GALERÍA (SCRIPT JS DE LA BARRA DE NAVEGACIÓN)
        Controla el efecto de cambio de fondo al hacer scroll y el menú móvil.
        ========================================================================= -->
@@ -4587,7 +4585,7 @@ Menú del Index: Líena 742
                 });
             })();
         </script>
-        <!-- =========================================================================
+        <!--=========================================================================
        [FIN] página GALERÍA (SCRIPT JS DE LA BARRA DE NAVEGACIÓN)
        ========================================================================= -->
 

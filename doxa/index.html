@@ -63,7 +63,7 @@ Menú del Index: Líena 742
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#150e02">
-    <title>DOXA | Doxa - Repostería NutriCosmética</title>
+    <title>DOXA | Doxa - Confitería BioInductiva</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@100;300;400;500;700&display=swap"
         rel="stylesheet">
@@ -881,6 +881,7 @@ Menú del Index: Líena 742
             0% {
                 transform: scale(1);
             }
+
             100% {
                 transform: scale(1.08);
             }
@@ -982,7 +983,7 @@ Menú del Index: Líena 742
             max-width: 500px;
             width: 100%;
             height: auto;
-            filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5));
+            filter: drop-shadow(0px 20px 30px rgba(0, 0, 0, 0.5));
         }
 
         /* =========================================
@@ -1284,10 +1285,12 @@ Menú del Index: Líena 742
                    [BOTÓN Y SUBMENÚ HORIZONTAL DE PRODUCTOS]
                    ========================================================================= -->
                 <div class="navbar-dropdown-wrapper" id="productosDropdownWrapper">
-                    <button class="navbar-link navbar-dropdown-btn" id="btnProductos" type="button" aria-expanded="false">
+                    <button class="navbar-link navbar-dropdown-btn" id="btnProductos" type="button"
+                        aria-expanded="false">
                         <span>Productos</span>
                         <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
                         </svg>
                     </button>
 
@@ -1358,8 +1361,8 @@ Menú del Index: Líena 742
                 <a href="../galeria.html" class="navbar-link btn-gallery" data-visible="off">Galería</a>
                 <a href="../articulos.html" class="navbar-link btn-articulos" data-visible="off">Artículos</a>
             </div>
-<!-- BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
-                <a href="../index.html" class="navbar-logo active">DOXA</a>
+            <!-- BOTÓN AMARILLO DE INDEX "DOXA" (A LA DERECHA DEL TODO) -->
+            <a href="../index.html" class="navbar-logo active">DOXA</a>
         </nav>
         <div class="navbar-overlay" id="navbarOverlay"></div>
         <!-- =========================================================================
@@ -1402,7 +1405,7 @@ Menú del Index: Líena 742
                 </h1>
 
                 <p class="hero-tagline">
-                    Donde placer, propósito y alma se encuentran
+                    Lo que antes era un esfuerzo... ahora es tu momento de placer
                 </p>
 
                 <a href="../coleccion.html" class="btn-oro">DESCÚBRELAS</a>
@@ -1435,7 +1438,8 @@ Menú del Index: Líena 742
                     </p>
 
                     <p>
-                        Alta repostería y ciencia se fusionan para que pecar <br class="desktop-only">se transforme en todo un regalo para tu cuerpo.
+                        Alta repostería y ciencia se fusionan para que pecar <br class="desktop-only">se transforme en
+                        todo un regalo para tu cuerpo.
                     </p>
                 </div>
 
@@ -1854,7 +1858,7 @@ Menú del Index: Líena 742
                 position: absolute;
                 width: 340px;
                 border-radius: 50%;
-                z-index: 20;
+                z-index: 30;
                 filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
                 pointer-events: auto;
                 cursor: pointer;
@@ -1913,31 +1917,7 @@ Menú del Index: Líena 742
                 transition: transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease, text-shadow 0.4s ease;
             }
 
-            .btn-volver {
-                display: none;
-                position: absolute;
-                top: 20px;
-                left: 20px;
-                z-index: 30;
-                background: rgba(255, 255, 255, 0.08);
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                color: #fff;
-                padding: 10px 20px;
-                font-size: 10px;
-                font-family: 'Lexend', sans-serif;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                cursor: pointer;
-                border-radius: 20px;
-                backdrop-filter: blur(5px);
-                transition: all 0.3s ease;
-            }
 
-            .btn-volver:hover {
-                background: rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 255, 255, 0.5);
-                transform: scale(1.05);
-            }
 
             /* Adaptación móvil exclusiva y de máxima prioridad para Rueda de Activos */
             @media (max-width: 768px) {
@@ -1960,13 +1940,17 @@ Menú del Index: Líena 742
                     left: 0 !important;
                     width: 100% !important;
                     height: 100% !important;
-                    background: linear-gradient(to bottom, 
-                        rgba(230, 231, 225, 0) 0%, 
-                        rgba(230, 231, 225, 0) 45%, 
-                        rgba(230, 231, 225, 0.35) 58%, 
-                        rgba(230, 231, 225, 0.82) 70%, 
-                        var(--yeso-oscuro, #e6e7e1) 78%, 
-                        var(--yeso-oscuro, #e6e7e1) 100%) !important;
+                    background: linear-gradient(to bottom,
+                            rgba(230, 231, 225, 0) 0%,
+                            rgba(230, 231, 225, 0) 30%,
+                            rgba(230, 231, 225, 0.08) 40%,
+                            rgba(230, 231, 225, 0.20) 50%,
+                            rgba(230, 231, 225, 0.36) 60%,
+                            rgba(230, 231, 225, 0.54) 70%,
+                            rgba(230, 231, 225, 0.72) 80%,
+                            rgba(230, 231, 225, 0.88) 90%,
+                            var(--yeso-oscuro, #e6e7e1) 96%,
+                            var(--yeso-oscuro, #e6e7e1) 100%) !important;
                     z-index: 2 !important;
                     pointer-events: none !important;
                 }
@@ -2029,7 +2013,7 @@ Menú del Index: Líena 742
                     width: 100% !important;
                     height: 100% !important;
                     touch-action: none !important;
-                    z-index: 25 !important;
+                    z-index: 20 !important;
                 }
 
                 .galleta-fija {
@@ -2046,7 +2030,7 @@ Menú del Index: Líena 742
                     filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.22)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.12)) !important;
                     pointer-events: auto !important;
                     cursor: pointer !important;
-                    z-index: 15 !important;
+                    z-index: 30 !important;
                     transition: transform 0.3s ease, filter 0.3s ease !important;
                 }
 
@@ -2217,7 +2201,8 @@ Menú del Index: Líena 742
                     En DOXA nada está presente sólo por figurar.<br><br>
                     Un producto healthy que sin embargo no sacrifica la textura.<br>
                     Un suplemento que no sacrifica el placer.<br><br>
-                    Una forma distinta de disfrutar, compatible con una alimentación consciente, con el entrenamiento, y con el cuidado a largo plazo.
+                    Una forma distinta de disfrutar, compatible con una alimentación consciente, con el entrenamiento, y
+                    con el cuidado a largo plazo.
                 </p>
             </div>
         </section>
@@ -2248,7 +2233,8 @@ Menú del Index: Líena 742
                         <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Descubre DOXA</h3>
                         <p class="hero-value-prop-neg">Arquitectura de Activos</p>
                         <div class="hero-value-prop">
-                            Haz clic en cualquiera de las categorías para explorar los activos que componen la arquitectura de DOXA.
+                            Haz clic en cualquiera de las categorías para explorar los activos que componen la
+                            arquitectura de DOXA.
                         </div>
                     </div>
                     <div class="rueda-cta-wrapper">
@@ -2655,10 +2641,11 @@ Menú del Index: Líena 742
                                 rueda.appendChild(nodo);
                             }
 
-                            nodo.onclick = () => {
+                            nodo.onclick = (e) => {
+                                if (e) e.stopPropagation();
                                 if (wasDragging || isDraggingWheel) return;
                                 alignToCajasActivos();
-                                if (i !== selectedCategoryIndex) {
+                                if (selectedCategoryIndex === -1) {
                                     selectedSubIndex = -1;
                                     childrenVisible = true;
                                     selectCategory(i);
@@ -3256,7 +3243,15 @@ Menú del Index: Líena 742
                     // Asignar evento click a la galleta central
                     const galletaCentral = document.querySelector('.galleta-fija');
                     if (galletaCentral) {
-                        galletaCentral.onclick = () => {
+                        galletaCentral.style.cursor = 'pointer';
+                        galletaCentral.onpointerdown = (e) => {
+                            e.stopPropagation();
+                        };
+                        galletaCentral.ontouchstart = (e) => {
+                            e.stopPropagation();
+                        };
+                        galletaCentral.onclick = (e) => {
+                            e.stopPropagation();
                             alignToCajasActivos();
                             resetToNeutral();
                         };
@@ -3414,7 +3409,7 @@ Menú del Index: Líena 742
                                     radialWrapper.style.cursor = 'grabbing';
                                     try {
                                         radialWrapper.setPointerCapture(activePointerId);
-                                    } catch (err) {}
+                                    } catch (err) { }
                                 }
                             }
 
@@ -3444,7 +3439,7 @@ Menú del Index: Líena 742
                                 if (radialWrapper.hasPointerCapture(e.pointerId)) {
                                     radialWrapper.releasePointerCapture(e.pointerId);
                                 }
-                            } catch (err) {}
+                            } catch (err) { }
 
                             if (isDraggingWheel) {
                                 isDraggingWheel = false;
@@ -4320,7 +4315,8 @@ Menú del Index: Líena 742
                     </p>
                     <p class="variety-desc" style="min-height: auto; margin-bottom: 0;">
                         Las tuyas te serán enviadas en cuanto hayan enfriado tras su horneado.<br><br>
-                        Un golpe de calor en el microondas antes de ser consumidas les devuelve ese punto fresco del recién hecho.<br><br>
+                        Un golpe de calor en el microondas antes de ser consumidas les devuelve ese punto fresco del
+                        recién hecho.<br><br>
                         Te informaremos por correo del momento en que estén listas para su envío.
                     </p>
                     <a href="../compra.html" class="btn-jotform">
@@ -4389,7 +4385,8 @@ Menú del Index: Líena 742
                     <div class="footer-column">
                         <h4 class="footer-column-title">Aviso Legal</h4>
                         <div class="footer-column-links">
-                            <a href="../ayuda.html#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
+                            <a href="../ayuda.html#condiciones-venta" class="footer-link">Condiciones generales de
+                                venta</a>
                             <a href="../ayuda.html#privacidad" class="footer-link">Política de privacidad</a>
                             <a href="../ayuda.html#cookies" class="footer-link">Cookies</a>
                         </div>
