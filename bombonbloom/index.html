@@ -1,4 +1,4 @@
-﻿<!-- 
+<!-- 
 =========================================================================
 INDICE DE CONTENIDO EDITABLE E IMPORTANTE (BOMBON BLOOM)
 =========================================================================
@@ -310,6 +310,17 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             width: max-content;
         }
 
+        /* Puente invisible para conectar el botón con el submenú y evitar perder el foco al mover el cursor */
+        .productos-submenu-horizontal::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: transparent;
+        }
+
         .navbar-dropdown-wrapper:hover .productos-submenu-horizontal,
         .navbar-dropdown-wrapper.active .productos-submenu-horizontal {
             opacity: 1;
@@ -367,7 +378,8 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.88);
             transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
-            white-space: nowrap;
+            text-align: center;
+            line-height: 1.25;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -831,6 +843,42 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             justify-content: center;
             overflow: hidden;
         }
+        /* Fondo dinámico sutil (efecto Ken Burns estilo To'ak Chocolate) y soporte para vídeo */
+        .hero-media-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-bg-media {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+            transform: scale(1);
+            animation: heroZoomIn 5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        @keyframes heroZoomIn {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.08);
+            }
+        }
+
 
         .hero-content {
             position: relative;
@@ -1393,15 +1441,15 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                             <!-- PRODUCTO 1: BOMBÓNBLOOM (Activo) -->
                             <a href="index.html" class="producto-sub-card" data-visible="on">
                                 <div class="producto-sub-thumb">
-                                    <img src="../Galle choco.png" alt="BombónBloom">
+                                    <img src="../BBB 1.png" alt="Bombón Blooms">
                                 </div>
-                                <span class="producto-sub-title">BombónBloom</span>
+                                <span class="producto-sub-title">Bombón<br>Blooms</span>
                             </a>
 
                             <!-- PRODUCTO 2: DOXA (INDEX) (Activo - a la derecha) -->
                             <a href="../index.html" class="producto-sub-card" data-visible="on">
                                 <div class="producto-sub-thumb">
-                                    <img src="../ProtoDoxa.png" alt="Doxa">
+                                    <img src="../Doxa.png" alt="Doxa">
                                 </div>
                                 <span class="producto-sub-title">Doxa</span>
                             </a>
@@ -1467,9 +1515,20 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
         <header class="hero-container">
 
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
-                <img src="../cabecera_index.jpg" alt="Fondo Doxa"
-                    style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4);">
+            <div class="hero-media-wrapper">
+                <!-- =========================================================================
+                   [FONDO DE CABECERA: IMAGEN O VIDEO]
+                   - Animacion sutil activa: efecto continuo Ken Burns (To'ak Chocolate).
+                   - PARA ACTIVAR VIDEO EN EL FUTURO:
+                     1. Descomenta la etiqueta <video> inferior y pon la ruta de tu video en 'src'.
+                     2. Comenta o elimina la etiqueta <img>.
+                   ========================================================================= -->
+                <!-- 
+                <video class="hero-bg-media" autoplay muted loop playsinline poster="../cabecera_index.jpg">
+                    <source src="../tu_video.mp4" type="video/mp4">
+                </video> 
+                -->
+                <img src="../cabecera_index.jpg" alt="Fondo Doxa" class="hero-bg-media">
             </div>
 
             <div class="hero-content animate-appear">
@@ -4351,12 +4410,41 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     navbarOverlay.addEventListener('click', closeMobileMenu);
                 }
 
-                // Toggle interactivo del desplegable de Productos (por clic o toque)
+                // Toggle y hover interactivo del desplegable de Productos
                 const productosDropdown = document.getElementById('productosDropdownWrapper');
                 const btnProductos = document.getElementById('btnProductos');
                 if (btnProductos && productosDropdown) {
+                    let closeDropdownTimer = null;
+
+                    const openDropdown = () => {
+                        if (closeDropdownTimer) {
+                            clearTimeout(closeDropdownTimer);
+                            closeDropdownTimer = null;
+                        }
+                        productosDropdown.classList.add('active');
+                        btnProductos.setAttribute('aria-expanded', 'true');
+                    };
+
+                    const closeDropdown = () => {
+                        productosDropdown.classList.remove('active');
+                        btnProductos.setAttribute('aria-expanded', 'false');
+                    };
+
+                    // Abrir de inmediato al pasar el ratón por el botón "Productos" o su submenú
+                    productosDropdown.addEventListener('mouseenter', openDropdown);
+
+                    // Desaparece sólo cuando ya no estás onhover ni sobre el botón ni sobre el menú
+                    productosDropdown.addEventListener('mouseleave', () => {
+                        closeDropdownTimer = setTimeout(closeDropdown, 180);
+                    });
+
+                    // Permitir también clic (útil en móviles o toque)
                     btnProductos.addEventListener('click', (e) => {
                         e.stopPropagation();
+                        if (closeDropdownTimer) {
+                            clearTimeout(closeDropdownTimer);
+                            closeDropdownTimer = null;
+                        }
                         const isExpanded = productosDropdown.classList.toggle('active');
                         btnProductos.setAttribute('aria-expanded', isExpanded);
                     });
@@ -4364,9 +4452,23 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     // Cerrar el desplegable al hacer clic fuera
                     document.addEventListener('click', (e) => {
                         if (!productosDropdown.contains(e.target)) {
-                            productosDropdown.classList.remove('active');
-                            btnProductos.setAttribute('aria-expanded', 'false');
+                            if (closeDropdownTimer) {
+                                clearTimeout(closeDropdownTimer);
+                                closeDropdownTimer = null;
+                            }
+                            closeDropdown();
                         }
+                    });
+
+                    // Desaparece inmediatamente una vez que se pincha en uno de sus productos
+                    productosDropdown.querySelectorAll('.producto-sub-card').forEach(card => {
+                        card.addEventListener('click', () => {
+                            if (closeDropdownTimer) {
+                                clearTimeout(closeDropdownTimer);
+                                closeDropdownTimer = null;
+                            }
+                            closeDropdown();
+                        });
                     });
                 }
 
