@@ -2049,10 +2049,10 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
         @media (min-width: 769px) {
             .wheel-column {
-                transform: translateX(60px);
+                transform: translateX(40px);
             }
             .text-column {
-                transform: translateX(-60px);
+                transform: translateX(40px);
             }
         }
         @media (min-width: 769px) {
@@ -4920,7 +4920,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 }, 870);
             }
 
-            const getRadioCategorias = () => (window.innerWidth <= 768 ? 155 : 215);
+            const getRadioCategorias = () => (window.innerWidth <= 768 ? 155 : 180);
             let rotacionActual = 0;
             let selectedCategoryIndex = -1;
             let selectedSubIndex = -1;
@@ -5248,12 +5248,12 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
                     let actualParentRadio;
                     if (isSelected) {
-                        actualParentRadio = isMobile ? 150 : (radioCategorias + 15);
+                        actualParentRadio = isMobile ? 150 : (radioCategorias + 12);
                     } else {
                         if (isMobile) {
                             actualParentRadio = getMobileParentRadius(i);
                         } else {
-                            actualParentRadio = (i % 2 !== 0) ? 235 : 205;
+                            actualParentRadio = (i % 2 !== 0) ? 194 : 180;
                         }
                     }
 
