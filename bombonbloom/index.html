@@ -2887,31 +2887,34 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             }
 
             function getMobileParentAngle(idx) {
-                // Distribucion en arco concentrico armonioso alrededor del bombon (18 deg a 162 deg)
-                // 8 categorias perfectamente balanceadas y simetricas
-                // Indice 0: BBB Piel, Pelo & Unas (100 deg centro-izq inferior)
-                // Indice 1: BBB Stop-loss Mujer (121 deg lado izquierdo inferior)
-                // Indice 2: BBB Menopausia (141 deg lado izquierdo medio)
-                // Indice 3: BBB Regla (162 deg extremo izquierdo)
-                // Indice 4: BBB Pre-entreno (18 deg extremo derecho)
-                // Indice 5: BBB Relajacion (39 deg lado derecho medio)
-                // Indice 6: BBB Stop-loss Hombre (59 deg lado derecho inferior)
-                // Indice 7: BBB Articulaciones (80 deg centro-der inferior)
-                const angles = [100, 121, 141, 162, 18, 39, 59, 80];
+                // Reordenacion para evitar solapamientos (Regla -> 78 deg, Articulaciones -> 142 deg, Piel -> 162 deg, Menopausia -> 122 deg, Stop-loss Mujer -> 102 deg)
+                // Indice 0: BBB Piel, Pelo & Unas (162 deg - extremo izquierdo superior)
+                // Indice 1: BBB Stop-loss Mujer (102 deg - centro-izquierdo inferior)
+                // Indice 2: BBB Menopausia (122 deg - lado izquierdo inferior)
+                // Indice 3: BBB Regla (78 deg - centro-derecho inferior)
+                // Indice 4: BBB Pre-entreno (18 deg - extremo derecho superior)
+                // Indice 5: BBB Relajacion (38 deg - lado derecho medio)
+                // Indice 6: BBB Stop-loss Hombre (58 deg - lado derecho inferior)
+                // Indice 7: BBB Articulaciones (142 deg - lado izquierdo medio)
+                const angles = [162, 102, 122, 78, 18, 38, 58, 142];
                 return angles[idx];
             }
 
             function getMobileParentRadius(idx) {
-                // Arco concentrico continuo optimizado para 8 categorias
-                // Indice 0: Piel, Pelo & Unas (100 deg) -> 172px
-                // Indice 1: Stop-loss Mujer (121 deg) -> 158px
-                // Indice 2: Menopausia (141 deg) -> 150px
-                // Indice 3: Regla (162 deg) -> 145px
-                // Indice 4: Pre-entreno (18 deg) -> 145px
-                // Indice 5: Relajacion (39 deg) -> 150px
-                // Indice 6: Stop-loss Hombre (59 deg) -> 158px
-                // Indice 7: Articulaciones (80 deg) -> 172px
-                const radii = [172, 158, 150, 145, 145, 150, 158, 172];
+                // Radios armonizados por posicion angular:
+                // Extremos 18 y 162 deg -> 145px
+                // Medios 38 y 142 deg -> 150px
+                // Bajos 58 y 122 deg -> 158px
+                // Centro 78 y 102 deg -> 172px
+                // Indice 0 (162 deg): 145px
+                // Indice 1 (102 deg): 172px
+                // Indice 2 (122 deg): 158px
+                // Indice 3 (78 deg): 172px
+                // Indice 4 (18 deg): 145px
+                // Indice 5 (38 deg): 150px
+                // Indice 6 (58 deg): 158px
+                // Indice 7 (142 deg): 150px
+                const radii = [145, 172, 158, 172, 145, 150, 158, 150];
                 return radii[idx];
             }
 
