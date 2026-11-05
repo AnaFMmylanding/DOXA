@@ -1502,55 +1502,52 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     <!-- Submenú horizontal desplegable -->
                     <div class="productos-submenu-horizontal" id="productosSubmenu">
                         <div class="productos-submenu-track">
-                            <!-- =========================================================================
-                               PRODUCTOS ACTIVOS (data-visible="on")
-                               Para ocultar un producto de la web: cambia data-visible="on" por "off"
-                               ========================================================================= -->
-
-                            <!-- PRODUCTO 1: BOMBÓNBLOOM (Activo) -->
-                            <a href="index.html" class="producto-sub-card" data-visible="on">
-                                <div class="producto-sub-thumb">
-                                    <img src="../BBB 1.png" alt="Bombón Blooms">
-                                </div>
-                                <span class="producto-sub-title">Bombón<br>Blooms</span>
-                            </a>
-
-                            <!-- PRODUCTO 2: DOXA (INDEX) (Activo - a la derecha) -->
-                            <a href="../index.html" class="producto-sub-card" data-visible="on">
+                            <!-- PRODUCTO 1: DOXA -->
+                            <a href="#rueda-activos-doxa" class="producto-sub-card producto-item" data-product="doxa" data-visible="on">
                                 <div class="producto-sub-thumb">
                                     <img src="../Doxa.png" alt="Doxa">
                                 </div>
                                 <span class="producto-sub-title">Doxa</span>
                             </a>
 
-                            <!-- =========================================================================
-                               [INTERRUPTOR OFF/ON] BOTONES DESACTIVADOS TEMPORALMENTE (data-visible="off")
-                               Para reactivar cualquiera de estos botones:
-                               Cambia simplemente data-visible="off" por data-visible="on"
-                               ========================================================================= -->
-
-                            <!-- PRODUCTO 3: LINGOTE [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
-                            <a href="../lingote/index.html" class="producto-sub-card" data-visible="off">
+                            <!-- PRODUCTO 2: DOXA-COOKIE -->
+                            <a href="#rueda-activos-cookie" class="producto-sub-card producto-item" data-product="cookie" data-visible="on">
                                 <div class="producto-sub-thumb">
-                                    <img src="../Galle choco negro.png" alt="Lingote">
+                                    <img src="../Cookie.png" alt="Doxa-Cookie">
                                 </div>
-                                <span class="producto-sub-title">Lingote</span>
+                                <span class="producto-sub-title">Doxa-<br>Cookie</span>
                             </a>
 
-                            <!-- PRODUCTO 4: OBLEA [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
-                            <a href="../oblea/index.html" class="producto-sub-card" data-visible="off">
+                            <!-- PRODUCTO 3: BOMBON BLOOMS -->
+                            <a href="#rueda-activos-bbb" class="producto-sub-card producto-item" data-product="bbb" data-visible="on">
                                 <div class="producto-sub-thumb">
-                                    <img src="../Galle cafe.png" alt="Oblea">
+                                    <img src="../BBB 1.png" alt="Bombón Blooms">
                                 </div>
-                                <span class="producto-sub-title">Oblea</span>
+                                <span class="producto-sub-title">Bombón<br>Blooms</span>
                             </a>
 
-                            <!-- PRODUCTO 5: COOKIE [ESTADO: OFF] -> Para reactivar cambiar a data-visible="on" -->
-                            <a href="../cookie/index.html" class="producto-sub-card" data-visible="off">
+                            <!-- PRODUCTO 4: LINGOTES -->
+                            <a href="#rueda-activos-lingote" class="producto-sub-card producto-item" data-product="lingote" data-visible="on">
                                 <div class="producto-sub-thumb">
-                                    <img src="../Galle frutos bosque.png" alt="Cookie">
+                                    <img src="../Lingote.png" alt="Lingotes">
                                 </div>
-                                <span class="producto-sub-title">Cookie</span>
+                                <span class="producto-sub-title">Lingotes</span>
+                            </a>
+
+                            <!-- PRODUCTO 5: CRUJIENTE DE ALMENDRA -->
+                            <a href="#rueda-activos-oblea" class="producto-sub-card producto-item" data-product="oblea" data-visible="on">
+                                <div class="producto-sub-thumb">
+                                    <img src="../Oblea.png" alt="Crujiente de Almendra">
+                                </div>
+                                <span class="producto-sub-title">Crujiente<br>Almendra</span>
+                            </a>
+
+                            <!-- PRODUCTO 6: PEQUEBLOOMS -->
+                            <a href="#rueda-activos-pequebloom" class="producto-sub-card producto-item" data-product="pequebloom" data-visible="on">
+                                <div class="producto-sub-thumb">
+                                    <img src="../Pequebloom.png" alt="PequeBlooms">
+                                </div>
+                                <span class="producto-sub-title">Peque<br>Blooms</span>
                             </a>
                         </div>
                     </div>
@@ -5848,18 +5845,26 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             return targetSection;
         }
 
-        // Event listener para el submenú general de productos
+        // Event listener para el submenu general de productos
         document.querySelectorAll(".bbb-submenu-item, .producto-item").forEach((btn) => {
             btn.addEventListener("click", function (e) {
                 e.preventDefault();
                 const prod = this.getAttribute("data-product");
                 if (!prod) return;
 
-                document.querySelectorAll(".bbb-submenu-item").forEach(b => b.classList.remove("active"));
-                this.classList.add("active");
+                document.querySelectorAll(".bbb-submenu-item").forEach(b => {
+                    if (b.getAttribute("data-product") === prod) {
+                        b.classList.add("active");
+                    } else {
+                        b.classList.remove("active");
+                    }
+                });
 
                 const targetSection = showProductWheel(prod);
                 if (targetSection) {
+                    try {
+                        history.replaceState(null, null, '#rueda-activos-' + prod);
+                    } catch (err) {}
                     const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset;
                     window.scrollTo({
                         top: targetY,
@@ -5869,7 +5874,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             });
         });
 
-        // Inicialización de la cantidad de productos visibles en móvil
+        // Inicializacion de la cantidad de productos visibles en movil
         (function initSubmenuLayout() {
             const container = document.querySelector(".bbb-submenu-container");
             if (container) {
@@ -5878,12 +5883,65 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             }
         })();
 
-        // Mostrar inicialmente la rueda del producto activo (por defecto Doxas)
-        function initInitialProductWheel() {
-            const activeBtn = document.querySelector(".bbb-submenu-item.active") || document.querySelector(".bbb-submenu-item");
-            const initialProd = activeBtn ? activeBtn.getAttribute("data-product") : "doxa";
-            showProductWheel(initialProd);
+        function getProductFromHash() {
+            const hash = window.location.hash;
+            if (!hash) return null;
+            const match = hash.match(/#rueda-(?:activos-)?([a-z0-9_-]+)/i);
+            if (match && wheelConfigs[match[1]]) {
+                return match[1];
+            }
+            if (hash === "#rueda-activos") {
+                return "bbb";
+            }
+            return null;
         }
+
+        // Mostrar inicialmente la rueda del producto activo (por defecto Doxas o segun URL hash)
+        function initInitialProductWheel() {
+            const hashProd = getProductFromHash();
+            const activeBtn = document.querySelector(".bbb-submenu-item.active") || document.querySelector(".bbb-submenu-item");
+            const initialProd = hashProd || (activeBtn ? activeBtn.getAttribute("data-product") : "doxa");
+
+            document.querySelectorAll(".bbb-submenu-item").forEach(b => {
+                if (b.getAttribute("data-product") === initialProd) {
+                    b.classList.add("active");
+                } else {
+                    b.classList.remove("active");
+                }
+            });
+
+            const targetSection = showProductWheel(initialProd);
+            if (hashProd && targetSection) {
+                setTimeout(() => {
+                    const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                        top: targetY,
+                        behavior: "smooth"
+                    });
+                }, 150);
+            }
+        }
+
+        window.addEventListener("hashchange", () => {
+            const hashProd = getProductFromHash();
+            if (hashProd) {
+                document.querySelectorAll(".bbb-submenu-item").forEach(b => {
+                    if (b.getAttribute("data-product") === hashProd) {
+                        b.classList.add("active");
+                    } else {
+                        b.classList.remove("active");
+                    }
+                });
+                const targetSection = showProductWheel(hashProd);
+                if (targetSection) {
+                    const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                        top: targetY,
+                        behavior: "smooth"
+                    });
+                }
+            }
+        });
 
         if (document.readyState === "loading") {
             document.addEventListener("DOMContentLoaded", initInitialProductWheel);
