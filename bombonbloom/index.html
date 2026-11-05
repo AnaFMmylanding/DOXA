@@ -1408,12 +1408,21 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 box-sizing: border-box;
             }
 
-            /* Si hay exactamente 4 productos visibles: se redistribuyen en 2 y 2 simétricos */
+            /* Si hay exactamente 4 productos visibles: caben en una sola fila (4 en línea) */
+            .bbb-submenu-container[data-visible-count="4"] {
+                gap: 8px 4px;
+            }
             .bbb-submenu-container[data-visible-count="4"] .bbb-submenu-item,
             .bbb-submenu-container:has(> .bbb-submenu-item:not([data-visible="off"]):nth-child(4):last-child) .bbb-submenu-item {
-                flex: 0 0 calc(50% - 8px);
-                max-width: calc(50% - 8px);
-                width: calc(50% - 8px);
+                flex: 0 0 calc(25% - 4px);
+                max-width: calc(25% - 4px);
+                width: calc(25% - 4px);
+                padding: 4px 1px;
+            }
+            .bbb-submenu-container[data-visible-count="4"] .bbb-submenu-thumb,
+            .bbb-submenu-container:has(> .bbb-submenu-item:not([data-visible="off"]):nth-child(4):last-child) .bbb-submenu-thumb {
+                width: 48px;
+                height: 48px;
             }
 
             /* Si hay 2 productos visibles o menos: centrados */
