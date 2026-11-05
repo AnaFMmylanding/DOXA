@@ -1318,7 +1318,17 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             font-weight: 500;
         }
 
-        /* Interruptor ON/OFF para las secciones de ruedas de activos */
+        /* =========================================================================
+           SISTEMA DE VISUALIZACIÓN EXCLUSIVA DE RUEDA POR PRODUCTO
+           Garantiza que SOLO se muestre una rueda a la vez (la del producto activo).
+           Las 5 ruedas restantes permanecen totalmente ocultas (display: none !important).
+           ========================================================================= */
+        .product-wheel {
+            display: none !important;
+        }
+        .product-wheel.active-product-wheel {
+            display: flex !important;
+        }
         .product-wheel[data-visible="off"],
         .cajas-activos-section[data-visible="off"] {
             display: none !important;
@@ -1644,15 +1654,15 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     </span>
                 </a>
 
-                <!-- PRODUCTO 3: BombÃ³n Blooms [ESTADO: ON/OFF] -->
+                <!-- PRODUCTO 3: Bombón Blooms [ESTADO: ON/OFF] -->
                 <!-- Para activar o desactivar: cambia data-visible="on" o "off" -->
                 <a href="#rueda-activos-bbb" class="bbb-submenu-item producto-item" id="btn-prod-bbb" data-product="bbb" data-visible="on">
                     <div class="bbb-submenu-thumb">
-                        <img src="../BBB.png" alt="BombÃ³n Blooms" onerror="this.src='../BBB 1.png'">
+                        <img src="../BBB.png" alt="Bombón Blooms" onerror="this.src='../BBB 1.png'">
                     </div>
                     <span class="bbb-submenu-name">
                         <span class="bbb-brand">DOXA</span>
-                        <span class="bbb-line">BombÃ³n Blooms</span>
+                        <span class="bbb-line">Bombón Blooms</span>
                     </span>
                 </a>
 
@@ -1681,15 +1691,15 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     </span>
                 </a>
 
-                <!-- PRODUCTO 6: NeneBlooms [ESTADO: ON/OFF] -->
+                <!-- PRODUCTO 6: PequeBlooms [ESTADO: ON/OFF] -->
                 <!-- Para activar o desactivar: cambia data-visible="on" o "off" -->
                 <a href="#rueda-activos-pequebloom" class="bbb-submenu-item producto-item" id="btn-prod-pequebloom" data-product="pequebloom" data-visible="on">
                     <div class="bbb-submenu-thumb">
-                        <img src="../Pequebloom.png" alt="NeneBlooms">
+                        <img src="../Pequebloom.png" alt="PequeBlooms">
                     </div>
                     <span class="bbb-submenu-name">
                         <span class="bbb-brand">DOXA</span>
-                        <span class="bbb-line">NeneBlooms</span>
+                        <span class="bbb-line">PequeBlooms</span>
                     </span>
                 </a>
             </div>
@@ -2221,8 +2231,21 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 overflow: visible !important;
                 position: relative;
                 background-color: var(--yeso-oscuro, #e6e7e1) !important;
-                display: flex !important;
+                display: flex;
                 align-items: stretch !important;
+            }
+
+            .product-wheel {
+                display: none !important;
+            }
+
+            .product-wheel.active-product-wheel {
+                display: flex !important;
+            }
+
+            .product-wheel[data-visible="off"],
+            .cajas-activos-section[data-visible="off"] {
+                display: none !important;
             }
 
             .cajas-activos-section::after {
@@ -2634,7 +2657,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
        Enlazada con el boton "Doxa-cookies" del submenu general.
        INTERRUPTOR ON/OFF: data-visible="on" / "off"
        ========================================================================= -->
-    <section id="rueda-activos-cookie" class="cajas-activos-section product-wheel" data-product="cookie" data-visible="on" style="display: none;">
+    <section id="rueda-activos-cookie" class="cajas-activos-section product-wheel" data-product="cookie" data-visible="on">
         <a id="rueda-cookie" style="position: absolute; top: 0; pointer-events: none;"></a>
         <div class="bg-layer" id="caja-bg-cookie" style="background-image: url('../piel negra.jpg');"></div>
         <div class="content-grid">
@@ -2670,7 +2693,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
        Enlazada con el boton "Bombon Blooms" del submenu general.
        INTERRUPTOR ON/OFF: data-visible="on" / "off"
        ========================================================================= -->
-    <section id="rueda-activos-bbb" class="cajas-activos-section product-wheel" data-product="bbb" data-visible="on" style="display: none;">
+    <section id="rueda-activos-bbb" class="cajas-activos-section product-wheel" data-product="bbb" data-visible="on">
         <a id="rueda-activos" style="position: absolute; top: 0; pointer-events: none;"></a>
         <div class="bg-layer" id="caja-bg-bbb" style="background-image: url('../piel negra.jpg');"></div>
         <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-bbb"></div>
@@ -2708,7 +2731,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
        Enlazada con el boton "Lingotes" del submenu general.
        INTERRUPTOR ON/OFF: data-visible="on" / "off"
        ========================================================================= -->
-    <section id="rueda-activos-lingote" class="cajas-activos-section product-wheel" data-product="lingote" data-visible="on" style="display: none;">
+    <section id="rueda-activos-lingote" class="cajas-activos-section product-wheel" data-product="lingote" data-visible="on">
         <a id="rueda-lingote" style="position: absolute; top: 0; pointer-events: none;"></a>
         <div class="bg-layer" id="caja-bg-lingote" style="background-image: url('../piel negra.jpg');"></div>
         <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-lingote"></div>
@@ -2746,7 +2769,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
        Enlazada con el boton "Crujiente de Almendra" del submenu general.
        INTERRUPTOR ON/OFF: data-visible="on" / "off"
        ========================================================================= -->
-    <section id="rueda-activos-oblea" class="cajas-activos-section product-wheel" data-product="oblea" data-visible="on" style="display: none;">
+    <section id="rueda-activos-oblea" class="cajas-activos-section product-wheel" data-product="oblea" data-visible="on">
         <a id="rueda-oblea" style="position: absolute; top: 0; pointer-events: none;"></a>
         <div class="bg-layer" id="caja-bg-oblea" style="background-image: url('../piel negra.jpg');"></div>
         <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-oblea"></div>
@@ -2784,24 +2807,24 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
        Enlazada con el boton "NeneBlooms" del submenu general.
        INTERRUPTOR ON/OFF: data-visible="on" / "off"
        ========================================================================= -->
-    <section id="rueda-activos-pequebloom" class="cajas-activos-section product-wheel" data-product="pequebloom" data-visible="on" style="display: none;">
+    <section id="rueda-activos-pequebloom" class="cajas-activos-section product-wheel" data-product="pequebloom" data-visible="on">
         <a id="rueda-pequebloom" style="position: absolute; top: 0; pointer-events: none;"></a>
         <div class="bg-layer" id="caja-bg-pequebloom" style="background-image: url('../piel negra.jpg');"></div>
         <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-pequebloom"></div>
         <div class="content-grid">
             <div class="wheel-column">
                 <div class="radial-wrapper" id="radialWrapper-pequebloom">
-                    <img src="../Pequebloom.png" class="galleta-fija" alt="NeneBlooms" onerror="this.src='../BBB.png'">
+                    <img src="../Pequebloom.png" class="galleta-fija" alt="PequeBlooms" onerror="this.src='../BBB.png'">
                     <div id="rueda-fisica-pequebloom" class="rueda-giro"></div>
                 </div>
             </div>
             <div class="text-column">
                 <div class="text-box" id="caja-text-pequebloom">
-                    <div class="tagline">NENEBLOOMS</div>
+                    <div class="tagline">PEQUEBLOOMS</div>
                     <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Arquitectura de Activos</h3>
                     <p class="hero-value-prop-neg">Nutrición Infantil y Juvenil</p>
                     <div class="hero-value-prop">
-                        Haz clic en cualquiera de las variedades de NeneBlooms para explorar su formulación activa.
+                        Haz clic en cualquiera de las variedades de PequeBlooms para explorar su formulación activa.
                     </div>
                 </div>
                 <div class="rueda-cta-wrapper">
@@ -2820,16 +2843,19 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
     <script>
         /* =========================================================================
            DATOS INDEPENDIENTES DE CADA RUEDA DE PRODUCTO
-           Cada producto tiene su propio bloque de datos para customizar libremente:
-           - activosDoxa: Activos de Doxas
-           - activosDoxaCookie: Activos de Doxa-cookies
-           - bbbCategorias: CategorÃ­as de BombÃ³n Bloom
-           - lingoteCategorias: CategorÃ­as de Lingotes
-           - obleaCategorias: CategorÃ­as de Crujiente de Almendra
-           - pequebloomCategorias: CategorÃ­as de NeneBlooms
+           Cada producto tiene su propio bloque de datos 100% independiente
+           para customizar libremente sus categorÃ­as, activos, descripciones e imÃ¡genes:
+           1. activosDoxa: Activos de Doxas
+           2. activosDoxaCookie: Activos de Doxa-cookies (Rueda Doxa NÂº 2)
+           3. bbbCategorias: CategorÃ­as de BombÃ³n Bloom
+           4. lingoteCategorias: CategorÃ­as de Lingotes
+           5. obleaCategorias: CategorÃ­as de Crujiente de Almendra
+           6. pequebloomCategorias: CategorÃ­as de PequeBlooms / NeneBlooms
            ========================================================================= */
 
-        /* --- DATOS RUEDA 1: DOXA --- */
+        /* =========================================================================
+           [RUEDA 1: DOXAS]
+           ========================================================================= */
         const activosDoxa = [
                         {
                             n: "Piel Nutrida & Firme",
@@ -2927,29 +2953,113 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
                     ];
 
-        /* --- DATOS RUEDA 2: DOXA-COOKIE (RUEDA DOXA NÂº 2) --- */
-        const activosDoxaCookie = JSON.parse(JSON.stringify(activosDoxa));
 
-        /* --- DATOS RUEDA 3: BOMBÃ“N BLOOM --- */
+        /* =========================================================================
+           [RUEDA 2: DOXA-COOKIES (RUEDA DOXA NÂº 2)]
+           ========================================================================= */
+        const activosDoxaCookie = [
+                        {
+                            n: "Piel Nutrida & Firme",
+                            bg: "../Hidratación.jpg",
+                            title: "Piel & Elasticidad",
+                            neg: "Nutrición y firmeza desde el interior",
+                            prop: "Haz clic en este apartado para ver cómo actúan los Péptidos de Colágeno, el Ácido Hialurónico y la Niacinamida en tu piel.",
+                            subActivos: [
+                                { n: "Péptidos De Colágeno — 10g", title: "Péptidos De Colágeno — 10g", neg: "Estructura y elasticidad", prop: "10g de péptidos de colágeno hidrolizado de la máxima calidad para favorecer la elasticidad, firmeza y regeneración de la piel y tejidos conectivos." },
+                                { n: "Ácido Hialurónico", title: "Ácido Hialurónico", neg: "Hidratación profunda", prop: "Ayuda a retener el agua en los tejidos, mejorando visiblemente la hidratación, tersura y volumen de la dermis desde el interior." },
+                                { n: "Niacinamida", title: "Niacinamida", neg: "Co-factor esencial", prop: "Potente antioxidante para las células e imprescindible para poder formar colágeno" }
+                            ]
+                        },
+                        {
+                            n: "Claridad Mental",
+                            bg: "../Claridad mental.jpg",
+                            title: "Claridad Mental",
+                            neg: "Foco y concentración constante",
+                            prop: "Haz clic en este apartado para ver cómo el Aceite MCT y la Vitamina D3 optimizan tu rendimiento cerebral y foco.",
+                            subActivos: [
+                                { n: "Aceite MCT", title: "Aceite MCT", neg: "Combustible cerebral", prop: "Aporta cetonas directas al cerebro, sirviendo como un excelente combustible mental para evitar la neblina cognitiva y potenciar el foco." },
+                                { n: "Vitamina D3", title: "Vitamina D3", neg: "Base esencial de bienestar", prop: "2000 UI de una de las vitaminas más deficitarias del estilo de vida moderno, clave para el equilibrio del sistema nervioso y el estado de ánimo." }
+                            ]
+                        },
+                        {
+                            n: "Energía Sostenida",
+                            bg: "../Energía.jpg",
+                            title: "Energía Sostenida",
+                            neg: "Vitalidad sin picos ni caídas",
+                            prop: "Haz clic en este apartado para descubrir cómo el Aceite MCT y la Proteína te aportan energía constante y limpia.",
+                            subActivos: [
+                                { n: "Aceite MCT", title: "Aceite MCT", neg: "Energía directa", prop: "Ácidos grasos de cadena media de rápida absorción que se convierten directamente en cetonas, proporcionando energía limpia sin generar picos de insulina." },
+                                { n: "Proteína De Suero", title: "Proteína De Suero", neg: "Soporte muscular", prop: "10g de proteína de suero ultra-filtrada de alta biodisponibilidad para nutrir tus células y mantener la saciedad durante horas." }
+                            ]
+                        },
+                        {
+                            n: "Articulaciones mimadas",
+                            bg: "../articulaciones.jpg",
+                            title: "Movimiento & Confort",
+                            neg: "Articulaciones y flexibilidad en calma",
+                            prop: "Haz clic en este apartado para explorar la acción antiinflamatoria de la Boswellia Serrata y el Jengibre.",
+                            subActivos: [
+                                { n: "Boswellia Serrata", title: "Boswellia Serrata", neg: "Tejidos en calma", prop: "Extracto botánico altamente purificado tradicionalmente valorado por su papel modulando la inflamación y cuidando las articulaciones." },
+                                { n: "Jengibre", title: "Jengibre", neg: "Flexibilidad y alivio", prop: "Compuestos fenólicos naturales con propiedades analgésicas y estimulantes que facilitan la recuperación del tejido articular y muscular." }
+                            ]
+                        },
+                        {
+                            n: "Pelo & Uñas Sanos",
+
+                            bg: "../Pelo y uñas.jpg",
+                            title: "Cabello & Uñas",
+                            neg: "Vitalidad en pelo y uñas",
+                            prop: "Haz clic en este apartado para ver cómo la Biotina fortalece tu estructura queratínica externa.",
+                            subActivos: [
+                                { n: "Biotina", title: "Biotina", neg: "Estructura fuerte", prop: "Vitamina hidrosoluble indispensable para estimular la síntesis de queratina, mejorando de forma notable el grosor, brillo y resistencia de cabello y uñas." }
+                            ]
+                        },
+                        {
+                            n: "Recuperación & Tono Muscular",
+                            bg: "../Creatina _ok.jpg",
+                            title: "Recuperación & Tono Muscular",
+                            neg: "Sostén y fuerza para tu musculatura",
+                            prop: "Haz clic en este apartado para ver cómo la Proteína de suero y la Creatina facilitan la síntesis muscular y evitan el cansancio.",
+                            subActivos: [
+                                { n: "Proteína De Suero", title: "Proteína De Suero", neg: "Aminoácidos esenciales", prop: "Aporte de proteínas clave indispensables para la reconstrucción de las fibras musculares tras una sesión de entrenamiento." },
+                                { n: "Creatina", title: "Creatina", neg: "Fuerza y recuperación celular", prop: "Monohidrato de creatina premium que favorece la producción de ATP celular, mejorando la resistencia y acelerando la recuperación física." }
+                            ]
+                        },
+                        {
+                            n: "Sin Inflamación",
+                            bg: "../respeto.jpg",
+                            title: "Ingredientes que respetan el cuerpo",
+                            neg: "Sin añadidos estériles, solo lo que necesitas",
+                            prop: "Haz clic en este apartado para conocer las bases libres de inflamación y de impacto glucémico de nuestra masa.",
+                            subActivos: [
+                                { n: "Sin Azúcares Añadidos", title: "Sin Azúcares Añadidos", neg: "Salud metabólica", prop: "Endulzada exclusivamente con eritritol premium, ideal para satisfacer el paladar sin alterar la curva de glucosa ni la insulina." },
+                                { n: "Sin Aceites Refinados", title: "Sin Aceites Refinados", neg: "Nutrición limpia", prop: "Elaborada solo con grasas nobles y saludables como manteca de cacao pura y base de harina de almendras premium." }
+                            ]
+                        },
+                        {
+                            n: "Defensa & Renovación",
+                            bg: "../amazona.jpg",
+                            title: "Defensa & Renovación",
+                            neg: "Protección celular y regeneración activa",
+                            prop: "Haz clic en este apartado para ver cómo la Vitamina C fortalece tu sistema inmunológico y estimula la renovación celular desde el interior.",
+                            subActivos: [
+                                {
+                                    n: "Vitamina C",
+                                    title: "Vitamina C — 100mg",
+                                    neg: "Escudo antioxidante y co-factor esencial",
+                                    prop: "Indispensable para el correcto funcionamiento del sistema inmune, la neutralización de radicales libres y la síntesis biológica de nuevo colágeno en los tejidos."
+                                }
+                            ]
+                        },
+
+                    ];
+
+
+        /* =========================================================================
+           [RUEDA 3: BOMBÃ“N BLOOM]
+           ========================================================================= */
         const bbbCategorias = [
-            {
-                n: "BBB Piel, Pelo & Uñas",
-                title: "BBB Piel, Pelo & Uñas",
-                tagline: "BOMBÓN BLOOM",
-                img: "../BBB 1.png",
-                bg: "../Pelo y uñas.jpg",
-                neg: "Regeneración celular, elasticidad y firmeza",
-                prop: "Fórmula de alta biodisponibilidad para nutrir la piel desde el interior, fortalecer el folículo piloso y devolver la vitalidad a las uñas.",
-                subActivos: [
-                    { n: "Péptidos Colágeno", title: "Péptidos de Colágeno — 10g", neg: "Firmeza y regeneración dérmica", prop: "10g de péptidos bioactivos hidrolizados de máxima asimilación para favorecer la síntesis de colágeno y restaurar la turgencia." },
-                    { n: "Ácido Hialurónico", title: "Ácido Hialurónico Puro", neg: "Hidratación celular profunda", prop: "Retiene hasta 1000 veces su peso molecular en agua, hidratando la matriz extracelular para una piel jugosa y tersa." },
-                    { n: "Coenzima Q10", title: "Coenzima Q10 Bioidéntica", neg: "Protección mitocondrial", prop: "Antioxidante intracelular que previene el estrés oxidativo y combate el fotoenvejecimiento." },
-                    { n: "Biotina Activa", title: "Biotina Pura D-Biotina", neg: "Vigor capilar y dureza ungular", prop: "Refuerza la queratina capilar y celular, engrosando el pelo fino y reduciendo la fragilidad." },
-                    { n: "Zinc Quelado", title: "Bisglicinato de Zinc", neg: "Cicatrización y equilibrio", prop: "Mineral esencial con máxima biodisponibilidad que regula la producción sebácea." },
-                    { n: "Vitamina C", title: "Vitamina C Pura Liposomada", neg: "Cofactor esencial", prop: "Potente antioxidante sinérgico indispensable para ensamblar las fibras de colágeno." }
-                ]
-            },
-            {
+        {
                 n: "BBB Stop-loss Mujer",
                 title: "BBB Stop-loss Mujer",
                 tagline: "BOMBÓN BLOOM",
@@ -2965,8 +3075,8 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     { n: "Semilla Calabaza", title: "Aceite de Semilla de Calabaza", neg: "Inhibición suave de la 5α-reductasa", prop: "Fitonutrientes que equilibran el impacto de andrógenos a nivel folicular en la mujer." },
                     { n: "Vitamina E", title: "Tocoferoles Mixtos Naturales", neg: "Microcirculación en el cuero cabelludo", prop: "Protege los capilares sanguíneos que irrigan la papila dérmica del estrés oxidativo." }
                 ]
-            },
-            {
+        },
+        {
                 n: "BBB Menopausia",
                 title: "BBB Menopausia",
                 tagline: "BOMBÓN BLOOM",
@@ -2982,25 +3092,25 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     { n: "Vitamina D3 & K2", title: "D3 Colecalciferol + K2 Menaquinona-7", neg: "Fijación del calcio óseo", prop: "Dúo vitamínico sinérgico que dirige el calcio hacia el hueso y previene la desmineralización." },
                     { n: "Complejo B Metilado", title: "Vitaminas B6, B9 y B12 Metiladas", neg: "Apoyo del sistema nervioso", prop: "Vitaminas en su forma biológicamente activa para mitigar la niebla mental y el cansancio." }
                 ]
-            },
-            {
-                n: "BBB Regla",
-                title: "BBB Regla",
+        },
+        {
+                n: "BBB Articulaciones",
+                title: "BBB Articulaciones",
                 tagline: "BOMBÓN BLOOM",
-                img: "../BBB 4.png",
-                bg: "../respeto.jpg",
-                neg: "Alivio del SPM, equilibrio prostaglándico y bienestar",
-                prop: "Fórmula reconfortante formulada para calmar los espasmos, reducir la inflamación y sostener un estado de ánimo estable durante el ciclo.",
+                img: "../BBB 1.png",
+                bg: "../articulaciones.jpg",
+                neg: "Flexibilidad, regeneración articular y confort biomecánico",
+                prop: "Arquitectura nutracéutica diseñada para preservar el cartílago, lubricar las articulaciones y mitigar la inflamación y rigidez articular.",
                 subActivos: [
-                    { n: "Sauzgatillo", title: "Vitex Agnus-Castus", neg: "Equilibrio estrógeno / progesterona", prop: "Regula la prolactina y armoniza la fase lútea, aliviando la hinchazón y la sensibilidad mamaria." },
-                    { n: "Magnesio Bisglicinato", title: "Magnesio Quelado de Alta Absorción", neg: "Relajación miometrial y muscular", prop: "Reduce la intensidad de los cólicos menstruales y alivia las migrañas catameniales." },
-                    { n: "Jengibre Estandarizado", title: "Extracto de Jengibre (5% Gingeroles)", neg: "Inhibición de prostaglandinas proinflamatorias", prop: "Eficacia demostrada para reducir el dolor espasmódico abdominal y las náuseas." },
-                    { n: "Vitamina B6 Activa", title: "Piridoxal-5-Fosfato (P5P)", neg: "Metabolismo de serotonina y dopamina", prop: "Forma activa de la B6 indispensable para estabilizar el humor y reducir la irritabilidad." },
-                    { n: "Onagra", title: "Aceite de Onagra Primera Prensión (GLA)", neg: "Modulación de la inflamación cíclica", prop: "Ácido gamma-linolénico para mantener la piel limpia y prevenir brotes premenstruales." },
-                    { n: "Hierro Quelado", title: "Bisglicinato de Hierro Ferrochel", neg: "Reposición de pérdidas menstruales", prop: "Restaura la vitalidad previniendo la fatiga ferropénica durante el sangrado." }
+                    { n: "Boswellia Serrata", title: "Boswellia Serrata (65% Ácidos Boswélicos)", neg: "Modulación antiinflamatoria y confort articular", prop: "Extracto botánico concentrado que inhibe la enzima proinflamatoria 5-LOX, aliviando la rigidez y favoreciendo la movilidad articular." },
+                    { n: "Colágeno Tipo II", title: "Colágeno Nativo Tipo II (UC-II®)", neg: "Integridad estructural y regeneración del cartílago", prop: "Proteína no desnaturalizada que actúa por tolerancia oral en las placas de Peyer, frenando la degradación del colágeno en las articulaciones." },
+                    { n: "Ácido Hialurónico", title: "Ácido Hialurónico Biotecnológico", neg: "Lubricación y viscosuplementación sinovial", prop: "Componente mayoritario del líquido sinovial que restaura la viscoelasticidad intraarticular y actúa como amortiguador biomecánico natural." },
+                    { n: "Cúrcuma Liposomada", title: "Cúrcuma Liposomada (95% Curcuminoides)", neg: "Alivio del dolor y protección antioxidante", prop: "Curcumina de absorción multiplicada que bloquea las vías de señalización inflamatoria NF-kB, aliviando las articulaciones sobrecargadas." },
+                    { n: "MSM Puro", title: "Metilsulfonilmetano (MSM) de Alta Pureza", neg: "Flexibilidad, tendones y azufre biológico", prop: "Donante de azufre orgánico indispensable para reparar los enlaces disulfuro de tendones, ligamentos y cartílagos sometidos a tensión." }
                 ]
-            },
-            {
+        },
+,
+        {
                 n: "BBB Pre-entreno",
                 title: "BBB Pre-entreno",
                 tagline: "BOMBÓN BLOOM",
@@ -3016,25 +3126,9 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     { n: "Creatina Creapure", title: "Creatina Monohidrato Creapure®", neg: "Regeneración de ATP y potencia explosiva", prop: "Recarga rápida de fosfocreatina para series pesadas y potencia anaeróbica." },
                     { n: "Electrolitos Quelados", title: "Sodio, Potasio y Magnesio Iónicos", neg: "Conductividad neuromuscular", prop: "Previene calambres y sostiene el rendimiento electrolítico celular intraentrenamiento." }
                 ]
-            },
-            {
-                n: "BBB Relajación",
-                title: "BBB Relajación",
-                tagline: "BOMBÓN BLOOM",
-                img: "../BBB 6.png",
-                bg: "../Claridad mental.jpg",
-                neg: "Descanso reparador, calma mental y desconexión",
-                prop: "Fórmula adaptogénica y relajante para desconectar de la sobreestimulación diaria, rebajar el cortisol y facilitar un sueño profundo.",
-                subActivos: [
-                    { n: "Magnesio Bisglicinato", title: "Magnesio Bisglicinato Puro", neg: "Relajación neuromuscular profunda", prop: "Favorece la síntesis de GABA y desactiva la tensión muscular acumulada durante el día." },
-                    { n: "L-Teanina", title: "L-Teanina de Grado Farmacéutico", neg: "Ondas cerebrales alfa y foco sereno", prop: "Promueve un estado de calma lúcida sin generar somnolencia diurna." },
-                    { n: "Pasiflora", title: "Extracto Seco de Pasiflora", neg: "Calmante del sistema nervioso", prop: "Fitocomplejo ansiolítico suave que apacigua la rumiación mental y el nerviosismo." },
-                    { n: "Fosfatidilserina", title: "Fosfatidilserina Lipídica", neg: "Amortiguación del cortisol nocturno", prop: "Fosfolípido esencial que normaliza la curva de estrés y protege las neuronas del cortisol." },
-                    { n: "Glicina", title: "Glicina Pura Cristalina", neg: "Descenso de la temperatura central", prop: "Neurotransmisor inhibidor que acorta el tiempo de latencia del sueño y mejora la fase REM." },
-                    { n: "Melatonina", title: "Melatonina Pura Microencapsulada", neg: "Sincronización del ciclo circadiano", prop: "Favorece la inducción rápida del sueño y previene los despertares a medianoche." }
-                ]
-            },
-            {
+        },
+,
+        {
                 n: "BBB Stop-loss Hombre",
                 title: "BBB Stop-loss Hombre",
                 tagline: "BOMBÓN BLOOM",
@@ -3050,12 +3144,69 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     { n: "Biotina", title: "Biotina Pura", neg: "Calibre y densidad de la hebra", prop: "Nutriente fundamental para vigorizar el tallo capilar, aumentando el grosor del pelo." },
                     { n: "Maca Negra", title: "Maca Negra Andina Estandarizada", neg: "Tono vital, resistencia y energía", prop: "Adaptógeno vigorizante que sostiene la vitalidad hormonal masculina y la salud celular." }
                 ]
-            },
-            {
-                n: "BBB Articulaciones",
-                title: "BBB Articulaciones",
+        },
+        {
+                n: "BBB Regla",
+                title: "BBB Regla",
                 tagline: "BOMBÓN BLOOM",
-                img: "../BBB 1.png",
+                img: "../BBB 4.png",
+                bg: "../respeto.jpg",
+                neg: "Alivio del SPM, equilibrio prostaglándico y bienestar",
+                prop: "Fórmula reconfortante formulada para calmar los espasmos, reducir la inflamación y sostener un estado de ánimo estable durante el ciclo.",
+                subActivos: [
+                    { n: "Sauzgatillo", title: "Vitex Agnus-Castus", neg: "Equilibrio estrógeno / progesterona", prop: "Regula la prolactina y armoniza la fase lútea, aliviando la hinchazón y la sensibilidad mamaria." },
+                    { n: "Magnesio Bisglicinato", title: "Magnesio Quelado de Alta Absorción", neg: "Relajación miometrial y muscular", prop: "Reduce la intensidad de los cólicos menstruales y alivia las migrañas catameniales." },
+                    { n: "Jengibre Estandarizado", title: "Extracto de Jengibre (5% Gingeroles)", neg: "Inhibición de prostaglandinas proinflamatorias", prop: "Eficacia demostrada para reducir el dolor espasmódico abdominal y las náuseas." },
+                    { n: "Vitamina B6 Activa", title: "Piridoxal-5-Fosfato (P5P)", neg: "Metabolismo de serotonina y dopamina", prop: "Forma activa de la B6 indispensable para estabilizar el humor y reducir la irritabilidad." },
+                    { n: "Onagra", title: "Aceite de Onagra Primera Prensión (GLA)", neg: "Modulación de la inflamación cíclica", prop: "Ácido gamma-linolénico para mantener la piel limpia y prevenir brotes premenstruales." },
+                    { n: "Hierro Quelado", title: "Bisglicinato de Hierro Ferrochel", neg: "Reposición de pérdidas menstruales", prop: "Restaura la vitalidad previniendo la fatiga ferropénica durante el sangrado." }
+                ]
+        }
+        ];
+
+        /* =========================================================================
+           [RUEDA 4: LINGOTES]
+           ========================================================================= */
+        const lingoteCategorias = [
+        {
+                n: "Lingote Stop-loss Mujer",
+                title: "Lingote Stop-loss Mujer",
+                tagline: "LINGOTE",
+                img: "../Lingote.png",
+                bg: "../cabello y uñas.jpg",
+                neg: "Anclaje folicular, nutrición y freno a la caída",
+                prop: "Arquitectura nutracéutica diseñada específicamente para frenar la caída capilar femenina estacional u hormonal y reactivar el crecimiento.",
+                subActivos: [
+                    { n: "Extracto Cola Caballo", title: "Cola de Caballo Estandarizada", neg: "Sílice orgánica y elasticidad", prop: "Aporte concentrado de silicio biodisponible para regenerar la estructura interna de la fibra capilar." },
+                    { n: "Hierro Bisglicinato", title: "Hierro Quelado Sin Molestias", neg: "Oxigenación de la raíz", prop: "Forma de hierro de máxima asimilación estomacal para sostener niveles óptimos de ferritina." },
+                    { n: "L-Cisteína", title: "L-Cisteína Pura", neg: "Estructura primaria de la queratina", prop: "Aminoácido azufrado indispensable para crear los puentes disulfuro que dan resistencia y fuerza al cabello." },
+                    { n: "Levadura Cerveza", title: "Levadura Nutricional Viva", neg: "Complejo vitamínico B natural", prop: "Aporte biodisponible de vitaminas del grupo B para activar la división celular en la raíz del pelo." },
+                    { n: "Semilla Calabaza", title: "Aceite de Semilla de Calabaza", neg: "Inhibición suave de la 5α-reductasa", prop: "Fitonutrientes que equilibran el impacto de andrógenos a nivel folicular en la mujer." },
+                    { n: "Vitamina E", title: "Tocoferoles Mixtos Naturales", neg: "Microcirculación en el cuero cabelludo", prop: "Protege los capilares sanguíneos que irrigan la papila dérmica del estrés oxidativo." }
+                ]
+        },
+        {
+                n: "Lingote Menopausia",
+                title: "Lingote Menopausia",
+                tagline: "LINGOTE",
+                img: "../Lingote.png",
+                bg: "../amazona.jpg",
+                neg: "Equilibrio hormonal, serenidad y soporte óseo",
+                prop: "Sinergia botánica y micronutricional para acompañar la transición hormonal con confort, vitalidad y protección celular.",
+                subActivos: [
+                    { n: "Trébol Rojo", title: "Isoflavonas de Trébol Rojo", neg: "Modulación fitoestrogénica", prop: "Fitoestrógenos naturales que alivian los sofocos, la sudoración nocturna y la sequedad." },
+                    { n: "Cimicífuga", title: "Cimicifuga Racemosa", neg: "Regulación neurovegetativa", prop: "Extracto estandarizado que suaviza los cambios de humor y favorece el descanso reparador." },
+                    { n: "Maca Andina", title: "Maca Roja y Negra Estandarizada", neg: "Energía y vitalidad endocrina", prop: "Adaptógeno milenario que combate la fatiga crónica y apoya la libido y la densidad ósea." },
+                    { n: "Salvia", title: "Salvia Officinalis Pura", neg: "Control de sofocos y transpiración", prop: "Fitocompuestos que equilibran el centro termorregulador hipotalámico." },
+                    { n: "Vitamina D3 & K2", title: "D3 Colecalciferol + K2 Menaquinona-7", neg: "Fijación del calcio óseo", prop: "Dúo vitamínico sinérgico que dirige el calcio hacia el hueso y previene la desmineralización." },
+                    { n: "Complejo B Metilado", title: "Vitaminas B6, B9 y B12 Metiladas", neg: "Apoyo del sistema nervioso", prop: "Vitaminas en su forma biológicamente activa para mitigar la niebla mental y el cansancio." }
+                ]
+        },
+        {
+                n: "Lingote Articulaciones",
+                title: "Lingote Articulaciones",
+                tagline: "LINGOTE",
+                img: "../Lingote.png",
                 bg: "../articulaciones.jpg",
                 neg: "Flexibilidad, regeneración articular y confort biomecánico",
                 prop: "Arquitectura nutracéutica diseñada para preservar el cartílago, lubricar las articulaciones y mitigar la inflamación y rigidez articular.",
@@ -3066,29 +3217,279 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     { n: "Cúrcuma Liposomada", title: "Cúrcuma Liposomada (95% Curcuminoides)", neg: "Alivio del dolor y protección antioxidante", prop: "Curcumina de absorción multiplicada que bloquea las vías de señalización inflamatoria NF-kB, aliviando las articulaciones sobrecargadas." },
                     { n: "MSM Puro", title: "Metilsulfonilmetano (MSM) de Alta Pureza", neg: "Flexibilidad, tendones y azufre biológico", prop: "Donante de azufre orgánico indispensable para reparar los enlaces disulfuro de tendones, ligamentos y cartílagos sometidos a tensión." }
                 ]
-            }
+        },
+,
+        {
+                n: "Lingote Pre-entreno",
+                title: "Lingote Pre-entreno",
+                tagline: "LINGOTE",
+                img: "../Lingote.png",
+                bg: "../Energía.jpg",
+                neg: "Fuerza limpia, bombeo muscular y foco mental",
+                prop: "Complejo ergogénico natural sin picos ni bajones, optimizado para elevar el rendimiento físico, la resistencia y la vascularización.",
+                subActivos: [
+                    { n: "Beta-Alanina", title: "Beta-Alanina Pura", neg: "Tampón de ácido láctico y resistencia", prop: "Aumenta los niveles de carnosina muscular retrasando la fatiga en esfuerzos intensos." },
+                    { n: "Citrulina Malato", title: "L-Citrulina Malato (2:1)", neg: "Óxido nítrico y bombeo muscular", prop: "Potente precursor de óxido nítrico que optimiza el flujo sanguíneo y el transporte de nutrientes." },
+                    { n: "Taurina", title: "L-Taurina Pura", neg: "Hidratación celular y contracción", prop: "Apoya la transmisión del impulso neuromuscular y protege las células musculares del daño oxidativo." },
+                    { n: "Té Verde", title: "Té Verde Estandarizado (EGCG + Cafeína)", neg: "Activación metabólica limpia", prop: "Estimulación neurofisiológica sostenida que mejora la concentración sin taquicardia ni nerviosismo." },
+                    { n: "Creatina Creapure", title: "Creatina Monohidrato Creapure®", neg: "Regeneración de ATP y potencia explosiva", prop: "Recarga rápida de fosfocreatina para series pesadas y potencia anaeróbica." },
+                    { n: "Electrolitos Quelados", title: "Sodio, Potasio y Magnesio Iónicos", neg: "Conductividad neuromuscular", prop: "Previene calambres y sostiene el rendimiento electrolítico celular intraentrenamiento." }
+                ]
+        },
+,
+        {
+                n: "Lingote Stop-loss Hombre",
+                title: "Lingote Stop-loss Hombre",
+                tagline: "LINGOTE",
+                img: "../Lingote.png",
+                bg: "../Creatina _ok.jpg",
+                neg: "Inhibición de DHT, densidad y fortaleza folicular",
+                prop: "Tratamiento nutracéutico masculino enfocado en combatir la miniaturización folicular androgénica y sostener la densidad del cabello.",
+                subActivos: [
+                    { n: "Saw Palmetto", title: "Saw Palmetto (45% Ácidos Grasos)", neg: "Inhibidor natural de la 5α-reductasa", prop: "Bloquea selectivamente la conversión de testosterona en dihidrotestosterona (DHT)." },
+                    { n: "Pygeum Africanum", title: "Extracto de Ciruelo Africano", neg: "Acción antiandrogénica sinérgica", prop: "Reduce la inflamación perineal folicular y frena la involución del folículo piloso." },
+                    { n: "Semilla Calabaza", title: "Aceite Concentrado de Calabaza", neg: "Fitoesteroles bloqueadores de DHT", prop: "Rico en delta-7-esteroles que protegen la papila dérmica del ataque androgénico." },
+                    { n: "Zinc & Selenio", title: "Zinc Bisglicinato + Selenometionina", neg: "Síntesis de queratina y cofactor", prop: "Dúo mineral indispensable para la regeneración celular y la salud capilar y prostática." },
+                    { n: "Biotina", title: "Biotina Pura", neg: "Calibre y densidad de la hebra", prop: "Nutriente fundamental para vigorizar el tallo capilar, aumentando el grosor del pelo." },
+                    { n: "Maca Negra", title: "Maca Negra Andina Estandarizada", neg: "Tono vital, resistencia y energía", prop: "Adaptógeno vigorizante que sostiene la vitalidad hormonal masculina y la salud celular." }
+                ]
+        },
+        {
+                n: "Lingote Regla",
+                title: "Lingote Regla",
+                tagline: "LINGOTE",
+                img: "../Lingote.png",
+                bg: "../respeto.jpg",
+                neg: "Alivio del SPM, equilibrio prostaglándico y bienestar",
+                prop: "Fórmula reconfortante formulada para calmar los espasmos, reducir la inflamación y sostener un estado de ánimo estable durante el ciclo.",
+                subActivos: [
+                    { n: "Sauzgatillo", title: "Vitex Agnus-Castus", neg: "Equilibrio estrógeno / progesterona", prop: "Regula la prolactina y armoniza la fase lútea, aliviando la hinchazón y la sensibilidad mamaria." },
+                    { n: "Magnesio Bisglicinato", title: "Magnesio Quelado de Alta Absorción", neg: "Relajación miometrial y muscular", prop: "Reduce la intensidad de los cólicos menstruales y alivia las migrañas catameniales." },
+                    { n: "Jengibre Estandarizado", title: "Extracto de Jengibre (5% Gingeroles)", neg: "Inhibición de prostaglandinas proinflamatorias", prop: "Eficacia demostrada para reducir el dolor espasmódico abdominal y las náuseas." },
+                    { n: "Vitamina B6 Activa", title: "Piridoxal-5-Fosfato (P5P)", neg: "Metabolismo de serotonina y dopamina", prop: "Forma activa de la B6 indispensable para estabilizar el humor y reducir la irritabilidad." },
+                    { n: "Onagra", title: "Aceite de Onagra Primera Prensión (GLA)", neg: "Modulación de la inflamación cíclica", prop: "Ácido gamma-linolénico para mantener la piel limpia y prevenir brotes premenstruales." },
+                    { n: "Hierro Quelado", title: "Bisglicinato de Hierro Ferrochel", neg: "Reposición de pérdidas menstruales", prop: "Restaura la vitalidad previniendo la fatiga ferropénica durante el sangrado." }
+                ]
+        }
         ];
 
-        /* --- DATOS RUEDA 4: LINGOTE --- */
-        const lingoteCategorias = bbbCategorias.map(c => Object.assign({}, c, {
-            tagline: "LINGOTE",
-            title: c.title.replace(/^BBB\s+/i, "Lingote "),
-            n: c.n.replace(/^BBB\s+/i, "Lingote ")
-        }));
+        /* =========================================================================
+           [RUEDA 5: CRUJIENTE DE ALMENDRA]
+           ========================================================================= */
+        const obleaCategorias = [
+        {
+                n: "Crujiente Stop-loss Mujer",
+                title: "Crujiente Stop-loss Mujer",
+                tagline: "CRUJIENTE DE ALMENDRA",
+                img: "../Oblea.png",
+                bg: "../cabello y uñas.jpg",
+                neg: "Anclaje folicular, nutrición y freno a la caída",
+                prop: "Arquitectura nutracéutica diseñada específicamente para frenar la caída capilar femenina estacional u hormonal y reactivar el crecimiento.",
+                subActivos: [
+                    { n: "Extracto Cola Caballo", title: "Cola de Caballo Estandarizada", neg: "Sílice orgánica y elasticidad", prop: "Aporte concentrado de silicio biodisponible para regenerar la estructura interna de la fibra capilar." },
+                    { n: "Hierro Bisglicinato", title: "Hierro Quelado Sin Molestias", neg: "Oxigenación de la raíz", prop: "Forma de hierro de máxima asimilación estomacal para sostener niveles óptimos de ferritina." },
+                    { n: "L-Cisteína", title: "L-Cisteína Pura", neg: "Estructura primaria de la queratina", prop: "Aminoácido azufrado indispensable para crear los puentes disulfuro que dan resistencia y fuerza al cabello." },
+                    { n: "Levadura Cerveza", title: "Levadura Nutricional Viva", neg: "Complejo vitamínico B natural", prop: "Aporte biodisponible de vitaminas del grupo B para activar la división celular en la raíz del pelo." },
+                    { n: "Semilla Calabaza", title: "Aceite de Semilla de Calabaza", neg: "Inhibición suave de la 5α-reductasa", prop: "Fitonutrientes que equilibran el impacto de andrógenos a nivel folicular en la mujer." },
+                    { n: "Vitamina E", title: "Tocoferoles Mixtos Naturales", neg: "Microcirculación en el cuero cabelludo", prop: "Protege los capilares sanguíneos que irrigan la papila dérmica del estrés oxidativo." }
+                ]
+        },
+        {
+                n: "Crujiente Menopausia",
+                title: "Crujiente Menopausia",
+                tagline: "CRUJIENTE DE ALMENDRA",
+                img: "../Oblea.png",
+                bg: "../amazona.jpg",
+                neg: "Equilibrio hormonal, serenidad y soporte óseo",
+                prop: "Sinergia botánica y micronutricional para acompañar la transición hormonal con confort, vitalidad y protección celular.",
+                subActivos: [
+                    { n: "Trébol Rojo", title: "Isoflavonas de Trébol Rojo", neg: "Modulación fitoestrogénica", prop: "Fitoestrógenos naturales que alivian los sofocos, la sudoración nocturna y la sequedad." },
+                    { n: "Cimicífuga", title: "Cimicifuga Racemosa", neg: "Regulación neurovegetativa", prop: "Extracto estandarizado que suaviza los cambios de humor y favorece el descanso reparador." },
+                    { n: "Maca Andina", title: "Maca Roja y Negra Estandarizada", neg: "Energía y vitalidad endocrina", prop: "Adaptógeno milenario que combate la fatiga crónica y apoya la libido y la densidad ósea." },
+                    { n: "Salvia", title: "Salvia Officinalis Pura", neg: "Control de sofocos y transpiración", prop: "Fitocompuestos que equilibran el centro termorregulador hipotalámico." },
+                    { n: "Vitamina D3 & K2", title: "D3 Colecalciferol + K2 Menaquinona-7", neg: "Fijación del calcio óseo", prop: "Dúo vitamínico sinérgico que dirige el calcio hacia el hueso y previene la desmineralización." },
+                    { n: "Complejo B Metilado", title: "Vitaminas B6, B9 y B12 Metiladas", neg: "Apoyo del sistema nervioso", prop: "Vitaminas en su forma biológicamente activa para mitigar la niebla mental y el cansancio." }
+                ]
+        },
+        {
+                n: "Crujiente Articulaciones",
+                title: "Crujiente Articulaciones",
+                tagline: "CRUJIENTE DE ALMENDRA",
+                img: "../Oblea.png",
+                bg: "../articulaciones.jpg",
+                neg: "Flexibilidad, regeneración articular y confort biomecánico",
+                prop: "Arquitectura nutracéutica diseñada para preservar el cartílago, lubricar las articulaciones y mitigar la inflamación y rigidez articular.",
+                subActivos: [
+                    { n: "Boswellia Serrata", title: "Boswellia Serrata (65% Ácidos Boswélicos)", neg: "Modulación antiinflamatoria y confort articular", prop: "Extracto botánico concentrado que inhibe la enzima proinflamatoria 5-LOX, aliviando la rigidez y favoreciendo la movilidad articular." },
+                    { n: "Colágeno Tipo II", title: "Colágeno Nativo Tipo II (UC-II®)", neg: "Integridad estructural y regeneración del cartílago", prop: "Proteína no desnaturalizada que actúa por tolerancia oral en las placas de Peyer, frenando la degradación del colágeno en las articulaciones." },
+                    { n: "Ácido Hialurónico", title: "Ácido Hialurónico Biotecnológico", neg: "Lubricación y viscosuplementación sinovial", prop: "Componente mayoritario del líquido sinovial que restaura la viscoelasticidad intraarticular y actúa como amortiguador biomecánico natural." },
+                    { n: "Cúrcuma Liposomada", title: "Cúrcuma Liposomada (95% Curcuminoides)", neg: "Alivio del dolor y protección antioxidante", prop: "Curcumina de absorción multiplicada que bloquea las vías de señalización inflamatoria NF-kB, aliviando las articulaciones sobrecargadas." },
+                    { n: "MSM Puro", title: "Metilsulfonilmetano (MSM) de Alta Pureza", neg: "Flexibilidad, tendones y azufre biológico", prop: "Donante de azufre orgánico indispensable para reparar los enlaces disulfuro de tendones, ligamentos y cartílagos sometidos a tensión." }
+                ]
+        },
+,
+        {
+                n: "Crujiente Pre-entreno",
+                title: "Crujiente Pre-entreno",
+                tagline: "CRUJIENTE DE ALMENDRA",
+                img: "../Oblea.png",
+                bg: "../Energía.jpg",
+                neg: "Fuerza limpia, bombeo muscular y foco mental",
+                prop: "Complejo ergogénico natural sin picos ni bajones, optimizado para elevar el rendimiento físico, la resistencia y la vascularización.",
+                subActivos: [
+                    { n: "Beta-Alanina", title: "Beta-Alanina Pura", neg: "Tampón de ácido láctico y resistencia", prop: "Aumenta los niveles de carnosina muscular retrasando la fatiga en esfuerzos intensos." },
+                    { n: "Citrulina Malato", title: "L-Citrulina Malato (2:1)", neg: "Óxido nítrico y bombeo muscular", prop: "Potente precursor de óxido nítrico que optimiza el flujo sanguíneo y el transporte de nutrientes." },
+                    { n: "Taurina", title: "L-Taurina Pura", neg: "Hidratación celular y contracción", prop: "Apoya la transmisión del impulso neuromuscular y protege las células musculares del daño oxidativo." },
+                    { n: "Té Verde", title: "Té Verde Estandarizado (EGCG + Cafeína)", neg: "Activación metabólica limpia", prop: "Estimulación neurofisiológica sostenida que mejora la concentración sin taquicardia ni nerviosismo." },
+                    { n: "Creatina Creapure", title: "Creatina Monohidrato Creapure®", neg: "Regeneración de ATP y potencia explosiva", prop: "Recarga rápida de fosfocreatina para series pesadas y potencia anaeróbica." },
+                    { n: "Electrolitos Quelados", title: "Sodio, Potasio y Magnesio Iónicos", neg: "Conductividad neuromuscular", prop: "Previene calambres y sostiene el rendimiento electrolítico celular intraentrenamiento." }
+                ]
+        },
+,
+        {
+                n: "Crujiente Stop-loss Hombre",
+                title: "Crujiente Stop-loss Hombre",
+                tagline: "CRUJIENTE DE ALMENDRA",
+                img: "../Oblea.png",
+                bg: "../Creatina _ok.jpg",
+                neg: "Inhibición de DHT, densidad y fortaleza folicular",
+                prop: "Tratamiento nutracéutico masculino enfocado en combatir la miniaturización folicular androgénica y sostener la densidad del cabello.",
+                subActivos: [
+                    { n: "Saw Palmetto", title: "Saw Palmetto (45% Ácidos Grasos)", neg: "Inhibidor natural de la 5α-reductasa", prop: "Bloquea selectivamente la conversión de testosterona en dihidrotestosterona (DHT)." },
+                    { n: "Pygeum Africanum", title: "Extracto de Ciruelo Africano", neg: "Acción antiandrogénica sinérgica", prop: "Reduce la inflamación perineal folicular y frena la involución del folículo piloso." },
+                    { n: "Semilla Calabaza", title: "Aceite Concentrado de Calabaza", neg: "Fitoesteroles bloqueadores de DHT", prop: "Rico en delta-7-esteroles que protegen la papila dérmica del ataque androgénico." },
+                    { n: "Zinc & Selenio", title: "Zinc Bisglicinato + Selenometionina", neg: "Síntesis de queratina y cofactor", prop: "Dúo mineral indispensable para la regeneración celular y la salud capilar y prostática." },
+                    { n: "Biotina", title: "Biotina Pura", neg: "Calibre y densidad de la hebra", prop: "Nutriente fundamental para vigorizar el tallo capilar, aumentando el grosor del pelo." },
+                    { n: "Maca Negra", title: "Maca Negra Andina Estandarizada", neg: "Tono vital, resistencia y energía", prop: "Adaptógeno vigorizante que sostiene la vitalidad hormonal masculina y la salud celular." }
+                ]
+        },
+        {
+                n: "Crujiente Regla",
+                title: "Crujiente Regla",
+                tagline: "CRUJIENTE DE ALMENDRA",
+                img: "../Oblea.png",
+                bg: "../respeto.jpg",
+                neg: "Alivio del SPM, equilibrio prostaglándico y bienestar",
+                prop: "Fórmula reconfortante formulada para calmar los espasmos, reducir la inflamación y sostener un estado de ánimo estable durante el ciclo.",
+                subActivos: [
+                    { n: "Sauzgatillo", title: "Vitex Agnus-Castus", neg: "Equilibrio estrógeno / progesterona", prop: "Regula la prolactina y armoniza la fase lútea, aliviando la hinchazón y la sensibilidad mamaria." },
+                    { n: "Magnesio Bisglicinato", title: "Magnesio Quelado de Alta Absorción", neg: "Relajación miometrial y muscular", prop: "Reduce la intensidad de los cólicos menstruales y alivia las migrañas catameniales." },
+                    { n: "Jengibre Estandarizado", title: "Extracto de Jengibre (5% Gingeroles)", neg: "Inhibición de prostaglandinas proinflamatorias", prop: "Eficacia demostrada para reducir el dolor espasmódico abdominal y las náuseas." },
+                    { n: "Vitamina B6 Activa", title: "Piridoxal-5-Fosfato (P5P)", neg: "Metabolismo de serotonina y dopamina", prop: "Forma activa de la B6 indispensable para estabilizar el humor y reducir la irritabilidad." },
+                    { n: "Onagra", title: "Aceite de Onagra Primera Prensión (GLA)", neg: "Modulación de la inflamación cíclica", prop: "Ácido gamma-linolénico para mantener la piel limpia y prevenir brotes premenstruales." },
+                    { n: "Hierro Quelado", title: "Bisglicinato de Hierro Ferrochel", neg: "Reposición de pérdidas menstruales", prop: "Restaura la vitalidad previniendo la fatiga ferropénica durante el sangrado." }
+                ]
+        }
+        ];
 
-        /* --- DATOS RUEDA 5: CRUJIENTE DE ALMENDRA --- */
-        const obleaCategorias = bbbCategorias.map(c => Object.assign({}, c, {
-            tagline: "CRUJIENTE DE ALMENDRA",
-            title: c.title.replace(/^BBB\s+/i, "Crujiente "),
-            n: c.n.replace(/^BBB\s+/i, "Crujiente ")
-        }));
-
-        /* --- DATOS RUEDA 6: NENEBLOOMS --- */
-        const pequebloomCategorias = bbbCategorias.map(c => Object.assign({}, c, {
-            tagline: "NENEBLOOMS",
-            title: c.title.replace(/^BBB\s+/i, "NeneBloom "),
-            n: c.n.replace(/^BBB\s+/i, "NeneBloom ")
-        }));
+        /* =========================================================================
+           [RUEDA 6: PEQUEBLOOMS / NENEBLOOMS]
+           ========================================================================= */
+        const pequebloomCategorias = [
+        {
+                n: "PequeBloom Stop-loss Mujer",
+                title: "PequeBloom Stop-loss Mujer",
+                tagline: "PEQUEBLOOMS",
+                img: "../Pequebloom.png",
+                bg: "../cabello y uñas.jpg",
+                neg: "Anclaje folicular, nutrición y freno a la caída",
+                prop: "Arquitectura nutracéutica diseñada específicamente para frenar la caída capilar femenina estacional u hormonal y reactivar el crecimiento.",
+                subActivos: [
+                    { n: "Extracto Cola Caballo", title: "Cola de Caballo Estandarizada", neg: "Sílice orgánica y elasticidad", prop: "Aporte concentrado de silicio biodisponible para regenerar la estructura interna de la fibra capilar." },
+                    { n: "Hierro Bisglicinato", title: "Hierro Quelado Sin Molestias", neg: "Oxigenación de la raíz", prop: "Forma de hierro de máxima asimilación estomacal para sostener niveles óptimos de ferritina." },
+                    { n: "L-Cisteína", title: "L-Cisteína Pura", neg: "Estructura primaria de la queratina", prop: "Aminoácido azufrado indispensable para crear los puentes disulfuro que dan resistencia y fuerza al cabello." },
+                    { n: "Levadura Cerveza", title: "Levadura Nutricional Viva", neg: "Complejo vitamínico B natural", prop: "Aporte biodisponible de vitaminas del grupo B para activar la división celular en la raíz del pelo." },
+                    { n: "Semilla Calabaza", title: "Aceite de Semilla de Calabaza", neg: "Inhibición suave de la 5α-reductasa", prop: "Fitonutrientes que equilibran el impacto de andrógenos a nivel folicular en la mujer." },
+                    { n: "Vitamina E", title: "Tocoferoles Mixtos Naturales", neg: "Microcirculación en el cuero cabelludo", prop: "Protege los capilares sanguíneos que irrigan la papila dérmica del estrés oxidativo." }
+                ]
+        },
+        {
+                n: "PequeBloom Menopausia",
+                title: "PequeBloom Menopausia",
+                tagline: "PEQUEBLOOMS",
+                img: "../Pequebloom.png",
+                bg: "../amazona.jpg",
+                neg: "Equilibrio hormonal, serenidad y soporte óseo",
+                prop: "Sinergia botánica y micronutricional para acompañar la transición hormonal con confort, vitalidad y protección celular.",
+                subActivos: [
+                    { n: "Trébol Rojo", title: "Isoflavonas de Trébol Rojo", neg: "Modulación fitoestrogénica", prop: "Fitoestrógenos naturales que alivian los sofocos, la sudoración nocturna y la sequedad." },
+                    { n: "Cimicífuga", title: "Cimicifuga Racemosa", neg: "Regulación neurovegetativa", prop: "Extracto estandarizado que suaviza los cambios de humor y favorece el descanso reparador." },
+                    { n: "Maca Andina", title: "Maca Roja y Negra Estandarizada", neg: "Energía y vitalidad endocrina", prop: "Adaptógeno milenario que combate la fatiga crónica y apoya la libido y la densidad ósea." },
+                    { n: "Salvia", title: "Salvia Officinalis Pura", neg: "Control de sofocos y transpiración", prop: "Fitocompuestos que equilibran el centro termorregulador hipotalámico." },
+                    { n: "Vitamina D3 & K2", title: "D3 Colecalciferol + K2 Menaquinona-7", neg: "Fijación del calcio óseo", prop: "Dúo vitamínico sinérgico que dirige el calcio hacia el hueso y previene la desmineralización." },
+                    { n: "Complejo B Metilado", title: "Vitaminas B6, B9 y B12 Metiladas", neg: "Apoyo del sistema nervioso", prop: "Vitaminas en su forma biológicamente activa para mitigar la niebla mental y el cansancio." }
+                ]
+        },
+        {
+                n: "PequeBloom Articulaciones",
+                title: "PequeBloom Articulaciones",
+                tagline: "PEQUEBLOOMS",
+                img: "../Pequebloom.png",
+                bg: "../articulaciones.jpg",
+                neg: "Flexibilidad, regeneración articular y confort biomecánico",
+                prop: "Arquitectura nutracéutica diseñada para preservar el cartílago, lubricar las articulaciones y mitigar la inflamación y rigidez articular.",
+                subActivos: [
+                    { n: "Boswellia Serrata", title: "Boswellia Serrata (65% Ácidos Boswélicos)", neg: "Modulación antiinflamatoria y confort articular", prop: "Extracto botánico concentrado que inhibe la enzima proinflamatoria 5-LOX, aliviando la rigidez y favoreciendo la movilidad articular." },
+                    { n: "Colágeno Tipo II", title: "Colágeno Nativo Tipo II (UC-II®)", neg: "Integridad estructural y regeneración del cartílago", prop: "Proteína no desnaturalizada que actúa por tolerancia oral en las placas de Peyer, frenando la degradación del colágeno en las articulaciones." },
+                    { n: "Ácido Hialurónico", title: "Ácido Hialurónico Biotecnológico", neg: "Lubricación y viscosuplementación sinovial", prop: "Componente mayoritario del líquido sinovial que restaura la viscoelasticidad intraarticular y actúa como amortiguador biomecánico natural." },
+                    { n: "Cúrcuma Liposomada", title: "Cúrcuma Liposomada (95% Curcuminoides)", neg: "Alivio del dolor y protección antioxidante", prop: "Curcumina de absorción multiplicada que bloquea las vías de señalización inflamatoria NF-kB, aliviando las articulaciones sobrecargadas." },
+                    { n: "MSM Puro", title: "Metilsulfonilmetano (MSM) de Alta Pureza", neg: "Flexibilidad, tendones y azufre biológico", prop: "Donante de azufre orgánico indispensable para reparar los enlaces disulfuro de tendones, ligamentos y cartílagos sometidos a tensión." }
+                ]
+        },
+,
+        {
+                n: "PequeBloom Pre-entreno",
+                title: "PequeBloom Pre-entreno",
+                tagline: "PEQUEBLOOMS",
+                img: "../Pequebloom.png",
+                bg: "../Energía.jpg",
+                neg: "Fuerza limpia, bombeo muscular y foco mental",
+                prop: "Complejo ergogénico natural sin picos ni bajones, optimizado para elevar el rendimiento físico, la resistencia y la vascularización.",
+                subActivos: [
+                    { n: "Beta-Alanina", title: "Beta-Alanina Pura", neg: "Tampón de ácido láctico y resistencia", prop: "Aumenta los niveles de carnosina muscular retrasando la fatiga en esfuerzos intensos." },
+                    { n: "Citrulina Malato", title: "L-Citrulina Malato (2:1)", neg: "Óxido nítrico y bombeo muscular", prop: "Potente precursor de óxido nítrico que optimiza el flujo sanguíneo y el transporte de nutrientes." },
+                    { n: "Taurina", title: "L-Taurina Pura", neg: "Hidratación celular y contracción", prop: "Apoya la transmisión del impulso neuromuscular y protege las células musculares del daño oxidativo." },
+                    { n: "Té Verde", title: "Té Verde Estandarizado (EGCG + Cafeína)", neg: "Activación metabólica limpia", prop: "Estimulación neurofisiológica sostenida que mejora la concentración sin taquicardia ni nerviosismo." },
+                    { n: "Creatina Creapure", title: "Creatina Monohidrato Creapure®", neg: "Regeneración de ATP y potencia explosiva", prop: "Recarga rápida de fosfocreatina para series pesadas y potencia anaeróbica." },
+                    { n: "Electrolitos Quelados", title: "Sodio, Potasio y Magnesio Iónicos", neg: "Conductividad neuromuscular", prop: "Previene calambres y sostiene el rendimiento electrolítico celular intraentrenamiento." }
+                ]
+        },
+,
+        {
+                n: "PequeBloom Stop-loss Hombre",
+                title: "PequeBloom Stop-loss Hombre",
+                tagline: "PEQUEBLOOMS",
+                img: "../Pequebloom.png",
+                bg: "../Creatina _ok.jpg",
+                neg: "Inhibición de DHT, densidad y fortaleza folicular",
+                prop: "Tratamiento nutracéutico masculino enfocado en combatir la miniaturización folicular androgénica y sostener la densidad del cabello.",
+                subActivos: [
+                    { n: "Saw Palmetto", title: "Saw Palmetto (45% Ácidos Grasos)", neg: "Inhibidor natural de la 5α-reductasa", prop: "Bloquea selectivamente la conversión de testosterona en dihidrotestosterona (DHT)." },
+                    { n: "Pygeum Africanum", title: "Extracto de Ciruelo Africano", neg: "Acción antiandrogénica sinérgica", prop: "Reduce la inflamación perineal folicular y frena la involución del folículo piloso." },
+                    { n: "Semilla Calabaza", title: "Aceite Concentrado de Calabaza", neg: "Fitoesteroles bloqueadores de DHT", prop: "Rico en delta-7-esteroles que protegen la papila dérmica del ataque androgénico." },
+                    { n: "Zinc & Selenio", title: "Zinc Bisglicinato + Selenometionina", neg: "Síntesis de queratina y cofactor", prop: "Dúo mineral indispensable para la regeneración celular y la salud capilar y prostática." },
+                    { n: "Biotina", title: "Biotina Pura", neg: "Calibre y densidad de la hebra", prop: "Nutriente fundamental para vigorizar el tallo capilar, aumentando el grosor del pelo." },
+                    { n: "Maca Negra", title: "Maca Negra Andina Estandarizada", neg: "Tono vital, resistencia y energía", prop: "Adaptógeno vigorizante que sostiene la vitalidad hormonal masculina y la salud celular." }
+                ]
+        },
+        {
+                n: "PequeBloom Regla",
+                title: "PequeBloom Regla",
+                tagline: "PEQUEBLOOMS",
+                img: "../Pequebloom.png",
+                bg: "../respeto.jpg",
+                neg: "Alivio del SPM, equilibrio prostaglándico y bienestar",
+                prop: "Fórmula reconfortante formulada para calmar los espasmos, reducir la inflamación y sostener un estado de ánimo estable durante el ciclo.",
+                subActivos: [
+                    { n: "Sauzgatillo", title: "Vitex Agnus-Castus", neg: "Equilibrio estrógeno / progesterona", prop: "Regula la prolactina y armoniza la fase lútea, aliviando la hinchazón y la sensibilidad mamaria." },
+                    { n: "Magnesio Bisglicinato", title: "Magnesio Quelado de Alta Absorción", neg: "Relajación miometrial y muscular", prop: "Reduce la intensidad de los cólicos menstruales y alivia las migrañas catameniales." },
+                    { n: "Jengibre Estandarizado", title: "Extracto de Jengibre (5% Gingeroles)", neg: "Inhibición de prostaglandinas proinflamatorias", prop: "Eficacia demostrada para reducir el dolor espasmódico abdominal y las náuseas." },
+                    { n: "Vitamina B6 Activa", title: "Piridoxal-5-Fosfato (P5P)", neg: "Metabolismo de serotonina y dopamina", prop: "Forma activa de la B6 indispensable para estabilizar el humor y reducir la irritabilidad." },
+                    { n: "Onagra", title: "Aceite de Onagra Primera Prensión (GLA)", neg: "Modulación de la inflamación cíclica", prop: "Ácido gamma-linolénico para mantener la piel limpia y prevenir brotes premenstruales." },
+                    { n: "Hierro Quelado", title: "Bisglicinato de Hierro Ferrochel", neg: "Reposición de pérdidas menstruales", prop: "Restaura la vitalidad previniendo la fatiga ferropénica durante el sangrado." }
+                ]
+        }
+        ];
 
         /* =========================================================================
            MOTOR 1: RUEDAS ESTILO DOXA (DOXA Y DOXA-COOKIE)
@@ -3277,14 +3678,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                         selectedSubIndex = -1;
                         childrenVisible = false;
 
-                        const neutralHTML = `
-                            <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Descubre DOXA</h3>
-                            <p class="hero-value-prop-neg">Arquitectura de Activos</p>
-                            <div class="hero-value-prop">
-                                Haz clic en cualquiera de las categorías para explorar los activos funcionales y los beneficios que componen cada DOXA.
-                            </div>
-                        `;
-                        transitionCajaText(neutralHTML);
+                        transitionCajaText(defaultNeutralHTML);
 
                         cajaBg.style.backgroundImage = "url('../piel negra.jpg')";
                         renderRueda();
@@ -3991,8 +4385,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     resetToNeutral();
 
                     // Asignar evento click a la galleta central
-                    const galletaCentral = sec.querySelector('.galleta-fija');
-                    if (galletaCentral) {
+                                        if (galletaCentral) {
                         galletaCentral.style.cursor = 'pointer';
                         galletaCentral.onpointerdown = (e) => {
                             e.stopPropagation();
@@ -4008,8 +4401,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     }
 
                     // Control de arrastre unificado y de alta precisión (Táctil y Ratón/Cursor) en móvil
-                    const radialWrapper = sec.querySelector('.radial-wrapper');
-                    if (radialWrapper) {
+                                        if (radialWrapper) {
                         radialWrapper.addEventListener('click', () => {
                             if (!wasDragging && !isDraggingWheel) {
                                 alignToCajasActivos();
@@ -4299,10 +4691,17 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                             }
                         }
                     });
+
+            resetToNeutral();
+
+            return {
+                resetToNeutral: resetToNeutral,
+                render: renderRueda
+            };
         }
 
         /* =========================================================================
-           MOTOR 2: RUEDAS ESTILO BOMBÃ“N BLOOM (BBB, LINGOTE, OBLEA, NENEBLOOM)
+           MOTOR 2: RUEDAS ESTILO BOMBÓN BLOOM (BBB, LINGOTE, OBLEA, PEQUEBLOOM)
            ========================================================================= */
         function initBBBStyleWheel(sec, bbbCategorias) {
             if (!sec) return;
@@ -5540,37 +5939,40 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
             resetToNeutral();
 
-            // Exponer globalmente para el submenú superior
+            return {
+                resetToNeutral: resetToNeutral,
+                render: renderRueda
+            };
         }
 
         /* =========================================================================
-           CONTROLADOR CENTRAL DE VISUALIZACIÃ“N DE RUEDAS
+           CONTROLADOR CENTRAL DE VISUALIZACIÓN DE RUEDAS
            Garantiza que SOLO se muestre una rueda a la vez (la del producto activo)
            ========================================================================= */
         const wheelConfigs = {
             "doxa": {
-                init: () => initDoxaStyleWheel(document.getElementById("rueda-activos-doxa"), activosDoxa),
-                initialized: false
+                instance: null,
+                init: () => initDoxaStyleWheel(document.getElementById("rueda-activos-doxa"), activosDoxa)
             },
             "cookie": {
-                init: () => initDoxaStyleWheel(document.getElementById("rueda-activos-cookie"), activosDoxaCookie),
-                initialized: false
+                instance: null,
+                init: () => initDoxaStyleWheel(document.getElementById("rueda-activos-cookie"), activosDoxaCookie)
             },
             "bbb": {
-                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-bbb"), bbbCategorias),
-                initialized: false
+                instance: null,
+                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-bbb"), bbbCategorias)
             },
             "lingote": {
-                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-lingote"), lingoteCategorias),
-                initialized: false
+                instance: null,
+                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-lingote"), lingoteCategorias)
             },
             "oblea": {
-                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-oblea"), obleaCategorias),
-                initialized: false
+                instance: null,
+                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-oblea"), obleaCategorias)
             },
             "pequebloom": {
-                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-pequebloom"), pequebloomCategorias),
-                initialized: false
+                instance: null,
+                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-pequebloom"), pequebloomCategorias)
             }
         };
 
@@ -5580,18 +5982,19 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
             wheels.forEach(sec => {
                 if (sec.getAttribute("data-product") === productId) {
-                    sec.style.display = "block";
                     sec.classList.add("active-product-wheel");
                     targetSection = sec;
                 } else {
-                    sec.style.display = "none";
                     sec.classList.remove("active-product-wheel");
                 }
             });
 
-            if (targetSection && wheelConfigs[productId] && !wheelConfigs[productId].initialized) {
-                wheelConfigs[productId].init();
-                wheelConfigs[productId].initialized = true;
+            if (targetSection && wheelConfigs[productId]) {
+                if (!wheelConfigs[productId].instance) {
+                    wheelConfigs[productId].instance = wheelConfigs[productId].init();
+                } else if (wheelConfigs[productId].instance && wheelConfigs[productId].instance.resetToNeutral) {
+                    wheelConfigs[productId].instance.resetToNeutral();
+                }
             }
 
             window.dispatchEvent(new Event("resize"));
@@ -5629,11 +6032,17 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
         })();
 
         // Mostrar inicialmente la rueda del producto activo (por defecto Doxas)
-        (function initInitialProductWheel() {
+        function initInitialProductWheel() {
             const activeBtn = document.querySelector(".bbb-submenu-item.active") || document.querySelector(".bbb-submenu-item");
             const initialProd = activeBtn ? activeBtn.getAttribute("data-product") : "doxa";
             showProductWheel(initialProd);
-        })();
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initInitialProductWheel);
+        } else {
+            initInitialProductWheel();
+        }
     </script>
 
 
