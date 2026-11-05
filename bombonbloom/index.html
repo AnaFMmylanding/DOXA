@@ -4713,8 +4713,8 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             const cajaBgOverlay = sec.querySelector(".bg-layer-overlay");
             if (!rueda || !cajaText || !radialWrapper) return;
 
-            const defaultImgSrc = galletaFija ? galletaFija.getAttribute("src") : "../BBB.png";
-            const defaultImgAlt = galletaFija ? galletaFija.alt : "BombÃ³n Bloom";
+            const defaultImgSrc = galletaFija ? (galletaFija.getAttribute("src") || "../BBB.png") : "../BBB.png";
+            const defaultImgAlt = galletaFija ? (galletaFija.alt || "Bombon Bloom") : "Bombon Bloom";
             const defaultNeutralHTML = cajaText.innerHTML;
 
             let activeBgUrl = '../piel negra.jpg';
@@ -4769,57 +4769,13 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 bgTransitionTimer = setTimeout(() => {
                     cajaBg.style.backgroundImage = 'url("' + newBgUrl + '")';
                     activeBgUrl = newBgUrl;
-                cajaBgOverlay.style.transition = 'none';
+                    cajaBgOverlay.style.transition = 'none';
                     cajaBgOverlay.style.opacity = '0';
                     bgTransitionTimer = null;
                 }, 870);
             }
-            const btnVolver = document.getElementById('btnVolver');
-            if (!rueda || !cajaText || !radialWrapper) return;
 
-            // =====================================================================
-            // DETECCION DINAMICA DE LIMITES DE IMAGEN Y AJUSTE DE RADIO DE LA RUEDA
-            // Detecta automaticamente los limites y tamano de la imagen central.
-            // Cuando la imagen es mas pequena (como el Bombon Bloom frente a la Doxa),
-            // acorta automaticamente las lineas y coloca los activos 100px mas cerca
-            // del centro de la misma, cinendolos a su contorno.
-            // =====================================================================
-            function getImageRadiusOffset() {
-                if (!galletaFija) return 100; // Por defecto para BBB
-
-                // 1. Deteccion por archivo de imagen o producto (BBB vs Doxa)
-                const src = (galletaFija.currentSrc || galletaFija.getAttribute('src') || '').toLowerCase();
-                const isBBB = src.includes('bbb') || src.includes('bomb');
-                const isDoxa = src.includes('galle') || src.includes('doxa');
-
-                // 2. Deteccion por limites reales y dimensiones del elemento
-                const baseDiametro = 340; // Tamano de referencia de la caja (Doxa estandar)
-                const rect = galletaFija.getBoundingClientRect();
-                const renderedSize = Math.min(rect.width || baseDiametro, rect.height || baseDiametro);
-
-                let offset = 0;
-                if (isBBB) {
-                    // En BBB, la masa del bombon mide ~216px de ancho frente a los ~340px de la Doxa.
-                    // Acorta las lineas exactamente 100px para acercar los activos al contorno.
-                    offset = 100;
-                } else if (!isDoxa && renderedSize < baseDiametro) {
-                    // Para cualquier otra imagen mas pequena detectada por sus limites:
-                    offset = Math.max(0, (baseDiametro - renderedSize) / 2);
-                }
-
-                // En movil (<= 768px), escalar proporcionalmente el acortamiento (~50px)
-                if (window.innerWidth <= 768) {
-                    offset = Math.round(offset * 0.5);
-                }
-
-                return offset;
-            }
-
-            const getRadioCategorias = () => {
-                const isMobile = window.innerWidth <= 768;
-                const base = isMobile ? 205 : 255;
-                return base - getImageRadiusOffset();
-            };
+            const getRadioCategorias = () => (window.innerWidth <= 768 ? 155 : 250);
             let rotacionActual = 0;
             let selectedCategoryIndex = -1;
             let selectedSubIndex = -1;
@@ -4833,109 +4789,26 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             }
 
             function getMobileParentAngle(idx) {
-                // Reordenacion para evitar solapamientos (Regla -> 78 deg, Articulaciones -> 142 deg, Piel -> 162 deg, Menopausia -> 122 deg, Stop-loss Mujer -> 102 deg)
-                // Indice 0: BBB Piel, Pelo & Unas (162 deg - extremo izquierdo superior)
-                // Indice 1: BBB Stop-loss Mujer (102 deg - centro-izquierdo inferior)
-                // Indice 2: BBB Menopausia (122 deg - lado izquierdo inferior)
-                // Indice 3: BBB Regla (78 deg - centro-derecho inferior)
-                // Indice 4: BBB Pre-entreno (18 deg - extremo derecho superior)
-                // Indice 5: BBB Relajacion (38 deg - lado derecho medio)
-                // Indice 6: BBB Stop-loss Hombre (58 deg - lado derecho inferior)
-                // Indice 7: BBB Articulaciones (142 deg - lado izquierdo medio)
                 const angles = [162, 102, 122, 78, 18, 38, 58, 142];
                 return angles[idx];
             }
 
             function getMobileParentRadius(idx) {
-                // Radios armonizados por posicion angular:
-                // Extremos 18 y 162 deg -> 145px
-                // Medios 38 y 142 deg -> 150px
-                // Bajos 58 y 122 deg -> 158px
-                // Centro 78 y 102 deg -> 172px
-                // Indice 0 (162 deg): 145px
-                // Indice 1 (102 deg): 172px
-                // Indice 2 (122 deg): 158px
-                // Indice 3 (78 deg): 172px
-                // Indice 4 (18 deg): 145px
-                // Indice 5 (38 deg): 150px
-                // Indice 6 (58 deg): 158px
-                // Indice 7 (142 deg): 150px
                 const radii = [145, 172, 158, 172, 145, 150, 158, 150];
                 return radii[idx];
             }
 
-            // Deteccion dinamica de si la rueda se corta con el margen izquierdo de la ventana
+            // En desktop/monitor se muestran SIEMPRE todas las 8 categorias en distribucion completa 360
             function isWheelCutByMargin() {
-                if (window.innerWidth <= 768) return false;
-                const rect = radialWrapper.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const offset = getImageRadiusOffset();
-                const marginThreshold = 390 - offset;
-                const leftThreshold = Math.max(40, 100 - offset * 0.6);
-                return (centerX < marginThreshold) || (rect.left < leftThreshold);
-            }
-
-            function getDesktopFanAngle(idx) {
-                const total = bbbCategorias.length;
-                const step = 130 / (total - 1);
-                return -65 + idx * step;
-            }
-
-            function getDesktopFanRadius(idx) {
-                // Longitud de lineas aumentada en 30px para las categorias padre
-                // evitando que queden apretadas en la vista neutral
-                const parentOffset = Math.max(0, getImageRadiusOffset() - 30);
-                const fanRadii = [250, 280, 248, 280, 248, 280, 248, 280];
-                return Math.max(120, fanRadii[idx % fanRadii.length] - parentOffset);
+                return false;
             }
 
             function getGradosPadre(idx) {
                 if (window.innerWidth <= 768) {
                     return getMobileParentAngle(idx);
                 }
-                if (isWheelCutByMargin()) {
-                    return getDesktopFanAngle(idx);
-                }
                 const anguloPaso = 360 / bbbCategorias.length;
                 return idx * anguloPaso - 90;
-            }
-
-            function updateFanArcVisibility(tempRot) {
-                const isNeutral = (selectedCategoryIndex === -1);
-                rueda.querySelectorAll('.nodo-activo').forEach(nodo => {
-                    const idx = parseInt(nodo.dataset.index);
-                    const grPadre = getGradosPadre(idx);
-                    let sDeg = (grPadre + tempRot) % 360;
-                    if (sDeg < -180) sDeg += 360;
-                    if (sDeg >= 180) sDeg -= 360;
-
-                    const line = rueda.querySelector(`.ray-line[data-index="${idx}"]`);
-                    const isSel = (idx === selectedCategoryIndex);
-
-                    if (isNeutral) {
-                        const distFromRight = Math.abs(sDeg);
-                        if (distFromRight > 85) {
-                            nodo.style.opacity = '0';
-                            nodo.style.pointerEvents = 'none';
-                            if (line) line.style.opacity = '0';
-                        } else {
-                            const op = distFromRight > 70 ? (85 - distFromRight) / 15 : 1;
-                            nodo.style.opacity = String(op);
-                            nodo.style.scale = '1';
-                            nodo.style.pointerEvents = 'auto';
-                            if (line) line.style.opacity = String(op * 0.75);
-                        }
-                    } else if (isSel) {
-                        nodo.style.opacity = '1';
-                        nodo.style.scale = '1.08';
-                        nodo.style.pointerEvents = 'auto';
-                        if (line) line.style.opacity = childrenVisible ? '0' : '0.85';
-                    } else {
-                        nodo.style.opacity = '0';
-                        nodo.style.pointerEvents = 'none';
-                        if (line) line.style.opacity = '0';
-                    }
-                });
             }
 
             function updateMobileArcVisibility(tempRot) {
@@ -4995,14 +4868,29 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             }
 
             function formatCategoryName(name) {
-                let clean = name.replace(/^BBB\s+/i, '');
-                const words = clean.split(' ');
-                if (words.length > 2) {
-                    return '<span style="display:block; font-size:8.5px; opacity:0.8; letter-spacing:2px; margin-bottom:2px;">BBB</span><span style="display:block; white-space:nowrap;">' + words.slice(0, 2).join(' ') + '</span><span style="display:block; white-space:nowrap; margin-top:2px;">' + words.slice(2).join(' ') + '</span>';
-                } else if (words.length === 2) {
-                    return '<span style="display:block; font-size:8.5px; opacity:0.8; letter-spacing:2px; margin-bottom:2px;">BBB</span><span style="display:block; white-space:nowrap;">' + words[0] + '</span><span style="display:block; white-space:nowrap; margin-top:2px;">' + words[1] + '</span>';
+                let prefix = '';
+                let clean = name;
+                if (/^BBB\s+/i.test(name)) {
+                    prefix = 'BBB';
+                    clean = name.replace(/^BBB\s+/i, '');
+                } else if (/^LINGOTE\s+/i.test(name)) {
+                    prefix = 'LINGOTE';
+                    clean = name.replace(/^LINGOTE\s+/i, '');
+                } else if (/^OBLEA\s+/i.test(name)) {
+                    prefix = 'OBLEA';
+                    clean = name.replace(/^OBLEA\s+/i, '');
+                } else if (/^PEQUEBLOOM\s+/i.test(name)) {
+                    prefix = 'PEQUEBLOOM';
+                    clean = name.replace(/^PEQUEBLOOM\s+/i, '');
                 }
-                return '<span style="display:block; font-size:8.5px; opacity:0.8; letter-spacing:2px; margin-bottom:2px;">BBB</span><span style="display:block; white-space:nowrap;">' + clean + '</span>';
+                const words = clean.split(' ');
+                const prefixHtml = prefix ? ('<span style="display:block; font-size:8.5px; opacity:0.8; letter-spacing:2px; margin-bottom:2px;">' + prefix + '</span>') : '';
+                if (words.length > 2) {
+                    return prefixHtml + '<span style="display:block; white-space:nowrap;">' + words.slice(0, 2).join(' ') + '</span><span style="display:block; white-space:nowrap; margin-top:2px;">' + words.slice(2).join(' ') + '</span>';
+                } else if (words.length === 2) {
+                    return prefixHtml + '<span style="display:block; white-space:nowrap;">' + words[0] + '</span><span style="display:block; white-space:nowrap; margin-top:2px;">' + words[1] + '</span>';
+                }
+                return prefixHtml + '<span style="display:block; white-space:nowrap;">' + clean + '</span>';
             }
 
             function formatSubActivoName(name) {
@@ -5029,7 +4917,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 if (index < 0 || index >= bbbCategorias.length) return;
                 const a = bbbCategorias[index];
                 const newHTML = `
-                        <div class="tagline" style="font-family:'Lexend',sans-serif;font-size:10.5px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:8px;display:block;">${a.tagline || 'BOMBÓN BLOOM'}</div>
+                        <div class="tagline" style="font-family:'Lexend',sans-serif;font-size:10.5px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:8px;display:block;">${a.tagline || 'BOMBON BLOOM'}</div>
                         <h3 class="variety-title" style="margin-bottom: 20px; line-height: 1.2;">${a.title || a.n}</h3>
                         ${a.neg ? `<p class="hero-value-prop-neg">${a.neg}</p>` : ''}
                         <div class="hero-value-prop">${a.prop || ''}</div>
@@ -5044,7 +4932,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 const a = bbbCategorias[index];
                 const isMobile = window.innerWidth <= 768;
 
-                // 1. Cambio dinámico de la foto central del bombón
+                // 1. Cambio dinamico de la foto central del producto
                 if (galletaFija && a.img) {
                     galletaFija.style.transition = 'opacity 0.25s ease, transform 0.3s ease';
                     galletaFija.style.opacity = '0';
@@ -5059,14 +4947,12 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     transitionBg(a.bg);
                 }
 
-
-
                 updateCategoryText(index);
 
                 const anguloPaso = 360 / bbbCategorias.length;
 
                 if (isMobile) {
-                    // En móvil: la categoría seleccionada se ubica en el cuadrante inferior izquierdo visible (145°)
+                    // En movil: la categoria seleccionada se ubica en el cuadrante inferior izquierdo visible (145 deg)
                     const targetRot = 145 - getGradosPadre(index);
                     let diff = (targetRot - rotacionActual) % 360;
                     if (diff > 180) diff -= 360;
@@ -5085,33 +4971,9 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                         t.style.transition = initial ? 'none' : `transform ${rotDur}s cubic-bezier(0.25, 1, 0.5, 1), color 0.45s ease, text-shadow 0.45s ease`;
                         t.style.transform = `rotate(${-rotacionActual}deg)`;
                     });
-                } else if (isWheelCutByMargin()) {
-                    // En modo Abanico Interior (PC con corte por margen):
-                    // La categoria seleccionada se ubica en el vertice superior del abanico (-65 deg)
-                    // y sus 6 activos descienden a lo largo del interior hacia el texto (ver sugerencia)
-                    const targetRot = -65 - getDesktopFanAngle(index);
-                    let diff = (targetRot - rotacionActual) % 360;
-                    if (diff > 180) diff -= 360;
-                    if (diff < -180) diff += 360;
-                    rotacionActual += diff;
-
-                    const rotDur = initial ? 0 : Math.min(1.65, Math.max(1.35, 1.25 + Math.abs(diff) * 0.0035));
-                    rueda.style.transition = initial ? 'none' : `transform ${rotDur}s cubic-bezier(0.25, 1, 0.5, 1)`;
-                    rueda.style.transform = `rotate(${rotacionActual}deg)`;
-
-                    rueda.querySelectorAll('.nodo-texto').forEach(t => {
-                        t.style.transition = initial ? 'none' : `transform ${rotDur}s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease, text-shadow 0.4s ease`;
-                        t.style.transform = `rotate(${-rotacionActual}deg)`;
-                    });
-                    rueda.querySelectorAll('.sub-activo-link').forEach(t => {
-                        t.style.transition = initial ? 'none' : `transform ${rotDur}s cubic-bezier(0.25, 1, 0.5, 1), color 0.45s ease, text-shadow 0.45s ease`;
-                        t.style.transform = `rotate(${-rotacionActual}deg)`;
-                    });
                 } else {
-                    // En PC / Tablet estandar (Modo 360 sin corte de ventana):
+                    // En PC / Monitor (Modo 360 completo)
                     if (fromSubmenu) {
-                        // Al pinchar desde el submenú superior: rotar suavemente hacia el cuadrante superior derecho (-30°)
-                        // Así la categoría queda arriba en el lado derecho y los 6 activos por debajo rellenando el espacio hacia el texto
                         const targetRot = 60 - index * anguloPaso;
                         let diff = (targetRot - rotacionActual) % 360;
                         if (diff > 180) diff -= 360;
@@ -5131,8 +4993,6 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                             t.style.transform = `rotate(${-rotacionActual}deg)`;
                         });
                     } else {
-                        // Al pinchar directamente en la rueda: comportamiento orgánico Doxa
-                        // Se abre allí donde se haya pinchado la categoría, con un suave giro brisa reactivo
                         if (!initial) {
                             const grados = index * anguloPaso - 90;
                             const angulo = grados * (Math.PI / 180);
@@ -5163,25 +5023,21 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 selectedSubIndex = -1;
                 childrenVisible = false;
 
+                rotacionActual = 0;
+                rueda.style.transition = 'transform 0.9s cubic-bezier(0.25, 1, 0.5, 1)';
+                rueda.style.transform = 'rotate(0deg)';
+                rueda.querySelectorAll('.nodo-texto').forEach(t => {
+                    t.style.transition = 'transform 0.9s cubic-bezier(0.25, 1, 0.5, 1), color 0.5s ease';
+                    t.style.transform = 'rotate(0deg)';
+                });
 
-
-                if (window.innerWidth <= 768 || isWheelCutByMargin()) {
-                    rotacionActual = 0;
-                    rueda.style.transition = 'transform 0.9s cubic-bezier(0.25, 1, 0.5, 1)';
-                    rueda.style.transform = 'rotate(0deg)';
-                    rueda.querySelectorAll('.nodo-texto').forEach(t => {
-                        t.style.transition = 'transform 0.9s cubic-bezier(0.25, 1, 0.5, 1), color 0.5s ease';
-                        t.style.transform = 'rotate(0deg)';
-                    });
-                }
-
-                // Resetear la foto central a BBB.png
+                // Resetear la foto central al producto por defecto
                 if (galletaFija) {
                     galletaFija.style.transition = 'opacity 0.25s ease, transform 0.3s ease';
                     galletaFija.style.opacity = '0';
                     setTimeout(() => {
-                        galletaFija.src = '../BBB.png';
-                        galletaFija.alt = 'Bombón Bloom';
+                        galletaFija.src = defaultImgSrc;
+                        galletaFija.alt = defaultImgAlt;
                         galletaFija.style.opacity = '1';
                     }, 220);
                 }
@@ -5189,15 +5045,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 // Resetear el fondo a neutral con desvanecimiento suave
                 transitionBg('../piel negra.jpg');
 
-                const neutralHTML = `
-                        <div class="tagline" style="font-family:'Lexend',sans-serif;font-size:10.5px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:8px;display:block;">BOMBÓN BLOOM</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Arquitectura de Activos</h3>
-                        <p class="hero-value-prop-neg">Repostería Nutricosmética</p>
-                        <div class="hero-value-prop">
-                            Haz clic en cualquiera de las 8 variedades de Bombón Bloom para explorar su formulación activa y beneficios clave.
-                        </div>
-                    `;
-                transitionCajaText(neutralHTML);
+                transitionCajaText(defaultNeutralHTML);
                 renderRueda();
             }
 
@@ -5219,13 +5067,8 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 });
             }
 
-
-
             function renderRueda() {
                 const isMobile = window.innerWidth <= 768;
-                if (radialWrapper) {
-                    radialWrapper.classList.toggle('inner-fan-mode', isWheelCutByMargin());
-                }
                 const radioCategorias = getRadioCategorias();
 
                 // Limpieza suave de activos hijos anteriores
@@ -5240,7 +5083,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
                 const anguloPaso = 360 / bbbCategorias.length;
 
-                // Ángulo actual en pantalla de la categoría seleccionada (normalizado a [-180, 180))
+                // Angulo actual en pantalla de la categoria seleccionada (normalizado a [-180, 180))
                 const selGradosPadre = selectedCategoryIndex !== -1 ? (selectedCategoryIndex * anguloPaso - 90) : 0;
                 let selNormPantalla = 0;
                 if (selectedCategoryIndex !== -1) {
@@ -5255,24 +5098,18 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     const isSelected = (i === selectedCategoryIndex);
                     const isNeutral = (selectedCategoryIndex === -1);
 
-                    // Radios intercalados en zigzag (+30px longitud de lineas para que las categorias padre no queden apretadas)
-                    const parentOffset = Math.max(0, getImageRadiusOffset() - 30);
-                    const baseDesktopRadii = [240, 282, 240, 282, 240, 282, 240, 282];
-                    const desktopRadii = baseDesktopRadii.map(r => Math.max(120, r - parentOffset));
                     let actualParentRadio;
                     if (isSelected) {
                         actualParentRadio = isMobile ? 150 : (radioCategorias + 25);
                     } else {
                         if (isMobile) {
                             actualParentRadio = getMobileParentRadius(i);
-                        } else if (isWheelCutByMargin()) {
-                            actualParentRadio = getDesktopFanRadius(i);
                         } else {
-                            actualParentRadio = desktopRadii[i % desktopRadii.length];
+                            actualParentRadio = (i % 2 !== 0) ? 282 : 240;
                         }
                     }
 
-                    // Línea rayo de la categoría padre
+                    // Linea rayo de la categoria padre
                     let line = rueda.querySelector(`.ray-line[data-index="${i}"]`);
                     if (!line) {
                         line = document.createElement('div');
@@ -5283,13 +5120,13 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                         line.style.left = '50%';
                         line.style.height = '1px';
                         line.style.transformOrigin = '0 50%';
-                        line.style.transform = `rotate(${gradosPadre}deg)`;
                         line.style.zIndex = '0';
                         line.style.pointerEvents = 'none';
                         line.style.transition = 'width 0.75s ease, background 0.5s ease, opacity 0.6s ease';
                         rueda.appendChild(line);
                     }
 
+                    line.style.transform = `rotate(${gradosPadre}deg)`;
                     line.style.width = `${actualParentRadio}px`;
                     if (isSelected) {
                         line.style.background = 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.25) 42%, rgba(193, 155, 118, 0.95) 95%, transparent 100%)';
@@ -5302,15 +5139,13 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     const x = Math.cos(anguloPadre) * actualParentRadio;
                     const y = Math.sin(anguloPadre) * actualParentRadio;
 
-                    // Nodo de la categoría padre
+                    // Nodo de la categoria padre
                     let nodo = rueda.querySelector(`.nodo-activo[data-index="${i}"]`);
                     if (!nodo) {
                         nodo = document.createElement('div');
                         nodo.className = 'nodo-activo';
                         nodo.dataset.index = i;
                         nodo.style.position = 'absolute';
-                        nodo.style.left = `calc(50% + ${x}px)`;
-                        nodo.style.top = `calc(50% + ${y}px)`;
                         nodo.style.transition = 'left 1.1s cubic-bezier(0.25, 1, 0.5, 1), top 1.1s cubic-bezier(0.25, 1, 0.5, 1), scale 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease';
 
                         nodo.innerHTML = `<span class="nodo-texto" style="display:inline-flex; flex-direction:column; align-items:center; text-align:center; line-height:1.2; font-size:${isMobile ? '9.5px' : '10.5px'}; letter-spacing: 0.8px; text-transform: uppercase;">${formatCategoryName(a.n)}</span>`;
@@ -5382,38 +5217,14 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                             nodo.style.pointerEvents = 'none';
                             if (line) line.style.opacity = '0';
                         }
-                    } else if (isWheelCutByMargin()) {
-                        let sDeg = (gradosPadre + rotacionActual) % 360;
-                        if (sDeg < -180) sDeg += 360;
-                        if (sDeg >= 180) sDeg -= 360;
-
-                        if (isNeutral) {
-                            const distFromRight = Math.abs(sDeg);
-                            if (distFromRight > 85) {
-                                nodo.style.opacity = '0';
-                                nodo.style.pointerEvents = 'none';
-                                if (line) line.style.opacity = '0';
-                            } else {
-                                const op = distFromRight > 70 ? (85 - distFromRight) / 15 : 1;
-                                nodo.style.opacity = String(op);
-                                nodo.style.scale = '1';
-                                nodo.style.pointerEvents = 'auto';
-                                if (line) line.style.opacity = String(op * 0.75);
-                            }
-                        } else if (isSelected) {
-                            nodo.style.opacity = '1';
-                            nodo.style.scale = '1.08';
-                            nodo.style.pointerEvents = 'auto';
-                            if (line) line.style.opacity = childrenVisible ? '0' : '0.85';
-                        } else {
-                            nodo.style.opacity = '0';
-                            nodo.style.pointerEvents = 'none';
-                            if (line) line.style.opacity = '0';
-                        }
                     } else {
+                        // Desktop: TODAS LAS 8 CATEGORIAS COMPLETAMENTE VISIBLES EN VISTA NEUTRAL
                         nodo.style.opacity = isNeutral ? '1' : (isSelected ? '1' : '0');
                         nodo.style.pointerEvents = isNeutral || isSelected ? 'auto' : 'none';
                         nodo.style.scale = isNeutral ? '1' : (isSelected ? '1.08' : '0.88');
+                        if (line) {
+                            line.style.opacity = isNeutral ? '0.75' : (isSelected ? (childrenVisible ? '0' : '0.85') : '0');
+                        }
                     }
 
                     const textSpan = nodo.querySelector('.nodo-texto');
@@ -5423,12 +5234,12 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     textSpan.style.textShadow = isSelected ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none';
                     textSpan.style.transform = `rotate(${-rotacionActual}deg)`;
 
-                    // 3. Renderizar activos hijas (subActivos) bajo la categoría seleccionada
+                    // 3. Renderizar activos hijas (subActivos) bajo la categoria seleccionada
                     if (isSelected && a.subActivos && childrenVisible) {
                         const subCount = a.subActivos.length;
 
                         if (isMobile) {
-                            // En móvil: arco inferior visible con separación escalonada alterna
+                            // En movil: arco inferior visible con separacion escalonada alterna
                             const baseOffset = 28;
                             const stepOffset = 24;
                             a.subActivos.forEach((sub, idx) => {
@@ -5500,122 +5311,15 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                                     nodoSub.style.scale = isSubSelected ? '1.08' : (noSubSelected ? '1' : '0.9');
                                 }, 150 + idx * 70);
                             });
-                        } else if (isWheelCutByMargin()) {
-                            // MODO ABANICO INTERIOR (SUGERENCIA DEL USUARIO):
-                            // Los 6 activos hijos se despliegan en abanico descendente a la derecha de la madre
-                            const subRadio = radioCategorias + 26; // ~281px
-                            const fanStep = 130 / 6; // 21.67 deg
-
-                            a.subActivos.forEach((sub, idx) => {
-                                const gradosSubPantalla = -65 + (idx + 1) * fanStep;
-                                const gradosSubLocal = gradosSubPantalla - rotacionActual;
-                                const anguloSub = gradosSubLocal * (Math.PI / 180);
-
-                                const xSub = Math.cos(anguloSub) * subRadio;
-                                const ySub = Math.sin(anguloSub) * subRadio;
-
-                                const isSubSelected = (selectedSubIndex === idx);
-                                const noSubSelected = (selectedSubIndex === -1);
-
-                                const subLine = document.createElement('div');
-                                subLine.className = 'sub-ray-line';
-                                subLine.dataset.subIndex = idx;
-                                subLine.style.position = 'absolute';
-                                subLine.style.top = 'calc(50% - 0.5px)';
-                                subLine.style.left = '50%';
-                                subLine.style.width = `${subRadio}px`;
-                                subLine.style.height = '1px';
-                                subLine.style.background = isSubSelected
-                                    ? 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.25) 42%, rgba(193, 155, 118, 0.95) 95%, transparent 100%)'
-                                    : 'linear-gradient(90deg, transparent 40%, rgba(193, 155, 118, 0.12) 42%, rgba(193, 155, 118, 0.6) 95%, transparent 100%)';
-                                subLine.style.transformOrigin = '0 50%';
-                                subLine.style.transform = `rotate(${gradosSubLocal}deg)`;
-                                subLine.style.zIndex = '5';
-                                subLine.style.pointerEvents = 'none';
-                                subLine.style.opacity = '0';
-                                subLine.style.transition = 'opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s ease';
-                                rueda.appendChild(subLine);
-
-                                const nodoSub = document.createElement('div');
-                                nodoSub.className = 'nodo-subactivo';
-                                nodoSub.dataset.subIndex = idx;
-                                nodoSub.style.position = 'absolute';
-                                nodoSub.style.left = `calc(50% + ${xSub}px)`;
-                                nodoSub.style.top = `calc(50% + ${ySub}px)`;
-                                nodoSub.style.opacity = '0';
-                                nodoSub.style.scale = isSubSelected ? '1.08' : (noSubSelected ? '1' : '0.9');
-                                nodoSub.style.zIndex = isSubSelected ? '65' : '55';
-                                nodoSub.style.cursor = 'pointer';
-                                nodoSub.style.touchAction = 'manipulation';
-                                nodoSub.style.transition = 'opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1), scale 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 1.1s cubic-bezier(0.25, 1, 0.5, 1)';
-
-                                nodoSub.innerHTML = `
-                                        <span class="sub-activo-link" style="display:inline-flex; flex-direction:column; align-items:center; text-align:center; line-height:1.2; font-size:10.5px; font-weight:${isSubSelected ? '600' : '400'}; color:${isSubSelected || noSubSelected ? '#fff' : 'rgba(255, 255, 255, 0.65)'}; letter-spacing: 0.6px; text-transform: none; pointer-events:none; transition: transform 1.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease, text-shadow 0.4s ease; text-shadow: ${isSubSelected ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none'};">
-                                            ${formatSubActivoName(sub.n)}
-                                        </span>
-                                    `;
-
-                                const textSpanSub = nodoSub.querySelector('.sub-activo-link');
-                                textSpanSub.style.transform = `rotate(${-rotacionActual}deg)`;
-
-                                nodoSub.onclick = (e) => {
-                                    e.stopPropagation();
-                                    if (wasDragging || isDraggingWheel) return;
-                                    alignToWheelSection();
-                                    handleSubClick(i, idx, sub);
-                                };
-
-                                nodoSub.onmouseenter = () => {
-                                    if (isDraggingWheel || isMobile) return;
-                                    nodoSub.style.scale = '1.08';
-                                    nodoSub.style.opacity = '1';
-                                    nodoSub.style.zIndex = '65';
-                                    if (subLine) subLine.style.opacity = '0.9';
-                                    const textSub = nodoSub.querySelector('.sub-activo-link');
-                                    if (textSub) {
-                                        textSub.style.color = '#fff';
-                                        textSub.style.textShadow = '0 0 14px rgba(255, 255, 255, 0.95)';
-                                    }
-                                };
-
-                                nodoSub.onmouseleave = () => {
-                                    if (isDraggingWheel || isMobile) return;
-                                    const isNowSelected = (selectedSubIndex === idx);
-                                    const noSubSelected = (selectedSubIndex === -1);
-                                    nodoSub.style.scale = isNowSelected ? '1.08' : (noSubSelected ? '1' : '0.9');
-                                    nodoSub.style.opacity = isNowSelected ? '1' : (noSubSelected ? '1' : '0.45');
-                                    nodoSub.style.zIndex = isNowSelected ? '65' : '55';
-                                    if (subLine) {
-                                        subLine.style.opacity = isNowSelected ? '0.85' : (noSubSelected ? '0.45' : '0.2');
-                                    }
-                                    const textSub = nodoSub.querySelector('.sub-activo-link');
-                                    if (textSub) {
-                                        textSub.style.color = isNowSelected ? '#fff' : (noSubSelected ? '#fff' : 'rgba(255, 255, 255, 0.65)');
-                                        textSub.style.textShadow = isNowSelected ? '0 0 14px rgba(255, 255, 255, 0.95)' : 'none';
-                                    }
-                                };
-
-                                rueda.appendChild(nodoSub);
-
-                                setTimeout(() => {
-                                    subLine.style.opacity = isSubSelected ? '0.85' : (noSubSelected ? '0.45' : '0.2');
-                                    nodoSub.style.opacity = isSubSelected ? '1' : (noSubSelected ? '1' : '0.45');
-                                    nodoSub.style.scale = isSubSelected ? '1.08' : (noSubSelected ? '1' : '0.9');
-                                }, 150 + idx * 70);
-                            });
                         } else {
-                            // En PC / Tablet (Modo Abanico Dinámico Doxa):
-                            // Los activos se despliegan según dónde se encuentre la categoría seleccionada
+                            // En PC / Tablet (Modo Abanico Dinamico 360):
+                            // Los activos se despliegan segun donde se encuentre la categoria seleccionada
                             const isLeftSide = Math.abs(selNormPantalla) > 90;
                             const isUpperHalf = selNormPantalla < 0;
 
-                            // En el lado derecho (entre -90° y +90°):
-                            // Si está en la mitad superior (-90° a 0°): signo = 1 (desciende hacia abajo por el lado derecho).
-                            // La categoría padre queda ARRIBA y los 6 activos POR DEBAJO rellenando el espacio hacia la caja de texto.
-                            // Si está en la mitad inferior (0° a 90°): signo = -1 (asciende hacia el centro horizontal para mantenerse en el lado derecho).
                             let signo = !isLeftSide ? (isUpperHalf ? 1 : -1) : (isUpperHalf ? -1 : 1);
 
-                            const subRadio = radioCategorias + 26; // 281px
+                            const subRadio = radioCategorias + 26; // 276px
                             const baseOffset = 15;
                             const stepOffset = 13.5;
 
@@ -5699,7 +5403,9 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                                     nodoSub.style.scale = isNowSelected ? '1.08' : (noSubSelected ? '1' : '0.9');
                                     nodoSub.style.opacity = isNowSelected ? '1' : (noSubSelected ? '1' : '0.45');
                                     nodoSub.style.zIndex = isNowSelected ? '65' : '55';
-                                    if (subLine) subLine.style.opacity = isNowSelected ? '0.85' : (noSubSelected ? '0.45' : '0.2');
+                                    if (subLine) {
+                                        subLine.style.opacity = isNowSelected ? '0.85' : (noSubSelected ? '0.45' : '0.2');
+                                    }
                                     const textSub = nodoSub.querySelector('.sub-activo-link');
                                     if (textSub) {
                                         textSub.style.color = isNowSelected ? '#fff' : (noSubSelected ? '#fff' : 'rgba(255, 255, 255, 0.65)');
@@ -5768,7 +5474,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 }
             }
 
-            // Control de arrastre unificado y frenada suave con inercia orgÃ¡nica (Estilo Doxa)
+            // Control de arrastre unificado y frenada suave con inercia organica (Estilo Doxa)
             let activePointerId = null;
             let pointerStartX = 0;
             let pointerStartY = 0;
@@ -5845,8 +5551,6 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
                     if (window.innerWidth <= 768) {
                         updateMobileArcVisibility(rotacionActual);
-                    } else if (isWheelCutByMargin()) {
-                        updateFanArcVisibility(rotacionActual);
                     }
                 }
             }, { passive: false });
@@ -5890,8 +5594,6 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
                             if (window.innerWidth <= 768) {
                                 updateMobileArcVisibility(rotacionActual);
-                            } else if (isWheelCutByMargin()) {
-                                updateFanArcVisibility(rotacionActual);
                             }
                             inertiaRaf = requestAnimationFrame(applyInertia);
                         } else {
@@ -5922,13 +5624,10 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             window.addEventListener('pointercancel', handlePointerEnd);
 
             let lastIsMobile = window.innerWidth <= 768;
-            let lastIsCut = isWheelCutByMargin();
             window.addEventListener('resize', () => {
                 const currIsMobile = window.innerWidth <= 768;
-                const currIsCut = isWheelCutByMargin();
-                if (currIsMobile !== lastIsMobile || currIsCut !== lastIsCut) {
+                if (currIsMobile !== lastIsMobile) {
                     lastIsMobile = currIsMobile;
-                    lastIsCut = currIsCut;
                     if (selectedCategoryIndex !== -1) {
                         selectCategory(selectedCategoryIndex, true, false);
                     } else {
