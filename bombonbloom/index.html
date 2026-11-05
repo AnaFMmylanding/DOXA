@@ -20,21 +20,25 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 3. SUBMENU GENERAL DE LOS 6 PRODUCTOS DOXA (DEBAJO DEL HERO)
 -------------------------------------------------------------------------
 - Contenedor del submenu: #productosMenuBar
-- Fotos circulares de los 6 productos y nombres en columna.
 - Interruptores ON/OFF (cambia data-visible="on" o "off"):
   * PRODUCTO 1: Doxas (Doxa.png) ........................ [data-visible="on"]
   * PRODUCTO 2: Doxa-cookies (Doxa.png) ................. [data-visible="on"]
   * PRODUCTO 3: Bombon Blooms (BBB.png) ................. [data-visible="on"]
   * PRODUCTO 4: Lingotes (Lingote.png) .................. [data-visible="on"]
   * PRODUCTO 5: Crujiente de Almendra (Oblea.png) ....... [data-visible="on"]
-  * PRODUCTO 6: PequeBlooms (Pequebloom.png) ............ [data-visible="on"]
+  * PRODUCTO 6: NeneBlooms (Pequebloom.png) ............. [data-visible="on"]
 
 -------------------------------------------------------------------------
-4. SECCION RUEDAS RADIALES DE ACTIVOS
+4. SECCION RUEDAS RADIALES DE ACTIVOS (UNA RUEDA POR PRODUCTO)
 -------------------------------------------------------------------------
-- Interruptor ON/OFF (cambia data-visible="on" o "off" en la etiqueta <section>):
-  * RUEDA DE ACTIVOS DOXA (#rueda-activos-doxa) ......... [data-visible="on"]
-  * RUEDA DE ACTIVOS BOMBON BLOOM (#rueda-activos-bbb) .. [data-visible="on"]
+- Solo se muestra la rueda del producto activo en cada momento.
+- Interruptores ON/OFF (cambia data-visible="on" o "off" en cada <section>):
+  * RUEDA 1: DOXA (#rueda-activos-doxa) ................. [data-visible="on"]
+  * RUEDA 2: DOXA-COOKIE (#rueda-activos-cookie) ......... [data-visible="on"]
+  * RUEDA 3: BOMBON BLOOM (#rueda-activos-bbb) .......... [data-visible="on"]
+  * RUEDA 4: LINGOTE (#rueda-activos-lingote) ........... [data-visible="on"]
+  * RUEDA 5: CRUJIENTE DE ALMENDRA (#rueda-activos-oblea) [data-visible="on"]
+  * RUEDA 6: NENEBLOOMS (#rueda-activos-pequebloom) ...... [data-visible="on"]
 =========================================================================
 -->
 <!DOCTYPE html>
@@ -1609,8 +1613,8 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
         </header>
 
         <!-- =========================================================================
-           [SUBMENÚ GENERAL DE LOS 6 PRODUCTOS DOXA]
-           Situado debajo de la cabecera (hero), con imágenes circulares y nombres.
+           [SUBMENÃš GENERAL DE LOS 6 PRODUCTOS DOXA]
+           Situado debajo de la cabecera (hero), con imÃ¡genes circulares y nombres.
            INTERRUPTORES ON/OFF: Para activar o desactivar cualquiera de los 6 productos,
            cambia su atributo data-visible="on" por data-visible="off".
            ========================================================================= -->
@@ -1618,7 +1622,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             <div class="bbb-submenu-container" data-visible-count="6">
                 <!-- PRODUCTO 1: Doxas [ESTADO: ON/OFF] -->
                 <!-- Para activar o desactivar: cambia data-visible="on" o "off" -->
-                <a href="#rueda-activos-doxa" class="bbb-submenu-item producto-item" id="btn-prod-doxa" data-product="doxa" data-visible="on">
+                <a href="#rueda-activos-doxa" class="bbb-submenu-item producto-item active" id="btn-prod-doxa" data-product="doxa" data-visible="on">
                     <div class="bbb-submenu-thumb">
                         <img src="../Doxa.png" alt="Doxas" onerror="this.src='../ProtoDoxa.png'">
                     </div>
@@ -1630,7 +1634,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
                 <!-- PRODUCTO 2: Doxa-cookies [ESTADO: ON/OFF] -->
                 <!-- Para activar o desactivar: cambia data-visible="on" o "off" -->
-                <a href="#rueda-activos-doxa" class="bbb-submenu-item producto-item" id="btn-prod-cookie" data-product="cookie" data-visible="on">
+                <a href="#rueda-activos-cookie" class="bbb-submenu-item producto-item" id="btn-prod-cookie" data-product="cookie" data-visible="on">
                     <div class="bbb-submenu-thumb">
                         <img src="../Doxa.png" alt="Doxa-cookies" onerror="this.src='../Cookie.png'">
                     </div>
@@ -1640,21 +1644,21 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     </span>
                 </a>
 
-                <!-- PRODUCTO 3: Bombón Blooms [ESTADO: ON/OFF] -->
+                <!-- PRODUCTO 3: BombÃ³n Blooms [ESTADO: ON/OFF] -->
                 <!-- Para activar o desactivar: cambia data-visible="on" o "off" -->
-                <a href="#rueda-activos-bbb" class="bbb-submenu-item producto-item active" id="btn-prod-bbb" data-product="bbb" data-visible="on">
+                <a href="#rueda-activos-bbb" class="bbb-submenu-item producto-item" id="btn-prod-bbb" data-product="bbb" data-visible="on">
                     <div class="bbb-submenu-thumb">
-                        <img src="../BBB.png" alt="Bombón Blooms" onerror="this.src='../BBB 1.png'">
+                        <img src="../BBB.png" alt="BombÃ³n Blooms" onerror="this.src='../BBB 1.png'">
                     </div>
                     <span class="bbb-submenu-name">
                         <span class="bbb-brand">DOXA</span>
-                        <span class="bbb-line">Bombón Blooms</span>
+                        <span class="bbb-line">BombÃ³n Blooms</span>
                     </span>
                 </a>
 
                 <!-- PRODUCTO 4: Lingotes [ESTADO: ON/OFF] -->
                 <!-- Para activar o desactivar: cambia data-visible="on" o "off" -->
-                <a href="#rueda-activos-bbb" class="bbb-submenu-item producto-item" id="btn-prod-lingote" data-product="lingote" data-visible="on">
+                <a href="#rueda-activos-lingote" class="bbb-submenu-item producto-item" id="btn-prod-lingote" data-product="lingote" data-visible="on">
                     <div class="bbb-submenu-thumb">
                         <img src="../Lingote.png" alt="Lingotes">
                     </div>
@@ -1666,7 +1670,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
                 <!-- PRODUCTO 5: Crujiente de Almendra [ESTADO: ON/OFF] -->
                 <!-- Para activar o desactivar: cambia data-visible="on" o "off" -->
-                <a href="#rueda-activos-bbb" class="bbb-submenu-item producto-item" id="btn-prod-oblea" data-product="oblea" data-visible="on">
+                <a href="#rueda-activos-oblea" class="bbb-submenu-item producto-item" id="btn-prod-oblea" data-product="oblea" data-visible="on">
                     <div class="bbb-submenu-thumb">
                         <img src="../Oblea.png" alt="Crujiente de Almendra">
                     </div>
@@ -1677,15 +1681,15 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                     </span>
                 </a>
 
-                <!-- PRODUCTO 6: PequeBlooms [ESTADO: ON/OFF] -->
+                <!-- PRODUCTO 6: NeneBlooms [ESTADO: ON/OFF] -->
                 <!-- Para activar o desactivar: cambia data-visible="on" o "off" -->
-                <a href="#rueda-activos-bbb" class="bbb-submenu-item producto-item" id="btn-prod-pequebloom" data-product="pequebloom" data-visible="on">
+                <a href="#rueda-activos-pequebloom" class="bbb-submenu-item producto-item" id="btn-prod-pequebloom" data-product="pequebloom" data-visible="on">
                     <div class="bbb-submenu-thumb">
-                        <img src="../Pequebloom.png" alt="PequeBlooms">
+                        <img src="../Pequebloom.png" alt="NeneBlooms">
                     </div>
                     <span class="bbb-submenu-name">
                         <span class="bbb-brand">DOXA</span>
-                        <span class="bbb-line">PequeBlooms</span>
+                        <span class="bbb-line">NeneBlooms</span>
                     </span>
                 </a>
             </div>
@@ -2590,50 +2594,243 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
 
     <!-- =========================================================================
-       [SECCION RUEDA RADIAL DE ACTIVOS DOXA]
-       Rescatada integramente de doxa/index.html y enlazada con el boton Doxas.
-       INTERRUPTOR ON/OFF: Cambia data-visible="on" por "off" para desactivar esta rueda.
+       [RUEDA DE ACTIVOS 1: DOXA]
+       Enlazada con el boton "Doxas" del submenu general.
+       INTERRUPTOR ON/OFF: data-visible="on" / "off"
        ========================================================================= -->
-    <section id="rueda-activos-doxa" class="cajas-activos-section product-wheel" data-product="doxa" data-visible="on">
+    <section id="rueda-activos-doxa" class="cajas-activos-section product-wheel active-product-wheel" data-product="doxa" data-visible="on">
         <a id="rueda-doxa" style="position: absolute; top: 0; pointer-events: none;"></a>
-            <div class="bg-layer" id="caja-bg-doxa" style="background-image: url('../piel negra.jpg');">
-            </div>
-
-            <div class="content-grid">
-                <!-- Columna Izquierda: Rueda -->
-                <div class="wheel-column">
-                    <div class="radial-wrapper" id="radialWrapperDoxa">
-                        <img src="../Galle choco.png" class="galleta-fija" alt="DOXA">
-                        <div id="rueda-fisica-doxa" class="rueda-giro"></div>
-                    </div>
-                </div>
-
-                <!-- Columna Derecha: Texto dinámico -->
-                <div class="text-column">
-                    <div class="text-box" id="caja-text-doxa">
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Descubre DOXA</h3>
-                        <p class="hero-value-prop-neg">Arquitectura de Activos</p>
-                        <div class="hero-value-prop">
-                            Haz clic en cualquiera de las categorías para explorar los activos que componen la
-                            arquitectura de DOXA.
-                        </div>
-                    </div>
-                    <div class="rueda-cta-wrapper">
-                        <a href="../compra.html" class="btn-reserva-rueda">
-                            RESERVA TU CAJA
-                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24" style="margin-left: 10px;">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </a>
-                    </div>
+        <div class="bg-layer" id="caja-bg-doxa" style="background-image: url('../piel negra.jpg');"></div>
+        <div class="content-grid">
+            <div class="wheel-column">
+                <div class="radial-wrapper" id="radialWrapper-doxa">
+                    <img src="../Galle choco.png" class="galleta-fija" alt="DOXA">
+                    <div id="rueda-fisica-doxa" class="rueda-giro"></div>
                 </div>
             </div>
+            <div class="text-column">
+                <div class="text-box" id="caja-text-doxa">
+                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Descubre DOXA</h3>
+                    <p class="hero-value-prop-neg">Arquitectura de Activos</p>
+                    <div class="hero-value-prop">
+                        Haz clic en cualquiera de las categorías para explorar los activos que componen la arquitectura de DOXA.
+                    </div>
+                </div>
+                <div class="rueda-cta-wrapper">
+                    <a href="../compra.html" class="btn-reserva-rueda">
+                        RESERVA TU CAJA
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left: 10px;">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <script>
-                (function () {
-                    const activos = [
+    <!-- =========================================================================
+       [RUEDA DE ACTIVOS 2: DOXA-COOKIE (RUEDA DOXA Nº 2)]
+       Enlazada con el boton "Doxa-cookies" del submenu general.
+       INTERRUPTOR ON/OFF: data-visible="on" / "off"
+       ========================================================================= -->
+    <section id="rueda-activos-cookie" class="cajas-activos-section product-wheel" data-product="cookie" data-visible="on" style="display: none;">
+        <a id="rueda-cookie" style="position: absolute; top: 0; pointer-events: none;"></a>
+        <div class="bg-layer" id="caja-bg-cookie" style="background-image: url('../piel negra.jpg');"></div>
+        <div class="content-grid">
+            <div class="wheel-column">
+                <div class="radial-wrapper" id="radialWrapper-cookie">
+                    <img src="../Doxa.png" class="galleta-fija" alt="DOXA Cookie" onerror="this.src='../Galle choco.png'">
+                    <div id="rueda-fisica-cookie" class="rueda-giro"></div>
+                </div>
+            </div>
+            <div class="text-column">
+                <div class="text-box" id="caja-text-cookie">
+                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Descubre DOXA-COOKIE</h3>
+                    <p class="hero-value-prop-neg">Arquitectura de Activos</p>
+                    <div class="hero-value-prop">
+                        Haz clic en cualquiera de las categorías para explorar los activos que componen cada Doxa-cookie.
+                    </div>
+                </div>
+                <div class="rueda-cta-wrapper">
+                    <a href="../compra.html" class="btn-reserva-rueda">
+                        RESERVA TU CAJA
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left: 10px;">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+       [RUEDA DE ACTIVOS 3: BOMBÓN BLOOM]
+       Enlazada con el boton "Bombon Blooms" del submenu general.
+       INTERRUPTOR ON/OFF: data-visible="on" / "off"
+       ========================================================================= -->
+    <section id="rueda-activos-bbb" class="cajas-activos-section product-wheel" data-product="bbb" data-visible="on" style="display: none;">
+        <a id="rueda-activos" style="position: absolute; top: 0; pointer-events: none;"></a>
+        <div class="bg-layer" id="caja-bg-bbb" style="background-image: url('../piel negra.jpg');"></div>
+        <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-bbb"></div>
+        <div class="content-grid">
+            <div class="wheel-column">
+                <div class="radial-wrapper" id="radialWrapper-bbb">
+                    <img src="../BBB.png" class="galleta-fija" alt="Bombón Bloom" onerror="this.src='../Galle choco.png'">
+                    <div id="rueda-fisica-bbb" class="rueda-giro"></div>
+                </div>
+            </div>
+            <div class="text-column">
+                <div class="text-box" id="caja-text-bbb">
+                    <div class="tagline">BOMBÓN BLOOM</div>
+                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Arquitectura de Activos</h3>
+                    <p class="hero-value-prop-neg">Repostería Nutricosmética</p>
+                    <div class="hero-value-prop">
+                        Haz clic en cualquiera de las 8 variedades de Bombón Bloom para explorar su formulación activa y beneficios clave.
+                    </div>
+                </div>
+                <div class="rueda-cta-wrapper">
+                    <a href="../compra.html" class="btn-reserva-rueda">
+                        RESERVA TU CAJA
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left: 10px;">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+       [RUEDA DE ACTIVOS 4: LINGOTES]
+       Enlazada con el boton "Lingotes" del submenu general.
+       INTERRUPTOR ON/OFF: data-visible="on" / "off"
+       ========================================================================= -->
+    <section id="rueda-activos-lingote" class="cajas-activos-section product-wheel" data-product="lingote" data-visible="on" style="display: none;">
+        <a id="rueda-lingote" style="position: absolute; top: 0; pointer-events: none;"></a>
+        <div class="bg-layer" id="caja-bg-lingote" style="background-image: url('../piel negra.jpg');"></div>
+        <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-lingote"></div>
+        <div class="content-grid">
+            <div class="wheel-column">
+                <div class="radial-wrapper" id="radialWrapper-lingote">
+                    <img src="../Lingote.png" class="galleta-fija" alt="Lingote" onerror="this.src='../Galle choco negro.png'">
+                    <div id="rueda-fisica-lingote" class="rueda-giro"></div>
+                </div>
+            </div>
+            <div class="text-column">
+                <div class="text-box" id="caja-text-lingote">
+                    <div class="tagline">LINGOTE</div>
+                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Arquitectura de Activos</h3>
+                    <p class="hero-value-prop-neg">Nutrición y Placer</p>
+                    <div class="hero-value-prop">
+                        Haz clic en cualquiera de las variedades de Lingote para explorar su formulación activa y beneficios clave.
+                    </div>
+                </div>
+                <div class="rueda-cta-wrapper">
+                    <a href="../compra.html" class="btn-reserva-rueda">
+                        RESERVA TU CAJA
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left: 10px;">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+       [RUEDA DE ACTIVOS 5: CRUJIENTE DE ALMENDRA]
+       Enlazada con el boton "Crujiente de Almendra" del submenu general.
+       INTERRUPTOR ON/OFF: data-visible="on" / "off"
+       ========================================================================= -->
+    <section id="rueda-activos-oblea" class="cajas-activos-section product-wheel" data-product="oblea" data-visible="on" style="display: none;">
+        <a id="rueda-oblea" style="position: absolute; top: 0; pointer-events: none;"></a>
+        <div class="bg-layer" id="caja-bg-oblea" style="background-image: url('../piel negra.jpg');"></div>
+        <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-oblea"></div>
+        <div class="content-grid">
+            <div class="wheel-column">
+                <div class="radial-wrapper" id="radialWrapper-oblea">
+                    <img src="../Oblea.png" class="galleta-fija" alt="Crujiente de Almendra" onerror="this.src='../Galle cafe.png'">
+                    <div id="rueda-fisica-oblea" class="rueda-giro"></div>
+                </div>
+            </div>
+            <div class="text-column">
+                <div class="text-box" id="caja-text-oblea">
+                    <div class="tagline">CRUJIENTE DE ALMENDRA</div>
+                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Arquitectura de Activos</h3>
+                    <p class="hero-value-prop-neg">Nutrición y Placer</p>
+                    <div class="hero-value-prop">
+                        Haz clic en cualquiera de las variedades de Crujiente de Almendra para explorar sus activos funcionales.
+                    </div>
+                </div>
+                <div class="rueda-cta-wrapper">
+                    <a href="../compra.html" class="btn-reserva-rueda">
+                        RESERVA TU CAJA
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left: 10px;">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+       [RUEDA DE ACTIVOS 6: NENEBLOOMS]
+       Enlazada con el boton "NeneBlooms" del submenu general.
+       INTERRUPTOR ON/OFF: data-visible="on" / "off"
+       ========================================================================= -->
+    <section id="rueda-activos-pequebloom" class="cajas-activos-section product-wheel" data-product="pequebloom" data-visible="on" style="display: none;">
+        <a id="rueda-pequebloom" style="position: absolute; top: 0; pointer-events: none;"></a>
+        <div class="bg-layer" id="caja-bg-pequebloom" style="background-image: url('../piel negra.jpg');"></div>
+        <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-pequebloom"></div>
+        <div class="content-grid">
+            <div class="wheel-column">
+                <div class="radial-wrapper" id="radialWrapper-pequebloom">
+                    <img src="../Pequebloom.png" class="galleta-fija" alt="NeneBlooms" onerror="this.src='../BBB.png'">
+                    <div id="rueda-fisica-pequebloom" class="rueda-giro"></div>
+                </div>
+            </div>
+            <div class="text-column">
+                <div class="text-box" id="caja-text-pequebloom">
+                    <div class="tagline">NENEBLOOMS</div>
+                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Arquitectura de Activos</h3>
+                    <p class="hero-value-prop-neg">Nutrición Infantil y Juvenil</p>
+                    <div class="hero-value-prop">
+                        Haz clic en cualquiera de las variedades de NeneBlooms para explorar su formulación activa.
+                    </div>
+                </div>
+                <div class="rueda-cta-wrapper">
+                    <a href="../compra.html" class="btn-reserva-rueda">
+                        RESERVA TU CAJA
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left: 10px;">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        /* =========================================================================
+           DATOS INDEPENDIENTES DE CADA RUEDA DE PRODUCTO
+           Cada producto tiene su propio bloque de datos para customizar libremente:
+           - activosDoxa: Activos de Doxas
+           - activosDoxaCookie: Activos de Doxa-cookies
+           - bbbCategorias: CategorÃ­as de BombÃ³n Bloom
+           - lingoteCategorias: CategorÃ­as de Lingotes
+           - obleaCategorias: CategorÃ­as de Crujiente de Almendra
+           - pequebloomCategorias: CategorÃ­as de NeneBlooms
+           ========================================================================= */
+
+        /* --- DATOS RUEDA 1: DOXA --- */
+        const activosDoxa = [
                         {
                             n: "Piel Nutrida & Firme",
                             bg: "../Hidratación.jpg",
@@ -2730,11 +2927,181 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
                     ];
 
-                    const sec = document.getElementById('rueda-activos-doxa');
-                    if (!sec) return;
-                    const rueda = sec.querySelector('.rueda-giro');
-                    const cajaBg = sec.querySelector('.bg-layer');
-                    const cajaText = sec.querySelector('.text-box');
+        /* --- DATOS RUEDA 2: DOXA-COOKIE (RUEDA DOXA NÂº 2) --- */
+        const activosDoxaCookie = JSON.parse(JSON.stringify(activosDoxa));
+
+        /* --- DATOS RUEDA 3: BOMBÃ“N BLOOM --- */
+        const bbbCategorias = [
+            {
+                n: "BBB Piel, Pelo & Uñas",
+                title: "BBB Piel, Pelo & Uñas",
+                tagline: "BOMBÓN BLOOM",
+                img: "../BBB 1.png",
+                bg: "../Pelo y uñas.jpg",
+                neg: "Regeneración celular, elasticidad y firmeza",
+                prop: "Fórmula de alta biodisponibilidad para nutrir la piel desde el interior, fortalecer el folículo piloso y devolver la vitalidad a las uñas.",
+                subActivos: [
+                    { n: "Péptidos Colágeno", title: "Péptidos de Colágeno — 10g", neg: "Firmeza y regeneración dérmica", prop: "10g de péptidos bioactivos hidrolizados de máxima asimilación para favorecer la síntesis de colágeno y restaurar la turgencia." },
+                    { n: "Ácido Hialurónico", title: "Ácido Hialurónico Puro", neg: "Hidratación celular profunda", prop: "Retiene hasta 1000 veces su peso molecular en agua, hidratando la matriz extracelular para una piel jugosa y tersa." },
+                    { n: "Coenzima Q10", title: "Coenzima Q10 Bioidéntica", neg: "Protección mitocondrial", prop: "Antioxidante intracelular que previene el estrés oxidativo y combate el fotoenvejecimiento." },
+                    { n: "Biotina Activa", title: "Biotina Pura D-Biotina", neg: "Vigor capilar y dureza ungular", prop: "Refuerza la queratina capilar y celular, engrosando el pelo fino y reduciendo la fragilidad." },
+                    { n: "Zinc Quelado", title: "Bisglicinato de Zinc", neg: "Cicatrización y equilibrio", prop: "Mineral esencial con máxima biodisponibilidad que regula la producción sebácea." },
+                    { n: "Vitamina C", title: "Vitamina C Pura Liposomada", neg: "Cofactor esencial", prop: "Potente antioxidante sinérgico indispensable para ensamblar las fibras de colágeno." }
+                ]
+            },
+            {
+                n: "BBB Stop-loss Mujer",
+                title: "BBB Stop-loss Mujer",
+                tagline: "BOMBÓN BLOOM",
+                img: "../BBB 2.png",
+                bg: "../cabello y uñas.jpg",
+                neg: "Anclaje folicular, nutrición y freno a la caída",
+                prop: "Arquitectura nutracéutica diseñada específicamente para frenar la caída capilar femenina estacional u hormonal y reactivar el crecimiento.",
+                subActivos: [
+                    { n: "Extracto Cola Caballo", title: "Cola de Caballo Estandarizada", neg: "Sílice orgánica y elasticidad", prop: "Aporte concentrado de silicio biodisponible para regenerar la estructura interna de la fibra capilar." },
+                    { n: "Hierro Bisglicinato", title: "Hierro Quelado Sin Molestias", neg: "Oxigenación de la raíz", prop: "Forma de hierro de máxima asimilación estomacal para sostener niveles óptimos de ferritina." },
+                    { n: "L-Cisteína", title: "L-Cisteína Pura", neg: "Estructura primaria de la queratina", prop: "Aminoácido azufrado indispensable para crear los puentes disulfuro que dan resistencia y fuerza al cabello." },
+                    { n: "Levadura Cerveza", title: "Levadura Nutricional Viva", neg: "Complejo vitamínico B natural", prop: "Aporte biodisponible de vitaminas del grupo B para activar la división celular en la raíz del pelo." },
+                    { n: "Semilla Calabaza", title: "Aceite de Semilla de Calabaza", neg: "Inhibición suave de la 5α-reductasa", prop: "Fitonutrientes que equilibran el impacto de andrógenos a nivel folicular en la mujer." },
+                    { n: "Vitamina E", title: "Tocoferoles Mixtos Naturales", neg: "Microcirculación en el cuero cabelludo", prop: "Protege los capilares sanguíneos que irrigan la papila dérmica del estrés oxidativo." }
+                ]
+            },
+            {
+                n: "BBB Menopausia",
+                title: "BBB Menopausia",
+                tagline: "BOMBÓN BLOOM",
+                img: "../BBB 3.png",
+                bg: "../amazona.jpg",
+                neg: "Equilibrio hormonal, serenidad y soporte óseo",
+                prop: "Sinergia botánica y micronutricional para acompañar la transición hormonal con confort, vitalidad y protección celular.",
+                subActivos: [
+                    { n: "Trébol Rojo", title: "Isoflavonas de Trébol Rojo", neg: "Modulación fitoestrogénica", prop: "Fitoestrógenos naturales que alivian los sofocos, la sudoración nocturna y la sequedad." },
+                    { n: "Cimicífuga", title: "Cimicifuga Racemosa", neg: "Regulación neurovegetativa", prop: "Extracto estandarizado que suaviza los cambios de humor y favorece el descanso reparador." },
+                    { n: "Maca Andina", title: "Maca Roja y Negra Estandarizada", neg: "Energía y vitalidad endocrina", prop: "Adaptógeno milenario que combate la fatiga crónica y apoya la libido y la densidad ósea." },
+                    { n: "Salvia", title: "Salvia Officinalis Pura", neg: "Control de sofocos y transpiración", prop: "Fitocompuestos que equilibran el centro termorregulador hipotalámico." },
+                    { n: "Vitamina D3 & K2", title: "D3 Colecalciferol + K2 Menaquinona-7", neg: "Fijación del calcio óseo", prop: "Dúo vitamínico sinérgico que dirige el calcio hacia el hueso y previene la desmineralización." },
+                    { n: "Complejo B Metilado", title: "Vitaminas B6, B9 y B12 Metiladas", neg: "Apoyo del sistema nervioso", prop: "Vitaminas en su forma biológicamente activa para mitigar la niebla mental y el cansancio." }
+                ]
+            },
+            {
+                n: "BBB Regla",
+                title: "BBB Regla",
+                tagline: "BOMBÓN BLOOM",
+                img: "../BBB 4.png",
+                bg: "../respeto.jpg",
+                neg: "Alivio del SPM, equilibrio prostaglándico y bienestar",
+                prop: "Fórmula reconfortante formulada para calmar los espasmos, reducir la inflamación y sostener un estado de ánimo estable durante el ciclo.",
+                subActivos: [
+                    { n: "Sauzgatillo", title: "Vitex Agnus-Castus", neg: "Equilibrio estrógeno / progesterona", prop: "Regula la prolactina y armoniza la fase lútea, aliviando la hinchazón y la sensibilidad mamaria." },
+                    { n: "Magnesio Bisglicinato", title: "Magnesio Quelado de Alta Absorción", neg: "Relajación miometrial y muscular", prop: "Reduce la intensidad de los cólicos menstruales y alivia las migrañas catameniales." },
+                    { n: "Jengibre Estandarizado", title: "Extracto de Jengibre (5% Gingeroles)", neg: "Inhibición de prostaglandinas proinflamatorias", prop: "Eficacia demostrada para reducir el dolor espasmódico abdominal y las náuseas." },
+                    { n: "Vitamina B6 Activa", title: "Piridoxal-5-Fosfato (P5P)", neg: "Metabolismo de serotonina y dopamina", prop: "Forma activa de la B6 indispensable para estabilizar el humor y reducir la irritabilidad." },
+                    { n: "Onagra", title: "Aceite de Onagra Primera Prensión (GLA)", neg: "Modulación de la inflamación cíclica", prop: "Ácido gamma-linolénico para mantener la piel limpia y prevenir brotes premenstruales." },
+                    { n: "Hierro Quelado", title: "Bisglicinato de Hierro Ferrochel", neg: "Reposición de pérdidas menstruales", prop: "Restaura la vitalidad previniendo la fatiga ferropénica durante el sangrado." }
+                ]
+            },
+            {
+                n: "BBB Pre-entreno",
+                title: "BBB Pre-entreno",
+                tagline: "BOMBÓN BLOOM",
+                img: "../BBB 5.png",
+                bg: "../Energía.jpg",
+                neg: "Fuerza limpia, bombeo muscular y foco mental",
+                prop: "Complejo ergogénico natural sin picos ni bajones, optimizado para elevar el rendimiento físico, la resistencia y la vascularización.",
+                subActivos: [
+                    { n: "Beta-Alanina", title: "Beta-Alanina Pura", neg: "Tampón de ácido láctico y resistencia", prop: "Aumenta los niveles de carnosina muscular retrasando la fatiga en esfuerzos intensos." },
+                    { n: "Citrulina Malato", title: "L-Citrulina Malato (2:1)", neg: "Óxido nítrico y bombeo muscular", prop: "Potente precursor de óxido nítrico que optimiza el flujo sanguíneo y el transporte de nutrientes." },
+                    { n: "Taurina", title: "L-Taurina Pura", neg: "Hidratación celular y contracción", prop: "Apoya la transmisión del impulso neuromuscular y protege las células musculares del daño oxidativo." },
+                    { n: "Té Verde", title: "Té Verde Estandarizado (EGCG + Cafeína)", neg: "Activación metabólica limpia", prop: "Estimulación neurofisiológica sostenida que mejora la concentración sin taquicardia ni nerviosismo." },
+                    { n: "Creatina Creapure", title: "Creatina Monohidrato Creapure®", neg: "Regeneración de ATP y potencia explosiva", prop: "Recarga rápida de fosfocreatina para series pesadas y potencia anaeróbica." },
+                    { n: "Electrolitos Quelados", title: "Sodio, Potasio y Magnesio Iónicos", neg: "Conductividad neuromuscular", prop: "Previene calambres y sostiene el rendimiento electrolítico celular intraentrenamiento." }
+                ]
+            },
+            {
+                n: "BBB Relajación",
+                title: "BBB Relajación",
+                tagline: "BOMBÓN BLOOM",
+                img: "../BBB 6.png",
+                bg: "../Claridad mental.jpg",
+                neg: "Descanso reparador, calma mental y desconexión",
+                prop: "Fórmula adaptogénica y relajante para desconectar de la sobreestimulación diaria, rebajar el cortisol y facilitar un sueño profundo.",
+                subActivos: [
+                    { n: "Magnesio Bisglicinato", title: "Magnesio Bisglicinato Puro", neg: "Relajación neuromuscular profunda", prop: "Favorece la síntesis de GABA y desactiva la tensión muscular acumulada durante el día." },
+                    { n: "L-Teanina", title: "L-Teanina de Grado Farmacéutico", neg: "Ondas cerebrales alfa y foco sereno", prop: "Promueve un estado de calma lúcida sin generar somnolencia diurna." },
+                    { n: "Pasiflora", title: "Extracto Seco de Pasiflora", neg: "Calmante del sistema nervioso", prop: "Fitocomplejo ansiolítico suave que apacigua la rumiación mental y el nerviosismo." },
+                    { n: "Fosfatidilserina", title: "Fosfatidilserina Lipídica", neg: "Amortiguación del cortisol nocturno", prop: "Fosfolípido esencial que normaliza la curva de estrés y protege las neuronas del cortisol." },
+                    { n: "Glicina", title: "Glicina Pura Cristalina", neg: "Descenso de la temperatura central", prop: "Neurotransmisor inhibidor que acorta el tiempo de latencia del sueño y mejora la fase REM." },
+                    { n: "Melatonina", title: "Melatonina Pura Microencapsulada", neg: "Sincronización del ciclo circadiano", prop: "Favorece la inducción rápida del sueño y previene los despertares a medianoche." }
+                ]
+            },
+            {
+                n: "BBB Stop-loss Hombre",
+                title: "BBB Stop-loss Hombre",
+                tagline: "BOMBÓN BLOOM",
+                img: "../BBB 7.png",
+                bg: "../Creatina _ok.jpg",
+                neg: "Inhibición de DHT, densidad y fortaleza folicular",
+                prop: "Tratamiento nutracéutico masculino enfocado en combatir la miniaturización folicular androgénica y sostener la densidad del cabello.",
+                subActivos: [
+                    { n: "Saw Palmetto", title: "Saw Palmetto (45% Ácidos Grasos)", neg: "Inhibidor natural de la 5α-reductasa", prop: "Bloquea selectivamente la conversión de testosterona en dihidrotestosterona (DHT)." },
+                    { n: "Pygeum Africanum", title: "Extracto de Ciruelo Africano", neg: "Acción antiandrogénica sinérgica", prop: "Reduce la inflamación perineal folicular y frena la involución del folículo piloso." },
+                    { n: "Semilla Calabaza", title: "Aceite Concentrado de Calabaza", neg: "Fitoesteroles bloqueadores de DHT", prop: "Rico en delta-7-esteroles que protegen la papila dérmica del ataque androgénico." },
+                    { n: "Zinc & Selenio", title: "Zinc Bisglicinato + Selenometionina", neg: "Síntesis de queratina y cofactor", prop: "Dúo mineral indispensable para la regeneración celular y la salud capilar y prostática." },
+                    { n: "Biotina", title: "Biotina Pura", neg: "Calibre y densidad de la hebra", prop: "Nutriente fundamental para vigorizar el tallo capilar, aumentando el grosor del pelo." },
+                    { n: "Maca Negra", title: "Maca Negra Andina Estandarizada", neg: "Tono vital, resistencia y energía", prop: "Adaptógeno vigorizante que sostiene la vitalidad hormonal masculina y la salud celular." }
+                ]
+            },
+            {
+                n: "BBB Articulaciones",
+                title: "BBB Articulaciones",
+                tagline: "BOMBÓN BLOOM",
+                img: "../BBB 1.png",
+                bg: "../articulaciones.jpg",
+                neg: "Flexibilidad, regeneración articular y confort biomecánico",
+                prop: "Arquitectura nutracéutica diseñada para preservar el cartílago, lubricar las articulaciones y mitigar la inflamación y rigidez articular.",
+                subActivos: [
+                    { n: "Boswellia Serrata", title: "Boswellia Serrata (65% Ácidos Boswélicos)", neg: "Modulación antiinflamatoria y confort articular", prop: "Extracto botánico concentrado que inhibe la enzima proinflamatoria 5-LOX, aliviando la rigidez y favoreciendo la movilidad articular." },
+                    { n: "Colágeno Tipo II", title: "Colágeno Nativo Tipo II (UC-II®)", neg: "Integridad estructural y regeneración del cartílago", prop: "Proteína no desnaturalizada que actúa por tolerancia oral en las placas de Peyer, frenando la degradación del colágeno en las articulaciones." },
+                    { n: "Ácido Hialurónico", title: "Ácido Hialurónico Biotecnológico", neg: "Lubricación y viscosuplementación sinovial", prop: "Componente mayoritario del líquido sinovial que restaura la viscoelasticidad intraarticular y actúa como amortiguador biomecánico natural." },
+                    { n: "Cúrcuma Liposomada", title: "Cúrcuma Liposomada (95% Curcuminoides)", neg: "Alivio del dolor y protección antioxidante", prop: "Curcumina de absorción multiplicada que bloquea las vías de señalización inflamatoria NF-kB, aliviando las articulaciones sobrecargadas." },
+                    { n: "MSM Puro", title: "Metilsulfonilmetano (MSM) de Alta Pureza", neg: "Flexibilidad, tendones y azufre biológico", prop: "Donante de azufre orgánico indispensable para reparar los enlaces disulfuro de tendones, ligamentos y cartílagos sometidos a tensión." }
+                ]
+            }
+        ];
+
+        /* --- DATOS RUEDA 4: LINGOTE --- */
+        const lingoteCategorias = bbbCategorias.map(c => Object.assign({}, c, {
+            tagline: "LINGOTE",
+            title: c.title.replace(/^BBB\s+/i, "Lingote "),
+            n: c.n.replace(/^BBB\s+/i, "Lingote ")
+        }));
+
+        /* --- DATOS RUEDA 5: CRUJIENTE DE ALMENDRA --- */
+        const obleaCategorias = bbbCategorias.map(c => Object.assign({}, c, {
+            tagline: "CRUJIENTE DE ALMENDRA",
+            title: c.title.replace(/^BBB\s+/i, "Crujiente "),
+            n: c.n.replace(/^BBB\s+/i, "Crujiente ")
+        }));
+
+        /* --- DATOS RUEDA 6: NENEBLOOMS --- */
+        const pequebloomCategorias = bbbCategorias.map(c => Object.assign({}, c, {
+            tagline: "NENEBLOOMS",
+            title: c.title.replace(/^BBB\s+/i, "NeneBloom "),
+            n: c.n.replace(/^BBB\s+/i, "NeneBloom ")
+        }));
+
+        /* =========================================================================
+           MOTOR 1: RUEDAS ESTILO DOXA (DOXA Y DOXA-COOKIE)
+           ========================================================================= */
+        function initDoxaStyleWheel(sec, activos) {
+            if (!sec) return;
+            const rueda = sec.querySelector(".rueda-giro");
+            const cajaBg = sec.querySelector(".bg-layer");
+            const cajaText = sec.querySelector(".text-box");
+            const radialWrapper = sec.querySelector(".radial-wrapper");
+            const galletaCentral = sec.querySelector(".galleta-fija");
+            if (!rueda || !cajaText || !radialWrapper) return;
+            const defaultNeutralHTML = cajaText.innerHTML;
 
                     const getRadioCategorias = () => (window.innerWidth <= 768 ? 205 : 250);
                     let rotacionActual = 0;
@@ -3932,219 +4299,25 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                             }
                         }
                     });
-                })();
-            </script>
-        </section>
+        }
 
-    <!-- =========================================================================
-           [SECCIÓN ÚNICA] RUEDA RADIAL DE ACTIVOS BOMBÓN BLOOM
-           Engloba las 7 variedades de bombones como categorías padre.
-           Al pinchar en una variedad se abren sus activos hijos y cambia la foto central.
-           ========================================================================= -->
-    <section id="rueda-activos-bbb" class="cajas-activos-section product-wheel" data-product="bbb" data-visible="on">
-        <a id="rueda-activos" style="position: absolute; top: 0; pointer-events: none;"></a>
-        <!-- [IMAGEN DE FONDO GENERAL DE LA RUEDA DE ACTIVOS]: Cambia la url a continuación -->
-        <div class="bg-layer" id="caja-bg-bbb" style="background-image: url('../piel negra.jpg');"></div>
-        <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-bbb"></div>
-
-
-
-        <div class="content-grid">
-            <!-- Columna Rueda Interactiva -->
-            <div class="wheel-column">
-                <div class="radial-wrapper" id="radialWrapper">
-                    <img src="../BBB.png" class="galleta-fija" id="galletaFija" alt="Bombón Bloom"
-                        onerror="this.src='../Galle choco.png'">
-                    <div class="rueda-giro" id="ruedaGiro"></div>
-                </div>
-            </div>
-
-            <!-- Columna Texto Dinámico -->
-            <div class="text-column">
-                <div class="text-box" id="cajaText">
-                    <div class="tagline">BOMBÓN BLOOM</div>
-                    <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">Arquitectura de Activos
-                    </h3>
-                    <p class="hero-value-prop-neg">Repostería Nutricosmética</p>
-                    <div class="hero-value-prop">
-                        Haz clic en cualquiera de las 8 variedades de Bombón Bloom para explorar su formulación activa y
-                        beneficios clave.
-                    </div>
-                </div>
-                <div class="rueda-cta-wrapper">
-                    <a href="../compra.html" class="btn-reserva-rueda">
-                        RESERVA TU CAJA
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24" style="margin-left: 10px;">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
         /* =========================================================================
-           =========================================================================
-           RUEDA RADIAL UNIFICADA DE BOMBÓN BLOOM (CATEGORÍAS PADRE + ACTIVOS HIJAS)
-           - 7 Variedades de Bombón Bloom como categorías padre en la rueda.
-           - Al seleccionar una categoría: rota, cambia la imagen central del bombón
-             y despliega sus 6 activos funcionales (categorías hijas).
-           - Al hacer clic en un activo hijo: muestra sus propiedades funcionales.
-           - Al hacer clic en el botón "Volver" o en el bombón central: resetea a neutral.
-           =========================================================================
+           MOTOR 2: RUEDAS ESTILO BOMBÃ“N BLOOM (BBB, LINGOTE, OBLEA, NENEBLOOM)
            ========================================================================= */
-
-        const bbbCategorias = [
-            {
-                n: "BBB Piel, Pelo & Uñas",
-                title: "BBB Piel, Pelo & Uñas",
-                tagline: "BOMBÓN BLOOM",
-                img: "../BBB 1.png",
-                bg: "../Pelo y uñas.jpg",
-                neg: "Regeneración celular, elasticidad y firmeza",
-                prop: "Fórmula de alta biodisponibilidad para nutrir la piel desde el interior, fortalecer el folículo piloso y devolver la vitalidad a las uñas.",
-                subActivos: [
-                    { n: "Péptidos Colágeno", title: "Péptidos de Colágeno — 10g", neg: "Firmeza y regeneración dérmica", prop: "10g de péptidos bioactivos hidrolizados de máxima asimilación para favorecer la síntesis de colágeno y restaurar la turgencia." },
-                    { n: "Ácido Hialurónico", title: "Ácido Hialurónico Puro", neg: "Hidratación celular profunda", prop: "Retiene hasta 1000 veces su peso molecular en agua, hidratando la matriz extracelular para una piel jugosa y tersa." },
-                    { n: "Coenzima Q10", title: "Coenzima Q10 Bioidéntica", neg: "Protección mitocondrial", prop: "Antioxidante intracelular que previene el estrés oxidativo y combate el fotoenvejecimiento." },
-                    { n: "Biotina Activa", title: "Biotina Pura D-Biotina", neg: "Vigor capilar y dureza ungular", prop: "Refuerza la queratina capilar y celular, engrosando el pelo fino y reduciendo la fragilidad." },
-                    { n: "Zinc Quelado", title: "Bisglicinato de Zinc", neg: "Cicatrización y equilibrio", prop: "Mineral esencial con máxima biodisponibilidad que regula la producción sebácea." },
-                    { n: "Vitamina C", title: "Vitamina C Pura Liposomada", neg: "Cofactor esencial", prop: "Potente antioxidante sinérgico indispensable para ensamblar las fibras de colágeno." }
-                ]
-            },
-            {
-                n: "BBB Stop-loss Mujer",
-                title: "BBB Stop-loss Mujer",
-                tagline: "BOMBÓN BLOOM",
-                img: "../BBB 2.png",
-                bg: "../cabello y uñas.jpg",
-                neg: "Anclaje folicular, nutrición y freno a la caída",
-                prop: "Arquitectura nutracéutica diseñada específicamente para frenar la caída capilar femenina estacional u hormonal y reactivar el crecimiento.",
-                subActivos: [
-                    { n: "Extracto Cola Caballo", title: "Cola de Caballo Estandarizada", neg: "Sílice orgánica y elasticidad", prop: "Aporte concentrado de silicio biodisponible para regenerar la estructura interna de la fibra capilar." },
-                    { n: "Hierro Bisglicinato", title: "Hierro Quelado Sin Molestias", neg: "Oxigenación de la raíz", prop: "Forma de hierro de máxima asimilación estomacal para sostener niveles óptimos de ferritina." },
-                    { n: "L-Cisteína", title: "L-Cisteína Pura", neg: "Estructura primaria de la queratina", prop: "Aminoácido azufrado indispensable para crear los puentes disulfuro que dan resistencia y fuerza al cabello." },
-                    { n: "Levadura Cerveza", title: "Levadura Nutricional Viva", neg: "Complejo vitamínico B natural", prop: "Aporte biodisponible de vitaminas del grupo B para activar la división celular en la raíz del pelo." },
-                    { n: "Semilla Calabaza", title: "Aceite de Semilla de Calabaza", neg: "Inhibición suave de la 5α-reductasa", prop: "Fitonutrientes que equilibran el impacto de andrógenos a nivel folicular en la mujer." },
-                    { n: "Vitamina E", title: "Tocoferoles Mixtos Naturales", neg: "Microcirculación en el cuero cabelludo", prop: "Protege los capilares sanguíneos que irrigan la papila dérmica del estrés oxidativo." }
-                ]
-            },
-            {
-                n: "BBB Menopausia",
-                title: "BBB Menopausia",
-                tagline: "BOMBÓN BLOOM",
-                img: "../BBB 3.png",
-                bg: "../amazona.jpg",
-                neg: "Equilibrio hormonal, serenidad y soporte óseo",
-                prop: "Sinergia botánica y micronutricional para acompañar la transición hormonal con confort, vitalidad y protección celular.",
-                subActivos: [
-                    { n: "Trébol Rojo", title: "Isoflavonas de Trébol Rojo", neg: "Modulación fitoestrogénica", prop: "Fitoestrógenos naturales que alivian los sofocos, la sudoración nocturna y la sequedad." },
-                    { n: "Cimicífuga", title: "Cimicifuga Racemosa", neg: "Regulación neurovegetativa", prop: "Extracto estandarizado que suaviza los cambios de humor y favorece el descanso reparador." },
-                    { n: "Maca Andina", title: "Maca Roja y Negra Estandarizada", neg: "Energía y vitalidad endocrina", prop: "Adaptógeno milenario que combate la fatiga crónica y apoya la libido y la densidad ósea." },
-                    { n: "Salvia", title: "Salvia Officinalis Pura", neg: "Control de sofocos y transpiración", prop: "Fitocompuestos que equilibran el centro termorregulador hipotalámico." },
-                    { n: "Vitamina D3 & K2", title: "D3 Colecalciferol + K2 Menaquinona-7", neg: "Fijación del calcio óseo", prop: "Dúo vitamínico sinérgico que dirige el calcio hacia el hueso y previene la desmineralización." },
-                    { n: "Complejo B Metilado", title: "Vitaminas B6, B9 y B12 Metiladas", neg: "Apoyo del sistema nervioso", prop: "Vitaminas en su forma biológicamente activa para mitigar la niebla mental y el cansancio." }
-                ]
-            },
-            {
-                n: "BBB Regla",
-                title: "BBB Regla",
-                tagline: "BOMBÓN BLOOM",
-                img: "../BBB 4.png",
-                bg: "../respeto.jpg",
-                neg: "Alivio del SPM, equilibrio prostaglándico y bienestar",
-                prop: "Fórmula reconfortante formulada para calmar los espasmos, reducir la inflamación y sostener un estado de ánimo estable durante el ciclo.",
-                subActivos: [
-                    { n: "Sauzgatillo", title: "Vitex Agnus-Castus", neg: "Equilibrio estrógeno / progesterona", prop: "Regula la prolactina y armoniza la fase lútea, aliviando la hinchazón y la sensibilidad mamaria." },
-                    { n: "Magnesio Bisglicinato", title: "Magnesio Quelado de Alta Absorción", neg: "Relajación miometrial y muscular", prop: "Reduce la intensidad de los cólicos menstruales y alivia las migrañas catameniales." },
-                    { n: "Jengibre Estandarizado", title: "Extracto de Jengibre (5% Gingeroles)", neg: "Inhibición de prostaglandinas proinflamatorias", prop: "Eficacia demostrada para reducir el dolor espasmódico abdominal y las náuseas." },
-                    { n: "Vitamina B6 Activa", title: "Piridoxal-5-Fosfato (P5P)", neg: "Metabolismo de serotonina y dopamina", prop: "Forma activa de la B6 indispensable para estabilizar el humor y reducir la irritabilidad." },
-                    { n: "Onagra", title: "Aceite de Onagra Primera Prensión (GLA)", neg: "Modulación de la inflamación cíclica", prop: "Ácido gamma-linolénico para mantener la piel limpia y prevenir brotes premenstruales." },
-                    { n: "Hierro Quelado", title: "Bisglicinato de Hierro Ferrochel", neg: "Reposición de pérdidas menstruales", prop: "Restaura la vitalidad previniendo la fatiga ferropénica durante el sangrado." }
-                ]
-            },
-            {
-                n: "BBB Pre-entreno",
-                title: "BBB Pre-entreno",
-                tagline: "BOMBÓN BLOOM",
-                img: "../BBB 5.png",
-                bg: "../Energía.jpg",
-                neg: "Fuerza limpia, bombeo muscular y foco mental",
-                prop: "Complejo ergogénico natural sin picos ni bajones, optimizado para elevar el rendimiento físico, la resistencia y la vascularización.",
-                subActivos: [
-                    { n: "Beta-Alanina", title: "Beta-Alanina Pura", neg: "Tampón de ácido láctico y resistencia", prop: "Aumenta los niveles de carnosina muscular retrasando la fatiga en esfuerzos intensos." },
-                    { n: "Citrulina Malato", title: "L-Citrulina Malato (2:1)", neg: "Óxido nítrico y bombeo muscular", prop: "Potente precursor de óxido nítrico que optimiza el flujo sanguíneo y el transporte de nutrientes." },
-                    { n: "Taurina", title: "L-Taurina Pura", neg: "Hidratación celular y contracción", prop: "Apoya la transmisión del impulso neuromuscular y protege las células musculares del daño oxidativo." },
-                    { n: "Té Verde", title: "Té Verde Estandarizado (EGCG + Cafeína)", neg: "Activación metabólica limpia", prop: "Estimulación neurofisiológica sostenida que mejora la concentración sin taquicardia ni nerviosismo." },
-                    { n: "Creatina Creapure", title: "Creatina Monohidrato Creapure®", neg: "Regeneración de ATP y potencia explosiva", prop: "Recarga rápida de fosfocreatina para series pesadas y potencia anaeróbica." },
-                    { n: "Electrolitos Quelados", title: "Sodio, Potasio y Magnesio Iónicos", neg: "Conductividad neuromuscular", prop: "Previene calambres y sostiene el rendimiento electrolítico celular intraentrenamiento." }
-                ]
-            },
-            {
-                n: "BBB Relajación",
-                title: "BBB Relajación",
-                tagline: "BOMBÓN BLOOM",
-                img: "../BBB 6.png",
-                bg: "../Claridad mental.jpg",
-                neg: "Descanso reparador, calma mental y desconexión",
-                prop: "Fórmula adaptogénica y relajante para desconectar de la sobreestimulación diaria, rebajar el cortisol y facilitar un sueño profundo.",
-                subActivos: [
-                    { n: "Magnesio Bisglicinato", title: "Magnesio Bisglicinato Puro", neg: "Relajación neuromuscular profunda", prop: "Favorece la síntesis de GABA y desactiva la tensión muscular acumulada durante el día." },
-                    { n: "L-Teanina", title: "L-Teanina de Grado Farmacéutico", neg: "Ondas cerebrales alfa y foco sereno", prop: "Promueve un estado de calma lúcida sin generar somnolencia diurna." },
-                    { n: "Pasiflora", title: "Extracto Seco de Pasiflora", neg: "Calmante del sistema nervioso", prop: "Fitocomplejo ansiolítico suave que apacigua la rumiación mental y el nerviosismo." },
-                    { n: "Fosfatidilserina", title: "Fosfatidilserina Lipídica", neg: "Amortiguación del cortisol nocturno", prop: "Fosfolípido esencial que normaliza la curva de estrés y protege las neuronas del cortisol." },
-                    { n: "Glicina", title: "Glicina Pura Cristalina", neg: "Descenso de la temperatura central", prop: "Neurotransmisor inhibidor que acorta el tiempo de latencia del sueño y mejora la fase REM." },
-                    { n: "Melatonina", title: "Melatonina Pura Microencapsulada", neg: "Sincronización del ciclo circadiano", prop: "Favorece la inducción rápida del sueño y previene los despertares a medianoche." }
-                ]
-            },
-            {
-                n: "BBB Stop-loss Hombre",
-                title: "BBB Stop-loss Hombre",
-                tagline: "BOMBÓN BLOOM",
-                img: "../BBB 7.png",
-                bg: "../Creatina _ok.jpg",
-                neg: "Inhibición de DHT, densidad y fortaleza folicular",
-                prop: "Tratamiento nutracéutico masculino enfocado en combatir la miniaturización folicular androgénica y sostener la densidad del cabello.",
-                subActivos: [
-                    { n: "Saw Palmetto", title: "Saw Palmetto (45% Ácidos Grasos)", neg: "Inhibidor natural de la 5α-reductasa", prop: "Bloquea selectivamente la conversión de testosterona en dihidrotestosterona (DHT)." },
-                    { n: "Pygeum Africanum", title: "Extracto de Ciruelo Africano", neg: "Acción antiandrogénica sinérgica", prop: "Reduce la inflamación perineal folicular y frena la involución del folículo piloso." },
-                    { n: "Semilla Calabaza", title: "Aceite Concentrado de Calabaza", neg: "Fitoesteroles bloqueadores de DHT", prop: "Rico en delta-7-esteroles que protegen la papila dérmica del ataque androgénico." },
-                    { n: "Zinc & Selenio", title: "Zinc Bisglicinato + Selenometionina", neg: "Síntesis de queratina y cofactor", prop: "Dúo mineral indispensable para la regeneración celular y la salud capilar y prostática." },
-                    { n: "Biotina", title: "Biotina Pura", neg: "Calibre y densidad de la hebra", prop: "Nutriente fundamental para vigorizar el tallo capilar, aumentando el grosor del pelo." },
-                    { n: "Maca Negra", title: "Maca Negra Andina Estandarizada", neg: "Tono vital, resistencia y energía", prop: "Adaptógeno vigorizante que sostiene la vitalidad hormonal masculina y la salud celular." }
-                ]
-            },
-            {
-                n: "BBB Articulaciones",
-                title: "BBB Articulaciones",
-                tagline: "BOMBÓN BLOOM",
-                img: "../BBB 1.png",
-                bg: "../articulaciones.jpg",
-                neg: "Flexibilidad, regeneración articular y confort biomecánico",
-                prop: "Arquitectura nutracéutica diseñada para preservar el cartílago, lubricar las articulaciones y mitigar la inflamación y rigidez articular.",
-                subActivos: [
-                    { n: "Boswellia Serrata", title: "Boswellia Serrata (65% Ácidos Boswélicos)", neg: "Modulación antiinflamatoria y confort articular", prop: "Extracto botánico concentrado que inhibe la enzima proinflamatoria 5-LOX, aliviando la rigidez y favoreciendo la movilidad articular." },
-                    { n: "Colágeno Tipo II", title: "Colágeno Nativo Tipo II (UC-II®)", neg: "Integridad estructural y regeneración del cartílago", prop: "Proteína no desnaturalizada que actúa por tolerancia oral en las placas de Peyer, frenando la degradación del colágeno en las articulaciones." },
-                    { n: "Ácido Hialurónico", title: "Ácido Hialurónico Biotecnológico", neg: "Lubricación y viscosuplementación sinovial", prop: "Componente mayoritario del líquido sinovial que restaura la viscoelasticidad intraarticular y actúa como amortiguador biomecánico natural." },
-                    { n: "Cúrcuma Liposomada", title: "Cúrcuma Liposomada (95% Curcuminoides)", neg: "Alivio del dolor y protección antioxidante", prop: "Curcumina de absorción multiplicada que bloquea las vías de señalización inflamatoria NF-kB, aliviando las articulaciones sobrecargadas." },
-                    { n: "MSM Puro", title: "Metilsulfonilmetano (MSM) de Alta Pureza", neg: "Flexibilidad, tendones y azufre biológico", prop: "Donante de azufre orgánico indispensable para reparar los enlaces disulfuro de tendones, ligamentos y cartílagos sometidos a tensión." }
-                ]
-            }
-        ];
-
-        (function initUnifiedBBBWheel() {
-            const sec = document.getElementById('rueda-activos-bbb') || document.getElementById('rueda-activos');
+        function initBBBStyleWheel(sec, bbbCategorias) {
             if (!sec) return;
+            const rueda = sec.querySelector(".rueda-giro");
+            const cajaText = sec.querySelector(".text-box");
+            const galletaFija = sec.querySelector(".galleta-fija");
+            const radialWrapper = sec.querySelector(".radial-wrapper");
+            const cajaBg = sec.querySelector(".bg-layer");
+            const cajaBgOverlay = sec.querySelector(".bg-layer-overlay");
+            if (!rueda || !cajaText || !radialWrapper) return;
 
-            const rueda = sec.querySelector('.rueda-giro');
-            const cajaText = sec.querySelector('.text-box');
-            const galletaFija = sec.querySelector('.galleta-fija');
-            const radialWrapper = sec.querySelector('.radial-wrapper');
-            const cajaBg = sec.querySelector('.bg-layer');
-            const cajaBgOverlay = sec.querySelector('.bg-layer-overlay');
+            const defaultImgSrc = galletaFija ? galletaFija.getAttribute("src") : "../BBB.png";
+            const defaultImgAlt = galletaFija ? galletaFija.alt : "BombÃ³n Bloom";
+            const defaultNeutralHTML = cajaText.innerHTML;
+
             let activeBgUrl = '../piel negra.jpg';
             let bgTransitionTimer = null;
 
@@ -5368,45 +5541,99 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             resetToNeutral();
 
             // Exponer globalmente para el submenú superior
-            window.bbbSelectCategory = function (index) {
-                alignToWheelSection();
-                selectCategory(index, false, true); // fromSubmenu = true -> cuadrante superior derecho
-            };
-        })();
+        }
 
         /* =========================================================================
-           [INTERACCION: NAVEGACION DESDE EL SUBMENU DE PRODUCTOS A SU RUEDA]
-           Al hacer clic en cualquier producto del submenu general:
-           1. Marca visualmente el boton seleccionado como activo
-           2. Se desplaza fluidamente hasta su rueda de activos correspondiente
+           CONTROLADOR CENTRAL DE VISUALIZACIÃ“N DE RUEDAS
+           Garantiza que SOLO se muestre una rueda a la vez (la del producto activo)
            ========================================================================= */
-        (function initSubmenuLayout() {
-            const container = document.querySelector('.bbb-submenu-container');
-            if (container) {
-                const visible = container.querySelectorAll('.bbb-submenu-item:not([data-visible="off"])');
-                container.setAttribute('data-visible-count', visible.length);
+        const wheelConfigs = {
+            "doxa": {
+                init: () => initDoxaStyleWheel(document.getElementById("rueda-activos-doxa"), activosDoxa),
+                initialized: false
+            },
+            "cookie": {
+                init: () => initDoxaStyleWheel(document.getElementById("rueda-activos-cookie"), activosDoxaCookie),
+                initialized: false
+            },
+            "bbb": {
+                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-bbb"), bbbCategorias),
+                initialized: false
+            },
+            "lingote": {
+                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-lingote"), lingoteCategorias),
+                initialized: false
+            },
+            "oblea": {
+                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-oblea"), obleaCategorias),
+                initialized: false
+            },
+            "pequebloom": {
+                init: () => initBBBStyleWheel(document.getElementById("rueda-activos-pequebloom"), pequebloomCategorias),
+                initialized: false
             }
-        })();
+        };
 
-        document.querySelectorAll('.bbb-submenu-item, .producto-item').forEach((btn) => {
-            btn.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    const targetSection = document.querySelector(href);
-                    if (targetSection) {
-                        e.preventDefault();
-                        document.querySelectorAll('.bbb-submenu-item').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
+        function showProductWheel(productId) {
+            const wheels = document.querySelectorAll(".product-wheel");
+            let targetSection = null;
 
-                        const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset;
-                        window.scrollTo({
-                            top: targetY,
-                            behavior: 'smooth'
-                        });
-                    }
+            wheels.forEach(sec => {
+                if (sec.getAttribute("data-product") === productId) {
+                    sec.style.display = "block";
+                    sec.classList.add("active-product-wheel");
+                    targetSection = sec;
+                } else {
+                    sec.style.display = "none";
+                    sec.classList.remove("active-product-wheel");
+                }
+            });
+
+            if (targetSection && wheelConfigs[productId] && !wheelConfigs[productId].initialized) {
+                wheelConfigs[productId].init();
+                wheelConfigs[productId].initialized = true;
+            }
+
+            window.dispatchEvent(new Event("resize"));
+            return targetSection;
+        }
+
+        // Event listener para el submenú general de productos
+        document.querySelectorAll(".bbb-submenu-item, .producto-item").forEach((btn) => {
+            btn.addEventListener("click", function (e) {
+                e.preventDefault();
+                const prod = this.getAttribute("data-product");
+                if (!prod) return;
+
+                document.querySelectorAll(".bbb-submenu-item").forEach(b => b.classList.remove("active"));
+                this.classList.add("active");
+
+                const targetSection = showProductWheel(prod);
+                if (targetSection) {
+                    const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                        top: targetY,
+                        behavior: "smooth"
+                    });
                 }
             });
         });
+
+        // Inicialización de la cantidad de productos visibles en móvil
+        (function initSubmenuLayout() {
+            const container = document.querySelector(".bbb-submenu-container");
+            if (container) {
+                const visible = container.querySelectorAll('.bbb-submenu-item:not([data-visible="off"])');
+                container.setAttribute("data-visible-count", visible.length);
+            }
+        })();
+
+        // Mostrar inicialmente la rueda del producto activo (por defecto Doxas)
+        (function initInitialProductWheel() {
+            const activeBtn = document.querySelector(".bbb-submenu-item.active") || document.querySelector(".bbb-submenu-item");
+            const initialProd = activeBtn ? activeBtn.getAttribute("data-product") : "doxa";
+            showProductWheel(initialProd);
+        })();
     </script>
 
 
