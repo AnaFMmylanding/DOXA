@@ -1385,22 +1385,49 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
         @media (max-width: 768px) {
             .bbb-submenu-bar {
                 top: 0;
-                padding: 16px 4px 18px 4px;
+                padding: 14px 6px 16px 6px;
             }
 
             .bbb-submenu-container {
-                gap: 8px 4px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 12px 6px;
+                max-width: 380px;
+                margin: 0 auto;
             }
 
+            /* Distribución en móvil: 3 productos por fila (3 y 3 para 6 productos; 3 y 2 para 5; 3 para 3) */
             .bbb-submenu-item {
-                width: 80px;
+                flex: 0 0 calc(33.333% - 6px);
+                max-width: calc(33.333% - 6px);
+                width: calc(33.333% - 6px);
+                min-width: 0;
                 padding: 4px 2px;
+                box-sizing: border-box;
+            }
+
+            /* Si hay exactamente 4 productos visibles: se redistribuyen en 2 y 2 simétricos */
+            .bbb-submenu-container[data-visible-count="4"] .bbb-submenu-item,
+            .bbb-submenu-container:has(> .bbb-submenu-item:not([data-visible="off"]):nth-child(4):last-child) .bbb-submenu-item {
+                flex: 0 0 calc(50% - 8px);
+                max-width: calc(50% - 8px);
+                width: calc(50% - 8px);
+            }
+
+            /* Si hay 2 productos visibles o menos: centrados */
+            .bbb-submenu-container[data-visible-count="2"] .bbb-submenu-item,
+            .bbb-submenu-container[data-visible-count="1"] .bbb-submenu-item {
+                flex: 0 0 calc(50% - 8px);
+                max-width: 130px;
+                width: auto;
             }
 
             .bbb-submenu-thumb {
-                width: 50px;
-                height: 50px;
-                margin-bottom: 4px;
+                width: 52px;
+                height: 52px;
+                margin-bottom: 5px;
             }
 
             .bbb-submenu-name {
@@ -1579,7 +1606,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
            cambia su atributo data-visible="on" por data-visible="off".
            ========================================================================= -->
         <div class="bbb-submenu-bar" id="productosMenuBar">
-            <div class="bbb-submenu-container">
+            <div class="bbb-submenu-container" data-visible-count="6">
                 <!-- PRODUCTO 1: Doxas [ESTADO: ON/OFF] -->
                 <!-- Para activar o desactivar: cambia data-visible="on" o "off" -->
                 <a href="#rueda-activos-doxa" class="bbb-submenu-item producto-item" id="btn-prod-doxa" data-product="doxa" data-visible="on">
@@ -5344,6 +5371,14 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
            1. Marca visualmente el boton seleccionado como activo
            2. Se desplaza fluidamente hasta su rueda de activos correspondiente
            ========================================================================= */
+        (function initSubmenuLayout() {
+            const container = document.querySelector('.bbb-submenu-container');
+            if (container) {
+                const visible = container.querySelectorAll('.bbb-submenu-item:not([data-visible="off"])');
+                container.setAttribute('data-visible-count', visible.length);
+            }
+        })();
+
         document.querySelectorAll('.bbb-submenu-item, .producto-item').forEach((btn) => {
             btn.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
