@@ -2047,6 +2047,28 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             padding-right: clamp(50px, 8vw, 130px);
         }
 
+        @media (min-width: 1025px) {
+            .wheel-column {
+                transform: translateX(140px);
+            }
+            .text-column {
+                transform: translateX(-140px);
+            }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .wheel-column {
+                transform: translateX(60px);
+            }
+            .text-column {
+                transform: translateX(-60px);
+            }
+        }
+        @media (min-width: 769px) {
+            .text-box, .rueda-cta-wrapper {
+                max-width: 380px;
+            }
+        }
+
         .rueda-cta-wrapper {
             margin-top: 35px;
             text-align: right;
@@ -2303,6 +2325,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 width: 100% !important;
                 flex: none !important;
                 height: 380px !important;
+                transform: none !important;
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
@@ -2427,6 +2450,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
+                transform: none !important;
                 justify-content: flex-start !important;
                 padding-top: clamp(90px, calc(7vh + 50px), 105px) !important;
                 padding-bottom: 25px !important;
@@ -3633,7 +3657,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             if (!rueda || !cajaText || !radialWrapper) return;
             const defaultNeutralHTML = cajaText.innerHTML;
 
-                    const getRadioCategorias = () => (window.innerWidth <= 768 ? 205 : 250);
+                    const getRadioCategorias = () => (window.innerWidth <= 768 ? 205 : 215);
                     let rotacionActual = 0;
                     let prevRot = 0;
                     let selectedCategoryIndex = -1;
@@ -3866,7 +3890,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                                     actualParentRadio = radioCategorias - 5;
                                 }
                             } else {
-                                actualParentRadio = isOdd ? (isMobile ? 228 : 282) : (isMobile ? 182 : 240);
+                                actualParentRadio = isOdd ? (isMobile ? 228 : 235) : (isMobile ? 182 : 205);
                             }
 
                             // 1. Línea rayo de la categoría padre
@@ -4904,7 +4928,7 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 }, 870);
             }
 
-            const getRadioCategorias = () => (window.innerWidth <= 768 ? 155 : 250);
+            const getRadioCategorias = () => (window.innerWidth <= 768 ? 155 : 215);
             let rotacionActual = 0;
             let selectedCategoryIndex = -1;
             let selectedSubIndex = -1;
@@ -5232,12 +5256,12 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
 
                     let actualParentRadio;
                     if (isSelected) {
-                        actualParentRadio = isMobile ? 150 : (radioCategorias + 25);
+                        actualParentRadio = isMobile ? 150 : (radioCategorias + 15);
                     } else {
                         if (isMobile) {
                             actualParentRadio = getMobileParentRadius(i);
                         } else {
-                            actualParentRadio = (i % 2 !== 0) ? 282 : 240;
+                            actualParentRadio = (i % 2 !== 0) ? 235 : 205;
                         }
                     }
 

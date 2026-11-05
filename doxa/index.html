@@ -1747,6 +1747,28 @@ Menú del Index: Líena 742
                 min-height: 420px;
             }
 
+            @media (min-width: 1025px) {
+                .wheel-column {
+                    transform: translateX(140px);
+                }
+                .text-column {
+                    transform: translateX(-140px);
+                }
+            }
+            @media (min-width: 769px) and (max-width: 1024px) {
+                .wheel-column {
+                    transform: translateX(60px);
+                }
+                .text-column {
+                    transform: translateX(-60px);
+                }
+            }
+            @media (min-width: 769px) {
+                .text-box, .rueda-cta-wrapper {
+                    max-width: 380px;
+                }
+            }
+
             .rueda-cta-wrapper {
                 margin-top: 35px;
                 text-align: right;
@@ -1977,6 +1999,7 @@ Menú del Index: Líena 742
                     width: 100% !important;
                     flex: none !important;
                     height: 380px !important;
+                    transform: none !important;
                     display: flex !important;
                     justify-content: center !important;
                     align-items: center !important;
@@ -2100,6 +2123,7 @@ Menú del Index: Líena 742
                     display: flex !important;
                     flex-direction: column !important;
                     align-items: center !important;
+                    transform: none !important;
                     justify-content: flex-start !important;
                     padding-top: clamp(120px, calc(6vh + 90px), 150px) !important;
                     padding-bottom: 25px !important;
@@ -2353,7 +2377,7 @@ Menú del Index: Líena 742
                     const cajaBg = document.getElementById('caja-bg');
                     const cajaText = document.getElementById('caja-text');
 
-                    const getRadioCategorias = () => (window.innerWidth <= 768 ? 205 : 250);
+                    const getRadioCategorias = () => (window.innerWidth <= 768 ? 205 : 215);
                     let rotacionActual = 0;
                     let prevRot = 0;
                     let selectedCategoryIndex = -1;
@@ -2593,7 +2617,7 @@ Menú del Index: Líena 742
                                     actualParentRadio = radioCategorias - 5;
                                 }
                             } else {
-                                actualParentRadio = isOdd ? (isMobile ? 228 : 282) : (isMobile ? 182 : 240);
+                                actualParentRadio = isOdd ? (isMobile ? 228 : 235) : (isMobile ? 182 : 205);
                             }
 
                             // 1. Línea rayo de la categoría padre
