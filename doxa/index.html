@@ -3909,7 +3909,7 @@ Menú del Index: Líena 742
             /* =========================================================================
            HOJA DE PRODUCTO DE LUJO (INSPIRADA EN LA MAISON DU CHOCOLAT)
            Totalmente responsive, editable y adaptada a la estética de DOXA
-           Diseño integrado: Galería a todo lo ancho, sin caja blanca, fondo yeso claro
+           Slider táctil con scroll lateral + Miniaturas flotantes sin marcos
            ========================================================================= */
         .product-sheet-container {
             width: 100%;
@@ -3920,11 +3920,12 @@ Menú del Index: Líena 742
             color: var(--text-dark, #3C332A);
         }
 
-        /* --- GALERÍA PROTAGONISTA A TODO LO ANCHO DE LA PÁGINA (SIN CAJA BLANCA) --- */
-        .product-gallery-fullwidth {
+        /* --- CONTENEDOR PRINCIPAL DEL SLIDER A TODO LO ANCHO (SIN CAJAS NI BORDES) --- */
+        .product-slider-wrapper {
             position: relative;
             width: 100%;
-            margin: 0 auto 40px auto;
+            max-width: 960px;
+            margin: 0 auto 35px auto;
             text-align: center;
             background: transparent !important;
             border: none !important;
@@ -3948,71 +3949,141 @@ Menú del Index: Líena 742
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
         }
 
-        .product-gallery-main {
-            position: relative;
+        /* Carrusel horizontal swipeable nativo (scroll con el dedo) */
+        .product-gallery-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
             width: 100%;
-            min-height: 420px;
-            max-height: 560px;
+            padding: 10px 0 20px 0;
             background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
+        }
+
+        .product-gallery-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .product-slide-item {
+            flex: 0 0 100%;
+            width: 100%;
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px 0;
-            overflow: visible;
+            min-height: 380px;
+            max-height: 520px;
+            background: transparent !important;
+            user-select: none;
+            box-sizing: border-box;
+            padding: 0 10px;
         }
 
-        .product-gallery-main img {
-            max-width: 100%;
-            max-height: 520px;
+        .product-slide-item img {
+            max-width: 92%;
+            max-height: 480px;
             width: auto;
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 25px 40px rgba(60, 51, 42, 0.22));
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease, filter 0.5s ease;
+            transition: transform 0.4s ease, filter 0.4s ease;
+            pointer-events: auto;
+            -webkit-user-drag: none;
         }
 
-        .product-gallery-main:hover img {
-            transform: scale(1.03);
-            filter: drop-shadow(0 32px 48px rgba(60, 51, 42, 0.28));
+        .product-slide-item img:hover {
+            transform: scale(1.025);
+            filter: drop-shadow(0 30px 48px rgba(60, 51, 42, 0.28));
         }
 
-        /* Tiras de miniaturas centradas */
+        /* Flechas de navegación lateral (< y >) estilo DOXA */
+        .slider-nav-arrow {
+            position: absolute;
+            top: 52%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(245, 244, 240, 0.88);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(60, 51, 42, 0.18);
+            color: #3C332A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            z-index: 10;
+            box-shadow: 0 4px 14px rgba(60, 51, 42, 0.1);
+            padding: 0;
+        }
+
+        .slider-nav-arrow:hover {
+            background: #ffffff;
+            color: #1e1a16;
+            transform: translateY(-50%) scale(1.08);
+            box-shadow: 0 6px 18px rgba(60, 51, 42, 0.18);
+        }
+
+        .slider-nav-arrow.slider-prev {
+            left: 8px;
+        }
+
+        .slider-nav-arrow.slider-next {
+            right: 8px;
+        }
+
+        /* --- MINIATURAS FLOTANTES SIN CAJA BLANCA NI BORDES NEGROS --- */
         .product-thumbs-strip {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 14px;
-            margin-top: 25px;
-            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 15px;
+            padding: 8px 10px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
+            background: transparent !important;
+            border: none !important;
+        }
+
+        .product-thumbs-strip::-webkit-scrollbar {
+            display: none;
         }
 
         .product-thumb-btn {
-            width: 84px;
-            height: 84px;
-            border-radius: 10px;
-            border: 1.5px solid rgba(60, 51, 42, 0.18);
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            padding: 4px;
             cursor: pointer;
-            background: rgba(255, 255, 255, 0.35);
-            padding: 6px;
-            transition: all 0.25s ease;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+            opacity: 0.42;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            outline: none;
+            width: 72px;
+            height: 72px;
+            flex-shrink: 0;
+            position: relative;
         }
 
         .product-thumb-btn:hover {
-            border-color: #3C332A;
-            background: rgba(255, 255, 255, 0.7);
-            transform: translateY(-2px);
+            opacity: 0.85;
+            transform: translateY(-2px) scale(1.05);
         }
 
         .product-thumb-btn.active {
-            border-color: #3C332A;
-            background: rgba(255, 255, 255, 0.85);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 18px rgba(60, 51, 42, 0.15);
+            opacity: 1;
+            transform: translateY(-3px) scale(1.12);
         }
 
         .product-thumb-btn img {
@@ -4020,7 +4091,27 @@ Menú del Index: Líena 742
             max-height: 100%;
             object-fit: contain;
             display: block;
-            filter: drop-shadow(0 3px 6px rgba(60, 51, 42, 0.15));
+            filter: drop-shadow(0 3px 6px rgba(60, 51, 42, 0.16));
+        }
+
+        /* Indicador sutil debajo de la miniatura activa (sin marco) */
+        .product-thumb-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 22px;
+            height: 2px;
+            background: #3C332A;
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .product-thumb-btn.active::after {
+            transform: translateX(-50%) scaleX(1);
+            opacity: 1;
         }
 
         /* --- CAJA DE COMPRA Y DETALLES (BUY BOX CENTRADA, ELEGANTE) --- */
@@ -4396,29 +4487,43 @@ Menú del Index: Líena 742
 
         @media (max-width: 768px) {
             .product-sheet-container {
-                padding: 0 10px;
+                padding: 0 8px;
                 margin-top: 25px;
             }
 
-            .product-gallery-main {
+            .product-slide-item {
                 min-height: 280px;
                 max-height: 380px;
-                padding: 5px 0;
+                padding: 0 4px;
             }
 
-            .product-gallery-main img {
+            .product-slide-item img {
                 max-height: 320px;
+                max-width: 95%;
+            }
+
+            .slider-nav-arrow {
+                width: 36px;
+                height: 36px;
+            }
+
+            .slider-nav-arrow.slider-prev {
+                left: 2px;
+            }
+
+            .slider-nav-arrow.slider-next {
+                right: 2px;
             }
 
             .product-thumbs-strip {
-                gap: 8px;
-                margin-top: 15px;
+                gap: 10px;
+                margin-top: 10px;
             }
 
             .product-thumb-btn {
-                width: 64px;
-                height: 64px;
-                padding: 4px;
+                width: 56px;
+                height: 56px;
+                padding: 2px;
             }
 
             .product-buy-box {
@@ -4550,47 +4655,65 @@ Menú del Index: Líena 742
                 <!-- =========================================================================
                      HOJA DE PRODUCTO DE LUJO (INSPIRADA EN LA MAISON DU CHOCOLAT)
                      Totalmente editable, comentada y adaptada a la estética DOXA
-                     Galería a todo lo ancho, sin caja blanca, imágenes PNG transparentes
+                     Slider táctil swipeable + Miniaturas flotantes sin marcos
                      ========================================================================= -->
                 <div class="product-sheet-container">
 
-                    <!-- GALERÍA PROTAGONISTA A TODO LO ANCHO DE LA PÁGINA (SIN CAJA BLANCA) -->
-                    <div class="product-gallery-fullwidth">
+                    <!-- SLIDER PROTAGONISTA A TODO LO ANCHO (SCROLL CON EL DEDO + FLECHAS) -->
+                    <div class="product-slider-wrapper">
                         <div class="product-badge-overlay">Edición Limitada · Alta Gastronomía</div>
-                        <div class="product-gallery-main">
-                            <img id="productCurrentImg"
-                                 src="../trufas-35.png"
-                                 alt="Estuche de Trufas Puras de Chocolate Negro">
+
+                        <!-- Flechas de navegación lateral (< y >) -->
+                        <button type="button" class="slider-nav-arrow slider-prev" id="sliderPrevBtn" aria-label="Foto anterior">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <button type="button" class="slider-nav-arrow slider-next" id="sliderNextBtn" aria-label="Foto siguiente">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+
+                        <!-- Carrusel swipeable nativo (deslizable con el dedo) -->
+                        <div class="product-gallery-slider" id="productGallerySlider">
+                            <!-- Slide 0: 35 piezas (default) -->
+                            <div class="product-slide-item" data-index="0" data-format="35">
+                                <img src="../trufas-35.png" alt="Estuche de 35 Trufas (245 g)">
+                            </div>
+                            <!-- Slide 1: 13 piezas -->
+                            <div class="product-slide-item" data-index="1" data-format="13">
+                                <img src="../trufas-13.png" alt="Estuche de 13 Trufas (90 g)" loading="lazy">
+                            </div>
+                            <!-- Slide 2: 2 piezas -->
+                            <div class="product-slide-item" data-index="2" data-format="2">
+                                <img src="../trufas-2.png" alt="Estuche de 2 Trufas (15 g)" loading="lazy">
+                            </div>
+                            <!-- Slide 3: 58 piezas -->
+                            <div class="product-slide-item" data-index="3" data-format="58">
+                                <img src="../trufas-58.png" alt="Estuche de 58 Trufas (405 g)" loading="lazy">
+                            </div>
+                            <!-- Slide 4: Caja Colección DOXA -->
+                            <div class="product-slide-item" data-index="4" data-format="">
+                                <img src="../ProtoDoxa.png" alt="Caja Escultórica Colección DOXA" loading="lazy">
+                            </div>
                         </div>
-                        <div class="product-thumbs-strip">
-                            <button type="button" class="product-thumb-btn active"
-                                    data-img="../trufas-35.png"
-                                    data-format="35"
-                                    title="Estuche 35 Trufas (245 g)">
+
+                        <!-- Miniaturas flotantes (SIN MARCOS NI CAJA BLANCA) -->
+                        <div class="product-thumbs-strip" id="productThumbsStrip">
+                            <button type="button" class="product-thumb-btn active" data-index="0" data-format="35" title="Estuche 35 Trufas (245 g)">
                                 <img src="../trufas-35.png" alt="35 Trufas">
                             </button>
-                            <button type="button" class="product-thumb-btn"
-                                    data-img="../trufas-13.png"
-                                    data-format="13"
-                                    title="Estuche 13 Trufas (90 g)">
+                            <button type="button" class="product-thumb-btn" data-index="1" data-format="13" title="Estuche 13 Trufas (90 g)">
                                 <img src="../trufas-13.png" alt="13 Trufas">
                             </button>
-                            <button type="button" class="product-thumb-btn"
-                                    data-img="../trufas-2.png"
-                                    data-format="2"
-                                    title="Estuche 2 Trufas (15 g)">
+                            <button type="button" class="product-thumb-btn" data-index="2" data-format="2" title="Estuche 2 Trufas (15 g)">
                                 <img src="../trufas-2.png" alt="2 Trufas">
                             </button>
-                            <button type="button" class="product-thumb-btn"
-                                    data-img="../trufas-58.png"
-                                    data-format="58"
-                                    title="Estuche 58 Trufas (405 g)">
+                            <button type="button" class="product-thumb-btn" data-index="3" data-format="58" title="Estuche 58 Trufas (405 g)">
                                 <img src="../trufas-58.png" alt="58 Trufas">
                             </button>
-                            <button type="button" class="product-thumb-btn"
-                                    data-img="../ProtoDoxa.png"
-                                    data-format=""
-                                    title="Caja Escultórica DOXA">
+                            <button type="button" class="product-thumb-btn" data-index="4" data-format="" title="Caja Escultórica DOXA">
                                 <img src="../ProtoDoxa.png" alt="Caja Colección DOXA">
                             </button>
                         </div>
@@ -4890,69 +5013,135 @@ Menú del Index: Líena 742
 
                 <script>
                     (function() {
-                        const imgPrefix = '../';
-                        const formatImgMap = {
-                            '2': imgPrefix + 'trufas-2.png',
-                            '13': imgPrefix + 'trufas-13.png',
-                            '35': imgPrefix + 'trufas-35.png',
-                            '58': imgPrefix + 'trufas-58.png'
-                        };
+                        const slider = document.getElementById('productGallerySlider');
+                        const btnPrev = document.getElementById('sliderPrevBtn');
+                        const btnNext = document.getElementById('sliderNextBtn');
+                        const thumbBtns = document.querySelectorAll('.product-thumb-btn');
+                        const formatSlideMap = { '35': 0, '13': 1, '2': 2, '58': 3 };
 
-                        function setMainImage(src) {
-                            const mainImg = document.getElementById('productCurrentImg');
-                            if (!mainImg || mainImg.src.indexOf(src) !== -1) return;
-                            mainImg.style.opacity = '0.25';
-                            mainImg.style.transform = 'scale(0.97)';
-                            setTimeout(() => {
-                                mainImg.src = src;
-                                mainImg.style.opacity = '1';
-                                mainImg.style.transform = 'scale(1)';
-                            }, 150);
+                        // 1. Desplazamiento suave a un slide concreto
+                        function scrollToSlide(index) {
+                            if (!slider) return;
+                            const slides = slider.querySelectorAll('.product-slide-item');
+                            if (slides[index]) {
+                                const leftPos = slides[index].offsetLeft - slider.offsetLeft;
+                                slider.scrollTo({ left: leftPos, behavior: 'smooth' });
+                                updateActiveThumb(index);
+                            }
                         }
 
-                        // 1. Selector de formatos interactivo
-                        document.querySelectorAll('.product-format-option').forEach(opt => {
-                            opt.addEventListener('click', function() {
-                                document.querySelectorAll('.product-format-option').forEach(o => o.classList.remove('active'));
-                                this.classList.add('active');
-
-                                const pieces = this.getAttribute('data-pieces');
-                                const price = parseFloat(this.getAttribute('data-price')).toFixed(2);
-                                const kilo = this.getAttribute('data-kilo');
-                                const weight = this.getAttribute('data-weight');
-                                const title = this.getAttribute('data-title');
-
-                                const displayPrice = document.getElementById('productDisplayPrice');
-                                const displayKilo = document.getElementById('productDisplayKilo');
-                                const mainTitle = document.getElementById('productMainTitle');
-                                const btnCart = document.getElementById('btnAddToCart');
-
-                                const qty = parseInt(document.getElementById('productQtyInput').value) || 1;
-                                const totalPrice = (price * qty).toFixed(2);
-
-                                if (displayPrice) displayPrice.innerText = totalPrice.replace('.', ',') + ' €';
-                                if (displayKilo) displayKilo.innerText = kilo + ' · Peso: ' + weight;
-                                if (mainTitle) mainTitle.innerText = title;
-                                if (btnCart) {
-                                    btnCart.querySelector('span').innerText = 'Añadir a la Cesta — ' + totalPrice.replace('.', ',') + ' €';
+                        // 2. Actualizar miniatura activa
+                        function updateActiveThumb(index) {
+                            thumbBtns.forEach((btn, idx) => {
+                                if (idx === index) {
+                                    btn.classList.add('active');
+                                } else {
+                                    btn.classList.remove('active');
                                 }
+                            });
+                        }
 
-                                // Cambiar imagen principal a la versión transparente correspondiente
-                                if (formatImgMap[pieces]) {
-                                    setMainImage(formatImgMap[pieces]);
-                                    // Sincronizar miniatura activa
-                                    document.querySelectorAll('.product-thumb-btn').forEach(b => {
-                                        if (b.getAttribute('data-format') === pieces) {
-                                            b.classList.add('active');
-                                        } else {
-                                            b.classList.remove('active');
+                        // 3. Flechas de navegación (< y >)
+                        if (btnPrev && slider) {
+                            btnPrev.addEventListener('click', () => {
+                                const step = slider.clientWidth * 0.95;
+                                slider.scrollBy({ left: -step, behavior: 'smooth' });
+                            });
+                        }
+                        if (btnNext && slider) {
+                            btnNext.addEventListener('click', () => {
+                                const step = slider.clientWidth * 0.95;
+                                slider.scrollBy({ left: step, behavior: 'smooth' });
+                            });
+                        }
+
+                        // 4. Detección de scroll táctil con el dedo (actualiza miniatura activa)
+                        if (slider) {
+                            let scrollTimeout;
+                            slider.addEventListener('scroll', () => {
+                                clearTimeout(scrollTimeout);
+                                scrollTimeout = setTimeout(() => {
+                                    const scrollLeft = slider.scrollLeft;
+                                    const slideWidth = slider.clientWidth;
+                                    if (slideWidth > 0) {
+                                        const currentIndex = Math.round(scrollLeft / slideWidth);
+                                        updateActiveThumb(currentIndex);
+
+                                        // Si el slide corresponde a un formato de compra, sincronizar selector
+                                        const currentSlide = slider.querySelectorAll('.product-slide-item')[currentIndex];
+                                        if (currentSlide) {
+                                            const fmt = currentSlide.getAttribute('data-format');
+                                            if (fmt) {
+                                                const opt = document.querySelector('.product-format-option[data-pieces="' + fmt + '"]');
+                                                if (opt && !opt.classList.contains('active')) {
+                                                    document.querySelectorAll('.product-format-option').forEach(o => o.classList.remove('active'));
+                                                    opt.classList.add('active');
+                                                    syncFormatData(opt);
+                                                }
+                                            }
                                         }
-                                    });
+                                    }
+                                }, 60);
+                            }, { passive: true });
+                        }
+
+                        // 5. Clic en las miniaturas flotantes
+                        thumbBtns.forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                const idx = parseInt(this.getAttribute('data-index'));
+                                scrollToSlide(idx);
+
+                                const fmt = this.getAttribute('data-format');
+                                if (fmt) {
+                                    const opt = document.querySelector('.product-format-option[data-pieces="' + fmt + '"]');
+                                    if (opt && !opt.classList.contains('active')) {
+                                        document.querySelectorAll('.product-format-option').forEach(o => o.classList.remove('active'));
+                                        opt.classList.add('active');
+                                        syncFormatData(opt);
+                                    }
                                 }
                             });
                         });
 
-                        // 2. Stepper de Cantidad (+ / -)
+                        // 6. Función para sincronizar precios y títulos del formato
+                        function syncFormatData(opt) {
+                            const price = parseFloat(opt.getAttribute('data-price')).toFixed(2);
+                            const kilo = opt.getAttribute('data-kilo');
+                            const weight = opt.getAttribute('data-weight');
+                            const title = opt.getAttribute('data-title');
+
+                            const displayPrice = document.getElementById('productDisplayPrice');
+                            const displayKilo = document.getElementById('productDisplayKilo');
+                            const mainTitle = document.getElementById('productMainTitle');
+                            const btnCart = document.getElementById('btnAddToCart');
+                            const qtyInput = document.getElementById('productQtyInput');
+
+                            const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+                            const totalPrice = (price * qty).toFixed(2);
+
+                            if (displayPrice) displayPrice.innerText = totalPrice.replace('.', ',') + ' €';
+                            if (displayKilo) displayKilo.innerText = kilo + ' · Peso: ' + weight;
+                            if (mainTitle) mainTitle.innerText = title;
+                            if (btnCart) {
+                                btnCart.querySelector('span').innerText = 'Añadir a la Cesta — ' + totalPrice.replace('.', ',') + ' €';
+                            }
+                        }
+
+                        // 7. Clic en selector de formatos del Buy Box
+                        document.querySelectorAll('.product-format-option').forEach(opt => {
+                            opt.addEventListener('click', function() {
+                                document.querySelectorAll('.product-format-option').forEach(o => o.classList.remove('active'));
+                                this.classList.add('active');
+                                syncFormatData(this);
+
+                                const pieces = this.getAttribute('data-pieces');
+                                if (formatSlideMap[pieces] !== undefined) {
+                                    scrollToSlide(formatSlideMap[pieces]);
+                                }
+                            });
+                        });
+
+                        // 8. Stepper de Cantidad (+ / -)
                         const qtyInput = document.getElementById('productQtyInput');
                         const btnMinus = document.getElementById('qtyMinusBtn');
                         const btnPlus = document.getElementById('qtyPlusBtn');
@@ -4989,27 +5178,7 @@ Menú del Index: Líena 742
                             });
                         }
 
-                        // 3. Miniaturas de Galería interactivas
-                        document.querySelectorAll('.product-thumb-btn').forEach(btn => {
-                            btn.addEventListener('click', function() {
-                                document.querySelectorAll('.product-thumb-btn').forEach(b => b.classList.remove('active'));
-                                this.classList.add('active');
-                                const newSrc = this.getAttribute('data-img');
-                                const fmt = this.getAttribute('data-format');
-                                if (newSrc) {
-                                    setMainImage(newSrc);
-                                }
-                                // Si corresponde a un formato, activar también esa opción de compra
-                                if (fmt) {
-                                    const matchingOpt = document.querySelector('.product-format-option[data-pieces="' + fmt + '"]');
-                                    if (matchingOpt && !matchingOpt.classList.contains('active')) {
-                                        matchingOpt.click();
-                                    }
-                                }
-                            });
-                        });
-
-                        // 4. Acordeones desplegables
+                        // 9. Acordeones desplegables
                         window.toggleSheetAccordion = function(btn) {
                             const item = btn.closest('.sheet-accordion-item');
                             const body = item.querySelector('.sheet-accordion-body');
@@ -5024,7 +5193,7 @@ Menú del Index: Líena 742
                             }
                         };
 
-                        // 5. Boton de reserva con feedback Toast
+                        // 10. Boton de reserva con feedback Toast
                         const btnAddToCart = document.getElementById('btnAddToCart');
                         if (btnAddToCart) {
                             btnAddToCart.addEventListener('click', () => {
