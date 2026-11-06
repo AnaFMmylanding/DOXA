@@ -2287,7 +2287,7 @@ Menú del Index: Líena 742
             <div class="container animate-appear" style="text-align: center;">
 
                 <h2 class="section-title">
-                    EL PROPÓSITO
+                    LA ARQUITECTURA DOXA
                 </h2>
 
                 <p class="col-desc" style="margin-bottom: 40px;">
@@ -3907,7 +3907,530 @@ Menú del Index: Líena 742
                 border-bottom: 1px solid rgba(60, 51, 42, 0.08);
             }
 
-            .btn-alma-coleccion {
+            /* =========================================================================
+           HOJA DE PRODUCTO DE LUJO (INSPIRADA EN LA MAISON DU CHOCOLAT)
+           Totalmente responsive, editable y adaptada a la estética de DOXA
+           ========================================================================= */
+        .product-sheet-container {
+            max-width: 1200px;
+            margin: 60px auto 20px auto;
+            padding: 0 20px;
+            font-family: 'Lexend', sans-serif;
+            color: var(--text-dark, #3C332A);
+        }
+
+        .product-sheet-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 55px;
+            align-items: start;
+        }
+
+        /* --- COLUMNA IZQUIERDA: GALERÍA DE IMÁGENES --- */
+        .product-gallery-card {
+            position: relative;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+            border: 1px solid rgba(60, 51, 42, 0.08);
+        }
+
+        .product-gallery-main {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8f8f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+        }
+
+        .product-gallery-main:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-badge-overlay {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(30, 26, 22, 0.88);
+            color: #ffffff;
+            font-family: 'Lato', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            z-index: 5;
+        }
+
+        .product-thumbs-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .product-thumb-btn {
+            width: 100%;
+            height: 85px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            background: #f8f8f6;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        .product-thumb-btn.active {
+            border-color: #3C332A;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(60, 51, 42, 0.15);
+        }
+
+        .product-thumb-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- COLUMNA DERECHA: BUY BOX & DETALLES --- */
+        .product-buy-box {
+            position: sticky;
+            top: 110px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 36px 32px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+            border: 1px solid rgba(60, 51, 42, 0.08);
+            text-align: left;
+        }
+
+        .product-pretitle {
+            font-family: 'Lato', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(60, 51, 42, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .product-main-title {
+            font-family: 'Lato', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            line-height: 1.25;
+            color: #1e1a16;
+            margin: 0 0 12px 0;
+        }
+
+        .product-rating-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            font-size: 12px;
+        }
+
+        .product-stars {
+            color: #bfa15f;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .product-rating-text {
+            color: rgba(60, 51, 42, 0.7);
+            font-weight: 400;
+        }
+
+        .product-short-desc {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: rgba(60, 51, 42, 0.85);
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.1);
+        }
+
+        /* Selector de formato / peso */
+        .product-format-section {
+            margin-bottom: 24px;
+        }
+
+        .product-format-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #3C332A;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .product-format-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .product-format-option {
+            border: 1.5px solid rgba(60, 51, 42, 0.15);
+            border-radius: 8px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: #fafaf9;
+            text-align: left;
+        }
+
+        .product-format-option:hover {
+            border-color: #3C332A;
+            background: #ffffff;
+        }
+
+        .product-format-option.active {
+            border-color: #3C332A;
+            background: #ffffff;
+            box-shadow: 0 3px 10px rgba(60, 51, 42, 0.1);
+        }
+
+        .format-opt-title {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1e1a16;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .format-opt-sub {
+            font-size: 11px;
+            color: rgba(60, 51, 42, 0.65);
+            display: block;
+        }
+
+        .format-opt-price {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #3C332A;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Precio actual */
+        .product-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .product-main-price {
+            font-family: 'Lato', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e1a16;
+        }
+
+        .product-price-kilo {
+            font-size: 12px;
+            color: rgba(60, 51, 42, 0.6);
+        }
+
+        /* Acciones: Stepper + Botón Añadir */
+        .product-actions-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 26px;
+        }
+
+        .product-qty-stepper {
+            display: flex;
+            align-items: center;
+            border: 1.5px solid rgba(60, 51, 42, 0.2);
+            border-radius: 8px;
+            background: #fafaf9;
+            padding: 2px;
+            height: 48px;
+        }
+
+        .qty-btn {
+            background: transparent;
+            border: none;
+            width: 36px;
+            height: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            color: #3C332A;
+            font-weight: 600;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+
+        .qty-btn:hover {
+            background: rgba(60, 51, 42, 0.08);
+        }
+
+        .qty-input {
+            width: 36px;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-family: 'Lexend', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e1a16;
+            outline: none;
+        }
+
+        .btn-add-cart {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #3C332A;
+            color: #ffffff !important;
+            font-family: 'Lato', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0 24px;
+            height: 48px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(60, 51, 42, 0.2);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-add-cart:hover {
+            background: #1e1a16;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(60, 51, 42, 0.3);
+        }
+
+        /* Sellos de garantía / envío */
+        .product-shipping-badges {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 16px 0 0 0;
+            border-top: 1px solid rgba(60, 51, 42, 0.1);
+        }
+
+        .shipping-badge-item {
+            text-align: center;
+            font-size: 10.5px;
+            line-height: 1.35;
+            color: rgba(60, 51, 42, 0.7);
+        }
+
+        .shipping-badge-item svg {
+            display: block;
+            margin: 0 auto 6px auto;
+            stroke: #3C332A;
+        }
+
+        /* --- SECCIÓN INFERIOR: ACORDEONES DETALLADOS --- */
+        .product-accordions-wrap {
+            max-width: 1200px;
+            margin: 45px auto 40px auto;
+            padding: 0 20px;
+        }
+
+        .sheet-accordion-item {
+            background: #ffffff;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(60, 51, 42, 0.09);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .sheet-accordion-item.active {
+            border-color: rgba(60, 51, 42, 0.3);
+        }
+
+        .sheet-accordion-header {
+            width: 100%;
+            padding: 20px 24px;
+            background: transparent;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #1e1a16;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.2s;
+        }
+
+        .sheet-accordion-header:hover {
+            background: #fbfbfa;
+        }
+
+        .sheet-accordion-icon {
+            font-size: 18px;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+            color: #3C332A;
+        }
+
+        .sheet-accordion-item.active .sheet-accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .sheet-accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+            background: #fafaf9;
+        }
+
+        .sheet-accordion-body-inner {
+            padding: 24px 28px;
+            font-size: 13.5px;
+            line-height: 1.7;
+            color: rgba(60, 51, 42, 0.88);
+            border-top: 1px solid rgba(60, 51, 42, 0.06);
+        }
+
+        .sheet-nutrition-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+            margin-top: 10px;
+        }
+
+        .sheet-nutrition-table th,
+        .sheet-nutrition-table td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.08);
+        }
+
+        .sheet-nutrition-table th {
+            font-family: 'Lato', sans-serif;
+            font-size: 11.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #1e1a16;
+            background: rgba(60, 51, 42, 0.04);
+        }
+
+        /* Notificación Toast */
+        .toast-notify {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e1a16;
+            color: #ffffff;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Lexend', sans-serif;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 9999;
+        }
+
+        .toast-notify.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Media Queries */
+        @media (max-width: 992px) {
+            .product-sheet-layout {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .product-buy-box {
+                position: static;
+                padding: 28px 22px;
+            }
+
+            .product-gallery-main {
+                height: 380px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-sheet-container {
+                padding: 0 14px;
+                margin-top: 35px;
+            }
+
+            .product-gallery-card {
+                padding: 14px;
+            }
+
+            .product-gallery-main {
+                height: 280px;
+            }
+
+            .product-thumbs-strip {
+                gap: 8px;
+            }
+
+            .product-thumb-btn {
+                height: 65px;
+            }
+
+            .product-main-title {
+                font-size: 21px;
+            }
+
+            .product-format-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-actions-row {
+                flex-direction: column;
+            }
+
+            .btn-add-cart {
+                width: 100%;
+            }
+
+            .product-shipping-badges {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+        }
+
+        .btn-alma-coleccion {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -3974,12 +4497,13 @@ Menú del Index: Líena 742
             }
         </style>
 
-        <section id="el-alma" class="alma-section">
+                <section id="la-coleccion" class="alma-section">
+            <a id="el-alma" style="position: absolute; top: 0; pointer-events: none;"></a>
             <div class="container animate-appear">
-                <!-- ESTRUCTURA IDÉNTICA A "EL PLACER": TÍTULO Y TEXTO CENTRADOS -->
-                <div style="text-align: center; margin-bottom: 50px;">
+                <!-- TÍTULO Y TEXTO INTRODUCTORIO DE LA COLECCIÓN (PRESERVADO ÍNTEGRO) -->
+                <div style="text-align: center; margin-bottom: 25px;">
                     <h2 class="section-title" style="color: var(--text-dark);">
-                        EL ALMA
+                        LA COLECCIÓN
                     </h2>
 
                     <p class="section-lead-text" style="max-width: 620px; color: var(--text-dark);">
@@ -4001,25 +4525,453 @@ Menú del Index: Líena 742
                     </p>
                 </div>
 
-                <!-- IMAGEN ABAJO (sin la caja de características) -->
-                <div
-                    style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 30px;">
-                    <div class="alma-img-card">
-                        <img src="../ProtoDoxa.png" alt="DOXA — El Alma y el Arte">
+                <!-- =========================================================================
+                     HOJA DE PRODUCTO DE LUJO (INSPIRADA EN LA MAISON DU CHOCOLAT)
+                     Totalmente editable, comentada y adaptada a la estética DOXA
+                     ========================================================================= -->
+                <div class="product-sheet-container">
+                    <div class="product-sheet-layout">
+
+                        <!-- COLUMNA IZQUIERDA: GALERÍA DE IMÁGENES -->
+                        <div class="product-gallery-card">
+                            <div class="product-badge-overlay">Edición Limitada · Alta Gastronomía</div>
+                            <div class="product-gallery-main">
+                                <img id="productCurrentImg"
+                                     src="https://media.lamaisonduchocolat.com/catalog/product/cache/7900d5e1f4dcf2e4802ae80b3fcd7c7b/g/i/giftbox-truffles-35chocolates-gray_1.jpg"
+                                     alt="Estuche de Trufas Puras de Chocolate Negro">
+                            </div>
+                            <div class="product-thumbs-strip">
+                                <button type="button" class="product-thumb-btn active"
+                                        data-img="https://media.lamaisonduchocolat.com/catalog/product/cache/7900d5e1f4dcf2e4802ae80b3fcd7c7b/g/i/giftbox-truffles-35chocolates-gray_1.jpg"
+                                        title="Estuche de Trufas Cerrado">
+                                    <img src="https://media.lamaisonduchocolat.com/catalog/product/cache/7900d5e1f4dcf2e4802ae80b3fcd7c7b/g/i/giftbox-truffles-35chocolates-gray_1.jpg"
+                                         alt="Estuche Cerrado">
+                                </button>
+                                <button type="button" class="product-thumb-btn"
+                                        data-img="https://media.lamaisonduchocolat.com/catalog/product/cache/7900d5e1f4dcf2e4802ae80b3fcd7c7b/t/r/truffles-range-2240x1966_5.jpg"
+                                        title="Estuche Abierto con Trufas">
+                                    <img src="https://media.lamaisonduchocolat.com/catalog/product/cache/7900d5e1f4dcf2e4802ae80b3fcd7c7b/t/r/truffles-range-2240x1966_5.jpg"
+                                         alt="Estuche Abierto">
+                                </button>
+                                <button type="button" class="product-thumb-btn"
+                                        data-img="https://media.lamaisonduchocolat.com/catalog/product/cache/7900d5e1f4dcf2e4802ae80b3fcd7c7b/n/a/naturetruffles-gourmet-2240x1966_1_2.jpg"
+                                        title="Textura Mousse Interior">
+                                    <img src="https://media.lamaisonduchocolat.com/catalog/product/cache/7900d5e1f4dcf2e4802ae80b3fcd7c7b/n/a/naturetruffles-gourmet-2240x1966_1_2.jpg"
+                                         alt="Textura Detalle">
+                                </button>
+                                <button type="button" class="product-thumb-btn"
+                                        data-img="../ProtoDoxa.png"
+                                        title="Caja Escultórica DOXA">
+                                    <img src="../ProtoDoxa.png" alt="Caja Colección DOXA">
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- COLUMNA DERECHA: BUY BOX & SELECTOR DE FORMATOS -->
+                        <div class="product-buy-box">
+                            <div class="product-pretitle">Colección Alta Repostería Biológica</div>
+                            <h3 class="product-main-title" id="productMainTitle">Estuche de Trufas Puras de Chocolate Negro</h3>
+
+                            <div class="product-rating-row">
+                                <span class="product-stars">★★★★★</span>
+                                <span class="product-rating-text">4.9 / 5 &nbsp;·&nbsp; 56 valoraciones verificadas</span>
+                            </div>
+
+                            <p class="product-short-desc">
+                                Las trufas de chocolate negro de La Maison du Chocolat ofrecen una sensación cremosa y fundente única, combinando una ganache batida de textura aérea con una fina capa de chocolate crujiente y un delicado velo de cacao puro amargo en polvo.
+                            </p>
+
+                            <!-- SELECTOR DE FORMATOS Y TAMAÑOS -->
+                            <div class="product-format-section">
+                                <span class="product-format-label">Selecciona el formato:</span>
+                                <div class="product-format-grid">
+                                    <!-- Formato 1: 2 piezas -->
+                                    <div class="product-format-option"
+                                         data-pieces="2"
+                                         data-weight="15 g"
+                                         data-price="10.00"
+                                         data-kilo="666,67 € / kg"
+                                         data-title="Estuche de Trufas Puras — 2 piezas (15 g)">
+                                        <span class="format-opt-title">2 piezas</span>
+                                        <span class="format-opt-sub">15 g neto</span>
+                                        <span class="format-opt-price">10,00 €</span>
+                                    </div>
+
+                                    <!-- Formato 2: 13 piezas -->
+                                    <div class="product-format-option"
+                                         data-pieces="13"
+                                         data-weight="90 g"
+                                         data-price="57.00"
+                                         data-kilo="633,33 € / kg"
+                                         data-title="Estuche de Trufas Puras — 13 piezas (90 g)">
+                                        <span class="format-opt-title">13 piezas</span>
+                                        <span class="format-opt-sub">90 g neto</span>
+                                        <span class="format-opt-price">57,00 €</span>
+                                    </div>
+
+                                    <!-- Formato 3: 35 piezas (POR DEFECTO) -->
+                                    <div class="product-format-option active"
+                                         data-pieces="35"
+                                         data-weight="245 g"
+                                         data-price="117.00"
+                                         data-kilo="477,55 € / kg"
+                                         data-title="Estuche de Trufas Puras — 35 piezas (245 g)">
+                                        <span class="format-opt-title">35 piezas</span>
+                                        <span class="format-opt-sub">245 g neto</span>
+                                        <span class="format-opt-price">117,00 €</span>
+                                    </div>
+
+                                    <!-- Formato 4: 58 piezas -->
+                                    <div class="product-format-option"
+                                         data-pieces="58"
+                                         data-weight="405 g"
+                                         data-price="165.00"
+                                         data-kilo="407,41 € / kg"
+                                         data-title="Estuche de Trufas Puras — 58 piezas (405 g)">
+                                        <span class="format-opt-title">58 piezas</span>
+                                        <span class="format-opt-sub">405 g neto</span>
+                                        <span class="format-opt-price">165,00 €</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PRECIO DINÁMICO -->
+                            <div class="product-price-row">
+                                <span class="product-main-price" id="productDisplayPrice">117,00 €</span>
+                                <span class="product-price-kilo" id="productDisplayKilo">477,55 € / kg · Peso: 245 g</span>
+                            </div>
+
+                            <!-- ACCIONES: STEPPER DE CANTIDAD + BOTÓN RESERVA/COMPRA -->
+                            <div class="product-actions-row">
+                                <div class="product-qty-stepper">
+                                    <button type="button" class="qty-btn" id="qtyMinusBtn" aria-label="Reducir cantidad">−</button>
+                                    <input type="text" class="qty-input" id="productQtyInput" value="1" readonly>
+                                    <button type="button" class="qty-btn" id="qtyPlusBtn" aria-label="Aumentar cantidad">+</button>
+                                </div>
+                                <a href="../compra.html" class="btn-add-cart" id="btnAddToCart">
+                                    <span>Añadir a la Cesta — 117,00 €</span>
+                                </a>
+                            </div>
+
+                            <!-- SELLOS DE GARANTÍA Y ENVÍO -->
+                            <div class="product-shipping-badges">
+                                <div class="shipping-badge-item">
+                                    <svg width="22" height="22" fill="none" stroke-width="1.8" viewBox="0 0 24 24">
+                                        <rect x="1" y="3" width="15" height="13"></rect>
+                                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                    </svg>
+                                    Envío Exprés Refrigerado 24-48h
+                                </div>
+                                <div class="shipping-badge-item">
+                                    <svg width="22" height="22" fill="none" stroke-width="1.8" viewBox="0 0 24 24">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                    Embalaje Isotérmico Protector
+                                </div>
+                                <div class="shipping-badge-item">
+                                    <svg width="22" height="22" fill="none" stroke-width="1.8" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 14 14"></polyline>
+                                    </svg>
+                                    Garantía de Frescura Artesanal
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- SECCIÓN INFERIOR: ACORDEONES DETALLADOS DE PRODUCTO -->
+                    <div class="product-accordions-wrap">
+
+                        <!-- 1. DESCRIPCIÓN & PROCESO ARTESANAL -->
+                        <div class="sheet-accordion-item active">
+                            <button type="button" class="sheet-accordion-header" onclick="toggleSheetAccordion(this)">
+                                <span>1. Descripción & Proceso Artesanal</span>
+                                <span class="sheet-accordion-icon">+</span>
+                            </button>
+                            <div class="sheet-accordion-body" style="max-height: 500px;">
+                                <div class="sheet-accordion-body-inner">
+                                    <p style="margin:0 0 12px 0;">
+                                        Una creación maestra nacida del saber hacer de los maestros chocolateros franceses. Se necesitan <strong>3 días de meticulosa elaboración</strong> para conseguir la textura inconfundible de esta trufa legendaria.
+                                    </p>
+                                    <p style="margin:0 0 12px 0;">
+                                        Su interior alberga una ganache montada hasta alcanzar una ligereza sublime, casi aérea, que contrasta delicadamente con una fina y crujiente camisa de chocolate negro puro. Como toque final, cada pieza es espolvoreada a mano con cacao amargo de la más pura procedencia para equilibrar la dulzura y sublimar los aromas florales y tostados del grano.
+                                    </p>
+                                    <p style="margin:0; font-style: italic; color: rgba(60,51,42,0.7);">
+                                        Presentadas en nuestro estuche característico con cinta de satén, listas para regalo o degustación privada.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. CONSEJOS DE CONSERVACIÓN Y DEGUSTACIÓN -->
+                        <div class="sheet-accordion-item">
+                            <button type="button" class="sheet-accordion-header" onclick="toggleSheetAccordion(this)">
+                                <span>2. Consejos de Conservación & Degustación</span>
+                                <span class="sheet-accordion-icon">+</span>
+                            </button>
+                            <div class="sheet-accordion-body">
+                                <div class="sheet-accordion-body-inner">
+                                    <p style="margin:0 0 10px 0;">
+                                        Para apreciar plenamente la complejidad de los matices aromáticos y la textura fundente de las trufas:
+                                    </p>
+                                    <ul style="margin:0 0 12px 20px; padding:0;">
+                                        <li>Conservar en un lugar fresco, seco y al abrigo de la luz, a una temperatura ideal entre <strong>14 °C y 18 °C</strong>.</li>
+                                        <li>Consumir preferentemente en un plazo de <strong>2 a 4 semanas</strong> desde su recepción para disfrutar de su máxima expresión de frescura.</li>
+                                        <li>Si se conservan en frigorífico debido a altas temperaturas ambientales, retirar la caja aproximadamente <strong>30 minutos antes de la degustación</strong> para que alcancen la temperatura idónea de servicio (aprox. 20 °C).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. INGREDIENTES & COMPROMISO DE CALIDAD -->
+                        <div class="sheet-accordion-item">
+                            <button type="button" class="sheet-accordion-header" onclick="toggleSheetAccordion(this)">
+                                <span>3. Ingredientes & Compromiso de Calidad</span>
+                                <span class="sheet-accordion-icon">+</span>
+                            </button>
+                            <div class="sheet-accordion-body">
+                                <div class="sheet-accordion-body-inner">
+                                    <p style="margin:0 0 10px 0;">
+                                        <strong>Cacao mínimo: 56% en el chocolate negro.</strong>
+                                    </p>
+                                    <p style="margin:0 0 12px 0;">
+                                        <strong>Ingredientes:</strong> Chocolate negro (pasta de cacao, azúcar, manteca de cacao, emulgente: lecitina de girasol, extracto natural de vainilla), nata líquida (leche), mantequilla concentrada (leche), estabilizante: sorbitol, cacao puro en polvo desgrasado.
+                                    </p>
+                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">
+                                        Compromiso: <strong>100% pura manteca de cacao</strong>, sin aceite de palma, sin aromas artificiales, sin colorantes añadidos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. INFORMACIÓN NUTRICIONAL COMPLETA -->
+                        <div class="sheet-accordion-item">
+                            <button type="button" class="sheet-accordion-header" onclick="toggleSheetAccordion(this)">
+                                <span>4. Información Nutricional Completa</span>
+                                <span class="sheet-accordion-icon">+</span>
+                            </button>
+                            <div class="sheet-accordion-body">
+                                <div class="sheet-accordion-body-inner">
+                                    <table class="sheet-nutrition-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Valores Nutricionales Medios</th>
+                                                <th>Por Porción (20 g / aprox. 3 trufas)</th>
+                                                <th>Por 100 g</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Valor Energético</td>
+                                                <td>120 kcal (502 kJ)</td>
+                                                <td>600 kcal (2.510 kJ)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Grasas Totales</td>
+                                                <td>10 g (13% VRN)</td>
+                                                <td>50 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>— de las cuales Saturadas</td>
+                                                <td>6 g (30% VRN)</td>
+                                                <td>30 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Grasas Trans</td>
+                                                <td>0 g</td>
+                                                <td>0 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Colesterol</td>
+                                                <td>15 mg (5% VRN)</td>
+                                                <td>75 mg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hidratos de Carbono</td>
+                                                <td>7 g (3% VRN)</td>
+                                                <td>35 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>— de los cuales Azúcares</td>
+                                                <td>6 g (12% VRN azúcares añadidos)</td>
+                                                <td>30 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fibra Alimentaria</td>
+                                                <td>2 g (7% VRN)</td>
+                                                <td>10 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Proteínas</td>
+                                                <td>1 g</td>
+                                                <td>5 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sodio / Sal</td>
+                                                <td>3 mg (&lt;0.2% VRN)</td>
+                                                <td>15 mg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Calcio</td>
+                                                <td>14 mg</td>
+                                                <td>70 mg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hierro</td>
+                                                <td>1.0 mg</td>
+                                                <td>5.0 mg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Potasio</td>
+                                                <td>169 mg</td>
+                                                <td>845 mg</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. ALÉRGENOS Y TRAZAS -->
+                        <div class="sheet-accordion-item">
+                            <button type="button" class="sheet-accordion-header" onclick="toggleSheetAccordion(this)">
+                                <span>5. Alérgenos y Trazas</span>
+                                <span class="sheet-accordion-icon">+</span>
+                            </button>
+                            <div class="sheet-accordion-body">
+                                <div class="sheet-accordion-body-inner">
+                                    <p style="margin:0 0 10px 0;">
+                                        <strong>Este producto contiene:</strong> Leche y derivados lácteos (incluida lactosa).
+                                    </p>
+                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">
+                                        <strong>Puede contener trazas de:</strong> Frutos de cáscara (almendras, avellanas, pistachos, nueces comunes, nueces de pecán), trigo (gluten), cacahuetes, soja y huevo.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- BOTÓN CTA A LA COLECCIÓN DEBAJO DE LA IMAGEN CON MARGEN GENEROSO -->
-                <div style="text-align: center; margin-top: 45px; margin-bottom: 10px;">
-                    <a href="../coleccion.html" class="btn-alma-coleccion">
-                        Descubre la colección
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24" style="margin-left: 10px;">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </a>
+                <!-- NOTIFICACIÓN TOAST AL AÑADIR AL CARRITO -->
+                <div class="toast-notify" id="productToastNotify">
+                    ✓ Estuche añadido a tu reserva.
                 </div>
+
+                <script>
+                    // 1. Selector de formatos interactivo
+                    document.querySelectorAll('.product-format-option').forEach(opt => {
+                        opt.addEventListener('click', function() {
+                            document.querySelectorAll('.product-format-option').forEach(o => o.classList.remove('active'));
+                            this.classList.add('active');
+
+                            const price = parseFloat(this.getAttribute('data-price')).toFixed(2);
+                            const kilo = this.getAttribute('data-kilo');
+                            const weight = this.getAttribute('data-weight');
+                            const title = this.getAttribute('data-title');
+
+                            const displayPrice = document.getElementById('productDisplayPrice');
+                            const displayKilo = document.getElementById('productDisplayKilo');
+                            const mainTitle = document.getElementById('productMainTitle');
+                            const btnCart = document.getElementById('btnAddToCart');
+
+                            const qty = parseInt(document.getElementById('productQtyInput').value) || 1;
+                            const totalPrice = (price * qty).toFixed(2);
+
+                            if (displayPrice) displayPrice.innerText = totalPrice.replace('.', ',') + ' €';
+                            if (displayKilo) displayKilo.innerText = kilo + ' · Peso: ' + weight;
+                            if (mainTitle) mainTitle.innerText = title;
+                            if (btnCart) {
+                                btnCart.querySelector('span').innerText = 'Añadir a la Cesta — ' + totalPrice.replace('.', ',') + ' €';
+                            }
+                        });
+                    });
+
+                    // 2. Stepper de Cantidad (+ / -)
+                    const qtyInput = document.getElementById('productQtyInput');
+                    const btnMinus = document.getElementById('qtyMinusBtn');
+                    const btnPlus = document.getElementById('qtyPlusBtn');
+
+                    function updateCartBtnPrice() {
+                        const activeOpt = document.querySelector('.product-format-option.active');
+                        if (!activeOpt) return;
+                        const unitPrice = parseFloat(activeOpt.getAttribute('data-price'));
+                        const qty = parseInt(qtyInput.value) || 1;
+                        const total = (unitPrice * qty).toFixed(2).replace('.', ',');
+                        const displayPrice = document.getElementById('productDisplayPrice');
+                        const btnCart = document.getElementById('btnAddToCart');
+                        if (displayPrice) displayPrice.innerText = total + ' €';
+                        if (btnCart) btnCart.querySelector('span').innerText = 'Añadir a la Cesta — ' + total + ' €';
+                    }
+
+                    if (btnMinus && qtyInput) {
+                        btnMinus.addEventListener('click', () => {
+                            let val = parseInt(qtyInput.value) || 1;
+                            if (val > 1) {
+                                qtyInput.value = val - 1;
+                                updateCartBtnPrice();
+                            }
+                        });
+                    }
+
+                    if (btnPlus && qtyInput) {
+                        btnPlus.addEventListener('click', () => {
+                            let val = parseInt(qtyInput.value) || 1;
+                            if (val < 99) {
+                                qtyInput.value = val + 1;
+                                updateCartBtnPrice();
+                            }
+                        });
+                    }
+
+                    // 3. Miniaturas de Galería interactivas
+                    document.querySelectorAll('.product-thumb-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            document.querySelectorAll('.product-thumb-btn').forEach(b => b.classList.remove('active'));
+                            this.classList.add('active');
+                            const newSrc = this.getAttribute('data-img');
+                            const mainImg = document.getElementById('productCurrentImg');
+                            if (mainImg && newSrc) {
+                                mainImg.style.opacity = '0.4';
+                                setTimeout(() => {
+                                    mainImg.src = newSrc;
+                                    mainImg.style.opacity = '1';
+                                }, 150);
+                            }
+                        });
+                    });
+
+                    // 4. Acordeones desplegables
+                    function toggleSheetAccordion(btn) {
+                        const item = btn.closest('.sheet-accordion-item');
+                        const body = item.querySelector('.sheet-accordion-body');
+                        const isActive = item.classList.contains('active');
+
+                        if (isActive) {
+                            item.classList.remove('active');
+                            body.style.maxHeight = null;
+                        } else {
+                            item.classList.add('active');
+                            body.style.maxHeight = body.scrollHeight + 50 + 'px';
+                        }
+                    }
+
+                    // 5. Boton de reserva con feedback Toast
+                    const btnAddToCart = document.getElementById('btnAddToCart');
+                    if (btnAddToCart) {
+                        btnAddToCart.addEventListener('click', (e) => {
+                            const toast = document.getElementById('productToastNotify');
+                            if (toast) {
+                                toast.classList.add('show');
+                                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                            }
+                        });
+                    }
+                </script>
+
             </div>
         </section>
 
