@@ -123,6 +123,83 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
             list-style: none;
         }
 
+        /* =========================================
+           TEXTO DE LA MARCA EN EL CENTRO DE LA CABECERA ("ESTADO DEL ARTE")
+           Misma tipografia que 'SUMUM' ('Lato', sans-serif, 500) pero en formato mas reducido
+           ========================================= */
+        .navbar-brand-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            pointer-events: auto;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .navbar-brand-center .brand-link {
+            font-family: 'Lato', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--nav-text-initial, #FFFFFF);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: color 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+        }
+
+        .navbar-brand-center .brand-link:hover {
+            opacity: 0.85;
+            transform: scale(1.02);
+        }
+
+        .navbar-brand-center .brand-del {
+            font-size: 0.65em;
+            letter-spacing: 3px;
+            vertical-align: middle;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .navbar.scrolled .navbar-brand-center .brand-link {
+            color: var(--nav-text-scrolled, #000000) !important;
+            text-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand-center .brand-link {
+                font-size: 13px;
+                letter-spacing: 3.5px;
+                gap: 5px;
+            }
+
+            .navbar-brand-center .brand-del {
+                font-size: 0.65em;
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-brand-center .brand-link {
+                font-size: 11.5px;
+                letter-spacing: 2px;
+                gap: 4px;
+            }
+
+            .navbar-brand-center .brand-del {
+                font-size: 0.65em;
+                letter-spacing: 1.5px;
+            }
+        }
+
         /* =========================================================================
            [INICIO] página GALERÍA (ESTILOS CSS DEL MENÚ DE ACCESO)
            ========================================================================= */
@@ -1484,6 +1561,13 @@ Nota: Si anades o eliminas lineas en este archivo, los numeros pueden variar lig
                 <span></span>
                 <span></span>
             </button>
+
+            <!-- ESPACIO CENTRAL: TEXTO DE LA MARCA "ESTADO DEL ARTE" -->
+            <div class="navbar-brand-center">
+                <a href="../index.html" class="brand-link">
+                    ESTADO <span class="brand-del">DEL</span> ARTE
+                </a>
+            </div>
 
             <div class="navbar-menu" id="navbarMenu">
                 <!-- =========================================================================
