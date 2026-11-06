@@ -1648,19 +1648,9 @@ Menú del Index: Líena 742
                 font-size: 15px;
                 font-weight: 300;
                 line-height: 2;
-                min-height: 100px;
-                margin-bottom: 40px;
+                margin-bottom: 35px;
                 opacity: 0.9;
-                max-height: 500px;
-                transition: max-height 0.35s ease-in-out, min-height 0.35s ease-in-out, opacity 0.35s ease-in-out, margin-bottom 0.35s ease-in-out;
-                overflow: hidden;
-            }
-
-            .variety-desc.hidden {
-                max-height: 0;
-                min-height: 0;
-                opacity: 0;
-                margin-bottom: 0 !important;
+                color: var(--text-dark);
             }
 
             .accordion-item {
@@ -3672,7 +3662,7 @@ Menú del Index: Líena 742
                 gap: 60px;
                 max-width: 1000px;
                 margin: 0 auto;
-                align-items: center;
+                align-items: flex-start;
             }
 
             .product-info-grid .column-text {
@@ -3864,29 +3854,32 @@ Menú del Index: Líena 742
                             function toggleAccordion(el) {
                                 const item = el.closest('.accordion-item');
                                 const panel = el.nextElementSibling;
-                                const desc = document.getElementById('varietyDesc');
-                                const allItems = document.querySelectorAll('.accordion-item');
+                                const container = el.closest('.column-text') || document;
+                                const allItems = container.querySelectorAll('.accordion-item');
 
                                 const isOpen = item.classList.contains('active-item');
 
-                                // Close all other items and restore their orders
+                                // Cerrar cualquier otro panel abierto de forma ordenada
                                 allItems.forEach(i => {
-                                    i.classList.remove('active-item');
-                                    i.querySelector('.accordion').classList.remove('active');
-                                    i.querySelector('.panel').style.maxHeight = null;
+                                    if (i !== item) {
+                                        i.classList.remove('active-item');
+                                        const acc = i.querySelector('.accordion');
+                                        const p = i.querySelector('.panel');
+                                        if (acc) acc.classList.remove('active');
+                                        if (p) p.style.maxHeight = null;
+                                    }
                                 });
 
                                 if (!isOpen) {
-                                    // Open this item
+                                    // Abrir este panel desplegándose hacia abajo
                                     item.classList.add('active-item');
                                     el.classList.add('active');
                                     panel.style.maxHeight = panel.scrollHeight + "px";
-
-                                    // Hide description smoothly using CSS transitions
-                                    desc.classList.add('hidden');
                                 } else {
-                                    // Show description again
-                                    desc.classList.remove('hidden');
+                                    // Si ya estaba abierto, cerrarlo
+                                    item.classList.remove('active-item');
+                                    el.classList.remove('active');
+                                    panel.style.maxHeight = null;
                                 }
                             }
                         </script>

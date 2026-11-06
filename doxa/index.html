@@ -1639,19 +1639,9 @@ Menú del Index: Líena 742
                 font-size: 15px;
                 font-weight: 300;
                 line-height: 2;
-                min-height: 100px;
-                margin-bottom: 40px;
+                margin-bottom: 35px;
                 opacity: 0.9;
-                max-height: 500px;
-                transition: max-height 0.35s ease-in-out, min-height 0.35s ease-in-out, opacity 0.35s ease-in-out, margin-bottom 0.35s ease-in-out;
-                overflow: hidden;
-            }
-
-            .variety-desc.hidden {
-                max-height: 0;
-                min-height: 0;
-                opacity: 0;
-                margin-bottom: 0 !important;
+                color: var(--text-dark);
             }
 
             .accordion-item {
@@ -3667,7 +3657,7 @@ Menú del Index: Líena 742
                 gap: 60px;
                 max-width: 1000px;
                 margin: 0 auto;
-                align-items: center;
+                align-items: flex-start;
             }
 
             .product-info-grid .column-text {
@@ -3733,15 +3723,16 @@ Menú del Index: Líena 742
             <div class="container animate-appear">
                 <div style="text-align: center; margin-bottom: 60px;">
                     <h2 class="section-title">
-                        EL SABOR DOXA
+                        EL SABOR
                     </h2>
 
                     <p class="section-lead-text" style="max-width: 550px;">
-                        Porque es innegociable.
-                        <br><br>
+
                         Reunir ingredientes excepcionales sin renunciar a la textura, la jugosidad y la experiencia que
                         esperas de una gran cookie no era sencillo.
                         <br><br>
+                        Una composición poco habitual donde cada elemento tiene sentido por sí solo y, aún más, cuando
+                        forma parte del conjunto.
 
                     </p>
                 </div>
@@ -3791,14 +3782,14 @@ Menú del Index: Líena 742
                             <button class="accordion" onclick="toggleAccordion(this)">Activos y sus dosis</button>
                             <div class="panel">
                                 <p style="padding-top: 15px; margin-bottom: 0; font-size: 11px; opacity: 0.8;">
-                                    *Dosis diarias recomendadas por la OMS
+                                    *VRN
                                 </p>
                                 <div class="table-responsive">
                                     <table class="comparative-table">
                                         <thead>
                                             <tr>
                                                 <th>Activo</th>
-                                                <th>OMS</th>
+                                                <th>VRN</th>
                                                 <th>Doxa</th>
                                             </tr>
                                         </thead>
@@ -3863,29 +3854,32 @@ Menú del Index: Líena 742
                             function toggleAccordion(el) {
                                 const item = el.closest('.accordion-item');
                                 const panel = el.nextElementSibling;
-                                const desc = document.getElementById('varietyDesc');
-                                const allItems = document.querySelectorAll('.accordion-item');
+                                const container = el.closest('.column-text') || document;
+                                const allItems = container.querySelectorAll('.accordion-item');
 
                                 const isOpen = item.classList.contains('active-item');
 
-                                // Close all other items and restore their orders
+                                // Cerrar cualquier otro panel abierto de forma ordenada
                                 allItems.forEach(i => {
-                                    i.classList.remove('active-item');
-                                    i.querySelector('.accordion').classList.remove('active');
-                                    i.querySelector('.panel').style.maxHeight = null;
+                                    if (i !== item) {
+                                        i.classList.remove('active-item');
+                                        const acc = i.querySelector('.accordion');
+                                        const p = i.querySelector('.panel');
+                                        if (acc) acc.classList.remove('active');
+                                        if (p) p.style.maxHeight = null;
+                                    }
                                 });
 
                                 if (!isOpen) {
-                                    // Open this item
+                                    // Abrir este panel desplegándose hacia abajo
                                     item.classList.add('active-item');
                                     el.classList.add('active');
                                     panel.style.maxHeight = panel.scrollHeight + "px";
-
-                                    // Hide description smoothly using CSS transitions
-                                    desc.classList.add('hidden');
                                 } else {
-                                    // Show description again
-                                    desc.classList.remove('hidden');
+                                    // Si ya estaba abierto, cerrarlo
+                                    item.classList.remove('active-item');
+                                    el.classList.remove('active');
+                                    panel.style.maxHeight = null;
                                 }
                             }
                         </script>
