@@ -1679,7 +1679,8 @@ Menú del Index: Líena 742
                 font-size: 9px;
                 font-weight: 700;
                 padding: 8px 12px;
-                border: 1px solid rgba(0, 0, 0, 0.15);
+                border: none !important;
+                background: rgba(255, 255, 255, 0.55);
                 letter-spacing: 2px;
                 text-transform: uppercase;
             }
@@ -4221,12 +4222,12 @@ Menú del Index: Líena 742
             }
 
             .product-format-option {
-                border: 1px solid rgba(60, 51, 42, 0.18);
+                border: none !important;
                 border-radius: 0 !important;
-                padding: 10px 12px;
+                padding: 11px 13px;
                 cursor: pointer;
                 transition: all 0.25s ease;
-                background: rgba(255, 255, 255, 0.4);
+                background: rgba(255, 255, 255, 0.45);
                 text-align: center;
                 display: flex;
                 flex-direction: column;
@@ -4237,14 +4238,12 @@ Menú del Index: Líena 742
             }
 
             .product-format-option:hover {
-                border-color: rgba(60, 51, 42, 0.4);
-                background: rgba(255, 255, 255, 0.7);
+                background: rgba(255, 255, 255, 0.75);
             }
 
             .product-format-option.active {
-                border-color: #3C332A;
                 background: #ffffff;
-                box-shadow: 0 3px 10px rgba(60, 51, 42, 0.1);
+                box-shadow: 0 3px 12px rgba(60, 51, 42, 0.1);
             }
 
             .product-format-option .format-opt-title {
@@ -4324,11 +4323,12 @@ Menú del Index: Líena 742
             .product-qty-stepper {
                 display: flex;
                 align-items: center;
-                border: 1.5px solid rgba(60, 51, 42, 0.2);
+                border: none !important;
                 border-radius: 0 !important;
-                background: rgba(255, 255, 255, 0.6);
+                background: rgba(255, 255, 255, 0.7);
                 padding: 2px;
                 height: 48px;
+                box-shadow: 0 2px 8px rgba(60, 51, 42, 0.05);
             }
 
             .qty-btn {
@@ -4425,14 +4425,14 @@ Menú del Index: Líena 742
                 backdrop-filter: blur(10px);
                 border-radius: 0 !important;
                 margin-bottom: 12px;
-                border: 1px solid rgba(60, 51, 42, 0.09);
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+                border: none !important;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
                 overflow: hidden;
-                transition: border-color 0.3s, background 0.3s;
+                transition: background 0.3s;
             }
 
             .sheet-accordion-item.active {
-                border-color: rgba(60, 51, 42, 0.3);
+                border: none !important;
                 background: rgba(255, 255, 255, 0.9);
             }
 
@@ -4481,7 +4481,7 @@ Menú del Index: Líena 742
                 font-size: 13.5px;
                 line-height: 1.7;
                 color: rgba(60, 51, 42, 0.88);
-                border-top: 1px solid rgba(60, 51, 42, 0.06);
+                border-top: none !important;
             }
 
             .sheet-nutrition-table {
