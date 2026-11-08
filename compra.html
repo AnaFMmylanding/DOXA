@@ -2279,10 +2279,15 @@
                 name: 'Doxas',
                 singularName: 'Doxas',
                 image: 'Doxa.png',
-                unitsPerBox: 10,
+                unitsPerBox: 2,
                 varieties: [
-                    { id: 'doxa_regular', name: '1 caja regular', fullName: 'CAJA DOXA REGULAR', price: 120.00 },
-                    { id: 'doxa_coleccion', name: '1 caja Colección', fullName: 'CAJA DOXA COLECCIÓN', price: 180.00 }
+                    { id: 'doxa_2', name: 'Cajita Dúo (2 piezas)', fullName: 'CAJITA DOXA "TÚ Y YO" (2 PIEZAS)', price: 10.00, image: 'trufas-2.png' },
+                    { id: 'doxa_7', name: 'Caja Mi Semana (7 piezas)', fullName: 'CAJA MI SEMANA (7 PIEZAS)', price: 57.00, image: 'trufas-13.png' },
+                    { id: 'doxa_28', name: 'Caja Mi Mes (28 piezas)', fullName: 'CAJA MI MES (28 PIEZAS)', price: 117.00, image: 'trufas-35.png' },
+                    { id: 'doxa_58', name: 'Caja Gran Reserva (58 piezas)', fullName: 'CAJA GRAN RESERVA (58 PIEZAS)', price: 185.00, image: 'trufas-58.png' },
+                    { id: 'doxa_proto', name: 'Caja Escultórica DOXA', fullName: 'CAJA ESCULTÓRICA DOXA (AUTOR)', price: 240.00, image: 'ProtoDoxa.png' },
+                    { id: 'doxa_regular', name: '1 caja regular (10 uds)', fullName: 'CAJA DOXA REGULAR (10 UDS)', price: 120.00, image: 'Doxa.png' },
+                    { id: 'doxa_coleccion', name: '1 caja Colección (10 uds)', fullName: 'CAJA DOXA COLECCIÓN (10 UDS)', price: 180.00, image: 'Doxa.png' }
                 ]
             },
             {
@@ -2422,6 +2427,21 @@
                     opt.innerText = `${v.fullName} — ${parseFloat(v.price).toFixed(2)} €`;
                     select.appendChild(opt);
                 });
+
+                // Si se viene con una selección activa desde index.html, preseleccionarla
+                try {
+                    const activeSel = JSON.parse(localStorage.getItem('doxa_active_selection'));
+                    if (activeSel && prod.id === 'doxa' && activeSel.varietyId) {
+                        const matchedOpt = select.querySelector(`option[value="${activeSel.varietyId}"]`);
+                        if (matchedOpt) {
+                            select.value = activeSel.varietyId;
+                        }
+                        const qtyInput = document.getElementById('qtyInput');
+                        if (qtyInput && activeSel.qty) {
+                            qtyInput.value = activeSel.qty;
+                        }
+                    }
+                } catch(e) {}
             }
 
             // 4. Actualizar textos de regalos para este producto
@@ -2660,6 +2680,31 @@
         let cartLines = [];
         let selectedLineId = null;
 
+        // Cargar líneas del carrito sincronizadas desde index.html o compras previas
+        function loadCartLinesFromStorage() {
+            try {
+                const saved = localStorage.getItem('doxa_cart_lines');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        cartLines = parsed;
+                        selectedLineId = cartLines[0].id;
+                    }
+                }
+            } catch (e) {
+                console.warn('Error leyendo doxa_cart_lines:', e);
+            }
+        }
+        loadCartLinesFromStorage();
+
+        function saveCartLinesToStorage() {
+            try {
+                localStorage.setItem('doxa_cart_lines', JSON.stringify(cartLines));
+            } catch (e) {
+                console.warn('Error guardando doxa_cart_lines:', e);
+            }
+        }
+
         // Preview de precios en el panel "Haz tu Selección"
         function getSelectedPrice() {
             const select = document.getElementById('varietySelect');
@@ -2778,6 +2823,7 @@
                     </div>
                 `;
                 updateTotalOrderPanel();
+                saveCartLinesToStorage();
                 return;
             }
 
@@ -2844,6 +2890,7 @@
             });
 
             updateTotalOrderPanel();
+            saveCartLinesToStorage();
         }
 
         function selectOrderLine(lineId) {
@@ -3132,6 +3179,20 @@
 
         // Ejecutar carga inicial al cargar la página
         renderShopUI();
+
+        // Si se abrió con el parámetro ?regalo=true, abrir automáticamente el modal de regalo
+        (function checkUrlGiftParam() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('regalo') === 'true') {
+                    setTimeout(() => {
+                        if (typeof openGiftModal === 'function') {
+                            openGiftModal();
+                        }
+                    }, 350);
+                }
+            } catch(e) {}
+        })();
 
         // --- PROCESAMIENTO DE PAGO MEDIANTE STRIPE CHECKOUT ---
         const STRIPE_ENDPOINT = '/api/create-checkout-session';
