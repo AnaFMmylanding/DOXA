@@ -2291,50 +2291,70 @@
                 ]
             },
             {
+                id: 'cookie',
+                name: 'Cookies',
+                columnName: 'Doxa<br>Cookie',
+                shortName: 'Cookie',
+                singularName: 'Cookies',
+                image: 'Cookie.png',
+                unitsPerBox: 10,
+                varieties: [
+                    { id: 'cookie_semanal', name: 'Caja 4 unidades', fullName: 'CAJA COOKIES SEMANAL (4 UDS)', price: 48.00, image: 'Galle choco.png' },
+                    { id: 'cookie_regular', name: '1 caja regular (10 uds)', fullName: 'CAJA COOKIES REGULAR (10 UDS)', price: 120.00, image: 'Cookie.png' },
+                    { id: 'cookie_coleccion', name: '1 caja Colección (10 uds)', fullName: 'CAJA COOKIES COLECCIÓN (10 UDS)', price: 180.00, image: 'Galle portada.png' }
+                ]
+            },
+            {
                 id: 'bombon',
                 name: 'Bombón Blooms',
                 columnName: 'Bombón<br>Blooms',
-                shortName: 'BBB',
+                shortName: 'Bloom',
                 singularName: 'Bombón Blooms',
-                image: 'BBB.png',
+                image: 'BBB 1.png',
                 unitsPerBox: 10,
                 varieties: [
-                    { id: 'bb_pist', name: '1 caja Pist.Pela&Palo', fullName: 'CAJA PIST.PELA&PALO', price: 120.00 },
-                    { id: 'bb_maracuya', name: '1 caja Maracuyá', fullName: 'CAJA MARACUYÁ', price: 120.00 },
-                    { id: 'bb_coleccion', name: '1 caja Colección', fullName: 'CAJA COLECCIÓN', price: 180.00 }
+                    { id: 'bb_pist', name: '1 caja Pist.Pela&Palo', fullName: 'CAJA PIST.PELA&PALO (10 UDS)', price: 120.00, image: 'BBB 1.png' },
+                    { id: 'bb_maracuya', name: '1 caja Maracuyá', fullName: 'CAJA MARACUYÁ (10 UDS)', price: 120.00, image: 'BBB 2.png' },
+                    { id: 'bb_coleccion', name: '1 caja Colección', fullName: 'CAJA COLECCIÓN (10 UDS)', price: 180.00, image: 'BBB 3.png' }
                 ]
             },
             {
                 id: 'lingote',
                 name: 'Lingotes',
+                columnName: 'Lingote<br>Pistacho',
+                shortName: 'Lingote',
                 singularName: 'Lingotes',
                 image: 'Lingote.png',
                 unitsPerBox: 10,
                 varieties: [
-                    { id: 'lingote_regular', name: '1 caja regular', fullName: 'CAJA LINGOTES REGULAR', price: 120.00 },
-                    { id: 'lingote_coleccion', name: '1 caja Colección', fullName: 'CAJA LINGOTES COLECCIÓN', price: 180.00 }
+                    { id: 'lingote_regular', name: '1 caja regular (10 uds)', fullName: 'CAJA LINGOTES REGULAR (10 UDS)', price: 120.00, image: 'Lingote.png' },
+                    { id: 'lingote_coleccion', name: '1 caja Colección (10 uds)', fullName: 'CAJA LINGOTES COLECCIÓN (10 UDS)', price: 180.00, image: 'Lingote.png' }
                 ]
             },
             {
                 id: 'oblea',
-                name: 'Obleas',
-                singularName: 'Obleas',
+                name: 'Crujiente de Almendra',
+                columnName: 'Crujiente<br>Almendra',
+                shortName: 'Crujiente',
+                singularName: 'Crujiente de Almendra',
                 image: 'Oblea.png',
                 unitsPerBox: 10,
                 varieties: [
-                    { id: 'oblea_regular', name: '1 caja regular', fullName: 'CAJA OBLEAS REGULAR', price: 120.00 },
-                    { id: 'oblea_coleccion', name: '1 caja Colección', fullName: 'CAJA OBLEAS COLECCIÓN', price: 180.00 }
+                    { id: 'oblea_regular', name: '1 caja regular (10 uds)', fullName: 'CAJA CRUJIENTE REGULAR (10 UDS)', price: 120.00, image: 'Oblea.png' },
+                    { id: 'oblea_coleccion', name: '1 caja Colección (10 uds)', fullName: 'CAJA CRUJIENTE COLECCIÓN (10 UDS)', price: 180.00, image: 'Oblea.png' }
                 ]
             },
             {
-                id: 'cookie',
-                name: 'Cookies',
-                singularName: 'Cookies',
-                image: 'Cookie.png',
+                id: 'pequebloom',
+                name: 'PequeBlooms',
+                columnName: 'Peque<br>Bloom',
+                shortName: 'Peque',
+                singularName: 'PequeBlooms',
+                image: 'Pequebloom.png',
                 unitsPerBox: 10,
                 varieties: [
-                    { id: 'cookie_regular', name: '1 caja regular', fullName: 'CAJA COOKIES REGULAR', price: 120.00 },
-                    { id: 'cookie_coleccion', name: '1 caja Colección', fullName: 'CAJA COOKIES COLECCIÓN', price: 180.00 }
+                    { id: 'peque_regular', name: '1 caja regular (10 uds)', fullName: 'CAJA PEQUEBLOOMS REGULAR (10 UDS)', price: 120.00, image: 'Pequebloom.png' },
+                    { id: 'peque_coleccion', name: '1 caja Colección (10 uds)', fullName: 'CAJA PEQUEBLOOMS COLECCIÓN (10 UDS)', price: 180.00, image: 'Pequebloom.png' }
                 ]
             }
         ];
@@ -2431,7 +2451,8 @@
                 // Si se viene con una selección activa desde index.html, preseleccionarla
                 try {
                     const activeSel = JSON.parse(localStorage.getItem('doxa_active_selection'));
-                    if (activeSel && prod.id === 'doxa' && activeSel.varietyId) {
+                    const isCurrentProd = activeSel && (activeSel.productId === prod.id || (activeSel.productId === 'bbb' && prod.id === 'bombon'));
+                    if (isCurrentProd && activeSel.varietyId) {
                         const matchedOpt = select.querySelector(`option[value="${activeSel.varietyId}"]`);
                         if (matchedOpt) {
                             select.value = activeSel.varietyId;
@@ -3176,6 +3197,24 @@
                 alert('Configuración restablecida por defecto.');
             }
         }
+
+        // Detectar producto desde URL (?product=...) o desde localStorage (doxa_active_selection)
+        (function initInitialProductFromUrlOrStorage() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                let targetId = urlParams.get('product');
+                if (!targetId) {
+                    const activeSel = JSON.parse(localStorage.getItem('doxa_active_selection'));
+                    if (activeSel && activeSel.productId) targetId = activeSel.productId;
+                }
+                if (targetId) {
+                    const idx = PRODUCTS_CATALOG.findIndex(p => p.id === targetId || (targetId === 'bbb' && p.id === 'bombon') || (targetId === 'bombon' && p.id === 'bombon'));
+                    if (idx >= 0) {
+                        currentProductIndex = idx;
+                    }
+                }
+            } catch(e) {}
+        })();
 
         // Ejecutar carga inicial al cargar la página
         renderShopUI();
