@@ -6835,6 +6835,250 @@ Menú del Index: Líena 742
                 box-shadow: 0 8px 24px rgba(60, 51, 42, 0.3);
             }
 
+            /* =========================================
+               PESTAÑA / PANEL DE REGALO EN INDEX
+               ========================================= */
+            .reservas-gift-panel {
+                margin-top: 18px;
+                padding-top: 18px;
+                border-top: 1px solid rgba(60, 51, 42, 0.12);
+                animation: fadeInSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                text-align: left;
+            }
+
+            @keyframes fadeInSlideDown {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-8px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .card-gift-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 16px;
+            }
+
+            .card-gift-title {
+                display: inline-flex;
+                align-items: center;
+                gap: 9px;
+                font-family: 'Lexend', sans-serif;
+                font-size: 13px;
+                font-weight: 500;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #1e1a16;
+            }
+
+            .card-gift-header-icon {
+                width: 16px;
+                height: 16px;
+                object-fit: contain;
+                display: inline-block;
+            }
+
+            .card-gift-close-btn {
+                background: none;
+                border: none;
+                font-size: 22px;
+                line-height: 1;
+                color: #3C332A;
+                opacity: 0.6;
+                cursor: pointer;
+                padding: 2px 6px;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+            }
+
+            .card-gift-close-btn:hover {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            .card-gift-quote {
+                background: #FAF9F6;
+                border: 1px solid rgba(60, 51, 42, 0.12);
+                border-radius: 4px;
+                padding: 13px 16px;
+                margin-bottom: 18px;
+                font-family: 'Lato', sans-serif;
+                font-size: 11px;
+                font-style: italic;
+                color: #3C332A;
+                line-height: 1.55;
+                opacity: 0.9;
+                text-align: left;
+            }
+
+            .card-gift-form {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                text-align: left;
+            }
+
+            .card-gift-grid-2-1 {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 12px;
+            }
+
+            .card-gift-grid-1-1 {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .card-gift-field {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .card-gift-label {
+                font-family: 'Lexend', sans-serif;
+                font-size: 9.5px;
+                font-weight: 500;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                color: #3C332A;
+                text-align: left;
+            }
+
+            .card-gift-input {
+                width: 100%;
+                background: #FFFFFF;
+                border: 1px solid rgba(60, 51, 42, 0.18);
+                border-radius: 4px;
+                padding: 9px 12px;
+                font-family: 'Lexend', sans-serif;
+                font-size: 12.5px;
+                color: #150e02;
+                box-sizing: border-box;
+                transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .card-gift-input:focus {
+                outline: none;
+                border-color: #3C332A;
+                box-shadow: 0 0 0 2px rgba(60, 51, 42, 0.1);
+            }
+
+            .card-gift-input::placeholder {
+                color: rgba(60, 51, 42, 0.45);
+                font-weight: 300;
+                font-size: 11.5px;
+            }
+
+            .card-gift-textarea {
+                resize: vertical;
+                min-height: 48px;
+                line-height: 1.45;
+            }
+
+            .card-gift-help {
+                font-family: 'Lexend', sans-serif;
+                font-size: 9px;
+                color: #3C332A;
+                opacity: 0.65;
+                margin-top: 1px;
+                line-height: 1.35;
+                text-align: left;
+            }
+
+            .card-gift-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-top: 6px;
+            }
+
+            .btn-card-gift-submit {
+                width: 100%;
+                height: 44px;
+                background: #150e02;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 2px;
+                font-family: 'Lexend', sans-serif;
+                font-size: 11.5px;
+                font-weight: 500;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                cursor: pointer;
+                transition: all 0.25s ease;
+                box-shadow: 0 3px 10px rgba(21, 14, 2, 0.15);
+            }
+
+            .btn-card-gift-submit:hover {
+                background: #2d200a;
+                transform: translateY(-1px);
+                box-shadow: 0 5px 14px rgba(21, 14, 2, 0.22);
+            }
+
+            .btn-card-gift-cancel {
+                width: 100%;
+                height: 40px;
+                background: transparent;
+                color: #150e02;
+                border: 1px solid rgba(60, 51, 42, 0.2);
+                border-radius: 2px;
+                font-family: 'Lexend', sans-serif;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                cursor: pointer;
+                transition: all 0.25s ease;
+            }
+
+            .btn-card-gift-cancel:hover {
+                background: rgba(60, 51, 42, 0.06);
+                border-color: #3C332A;
+            }
+
+            /* Lista de regalos añadidos en index */
+            .reservas-gifts-list {
+                margin-top: 15px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                text-align: left;
+            }
+
+            .res-gift-item-pill {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: #E6E4DF;
+                border: 1px solid rgba(60, 51, 42, 0.12);
+                border-radius: 4px;
+                padding: 8px 12px;
+                font-size: 12px;
+                font-family: 'Lexend', sans-serif;
+                color: #1e1a16;
+            }
+
+            .res-gift-item-del-btn {
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: 14px;
+                opacity: 0.6;
+                padding: 2px 4px;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+            }
+
+            .res-gift-item-del-btn:hover {
+                opacity: 1;
+                transform: scale(1.15);
+            }
+
             /* Desglose de totales del pedido */
             .product-order-breakdown {
                 max-width: 520px;
@@ -7584,9 +7828,76 @@ Menú del Index: Líena 742
                                 Sorprende a alguien especial. Añade uno o varios destinatarios en este mismo pedido con
                                 su propia dirección y dedicatoria personalizada.
                             </p>
-                            <a href="compra.html?regalo=true" class="btn-gift-trigger" id="btnGiftRegalo">
+                            <button type="button" class="btn-gift-trigger" id="btnGiftRegalo" onclick="toggleReservasGiftPanel()">
                                 SÍ, QUIERO REGALAR DOXAS
-                            </a>
+                            </button>
+
+                            <!-- LISTA DE REGALOS AÑADIDOS -->
+                            <div class="reservas-gifts-list" id="reservasGiftsList"></div>
+
+                            <!-- PESTAÑA / PANEL DE REGALO DESPLEGABLE -->
+                            <div class="reservas-gift-panel" id="reservasGiftPanel" style="display: none;">
+                                <div class="card-gift-header">
+                                    <div class="card-gift-title">
+                                        <img src="Icono regalo.png" alt="" class="card-gift-header-icon">
+                                        <span id="reservasGiftPanelTitle">ENVIAR DOXA COMO REGALO</span>
+                                    </div>
+                                    <button type="button" class="card-gift-close-btn" onclick="toggleReservasGiftPanel()" title="Cerrar">&times;</button>
+                                </div>
+                                <div class="card-gift-quote">
+                                    &ldquo;Un regalo está en camino hacia tí... Te hemos enviado un correo y SMS con el enlace de seguimiento en tiempo real. Si algo se dificultase para entregártelo podrían llamarte.<br>
+                                    Espero que sea de tu agrado. Alguien te aprecia mucho...&rdquo;
+                                </div>
+                                <form class="card-gift-form" id="reservasGiftForm" onsubmit="submitReservasGift(event)">
+                                    <div class="card-gift-grid-2-1">
+                                        <div class="card-gift-field">
+                                            <label class="card-gift-label" for="resGiftVarietySelect">VARIEDAD DE CAJA *</label>
+                                            <select class="card-gift-input" id="resGiftVarietySelect" required></select>
+                                        </div>
+                                        <div class="card-gift-field">
+                                            <label class="card-gift-label" for="resGiftQtyInput">CANTIDAD *</label>
+                                            <input class="card-gift-input" type="number" id="resGiftQtyInput" min="1" max="50" value="1" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-gift-field">
+                                        <label class="card-gift-label" for="resGiftRecipientName">NOMBRE DEL DESTINATARIO *</label>
+                                        <input class="card-gift-input" type="text" id="resGiftRecipientName" placeholder="Nombre y apellidos de quien recibe el regalo" required>
+                                    </div>
+
+                                    <div class="card-gift-field">
+                                        <label class="card-gift-label" for="resGiftRecipientPhone">TELÉFONO DEL DESTINATARIO *</label>
+                                        <input class="card-gift-input" type="tel" id="resGiftRecipientPhone" placeholder="Para el transportista y aviso de entrega por SMS" required>
+                                        <span class="card-gift-help">Necesario para que la mensajería pueda coordinar la entrega.</span>
+                                    </div>
+
+                                    <div class="card-gift-field">
+                                        <label class="card-gift-label" for="resGiftRecipientAddress">DIRECCIÓN DE ENTREGA DEL DESTINATARIO *</label>
+                                        <input class="card-gift-input" type="text" id="resGiftRecipientAddress" placeholder="Calle, número, piso, puerta..." required>
+                                    </div>
+
+                                    <div class="card-gift-grid-1-1">
+                                        <div class="card-gift-field">
+                                            <label class="card-gift-label" for="resGiftRecipientZip">CÓDIGO POSTAL *</label>
+                                            <input class="card-gift-input" type="text" id="resGiftRecipientZip" placeholder="número del cp" required>
+                                        </div>
+                                        <div class="card-gift-field">
+                                            <label class="card-gift-label" for="resGiftRecipientCity">CIUDAD *</label>
+                                            <input class="card-gift-input" type="text" id="resGiftRecipientCity" placeholder="nombre de la ciudad destino" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-gift-field">
+                                        <label class="card-gift-label" for="resGiftMessage">DEDICATORIA / MENSAJE EN LA CAJA (OPCIONAL)</label>
+                                        <textarea class="card-gift-input card-gift-textarea" id="resGiftMessage" rows="2" placeholder="Escribe un mensaje para que lo incluyamos en una elegante tarjeta de regalo..."></textarea>
+                                    </div>
+
+                                    <div class="card-gift-actions">
+                                        <button type="submit" class="btn-card-gift-submit" id="btnSubmitResGift">AÑADIR REGALO AL PEDIDO</button>
+                                        <button type="button" class="btn-card-gift-cancel" onclick="toggleReservasGiftPanel()">CANCELAR</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
 
                         <!-- DESGLOSE DE TOTALES EN VIVO (ORDER BREAKDOWN) -->
@@ -7942,13 +8253,15 @@ Menú del Index: Líena 742
                                 const prod = getCurrentProduct();
                                 const fmt = getCurrentFormat();
                                 const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+                                const prodId = prod.id === 'bbb' ? 'bombon' : prod.id;
 
                                 const varietyCode = prod.id === 'doxa' ? ('doxa_' + fmt.key) :
                                                     (prod.id === 'bbb' ? ('bb_' + fmt.key) :
-                                                    (prod.id + '_' + fmt.key));
+                                                    (prod.id === 'pequebloom' ? ('peque_' + fmt.key) :
+                                                    (prod.id + '_' + fmt.key)));
 
                                 const selection = {
-                                    productId: prod.id,
+                                    productId: prodId,
                                     productName: prod.name,
                                     formatKey: fmt.key,
                                     varietyId: varietyCode,
@@ -7969,10 +8282,10 @@ Menú del Index: Líena 742
                                     } catch (e) { lines = []; }
                                 }
 
-                                const lineIdx = lines.findIndex(l => !l.isGift && l.productId === prod.id);
+                                const lineIdx = lines.findIndex(l => !l.isGift && l.productId === prodId);
                                 const newLine = {
                                     id: lineIdx >= 0 ? lines[lineIdx].id : ('line_' + Date.now() + Math.random().toString(36).substr(2, 4)),
-                                    productId: prod.id,
+                                    productId: prodId,
                                     productName: prod.name,
                                     productImage: fmt.image || (prod.id + '.png'),
                                     varietyId: varietyCode,
@@ -7996,11 +8309,58 @@ Menú del Index: Líena 742
 
                         // Actualización reactiva del desglose de pedido y confirmación
                         function updateOrderSummary() {
+                            let lines = [];
+                            try {
+                                const saved = localStorage.getItem('doxa_cart_lines');
+                                if (saved) {
+                                    lines = JSON.parse(saved);
+                                    if (!Array.isArray(lines)) lines = [];
+                                }
+                            } catch (e) { lines = []; }
+
                             const prod = getCurrentProduct();
                             const fmt = getCurrentFormat();
                             const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
-                            const subtotal = fmt.price * qty;
-                            const shipping = subtotal > 0 ? 6.00 : 0.00;
+                            const prodId = prod.id === 'bbb' ? 'bombon' : prod.id;
+
+                            const varietyCode = prod.id === 'doxa' ? ('doxa_' + fmt.key) :
+                                                (prod.id === 'bbb' ? ('bb_' + fmt.key) :
+                                                (prod.id === 'pequebloom' ? ('peque_' + fmt.key) :
+                                                (prod.id + '_' + fmt.key)));
+
+                            // Sincronizar selección activa personal en el array
+                            const lineIdx = lines.findIndex(l => !l.isGift && l.productId === prodId);
+                            if (lineIdx >= 0) {
+                                lines[lineIdx].varietyId = varietyCode;
+                                lines[lineIdx].varietyName = `${fmt.feedbackName} (${fmt.optSub})`;
+                                lines[lineIdx].unitPrice = fmt.price;
+                                lines[lineIdx].qty = qty;
+                                lines[lineIdx].productImage = fmt.image || (prod.id + '.png');
+                            } else {
+                                lines.push({
+                                    id: 'line_' + Date.now(),
+                                    productId: prodId,
+                                    productName: prod.name,
+                                    productImage: fmt.image || (prod.id + '.png'),
+                                    varietyId: varietyCode,
+                                    varietyName: `${fmt.feedbackName} (${fmt.optSub})`,
+                                    unitPrice: fmt.price,
+                                    qty: qty,
+                                    isGift: false
+                                });
+                            }
+
+                            const totalBoxes = lines.reduce((s, l) => s + l.qty, 0);
+                            const subtotal = lines.reduce((s, l) => s + (l.unitPrice * l.qty), 0);
+
+                            const hasPersonal = lines.some(l => !l.isGift && l.qty > 0);
+                            const giftDestinations = new Set();
+                            lines.filter(l => l.isGift).forEach(g => {
+                                const addrKey = `${(g.address || '').trim().toLowerCase()}_${(g.zip || '').trim()}_${(g.city || '').trim().toLowerCase()}`;
+                                giftDestinations.add(addrKey);
+                            });
+                            const totalDestinations = (hasPersonal ? 1 : 0) + giftDestinations.size;
+                            const shipping = totalBoxes > 0 ? (totalDestinations * 6.00) : 0;
                             const total = subtotal + shipping;
                             const tax = total - (total / 1.10);
 
@@ -8019,15 +8379,196 @@ Menú del Index: Líena 742
                             const taxCost = document.getElementById('summaryTax');
                             const totalCost = document.getElementById('summaryTotal');
 
-                            if (itemsLabel) itemsLabel.innerText = `Artículos (${qty} ${qty === 1 ? 'caja' : 'cajas'}):`;
+                            if (itemsLabel) itemsLabel.innerText = `Artículos (${totalBoxes} ${totalBoxes === 1 ? 'caja' : 'cajas'}):`;
                             if (itemsSubtotal) itemsSubtotal.innerText = subtotal.toFixed(2).replace('.', ',') + ' €';
                             if (shippingCost) shippingCost.innerText = shipping.toFixed(2).replace('.', ',') + ' €';
                             if (taxCost) taxCost.innerText = tax.toFixed(2).replace('.', ',') + ' €';
                             if (totalCost) totalCost.innerText = total.toFixed(2).replace('.', ',') + ' €';
 
-                            // 3. Sincronizar en localStorage
-                            syncCartToStorage(false);
+                            try {
+                                localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                            } catch (e) {}
                         }
+
+                        // =========================================
+                        // GESTIÓN DE LA PESTAÑA DE REGALOS EN INDEX
+                        // =========================================
+                        function toggleReservasGiftPanel() {
+                            const panel = document.getElementById('reservasGiftPanel');
+                            if (!panel) return;
+                            const isHidden = panel.style.display === 'none' || panel.style.display === '';
+                            if (isHidden) {
+                                populateReservasGiftVarieties();
+                                panel.style.display = 'block';
+                                panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            } else {
+                                panel.style.display = 'none';
+                            }
+                        }
+                        window.toggleReservasGiftPanel = toggleReservasGiftPanel;
+
+                        function populateReservasGiftVarieties() {
+                            const prod = getCurrentProduct();
+                            const select = document.getElementById('resGiftVarietySelect');
+                            const titleEl = document.getElementById('reservasGiftPanelTitle');
+                            if (titleEl) {
+                                titleEl.innerText = `ENVIAR ${prod.giftName || prod.name.toUpperCase()} COMO REGALO`;
+                            }
+                            if (!select) return;
+                            select.innerHTML = '';
+                            prod.formats.forEach(f => {
+                                const opt = document.createElement('option');
+                                opt.value = f.key;
+                                opt.setAttribute('data-price', f.price);
+                                opt.innerText = `${f.feedbackName} (${f.optSub}) — ${f.price.toFixed(2).replace('.', ',')} €`;
+                                if (f.key === activeFormatKey) {
+                                    opt.selected = true;
+                                }
+                                select.appendChild(opt);
+                            });
+                        }
+
+                        function submitReservasGift(event) {
+                            event.preventDefault();
+                            const prod = getCurrentProduct();
+                            const select = document.getElementById('resGiftVarietySelect');
+                            const qtyInp = document.getElementById('resGiftQtyInput');
+                            const nameInp = document.getElementById('resGiftRecipientName');
+                            const phoneInp = document.getElementById('resGiftRecipientPhone');
+                            const addrInp = document.getElementById('resGiftRecipientAddress');
+                            const zipInp = document.getElementById('resGiftRecipientZip');
+                            const cityInp = document.getElementById('resGiftRecipientCity');
+                            const msgInp = document.getElementById('resGiftMessage');
+
+                            if (!select || !nameInp || !addrInp || !zipInp || !cityInp) return;
+
+                            const selectedKey = select.value;
+                            const fmt = prod.formats.find(f => f.key === selectedKey) || prod.formats[0];
+                            const qty = parseInt(qtyInp ? qtyInp.value : 1) || 1;
+                            const recipientName = nameInp.value.trim();
+                            const recipientPhone = phoneInp ? phoneInp.value.trim() : '';
+                            const recipientAddress = addrInp.value.trim();
+                            const recipientZip = zipInp.value.trim();
+                            const recipientCity = cityInp.value.trim();
+                            const giftMessage = msgInp ? msgInp.value.trim() : '';
+
+                            if (!recipientName || !recipientAddress || !recipientZip || !recipientCity) {
+                                alert('Por favor, completa los datos de entrega del destinatario.');
+                                return;
+                            }
+
+                            const prodId = prod.id === 'bbb' ? 'bombon' : prod.id;
+                            const varietyCode = prod.id === 'doxa' ? ('doxa_' + fmt.key) :
+                                                (prod.id === 'bbb' ? ('bb_' + fmt.key) :
+                                                (prod.id === 'pequebloom' ? ('peque_' + fmt.key) :
+                                                (prod.id + '_' + fmt.key)));
+
+                            const giftLine = {
+                                id: 'gift_' + Date.now() + Math.random().toString(36).substr(2, 4),
+                                productId: prodId,
+                                productName: prod.name,
+                                productImage: fmt.image || (prod.id + '.png'),
+                                varietyId: varietyCode,
+                                varietyName: `${fmt.feedbackName} para "${recipientName}"`,
+                                unitPrice: fmt.price,
+                                qty: qty,
+                                isGift: true,
+                                recipientName: recipientName,
+                                phone: recipientPhone,
+                                address: recipientAddress,
+                                zip: recipientZip,
+                                city: recipientCity,
+                                message: giftMessage
+                            };
+
+                            let lines = [];
+                            try {
+                                const saved = localStorage.getItem('doxa_cart_lines');
+                                if (saved) {
+                                    lines = JSON.parse(saved);
+                                    if (!Array.isArray(lines)) lines = [];
+                                }
+                            } catch (e) { lines = []; }
+
+                            lines.push(giftLine);
+                            localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+
+                            // Resetear formulario
+                            nameInp.value = '';
+                            if (phoneInp) phoneInp.value = '';
+                            addrInp.value = '';
+                            zipInp.value = '';
+                            cityInp.value = '';
+                            if (msgInp) msgInp.value = '';
+                            if (qtyInp) qtyInp.value = '1';
+
+                            // Cerrar panel desplegable
+                            const panel = document.getElementById('reservasGiftPanel');
+                            if (panel) panel.style.display = 'none';
+
+                            // Mostrar feedback de adición de regalo
+                            const feedbackBox = document.getElementById('productCartFeedback');
+                            if (feedbackBox) {
+                                feedbackBox.innerHTML = `✓ SE HA AÑADIDO 1 REGALO DE "${fmt.feedbackName}" PARA "${recipientName.toUpperCase()}" A TU PEDIDO`;
+                                feedbackBox.style.transform = 'scale(1.03)';
+                                feedbackBox.style.color = '#150e02';
+                                setTimeout(() => {
+                                    feedbackBox.style.transform = '';
+                                    feedbackBox.style.color = '#3C332A';
+                                }, 600);
+                            }
+
+                            renderReservasGiftsList();
+                            updateOrderSummary();
+                        }
+                        window.submitReservasGift = submitReservasGift;
+
+                        function renderReservasGiftsList() {
+                            const container = document.getElementById('reservasGiftsList');
+                            if (!container) return;
+                            let lines = [];
+                            try {
+                                const saved = localStorage.getItem('doxa_cart_lines');
+                                if (saved) {
+                                    lines = JSON.parse(saved);
+                                    if (!Array.isArray(lines)) lines = [];
+                                }
+                            } catch (e) { lines = []; }
+
+                            const gifts = lines.filter(l => l.isGift);
+                            if (gifts.length === 0) {
+                                container.innerHTML = '';
+                                return;
+                            }
+
+                            let html = '';
+                            gifts.forEach(g => {
+                                html += `
+                                    <div class="res-gift-item-pill">
+                                        <span>🎁 ${g.qty > 1 ? g.qty + 'x ' : ''}${g.varietyName} — ${(g.unitPrice * g.qty).toFixed(2).replace('.', ',')} €</span>
+                                        <button type="button" class="res-gift-item-del-btn" onclick="deleteReservasGift('${g.id}')" title="Eliminar este regalo">🗑️</button>
+                                    </div>
+                                `;
+                            });
+                            container.innerHTML = html;
+                        }
+                        window.renderReservasGiftsList = renderReservasGiftsList;
+
+                        window.deleteReservasGift = function (giftId) {
+                            let lines = [];
+                            try {
+                                const saved = localStorage.getItem('doxa_cart_lines');
+                                if (saved) {
+                                    lines = JSON.parse(saved);
+                                    if (!Array.isArray(lines)) lines = [];
+                                }
+                            } catch (e) { lines = []; }
+
+                            lines = lines.filter(l => l.id !== giftId);
+                            localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                            renderReservasGiftsList();
+                            updateOrderSummary();
+                        };
 
                         function scrollToSlide(index) {
                             if (!slider) return;
@@ -8179,11 +8720,12 @@ Menú del Index: Líena 742
                             }
                             if (btnGift) {
                                 btnGift.innerText = `SÍ, QUIERO REGALAR ${prod.giftName}`;
-                                btnGift.href = `compra.html?product=${prod.id}&regalo=true`;
                             }
                             if (btnCheckout) {
-                                btnCheckout.href = `compra.html?product=${prod.id}`;
+                                btnCheckout.href = `compra.html`;
                             }
+                            populateReservasGiftVarieties();
+                            renderReservasGiftsList();
 
                             // 7. Aplicar formato inicial
                             applyFormatData(prod.defaultFormat || prod.formats[0].key, false);
@@ -8286,10 +8828,11 @@ Menú del Index: Líena 742
                             });
                         }
 
-                        // Botón Regalo
+                        // Botón Regalo: abrir pestaña de regalo en index
                         if (btnGift) {
-                            btnGift.addEventListener('click', () => {
-                                syncCartToStorage(true);
+                            btnGift.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                toggleReservasGiftPanel();
                             });
                         }
 
