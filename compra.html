@@ -106,10 +106,10 @@
         }
 
         .navbar-brand-center .brand-link {
-            display: flex;
+            display: inline-flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            align-items: stretch;
+            width: fit-content;
             text-decoration: none;
             transition: all 0.3s ease;
             text-align: center;
@@ -126,13 +126,16 @@
             font-size: 20px;
             font-weight: 500;
             letter-spacing: 5px;
+            margin-right: -5px;
             color: #FFFFFF !important;
             text-transform: uppercase;
             white-space: nowrap;
             display: inline-flex;
             align-items: baseline;
+            justify-content: center;
             gap: 6px;
             transition: color 0.3s ease;
+            width: 100%;
         }
 
         .navbar-brand-center .brand-del {
@@ -143,15 +146,31 @@
         }
 
         .navbar-brand-center .brand-sub {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
             font-family: 'Lato', sans-serif;
-            font-size: 8px;
+            font-size: 7.5px;
             font-weight: 300;
-            letter-spacing: 3.5px;
             color: rgba(255, 255, 255, 0.85) !important;
             text-transform: uppercase;
-            margin-top: 3px;
-            white-space: nowrap;
+            margin-top: 5px;
+            letter-spacing: normal;
+            line-height: 1;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             transition: color 0.3s ease;
+        }
+
+        .navbar-brand-center .brand-sub span {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .navbar-brand-center .brand-sub .sub-space {
+            width: 7px;
         }
 
         .navbar.scrolled .navbar-brand-center .brand-title {
@@ -276,6 +295,7 @@
             .navbar-brand-center .brand-title {
                 font-size: 15px;
                 letter-spacing: 2.5px;
+                margin-right: -2.5px;
                 gap: 4px;
             }
 
@@ -284,9 +304,12 @@
             }
 
             .navbar-brand-center .brand-sub {
-                font-size: 7px;
-                letter-spacing: 2px;
-                margin-top: 2px;
+                font-size: 6px;
+                margin-top: 3px;
+            }
+
+            .navbar-brand-center .brand-sub .sub-space {
+                width: 5px;
             }
 
             .navbar-menu {
@@ -2075,7 +2098,11 @@
             <div class="navbar-brand-center">
                 <a href="index.html" class="brand-link" aria-label="Volver al Inicio">
                     <span class="brand-title">ESTADO <span class="brand-del">DEL</span> ARTE</span>
-                    <span class="brand-sub">REPOSTERÍA BIOINDUCTIVA</span>
+                    <span class="brand-sub" aria-label="Repostería Bioinductiva">
+                        <span>R</span><span>E</span><span>P</span><span>O</span><span>S</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
+                        <span class="sub-space"></span>
+                        <span>B</span><span>I</span><span>O</span><span>I</span><span>N</span><span>D</span><span>U</span><span>C</span><span>T</span><span>I</span><span>V</span><span>A</span>
+                    </span>
                 </a>
             </div>
         </nav>
