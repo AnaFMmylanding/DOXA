@@ -87,17 +87,19 @@
             background-color: transparent;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             border-bottom: 1px solid rgba(255, 255, 255, 0);
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Estado al hacer scroll */
         .navbar.scrolled {
+            opacity: 1;
+            pointer-events: auto;
             height: 75px;
-            background-color: transparent !important;
-            /* Totalmente transparente */
+            background-color: rgba(246, 245, 242, 0.94) !important;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            /* Línea sutil blanca */
+            border-bottom: 1px solid rgba(60, 51, 42, 0.08);
         }
 
         .navbar-logo {
@@ -289,11 +291,93 @@
         }
 
         /* =========================================
+           ENCABEZADO DE PÁGINA (CHECKOUT HERO)
+           ========================================= */
+        .checkout-hero {
+            position: relative;
+            width: 100%;
+            height: clamp(170px, 22vh, 230px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #111111;
+        }
+
+        .checkout-hero .hero-media-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .checkout-hero .hero-bg-media {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.42);
+            transform: scale(1);
+            animation: heroZoomIn 6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        @keyframes heroZoomIn {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.08);
+            }
+        }
+
+        .checkout-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkout-hero-brand {
+            font-family: 'Lato', sans-serif;
+            font-size: clamp(26px, 4.2vw, 38px);
+            font-weight: 400;
+            letter-spacing: clamp(10px, 2.2vw, 18px);
+            margin-right: calc(-1 * clamp(10px, 2.2vw, 18px));
+            text-transform: uppercase;
+            color: #FFFFFF !important;
+            text-decoration: none;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            display: inline-block;
+        }
+
+        .checkout-hero-brand:hover {
+            opacity: 0.82;
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .checkout-hero {
+                height: clamp(130px, 18vh, 170px);
+            }
+        }
+
+        /* =========================================
            SECCIÓN DE COMPRA (DISEÑO GRID)
            ========================================= */
         .checkout-section {
             background-color: var(--yeso-claro);
-            padding: 140px 0 100px 0;
+            padding: 50px 0 100px 0;
             border-bottom: 1px solid rgba(60, 51, 42, 0.08);
             min-height: calc(100vh - 150px);
         }
@@ -1073,9 +1157,9 @@
                 height: 65px;
             }
 
-            /* Subir sección pegada bajo la navbar */
+            /* Espaciado bajo el encabezado hero */
             .checkout-section {
-                padding: 72px 0 50px 0 !important;
+                padding: 30px 0 50px 0 !important;
             }
 
             .container {
@@ -1821,19 +1905,36 @@
 
     <div class="page-wrapper">
 
-        <!-- NAVEGACIÓN PRINCIPAL: SOLO BOTÓN INDEX DOXA -->
+        <!-- NAVEGACIÓN PRINCIPAL: SOLO BOTÓN INDEX DOXA (APARECE AL HACER SCROLL) -->
         <nav class="navbar" id="mainNavbar">
             <a href="index.html" class="navbar-logo">DOXA</a>
         </nav>
 
+        <!-- ENCABEZADO ESTRECHO: MARCA Y FONDO IMAGEN/VÍDEO -->
+        <header class="checkout-hero">
+            <div class="hero-media-wrapper">
+                <!--=========================================================================
+                   [FONDO DE CABECERA: IMAGEN O VÍDEO]
+                   - Animación sutil activa: efecto continuo Ken Burns.
+                   - PARA ACTIVAR VÍDEO EN EL FUTURO:
+                     1. Descomenta la etiqueta <video> inferior y pon la ruta de tu vídeo en 'src'.
+                     2. Comenta o elimina la etiqueta <img>.
+                   ========================================================================= -->
+                <!--
+                <video class="hero-bg-media" autoplay muted loop playsinline poster="cabecera_index.jpg">
+                    <source src="tu_video.mp4" type="video/mp4">
+                </video> 
+                -->
+                <img src="cabecera_index.jpg" alt="DOXA" class="hero-bg-media">
+            </div>
+            <div class="checkout-hero-content">
+                <a href="index.html" class="checkout-hero-brand">DOXA</a>
+            </div>
+        </header>
+
         <!-- SECCIÓN FORMULARIO DE COMPRA -->
         <section class="checkout-section">
             <div class="container animate-fade">
-
-                <!-- BARRA SUPERIOR DE FAMILIAS DE PRODUCTOS -->
-                <div class="products-top-nav" id="productsTopNav" role="tablist" aria-label="Selección de producto">
-                    <!-- Generado dinámicamente por JS -->
-                </div>
 
                 <div class="checkout-grid">
 
@@ -2677,7 +2778,8 @@
         // Efecto scroll en Navbar
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('mainNavbar');
-            if (window.scrollY > 50) {
+            if (!nav) return;
+            if (window.scrollY > 80) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
