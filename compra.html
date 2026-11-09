@@ -1168,6 +1168,17 @@
             padding-right: 4px;
         }
 
+        .panel-header-subtext {
+            font-size: 11px;
+            font-style: italic;
+            opacity: 0.65;
+            text-align: right;
+            margin-top: -16px;
+            margin-bottom: 22px;
+            color: #3C332A;
+            line-height: 1.4;
+        }
+
         .order-product-card {
             background: var(--yeso-claro);
             border: 1px solid rgba(60, 51, 42, 0.1);
@@ -1181,6 +1192,11 @@
 
         .order-product-card:hover {
             border-color: rgba(60, 51, 42, 0.22);
+        }
+
+        .order-product-card.gift-expanded {
+            border-color: rgba(60, 51, 42, 0.28);
+            box-shadow: 0 4px 18px rgba(60, 51, 42, 0.06);
         }
 
         .order-card-inner {
@@ -1230,21 +1246,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 7px 10px;
+            padding: 8px 14px;
             border-radius: 4px;
             font-size: 13.5px;
             cursor: pointer;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(60, 51, 42, 0.12);
+            background-color: #E6E4DF;
         }
 
         .order-line-item:hover {
-            background-color: rgba(60, 51, 42, 0.05);
+            background-color: #DDD9D2;
         }
 
         .order-line-item.selected {
-            background-color: rgba(60, 51, 42, 0.09);
-            border-color: rgba(60, 51, 42, 0.3);
+            background-color: #DDD9D2;
+            border-color: rgba(60, 51, 42, 0.35);
             font-weight: 500;
         }
 
@@ -1265,7 +1282,6 @@
             justify-content: flex-end;
             align-items: center;
             padding-top: 10px;
-            border-top: 1px solid rgba(60, 51, 42, 0.08);
             font-size: 15px;
             font-weight: 600;
             color: #000;
@@ -1300,13 +1316,37 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: 500;
+            padding: 0;
             transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .btn-ctrl-icon {
+            width: 15px;
+            height: 15px;
+            object-fit: contain;
+            display: inline-block;
+            vertical-align: middle;
+            transition: filter 0.2s ease;
         }
 
         .btn-ctrl-action:hover:not(:disabled) {
             background: #150e02;
             color: #FFFFFF;
             border-color: #150e02;
+        }
+
+        .btn-ctrl-action:hover:not(:disabled) .btn-ctrl-icon {
+            filter: brightness(0) invert(1);
+        }
+
+        .btn-ctrl-action.active {
+            background: #3C332A !important;
+            border-color: #3C332A !important;
+        }
+
+        .btn-ctrl-action.active .btn-ctrl-icon {
+            filter: brightness(0) invert(1);
         }
 
         .btn-ctrl-action:disabled {
@@ -1318,6 +1358,208 @@
             font-size: 10.5px;
             opacity: 0.65;
             font-style: italic;
+        }
+
+        /* =========================================
+           PANEL DE REGALO INLINE EN TARJETA DE PRODUCTO
+           ========================================= */
+        .order-card-gift-panel {
+            margin-top: 10px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(60, 51, 42, 0.12);
+            animation: fadeInSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInSlideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-gift-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-gift-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #1e1a16;
+        }
+
+        .card-gift-header-icon {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+            display: inline-block;
+        }
+
+        .card-gift-close-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            line-height: 1;
+            color: #3C332A;
+            opacity: 0.6;
+            cursor: pointer;
+            padding: 2px 6px;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .card-gift-close-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .card-gift-quote {
+            background: #FFFFFF;
+            border: 1px solid rgba(60, 51, 42, 0.12);
+            border-radius: 4px;
+            padding: 13px 16px;
+            margin-bottom: 18px;
+            font-family: 'Lato', sans-serif;
+            font-size: 11px;
+            font-style: italic;
+            color: #3C332A;
+            line-height: 1.55;
+            opacity: 0.9;
+        }
+
+        .card-gift-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .card-gift-grid-2-1 {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+        }
+
+        .card-gift-grid-1-1 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .card-gift-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .card-gift-label {
+            font-family: 'Lexend', sans-serif;
+            font-size: 9.5px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #3C332A;
+        }
+
+        .card-gift-input {
+            width: 100%;
+            background: #FFFFFF;
+            border: 1px solid rgba(60, 51, 42, 0.18);
+            border-radius: 4px;
+            padding: 9px 12px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 12.5px;
+            color: #150e02;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card-gift-input:focus {
+            outline: none;
+            border-color: #3C332A;
+            box-shadow: 0 0 0 2px rgba(60, 51, 42, 0.1);
+        }
+
+        .card-gift-input::placeholder {
+            color: rgba(60, 51, 42, 0.45);
+            font-weight: 300;
+            font-size: 11.5px;
+        }
+
+        .card-gift-textarea {
+            resize: vertical;
+            min-height: 48px;
+            line-height: 1.45;
+        }
+
+        .card-gift-help {
+            font-family: 'Lexend', sans-serif;
+            font-size: 9px;
+            color: #3C332A;
+            opacity: 0.65;
+            margin-top: 1px;
+            line-height: 1.35;
+        }
+
+        .card-gift-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .btn-card-gift-submit {
+            width: 100%;
+            height: 42px;
+            background: #150e02;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 2px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 11.5px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 3px 10px rgba(21, 14, 2, 0.15);
+        }
+
+        .btn-card-gift-submit:hover {
+            background: #2d200a;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 14px rgba(21, 14, 2, 0.22);
+        }
+
+        .btn-card-gift-cancel {
+            width: 100%;
+            height: 38px;
+            background: transparent;
+            color: #150e02;
+            border: 1px solid rgba(60, 51, 42, 0.2);
+            border-radius: 2px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-card-gift-cancel:hover {
+            background: rgba(60, 51, 42, 0.06);
+            border-color: #3C332A;
         }
 
         .empty-orders-msg {
@@ -1474,6 +1716,23 @@
                 margin-bottom: 20px !important;
                 max-width: 100% !important;
                 box-sizing: border-box !important;
+            }
+
+            .card-gift-grid-2-1,
+            .card-gift-grid-1-1 {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            .card-gift-title {
+                font-size: 11.5px !important;
+                letter-spacing: 1.5px !important;
+            }
+
+            .panel-header-subtext {
+                text-align: left !important;
+                margin-top: -10px !important;
+                margin-bottom: 16px !important;
             }
         }
 
@@ -2235,6 +2494,7 @@
                         <!-- PANEL: TU PEDIDO -->
                         <div class="order-summary-panel" id="orderSummaryPanel">
                             <h3 class="panel-header-title">Tu Pedido</h3>
+                            <div class="panel-header-subtext">*Para modificar cantidad o borrar, selecciona la línea y pulsa el botón</div>
                             <div class="order-products-container" id="orderProductsContainer">
                                 <!-- Se renderiza dinámicamente con las tarjetas de cada producto -->
                             </div>
@@ -3001,6 +3261,7 @@
         // =========================================
         let cartLines = [];
         let selectedLineId = null;
+        let activeGiftCardProductId = null;
 
         // Cargar líneas del carrito sincronizadas desde index.html o compras previas
         function loadCartLinesFromStorage() {
@@ -3164,13 +3425,15 @@
                 const prodInfo = PRODUCTS_CATALOG.find(p => p.id === prodId) || {
                     id: prodId,
                     name: prodLines[0].productName,
-                    image: prodLines[0].productImage
+                    image: prodLines[0].productImage,
+                    varieties: []
                 };
 
                 const prodSubtotal = prodLines.reduce((sum, l) => sum + (l.unitPrice * l.qty), 0);
+                const isGiftOpen = activeGiftCardProductId === prodId;
 
                 const card = document.createElement('div');
-                card.className = 'order-product-card';
+                card.className = 'order-product-card' + (isGiftOpen ? ' gift-expanded' : '');
                 card.setAttribute('data-product-id', prodId);
 
                 let linesHTML = '';
@@ -3178,11 +3441,20 @@
                     const isSel = line.id === selectedLineId;
                     linesHTML += `
                         <div class="order-line-item ${isSel ? 'selected' : ''}" onclick="selectOrderLine('${line.id}')">
-                            <span class="order-line-name">${line.qty > 1 ? line.qty + 'x ' : ''}${line.varietyName}</span>
+                            <span class="order-line-name">${line.isGift ? '🎁 ' : ''}${line.qty > 1 ? line.qty + 'x ' : ''}${line.varietyName}</span>
                             <span class="order-line-price">${(line.unitPrice * line.qty).toFixed(2)} €</span>
                         </div>
                     `;
                 });
+
+                const giftHeaderName = prodId === 'doxa' ? 'DOXA' : (prodInfo.shortName ? prodInfo.shortName.toUpperCase() : prodInfo.name.toUpperCase());
+
+                let varietiesOptionsHTML = '';
+                if (prodInfo.varieties && prodInfo.varieties.length > 0) {
+                    prodInfo.varieties.forEach(v => {
+                        varietiesOptionsHTML += `<option value="${v.id}" data-price="${v.price}" data-name="${v.name}">${v.fullName || v.name} — ${parseFloat(v.price).toFixed(2)} €</option>`;
+                    });
+                }
 
                 card.innerHTML = `
                     <div class="order-card-inner">
@@ -3200,12 +3472,83 @@
                     </div>
                     <div class="order-card-actions-bar">
                         <div class="order-actions-btns">
-                            <button type="button" class="btn-ctrl-action" onclick="adjustSelectedLineQty(1)" title="Aumentar cantidad de la línea seleccionada">+</button>
-                            <button type="button" class="btn-ctrl-action" onclick="adjustSelectedLineQty(-1)" title="Disminuir cantidad">−</button>
-                            <button type="button" class="btn-ctrl-action" onclick="deleteSelectedLine()" title="Borrar línea seleccionada" style="font-size: 13px;">🗑️</button>
+                            <button type="button" class="btn-ctrl-action" onclick="adjustSelectedLineQty(1, '${prodId}')" title="Aumentar cantidad">+</button>
+                            <button type="button" class="btn-ctrl-action" onclick="adjustSelectedLineQty(-1, '${prodId}')" title="Disminuir cantidad">−</button>
+                            <button type="button" class="btn-ctrl-action ${isGiftOpen ? 'active' : ''}" onclick="toggleInlineGiftForm('${prodId}')" title="Enviar como regalo">
+                                <img src="Icono regalo.png" alt="Regalo" class="btn-ctrl-icon">
+                            </button>
+                            <button type="button" class="btn-ctrl-action" onclick="deleteSelectedLine('${prodId}')" title="Borrar línea" style="font-size: 13px;">
+                                <img src="Icono papelera.png" alt="Borrar" class="btn-ctrl-icon">
+                            </button>
                         </div>
-                        <span class="order-actions-help">*Para modificar cantidad o borrar, selecciona la línea y pulsa el botón</span>
+                        ${!isGiftOpen ? '<span class="order-actions-help">*Para modificar cantidad o borrar, selecciona la línea y pulsa el botón</span>' : ''}
                     </div>
+                    ${isGiftOpen ? `
+                        <div class="order-card-gift-panel">
+                            <div class="card-gift-header">
+                                <div class="card-gift-title">
+                                    <img src="Icono regalo.png" alt="" class="card-gift-header-icon">
+                                    <span>ENVIAR ${giftHeaderName} COMO REGALO</span>
+                                </div>
+                                <button type="button" class="card-gift-close-btn" onclick="toggleInlineGiftForm('${prodId}')" title="Cerrar">&times;</button>
+                            </div>
+                            <div class="card-gift-quote">
+                                &ldquo;Un regalo está en camino hacia tí... Te hemos enviado un correo y SMS con el enlace de seguimiento en tiempo real. Si algo se dificultase para entregártelo podrían llamarte.<br>
+                                Espero que sea de tu agrado. Alguien te aprecia mucho...&rdquo;
+                            </div>
+                            <form class="card-gift-form" onsubmit="saveInlineGiftOrder(event, '${prodId}')">
+                                <div class="card-gift-grid-2-1">
+                                    <div class="card-gift-field">
+                                        <label class="card-gift-label" for="inlineGiftVariety_${prodId}">VARIEDAD DE CAJA *</label>
+                                        <select class="card-gift-input" id="inlineGiftVariety_${prodId}" required>
+                                            ${varietiesOptionsHTML}
+                                        </select>
+                                    </div>
+                                    <div class="card-gift-field">
+                                        <label class="card-gift-label" for="inlineGiftQty_${prodId}">CANTIDAD *</label>
+                                        <input class="card-gift-input" type="number" id="inlineGiftQty_${prodId}" min="1" max="50" value="1" required>
+                                    </div>
+                                </div>
+
+                                <div class="card-gift-field">
+                                    <label class="card-gift-label" for="inlineGiftName_${prodId}">NOMBRE DEL DESTINATARIO *</label>
+                                    <input class="card-gift-input" type="text" id="inlineGiftName_${prodId}" placeholder="Nombre y apellidos de quien recibe el regalo" required>
+                                </div>
+
+                                <div class="card-gift-field">
+                                    <label class="card-gift-label" for="inlineGiftPhone_${prodId}">TELÉFONO DEL DESTINATARIO *</label>
+                                    <input class="card-gift-input" type="tel" id="inlineGiftPhone_${prodId}" placeholder="Para el transportista y aviso de entrega por SMS" required>
+                                    <span class="card-gift-help">Necesario para que la mensajería pueda coordinar la entrega.</span>
+                                </div>
+
+                                <div class="card-gift-field">
+                                    <label class="card-gift-label" for="inlineGiftAddress_${prodId}">DIRECCIÓN DE ENTREGA DEL DESTINATARIO *</label>
+                                    <input class="card-gift-input" type="text" id="inlineGiftAddress_${prodId}" placeholder="Calle, número, piso, puerta..." required>
+                                </div>
+
+                                <div class="card-gift-grid-1-1">
+                                    <div class="card-gift-field">
+                                        <label class="card-gift-label" for="inlineGiftZip_${prodId}">CÓDIGO POSTAL *</label>
+                                        <input class="card-gift-input" type="text" id="inlineGiftZip_${prodId}" placeholder="número del cp" required>
+                                    </div>
+                                    <div class="card-gift-field">
+                                        <label class="card-gift-label" for="inlineGiftCity_${prodId}">CIUDAD *</label>
+                                        <input class="card-gift-input" type="text" id="inlineGiftCity_${prodId}" placeholder="nombre de la ciudad destino" required>
+                                    </div>
+                                </div>
+
+                                <div class="card-gift-field">
+                                    <label class="card-gift-label" for="inlineGiftMsg_${prodId}">DEDICATORIA / MENSAJE EN LA CAJA (OPCIONAL)</label>
+                                    <textarea class="card-gift-input card-gift-textarea" id="inlineGiftMsg_${prodId}" rows="2" placeholder="Escribe un mensaje para que lo incluyamos en una elegante tarjeta de regalo..."></textarea>
+                                </div>
+
+                                <div class="card-gift-actions">
+                                    <button type="submit" class="btn-card-gift-submit">AÑADIR REGALO AL PEDIDO</button>
+                                    <button type="button" class="btn-card-gift-cancel" onclick="toggleInlineGiftForm('${prodId}')">CANCELAR</button>
+                                </div>
+                            </form>
+                        </div>
+                    ` : ''}
                 `;
 
                 container.appendChild(card);
@@ -3215,21 +3558,102 @@
             saveCartLinesToStorage();
         }
 
+        function toggleInlineGiftForm(prodId) {
+            if (activeGiftCardProductId === prodId) {
+                activeGiftCardProductId = null;
+            } else {
+                activeGiftCardProductId = prodId;
+            }
+            renderCart();
+        }
+
+        function saveInlineGiftOrder(event, prodId) {
+            event.preventDefault();
+
+            const prodInfo = PRODUCTS_CATALOG.find(p => p.id === prodId) || {
+                id: prodId,
+                name: 'Doxas',
+                image: 'Doxa.png',
+                varieties: []
+            };
+
+            const varietySelect = document.getElementById(`inlineGiftVariety_${prodId}`);
+            const qtyInput = document.getElementById(`inlineGiftQty_${prodId}`);
+            const nameInput = document.getElementById(`inlineGiftName_${prodId}`);
+            const phoneInput = document.getElementById(`inlineGiftPhone_${prodId}`);
+            const addressInput = document.getElementById(`inlineGiftAddress_${prodId}`);
+            const zipInput = document.getElementById(`inlineGiftZip_${prodId}`);
+            const cityInput = document.getElementById(`inlineGiftCity_${prodId}`);
+            const msgInput = document.getElementById(`inlineGiftMsg_${prodId}`);
+
+            if (!varietySelect || !nameInput || !addressInput || !zipInput || !cityInput) return;
+
+            const selectedOpt = varietySelect.options[varietySelect.selectedIndex];
+            const varietyId = selectedOpt ? selectedOpt.value : '';
+            const varietyName = selectedOpt ? (selectedOpt.getAttribute('data-name') || selectedOpt.text.split(' — ')[0]) : '';
+            const unitPrice = selectedOpt ? (parseFloat(selectedOpt.getAttribute('data-price')) || 0) : 0;
+            const qty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
+            const recipientName = nameInput.value.trim();
+            const recipientPhone = phoneInput ? phoneInput.value.trim() : '';
+            const recipientAddress = addressInput.value.trim();
+            const recipientZip = zipInput.value.trim();
+            const recipientCity = cityInput.value.trim();
+            const giftMessage = msgInput ? msgInput.value.trim() : '';
+
+            if (!recipientName || !recipientAddress || !recipientZip || !recipientCity) {
+                alert('Por favor, completa los datos de entrega del destinatario.');
+                return;
+            }
+
+            const giftLine = {
+                id: 'gift_' + Date.now() + Math.random().toString(36).substr(2, 4),
+                productId: prodInfo.id,
+                productName: prodInfo.name,
+                productImage: prodInfo.image,
+                varietyId: varietyId,
+                varietyName: `${varietyName} para "${recipientName}"`,
+                unitPrice: unitPrice,
+                qty: qty,
+                isGift: true,
+                recipientName: recipientName,
+                phone: recipientPhone,
+                address: recipientAddress,
+                zip: recipientZip,
+                city: recipientCity,
+                message: giftMessage
+            };
+
+            cartLines.push(giftLine);
+            selectedLineId = giftLine.id;
+            activeGiftCardProductId = null;
+            renderCart();
+
+            // En móvil, hacer scroll suave hacia Tu Pedido
+            if (window.innerWidth <= 768) {
+                const panel = document.getElementById('orderSummaryPanel');
+                if (panel) {
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+
         function selectOrderLine(lineId) {
             selectedLineId = lineId;
             renderCart();
         }
 
-        function adjustSelectedLineQty(delta) {
-            if (!selectedLineId) {
-                if (cartLines.length > 0) {
-                    selectedLineId = cartLines[0].id;
-                } else {
-                    return;
+        function adjustSelectedLineQty(delta, prodId) {
+            let line = cartLines.find(l => l.id === selectedLineId && (!prodId || l.productId === prodId));
+            if (!line && prodId) {
+                const prodLines = cartLines.filter(l => l.productId === prodId);
+                if (prodLines.length > 0) {
+                    line = prodLines[prodLines.length - 1];
+                    selectedLineId = line.id;
                 }
+            } else if (!line && cartLines.length > 0) {
+                line = cartLines[0];
+                selectedLineId = line.id;
             }
-
-            const line = cartLines.find(l => l.id === selectedLineId);
             if (!line) return;
 
             if (delta < 0 && line.qty <= 1) {
@@ -3241,16 +3665,21 @@
             renderCart();
         }
 
-        function deleteSelectedLine() {
-            if (!selectedLineId) {
-                if (cartLines.length > 0) {
-                    selectedLineId = cartLines[0].id;
-                } else {
-                    return;
+        function deleteSelectedLine(prodId) {
+            let lineIndex = cartLines.findIndex(l => l.id === selectedLineId && (!prodId || l.productId === prodId));
+            if (lineIndex === -1 && prodId) {
+                for (let i = cartLines.length - 1; i >= 0; i--) {
+                    if (cartLines[i].productId === prodId) {
+                        lineIndex = i;
+                        break;
+                    }
                 }
+            } else if (lineIndex === -1 && cartLines.length > 0) {
+                lineIndex = 0;
             }
+            if (lineIndex === -1) return;
 
-            cartLines = cartLines.filter(l => l.id !== selectedLineId);
+            cartLines.splice(lineIndex, 1);
             selectedLineId = cartLines.length > 0 ? cartLines[cartLines.length - 1].id : null;
             renderCart();
         }
