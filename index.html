@@ -6424,7 +6424,7 @@ Menú del Index: Líena 742
                 color: var(--text-dark, #3C332A) !important;
                 opacity: 0.9 !important;
                 max-width: 720px;
-                margin: 0 auto 46px auto;
+                margin: 0 auto 0 auto;
                 text-align: center;
                 padding-bottom: 24px;
                 border-bottom: 1px solid rgba(60, 51, 42, 0.1);
@@ -6528,10 +6528,10 @@ Menú del Index: Líena 742
                 color: #1e1a16;
             }
 
-            /* Selector superior de formatos disponibles (antes del carrusel, perfectamente centrado) */
+            /* Selector de formatos disponibles (entre descripción y precio) */
             .product-formats-top {
                 max-width: 820px;
-                margin: 20px auto 16px auto;
+                margin: 30px auto 60px auto;
                 text-align: center;
                 padding: 0 10px;
                 display: flex;
@@ -7187,7 +7187,7 @@ Menú del Index: Líena 742
 
                 .product-formats-top {
                     padding: 0 4px;
-                    margin: 15px auto 12px auto;
+                    margin: 30px auto 60px auto;
                 }
 
                 .product-formats-top-grid {
@@ -7234,7 +7234,7 @@ Menú del Index: Líena 742
                     font-size: 14.5px !important;
                     line-height: 1.9 !important;
                     text-align: center;
-                    margin-bottom: 38px !important;
+                    margin-bottom: 0 !important;
                     padding-bottom: 20px !important;
                 }
 
@@ -7429,39 +7429,6 @@ Menú del Index: Líena 742
                      ========================================================================= -->
                 <div class="product-sheet-container">
 
-                    <!-- SELECTOR DE FORMATOS DISPONIBLES (SUPERIOR, ANTES DEL CARRUSEL) -->
-                    <div class="product-formats-top">
-                        <div class="product-formats-top-label">Formatos disponibles:</div>
-                        <div class="product-formats-top-grid" id="productFormatsTopGrid">
-                            <!-- Formato 1: 2 piezas (Activo por defecto como en la captura) -->
-                            <button type="button" class="product-format-option active" data-pieces="2"
-                                data-weight="15 g" data-price="10.00" data-kilo="666,67 € / kg · Peso: 15 g"
-                                data-title="Estuche de Trufas Puras — 2 piezas (15 g)"
-                                data-carousel-title="CAJITA <strong>DÚO</strong> <span class=&quot;format-pieces-sub&quot;>(2 PIEZAS)</span>">
-                                <span class="format-opt-title">Caja</span>
-                                <span class="format-opt-sub">2 piezas</span>
-                            </button>
-
-                            <!-- Formato 2: 7 piezas -->
-                            <button type="button" class="product-format-option" data-pieces="7" data-weight="90 g"
-                                data-price="57.00" data-kilo="633,33 € / kg · Peso: 90 g"
-                                data-title="Estuche de Trufas Puras — 7 piezas (90 g)"
-                                data-carousel-title="CAJA <strong>MI SEMANA</strong> <span class=&quot;format-pieces-sub&quot;>(7 PIEZAS)</span>">
-                                <span class="format-opt-title">Caja</span>
-                                <span class="format-opt-sub">7 piezas</span>
-                            </button>
-
-                            <!-- Formato 3: 28 piezas -->
-                            <button type="button" class="product-format-option" data-pieces="28" data-weight="245 g"
-                                data-price="117.00" data-kilo="477,55 € / kg · Peso: 245 g"
-                                data-title="Estuche de Trufas Puras — 28 piezas (245 g)"
-                                data-carousel-title="CAJA <strong>MI MES</strong> <span class=&quot;format-pieces-sub&quot;>(28 PIEZAS)</span>">
-                                <span class="format-opt-title">Caja</span>
-                                <span class="format-opt-sub">28 piezas</span>
-                            </button>
-                        </div>
-                    </div>
-
                     <!-- TÍTULO DINÁMICO DEL PRODUCTO ANTES DEL CARRUSEL DE FOTOS (ESTILO BÉSAME CHOCO: MAYÚSCULAS) -->
                     <div class="product-carousel-title" id="productCarouselTitle">
                         CAJITA <strong>DÚO</strong> <span class="format-pieces-sub">(2 PIEZAS)</span>
@@ -7541,6 +7508,39 @@ Menú del Index: Líena 742
                             fundente única, combinando una ganache batida de textura aérea con una fina capa de
                             chocolate crujiente y un delicado velo de cacao puro amargo en polvo.
                         </p>
+
+                        <!-- SELECTOR DE FORMATOS DISPONIBLES (ENTRE DESCRIPCIÓN Y PRECIO) -->
+                        <div class="product-formats-top">
+                            <div class="product-formats-top-label">Formatos disponibles:</div>
+                            <div class="product-formats-top-grid" id="productFormatsTopGrid">
+                                <!-- Formato 1: 2 piezas (Activo por defecto como en la captura) -->
+                                <button type="button" class="product-format-option active" data-pieces="2"
+                                    data-weight="15 g" data-price="10.00" data-kilo="666,67 € / kg · Peso: 15 g"
+                                    data-title="Estuche de Trufas Puras — 2 piezas (15 g)"
+                                    data-carousel-title="CAJITA <strong>DÚO</strong> <span class=&quot;format-pieces-sub&quot;>(2 PIEZAS)</span>">
+                                    <span class="format-opt-title">Caja</span>
+                                    <span class="format-opt-sub">2 piezas</span>
+                                </button>
+
+                                <!-- Formato 2: 7 piezas -->
+                                <button type="button" class="product-format-option" data-pieces="7" data-weight="90 g"
+                                    data-price="57.00" data-kilo="633,33 € / kg · Peso: 90 g"
+                                    data-title="Estuche de Trufas Puras — 7 piezas (90 g)"
+                                    data-carousel-title="CAJA <strong>MI SEMANA</strong> <span class=&quot;format-pieces-sub&quot;>(7 PIEZAS)</span>">
+                                    <span class="format-opt-title">Caja</span>
+                                    <span class="format-opt-sub">7 piezas</span>
+                                </button>
+
+                                <!-- Formato 3: 28 piezas -->
+                                <button type="button" class="product-format-option" data-pieces="28" data-weight="245 g"
+                                    data-price="117.00" data-kilo="477,55 € / kg · Peso: 245 g"
+                                    data-title="Estuche de Trufas Puras — 28 piezas (245 g)"
+                                    data-carousel-title="CAJA <strong>MI MES</strong> <span class=&quot;format-pieces-sub&quot;>(28 PIEZAS)</span>">
+                                    <span class="format-opt-title">Caja</span>
+                                    <span class="format-opt-sub">28 piezas</span>
+                                </button>
+                            </div>
+                        </div>
 
                         <!-- PRECIO DINÁMICO -->
                         <div class="product-price-row">
