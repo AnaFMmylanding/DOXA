@@ -7828,7 +7828,7 @@ Menú del Index: Líena 742
                                 Sorprende a alguien especial. Añade uno o varios destinatarios en este mismo pedido con
                                 su propia dirección y dedicatoria personalizada.
                             </p>
-                            <button type="button" class="btn-gift-trigger" id="btnGiftRegalo" onclick="toggleReservasGiftPanel()">
+                            <button type="button" class="btn-gift-trigger" id="btnGiftRegalo">
                                 SÍ, QUIERO REGALAR DOXAS
                             </button>
 
@@ -7842,7 +7842,7 @@ Menú del Index: Líena 742
                                         <img src="Icono regalo.png" alt="" class="card-gift-header-icon">
                                         <span id="reservasGiftPanelTitle">ENVIAR DOXA COMO REGALO</span>
                                     </div>
-                                    <button type="button" class="card-gift-close-btn" onclick="toggleReservasGiftPanel()" title="Cerrar">&times;</button>
+                                    <button type="button" class="card-gift-close-btn" onclick="closeReservasGiftPanel(event)" title="Cerrar">&times;</button>
                                 </div>
                                 <div class="card-gift-quote">
                                     &ldquo;Un regalo está en camino hacia tí... Te hemos enviado un correo y SMS con el enlace de seguimiento en tiempo real. Si algo se dificultase para entregártelo podrían llamarte.<br>
@@ -7894,7 +7894,7 @@ Menú del Index: Líena 742
 
                                     <div class="card-gift-actions">
                                         <button type="submit" class="btn-card-gift-submit" id="btnSubmitResGift">AÑADIR REGALO AL PEDIDO</button>
-                                        <button type="button" class="btn-card-gift-cancel" onclick="toggleReservasGiftPanel()">CANCELAR</button>
+                                        <button type="button" class="btn-card-gift-cancel" onclick="closeReservasGiftPanel(event)">CANCELAR</button>
                                     </div>
                                 </form>
                             </div>
@@ -8393,19 +8393,53 @@ Menú del Index: Líena 742
                         // =========================================
                         // GESTIÓN DE LA PESTAÑA DE REGALOS EN INDEX
                         // =========================================
-                        function toggleReservasGiftPanel() {
+                        let _lastGiftPanelToggle = 0;
+                        function toggleReservasGiftPanel(e) {
+                            if (e) {
+                                if (typeof e.preventDefault === 'function') e.preventDefault();
+                                if (typeof e.stopPropagation === 'function') e.stopPropagation();
+                            }
+                            const now = Date.now();
+                            if (now - _lastGiftPanelToggle < 250) {
+                                return; // Protección contra rebotes o dobles disparos
+                            }
+                            _lastGiftPanelToggle = now;
+
                             const panel = document.getElementById('reservasGiftPanel');
                             if (!panel) return;
                             const isHidden = panel.style.display === 'none' || panel.style.display === '';
                             if (isHidden) {
-                                populateReservasGiftVarieties();
-                                panel.style.display = 'block';
-                                panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                                openReservasGiftPanel();
                             } else {
-                                panel.style.display = 'none';
+                                closeReservasGiftPanel();
                             }
                         }
                         window.toggleReservasGiftPanel = toggleReservasGiftPanel;
+
+                        function openReservasGiftPanel() {
+                            const panel = document.getElementById('reservasGiftPanel');
+                            if (!panel) return;
+                            try {
+                                populateReservasGiftVarieties();
+                            } catch (err) {
+                                console.warn('Error poblando variedades de regalo:', err);
+                            }
+                            panel.style.display = 'block';
+                            setTimeout(() => {
+                                try {
+                                    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                                } catch (err) {}
+                            }, 50);
+                        }
+                        window.openReservasGiftPanel = openReservasGiftPanel;
+
+                        function closeReservasGiftPanel(e) {
+                            if (e && typeof e.preventDefault === 'function') e.preventDefault();
+                            const panel = document.getElementById('reservasGiftPanel');
+                            if (!panel) return;
+                            panel.style.display = 'none';
+                        }
+                        window.closeReservasGiftPanel = closeReservasGiftPanel;
 
                         function populateReservasGiftVarieties() {
                             const prod = getCurrentProduct();
@@ -8503,8 +8537,7 @@ Menú del Index: Líena 742
                             if (qtyInp) qtyInp.value = '1';
 
                             // Cerrar panel desplegable
-                            const panel = document.getElementById('reservasGiftPanel');
-                            if (panel) panel.style.display = 'none';
+                            closeReservasGiftPanel();
 
                             // Mostrar feedback de adición de regalo
                             const feedbackBox = document.getElementById('productCartFeedback');
@@ -8830,10 +8863,9 @@ Menú del Index: Líena 742
 
                         // Botón Regalo: abrir pestaña de regalo en index
                         if (btnGift) {
-                            btnGift.addEventListener('click', (e) => {
-                                e.preventDefault();
-                                toggleReservasGiftPanel();
-                            });
+                            btnGift.onclick = function (e) {
+                                toggleReservasGiftPanel(e);
+                            };
                         }
 
                         // Inicialización: cargar DOXA por defecto
