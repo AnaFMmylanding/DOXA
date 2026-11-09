@@ -2911,7 +2911,6 @@
             }
 
             // 3. Actualizar el selector de variantes para este producto
-            const select = document.getElementById('varietySelect');
             if (select) {
                 select.innerHTML = '';
                 prod.varieties.forEach(v => {
@@ -3194,7 +3193,33 @@
                 console.warn('Error leyendo doxa_cart_lines:', e);
             }
 
-            // Fallback si no hay líneas previas guardadas (acceso directo a compra.html)
+            // Fallback 1: Si hay selección activa previa en doxa_active_selection
+            try {
+                const activeSel = JSON.parse(localStorage.getItem('doxa_active_selection'));
+                if (activeSel && activeSel.productId) {
+                    const prodId = activeSel.productId === 'bbb' ? 'bombon' : activeSel.productId;
+                    const prodInfo = PRODUCTS_CATALOG.find(p => p.id === prodId) || PRODUCTS_CATALOG[0];
+                    const vName = activeSel.name || (prodInfo.varieties[0] ? prodInfo.varieties[0].name : prodInfo.name);
+                    cartLines = [
+                        {
+                            id: 'line_' + Date.now(),
+                            productId: prodInfo.id,
+                            productName: prodInfo.name,
+                            productImage: activeSel.image || prodInfo.image,
+                            varietyId: activeSel.varietyId || (prodInfo.varieties[0] ? prodInfo.varieties[0].id : ''),
+                            varietyName: vName,
+                            unitPrice: parseFloat(activeSel.price) || (prodInfo.varieties[0] ? prodInfo.varieties[0].price : 10.00),
+                            qty: parseInt(activeSel.qty) || 1,
+                            isGift: false
+                        }
+                    ];
+                    selectedLineId = cartLines[0].id;
+                    saveCartLinesToStorage();
+                    return;
+                }
+            } catch (e) {}
+
+            // Fallback 2: si no hay líneas previas guardadas (acceso directo a compra.html)
             if (cartLines.length === 0) {
                 cartLines = [
                     {

@@ -8868,6 +8868,13 @@ Menú del Index: Líena 742
                             };
                         }
 
+                        // Botón Ir a la Hoja de Pago: asegurar sincronización previa de la selección activa
+                        if (btnCheckout) {
+                            btnCheckout.addEventListener('click', () => {
+                                syncCartToStorage(true);
+                            });
+                        }
+
                         // Inicialización: cargar DOXA por defecto
                         switchReservasProduct('doxa');
                     })();
