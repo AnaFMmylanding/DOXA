@@ -80,10 +80,9 @@
             height: 90px;
             z-index: 1000;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             align-items: center;
-            padding: 0 50px;
-            gap: 25px;
+            padding: 0 30px;
             background-color: transparent;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             border-bottom: 1px solid rgba(255, 255, 255, 0);
@@ -96,6 +95,71 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(60, 51, 42, 0.08);
+        }
+
+        /* Marca centrada en el encabezado (idéntica al index, botón hacia la portada) */
+        .navbar-brand-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .navbar-brand-center .brand-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .navbar-brand-center .brand-link:hover {
+            opacity: 0.85;
+            transform: scale(1.02);
+        }
+
+        .navbar-brand-center .brand-title {
+            font-family: 'Lato', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 5px;
+            color: #FFFFFF !important;
+            text-transform: uppercase;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 6px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand-center .brand-del {
+            font-size: 0.65em;
+            letter-spacing: 3px;
+            font-weight: 400;
+            opacity: 0.85;
+        }
+
+        .navbar-brand-center .brand-sub {
+            font-family: 'Lato', sans-serif;
+            font-size: 8px;
+            font-weight: 300;
+            letter-spacing: 3.5px;
+            color: rgba(255, 255, 255, 0.85) !important;
+            text-transform: uppercase;
+            margin-top: 3px;
+            white-space: nowrap;
+            transition: color 0.3s ease;
+        }
+
+        .navbar.scrolled .navbar-brand-center .brand-title {
+            color: #3C332A !important;
+        }
+
+        .navbar.scrolled .navbar-brand-center .brand-sub {
+            color: rgba(60, 51, 42, 0.75) !important;
         }
 
         .navbar-logo {
@@ -201,28 +265,28 @@
                 padding: 0 16px;
                 height: 70px;
                 display: flex;
-                justify-content: flex-end;
+                justify-content: center;
                 align-items: center;
-                gap: 12px;
             }
 
             .navbar.scrolled {
                 height: 65px;
             }
 
-            .mobile-toggle {
-                display: flex;
-                order: 1;
-                margin-left: auto;
+            .navbar-brand-center .brand-title {
+                font-size: 15px;
+                letter-spacing: 2.5px;
+                gap: 4px;
             }
 
-            .navbar-logo {
-                display: inline-flex !important;
-                order: 2;
-                padding: 6px 14px !important;
-                font-size: 11px !important;
-                letter-spacing: 2.5px !important;
-                border-radius: 2px;
+            .navbar-brand-center .brand-del {
+                letter-spacing: 1.5px;
+            }
+
+            .navbar-brand-center .brand-sub {
+                font-size: 7px;
+                letter-spacing: 2px;
+                margin-top: 2px;
             }
 
             .navbar-menu {
@@ -294,7 +358,7 @@
             width: 100%;
             height: calc(100vh / 3);
             height: calc(100svh / 3);
-            min-height: clamp(270px, 33.33vh, 380px);
+            min-height: clamp(180px, 33.33vh, 260px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2006,9 +2070,17 @@
 
     <div class="page-wrapper">
 
-        <nav class="navbar" id="mainNavbar" style="display: none;"></nav>
+        <!-- NAVEGACIÓN PRINCIPAL: MARCA CENTRADA CON ENLACE AL INDEX (SIN BOTONES EN LA ESQUINA) -->
+        <nav class="navbar" id="mainNavbar">
+            <div class="navbar-brand-center">
+                <a href="index.html" class="brand-link" aria-label="Volver al Inicio">
+                    <span class="brand-title">ESTADO <span class="brand-del">DEL</span> ARTE</span>
+                    <span class="brand-sub">REPOSTERÍA BIOINDUCTIVA</span>
+                </a>
+            </div>
+        </nav>
 
-        <!-- CABECERA: IDÉNTICA A LA DEL INDEX (1/3 DE LONGITUD VERTICAL) -->
+        <!-- CABECERA: FONDO IMAGEN/VÍDEO (1/3 DE LONGITUD DEL INDEX) -->
         <header class="hero-container">
 
             <div class="hero-media-wrapper">
@@ -2027,23 +2099,6 @@
                 <img src="cabecera_index.jpg" alt="Fondo Doxa" class="hero-bg-media">
             </div>
 
-            <div class="hero-content animate-appear">
-
-                <h1 class="hero-title">
-                    <span class="hero-doxa">ESTADO DEL ARTE</span>
-
-                    <span class="hero-sub">
-                        <span>C</span><span>O</span><span>N</span><span>F</span><span>I</span><span>T</span><span>E</span><span>R</span><span>Í</span><span>A</span>
-                        <span></span>
-                        <span>B</span><span>I</span><span>O</span><span>I</span><span>N</span><span>D</span><span>U</span><span>C</span><span>T</span><span>I</span><span>V</span><span>A</span>
-                    </span>
-                </h1>
-
-                <p class="hero-tagline">
-                    Lo que antes era un esfuerzo... ahora es tu momento de placer
-                </p>
-
-            </div>
         </header>
 
         <!-- SECCIÓN FORMULARIO DE COMPRA -->
