@@ -689,8 +689,8 @@
 
         .checkout-grid {
             display: grid;
-            grid-template-columns: 1.1fr 1.9fr;
-            gap: 60px;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 45px;
             align-items: start;
         }
 
@@ -1132,7 +1132,8 @@
             transform: translateY(0);
         }
 
-        /* Columna Derecha Stack y Paneles */
+        /* Columnas y Paneles de Pedido y Facturación */
+        .left-column-stack,
         .right-column-stack {
             display: flex;
             flex-direction: column;
@@ -1163,9 +1164,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            max-height: 580px;
-            overflow-y: auto;
-            padding-right: 4px;
+            padding-right: 2px;
         }
 
         .panel-header-subtext {
@@ -1212,7 +1211,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
             border-radius: 6px;
             transition: transform 0.25s ease;
             position: relative;
@@ -1669,6 +1667,12 @@
             /* Subir paneles inferiores */
             .checkout-grid {
                 gap: 20px !important;
+            }
+
+            .left-column-stack {
+                padding: 0 !important;
+                gap: 20px !important;
+                width: 100% !important;
             }
 
             .product-column,
@@ -2396,100 +2400,8 @@
 
                 <div class="checkout-grid">
 
-                    <!-- COLUMNA IZQUIERDA: HAZ TU SELECCIÓN -->
-                    <div class="product-column" id="selectionColumn">
-                        <h3 class="product-title">Haz tu Selección</h3>
-
-                        <div class="product-carousel-wrapper">
-                            <button type="button" class="carousel-arrow carousel-arrow-prev" id="carouselPrevBtn"
-                                onclick="switchProduct(currentProductIndex - 1)" aria-label="Producto anterior">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="15 18 9 12 15 6"></polyline>
-                                </svg>
-                            </button>
-                            <div class="product-image-container" id="productCarouselContainer">
-                                <img src="Doxa.png" alt="Caja de DOXAS Premium" id="mainProductImg">
-                            </div>
-                            <button type="button" class="carousel-arrow carousel-arrow-next" id="carouselNextBtn"
-                                onclick="switchProduct(currentProductIndex + 1)" aria-label="Siguiente producto">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <!-- Selector de variedad -->
-                        <div class="select-group">
-                            <label class="select-label" id="varietySelectLabel" for="varietySelect">Selecciona tu Caja
-                                (10 uds)</label>
-                            <select class="variety-select" id="varietySelect" onchange="updateSelectionPreview()">
-                                <option value="doxa_regular" data-price="120">CAJA DOXA REGULAR — 120.00 €</option>
-                                <option value="doxa_coleccion" data-price="180">CAJA DOXA COLECCIÓN — 180.00 €</option>
-                            </select>
-                        </div>
-
-                        <!-- Cantidad -->
-                        <div class="quantity-group">
-                            <span class="select-label" style="margin-bottom: 0;">Cantidad para ti (Tus Cajas)</span>
-                            <div class="quantity-controls">
-                                <button type="button" class="qty-btn" onclick="adjustQty(-1)">−</button>
-                                <input type="text" class="qty-input" id="qtyInput" value="1" readonly>
-                                <button type="button" class="qty-btn" onclick="adjustQty(1)">+</button>
-                            </div>
-                        </div>
-
-                        <!-- BOTÓN AÑADIR AL PEDIDO -->
-                        <button type="button" class="btn-add-to-cart" id="btnAddToCart"
-                            onclick="addCurrentSelectionToCart()">
-                            Añadir al pedido
-                        </button>
-
-                        <!-- SECCIÓN REGALOS (ENVÍOS A OTRAS PERSONAS) -->
-                        <div class="gift-container-box">
-                            <div class="gift-header-title">
-                                <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"
-                                    style="color: #3C332A;">
-                                    <path
-                                        d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.65-.5-.65C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1h-2.22l.85-1.14c.26-.36.69-.86 1.37-.86zM9 4c.68 0 1.11.5 1.37.86L11.22 6H9c-.55 0-1-.45-1-1s.45-1 1-1zm11 15H4V8h7v13h2V8h7v11z" />
-                                </svg>
-                                ¿Quieres enviar Doxas como regalo?
-                            </div>
-                            <p class="gift-header-desc">
-                                Sorprende a alguien especial. Añade uno o varios destinatarios en este mismo pedido con
-                                su propia dirección y dedicatoria personalizada.
-                            </p>
-
-                            <button type="button" class="btn-gift-trigger" id="btnOpenGiftModal"
-                                onclick="openGiftModal()">
-                                Si, quiero una caja de Doxas
-                            </button>
-                        </div>
-
-                        <!-- Desglose de totales del producto actual -->
-                        <div class="summary-row">
-                            <span id="itemsSubtotalLabel">Artículos (1 caja):</span>
-                            <span id="itemsSubtotal">120.00 €</span>
-                        </div>
-                        <div class="summary-row">
-                            <span id="shippingCostLabel">Gastos de Envío:</span>
-                            <span id="shippingCost">6.00 €</span>
-                        </div>
-                        <div class="summary-row" style="font-size: 12px; opacity: 0.6;">
-                            <span>Impuestos (10% IVA Incl.):</span>
-                            <span id="taxCost">11.45 €</span>
-                        </div>
-                        <div class="summary-row total-row">
-                            <span>Total:</span>
-                            <span id="totalCost">126.00 €</span>
-                        </div>
-                        <p class="tax-cost">* Los impuestos aplicables (10% de IVA) y transporte refrigerado están
-                            detallados en el total.</p>
-                    </div>
-
-                    <!-- COLUMNA DERECHA: TU PEDIDO + TOTAL PEDIDO + TUS DATOS -->
-                    <div class="right-column-stack">
+                    <!-- COLUMNA IZQUIERDA: TU PEDIDO Y TOTAL PEDIDO -->
+                    <div class="left-column-stack" id="leftOrderStack">
 
                         <!-- PANEL: TU PEDIDO -->
                         <div class="order-summary-panel" id="orderSummaryPanel">
@@ -2523,8 +2435,10 @@
                                 detallados en el total.</p>
                         </div>
 
-                        <!-- PANEL: DATOS DE ENVÍO Y FACTURACIÓN -->
-                        <div class="form-column">
+                    </div>
+
+                    <!-- COLUMNA DERECHA: TUS DATOS (COMPRADOR Y FACTURACIÓN) -->
+                    <div class="form-column" id="checkoutFormColumn">
                             <h3 class="form-title">Tus Datos (Comprador y Facturación)</h3>
                             <p id="buyerAddressNote"
                                 style="font-size: 11px; opacity: 0.75; margin-top: -18px; margin-bottom: 22px; line-height: 1.4;">
@@ -2595,8 +2509,7 @@
                             </div>
 
                         </div>
-                        <!-- Fin .right-column-stack -->
-                    </div>
+                        <!-- Fin .form-column -->
 
                 </div>
             </div>
@@ -2980,6 +2893,8 @@
         }
 
         function renderProductSelector() {
+            const select = document.getElementById('varietySelect');
+            if (!select) return;
             const prod = getCurrentProduct();
 
             // 1. Actualizar imagen
@@ -3272,10 +3187,29 @@
                     if (Array.isArray(parsed) && parsed.length > 0) {
                         cartLines = parsed;
                         selectedLineId = cartLines[0].id;
+                        return;
                     }
                 }
             } catch (e) {
                 console.warn('Error leyendo doxa_cart_lines:', e);
+            }
+
+            // Fallback si no hay líneas previas guardadas (acceso directo a compra.html)
+            if (cartLines.length === 0) {
+                cartLines = [
+                    {
+                        id: 'line_' + Date.now(),
+                        productId: 'doxa',
+                        productName: 'Doxas',
+                        productImage: 'Doxa.png',
+                        varietyId: 'doxa_2',
+                        varietyName: 'DOXAS DÚO (2 piezas)',
+                        unitPrice: 10.00,
+                        qty: 1,
+                        isGift: false
+                    }
+                ];
+                selectedLineId = cartLines[0].id;
             }
         }
         loadCartLinesFromStorage();
@@ -3307,8 +3241,10 @@
         }
 
         function updateSelectionPreview() {
+            const qtyInput = document.getElementById('qtyInput');
+            if (!qtyInput) return;
             const config = getShopConfig();
-            const personalQty = parseInt(document.getElementById('qtyInput').value) || 1;
+            const personalQty = parseInt(qtyInput.value) || 1;
             const unitPrice = getSelectedPrice();
 
             const subtotal = personalQty * unitPrice;
@@ -3402,7 +3338,7 @@
                 container.innerHTML = `
                     <div class="empty-orders-msg">
                         Tu pedido está vacío.<br>
-                        Selecciona tu producto en el panel izquierdo y pulsa <strong>"Añadir al pedido"</strong>.
+                        <a href="index.html#seccion-reservas" style="display: inline-block; margin-top: 10px; color: #3C332A; text-decoration: underline; font-weight: 500;">Volver a la selección de productos</a>
                     </div>
                 `;
                 updateTotalOrderPanel();
@@ -3458,7 +3394,7 @@
 
                 card.innerHTML = `
                     <div class="order-card-inner">
-                        <div class="order-product-thumb-wrap" onclick="switchToProduct('${prodId}')" title="Pulsar para añadir más ${prodInfo.name}">
+                        <div class="order-product-thumb-wrap" title="${prodInfo.name}">
                             <img src="${prodInfo.image}" alt="${prodInfo.name}" class="order-product-thumb">
                         </div>
                         <div class="order-product-details">
