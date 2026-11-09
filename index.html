@@ -7042,41 +7042,72 @@ Menú del Index: Líena 742
                 border-color: #3C332A;
             }
 
-            /* Lista de regalos añadidos en index */
+            /* Lista de regalos añadidos en index (con estilo de confirmación de pedido y fondo transparente) */
             .reservas-gifts-list {
-                margin-top: 15px;
+                margin-top: 18px;
                 display: flex;
                 flex-direction: column;
-                gap: 8px;
-                text-align: left;
+                gap: 10px;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                width: 100%;
             }
 
             .res-gift-item-pill {
-                display: flex;
+                display: inline-flex;
                 align-items: center;
-                justify-content: space-between;
-                background: #E6E4DF;
-                border: 1px solid rgba(60, 51, 42, 0.12);
-                border-radius: 4px;
-                padding: 8px 12px;
-                font-size: 12px;
+                justify-content: center;
+                gap: 10px;
+                background: transparent !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                padding: 4px 0;
+                margin: 0 auto;
                 font-family: 'Lexend', sans-serif;
-                color: #1e1a16;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #3C332A;
+                line-height: 1.5;
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+
+            .res-gift-feedback-text {
+                font-family: 'Lexend', sans-serif;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #3C332A;
             }
 
             .res-gift-item-del-btn {
                 background: none;
                 border: none;
                 cursor: pointer;
-                font-size: 14px;
-                opacity: 0.6;
-                padding: 2px 4px;
+                padding: 0 4px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0.65;
                 transition: opacity 0.2s ease, transform 0.2s ease;
+                vertical-align: middle;
             }
 
             .res-gift-item-del-btn:hover {
                 opacity: 1;
-                transform: scale(1.15);
+                transform: scale(1.18);
+            }
+
+            .res-gift-del-icon {
+                width: 14px;
+                height: 14px;
+                object-fit: contain;
+                display: block;
             }
 
             /* Desglose de totales del pedido */
@@ -8504,6 +8535,7 @@ Menú del Index: Líena 742
                                 productImage: fmt.image || (prod.id + '.png'),
                                 varietyId: varietyCode,
                                 varietyName: `${fmt.feedbackName} para "${recipientName}"`,
+                                formatName: fmt.feedbackName,
                                 unitPrice: fmt.price,
                                 qty: qty,
                                 isGift: true,
@@ -8539,18 +8571,6 @@ Menú del Index: Líena 742
                             // Cerrar panel desplegable
                             closeReservasGiftPanel();
 
-                            // Mostrar feedback de adición de regalo
-                            const feedbackBox = document.getElementById('productCartFeedback');
-                            if (feedbackBox) {
-                                feedbackBox.innerHTML = `✓ SE HA AÑADIDO 1 REGALO DE "${fmt.feedbackName}" PARA "${recipientName.toUpperCase()}" A TU PEDIDO`;
-                                feedbackBox.style.transform = 'scale(1.03)';
-                                feedbackBox.style.color = '#150e02';
-                                setTimeout(() => {
-                                    feedbackBox.style.transform = '';
-                                    feedbackBox.style.color = '#3C332A';
-                                }, 600);
-                            }
-
                             renderReservasGiftsList();
                             updateOrderSummary();
                         }
@@ -8576,10 +8596,19 @@ Menú del Index: Líena 742
 
                             let html = '';
                             gifts.forEach(g => {
+                                const qtyNum = g.qty || 1;
+                                const verb = qtyNum === 1 ? 'SE HA AÑADIDO' : 'SE HAN AÑADIDO';
+                                const cajaWord = qtyNum === 1 ? 'CAJA' : 'CAJAS';
+                                const formatName = (g.formatName || (g.varietyName ? g.varietyName.split(' para "')[0] : g.productName || 'DOXA')).toUpperCase();
+                                const recipientName = (g.recipientName || (g.varietyName && g.varietyName.includes(' para "') ? g.varietyName.split(' para "')[1].replace(/"/g, '') : '')).toUpperCase();
+                                const recipientPart = recipientName ? ` PARA "${recipientName}"` : '';
+
                                 html += `
                                     <div class="res-gift-item-pill">
-                                        <span>🎁 ${g.qty > 1 ? g.qty + 'x ' : ''}${g.varietyName} — ${(g.unitPrice * g.qty).toFixed(2).replace('.', ',')} €</span>
-                                        <button type="button" class="res-gift-item-del-btn" onclick="deleteReservasGift('${g.id}')" title="Eliminar este regalo">🗑️</button>
+                                        <span class="res-gift-feedback-text">${verb} ${qtyNum} ${cajaWord} DE REGALO DE "${formatName}"${recipientPart} A TU PEDIDO</span>
+                                        <button type="button" class="res-gift-item-del-btn" onclick="deleteReservasGift('${g.id}')" title="Eliminar este regalo">
+                                            <img src="Icono papelera.png" alt="Eliminar" class="res-gift-del-icon">
+                                        </button>
                                     </div>
                                 `;
                             });
