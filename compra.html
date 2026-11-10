@@ -2645,13 +2645,13 @@
                                     <!-- DESPLEGABLE DE CAMPOS FISCALES DE EMPRESA / DATOS DISTINTOS -->
                                     <div class="company-billing-box" id="companyBillingBox" style="display: none;">
                                         <div class="form-group" style="margin-bottom: 14px;">
-                                            <label class="form-label" for="billingCompanyName">Razón Social *</label>
+                                            <label class="form-label" for="billingCompanyName">Razón social *</label>
                                             <input type="text" class="form-input" id="billingCompanyName" name="factura_razon_social"
                                                 placeholder="Nombre de la empresa o titular">
                                         </div>
 
                                         <div class="form-group" style="margin-bottom: 14px;">
-                                            <label class="form-label" for="billingAddress">Dirección *</label>
+                                            <label class="form-label" for="billingAddress">Dirección fiscal *</label>
                                             <input type="text" class="form-input" id="billingAddress" name="factura_direccion"
                                                 placeholder="Calle, número, piso o puerta">
                                         </div>
@@ -2670,7 +2670,7 @@
                                         </div>
 
                                         <div class="form-group" style="margin-bottom: 0;">
-                                            <label class="form-label" for="billingEmail">A qué e-mail deseas se envíe la factura:</label>
+                                            <label class="form-label" for="billingEmail">A qué email deseas se envíe la factura</label>
                                             <input type="email" class="form-input" id="billingEmail" name="factura_email"
                                                 placeholder="ejemplo@empresa.com (si difiere del correo principal)">
                                         </div>
@@ -4209,7 +4209,7 @@
                 const bEmail = document.getElementById('billingEmail') ? document.getElementById('billingEmail').value.trim() : '';
 
                 if (!bCompany || !bAddress || !bZip || !bCity) {
-                    alert('Por favor, completa los campos requeridos de facturación (Razón Social, Dirección, CP y Ciudad).');
+                    alert('Por favor, completa los campos requeridos de facturación (Razón Social, Dirección Fiscal, CP y Ciudad).');
                     loadingOverlay.classList.remove('active');
                     setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
                     submitBtn.disabled = false;
