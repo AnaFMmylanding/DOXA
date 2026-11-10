@@ -1851,29 +1851,24 @@ Menú del Index: Líena 742
             }
 
             /* =========================================================================
-               SISTEMA DE CONTRASTE DINÁMICO (LUMINANCIA) PARA RUEDA DE ACTIVOS
-               Adapta automáticamente los colores del texto al fondo (claro u oscuro).
+               SISTEMA DE CONTRASTE DINÁMICO (LUMINANCIA) PARA CABECERA RUEDA DE ACTIVOS
+               Adapta automáticamente el título y subtítulo ("LA ARQUITECTURA DE ACTIVOS")
+               según la foto de fondo sea clara u oscura.
+               La caja de producto de la derecha se mantiene SIEMPRE en negro (#181818)
+               sobre su fondo de yeso claro.
                ========================================================================= */
             .rueda-activos-header .section-title,
-            .rueda-activos-header .section-lead-text,
-            .text-box,
-            .text-box .tagline,
-            .text-box .variety-title,
-            .text-box .hero-value-prop-neg,
-            .text-box .hero-value-prop,
-            .btn-reserva-rueda {
-                transition: color 0.4s ease, text-shadow 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
+            .rueda-activos-header .section-lead-text {
+                transition: color 0.4s ease, text-shadow 0.4s ease;
             }
 
-            /* 1. CABECERA: Fondo OSCURO (Por defecto o detectado) -> Texto Blanco Nítido */
-            .cajas-activos-section .rueda-activos-header .section-title,
+            /* 1. CABECERA: Fondo OSCURO (ej. piel negra) -> Texto Blanco Nítido */
             .cajas-activos-section[data-header-theme="dark"] .rueda-activos-header .section-title,
             .rueda-activos-header[data-bg-theme="dark"] .section-title {
                 color: #FFFFFF !important;
                 text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 3px rgba(0, 0, 0, 0.95) !important;
             }
 
-            .cajas-activos-section .rueda-activos-header .section-lead-text,
             .cajas-activos-section[data-header-theme="dark"] .rueda-activos-header .section-lead-text,
             .rueda-activos-header[data-bg-theme="dark"] .section-lead-text {
                 color: rgba(255, 255, 255, 0.92) !important;
@@ -1893,87 +1888,45 @@ Menú del Index: Líena 742
                 text-shadow: none !important;
             }
 
-            /* 3. CAJA DE TEXTO: Fondo OSCURO -> Texto Blanco */
-            .cajas-activos-section[data-text-theme="dark"] .text-box,
-            .text-box[data-bg-theme="dark"] {
-                color: #FFFFFF !important;
-            }
-
-            .cajas-activos-section[data-text-theme="dark"] .text-box .tagline,
-            .text-box[data-bg-theme="dark"] .tagline {
-                color: rgba(255, 255, 255, 0.80) !important;
-                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6) !important;
-            }
-
-            .cajas-activos-section[data-text-theme="dark"] .text-box .variety-title,
-            .text-box[data-bg-theme="dark"] .variety-title {
-                color: #FFFFFF !important;
-                text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85), 0 0 3px rgba(0, 0, 0, 0.9) !important;
-            }
-
-            .cajas-activos-section[data-text-theme="dark"] .text-box .hero-value-prop-neg,
-            .text-box[data-bg-theme="dark"] .hero-value-prop-neg {
-                color: rgba(255, 255, 255, 0.95) !important;
-                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6) !important;
-            }
-
-            .cajas-activos-section[data-text-theme="dark"] .text-box .hero-value-prop,
-            .text-box[data-bg-theme="dark"] .hero-value-prop {
-                color: rgba(255, 255, 255, 0.88) !important;
-                text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6) !important;
-            }
-
-            .cajas-activos-section[data-text-theme="dark"] .btn-reserva-rueda,
-            .text-box[data-bg-theme="dark"] ~ .rueda-cta-wrapper .btn-reserva-rueda {
-                color: #FFFFFF !important;
-                border-color: rgba(255, 255, 255, 0.8) !important;
-            }
-
-            .cajas-activos-section[data-text-theme="dark"] .btn-reserva-rueda:hover,
-            .text-box[data-bg-theme="dark"] ~ .rueda-cta-wrapper .btn-reserva-rueda:hover {
-                background-color: #FFFFFF !important;
-                color: #181818 !important;
-                border-color: #FFFFFF !important;
-            }
-
-            /* 4. CAJA DE TEXTO: Fondo CLARO -> Texto Oscuro */
-            .cajas-activos-section[data-text-theme="light"] .text-box,
-            .text-box[data-bg-theme="light"] {
+            /* 3. CAJA DE PRODUCTO A LA DERECHA:
+               Reposa sobre el yeso claro (#e6e7e1) y la escultura, por lo que SIEMPRE
+               se muestra en color negro (#181818) con total nitidez */
+            .cajas-activos-section .text-box {
                 color: #181818 !important;
             }
 
-            .cajas-activos-section[data-text-theme="light"] .text-box .tagline,
-            .text-box[data-bg-theme="light"] .tagline {
-                color: rgba(0, 0, 0, 0.45) !important;
+            .cajas-activos-section .text-box .tagline,
+            .cajas-activos-section .text-box h2.tagline,
+            .cajas-activos-section .text-box div.tagline {
+                color: rgba(0, 0, 0, 0.5) !important;
                 text-shadow: none !important;
             }
 
-            .cajas-activos-section[data-text-theme="light"] .text-box .variety-title,
-            .text-box[data-bg-theme="light"] .variety-title {
+            .cajas-activos-section .text-box .variety-title,
+            .cajas-activos-section .text-box .main-title {
                 color: #181818 !important;
                 text-shadow: none !important;
             }
 
-            .cajas-activos-section[data-text-theme="light"] .text-box .hero-value-prop-neg,
-            .text-box[data-bg-theme="light"] .hero-value-prop-neg {
+            .cajas-activos-section .text-box .hero-value-prop-neg {
                 color: #181818 !important;
                 text-shadow: none !important;
             }
 
-            .cajas-activos-section[data-text-theme="light"] .text-box .hero-value-prop,
-            .text-box[data-bg-theme="light"] .hero-value-prop {
-                color: rgba(24, 24, 24, 0.85) !important;
+            .cajas-activos-section .text-box .hero-value-prop {
+                color: rgba(24, 24, 24, 0.88) !important;
                 text-shadow: none !important;
             }
 
-            .cajas-activos-section[data-text-theme="light"] .btn-reserva-rueda,
-            .text-box[data-bg-theme="light"] ~ .rueda-cta-wrapper .btn-reserva-rueda {
+            .cajas-activos-section .btn-reserva-rueda {
                 color: #181818 !important;
-                border-color: #181818 !important;
+                border: 1px solid #181818 !important;
+                background-color: transparent !important;
+                text-shadow: none !important;
             }
 
-            .cajas-activos-section[data-text-theme="light"] .btn-reserva-rueda:hover,
-            .text-box[data-bg-theme="light"] ~ .rueda-cta-wrapper .btn-reserva-rueda:hover {
+            .cajas-activos-section .btn-reserva-rueda:hover,
+            .cajas-activos-section .btn-reserva-rueda:active {
                 background-color: #181818 !important;
                 color: #FFFFFF !important;
                 border-color: #181818 !important;
@@ -2478,31 +2431,14 @@ Menú del Index: Líena 742
                     margin: 0 auto !important;
                 }
 
-                /* Transicion fluida de color para textos adaptativos */
+                /* En móvil la caja de texto se mantiene siempre en negro sobre el fondo de yeso */
                 .text-box .tagline,
                 .text-box h2.tagline,
                 .text-box div.tagline,
                 .text-box .variety-title,
                 .text-box .hero-value-prop-neg {
-                    transition: color 0.45s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.45s cubic-bezier(0.25, 1, 0.5, 1) !important;
-                }
-
-                /* Cabecera adaptativa en blanco para fondos oscuros medidos */
-                .text-box[data-header-theme="light"] .tagline,
-                .text-box[data-header-theme="light"] h2.tagline,
-                .text-box[data-header-theme="light"] div.tagline {
-                    color: rgba(255, 255, 255, 0.85) !important;
-                    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45) !important;
-                }
-
-                .text-box[data-header-theme="light"] .variety-title {
-                    color: #FFFFFF !important;
-                    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.5) !important;
-                }
-
-                .text-box[data-header-theme="light"] .hero-value-prop-neg {
-                    color: rgba(255, 255, 255, 0.95) !important;
-                    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45) !important;
+                    color: #181818 !important;
+                    text-shadow: none !important;
                 }
             }
 
@@ -3651,36 +3587,61 @@ Menú del Index: Líena 742
 
 
             /* =========================================================================
-               SISTEMA AUTOMÁTICO DE DETECCIÓN DE LUMINANCIA PARA FONDOS DE RUEDA DE ACTIVOS
+               SISTEMA AUTOMÁTICO DE DETECCIÓN DE LUMINANCIA PARA CABECERA RUEDA DE ACTIVOS
                Analiza mediante Canvas la imagen de fondo (o mapa de fallback)
-               y adapta el color de cabeceras ("LA ARQUITECTURA DE ACTIVOS") y caja de texto.
+               y adapta exclusivamente el color del título "LA ARQUITECTURA DE ACTIVOS".
+               La caja de producto de la derecha se mantiene SIEMPRE en negro (#181818).
                ========================================================================= */
             const LUMINANCE_CACHE = {};
 
             const KNOWN_BG_THEMES = {
-                'amazona.jpg': { header: 'dark', text: 'light' },
-                'piel negra.jpg': { header: 'dark', text: 'dark' },
-                'pelo y uñas.jpg': { header: 'dark', text: 'dark' },
-                'cabello y uñas.jpg': { header: 'dark', text: 'dark' },
-                'hidratación.jpg': { header: 'dark', text: 'dark' },
-                'claridad mental.jpg': { header: 'dark', text: 'dark' },
-                'energía.jpg': { header: 'dark', text: 'dark' },
-                'articulaciones.jpg': { header: 'dark', text: 'dark' },
-                'creatina _ok.jpg': { header: 'dark', text: 'dark' },
-                'respeto.jpg': { header: 'dark', text: 'dark' }
+                'amazona.jpg': 'dark',
+                'amazona': 'dark',
+                'piel negra.jpg': 'dark',
+                'piel negra': 'dark',
+                'piel%20negra.jpg': 'dark',
+                'pelo y uñas.jpg': 'dark',
+                'pelo y uñas': 'dark',
+                'pelo%20y%20uñas.jpg': 'dark',
+                'cabello y uñas.jpg': 'dark',
+                'cabello y uñas': 'dark',
+                'cabello%20y%20uñas.jpg': 'dark',
+                'hidratación.jpg': 'dark',
+                'hidratación': 'dark',
+                'claridad mental.jpg': 'dark',
+                'claridad mental': 'dark',
+                'claridad%20mental.jpg': 'dark',
+                'energía.jpg': 'dark',
+                'energía': 'dark',
+                'articulaciones.jpg': 'dark',
+                'articulaciones': 'dark',
+                'creatina _ok.jpg': 'dark',
+                'creatina _ok': 'dark',
+                'creatina%20_ok.jpg': 'dark',
+                'respeto.jpg': 'dark',
+                'respeto': 'dark'
             };
 
             function analyzeImageLuminance(url, callback) {
                 if (!url || url === 'none') {
-                    callback({ header: 'light', text: 'light' });
+                    callback('light');
                     return;
                 }
-                const cleanUrl = url.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '').trim();
+                let cleanUrl = url.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '').trim();
+                try {
+                    cleanUrl = decodeURIComponent(cleanUrl);
+                } catch (e) {}
                 const fileName = cleanUrl.split('/').pop().split('\\').pop();
                 const key = fileName.toLowerCase();
 
                 if (LUMINANCE_CACHE[key]) {
                     callback(LUMINANCE_CACHE[key]);
+                    return;
+                }
+
+                if (KNOWN_BG_THEMES[key]) {
+                    LUMINANCE_CACHE[key] = KNOWN_BG_THEMES[key];
+                    callback(KNOWN_BG_THEMES[key]);
                     return;
                 }
 
@@ -3698,34 +3659,15 @@ Menú del Index: Líena 742
                         canvas.height = h;
                         ctx.drawImage(img, 0, 0, w, h);
 
-                        // Muestra 1: Cabecera superior (x: 20% a 80%, y: 0% a 30%)
-                        const hData = ctx.getImageData(Math.floor(w * 0.2), 0, Math.floor(w * 0.6), Math.floor(h * 0.3)).data;
+                        // Muestra: Zona superior donde se sitúa el título "LA ARQUITECTURA DE ACTIVOS" (x: 10% a 90%, y: 0% a 35%)
+                        const hData = ctx.getImageData(Math.floor(w * 0.1), 0, Math.floor(w * 0.8), Math.floor(h * 0.35)).data;
                         let sumH = 0, countH = 0;
                         for (let i = 0; i < hData.length; i += 4) {
-                            sumH += (0.299 * hData[i] + 0.587 * hData[i + 1] + 0.114 * hData[i + 2]) * 0.6;
+                            sumH += (0.299 * hData[i] + 0.587 * hData[i + 1] + 0.114 * hData[i + 2]);
                             countH++;
                         }
                         const avgH = countH > 0 ? sumH / countH : 0;
-
-                        // Muestra 2: Caja de texto (derecha: x: 55% a 95%, y: 25% a 75%)
-                        const isMobile = window.innerWidth <= 768;
-                        const tX = isMobile ? Math.floor(w * 0.15) : Math.floor(w * 0.55);
-                        const tW = isMobile ? Math.floor(w * 0.7) : Math.floor(w * 0.4);
-                        const tY = isMobile ? Math.floor(h * 0.55) : Math.floor(h * 0.25);
-                        const tH = isMobile ? Math.floor(h * 0.4) : Math.floor(h * 0.55);
-
-                        const tData = ctx.getImageData(tX, tY, tW, tH).data;
-                        let sumT = 0, countT = 0;
-                        for (let i = 0; i < tData.length; i += 4) {
-                            sumT += (0.299 * tData[i] + 0.587 * tData[i + 1] + 0.114 * tData[i + 2]) * 0.6;
-                            countT++;
-                        }
-                        const avgT = countT > 0 ? sumT / countT : 0;
-
-                        const result = {
-                            header: avgH < 125 ? 'dark' : 'light',
-                            text: avgT < 125 ? 'dark' : 'light'
-                        };
+                        const result = avgH < 128 ? 'dark' : 'light';
                         LUMINANCE_CACHE[key] = result;
                         callback(result);
                         return;
@@ -3736,12 +3678,9 @@ Menú del Index: Líena 742
                 img.onerror = applyFallback;
 
                 function applyFallback() {
-                    if (KNOWN_BG_THEMES[key]) {
-                        LUMINANCE_CACHE[key] = KNOWN_BG_THEMES[key];
-                        callback(KNOWN_BG_THEMES[key]);
-                    } else {
-                        callback({ header: 'dark', text: 'dark' });
-                    }
+                    const fallbackTheme = KNOWN_BG_THEMES[key] || 'dark';
+                    LUMINANCE_CACHE[key] = fallbackTheme;
+                    callback(fallbackTheme);
                 }
 
                 img.src = cleanUrl;
@@ -3755,15 +3694,18 @@ Menú del Index: Líena 742
                         bgUrl = bgLayer.style.backgroundImage || window.getComputedStyle(bgLayer).backgroundImage || '';
                     }
                 }
-                analyzeImageLuminance(bgUrl, function (theme) {
-                    sectionEl.setAttribute('data-header-theme', theme.header);
-                    sectionEl.setAttribute('data-text-theme', theme.text);
+                analyzeImageLuminance(bgUrl, function (headerTheme) {
+                    sectionEl.setAttribute('data-header-theme', headerTheme);
 
                     const headerEl = sectionEl.querySelector('.rueda-activos-header');
-                    if (headerEl) headerEl.setAttribute('data-bg-theme', theme.header);
+                    if (headerEl) headerEl.setAttribute('data-bg-theme', headerTheme);
 
+                    // Aseguramos que la caja de producto nunca reciba atributos de tema oscuro
                     const textBox = sectionEl.querySelector('.text-box');
-                    if (textBox) textBox.setAttribute('data-bg-theme', theme.text);
+                    if (textBox) {
+                        textBox.removeAttribute('data-bg-theme');
+                        textBox.removeAttribute('data-header-theme');
+                    }
                 });
             }
             window.updateSectionLuminanceTheme = updateSectionLuminanceTheme;
