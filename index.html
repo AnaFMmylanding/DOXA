@@ -82,20 +82,14 @@ Menú del Index: Líena 742
                     if ('scrollRestoration' in history) {
                         history.scrollRestoration = 'manual';
                     }
-                    if (h === '#reservasProductsNav') {
-                        try {
-                            history.replaceState(null, null, window.location.pathname + window.location.search + '#reserva');
-                        } catch(e) {}
-                    }
                     var style = document.createElement('style');
                     style.id = 'reserva-prejump-style';
-                    style.textContent = 'html.direct-reservas body { opacity: 0 !important; visibility: hidden !important; }';
+                    style.textContent = 'html.direct-reservas body { opacity: 0 !important; }';
                     document.head.appendChild(style);
                     setTimeout(function () {
                         var el = document.getElementById('reserva-prejump-style');
                         if (el) el.remove();
                         if (document.body) {
-                            document.body.style.visibility = 'visible';
                             document.body.style.opacity = '1';
                         }
                     }, 800);
@@ -8875,7 +8869,7 @@ Menú del Index: Líena 742
              Aquí se muestran los productos en su caja y unidades finales de compra.
              (Totalmente independiente de las fotos de planos cercanos de "El Sabor").
              ========================================================================= -->
-        <section id="la-coleccion" class="alma-section">
+        <section id="la-coleccion" class="alma-section" style="position: relative;">
             <a id="el-alma" style="position: absolute; top: 0; pointer-events: none;"></a>
             <a id="reserva" style="position: absolute; top: 0; pointer-events: none;"></a>
             <div class="container animate-appear">
@@ -10433,7 +10427,13 @@ Menú del Index: Líena 742
                             const scrollTarget = document.getElementById('reservasProductsNav') || document.getElementById('la-coleccion');
                             if (scrollTarget) {
                                 const topOffset = isMobile ? 70 : 85;
-                                const targetY = scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset;
+                                let el = scrollTarget;
+                                let elemTop = 0;
+                                while (el) {
+                                    elemTop += el.offsetTop || 0;
+                                    el = el.offsetParent;
+                                }
+                                const targetY = elemTop > 0 ? (elemTop - topOffset) : (scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset);
                                 window.scrollTo(0, Math.max(0, targetY));
                             }
 
