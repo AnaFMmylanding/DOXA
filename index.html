@@ -5877,10 +5877,10 @@ Menú del Index: Líena 742
 
                 // 3. Scroll suave hacia la posición exacta de la hoja de producto (miniaturas y opciones de compra)
                 const scrollToBuyPosition = () => {
-                    const scrollTarget = document.getElementById('productThumbsStrip') || document.querySelector('.product-buy-box') || document.getElementById('la-coleccion');
+                    const scrollTarget = document.getElementById('reservasProductsNav') || document.getElementById('productThumbsStrip') || document.querySelector('.product-buy-box') || document.getElementById('la-coleccion');
                     if (scrollTarget) {
                         const isMobile = window.innerWidth <= 768;
-                        const topOffset = isMobile ? 120 : 160;
+                        const topOffset = isMobile ? 70 : 85;
                         const targetY = scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset;
                         window.scrollTo({
                             top: Math.max(0, targetY),
@@ -5955,7 +5955,13 @@ Menú del Index: Líena 742
             function initInitialProductWheel() {
                 const hashProd = getProductFromHash();
                 const activeBtn = document.querySelector(".bbb-submenu-item.active") || document.querySelector(".bbb-submenu-item");
-                const initialProd = hashProd || (activeBtn ? activeBtn.getAttribute("data-product") : "doxa");
+                let urlProd = null;
+                try {
+                    const uParams = new URLSearchParams(window.location.search);
+                    urlProd = uParams.get('producto') || uParams.get('reserva');
+                    if (urlProd === 'bombon') urlProd = 'bbb';
+                } catch(e) {}
+                const initialProd = hashProd || urlProd || (activeBtn ? activeBtn.getAttribute("data-product") : "doxa");
 
                 document.querySelectorAll(".bbb-submenu-item").forEach(b => {
                     if (b.getAttribute("data-product") === initialProd) {
@@ -10264,9 +10270,47 @@ Menú del Index: Líena 742
                             });
                         }
 
-                        // Inicialización: cargar el producto actualmente activo (o DOXA por defecto)
-                        const initialReservasProd = window.currentActiveProduct || (typeof getProductFromHash === 'function' ? getProductFromHash() : null) || 'doxa';
+                        // Inicialización: cargar el producto solicitado en URL (?producto=... o #reserva-...), producto activo o DOXA
+                        let urlTargetProd = null;
+                        try {
+                            const urlParams = new URLSearchParams(window.location.search);
+                            urlTargetProd = urlParams.get('producto') || urlParams.get('reserva');
+                            if (!urlTargetProd && window.location.hash) {
+                                const hMatch = window.location.hash.match(/#reserva-(?:producto-)?([a-z0-9_-]+)/i);
+                                if (hMatch) {
+                                    urlTargetProd = hMatch[1];
+                                }
+                            }
+                            if (urlTargetProd === 'bombon') urlTargetProd = 'bbb';
+                            if (urlTargetProd && !RESERVAS_CATALOG[urlTargetProd]) {
+                                urlTargetProd = null;
+                            }
+                        } catch (e) {}
+
+                        const initialReservasProd = urlTargetProd || window.currentActiveProduct || (typeof getProductFromHash === 'function' ? getProductFromHash() : null) || 'doxa';
                         switchReservasProduct(initialReservasProd);
+
+                        // Si viene específicamente buscando un producto o el apartado de reservas, scroll suave directo al área de compra
+                        if (urlTargetProd || window.location.hash === '#reserva' || window.location.hash === '#la-coleccion') {
+                            const scrollToReserva = () => {
+                                if (typeof window.goToReservasProduct === 'function') {
+                                    window.goToReservasProduct(initialReservasProd);
+                                } else {
+                                    const scrollTarget = document.getElementById('reservasProductsNav') || document.getElementById('productThumbsStrip') || document.querySelector('.product-buy-box') || document.getElementById('la-coleccion');
+                                    if (scrollTarget) {
+                                        const isMobile = window.innerWidth <= 768;
+                                        const topOffset = isMobile ? 70 : 85;
+                                        const targetY = scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset;
+                                        window.scrollTo({
+                                            top: Math.max(0, targetY),
+                                            behavior: 'smooth'
+                                        });
+                                    }
+                                }
+                            };
+                            setTimeout(scrollToReserva, 120);
+                            setTimeout(scrollToReserva, 450);
+                        }
                     })();
                 </script>
 

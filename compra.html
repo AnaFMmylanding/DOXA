@@ -1467,6 +1467,7 @@
             padding: 0;
             transition: all 0.2s ease;
             box-sizing: border-box;
+            text-decoration: none;
         }
 
         .btn-ctrl-icon {
@@ -1478,6 +1479,15 @@
             transition: filter 0.2s ease;
         }
 
+        .btn-ctrl-action svg {
+            width: 15px;
+            height: 15px;
+            stroke: currentColor;
+            display: inline-block;
+            vertical-align: middle;
+            transition: transform 0.2s ease, stroke 0.2s ease;
+        }
+
         .btn-ctrl-action:hover:not(:disabled) {
             background: #150e02;
             color: #FFFFFF;
@@ -1486,6 +1496,11 @@
 
         .btn-ctrl-action:hover:not(:disabled) .btn-ctrl-icon {
             filter: brightness(0) invert(1);
+        }
+
+        .btn-ctrl-action:hover:not(:disabled) svg {
+            stroke: #FFFFFF;
+            transform: translateX(-1.5px);
         }
 
         .btn-ctrl-action.active {
@@ -4309,6 +4324,8 @@
                     });
                 }
 
+                const targetReservasProdId = (prodId === 'bombon') ? 'bbb' : prodId;
+
                 card.innerHTML = `
                     <div class="order-card-inner">
                         <div class="order-product-thumb-wrap" title="${prodInfo.name}">
@@ -4333,6 +4350,12 @@
                             <button type="button" class="btn-ctrl-action" onclick="deleteSelectedLine('${prodId}')" title="Borrar línea" style="font-size: 13px;">
                                 <img src="Icono papelera.png" alt="Borrar" class="btn-ctrl-icon">
                             </button>
+                            <a href="index.html?producto=${targetReservasProdId}#reserva" class="btn-ctrl-action" title="Volver al producto" aria-label="Volver al producto">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                                    <polyline points="12 19 5 12 12 5"></polyline>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                     ${isGiftOpen ? `
