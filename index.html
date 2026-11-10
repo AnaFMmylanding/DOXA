@@ -68,6 +68,36 @@ Menú del Index: Líena 742
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Lato:wght@100;300;400;500;700&display=swap"
         rel="stylesheet">
 
+    <!-- Control de salto directo a Reservas: evita ver la cabecera y el desplazamiento prolongado -->
+    <script>
+        (function () {
+            try {
+                var s = window.location.search || '';
+                var h = window.location.hash || '';
+                var isReserva = s.indexOf('producto=') !== -1 || s.indexOf('reserva=') !== -1 ||
+                    h === '#reserva' || h === '#la-coleccion' || h === '#reservasProductsNav' || h.indexOf('#reserva-') === 0;
+                if (isReserva) {
+                    document.documentElement.style.scrollBehavior = 'auto';
+                    if ('scrollRestoration' in history) {
+                        history.scrollRestoration = 'manual';
+                    }
+                    var style = document.createElement('style');
+                    style.id = 'reserva-prejump-style';
+                    style.textContent = 'body { opacity: 0 !important; visibility: hidden !important; }';
+                    document.head.appendChild(style);
+                    setTimeout(function () {
+                        var el = document.getElementById('reserva-prejump-style');
+                        if (el) el.remove();
+                        if (document.body) {
+                            document.body.style.visibility = 'visible';
+                            document.body.style.opacity = '1';
+                        }
+                    }, 600);
+                }
+            } catch (e) { }
+        })();
+    </script>
+
 
     <style>
         /* =========================================
@@ -109,6 +139,20 @@ Menú del Index: Líena 742
             font-family: 'Lexend', sans-serif;
             scroll-behavior: smooth;
             -webkit-text-size-adjust: 100%;
+        }
+
+        #reservasProductsNav,
+        #la-coleccion,
+        #reserva {
+            scroll-margin-top: 85px;
+        }
+
+        @media (max-width: 768px) {
+            #reservasProductsNav,
+            #la-coleccion,
+            #reserva {
+                scroll-margin-top: 70px;
+            }
         }
 
         body.menu-open {
@@ -10290,26 +10334,37 @@ Menú del Index: Líena 742
                         const initialReservasProd = urlTargetProd || window.currentActiveProduct || (typeof getProductFromHash === 'function' ? getProductFromHash() : null) || 'doxa';
                         switchReservasProduct(initialReservasProd);
 
-                        // Si viene específicamente buscando un producto o el apartado de reservas, scroll suave directo al área de compra
-                        if (urlTargetProd || window.location.hash === '#reserva' || window.location.hash === '#la-coleccion') {
-                            const scrollToReserva = () => {
-                                if (typeof window.goToReservasProduct === 'function') {
-                                    window.goToReservasProduct(initialReservasProd);
-                                } else {
-                                    const scrollTarget = document.getElementById('reservasProductsNav') || document.getElementById('productThumbsStrip') || document.querySelector('.product-buy-box') || document.getElementById('la-coleccion');
-                                    if (scrollTarget) {
-                                        const isMobile = window.innerWidth <= 768;
-                                        const topOffset = isMobile ? 70 : 85;
-                                        const targetY = scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset;
-                                        window.scrollTo({
-                                            top: Math.max(0, targetY),
-                                            behavior: 'smooth'
-                                        });
-                                    }
+                        // Si viene específicamente buscando un producto o el apartado de reservas:
+                        // SALTO DIRECTO E INSTANTÁNEO A LA SECCIÓN DE RESERVAS SIN PASAR POR LA CABECERA
+                        const isReservaIncoming = !!(urlTargetProd || window.location.hash === '#reserva' || window.location.hash === '#la-coleccion' || window.location.hash === '#reservasProductsNav');
+                        if (isReservaIncoming) {
+                            const executeInstantDirectJump = () => {
+                                const isMobile = window.innerWidth <= 768;
+                                const scrollTarget = document.getElementById('reservasProductsNav') || document.getElementById('productThumbsStrip') || document.querySelector('.product-buy-box') || document.getElementById('la-coleccion');
+                                if (scrollTarget) {
+                                    const topOffset = isMobile ? 70 : 85;
+                                    const targetY = scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset;
+                                    window.scrollTo(0, Math.max(0, targetY));
+                                }
+                                // Revelar el contenido ya situado exactamente en la sección
+                                const preStyle = document.getElementById('reserva-prejump-style');
+                                if (preStyle) preStyle.remove();
+                                if (document.body) {
+                                    document.body.style.visibility = 'visible';
+                                    document.body.style.opacity = '1';
                                 }
                             };
-                            setTimeout(scrollToReserva, 120);
-                            setTimeout(scrollToReserva, 450);
+
+                            // Salto inmediato sin retrasos
+                            executeInstantDirectJump();
+                            requestAnimationFrame(executeInstantDirectJump);
+                            setTimeout(executeInstantDirectJump, 50);
+                            setTimeout(executeInstantDirectJump, 150);
+                            setTimeout(executeInstantDirectJump, 300);
+                            setTimeout(() => {
+                                // Restaurar scroll suave para navegación interna habitual tras haber aterrizado
+                                document.documentElement.style.scrollBehavior = '';
+                            }, 450);
                         }
                     })();
                 </script>
