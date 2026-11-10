@@ -888,10 +888,10 @@
         }
 
         .form-title .form-title-sub {
-            font-size: 11.5px;
+            font-size: 13px;
             font-weight: 300;
             letter-spacing: 1.5px;
-            opacity: 0.72;
+            opacity: 0.75;
             text-transform: uppercase;
             display: inline-block;
             margin-left: 6px;
@@ -2444,7 +2444,7 @@
 
                     <!-- COLUMNA DERECHA: TUS DATOS (COMPRADOR Y FACTURACIÓN) -->
                     <div class="form-column" id="checkoutFormColumn">
-                            <h3 class="form-title">Tus datos. <span class="form-title-sub">Comprador y facturación</span></h3>
+                            <h3 class="form-title">Tus datos <span class="form-title-sub">(Comprador y facturación)</span></h3>
                             <p id="buyerAddressNote"
                                 style="font-size: 11px; opacity: 0.75; margin-top: -18px; margin-bottom: 22px; line-height: 1.4;">
                                 Tus cajas personales se enviarán a esta dirección. Los pedidos para regalo se enviarán
@@ -3448,7 +3448,6 @@
                                 <img src="Icono papelera.png" alt="Borrar" class="btn-ctrl-icon">
                             </button>
                         </div>
-                        ${!isGiftOpen ? '<span class="order-actions-help">*Para modificar cantidad o borrar, selecciona la línea y pulsa el botón</span>' : ''}
                     </div>
                     ${isGiftOpen ? `
                         <div class="order-card-gift-panel">
