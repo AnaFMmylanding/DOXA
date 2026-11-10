@@ -151,6 +151,19 @@ const server = http.createServer(async (req, res) => {
                     stripeParams.append('metadata[total_regalos]', (data.giftOrders ? data.giftOrders.length : 0).toString());
                 }
 
+                // Datos de facturación (personal o empresa / datos fiscales distintos)
+                if (data.billing && data.billing.isCompany) {
+                    stripeParams.append('metadata[factura_tipo]', 'Empresa / Datos fiscales diferentes');
+                    stripeParams.append('metadata[factura_razon_social]', (data.billing.companyName || '').substring(0, 100));
+                    stripeParams.append('metadata[factura_cif_nif]', (data.billing.nif || '').substring(0, 50));
+                    stripeParams.append('metadata[factura_domicilio]', `${data.billing.address || ''}, ${data.billing.zip || ''} ${data.billing.city || ''}`.substring(0, 200));
+                    if (data.billing.email) {
+                        stripeParams.append('metadata[factura_email]', data.billing.email.substring(0, 100));
+                    }
+                } else {
+                    stripeParams.append('metadata[factura_tipo]', 'Particular / Datos personales');
+                }
+
                 // Llamada a la API de Stripe
                 const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {
                     method: 'POST',

@@ -934,6 +934,130 @@
             background-color: #FFFFFF;
         }
 
+        /* Sección y Selector de Tipo de Facturación (Personal vs Empresa/Datos Distintos) */
+        .billing-section {
+            margin-top: 26px;
+            margin-bottom: 22px;
+            border-top: 1px solid rgba(60, 51, 42, 0.12);
+            padding-top: 22px;
+        }
+
+        .billing-type-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+
+        .billing-type-card {
+            position: relative;
+            cursor: pointer;
+            padding: 12px 14px;
+            border: 1px solid rgba(60, 51, 42, 0.2);
+            background-color: var(--yeso-claro);
+            border-radius: 4px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            transition: all 0.22s ease;
+            user-select: none;
+        }
+
+        .billing-type-card:hover {
+            border-color: rgba(60, 51, 42, 0.5);
+            background-color: #fafbf7;
+        }
+
+        .billing-type-card.active {
+            border-color: #181818;
+            background-color: #FFFFFF;
+            box-shadow: 0 3px 12px rgba(60, 51, 42, 0.08);
+        }
+
+        .billing-type-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            width: 0;
+            height: 0;
+        }
+
+        .billing-radio-circle {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(60, 51, 42, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: all 0.2s ease;
+            background: #FFFFFF;
+        }
+
+        .billing-type-card.active .billing-radio-circle {
+            border-color: #181818;
+        }
+
+        .billing-type-card.active .billing-radio-circle::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #181818;
+        }
+
+        .billing-type-label-box {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .billing-type-name {
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            line-height: 1.25;
+        }
+
+        .billing-type-desc {
+            font-size: 10.5px;
+            opacity: 0.72;
+            line-height: 1.3;
+            color: var(--text-dark);
+        }
+
+        .company-billing-box {
+            margin-top: 16px;
+            padding: 18px 16px;
+            background-color: rgba(241, 242, 236, 0.85);
+            border: 1px solid rgba(60, 51, 42, 0.16);
+            border-radius: 4px;
+            animation: fadeInBilling 0.28s ease-out;
+        }
+
+        @keyframes fadeInBilling {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .billing-type-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+
         /* Estilo del Botón de Pago igual al de Index (.btn-jotform) */
         .btn-checkout {
             display: inline-block;
@@ -2490,6 +2614,75 @@
                                     </div>
                                 </div>
 
+                                <!-- SECCIÓN DE FACTURACIÓN: DATOS PERSONALES O EMPRESA / DATOS FISCALES DISTINTOS -->
+                                <div class="billing-section">
+                                    <label class="form-label" style="font-weight: 600; letter-spacing: 1px; margin-bottom: 6px;">
+                                        Facturación: ¿A qué datos emitir la factura? *
+                                    </label>
+
+                                    <div class="billing-type-grid">
+                                        <!-- OPCIÓN 1: DATOS PERSONALES -->
+                                        <label class="billing-type-card active" id="billingCardPersonal" onclick="setBillingType('personal')">
+                                            <input type="radio" name="tipo_facturacion" value="personal" id="radioBillingPersonal" checked>
+                                            <span class="billing-radio-circle"></span>
+                                            <span class="billing-type-label-box">
+                                                <span class="billing-type-name">Datos personales</span>
+                                                <span class="billing-type-desc">Emitir con el nombre y dirección indicados arriba</span>
+                                            </span>
+                                        </label>
+
+                                        <!-- OPCIÓN 2: EMPRESA O DATOS DISTINTOS -->
+                                        <label class="billing-type-card" id="billingCardCompany" onclick="setBillingType('empresa')">
+                                            <input type="radio" name="tipo_facturacion" value="empresa" id="radioBillingCompany">
+                                            <span class="billing-radio-circle"></span>
+                                            <span class="billing-type-label-box">
+                                                <span class="billing-type-name">Datos de empresa</span>
+                                                <span class="billing-type-desc">Facturar a CIF / NIF y razón social distinta</span>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <!-- DESPLEGABLE DE CAMPOS FISCALES DE EMPRESA / DATOS DISTINTOS -->
+                                    <div class="company-billing-box" id="companyBillingBox" style="display: none;">
+                                        <div class="form-group" style="margin-bottom: 14px;">
+                                            <label class="form-label" for="billingCompanyName">Razón Social / Nombre de Empresa *</label>
+                                            <input type="text" class="form-input" id="billingCompanyName" name="factura_razon_social"
+                                                placeholder="Ej: Mi Empresa S.L. o Nombre del titular">
+                                        </div>
+
+                                        <div class="form-group" style="margin-bottom: 14px;">
+                                            <label class="form-label" for="billingCif">CIF / NIF / NIE *</label>
+                                            <input type="text" class="form-input" id="billingCif" name="factura_cif"
+                                                placeholder="Ej: B12345678 o 12345678Z">
+                                        </div>
+
+                                        <div class="form-group" style="margin-bottom: 14px;">
+                                            <label class="form-label" for="billingAddress">Dirección Fiscal *</label>
+                                            <input type="text" class="form-input" id="billingAddress" name="factura_direccion"
+                                                placeholder="Calle, número, piso o puerta fiscal">
+                                        </div>
+
+                                        <div class="form-row" style="margin-bottom: 14px;">
+                                            <div class="form-group" style="margin-bottom: 0;">
+                                                <label class="form-label" for="billingZip">Código Postal Fiscal *</label>
+                                                <input type="text" class="form-input" id="billingZip" name="factura_codigo_postal"
+                                                    placeholder="CP fiscal">
+                                            </div>
+                                            <div class="form-group" style="margin-bottom: 0;">
+                                                <label class="form-label" for="billingCity">Ciudad Fiscal *</label>
+                                                <input type="text" class="form-input" id="billingCity" name="factura_ciudad"
+                                                    placeholder="Ciudad fiscal">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-bottom: 0;">
+                                            <label class="form-label" for="billingEmail">Email para Facturas (Opcional)</label>
+                                            <input type="email" class="form-input" id="billingEmail" name="factura_email"
+                                                placeholder="facturas@empresa.com (si difiere del email de contacto)">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Botón de Pago Negro igual a .btn-jotform -->
                                 <button type="submit" class="btn-checkout" id="submitBtn">
                                     Pagar Pedido
@@ -3930,6 +4123,42 @@
             } catch(e) {}
         })();
 
+        // --- GESTIÓN DE TIPO DE FACTURACIÓN (PERSONAL VS EMPRESA / DATOS FISCALES DISTINTOS) ---
+        function setBillingType(type) {
+            const radioPersonal = document.getElementById('radioBillingPersonal');
+            const radioCompany = document.getElementById('radioBillingCompany');
+            const cardPersonal = document.getElementById('billingCardPersonal');
+            const cardCompany = document.getElementById('billingCardCompany');
+            const box = document.getElementById('companyBillingBox');
+
+            const companyInputs = [
+                document.getElementById('billingCompanyName'),
+                document.getElementById('billingCif'),
+                document.getElementById('billingAddress'),
+                document.getElementById('billingZip'),
+                document.getElementById('billingCity')
+            ];
+
+            if (type === 'empresa') {
+                if (radioCompany) radioCompany.checked = true;
+                if (cardCompany) cardCompany.classList.add('active');
+                if (cardPersonal) cardPersonal.classList.remove('active');
+                if (box) box.style.display = 'block';
+                companyInputs.forEach(inp => {
+                    if (inp) inp.required = true;
+                });
+            } else {
+                if (radioPersonal) radioPersonal.checked = true;
+                if (cardPersonal) cardPersonal.classList.add('active');
+                if (cardCompany) cardCompany.classList.remove('active');
+                if (box) box.style.display = 'none';
+                companyInputs.forEach(inp => {
+                    if (inp) inp.required = false;
+                });
+            }
+        }
+        window.setBillingType = setBillingType;
+
         // --- PROCESAMIENTO DE PAGO MEDIANTE STRIPE CHECKOUT ---
         const STRIPE_ENDPOINT = '/api/create-checkout-session';
 
@@ -3965,6 +4194,43 @@
             const address = document.getElementById('addressInput').value.trim();
             const zip = document.getElementById('zipInput').value.trim();
             const city = document.getElementById('cityInput').value.trim();
+
+            // Obtener datos de facturación (personal o empresa/datos fiscales diferentes)
+            const isCompanyBilling = document.getElementById('radioBillingCompany') && document.getElementById('radioBillingCompany').checked;
+            let billingInfo = {
+                type: isCompanyBilling ? 'empresa' : 'personal',
+                isCompany: isCompanyBilling,
+                companyName: name,
+                nif: '',
+                address: address,
+                zip: zip,
+                city: city,
+                email: email
+            };
+
+            if (isCompanyBilling) {
+                const bCompany = document.getElementById('billingCompanyName') ? document.getElementById('billingCompanyName').value.trim() : '';
+                const bCif = document.getElementById('billingCif') ? document.getElementById('billingCif').value.trim() : '';
+                const bAddress = document.getElementById('billingAddress') ? document.getElementById('billingAddress').value.trim() : '';
+                const bZip = document.getElementById('billingZip') ? document.getElementById('billingZip').value.trim() : '';
+                const bCity = document.getElementById('billingCity') ? document.getElementById('billingCity').value.trim() : '';
+                const bEmail = document.getElementById('billingEmail') ? document.getElementById('billingEmail').value.trim() : '';
+
+                if (!bCompany || !bCif || !bAddress || !bZip || !bCity) {
+                    alert('Por favor, completa los campos requeridos de facturación para la empresa (Razón Social, CIF/NIF, Dirección Fiscal, Código Postal y Ciudad).');
+                    loadingOverlay.classList.remove('active');
+                    setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                billingInfo.companyName = bCompany;
+                billingInfo.nif = bCif;
+                billingInfo.address = bAddress;
+                billingInfo.zip = bZip;
+                billingInfo.city = bCity;
+                billingInfo.email = bEmail || email;
+            }
 
             const config = getShopConfig();
             const baseShipping = parseFloat(config.shippingCost) || 6.00;
@@ -4016,7 +4282,8 @@
                     address: address,
                     zip: zip,
                     city: city
-                }
+                },
+                billing: billingInfo
             };
 
             try {
