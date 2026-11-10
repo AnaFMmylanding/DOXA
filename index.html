@@ -8475,11 +8475,29 @@ Menú del Index: Líena 742
                 }
 
                 .reservas-products-nav {
-                    justify-content: flex-start;
-                    gap: 12px;
-                    padding: 6px 12px;
-                    margin: 0 auto 26px auto;
-                    -webkit-overflow-scrolling: touch;
+                    display: flex !important;
+                    justify-content: flex-start !important;
+                    align-items: flex-start !important;
+                    gap: 12px !important;
+                    padding: 8px 16px !important;
+                    margin: 0 -16px 26px -16px !important;
+                    width: calc(100% + 32px) !important;
+                    max-width: calc(100% + 32px) !important;
+                    box-sizing: border-box !important;
+                    overflow-x: auto !important;
+                    overflow-y: hidden !important;
+                    -webkit-overflow-scrolling: touch !important;
+                    touch-action: pan-x !important;
+                    overscroll-behavior-x: contain !important;
+                    scroll-behavior: smooth !important;
+                    scrollbar-width: none !important;
+                    cursor: grab;
+                    user-select: none;
+                    -webkit-user-select: none;
+                }
+
+                .reservas-products-nav::-webkit-scrollbar {
+                    display: none !important;
                 }
 
                 .reservas-nav-item {
@@ -8487,6 +8505,8 @@ Menú del Index: Líena 742
                     gap: 6px;
                     min-width: 58px;
                     max-width: 68px;
+                    flex-shrink: 0 !important;
+                    touch-action: pan-x !important;
                 }
 
                 .reservas-nav-thumb-wrap {
@@ -9848,6 +9868,20 @@ Menú del Index: Líena 742
                                     }
                                 });
 
+                                // Centrar suavemente el producto seleccionado en el menú horizontal (móvil y desktop) sin mover la página
+                                const activeNavItem = document.querySelector(`#reservasProductsNav .reservas-nav-item[data-product="${productId}"]`);
+                                const navContainer = document.getElementById('reservasProductsNav');
+                                if (activeNavItem && navContainer) {
+                                    const itemRect = activeNavItem.getBoundingClientRect();
+                                    const navRect = navContainer.getBoundingClientRect();
+                                    const offset = itemRect.left - navRect.left + navContainer.scrollLeft;
+                                    const targetScroll = offset - (navContainer.clientWidth / 2) + (itemRect.width / 2);
+                                    navContainer.scrollTo({
+                                        left: Math.max(0, targetScroll),
+                                        behavior: 'smooth'
+                                    });
+                                }
+
                                 // Mantener sincronizadas también Rueda y El Sabor en segundo plano
                                 const wheels = document.querySelectorAll(".product-wheel");
                                 wheels.forEach(sec => {
@@ -10077,6 +10111,75 @@ Menú del Index: Líena 742
                             });
                         }
 
+                        // Deslizamiento táctil suave (swipe izquierda/derecha) y con ratón en el menú de Reservas
+                        function setupReservasNavDrag() {
+                            const nav = document.getElementById('reservasProductsNav');
+                            if (!nav || nav._hasDragListener) return;
+                            nav._hasDragListener = true;
+
+                            let isDown = false;
+                            let startX = 0;
+                            let scrollLeft = 0;
+                            let hasMoved = false;
+
+                            // Deslizamiento con el dedo de izquierda a derecha (touch en móvil)
+                            nav.addEventListener('touchstart', (e) => {
+                                isDown = true;
+                                hasMoved = false;
+                                startX = e.touches[0].pageX - nav.offsetLeft;
+                                scrollLeft = nav.scrollLeft;
+                            }, { passive: true });
+
+                            nav.addEventListener('touchmove', (e) => {
+                                if (!isDown) return;
+                                const x = e.touches[0].pageX - nav.offsetLeft;
+                                const walk = (x - startX);
+                                if (Math.abs(walk) > 4) {
+                                    hasMoved = true;
+                                    nav.scrollLeft = scrollLeft - walk;
+                                }
+                            }, { passive: true });
+
+                            nav.addEventListener('touchend', () => {
+                                isDown = false;
+                            }, { passive: true });
+
+                            // Deslizamiento con ratón (desktop)
+                            nav.addEventListener('mousedown', (e) => {
+                                isDown = true;
+                                hasMoved = false;
+                                nav.style.cursor = 'grabbing';
+                                startX = e.pageX - nav.offsetLeft;
+                                scrollLeft = nav.scrollLeft;
+                            });
+
+                            window.addEventListener('mousemove', (e) => {
+                                if (!isDown) return;
+                                const x = e.pageX - nav.offsetLeft;
+                                const walk = (x - startX);
+                                if (Math.abs(walk) > 4) {
+                                    hasMoved = true;
+                                    nav.scrollLeft = scrollLeft - walk;
+                                }
+                            });
+
+                            window.addEventListener('mouseup', () => {
+                                if (!isDown) return;
+                                isDown = false;
+                                nav.style.cursor = 'grab';
+                            });
+
+                            // Evitar activación accidental de selección si el usuario estaba deslizando
+                            nav.addEventListener('click', (e) => {
+                                if (hasMoved) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    e.stopImmediatePropagation();
+                                    hasMoved = false;
+                                }
+                            }, true);
+                        }
+
                         // Vinculación directa y robusta de eventos de clic a los botones de productos en Reservas
                         function bindReservasNavEvents() {
                             const navItems = document.querySelectorAll('#reservasProductsNav .reservas-nav-item');
@@ -10091,8 +10194,12 @@ Menú del Index: Líena 742
                             });
                         }
                         bindReservasNavEvents();
+                        setupReservasNavDrag();
                         if (document.readyState === 'loading') {
-                            document.addEventListener('DOMContentLoaded', bindReservasNavEvents);
+                            document.addEventListener('DOMContentLoaded', () => {
+                                bindReservasNavEvents();
+                                setupReservasNavDrag();
+                            });
                         }
 
                         // Inicialización: cargar el producto actualmente activo (o DOXA por defecto)
