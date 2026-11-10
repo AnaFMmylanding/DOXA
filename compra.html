@@ -2503,6 +2503,294 @@
             border-color: #3C332A;
             color: #150e02;
         }
+
+        /* ============================================================
+           SECCIÓN DE MÉTODOS DE PAGO (ESTILO TO'AK / SHOPIFY LUXURY)
+           ============================================================ */
+        .payment-methods-section {
+            margin-top: 32px;
+            margin-bottom: 22px;
+            border-top: 1px solid rgba(60, 51, 42, 0.12);
+            padding-top: 24px;
+        }
+
+        .payment-section-header {
+            margin-bottom: 14px;
+        }
+
+        .payment-section-title {
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #1e1a16;
+            margin: 0 0 4px 0;
+        }
+
+        .payment-section-subtitle {
+            font-size: 12px;
+            color: rgba(60, 51, 42, 0.7);
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .payment-accordion {
+            border: 1px solid rgba(60, 51, 42, 0.22);
+            border-radius: 4px;
+            background-color: #FFFFFF;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(60, 51, 42, 0.04);
+        }
+
+        .payment-option-card {
+            border-bottom: 1px solid rgba(60, 51, 42, 0.15);
+            transition: background-color 0.2s ease;
+        }
+
+        .payment-option-card:last-child {
+            border-bottom: none;
+        }
+
+        .payment-option-card.active {
+            background-color: #FAF9F6;
+        }
+
+        .payment-option-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 18px;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .payment-option-header:hover {
+            background-color: rgba(60, 51, 42, 0.03);
+        }
+
+        .payment-option-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .payment-option-left input[type="radio"] {
+            display: none;
+        }
+
+        .custom-radio {
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid rgba(60, 51, 42, 0.45);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+            background-color: #FFFFFF;
+        }
+
+        .payment-option-card.active .custom-radio {
+            border-color: #1e1a16;
+        }
+
+        .payment-option-card.active .custom-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: #1e1a16;
+            border-radius: 50%;
+        }
+
+        .payment-option-name {
+            font-family: 'Lato', sans-serif;
+            font-size: 13.5px;
+            font-weight: 500;
+            color: #1e1a16;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .payment-card-logos {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .payment-badge-icon,
+        .payment-badge-bizum {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.06));
+        }
+
+        .payment-option-body {
+            padding: 16px 18px 20px 18px;
+            border-top: 1px solid rgba(60, 51, 42, 0.12);
+            background-color: #FAF9F6;
+            animation: fadeInBody 0.25s ease-out;
+        }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-inputs-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .input-icon-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon-wrapper .form-input {
+            padding-right: 38px;
+        }
+
+        .input-inline-icon {
+            position: absolute;
+            right: 12px;
+            color: rgba(60, 51, 42, 0.45);
+            display: flex;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .card-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 0;
+        }
+
+        /* Bizum panel styling */
+        .bizum-panel-content {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .bizum-instruction {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            background-color: rgba(0, 165, 168, 0.08);
+            border: 1px solid rgba(0, 165, 168, 0.25);
+            border-radius: 4px;
+        }
+
+        .bizum-icon-circle {
+            color: #00A5A8;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .bizum-instruction-text {
+            font-size: 12px;
+            line-height: 1.45;
+            color: #1e1a16;
+        }
+
+        .bizum-instruction-text strong {
+            display: block;
+            margin-bottom: 2px;
+            color: #007A7C;
+        }
+
+        .bizum-instruction-text p {
+            margin: 0;
+            color: rgba(30, 26, 22, 0.85);
+        }
+
+        .wallet-instruction-text {
+            font-size: 12.5px;
+            line-height: 1.5;
+            color: rgba(60, 51, 42, 0.85);
+            margin: 0;
+        }
+
+        /* ============================================================
+           TARJETA "GUARDA MI INFORMACIÓN" (ESTILO TO'AK)
+           ============================================================ */
+        .save-info-card {
+            margin-top: 18px;
+            margin-bottom: 26px;
+            padding: 16px 18px;
+            background-color: #FFFFFF;
+            border: 1px solid rgba(60, 51, 42, 0.2);
+            border-radius: 4px;
+            box-shadow: 0 1px 4px rgba(60, 51, 42, 0.03);
+            transition: all 0.2s ease;
+        }
+
+        .save-info-card:hover {
+            border-color: rgba(60, 51, 42, 0.4);
+        }
+
+        .save-info-checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .save-info-checkbox-row input[type="checkbox"] {
+            display: none;
+        }
+
+        .custom-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid rgba(60, 51, 42, 0.45);
+            border-radius: 3px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background-color: #FFFFFF;
+            transition: all 0.2s ease;
+        }
+
+        .save-info-checkbox-row input[type="checkbox"]:checked + .custom-checkbox {
+            background-color: #1e1a16;
+            border-color: #1e1a16;
+        }
+
+        .save-info-checkbox-row input[type="checkbox"]:checked + .custom-checkbox::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            border: solid #FFFFFF;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            margin-bottom: 2px;
+        }
+
+        .save-info-title {
+            font-family: 'Lato', sans-serif;
+            font-size: 13.5px;
+            font-weight: 500;
+            color: #1e1a16;
+        }
+
+        .save-info-desc {
+            font-size: 11.5px;
+            line-height: 1.45;
+            color: rgba(60, 51, 42, 0.65);
+            margin: 6px 0 0 28px;
+        }
     </style>
 </head>
 
@@ -2677,9 +2965,212 @@
                                     </div>
                                 </div>
 
-                                <!-- Botón de Pago Negro igual a .btn-jotform -->
+                                <!-- ============================================================
+                                     SECCIÓN DE FORMAS DE PAGO (INSPIRADA EN TO'AK / SHOPIFY LUXURY)
+                                     ============================================================ -->
+                                <div class="payment-methods-section" id="paymentMethodsSection">
+                                    <div class="payment-section-header">
+                                        <h4 class="payment-section-title">Forma de pago</h4>
+                                        <p class="payment-section-subtitle">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 5px; vertical-align: -1px;">
+                                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                            </svg>
+                                            Todas las transacciones son seguras y están cifradas con Stripe.
+                                        </p>
+                                    </div>
+
+                                    <div class="payment-accordion" id="paymentAccordion">
+
+                                        <!-- OPCIÓN 1: TARJETA DE CRÉDITO O DÉBITO -->
+                                        <div class="payment-option-card active" id="cardOptionTarjeta">
+                                            <div class="payment-option-header" onclick="selectPaymentMethod('tarjeta')">
+                                                <div class="payment-option-left">
+                                                    <input type="radio" name="metodo_pago" value="tarjeta" id="radioPaymentTarjeta" checked>
+                                                    <span class="custom-radio"></span>
+                                                    <label for="radioPaymentTarjeta" class="payment-option-name">Tarjeta de crédito o débito</label>
+                                                </div>
+                                                <div class="payment-card-logos">
+                                                    <!-- VISA -->
+                                                    <span class="payment-badge-icon" title="Visa">
+                                                        <svg width="34" height="22" viewBox="0 0 38 24" fill="none">
+                                                            <rect width="38" height="24" rx="3" fill="#FFFFFF" stroke="#E0DCD6"/>
+                                                            <path d="M15.4 16.5H13.2L14.6 7.5H16.8L15.4 16.5Z" fill="#1A1F71"/>
+                                                            <path d="M22.5 7.7C22 7.5 21.3 7.3 20.4 7.3C18.1 7.3 16.5 8.5 16.5 10.2C16.5 11.5 17.6 12.2 18.5 12.6C19.4 13.1 19.7 13.4 19.7 13.8C19.7 14.4 19 14.7 18.3 14.7C17.4 14.7 16.8 14.5 16.1 14.2L15.8 14L15.5 16C16.1 16.3 17.2 16.5 18.2 16.5C20.6 16.5 22.2 15.3 22.2 13.5C22.2 12.4 21.5 11.6 20.1 10.9C19.3 10.5 18.8 10.2 18.8 9.7C18.8 9.3 19.3 8.9 20.2 8.9C21 8.9 21.6 9.1 22.1 9.3L22.3 9.4L22.5 7.7Z" fill="#1A1F71"/>
+                                                            <path d="M25.7 13.3C25.9 12.8 26.7 10.6 26.7 10.6C26.7 10.6 26.9 10.1 27 9.7L27.2 10.6C27.2 10.6 27.7 12.8 27.8 13.3H25.7ZM29.2 16.5H31.1L29.4 7.5H27.7C27.3 7.5 27 7.7 26.8 8.1L22.9 16.5H25.2L25.7 15.1H28.4L28.7 16.5H29.2Z" fill="#1A1F71"/>
+                                                            <path d="M11.6 7.5H9.5C9 7.5 8.6 7.7 8.4 8.1L5 16.5H7.3L7.8 15.1H10.6C10.7 15.6 11 16.5 11 16.5H13.2L11.6 7.5Z" fill="#1A1F71"/>
+                                                            <path d="M8.3 13.6L9.3 8.8C9.3 8.8 9.1 8.2 8.4 8.2H6.2L8.3 13.6Z" fill="#F7B600"/>
+                                                        </svg>
+                                                    </span>
+                                                    <!-- MASTERCARD -->
+                                                    <span class="payment-badge-icon" title="Mastercard">
+                                                        <svg width="34" height="22" viewBox="0 0 38 24" fill="none">
+                                                            <rect width="38" height="24" rx="3" fill="#FFFFFF" stroke="#E0DCD6"/>
+                                                            <circle cx="15" cy="12" r="6.5" fill="#EB001B"/>
+                                                            <circle cx="23" cy="12" r="6.5" fill="#F79E1B"/>
+                                                            <path d="M19 7.4A6.47 6.47 0 0 0 16.5 12 6.47 6.47 0 0 0 19 16.6 6.47 6.47 0 0 0 21.5 12 6.47 6.47 0 0 0 19 7.4Z" fill="#FF5F00"/>
+                                                        </svg>
+                                                    </span>
+                                                    <!-- AMEX -->
+                                                    <span class="payment-badge-icon" title="American Express">
+                                                        <svg width="34" height="22" viewBox="0 0 38 24" fill="none">
+                                                            <rect width="38" height="24" rx="3" fill="#0077A6"/>
+                                                            <path d="M6 14.5L8.5 9.5H11.5L14 14.5H11.8L11.4 13.5H8.6L8.2 14.5H6ZM9.2 12H10.8L10 10.4L9.2 12Z" fill="#FFFFFF"/>
+                                                            <path d="M14 9.5H16.2L17.8 12.3L19.4 9.5H21.6V14.5H19.7V11.5L18.3 13.9H17.3L15.9 11.5V14.5H14V9.5Z" fill="#FFFFFF"/>
+                                                            <path d="M22.5 9.5H27.5V10.9H24.3V11.3H27V12.6H24.3V13.1H27.5V14.5H22.5V9.5Z" fill="#FFFFFF"/>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <!-- CAMPOS DE LA TARJETA -->
+                                            <div class="payment-option-body" id="bodyPaymentTarjeta">
+                                                <div class="card-inputs-grid">
+                                                    <!-- NÚMERO DE TARJETA -->
+                                                    <div class="form-group field-card-number">
+                                                        <label class="form-label" for="cardNumberInput">Número de tarjeta *</label>
+                                                        <div class="input-icon-wrapper">
+                                                            <input type="text" class="form-input" id="cardNumberInput" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number">
+                                                            <span class="input-inline-icon">
+                                                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- FECHA CADUCIDAD Y CVC -->
+                                                    <div class="form-row card-row-2">
+                                                        <div class="form-group" style="margin-bottom: 0;">
+                                                            <label class="form-label" for="cardExpInput">Caducidad (MM / AA) *</label>
+                                                            <input type="text" class="form-input" id="cardExpInput" placeholder="MM / AA" maxlength="7" autocomplete="cc-exp">
+                                                        </div>
+                                                        <div class="form-group" style="margin-bottom: 0;">
+                                                            <label class="form-label" for="cardCvcInput">Código de seguridad *</label>
+                                                            <div class="input-icon-wrapper">
+                                                                <input type="text" class="form-input" id="cardCvcInput" placeholder="CVC" maxlength="4" autocomplete="cc-csc">
+                                                                <span class="input-inline-icon" title="Código de 3 o 4 dígitos al dorso de tu tarjeta">
+                                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                                                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                                                    </svg>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- NOMBRE EN LA TARJETA -->
+                                                    <div class="form-group" style="margin-bottom: 0;">
+                                                        <label class="form-label" for="cardHolderInput">Nombre en la tarjeta *</label>
+                                                        <input type="text" class="form-input" id="cardHolderInput" placeholder="Nombre completo tal como aparece en la tarjeta" autocomplete="cc-name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- OPCIÓN 2: BIZUM -->
+                                        <div class="payment-option-card" id="cardOptionBizum">
+                                            <div class="payment-option-header" onclick="selectPaymentMethod('bizum')">
+                                                <div class="payment-option-left">
+                                                    <input type="radio" name="metodo_pago" value="bizum" id="radioPaymentBizum">
+                                                    <span class="custom-radio"></span>
+                                                    <label for="radioPaymentBizum" class="payment-option-name">Bizum</label>
+                                                </div>
+                                                <div class="payment-card-logos">
+                                                    <!-- LOGO BIZUM -->
+                                                    <span class="payment-badge-bizum" title="Bizum">
+                                                        <svg width="48" height="22" viewBox="0 0 60 26" fill="none">
+                                                            <rect width="60" height="26" rx="4" fill="#00A5A8"/>
+                                                            <text x="30" y="17" font-family="'Lexend', 'Lato', sans-serif" font-weight="700" font-size="12" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">bizum</text>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="payment-option-body" id="bodyPaymentBizum" style="display: none;">
+                                                <div class="bizum-panel-content">
+                                                    <div class="bizum-instruction">
+                                                        <div class="bizum-icon-circle">
+                                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div class="bizum-instruction-text">
+                                                            <strong>Pago instantáneo por Bizum:</strong>
+                                                            <p>Introduce tu número de teléfono asociado a Bizum. Al hacer clic en <em>«Pagar ahora»</em>, autorizarás la solicitud directamente desde la app de tu banco.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="margin-bottom: 0;">
+                                                        <label class="form-label" for="bizumPhoneInput">Teléfono registrado en Bizum *</label>
+                                                        <input type="tel" class="form-input" id="bizumPhoneInput" placeholder="+34 600 000 000">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- OPCIÓN 3: APPLE PAY / GOOGLE PAY -->
+                                        <div class="payment-option-card" id="cardOptionWallet">
+                                            <div class="payment-option-header" onclick="selectPaymentMethod('wallet')">
+                                                <div class="payment-option-left">
+                                                    <input type="radio" name="metodo_pago" value="wallet" id="radioPaymentWallet">
+                                                    <span class="custom-radio"></span>
+                                                    <label for="radioPaymentWallet" class="payment-option-name">Apple Pay / Google Pay</label>
+                                                </div>
+                                                <div class="payment-card-logos">
+                                                    <!-- APPLE PAY -->
+                                                    <span class="payment-badge-icon" title="Apple Pay">
+                                                        <svg width="34" height="22" viewBox="0 0 38 24" fill="none">
+                                                            <rect width="38" height="24" rx="3" fill="#000000"/>
+                                                            <path d="M13.6 11.2C13.6 9.8 14.5 9 14.5 9C13.8 8 12.6 7.9 12.2 7.8C11.1 7.7 10.1 8.5 9.5 8.5C9 8.5 8.1 7.9 7.3 7.9C5.9 7.9 4.7 8.7 4 10C2.6 12.5 3.6 16.2 5 18.2C5.7 19.2 6.5 20.3 7.5 20.2C8.5 20.1 8.9 19.5 10.1 19.5C11.3 19.5 11.6 20.2 12.7 20.2C13.8 20.2 14.4 19.2 15.1 18.2C15.9 17 16.2 15.9 16.2 15.8C16.2 15.7 13.6 14.7 13.6 11.2Z" fill="#FFFFFF"/>
+                                                            <path d="M11.9 6.7C12.4 6 12.8 5 12.7 4C11.9 4 10.8 4.6 10.3 5.2C9.8 5.8 9.4 6.8 9.5 7.8C10.5 7.9 11.4 7.3 11.9 6.7Z" fill="#FFFFFF"/>
+                                                            <path d="M19.5 9.5H21.5L23.2 14.5L24.9 9.5H26.9L24.2 16.5H22.2L19.5 9.5Z" fill="#FFFFFF"/>
+                                                        </svg>
+                                                    </span>
+                                                    <!-- GOOGLE PAY -->
+                                                    <span class="payment-badge-icon" title="Google Pay">
+                                                        <svg width="34" height="22" viewBox="0 0 38 24" fill="none">
+                                                            <rect width="38" height="24" rx="3" fill="#FFFFFF" stroke="#E0DCD6"/>
+                                                            <path d="M15.5 12.2C15.5 11.8 15.5 11.4 15.4 11H11V12.8H13.5C13.4 13.5 13 14.1 12.4 14.5V15.9H14.2C15.2 14.9 15.5 13.6 15.5 12.2Z" fill="#4285F4"/>
+                                                            <path d="M11 16.8C12.3 16.8 13.4 16.4 14.2 15.7L12.4 14.3C12 14.6 11.5 14.8 11 14.8C9.8 14.8 8.8 14 8.4 12.9H6.5V14.4C7.5 16.4 9.1 16.8 11 16.8Z" fill="#34A853"/>
+                                                            <path d="M8.4 12.9C8.2 12.4 8.2 11.8 8.4 11.3V9.8H6.5C5.8 11.2 5.8 12.9 6.5 14.4L8.4 12.9Z" fill="#FBBC04"/>
+                                                            <path d="M11 9.2C11.7 9.2 12.4 9.5 12.9 10L14.3 8.6C13.4 7.8 12.2 7.3 11 7.3C9.1 7.3 7.5 8.7 6.5 10.7L8.4 12.2C8.8 11.1 9.8 9.2 11 9.2Z" fill="#EA4335"/>
+                                                            <path d="M18.8 10H20.3V15.5H18.8V10Z" fill="#5F6368"/>
+                                                            <path d="M22.5 11.8H24V15.5H22.5V11.8Z" fill="#5F6368"/>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="payment-option-body" id="bodyPaymentWallet" style="display: none;">
+                                                <p class="wallet-instruction-text">
+                                                    Al confirmar tu pedido, se abrirá el monedero digital nativo de tu dispositivo (Apple Pay o Google Wallet) para que puedas abonarlo de forma biométrica (Face ID, Touch ID o huella).
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- ============================================================
+                                     SECCIÓN: GUARDA MI INFORMACIÓN PARA FUTURAS COMPRAS (ESTILO TO'AK)
+                                     ============================================================ -->
+                                <div class="save-info-card" id="saveInfoCard">
+                                    <label class="save-info-checkbox-row">
+                                        <input type="checkbox" id="saveInfoCheckbox" name="guardar_informacion" checked>
+                                        <span class="custom-checkbox"></span>
+                                        <span class="save-info-title">Guarda mi info para agilizar futuras compras</span>
+                                    </label>
+                                    <p class="save-info-desc">
+                                        Tus datos de contacto y entrega se recordarán de forma segura en este navegador para completar tus próximos pedidos en 1 solo clic.
+                                    </p>
+                                </div>
+
+                                <!-- Botón de Pago con importe dinámico en vivo -->
                                 <button type="submit" class="btn-checkout" id="submitBtn">
-                                    Pagar Pedido
+                                    <span id="btnPayText">Pagar ahora</span>
                                 </button>
                             </form>
 
@@ -3892,6 +4383,9 @@
 
             const totGrandTotalAmount = document.getElementById('totGrandTotalAmount');
             if (totGrandTotalAmount) totGrandTotalAmount.innerText = grandTotal.toFixed(2) + " €";
+
+            const btnPayText = document.getElementById('btnPayText');
+            if (btnPayText) btnPayText.innerText = `Pagar ahora — ${grandTotal.toFixed(2)} €`;
         }
 
         // =========================================
@@ -4102,6 +4596,8 @@
 
         // Ejecutar carga inicial al cargar la página
         renderShopUI();
+        initCardInputsFormatting();
+        loadSavedBuyerInfo();
 
         // Si se abrió con el parámetro ?regalo=true, abrir automáticamente el modal de regalo
         (function checkUrlGiftParam() {
@@ -4152,6 +4648,115 @@
         }
         window.setBillingType = setBillingType;
 
+        // --- GESTIÓN DE MÉTODOS DE PAGO Y GUARDADO DE DATOS (ESTILO TO'AK) ---
+        function selectPaymentMethod(method) {
+            const radioTarjeta = document.getElementById('radioPaymentTarjeta');
+            const radioBizum = document.getElementById('radioPaymentBizum');
+            const radioWallet = document.getElementById('radioPaymentWallet');
+
+            const cardTarjeta = document.getElementById('cardOptionTarjeta');
+            const cardBizum = document.getElementById('cardOptionBizum');
+            const cardWallet = document.getElementById('cardOptionWallet');
+
+            const bodyTarjeta = document.getElementById('bodyPaymentTarjeta');
+            const bodyBizum = document.getElementById('bodyPaymentBizum');
+            const bodyWallet = document.getElementById('bodyPaymentWallet');
+
+            if (cardTarjeta) cardTarjeta.classList.remove('active');
+            if (cardBizum) cardBizum.classList.remove('active');
+            if (cardWallet) cardWallet.classList.remove('active');
+
+            if (bodyTarjeta) bodyTarjeta.style.display = 'none';
+            if (bodyBizum) bodyBizum.style.display = 'none';
+            if (bodyWallet) bodyWallet.style.display = 'none';
+
+            if (method === 'bizum') {
+                if (radioBizum) radioBizum.checked = true;
+                if (cardBizum) cardBizum.classList.add('active');
+                if (bodyBizum) bodyBizum.style.display = 'block';
+
+                const phoneInput = document.getElementById('phoneInput');
+                const bizumPhone = document.getElementById('bizumPhoneInput');
+                if (phoneInput && bizumPhone && !bizumPhone.value.trim()) {
+                    bizumPhone.value = phoneInput.value.trim();
+                }
+            } else if (method === 'wallet') {
+                if (radioWallet) radioWallet.checked = true;
+                if (cardWallet) cardWallet.classList.add('active');
+                if (bodyWallet) bodyWallet.style.display = 'block';
+            } else {
+                if (radioTarjeta) radioTarjeta.checked = true;
+                if (cardTarjeta) cardTarjeta.classList.add('active');
+                if (bodyTarjeta) bodyTarjeta.style.display = 'block';
+            }
+        }
+        window.selectPaymentMethod = selectPaymentMethod;
+
+        function initCardInputsFormatting() {
+            const cardNum = document.getElementById('cardNumberInput');
+            if (cardNum) {
+                cardNum.addEventListener('input', (e) => {
+                    let v = e.target.value.replace(/\D/g, '').substring(0, 16);
+                    let formatted = v.match(/.{1,4}/g)?.join(' ') || v;
+                    e.target.value = formatted;
+                });
+            }
+
+            const cardExp = document.getElementById('cardExpInput');
+            if (cardExp) {
+                cardExp.addEventListener('input', (e) => {
+                    let v = e.target.value.replace(/\D/g, '').substring(0, 4);
+                    if (v.length >= 3) {
+                        e.target.value = v.substring(0, 2) + ' / ' + v.substring(2);
+                    } else {
+                        e.target.value = v;
+                    }
+                });
+            }
+
+            const phoneInput = document.getElementById('phoneInput');
+            const bizumPhone = document.getElementById('bizumPhoneInput');
+            if (phoneInput && bizumPhone) {
+                phoneInput.addEventListener('input', () => {
+                    if (!bizumPhone.value || bizumPhone.dataset.autofilled === 'true') {
+                        bizumPhone.value = phoneInput.value;
+                        bizumPhone.dataset.autofilled = 'true';
+                    }
+                });
+                bizumPhone.addEventListener('input', () => {
+                    bizumPhone.dataset.autofilled = 'false';
+                });
+            }
+        }
+
+        function loadSavedBuyerInfo() {
+            try {
+                const raw = localStorage.getItem('doxa_saved_buyer');
+                if (raw) {
+                    const saved = JSON.parse(raw);
+                    if (saved) {
+                        const emailEl = document.getElementById('emailInput');
+                        const nameEl = document.getElementById('nameInput');
+                        const phoneEl = document.getElementById('phoneInput');
+                        const addressEl = document.getElementById('addressInput');
+                        const zipEl = document.getElementById('zipInput');
+                        const cityEl = document.getElementById('cityInput');
+                        const bizumPhoneEl = document.getElementById('bizumPhoneInput');
+                        const saveBoxEl = document.getElementById('saveInfoCheckbox');
+
+                        if (saved.email && emailEl && !emailEl.value) emailEl.value = saved.email;
+                        if (saved.name && nameEl && !nameEl.value) nameEl.value = saved.name;
+                        if (saved.phone && phoneEl && !phoneEl.value) phoneEl.value = saved.phone;
+                        if (saved.address && addressEl && !addressEl.value) addressEl.value = saved.address;
+                        if (saved.zip && zipEl && !zipEl.value) zipEl.value = saved.zip;
+                        if (saved.city && cityEl && !cityEl.value) cityEl.value = saved.city;
+                        if (saved.phone && bizumPhoneEl && !bizumPhoneEl.value) bizumPhoneEl.value = saved.phone;
+                        if (saveBoxEl) saveBoxEl.checked = true;
+                    }
+                }
+            } catch (e) { }
+        }
+
         // --- PROCESAMIENTO DE PAGO MEDIANTE STRIPE CHECKOUT ---
         const STRIPE_ENDPOINT = '/api/create-checkout-session';
 
@@ -4172,14 +4777,6 @@
             const loadingOverlay = document.getElementById('loadingOverlay');
             const loadingText = document.getElementById('loadingText');
 
-            // Deshabilitar botón y mostrar pantalla de carga
-            submitBtn.disabled = true;
-            if (loadingText) loadingText.innerText = 'Conectando con la pasarela segura de Stripe...';
-            loadingOverlay.style.display = 'flex';
-            setTimeout(() => {
-                loadingOverlay.classList.add('active');
-            }, 50);
-
             // Obtener variables de compra
             const email = document.getElementById('emailInput').value.trim();
             const name = document.getElementById('nameInput').value.trim();
@@ -4187,6 +4784,66 @@
             const address = document.getElementById('addressInput').value.trim();
             const zip = document.getElementById('zipInput').value.trim();
             const city = document.getElementById('cityInput').value.trim();
+
+            // Método de pago seleccionado
+            const selectedMethodRadio = document.querySelector('input[name="metodo_pago"]:checked');
+            const paymentMethod = selectedMethodRadio ? selectedMethodRadio.value : 'tarjeta';
+
+            // Validaciones según el método de pago elegido
+            if (paymentMethod === 'tarjeta') {
+                const cardNum = document.getElementById('cardNumberInput') ? document.getElementById('cardNumberInput').value.trim() : '';
+                const cardExp = document.getElementById('cardExpInput') ? document.getElementById('cardExpInput').value.trim() : '';
+                const cardCvc = document.getElementById('cardCvcInput') ? document.getElementById('cardCvcInput').value.trim() : '';
+                const cardHolder = document.getElementById('cardHolderInput') ? document.getElementById('cardHolderInput').value.trim() : '';
+
+                if (!cardNum || !cardExp || !cardCvc || !cardHolder) {
+                    alert('Por favor, completa los datos de tu tarjeta (Número de tarjeta, Caducidad, Código CVC y Nombre del titular).');
+                    return;
+                }
+            } else if (paymentMethod === 'bizum') {
+                const bizumPhone = document.getElementById('bizumPhoneInput') ? document.getElementById('bizumPhoneInput').value.trim() : '';
+                if (!bizumPhone) {
+                    alert('Por favor, introduce tu número de teléfono registrado en Bizum.');
+                    return;
+                }
+            }
+
+            // Deshabilitar botón y mostrar pantalla de carga
+            submitBtn.disabled = true;
+            if (loadingText) {
+                if (paymentMethod === 'bizum') {
+                    loadingText.innerText = 'Conectando con Bizum a través de Stripe...';
+                } else if (paymentMethod === 'wallet') {
+                    loadingText.innerText = 'Abriendo monedero digital seguro...';
+                } else {
+                    loadingText.innerText = 'Conectando con la pasarela segura de Stripe...';
+                }
+            }
+            loadingOverlay.style.display = 'flex';
+            setTimeout(() => {
+                loadingOverlay.classList.add('active');
+            }, 50);
+
+            // Guardar o borrar información en localStorage según la casilla elegida
+            const saveInfoCheckbox = document.getElementById('saveInfoCheckbox');
+            if (saveInfoCheckbox && saveInfoCheckbox.checked) {
+                try {
+                    const buyerToSave = {
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        address: address,
+                        zip: zip,
+                        city: city,
+                        saveInfo: true
+                    };
+                    localStorage.setItem('doxa_saved_buyer', JSON.stringify(buyerToSave));
+                } catch (e) { }
+            } else {
+                try {
+                    localStorage.removeItem('doxa_saved_buyer');
+                } catch (e) { }
+            }
 
             // Obtener datos de facturación (personal o empresa/datos fiscales diferentes)
             const isCompanyBilling = document.getElementById('radioBillingCompany') && document.getElementById('radioBillingCompany').checked;
@@ -4266,6 +4923,8 @@
                 shippingCost: totalShipping,
                 totalAmount: total,
                 totalFormatted: total.toFixed(2) + " €",
+                paymentMethod: paymentMethod,
+                bizumPhone: paymentMethod === 'bizum' ? (document.getElementById('bizumPhoneInput')?.value.trim() || phone) : '',
                 buyer: {
                     name: name,
                     email: email,

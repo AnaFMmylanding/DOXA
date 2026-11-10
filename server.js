@@ -88,6 +88,10 @@ const server = http.createServer(async (req, res) => {
                 const stripeParams = new URLSearchParams();
                 stripeParams.append('mode', 'payment');
 
+                // Habilitar Tarjetas y Bizum oficialmente en Stripe
+                stripeParams.append('payment_method_types[0]', 'card');
+                stripeParams.append('payment_method_types[1]', 'bizum');
+
                 // Enlaces de retorno tras el pago
                 const returnQuery = new URLSearchParams({
                     variety: data.varietyName || 'Caja DOXA',
@@ -149,6 +153,13 @@ const server = http.createServer(async (req, res) => {
                     stripeParams.append('metadata[comprador_direccion]', `${data.buyer.address || ''}, ${data.buyer.zip || ''} ${data.buyer.city || ''}`);
                     stripeParams.append('metadata[cajas_personales]', `${data.personalQty || 0}x ${data.varietyName || ''}`);
                     stripeParams.append('metadata[total_regalos]', (data.giftOrders ? data.giftOrders.length : 0).toString());
+                }
+
+                if (data.paymentMethod) {
+                    stripeParams.append('metadata[metodo_pago]', data.paymentMethod);
+                }
+                if (data.bizumPhone) {
+                    stripeParams.append('metadata[bizum_telefono]', data.bizumPhone);
                 }
 
                 // Datos de facturación (personal o empresa / datos fiscales distintos)
