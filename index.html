@@ -1104,7 +1104,7 @@ Menú del Index: Líena 742
             }
 
             .sobre-doxa-section {
-                padding: 65px 0 !important;
+                padding: 65px 0 150px 0 !important;
             }
 
             .sobre-doxa-img-wrap {
@@ -6051,6 +6051,12 @@ Menú del Index: Líena 742
                     padding-bottom: 65px !important;
                 }
 
+                .sabor-section-header,
+                .product-sabor .sabor-section-header,
+                .product-sabor div[style*="margin-bottom: 60px"] {
+                    margin-bottom: 25px !important;
+                }
+
                 .product-info-grid {
                     flex-direction: column;
                     gap: 35px;
@@ -6173,7 +6179,7 @@ Menú del Index: Líena 742
              Aquí se muestran planos cercanos, texturas y vídeos del producto. -->
         <section id="sabor-doxa" class="coleccion-section product-sabor active-product-sabor" data-product="doxa">
             <div class="container animate-appear">
-                <div style="text-align: center; margin-bottom: 60px;">
+                <div class="sabor-section-header" style="text-align: center; margin-bottom: 60px;">
                     <h2 class="section-title">EL SABOR DOXA</h2>
                     <p class="section-lead-text" style="max-width: 600px;">
                         Trufas Puras de Alta Confitería Bioinductiva.<br>
@@ -6331,7 +6337,7 @@ Menú del Index: Líena 742
              Aquí se muestran planos cercanos, texturas y vídeos del producto. -->
         <section id="sabor-cookie" class="coleccion-section product-sabor" data-product="cookie">
             <div class="container animate-appear">
-                <div style="text-align: center; margin-bottom: 60px;">
+                <div class="sabor-section-header" style="text-align: center; margin-bottom: 60px;">
                     <h2 class="section-title">EL SABOR DOXA</h2>
                     <p class="section-lead-text" style="max-width: 600px;">
                         Cookies Artesanales Bioinductivas de Autor.<br>
@@ -6485,7 +6491,7 @@ Menú del Index: Líena 742
              Aquí se muestran planos cercanos, texturas y vídeos del producto. -->
         <section id="sabor-bbb" class="coleccion-section product-sabor" data-product="bbb">
             <div class="container animate-appear">
-                <div style="text-align: center; margin-bottom: 60px;">
+                <div class="sabor-section-header" style="text-align: center; margin-bottom: 60px;">
                     <h2 class="section-title">EL SABOR DOXA</h2>
                     <p class="section-lead-text" style="max-width: 600px;">
                         Bombón Bloom — Repostería Nutricosmética Bioactiva.<br>
@@ -6625,7 +6631,7 @@ Menú del Index: Líena 742
              Aquí se muestran planos cercanos, texturas y vídeos del producto. -->
         <section id="sabor-lingote" class="coleccion-section product-sabor" data-product="lingote">
             <div class="container animate-appear">
-                <div style="text-align: center; margin-bottom: 60px;">
+                <div class="sabor-section-header" style="text-align: center; margin-bottom: 60px;">
                     <h2 class="section-title">EL SABOR DOXA</h2>
                     <p class="section-lead-text" style="max-width: 600px;">
                         Lingote Pistacho — Alta Confitería Funcional.<br>
@@ -6749,7 +6755,7 @@ Menú del Index: Líena 742
              Aquí se muestran planos cercanos, texturas y vídeos del producto. -->
         <section id="sabor-oblea" class="coleccion-section product-sabor" data-product="oblea">
             <div class="container animate-appear">
-                <div style="text-align: center; margin-bottom: 60px;">
+                <div class="sabor-section-header" style="text-align: center; margin-bottom: 60px;">
                     <h2 class="section-title">EL SABOR DOXA</h2>
                     <p class="section-lead-text" style="max-width: 600px;">
                         Crujiente de Almendra — Oblea Bioinductiva Artesanal.<br>
@@ -6872,7 +6878,7 @@ Menú del Index: Líena 742
              Aquí se muestran planos cercanos, texturas y vídeos del producto. -->
         <section id="sabor-pequebloom" class="coleccion-section product-sabor" data-product="pequebloom">
             <div class="container animate-appear">
-                <div style="text-align: center; margin-bottom: 60px;">
+                <div class="sabor-section-header" style="text-align: center; margin-bottom: 60px;">
                     <h2 class="section-title">EL SABOR DOXA</h2>
                     <p class="section-lead-text" style="max-width: 600px;">
                         PequeBloom — Mini Bombones Funcionales.<br>
@@ -8587,9 +8593,14 @@ Menú del Index: Líena 742
                     padding: 0 24px;
                 }
 
+                .checkout-btn-wrap {
+                    margin-top: 60px !important;
+                }
+
                 .product-shipping-badges {
                     grid-template-columns: 1fr;
                     gap: 14px;
+                    margin: 60px auto 0 auto !important;
                     padding-top: 20px !important;
                 }
 
@@ -8658,7 +8669,7 @@ Menú del Index: Líena 742
 
             @media (max-width: 768px) {
                 .alma-section {
-                    padding: 48px 0 75px 0 !important;
+                    padding: 48px 0 40px 0 !important;
                 }
 
                 .alma-img-card {
@@ -9031,7 +9042,7 @@ Menú del Index: Líena 742
                                 * Los impuestos aplicables (10% de IVA) y transporte refrigerado están detallados en el
                                 total.
                             </p>
-                            <div style="text-align: center; margin-top: 100px;">
+                            <div class="checkout-btn-wrap" style="text-align: center; margin-top: 100px;">
                                 <a href="compra.html" class="btn-checkout-link" id="btnGoToCheckout">
                                     IR A LA HOJA DE PAGO &rarr;
                                 </a>
