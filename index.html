@@ -7854,14 +7854,13 @@ Menú del Index: Líena 742
                 background-color: #3C332A;
                 color: #FFFFFF !important;
                 border: none;
-                flex: 0 1 auto;
-                width: auto;
-                min-width: 380px;
+                width: 100%;
                 max-width: 440px;
-                height: 48px;
+                min-height: 48px;
                 box-sizing: border-box;
-                padding: 0 40px;
-                font-size: 13px;
+                padding: 14px 28px;
+                margin: 16px auto 0 auto;
+                font-size: 12.5px;
                 font-family: 'Lato', sans-serif;
                 font-weight: 500;
                 letter-spacing: 2px;
@@ -7875,7 +7874,8 @@ Menú del Index: Líena 742
                 justify-content: center;
                 transition: all 0.3s ease;
                 box-shadow: 0 6px 18px rgba(60, 51, 42, 0.2);
-                white-space: nowrap;
+                white-space: normal;
+                line-height: 1.35;
             }
 
             .btn-gift-trigger:hover {
@@ -8616,13 +8616,40 @@ Menú del Index: Líena 742
                     margin: 0 auto 38px auto;
                 }
 
-                .btn-add-cart,
-                .btn-gift-trigger {
+                .btn-add-cart {
                     width: auto;
                     min-width: 260px;
                     max-width: 330px;
                     padding: 0 24px;
                     font-size: 12px;
+                }
+
+                .gift-container-box {
+                    padding: 22px 18px 26px 18px !important;
+                    margin: 0 auto 30px auto !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                }
+
+                .btn-gift-trigger {
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    min-width: 0 !important;
+                    height: auto !important;
+                    min-height: 46px !important;
+                    padding: 13px 14px !important;
+                    margin: 16px auto 0 auto !important;
+                    font-size: 11px !important;
+                    letter-spacing: 1.4px !important;
+                    line-height: 1.35 !important;
+                    white-space: normal !important;
+                    box-sizing: border-box !important;
+                    border-radius: 0 !important;
+                    box-shadow: 0 4px 14px rgba(60, 51, 42, 0.16) !important;
                 }
 
                 .btn-checkout-link {
