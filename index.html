@@ -1795,13 +1795,9 @@ Menú del Index: Líena 742
                 max-width: 100%;
                 min-height: 700px;
                 display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
                 align-items: center;
                 overflow: hidden;
                 background-color: var(--dark-bg);
-                padding: 100px 0 45px 0;
-                scroll-margin-top: 75px;
             }
 
 
@@ -1847,48 +1843,10 @@ Menú del Index: Líena 742
                 flex-direction: row;
                 align-items: center;
                 gap: 40px;
-                padding: 0 20px 30px 20px;
+                padding: 40px 20px;
             }
 
-            /* =========================================================================
-               SISTEMA DE CONTRASTE DINÁMICO (LUMINANCIA) PARA CABECERA RUEDA DE ACTIVOS
-               Adapta automáticamente el título y subtítulo ("LA ARQUITECTURA DE ACTIVOS")
-               según la foto de fondo sea clara u oscura.
-               La caja de producto de la derecha se mantiene SIEMPRE en negro (#181818)
-               sobre su fondo de yeso claro.
-               ========================================================================= */
-            .rueda-activos-header .section-title,
-            .rueda-activos-header .section-lead-text {
-                transition: color 0.4s ease, text-shadow 0.4s ease;
-            }
-
-            /* 1. CABECERA: Fondo OSCURO (ej. piel negra) -> Texto Blanco Nítido */
-            .cajas-activos-section[data-header-theme="dark"] .rueda-activos-header .section-title,
-            .rueda-activos-header[data-bg-theme="dark"] .section-title {
-                color: #FFFFFF !important;
-                text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 3px rgba(0, 0, 0, 0.95) !important;
-            }
-
-            .cajas-activos-section[data-header-theme="dark"] .rueda-activos-header .section-lead-text,
-            .rueda-activos-header[data-bg-theme="dark"] .section-lead-text {
-                color: rgba(255, 255, 255, 0.92) !important;
-                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75) !important;
-            }
-
-            /* 2. CABECERA: Fondo CLARO -> Texto Oscuro */
-            .cajas-activos-section[data-header-theme="light"] .rueda-activos-header .section-title,
-            .rueda-activos-header[data-bg-theme="light"] .section-title {
-                color: #181818 !important;
-                text-shadow: none !important;
-            }
-
-            .cajas-activos-section[data-header-theme="light"] .rueda-activos-header .section-lead-text,
-            .rueda-activos-header[data-bg-theme="light"] .section-lead-text {
-                color: rgba(24, 24, 24, 0.85) !important;
-                text-shadow: none !important;
-            }
-
-            /* 3. CAJA DE PRODUCTO A LA DERECHA:
+            /* CAJA DE PRODUCTO A LA DERECHA:
                Reposa sobre el yeso claro (#e6e7e1) y la escultura, por lo que SIEMPRE
                se muestra en color negro (#181818) con total nitidez */
             .cajas-activos-section .text-box {
@@ -2145,17 +2103,14 @@ Menú del Index: Líena 742
             /* Adaptación móvil exclusiva y de máxima prioridad para Rueda de Activos */
             @media (max-width: 768px) {
                 .cajas-activos-section {
-                    height: auto !important;
-                    min-height: 100svh !important;
-                    max-height: none !important;
+                    height: 100svh !important;
+                    min-height: 640px !important;
+                    max-height: 100svh !important;
                     overflow: visible !important;
                     position: relative;
                     background-color: var(--yeso-oscuro, #e6e7e1) !important;
                     display: flex;
-                    flex-direction: column !important;
-                    align-items: center !important;
-                    justify-content: flex-start !important;
-                    padding: 100px 0 35px 0 !important;
+                    align-items: stretch !important;
                 }
 
                 .product-wheel {
@@ -2507,15 +2462,6 @@ Menú del Index: Líena 742
             <a id="cajas-activos" style="position: absolute; top: 0; pointer-events: none;"></a>
             <div class="bg-layer" id="caja-bg-doxa" style="background-image: url('piel negra.jpg');"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
-            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
-                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
-                <p class="section-lead-text" style="max-width: 600px;">
-                    Trufas Puras de Alta Confitería Bioinductiva.<br>
-                    Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
-                </p>
-            </div>
-
             <div class="content-grid">
                 <div class="wheel-column">
                     <div class="radial-wrapper" id="radialWrapper-doxa">
@@ -2526,11 +2472,11 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-doxa">
                         <div class="tagline">TRUFAS PURAS</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">DOXA ORIGEN</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
                         <p class="hero-value-prop-neg">Alta Confitería Bioinductiva</p>
                         <div class="hero-value-prop">
-                            Un producto healthy que sin embargo no sacrifica la textura.<br>
-                            Un suplemento que no sacrifica el placer.<br><br>
+                            Trufas Puras de Alta Confitería Bioinductiva.<br>
+                            Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.<br><br>
                             Una forma distinta de disfrutar, compatible con una alimentación consciente, con el
                             entrenamiento, y
                             con el cuidado a largo plazo.
@@ -2560,15 +2506,6 @@ Menú del Index: Líena 742
             <a id="rueda-cookie" style="position: absolute; top: 0; pointer-events: none;"></a>
             <div class="bg-layer" id="caja-bg-cookie" style="background-image: url('piel negra.jpg');"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
-            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
-                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
-                <p class="section-lead-text" style="max-width: 600px;">
-                    Trufas Puras de Alta Confitería Bioinductiva.<br>
-                    Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
-                </p>
-            </div>
-
             <div class="content-grid">
                 <div class="wheel-column">
                     <div class="radial-wrapper" id="radialWrapper-cookie">
@@ -2579,7 +2516,7 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-cookie">
                         <div class="tagline">DOXA COOKIE</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">BÉSAME CHOCO</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
                         <p class="hero-value-prop-neg">Cookies Artesanales Bioinductivas</p>
                         <div class="hero-value-prop">
                             Haz clic en cualquiera de las categorías para explorar los activos que componen cada
@@ -2611,15 +2548,6 @@ Menú del Index: Líena 742
             <div class="bg-layer" id="caja-bg-bbb" style="background-image: url('piel negra.jpg');"></div>
             <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-bbb"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
-            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
-                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
-                <p class="section-lead-text" style="max-width: 600px;">
-                    Trufas Puras de Alta Confitería Bioinductiva.<br>
-                    Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
-                </p>
-            </div>
-
             <div class="content-grid">
                 <div class="wheel-column">
                     <div class="radial-wrapper" id="radialWrapper-bbb">
@@ -2630,7 +2558,7 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-bbb">
                         <div class="tagline">BOMBÓN BLOOM</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">MENOPAUSIA</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
                         <p class="hero-value-prop-neg">Repostería Nutricosmética</p>
                         <div class="hero-value-prop">
                             Haz clic en cualquiera de las 8 variedades de Bombón Bloom para explorar su formulación
@@ -2662,15 +2590,6 @@ Menú del Index: Líena 742
             <div class="bg-layer" id="caja-bg-lingote" style="background-image: url('piel negra.jpg');"></div>
             <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-lingote"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
-            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
-                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
-                <p class="section-lead-text" style="max-width: 600px;">
-                    Trufas Puras de Alta Confitería Bioinductiva.<br>
-                    Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
-                </p>
-            </div>
-
             <div class="content-grid">
                 <div class="wheel-column">
                     <div class="radial-wrapper" id="radialWrapper-lingote">
@@ -2681,8 +2600,8 @@ Menú del Index: Líena 742
                 </div>
                 <div class="text-column">
                     <div class="text-box" id="caja-text-lingote">
-                        <div class="tagline">LINGOTE PISTACHO</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">PISTACHO PURO</h3>
+                        <div class="tagline">LINGOTE</div>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
                         <p class="hero-value-prop-neg">Nutrición y Placer</p>
                         <div class="hero-value-prop">
                             Haz clic en cualquiera de las variedades de Lingote para explorar su formulación activa y
@@ -2714,15 +2633,6 @@ Menú del Index: Líena 742
             <div class="bg-layer" id="caja-bg-oblea" style="background-image: url('piel negra.jpg');"></div>
             <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-oblea"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
-            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
-                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
-                <p class="section-lead-text" style="max-width: 600px;">
-                    Trufas Puras de Alta Confitería Bioinductiva.<br>
-                    Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
-                </p>
-            </div>
-
             <div class="content-grid">
                 <div class="wheel-column">
                     <div class="radial-wrapper" id="radialWrapper-oblea">
@@ -2734,7 +2644,7 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-oblea">
                         <div class="tagline">CRUJIENTE DE ALMENDRA</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">OBLEA BIOINDUCTIVA</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
                         <p class="hero-value-prop-neg">Nutrición y Placer</p>
                         <div class="hero-value-prop">
                             Haz clic en cualquiera de las variedades de Crujiente de Almendra para explorar sus activos
@@ -2766,15 +2676,6 @@ Menú del Index: Líena 742
             <div class="bg-layer" id="caja-bg-pequebloom" style="background-image: url('piel negra.jpg');"></div>
             <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-pequebloom"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
-            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
-                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
-                <p class="section-lead-text" style="max-width: 600px;">
-                    Trufas Puras de Alta Confitería Bioinductiva.<br>
-                    Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
-                </p>
-            </div>
-
             <div class="content-grid">
                 <div class="wheel-column">
                     <div class="radial-wrapper" id="radialWrapper-pequebloom">
@@ -2785,7 +2686,7 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-pequebloom">
                         <div class="tagline">PEQUEBLOOM</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">MICRODOSIS VITAL</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
                         <p class="hero-value-prop-neg">Nutrición Infantil y Juvenil</p>
                         <div class="hero-value-prop">
                             Haz clic en cualquiera de las variedades de PequeBlooms para explorar su formulación activa.
@@ -6020,7 +5921,10 @@ Menú del Index: Líena 742
                         try {
                             history.replaceState(null, null, '#rueda-activos-' + prod);
                         } catch (err) { }
-                        const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset - 75;
+                        const isMobile = window.innerWidth <= 768;
+                        const targetY = isMobile
+                            ? (targetSection.getBoundingClientRect().top + window.pageYOffset)
+                            : (targetSection.getBoundingClientRect().top + window.pageYOffset - 75);
                         window.scrollTo({
                             top: Math.max(0, targetY),
                             behavior: "smooth"
@@ -6070,7 +5974,10 @@ Menú del Index: Líena 742
                 document.querySelectorAll('.cajas-activos-section').forEach(sec => updateSectionLuminanceTheme(sec));
                 if (hashProd && targetSection) {
                     setTimeout(() => {
-                        const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset - 75;
+                        const isMobile = window.innerWidth <= 768;
+                        const targetY = isMobile
+                            ? (targetSection.getBoundingClientRect().top + window.pageYOffset)
+                            : (targetSection.getBoundingClientRect().top + window.pageYOffset - 75);
                         window.scrollTo({
                             top: Math.max(0, targetY),
                             behavior: "smooth"
@@ -6091,7 +5998,10 @@ Menú del Index: Líena 742
                     });
                     const targetSection = showProductWheel(hashProd);
                     if (targetSection) {
-                        const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset - 75;
+                        const isMobile = window.innerWidth <= 768;
+                        const targetY = isMobile
+                            ? (targetSection.getBoundingClientRect().top + window.pageYOffset)
+                            : (targetSection.getBoundingClientRect().top + window.pageYOffset - 75);
                         window.scrollTo({
                             top: Math.max(0, targetY),
                             behavior: "smooth"
