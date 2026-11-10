@@ -9443,6 +9443,38 @@ Menú del Index: Líena 742
                             return prod.formats.find(f => f.key === activeFormatKey) || prod.formats[0];
                         }
 
+                        // Utilidad de lectura y saneamiento defensivo del carrito en localStorage
+                        function getSanitizedCartLines() {
+                            try {
+                                const saved = localStorage.getItem('doxa_cart_lines');
+                                if (!saved) return [];
+                                const parsed = JSON.parse(saved);
+                                if (!Array.isArray(parsed)) return [];
+                                return parsed.filter(l => l && typeof l === 'object').map(l => {
+                                    return {
+                                        id: l.id || ('line_' + Date.now() + Math.random().toString(36).substr(2, 4)),
+                                        productId: String(l.productId || 'doxa'),
+                                        productName: String(l.productName || 'DOXA'),
+                                        productImage: String(l.productImage || 'Doxa.png'),
+                                        varietyId: String(l.varietyId || ''),
+                                        varietyName: String(l.varietyName || ''),
+                                        formatName: String(l.formatName || ''),
+                                        unitPrice: parseFloat(l.unitPrice) || 0,
+                                        qty: parseInt(l.qty) || 1,
+                                        isGift: !!l.isGift,
+                                        recipientName: String(l.recipientName || l.recipient || ''),
+                                        phone: String(l.phone || ''),
+                                        address: String(l.address || ''),
+                                        zip: String(l.zip || ''),
+                                        city: String(l.city || ''),
+                                        message: String(l.message || '')
+                                    };
+                                });
+                            } catch (e) {
+                                return [];
+                            }
+                        }
+
                         // Sincronización persistente del carrito para la hoja de pago (compra.html)
                         function syncCartToStorage(explicitAdd) {
                             try {
@@ -9469,15 +9501,7 @@ Menú del Index: Líena 742
                                 };
                                 localStorage.setItem('doxa_active_selection', JSON.stringify(selection));
 
-                                let lines = [];
-                                const savedLines = localStorage.getItem('doxa_cart_lines');
-                                if (savedLines) {
-                                    try {
-                                        lines = JSON.parse(savedLines);
-                                        if (!Array.isArray(lines)) lines = [];
-                                    } catch (e) { lines = []; }
-                                }
-
+                                let lines = getSanitizedCartLines();
                                 const lineIdx = lines.findIndex(l => !l.isGift && l.productId === prodId);
                                 const newLine = {
                                     id: lineIdx >= 0 ? lines[lineIdx].id : ('line_' + Date.now() + Math.random().toString(36).substr(2, 4)),
@@ -9486,7 +9510,7 @@ Menú del Index: Líena 742
                                     productImage: fmt.image || (prod.id + '.png'),
                                     varietyId: varietyCode,
                                     varietyName: `${fmt.feedbackName} (${fmt.optSub})`,
-                                    unitPrice: fmt.price,
+                                    unitPrice: parseFloat(fmt.price) || 0,
                                     qty: qty,
                                     isGift: false
                                 };
@@ -9505,85 +9529,80 @@ Menú del Index: Líena 742
 
                         // Actualización reactiva del desglose de pedido y confirmación
                         function updateOrderSummary() {
-                            let lines = [];
                             try {
-                                const saved = localStorage.getItem('doxa_cart_lines');
-                                if (saved) {
-                                    lines = JSON.parse(saved);
-                                    if (!Array.isArray(lines)) lines = [];
+                                let lines = getSanitizedCartLines();
+
+                                const prod = getCurrentProduct();
+                                const fmt = getCurrentFormat();
+                                const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+                                const prodId = prod.id === 'bbb' ? 'bombon' : prod.id;
+
+                                const varietyCode = prod.id === 'doxa' ? ('doxa_' + fmt.key) :
+                                    (prod.id === 'bbb' ? ('bb_' + fmt.key) :
+                                        (prod.id === 'pequebloom' ? ('peque_' + fmt.key) :
+                                            (prod.id + '_' + fmt.key)));
+
+                                // Sincronizar selección activa personal en el array
+                                const lineIdx = lines.findIndex(l => !l.isGift && l.productId === prodId);
+                                if (lineIdx >= 0) {
+                                    lines[lineIdx].varietyId = varietyCode;
+                                    lines[lineIdx].varietyName = `${fmt.feedbackName} (${fmt.optSub})`;
+                                    lines[lineIdx].unitPrice = parseFloat(fmt.price) || 0;
+                                    lines[lineIdx].qty = qty;
+                                    lines[lineIdx].productImage = fmt.image || (prod.id + '.png');
+                                } else {
+                                    lines.push({
+                                        id: 'line_' + Date.now(),
+                                        productId: prodId,
+                                        productName: prod.name,
+                                        productImage: fmt.image || (prod.id + '.png'),
+                                        varietyId: varietyCode,
+                                        varietyName: `${fmt.feedbackName} (${fmt.optSub})`,
+                                        unitPrice: parseFloat(fmt.price) || 0,
+                                        qty: qty,
+                                        isGift: false
+                                    });
                                 }
-                            } catch (e) { lines = []; }
 
-                            const prod = getCurrentProduct();
-                            const fmt = getCurrentFormat();
-                            const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
-                            const prodId = prod.id === 'bbb' ? 'bombon' : prod.id;
+                                const totalBoxes = lines.reduce((s, l) => s + (parseInt(l.qty) || 0), 0);
+                                const subtotal = lines.reduce((s, l) => s + ((parseFloat(l.unitPrice) || 0) * (parseInt(l.qty) || 0)), 0);
 
-                            const varietyCode = prod.id === 'doxa' ? ('doxa_' + fmt.key) :
-                                (prod.id === 'bbb' ? ('bb_' + fmt.key) :
-                                    (prod.id === 'pequebloom' ? ('peque_' + fmt.key) :
-                                        (prod.id + '_' + fmt.key)));
-
-                            // Sincronizar selección activa personal en el array
-                            const lineIdx = lines.findIndex(l => !l.isGift && l.productId === prodId);
-                            if (lineIdx >= 0) {
-                                lines[lineIdx].varietyId = varietyCode;
-                                lines[lineIdx].varietyName = `${fmt.feedbackName} (${fmt.optSub})`;
-                                lines[lineIdx].unitPrice = fmt.price;
-                                lines[lineIdx].qty = qty;
-                                lines[lineIdx].productImage = fmt.image || (prod.id + '.png');
-                            } else {
-                                lines.push({
-                                    id: 'line_' + Date.now(),
-                                    productId: prodId,
-                                    productName: prod.name,
-                                    productImage: fmt.image || (prod.id + '.png'),
-                                    varietyId: varietyCode,
-                                    varietyName: `${fmt.feedbackName} (${fmt.optSub})`,
-                                    unitPrice: fmt.price,
-                                    qty: qty,
-                                    isGift: false
+                                const hasPersonal = lines.some(l => !l.isGift && (parseInt(l.qty) || 0) > 0);
+                                const giftDestinations = new Set();
+                                lines.filter(l => l.isGift).forEach(g => {
+                                    const addrKey = `${(g.address || '').trim().toLowerCase()}_${(g.zip || '').trim()}_${(g.city || '').trim().toLowerCase()}`;
+                                    giftDestinations.add(addrKey);
                                 });
-                            }
+                                const totalDestinations = (hasPersonal ? 1 : 0) + giftDestinations.size;
+                                const shipping = totalBoxes > 0 ? (totalDestinations * 6.00) : 0;
+                                const total = subtotal + shipping;
+                                const tax = total - (total / 1.10);
 
-                            const totalBoxes = lines.reduce((s, l) => s + l.qty, 0);
-                            const subtotal = lines.reduce((s, l) => s + (l.unitPrice * l.qty), 0);
+                                // 1. Texto de feedback
+                                const feedbackBox = document.getElementById('productCartFeedback');
+                                if (feedbackBox) {
+                                    const verb = qty === 1 ? 'SE HA AÑADIDO' : 'SE HAN AÑADIDO';
+                                    const cajaWord = qty === 1 ? 'CAJA' : 'CAJAS';
+                                    feedbackBox.innerHTML = `${verb} ${qty} ${cajaWord} DE "${fmt.feedbackName}" A TU PEDIDO`;
+                                }
 
-                            const hasPersonal = lines.some(l => !l.isGift && l.qty > 0);
-                            const giftDestinations = new Set();
-                            lines.filter(l => l.isGift).forEach(g => {
-                                const addrKey = `${(g.address || '').trim().toLowerCase()}_${(g.zip || '').trim()}_${(g.city || '').trim().toLowerCase()}`;
-                                giftDestinations.add(addrKey);
-                            });
-                            const totalDestinations = (hasPersonal ? 1 : 0) + giftDestinations.size;
-                            const shipping = totalBoxes > 0 ? (totalDestinations * 6.00) : 0;
-                            const total = subtotal + shipping;
-                            const tax = total - (total / 1.10);
+                                // 2. Desglose en vivo
+                                const itemsLabel = document.getElementById('summaryItemsLabel');
+                                const itemsSubtotal = document.getElementById('summaryItemsSubtotal');
+                                const shippingCost = document.getElementById('summaryShipping');
+                                const taxCost = document.getElementById('summaryTax');
+                                const totalCost = document.getElementById('summaryTotal');
 
-                            // 1. Texto de feedback
-                            const feedbackBox = document.getElementById('productCartFeedback');
-                            if (feedbackBox) {
-                                const verb = qty === 1 ? 'SE HA AÑADIDO' : 'SE HAN AÑADIDO';
-                                const cajaWord = qty === 1 ? 'CAJA' : 'CAJAS';
-                                feedbackBox.innerHTML = `${verb} ${qty} ${cajaWord} DE "${fmt.feedbackName}" A TU PEDIDO`;
-                            }
+                                if (itemsLabel) itemsLabel.innerText = `Artículos (${totalBoxes} ${totalBoxes === 1 ? 'caja' : 'cajas'}):`;
+                                if (itemsSubtotal) itemsSubtotal.innerText = (parseFloat(subtotal) || 0).toFixed(2).replace('.', ',') + ' €';
+                                if (shippingCost) shippingCost.innerText = (parseFloat(shipping) || 0).toFixed(2).replace('.', ',') + ' €';
+                                if (taxCost) taxCost.innerText = (parseFloat(tax) || 0).toFixed(2).replace('.', ',') + ' €';
+                                if (totalCost) totalCost.innerText = (parseFloat(total) || 0).toFixed(2).replace('.', ',') + ' €';
 
-                            // 2. Desglose en vivo
-                            const itemsLabel = document.getElementById('summaryItemsLabel');
-                            const itemsSubtotal = document.getElementById('summaryItemsSubtotal');
-                            const shippingCost = document.getElementById('summaryShipping');
-                            const taxCost = document.getElementById('summaryTax');
-                            const totalCost = document.getElementById('summaryTotal');
-
-                            if (itemsLabel) itemsLabel.innerText = `Artículos (${totalBoxes} ${totalBoxes === 1 ? 'caja' : 'cajas'}):`;
-                            if (itemsSubtotal) itemsSubtotal.innerText = subtotal.toFixed(2).replace('.', ',') + ' €';
-                            if (shippingCost) shippingCost.innerText = shipping.toFixed(2).replace('.', ',') + ' €';
-                            if (taxCost) taxCost.innerText = tax.toFixed(2).replace('.', ',') + ' €';
-                            if (totalCost) totalCost.innerText = total.toFixed(2).replace('.', ',') + ' €';
-
-                            try {
                                 localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
-                            } catch (e) { }
+                            } catch (err) {
+                                console.warn('Error en updateOrderSummary:', err);
+                            }
                         }
 
                         // =========================================
@@ -9712,15 +9731,7 @@ Menú del Index: Líena 742
                                 message: giftMessage
                             };
 
-                            let lines = [];
-                            try {
-                                const saved = localStorage.getItem('doxa_cart_lines');
-                                if (saved) {
-                                    lines = JSON.parse(saved);
-                                    if (!Array.isArray(lines)) lines = [];
-                                }
-                            } catch (e) { lines = []; }
-
+                            let lines = getSanitizedCartLines();
                             lines.push(giftLine);
                             localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
 
@@ -9742,67 +9753,65 @@ Menú del Index: Líena 742
                         window.submitReservasGift = submitReservasGift;
 
                         function renderReservasGiftsList() {
-                            const container = document.getElementById('reservasGiftsList');
-                            if (!container) return;
-                            let lines = [];
                             try {
-                                const saved = localStorage.getItem('doxa_cart_lines');
-                                if (saved) {
-                                    lines = JSON.parse(saved);
-                                    if (!Array.isArray(lines)) lines = [];
+                                const container = document.getElementById('reservasGiftsList');
+                                if (!container) return;
+                                let lines = getSanitizedCartLines();
+
+                                const gifts = lines.filter(l => l && l.isGift);
+                                if (gifts.length === 0) {
+                                    container.innerHTML = '';
+                                    return;
                                 }
-                            } catch (e) { lines = []; }
 
-                            const gifts = lines.filter(l => l.isGift);
-                            if (gifts.length === 0) {
-                                container.innerHTML = '';
-                                return;
+                                let html = '';
+                                gifts.forEach(g => {
+                                    const qtyNum = parseInt(g.qty) || 1;
+                                    const verb = qtyNum === 1 ? 'SE HA AÑADIDO' : 'SE HAN AÑADIDO';
+                                    const cajaWord = qtyNum === 1 ? 'CAJA' : 'CAJAS';
+                                    const formatName = (g.formatName || (g.varietyName && typeof g.varietyName === 'string' && g.varietyName.includes(' para "') ? g.varietyName.split(' para "')[0] : g.productName || 'DOXA')).toUpperCase();
+                                    const recipientName = (g.recipientName || (g.varietyName && typeof g.varietyName === 'string' && g.varietyName.includes(' para "') ? g.varietyName.split(' para "')[1].replace(/"/g, '') : '')).toUpperCase();
+                                    const recipientPart = recipientName ? ` PARA "${recipientName}"` : '';
+
+                                    html += `
+                                        <div class="res-gift-item-pill">
+                                            <span class="res-gift-feedback-text">${verb} ${qtyNum} ${cajaWord} DE REGALO DE "${formatName}"${recipientPart} A TU PEDIDO</span>
+                                            <button type="button" class="res-gift-item-del-btn" onclick="deleteReservasGift('${g.id}')" title="Eliminar este regalo">
+                                                <img src="Icono papelera.png" alt="Eliminar" class="res-gift-del-icon">
+                                            </button>
+                                        </div>
+                                    `;
+                                });
+                                container.innerHTML = html;
+                            } catch (err) {
+                                console.warn('Error en renderReservasGiftsList:', err);
                             }
-
-                            let html = '';
-                            gifts.forEach(g => {
-                                const qtyNum = g.qty || 1;
-                                const verb = qtyNum === 1 ? 'SE HA AÑADIDO' : 'SE HAN AÑADIDO';
-                                const cajaWord = qtyNum === 1 ? 'CAJA' : 'CAJAS';
-                                const formatName = (g.formatName || (g.varietyName ? g.varietyName.split(' para "')[0] : g.productName || 'DOXA')).toUpperCase();
-                                const recipientName = (g.recipientName || (g.varietyName && g.varietyName.includes(' para "') ? g.varietyName.split(' para "')[1].replace(/"/g, '') : '')).toUpperCase();
-                                const recipientPart = recipientName ? ` PARA "${recipientName}"` : '';
-
-                                html += `
-                                    <div class="res-gift-item-pill">
-                                        <span class="res-gift-feedback-text">${verb} ${qtyNum} ${cajaWord} DE REGALO DE "${formatName}"${recipientPart} A TU PEDIDO</span>
-                                        <button type="button" class="res-gift-item-del-btn" onclick="deleteReservasGift('${g.id}')" title="Eliminar este regalo">
-                                            <img src="Icono papelera.png" alt="Eliminar" class="res-gift-del-icon">
-                                        </button>
-                                    </div>
-                                `;
-                            });
-                            container.innerHTML = html;
                         }
                         window.renderReservasGiftsList = renderReservasGiftsList;
 
                         window.deleteReservasGift = function (giftId) {
-                            let lines = [];
                             try {
-                                const saved = localStorage.getItem('doxa_cart_lines');
-                                if (saved) {
-                                    lines = JSON.parse(saved);
-                                    if (!Array.isArray(lines)) lines = [];
-                                }
-                            } catch (e) { lines = []; }
-
-                            lines = lines.filter(l => l.id !== giftId);
-                            localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
-                            renderReservasGiftsList();
-                            updateOrderSummary();
+                                let lines = getSanitizedCartLines();
+                                lines = lines.filter(l => l.id !== giftId);
+                                localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                                renderReservasGiftsList();
+                                updateOrderSummary();
+                            } catch (e) {
+                                console.warn('Error eliminando regalo:', e);
+                            }
                         };
 
-                        function scrollToSlide(index) {
+                        function scrollToSlide(index, smooth = true) {
                             if (!slider) return;
                             const slides = slider.querySelectorAll('.product-slide-item');
                             if (slides[index]) {
                                 const leftPos = slides[index].offsetLeft - slider.offsetLeft;
-                                slider.scrollTo({ left: leftPos, behavior: 'smooth' });
+                                if (smooth) {
+                                    slider.scrollTo({ left: leftPos, behavior: 'smooth' });
+                                } else {
+                                    slider.scrollTo({ left: leftPos, behavior: 'auto' });
+                                    slider.scrollLeft = leftPos;
+                                }
                                 updateActiveThumb(index);
                             }
                         }
@@ -9820,173 +9829,206 @@ Menú del Index: Líena 742
                         }
 
                         function applyFormatData(fmtKey, smoothScroll = true) {
-                            const prod = getCurrentProduct();
-                            const fmt = prod.formats.find(f => f.key === fmtKey) || prod.formats[0];
-                            if (!fmt) return;
-                            activeFormatKey = fmt.key;
-                            const fmtIndex = prod.formats.indexOf(fmt);
+                            try {
+                                const prod = getCurrentProduct();
+                                const fmt = prod.formats.find(f => f.key === fmtKey) || prod.formats[0];
+                                if (!fmt) return;
+                                activeFormatKey = fmt.key;
+                                const fmtIndex = prod.formats.indexOf(fmt);
 
-                            // Actualizar título dinámico antes del carrusel
-                            if (carouselTitle && fmt.carouselTitle) {
-                                carouselTitle.innerHTML = fmt.carouselTitle;
-                            }
+                                // Actualizar título dinámico antes del carrusel
+                                if (carouselTitle && fmt.carouselTitle) {
+                                    carouselTitle.innerHTML = fmt.carouselTitle;
+                                }
 
-                            // Actualizar título principal
-                            if (mainTitle && fmt.title) {
-                                mainTitle.innerText = fmt.title;
-                            }
+                                // Actualizar título principal
+                                if (mainTitle && fmt.title) {
+                                    mainTitle.innerText = fmt.title;
+                                }
 
-                            // Actualizar precios y kilos
-                            const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
-                            const total = (fmt.price * qty).toFixed(2).replace('.', ',');
-                            if (displayPrice) displayPrice.innerText = total + ' €';
-                            if (displayKilo && fmt.kilo) displayKilo.innerText = fmt.kilo;
-                            if (btnCart) {
-                                btnCart.querySelector('span').innerText = 'Añadir a la Cesta — ' + total + ' €';
-                            }
-
-                            // Actualizar botones de formatos
-                            if (formatsGrid) {
-                                const formatBtns = formatsGrid.querySelectorAll('.product-format-option');
-                                formatBtns.forEach(btn => {
-                                    if (btn.getAttribute('data-key') === fmt.key) {
-                                        btn.classList.add('active');
+                                // Actualizar precios y kilos
+                                const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+                                const total = ((parseFloat(fmt.price) || 0) * qty).toFixed(2).replace('.', ',');
+                                if (displayPrice) displayPrice.innerText = total + ' €';
+                                if (displayKilo && fmt.kilo) displayKilo.innerText = fmt.kilo;
+                                if (btnCart) {
+                                    const span = btnCart.querySelector('span');
+                                    if (span) {
+                                        span.innerText = 'Añadir a la Cesta — ' + total + ' €';
                                     } else {
-                                        btn.classList.remove('active');
+                                        btnCart.innerText = 'Añadir a la Cesta — ' + total + ' €';
                                     }
-                                });
-                            }
+                                }
 
-                            // Actualizar miniatura y carrusel
-                            updateActiveThumb(fmtIndex);
-                            if (smoothScroll) {
-                                scrollToSlide(fmtIndex);
-                            }
+                                // Actualizar botones de formatos
+                                if (formatsGrid) {
+                                    const formatBtns = formatsGrid.querySelectorAll('.product-format-option');
+                                    formatBtns.forEach(btn => {
+                                        if (btn.getAttribute('data-key') === fmt.key) {
+                                            btn.classList.add('active');
+                                        } else {
+                                            btn.classList.remove('active');
+                                        }
+                                    });
+                                }
 
-                            // Actualizar desglose y sincronización
-                            updateOrderSummary();
+                                // Actualizar miniatura y carrusel
+                                updateActiveThumb(fmtIndex);
+                                scrollToSlide(fmtIndex, smoothScroll);
+
+                                // Actualizar desglose y sincronización
+                                updateOrderSummary();
+                            } catch (err) {
+                                console.warn('Error en applyFormatData:', err);
+                            }
                         }
+
+                        // Variable para evitar bucles durante el cambio programático de producto
+                        let _isSwitchingProduct = false;
 
                         // CAMBIO DE PRODUCTO PRINCIPAL (DOXA, COOKIE, BLOOM, LINGOTE, OBLEA, PEQUEBLOOM)
                         window.switchReservasProduct = function (productId) {
-                            if (!RESERVAS_CATALOG[productId]) return;
-                            currentProductId = productId;
-                            window.currentActiveProduct = productId;
-                            const prod = RESERVAS_CATALOG[productId];
+                            try {
+                                if (!RESERVAS_CATALOG[productId]) return;
+                                _isSwitchingProduct = true;
+                                currentProductId = productId;
+                                window.currentActiveProduct = productId;
+                                const prod = RESERVAS_CATALOG[productId];
 
-                            // 1. Actualizar barra superior de productos
-                            const navItems = document.querySelectorAll('#reservasProductsNav .reservas-nav-item');
-                            navItems.forEach(item => {
-                                const p = item.getAttribute('data-product');
-                                if (p === productId) {
-                                    item.classList.add('active');
-                                    item.setAttribute('aria-selected', 'true');
-                                } else {
-                                    item.classList.remove('active');
-                                    item.setAttribute('aria-selected', 'false');
-                                }
-                            });
-
-                            // Mantener sincronizadas también Rueda y El Sabor en segundo plano
-                            const wheels = document.querySelectorAll(".product-wheel");
-                            wheels.forEach(sec => {
-                                if (sec.getAttribute("data-product") === productId) {
-                                    sec.classList.add("active-product-wheel");
-                                } else {
-                                    sec.classList.remove("active-product-wheel");
-                                }
-                            });
-                            const saborSections = document.querySelectorAll(".product-sabor");
-                            saborSections.forEach(sec => {
-                                if (sec.getAttribute("data-product") === productId) {
-                                    sec.classList.add("active-product-sabor");
-                                } else {
-                                    sec.classList.remove("active-product-sabor");
-                                }
-                            });
-
-                            // 2. Actualizar pretítulo y descripción corta
-                            if (pretitleEl && prod.pretitle) pretitleEl.innerText = prod.pretitle;
-                            if (shortDescEl && prod.shortDesc) shortDescEl.innerText = prod.shortDesc;
-
-                            // 3. Renderizar botones de formatos disponibles para este producto
-                            if (formatsGrid) {
-                                formatsGrid.innerHTML = '';
-                                prod.formats.forEach((fmt, idx) => {
-                                    const btn = document.createElement('button');
-                                    btn.type = 'button';
-                                    btn.className = 'product-format-option' + (idx === 0 ? ' active' : '');
-                                    btn.setAttribute('data-key', fmt.key);
-                                    btn.innerHTML = `
-                                        <span class="format-opt-title">${fmt.optTitle}</span>
-                                        <span class="format-opt-sub">${fmt.optSub}</span>
-                                    `;
-                                    btn.onclick = () => {
-                                        applyFormatData(fmt.key, true);
-                                    };
-                                    formatsGrid.appendChild(btn);
+                                // 1. Actualizar barra superior de productos
+                                const navItems = document.querySelectorAll('#reservasProductsNav .reservas-nav-item');
+                                navItems.forEach(item => {
+                                    const p = item.getAttribute('data-product');
+                                    if (p === productId) {
+                                        item.classList.add('active');
+                                        item.setAttribute('aria-selected', 'true');
+                                    } else {
+                                        item.classList.remove('active');
+                                        item.setAttribute('aria-selected', 'false');
+                                    }
                                 });
-                            }
 
-                            // 4. Renderizar slides del carrusel
-                            if (slider) {
-                                slider.innerHTML = '';
-                                prod.formats.forEach((fmt, idx) => {
-                                    const slide = document.createElement('div');
-                                    slide.className = 'product-slide-item';
-                                    slide.setAttribute('data-index', idx);
-                                    slide.setAttribute('data-key', fmt.key);
-                                    slide.innerHTML = `<img src="${fmt.image}" alt="${fmt.title}" ${idx > 0 ? 'loading="lazy"' : ''}>`;
-                                    slider.appendChild(slide);
+                                // Mantener sincronizadas también Rueda y El Sabor en segundo plano
+                                const wheels = document.querySelectorAll(".product-wheel");
+                                wheels.forEach(sec => {
+                                    if (sec.getAttribute("data-product") === productId) {
+                                        sec.classList.add("active-product-wheel");
+                                    } else {
+                                        sec.classList.remove("active-product-wheel");
+                                    }
                                 });
-                                slider.scrollLeft = 0;
-                            }
-
-                            // 5. Renderizar miniaturas
-                            if (thumbsStrip) {
-                                thumbsStrip.innerHTML = '';
-                                prod.formats.forEach((fmt, idx) => {
-                                    const tbtn = document.createElement('button');
-                                    tbtn.type = 'button';
-                                    tbtn.className = 'product-thumb-btn' + (idx === 0 ? ' active' : '');
-                                    tbtn.setAttribute('data-index', idx);
-                                    tbtn.setAttribute('data-key', fmt.key);
-                                    tbtn.title = fmt.title;
-                                    tbtn.innerHTML = `<img src="${fmt.image}" alt="${fmt.feedbackName}">`;
-                                    tbtn.onclick = () => {
-                                        applyFormatData(fmt.key, true);
-                                    };
-                                    thumbsStrip.appendChild(tbtn);
+                                const saborSections = document.querySelectorAll(".product-sabor");
+                                saborSections.forEach(sec => {
+                                    if (sec.getAttribute("data-product") === productId) {
+                                        sec.classList.add("active-product-sabor");
+                                    } else {
+                                        sec.classList.remove("active-product-sabor");
+                                    }
                                 });
-                            }
 
-                            // 6. Actualizar enlaces y textos de regalo y checkout
-                            if (giftTitleEl) {
-                                giftTitleEl.innerText = `¿QUIERES ENVIAR ${prod.giftName} COMO REGALO?`;
-                            }
-                            if (btnGift) {
-                                btnGift.innerText = `SÍ, QUIERO REGALAR ${prod.giftName}`;
-                            }
-                            if (btnCheckout) {
-                                btnCheckout.href = `compra.html`;
-                            }
-                            populateReservasGiftVarieties();
-                            renderReservasGiftsList();
+                                // 2. Actualizar pretítulo y descripción corta
+                                if (pretitleEl && prod.pretitle) pretitleEl.innerText = prod.pretitle;
+                                if (shortDescEl && prod.shortDesc) shortDescEl.innerText = prod.shortDesc;
 
-                            // 7. Aplicar formato inicial
-                            applyFormatData(prod.defaultFormat || prod.formats[0].key, false);
+                                // 3. Renderizar botones de formatos disponibles para este producto
+                                if (formatsGrid) {
+                                    formatsGrid.innerHTML = '';
+                                    prod.formats.forEach((fmt, idx) => {
+                                        const btn = document.createElement('button');
+                                        btn.type = 'button';
+                                        btn.className = 'product-format-option' + (idx === 0 ? ' active' : '');
+                                        btn.setAttribute('data-key', fmt.key);
+                                        btn.innerHTML = `
+                                            <span class="format-opt-title">${fmt.optTitle}</span>
+                                            <span class="format-opt-sub">${fmt.optSub}</span>
+                                        `;
+                                        btn.onclick = (e) => {
+                                            if (e && typeof e.preventDefault === 'function') e.preventDefault();
+                                            applyFormatData(fmt.key, true);
+                                        };
+                                        formatsGrid.appendChild(btn);
+                                    });
+                                }
+
+                                // 4. Renderizar slides del carrusel con carga inmediata de la foto
+                                if (slider) {
+                                    slider.innerHTML = '';
+                                    prod.formats.forEach((fmt, idx) => {
+                                        const slide = document.createElement('div');
+                                        slide.className = 'product-slide-item';
+                                        slide.setAttribute('data-index', idx);
+                                        slide.setAttribute('data-key', fmt.key);
+                                        slide.innerHTML = `<img src="${fmt.image}" alt="${fmt.title}">`;
+                                        slider.appendChild(slide);
+                                    });
+                                    slider.scrollLeft = 0;
+                                }
+
+                                // 5. Renderizar miniaturas
+                                if (thumbsStrip) {
+                                    thumbsStrip.innerHTML = '';
+                                    prod.formats.forEach((fmt, idx) => {
+                                        const tbtn = document.createElement('button');
+                                        tbtn.type = 'button';
+                                        tbtn.className = 'product-thumb-btn' + (idx === 0 ? ' active' : '');
+                                        tbtn.setAttribute('data-index', idx);
+                                        tbtn.setAttribute('data-key', fmt.key);
+                                        tbtn.title = fmt.title;
+                                        tbtn.innerHTML = `<img src="${fmt.image}" alt="${fmt.feedbackName}">`;
+                                        tbtn.onclick = (e) => {
+                                            if (e && typeof e.preventDefault === 'function') e.preventDefault();
+                                            applyFormatData(fmt.key, true);
+                                        };
+                                        thumbsStrip.appendChild(tbtn);
+                                    });
+                                }
+
+                                // 6. Actualizar enlaces y textos de regalo y checkout
+                                if (giftTitleEl) {
+                                    giftTitleEl.innerText = `¿QUIERES ENVIAR ${prod.giftName} COMO REGALO?`;
+                                }
+                                if (btnGift) {
+                                    btnGift.innerText = `SÍ, QUIERO REGALAR ${prod.giftName}`;
+                                }
+                                if (btnCheckout) {
+                                    btnCheckout.href = `compra.html`;
+                                }
+                                try {
+                                    populateReservasGiftVarieties();
+                                } catch (e) {
+                                    console.warn('Error en populateReservasGiftVarieties:', e);
+                                }
+                                try {
+                                    renderReservasGiftsList();
+                                } catch (e) {
+                                    console.warn('Error en renderReservasGiftsList:', e);
+                                }
+
+                                // 7. Aplicar formato inicial y posicionar slide inmediatamente
+                                const targetFormatKey = prod.defaultFormat || prod.formats[0].key;
+                                applyFormatData(targetFormatKey, false);
+
+                                setTimeout(() => {
+                                    _isSwitchingProduct = false;
+                                }, 200);
+                            } catch (err) {
+                                console.error('Error al cambiar de producto en Reservas:', err);
+                                _isSwitchingProduct = false;
+                            }
                         };
 
                         // Scroll táctil en carrusel swipeable nativo
                         if (slider) {
                             let scrollTimeout;
                             slider.addEventListener('scroll', () => {
+                                if (_isSwitchingProduct) return;
                                 clearTimeout(scrollTimeout);
                                 scrollTimeout = setTimeout(() => {
+                                    if (_isSwitchingProduct) return;
                                     const prod = getCurrentProduct();
                                     const scrollLeft = slider.scrollLeft;
                                     const slideWidth = slider.clientWidth;
-                                    if (slideWidth > 0 && prod.formats.length > 0) {
+                                    if (slideWidth > 0 && prod.formats && prod.formats.length > 0) {
                                         const curIdx = Math.min(
                                             Math.max(0, Math.round(scrollLeft / slideWidth)),
                                             prod.formats.length - 1
@@ -10006,7 +10048,14 @@ Menú del Index: Líena 742
                             const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
                             const total = (fmt.price * qty).toFixed(2).replace('.', ',');
                             if (displayPrice) displayPrice.innerText = total + ' €';
-                            if (btnCart) btnCart.querySelector('span').innerText = 'Añadir a la Cesta — ' + total + ' €';
+                            if (btnCart) {
+                                const span = btnCart.querySelector('span');
+                                if (span) {
+                                    span.innerText = 'Añadir a la Cesta — ' + total + ' €';
+                                } else {
+                                    btnCart.innerText = 'Añadir a la Cesta — ' + total + ' €';
+                                }
+                            }
                         }
 
                         const btnMinus = document.getElementById('qtyMinusBtn');
@@ -10086,6 +10135,24 @@ Menú del Index: Líena 742
                             btnCheckout.addEventListener('click', () => {
                                 syncCartToStorage(true);
                             });
+                        }
+
+                        // Vinculación directa y robusta de eventos de clic a los botones de productos en Reservas
+                        function bindReservasNavEvents() {
+                            const navItems = document.querySelectorAll('#reservasProductsNav .reservas-nav-item');
+                            navItems.forEach(item => {
+                                item.addEventListener('click', function (e) {
+                                    e.preventDefault();
+                                    const prod = this.getAttribute('data-product');
+                                    if (prod && typeof window.switchReservasProduct === 'function') {
+                                        window.switchReservasProduct(prod);
+                                    }
+                                });
+                            });
+                        }
+                        bindReservasNavEvents();
+                        if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', bindReservasNavEvents);
                         }
 
                         // Inicialización: cargar el producto actualmente activo (o DOXA por defecto)
