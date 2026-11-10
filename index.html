@@ -77,13 +77,14 @@ Menú del Index: Líena 742
                 var isReserva = s.indexOf('producto=') !== -1 || s.indexOf('reserva=') !== -1 ||
                     h === '#reserva' || h === '#la-coleccion' || h === '#reservasProductsNav' || h.indexOf('#reserva-') === 0;
                 if (isReserva) {
+                    document.documentElement.classList.add('direct-reservas');
                     document.documentElement.style.scrollBehavior = 'auto';
                     if ('scrollRestoration' in history) {
                         history.scrollRestoration = 'manual';
                     }
                     var style = document.createElement('style');
                     style.id = 'reserva-prejump-style';
-                    style.textContent = 'body { opacity: 0 !important; visibility: hidden !important; }';
+                    style.textContent = 'html.direct-reservas body { opacity: 0 !important; visibility: hidden !important; }';
                     document.head.appendChild(style);
                     setTimeout(function () {
                         var el = document.getElementById('reserva-prejump-style');
@@ -92,7 +93,7 @@ Menú del Index: Líena 742
                             document.body.style.visibility = 'visible';
                             document.body.style.opacity = '1';
                         }
-                    }, 600);
+                    }, 800);
                 }
             } catch (e) { }
         })();
@@ -153,6 +154,37 @@ Menú del Index: Líena 742
             #reserva {
                 scroll-margin-top: 70px;
             }
+        }
+
+        /* =========================================================================
+           ESTADOS PARA SALTO DIRECTO E INSTANTÁNEO A RESERVAS
+           Elimina cualquier temblor, animación vertical o desplazamiento visual
+           ========================================================================= */
+        html.direct-reservas,
+        html.direct-reservas body {
+            scroll-behavior: auto !important;
+        }
+
+        html.direct-reservas * {
+            animation-duration: 0s !important;
+            animation-delay: 0s !important;
+            transition-duration: 0s !important;
+            transition-delay: 0s !important;
+        }
+
+        html.direct-reservas .animate-appear {
+            animation: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+
+        html.direct-reservas .product-gallery-slider {
+            scroll-behavior: auto !important;
+            scroll-snap-type: none !important;
+        }
+
+        html.direct-reservas .reservas-products-nav {
+            scroll-behavior: auto !important;
         }
 
         body.menu-open {
@@ -9855,10 +9887,11 @@ Menú del Index: Líena 742
 
                         function scrollToSlide(index, smooth = true) {
                             if (!slider) return;
+                            const isDirect = document.documentElement.classList.contains('direct-reservas');
                             const slides = slider.querySelectorAll('.product-slide-item');
                             if (slides[index]) {
                                 const leftPos = slides[index].offsetLeft - slider.offsetLeft;
-                                if (smooth) {
+                                if (smooth && !isDirect) {
                                     slider.scrollTo({ left: leftPos, behavior: 'smooth' });
                                 } else {
                                     slider.scrollTo({ left: leftPos, behavior: 'auto' });
@@ -9960,7 +9993,7 @@ Menú del Index: Líena 742
                                     }
                                 });
 
-                                // Centrar suavemente el producto seleccionado en el menú horizontal (móvil y desktop) sin mover la página
+                                // Centrar el producto seleccionado en el menú horizontal (móvil y desktop) sin mover la página
                                 const activeNavItem = document.querySelector(`#reservasProductsNav .reservas-nav-item[data-product="${productId}"]`);
                                 const navContainer = document.getElementById('reservasProductsNav');
                                 if (activeNavItem && navContainer) {
@@ -9968,10 +10001,15 @@ Menú del Index: Líena 742
                                     const navRect = navContainer.getBoundingClientRect();
                                     const offset = itemRect.left - navRect.left + navContainer.scrollLeft;
                                     const targetScroll = offset - (navContainer.clientWidth / 2) + (itemRect.width / 2);
-                                    navContainer.scrollTo({
-                                        left: Math.max(0, targetScroll),
-                                        behavior: 'smooth'
-                                    });
+                                    const isDirect = document.documentElement.classList.contains('direct-reservas');
+                                    if (isDirect) {
+                                        navContainer.scrollLeft = Math.max(0, targetScroll);
+                                    } else {
+                                        navContainer.scrollTo({
+                                            left: Math.max(0, targetScroll),
+                                            behavior: 'smooth'
+                                        });
+                                    }
                                 }
 
                                 // Mantener sincronizadas también Rueda y El Sabor en segundo plano
@@ -10335,36 +10373,40 @@ Menú del Index: Líena 742
                         switchReservasProduct(initialReservasProd);
 
                         // Si viene específicamente buscando un producto o el apartado de reservas:
-                        // SALTO DIRECTO E INSTANTÁNEO A LA SECCIÓN DE RESERVAS SIN PASAR POR LA CABECERA
+                        // SALTO DIRECTO E INSTANTÁNEO A LA SECCIÓN DE RESERVAS SIN PASAR POR LA CABECERA Y SIN TEMBLORES
                         const isReservaIncoming = !!(urlTargetProd || window.location.hash === '#reserva' || window.location.hash === '#la-coleccion' || window.location.hash === '#reservasProductsNav');
                         if (isReservaIncoming) {
-                            const executeInstantDirectJump = () => {
-                                const isMobile = window.innerWidth <= 768;
-                                const scrollTarget = document.getElementById('reservasProductsNav') || document.getElementById('productThumbsStrip') || document.querySelector('.product-buy-box') || document.getElementById('la-coleccion');
+                            const isMobile = window.innerWidth <= 768;
+                            const scrollTarget = document.getElementById('reservasProductsNav') || document.getElementById('la-coleccion');
+                            if (scrollTarget) {
+                                const topOffset = isMobile ? 70 : 85;
+                                const targetY = scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset;
+                                window.scrollTo(0, Math.max(0, targetY));
+                            }
+
+                            // Revelar el contenido con el elemento ya fijado en su sitio exacto
+                            const preStyle = document.getElementById('reserva-prejump-style');
+                            if (preStyle) preStyle.remove();
+                            if (document.body) {
+                                document.body.style.visibility = 'visible';
+                                document.body.style.opacity = '1';
+                            }
+
+                            // Asegurar en el siguiente frame una única vez sin bucles repetidos
+                            requestAnimationFrame(() => {
                                 if (scrollTarget) {
                                     const topOffset = isMobile ? 70 : 85;
                                     const targetY = scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset;
                                     window.scrollTo(0, Math.max(0, targetY));
                                 }
-                                // Revelar el contenido ya situado exactamente en la sección
-                                const preStyle = document.getElementById('reserva-prejump-style');
-                                if (preStyle) preStyle.remove();
-                                if (document.body) {
-                                    document.body.style.visibility = 'visible';
-                                    document.body.style.opacity = '1';
-                                }
-                            };
+                            });
 
-                            // Salto inmediato sin retrasos
-                            executeInstantDirectJump();
-                            requestAnimationFrame(executeInstantDirectJump);
-                            setTimeout(executeInstantDirectJump, 50);
-                            setTimeout(executeInstantDirectJump, 150);
-                            setTimeout(executeInstantDirectJump, 300);
+                            // Una vez completamente asentado el scroll y pintado en pantalla (350ms),
+                            // retiramos la clase de bloqueo para restaurar el comportamiento suave normal del index
                             setTimeout(() => {
-                                // Restaurar scroll suave para navegación interna habitual tras haber aterrizado
+                                document.documentElement.classList.remove('direct-reservas');
                                 document.documentElement.style.scrollBehavior = '';
-                            }, 450);
+                            }, 350);
                         }
                     })();
                 </script>
