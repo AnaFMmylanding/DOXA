@@ -1800,7 +1800,7 @@ Menú del Index: Líena 742
                 align-items: center;
                 overflow: hidden;
                 background-color: var(--dark-bg);
-                padding: 90px 0 70px 0;
+                padding: 38px 0 45px 0;
                 scroll-margin-top: 75px;
             }
 
@@ -1847,7 +1847,136 @@ Menú del Index: Líena 742
                 flex-direction: row;
                 align-items: center;
                 gap: 40px;
-                padding: 40px 20px;
+                padding: 0 20px 30px 20px;
+            }
+
+            /* =========================================================================
+               SISTEMA DE CONTRASTE DINÁMICO (LUMINANCIA) PARA RUEDA DE ACTIVOS
+               Adapta automáticamente los colores del texto al fondo (claro u oscuro).
+               ========================================================================= */
+            .rueda-activos-header .section-title,
+            .rueda-activos-header .section-lead-text,
+            .text-box,
+            .text-box .tagline,
+            .text-box .variety-title,
+            .text-box .hero-value-prop-neg,
+            .text-box .hero-value-prop,
+            .btn-reserva-rueda {
+                transition: color 0.4s ease, text-shadow 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
+            }
+
+            /* 1. CABECERA: Fondo OSCURO (Por defecto o detectado) -> Texto Blanco Nítido */
+            .cajas-activos-section .rueda-activos-header .section-title,
+            .cajas-activos-section[data-header-theme="dark"] .rueda-activos-header .section-title,
+            .rueda-activos-header[data-bg-theme="dark"] .section-title {
+                color: #FFFFFF !important;
+                text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 3px rgba(0, 0, 0, 0.95) !important;
+            }
+
+            .cajas-activos-section .rueda-activos-header .section-lead-text,
+            .cajas-activos-section[data-header-theme="dark"] .rueda-activos-header .section-lead-text,
+            .rueda-activos-header[data-bg-theme="dark"] .section-lead-text {
+                color: rgba(255, 255, 255, 0.92) !important;
+                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75) !important;
+            }
+
+            /* 2. CABECERA: Fondo CLARO -> Texto Oscuro */
+            .cajas-activos-section[data-header-theme="light"] .rueda-activos-header .section-title,
+            .rueda-activos-header[data-bg-theme="light"] .section-title {
+                color: #181818 !important;
+                text-shadow: none !important;
+            }
+
+            .cajas-activos-section[data-header-theme="light"] .rueda-activos-header .section-lead-text,
+            .rueda-activos-header[data-bg-theme="light"] .section-lead-text {
+                color: rgba(24, 24, 24, 0.85) !important;
+                text-shadow: none !important;
+            }
+
+            /* 3. CAJA DE TEXTO: Fondo OSCURO -> Texto Blanco */
+            .cajas-activos-section[data-text-theme="dark"] .text-box,
+            .text-box[data-bg-theme="dark"] {
+                color: #FFFFFF !important;
+            }
+
+            .cajas-activos-section[data-text-theme="dark"] .text-box .tagline,
+            .text-box[data-bg-theme="dark"] .tagline {
+                color: rgba(255, 255, 255, 0.80) !important;
+                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6) !important;
+            }
+
+            .cajas-activos-section[data-text-theme="dark"] .text-box .variety-title,
+            .text-box[data-bg-theme="dark"] .variety-title {
+                color: #FFFFFF !important;
+                text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85), 0 0 3px rgba(0, 0, 0, 0.9) !important;
+            }
+
+            .cajas-activos-section[data-text-theme="dark"] .text-box .hero-value-prop-neg,
+            .text-box[data-bg-theme="dark"] .hero-value-prop-neg {
+                color: rgba(255, 255, 255, 0.95) !important;
+                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6) !important;
+            }
+
+            .cajas-activos-section[data-text-theme="dark"] .text-box .hero-value-prop,
+            .text-box[data-bg-theme="dark"] .hero-value-prop {
+                color: rgba(255, 255, 255, 0.88) !important;
+                text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6) !important;
+            }
+
+            .cajas-activos-section[data-text-theme="dark"] .btn-reserva-rueda,
+            .text-box[data-bg-theme="dark"] ~ .rueda-cta-wrapper .btn-reserva-rueda {
+                color: #FFFFFF !important;
+                border-color: rgba(255, 255, 255, 0.8) !important;
+            }
+
+            .cajas-activos-section[data-text-theme="dark"] .btn-reserva-rueda:hover,
+            .text-box[data-bg-theme="dark"] ~ .rueda-cta-wrapper .btn-reserva-rueda:hover {
+                background-color: #FFFFFF !important;
+                color: #181818 !important;
+                border-color: #FFFFFF !important;
+            }
+
+            /* 4. CAJA DE TEXTO: Fondo CLARO -> Texto Oscuro */
+            .cajas-activos-section[data-text-theme="light"] .text-box,
+            .text-box[data-bg-theme="light"] {
+                color: #181818 !important;
+            }
+
+            .cajas-activos-section[data-text-theme="light"] .text-box .tagline,
+            .text-box[data-bg-theme="light"] .tagline {
+                color: rgba(0, 0, 0, 0.45) !important;
+                text-shadow: none !important;
+            }
+
+            .cajas-activos-section[data-text-theme="light"] .text-box .variety-title,
+            .text-box[data-bg-theme="light"] .variety-title {
+                color: #181818 !important;
+                text-shadow: none !important;
+            }
+
+            .cajas-activos-section[data-text-theme="light"] .text-box .hero-value-prop-neg,
+            .text-box[data-bg-theme="light"] .hero-value-prop-neg {
+                color: #181818 !important;
+                text-shadow: none !important;
+            }
+
+            .cajas-activos-section[data-text-theme="light"] .text-box .hero-value-prop,
+            .text-box[data-bg-theme="light"] .hero-value-prop {
+                color: rgba(24, 24, 24, 0.85) !important;
+                text-shadow: none !important;
+            }
+
+            .cajas-activos-section[data-text-theme="light"] .btn-reserva-rueda,
+            .text-box[data-bg-theme="light"] ~ .rueda-cta-wrapper .btn-reserva-rueda {
+                color: #181818 !important;
+                border-color: #181818 !important;
+            }
+
+            .cajas-activos-section[data-text-theme="light"] .btn-reserva-rueda:hover,
+            .text-box[data-bg-theme="light"] ~ .rueda-cta-wrapper .btn-reserva-rueda:hover {
+                background-color: #181818 !important;
+                color: #FFFFFF !important;
+                border-color: #181818 !important;
             }
 
             .wheel-column {
@@ -2072,7 +2201,7 @@ Menú del Index: Líena 742
                     display: flex;
                     flex-direction: column !important;
                     align-items: center !important;
-                    padding: 50px 0 40px 0 !important;
+                    padding: 30px 0 35px 0 !important;
                 }
 
                 .product-wheel {
@@ -2441,9 +2570,9 @@ Menú del Index: Líena 742
             <a id="cajas-activos" style="position: absolute; top: 0; pointer-events: none;"></a>
             <div class="bg-layer" id="caja-bg-doxa" style="background-image: url('piel negra.jpg');"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS (Copiado de El Sabor Doxa) -->
-            <div class="container animate-appear" style="text-align: center; margin-bottom: 60px; position: relative; z-index: 5;">
-                <h2 class="section-title">LA ARQUITECTURA DE ACTIVOS</h2>
+            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
+            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
+                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
                 <p class="section-lead-text" style="max-width: 600px;">
                     Trufas Puras de Alta Confitería Bioinductiva.<br>
                     Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
@@ -2494,9 +2623,9 @@ Menú del Index: Líena 742
             <a id="rueda-cookie" style="position: absolute; top: 0; pointer-events: none;"></a>
             <div class="bg-layer" id="caja-bg-cookie" style="background-image: url('piel negra.jpg');"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS (Copiado de El Sabor Doxa) -->
-            <div class="container animate-appear" style="text-align: center; margin-bottom: 60px; position: relative; z-index: 5;">
-                <h2 class="section-title">LA ARQUITECTURA DE ACTIVOS</h2>
+            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
+            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
+                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
                 <p class="section-lead-text" style="max-width: 600px;">
                     Trufas Puras de Alta Confitería Bioinductiva.<br>
                     Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
@@ -2545,9 +2674,9 @@ Menú del Index: Líena 742
             <div class="bg-layer" id="caja-bg-bbb" style="background-image: url('piel negra.jpg');"></div>
             <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-bbb"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS (Copiado de El Sabor Doxa) -->
-            <div class="container animate-appear" style="text-align: center; margin-bottom: 60px; position: relative; z-index: 5;">
-                <h2 class="section-title">LA ARQUITECTURA DE ACTIVOS</h2>
+            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
+            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
+                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
                 <p class="section-lead-text" style="max-width: 600px;">
                     Trufas Puras de Alta Confitería Bioinductiva.<br>
                     Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
@@ -2596,9 +2725,9 @@ Menú del Index: Líena 742
             <div class="bg-layer" id="caja-bg-lingote" style="background-image: url('piel negra.jpg');"></div>
             <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-lingote"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS (Copiado de El Sabor Doxa) -->
-            <div class="container animate-appear" style="text-align: center; margin-bottom: 60px; position: relative; z-index: 5;">
-                <h2 class="section-title">LA ARQUITECTURA DE ACTIVOS</h2>
+            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
+            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
+                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
                 <p class="section-lead-text" style="max-width: 600px;">
                     Trufas Puras de Alta Confitería Bioinductiva.<br>
                     Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
@@ -2648,9 +2777,9 @@ Menú del Index: Líena 742
             <div class="bg-layer" id="caja-bg-oblea" style="background-image: url('piel negra.jpg');"></div>
             <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-oblea"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS (Copiado de El Sabor Doxa) -->
-            <div class="container animate-appear" style="text-align: center; margin-bottom: 60px; position: relative; z-index: 5;">
-                <h2 class="section-title">LA ARQUITECTURA DE ACTIVOS</h2>
+            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
+            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
+                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
                 <p class="section-lead-text" style="max-width: 600px;">
                     Trufas Puras de Alta Confitería Bioinductiva.<br>
                     Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
@@ -2700,9 +2829,9 @@ Menú del Index: Líena 742
             <div class="bg-layer" id="caja-bg-pequebloom" style="background-image: url('piel negra.jpg');"></div>
             <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-pequebloom"></div>
 
-            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS (Copiado de El Sabor Doxa) -->
-            <div class="container animate-appear" style="text-align: center; margin-bottom: 60px; position: relative; z-index: 5;">
-                <h2 class="section-title">LA ARQUITECTURA DE ACTIVOS</h2>
+            <!-- HEADER DE SECCIÓN RUEDA DE ACTIVOS -->
+            <div class="container animate-appear rueda-activos-header" data-bg-theme="dark" style="text-align: center; margin-bottom: 20px; position: relative; z-index: 5;">
+                <h2 class="section-title" style="margin-bottom: 12px;">LA ARQUITECTURA DE ACTIVOS</h2>
                 <p class="section-lead-text" style="max-width: 600px;">
                     Trufas Puras de Alta Confitería Bioinductiva.<br>
                     Donde disfrutar y cuidarse encuentran el mismo camino. El capricho evoluciona.
@@ -3522,6 +3651,126 @@ Menú del Index: Líena 742
 
 
             /* =========================================================================
+               SISTEMA AUTOMÁTICO DE DETECCIÓN DE LUMINANCIA PARA FONDOS DE RUEDA DE ACTIVOS
+               Analiza mediante Canvas la imagen de fondo (o mapa de fallback)
+               y adapta el color de cabeceras ("LA ARQUITECTURA DE ACTIVOS") y caja de texto.
+               ========================================================================= */
+            const LUMINANCE_CACHE = {};
+
+            const KNOWN_BG_THEMES = {
+                'amazona.jpg': { header: 'dark', text: 'light' },
+                'piel negra.jpg': { header: 'dark', text: 'dark' },
+                'pelo y uñas.jpg': { header: 'dark', text: 'dark' },
+                'cabello y uñas.jpg': { header: 'dark', text: 'dark' },
+                'hidratación.jpg': { header: 'dark', text: 'dark' },
+                'claridad mental.jpg': { header: 'dark', text: 'dark' },
+                'energía.jpg': { header: 'dark', text: 'dark' },
+                'articulaciones.jpg': { header: 'dark', text: 'dark' },
+                'creatina _ok.jpg': { header: 'dark', text: 'dark' },
+                'respeto.jpg': { header: 'dark', text: 'dark' }
+            };
+
+            function analyzeImageLuminance(url, callback) {
+                if (!url || url === 'none') {
+                    callback({ header: 'light', text: 'light' });
+                    return;
+                }
+                const cleanUrl = url.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '').trim();
+                const fileName = cleanUrl.split('/').pop().split('\\').pop();
+                const key = fileName.toLowerCase();
+
+                if (LUMINANCE_CACHE[key]) {
+                    callback(LUMINANCE_CACHE[key]);
+                    return;
+                }
+
+                const img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = function () {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                        if (!ctx) throw new Error('No canvas context');
+
+                        const w = 100;
+                        const h = 80;
+                        canvas.width = w;
+                        canvas.height = h;
+                        ctx.drawImage(img, 0, 0, w, h);
+
+                        // Muestra 1: Cabecera superior (x: 20% a 80%, y: 0% a 30%)
+                        const hData = ctx.getImageData(Math.floor(w * 0.2), 0, Math.floor(w * 0.6), Math.floor(h * 0.3)).data;
+                        let sumH = 0, countH = 0;
+                        for (let i = 0; i < hData.length; i += 4) {
+                            sumH += (0.299 * hData[i] + 0.587 * hData[i + 1] + 0.114 * hData[i + 2]) * 0.6;
+                            countH++;
+                        }
+                        const avgH = countH > 0 ? sumH / countH : 0;
+
+                        // Muestra 2: Caja de texto (derecha: x: 55% a 95%, y: 25% a 75%)
+                        const isMobile = window.innerWidth <= 768;
+                        const tX = isMobile ? Math.floor(w * 0.15) : Math.floor(w * 0.55);
+                        const tW = isMobile ? Math.floor(w * 0.7) : Math.floor(w * 0.4);
+                        const tY = isMobile ? Math.floor(h * 0.55) : Math.floor(h * 0.25);
+                        const tH = isMobile ? Math.floor(h * 0.4) : Math.floor(h * 0.55);
+
+                        const tData = ctx.getImageData(tX, tY, tW, tH).data;
+                        let sumT = 0, countT = 0;
+                        for (let i = 0; i < tData.length; i += 4) {
+                            sumT += (0.299 * tData[i] + 0.587 * tData[i + 1] + 0.114 * tData[i + 2]) * 0.6;
+                            countT++;
+                        }
+                        const avgT = countT > 0 ? sumT / countT : 0;
+
+                        const result = {
+                            header: avgH < 125 ? 'dark' : 'light',
+                            text: avgT < 125 ? 'dark' : 'light'
+                        };
+                        LUMINANCE_CACHE[key] = result;
+                        callback(result);
+                        return;
+                    } catch (e) {
+                        applyFallback();
+                    }
+                };
+                img.onerror = applyFallback;
+
+                function applyFallback() {
+                    if (KNOWN_BG_THEMES[key]) {
+                        LUMINANCE_CACHE[key] = KNOWN_BG_THEMES[key];
+                        callback(KNOWN_BG_THEMES[key]);
+                    } else {
+                        callback({ header: 'dark', text: 'dark' });
+                    }
+                }
+
+                img.src = cleanUrl;
+            }
+
+            function updateSectionLuminanceTheme(sectionEl, bgUrl) {
+                if (!sectionEl) return;
+                if (!bgUrl) {
+                    const bgLayer = sectionEl.querySelector('.bg-layer');
+                    if (bgLayer) {
+                        bgUrl = bgLayer.style.backgroundImage || window.getComputedStyle(bgLayer).backgroundImage || '';
+                    }
+                }
+                analyzeImageLuminance(bgUrl, function (theme) {
+                    sectionEl.setAttribute('data-header-theme', theme.header);
+                    sectionEl.setAttribute('data-text-theme', theme.text);
+
+                    const headerEl = sectionEl.querySelector('.rueda-activos-header');
+                    if (headerEl) headerEl.setAttribute('data-bg-theme', theme.header);
+
+                    const textBox = sectionEl.querySelector('.text-box');
+                    if (textBox) textBox.setAttribute('data-bg-theme', theme.text);
+                });
+            }
+            window.updateSectionLuminanceTheme = updateSectionLuminanceTheme;
+            window.analyzeImageLuminance = analyzeImageLuminance;
+
+
+            /* =========================================================================
                MOTOR 1: RUEDAS ESTILO DOXA (DOXA Y DOXA-COOKIE)
                ========================================================================= */
             function initDoxaStyleWheel(sec, activos) {
@@ -3533,6 +3782,7 @@ Menú del Index: Líena 742
                 const galletaCentral = sec.querySelector(".galleta-fija");
                 if (!rueda || !cajaText || !radialWrapper) return;
                 const defaultNeutralHTML = cajaText.innerHTML;
+                updateSectionLuminanceTheme(sec);
 
                 const getRadioCategorias = () => (window.innerWidth <= 768 ? 205 : 215);
                 let rotacionActual = 0;
@@ -3637,9 +3887,11 @@ Menú del Index: Líena 742
                     const currentBg = a.bg;
                     if (currentBg) {
                         cajaBg.style.backgroundImage = `url('${currentBg}')`;
+                        updateSectionLuminanceTheme(sec, currentBg);
                     } else {
                         cajaBg.style.backgroundImage = 'none';
                         cajaBg.style.backgroundColor = isMobile ? 'var(--yeso-oscuro)' : 'var(--dark-bg)';
+                        updateSectionLuminanceTheme(sec, 'none');
                     }
 
                     const defaultTagline = sec.id.includes('cookie') ? 'DOXA COOKIE' : 'TRUFAS PURAS';
@@ -3715,6 +3967,7 @@ Menú del Index: Líena 742
                     transitionCajaText(defaultNeutralHTML);
 
                     cajaBg.style.backgroundImage = "url('piel negra.jpg')";
+                    updateSectionLuminanceTheme(sec, 'piel negra.jpg');
                     renderRueda();
                 }
 
@@ -4750,19 +5003,13 @@ Menú del Index: Líena 742
                 const defaultImgSrc = galletaFija ? (galletaFija.getAttribute("src") || "BBB.png") : "BBB.png";
                 const defaultImgAlt = galletaFija ? (galletaFija.alt || "Bombon Bloom") : "Bombon Bloom";
                 const defaultNeutralHTML = cajaText.innerHTML;
+                updateSectionLuminanceTheme(sec);
 
                 let activeBgUrl = 'piel negra.jpg';
                 let bgTransitionTimer = null;
 
                 function updateTextTheme(bgUrl) {
-                    if (!cajaText) return;
-                    const isMobile = window.innerWidth <= 768;
-                    if (!isMobile) {
-                        cajaText.setAttribute('data-header-theme', 'dark');
-                        return;
-                    }
-                    const isLightBg = bgUrl && bgUrl.indexOf('amazona') !== -1;
-                    cajaText.setAttribute('data-header-theme', isLightBg ? 'dark' : 'light');
+                    updateSectionLuminanceTheme(sec, bgUrl);
                 }
 
                 updateTextTheme(activeBgUrl);
@@ -5749,6 +5996,10 @@ Menú del Index: Líena 742
                     }
                 }
 
+                if (targetSection) {
+                    updateSectionLuminanceTheme(targetSection);
+                }
+
                 window.dispatchEvent(new Event("resize"));
                 return targetSection;
             }
@@ -5867,6 +6118,7 @@ Menú del Index: Líena 742
                 });
 
                 const targetSection = showProductWheel(initialProd);
+                document.querySelectorAll('.cajas-activos-section').forEach(sec => updateSectionLuminanceTheme(sec));
                 if (hashProd && targetSection) {
                     setTimeout(() => {
                         const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset - 75;
