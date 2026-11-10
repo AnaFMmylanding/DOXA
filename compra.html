@@ -2637,7 +2637,7 @@
                                             <span class="billing-radio-circle"></span>
                                             <span class="billing-type-label-box">
                                                 <span class="billing-type-name">Datos de empresa</span>
-                                                <span class="billing-type-desc">Facturar a CIF / NIF y razón social distinta</span>
+                                                <span class="billing-type-desc">Facturar a otra razón social o dirección</span>
                                             </span>
                                         </label>
                                     </div>
@@ -2645,40 +2645,34 @@
                                     <!-- DESPLEGABLE DE CAMPOS FISCALES DE EMPRESA / DATOS DISTINTOS -->
                                     <div class="company-billing-box" id="companyBillingBox" style="display: none;">
                                         <div class="form-group" style="margin-bottom: 14px;">
-                                            <label class="form-label" for="billingCompanyName">Razón Social / Nombre de Empresa *</label>
+                                            <label class="form-label" for="billingCompanyName">Razón Social *</label>
                                             <input type="text" class="form-input" id="billingCompanyName" name="factura_razon_social"
-                                                placeholder="Ej: Mi Empresa S.L. o Nombre del titular">
+                                                placeholder="Nombre de la empresa o titular">
                                         </div>
 
                                         <div class="form-group" style="margin-bottom: 14px;">
-                                            <label class="form-label" for="billingCif">CIF / NIF / NIE *</label>
-                                            <input type="text" class="form-input" id="billingCif" name="factura_cif"
-                                                placeholder="Ej: B12345678 o 12345678Z">
-                                        </div>
-
-                                        <div class="form-group" style="margin-bottom: 14px;">
-                                            <label class="form-label" for="billingAddress">Dirección Fiscal *</label>
+                                            <label class="form-label" for="billingAddress">Dirección *</label>
                                             <input type="text" class="form-input" id="billingAddress" name="factura_direccion"
-                                                placeholder="Calle, número, piso o puerta fiscal">
+                                                placeholder="Calle, número, piso o puerta">
                                         </div>
 
                                         <div class="form-row" style="margin-bottom: 14px;">
                                             <div class="form-group" style="margin-bottom: 0;">
-                                                <label class="form-label" for="billingZip">Código Postal Fiscal *</label>
+                                                <label class="form-label" for="billingZip">CP *</label>
                                                 <input type="text" class="form-input" id="billingZip" name="factura_codigo_postal"
-                                                    placeholder="CP fiscal">
+                                                    placeholder="Código postal">
                                             </div>
                                             <div class="form-group" style="margin-bottom: 0;">
-                                                <label class="form-label" for="billingCity">Ciudad Fiscal *</label>
+                                                <label class="form-label" for="billingCity">Ciudad *</label>
                                                 <input type="text" class="form-input" id="billingCity" name="factura_ciudad"
-                                                    placeholder="Ciudad fiscal">
+                                                    placeholder="Ciudad">
                                             </div>
                                         </div>
 
                                         <div class="form-group" style="margin-bottom: 0;">
-                                            <label class="form-label" for="billingEmail">Email para Facturas (Opcional)</label>
+                                            <label class="form-label" for="billingEmail">A qué e-mail deseas se envíe la factura:</label>
                                             <input type="email" class="form-input" id="billingEmail" name="factura_email"
-                                                placeholder="facturas@empresa.com (si difiere del email de contacto)">
+                                                placeholder="ejemplo@empresa.com (si difiere del correo principal)">
                                         </div>
                                     </div>
                                 </div>
@@ -4133,7 +4127,6 @@
 
             const companyInputs = [
                 document.getElementById('billingCompanyName'),
-                document.getElementById('billingCif'),
                 document.getElementById('billingAddress'),
                 document.getElementById('billingZip'),
                 document.getElementById('billingCity')
@@ -4210,14 +4203,13 @@
 
             if (isCompanyBilling) {
                 const bCompany = document.getElementById('billingCompanyName') ? document.getElementById('billingCompanyName').value.trim() : '';
-                const bCif = document.getElementById('billingCif') ? document.getElementById('billingCif').value.trim() : '';
                 const bAddress = document.getElementById('billingAddress') ? document.getElementById('billingAddress').value.trim() : '';
                 const bZip = document.getElementById('billingZip') ? document.getElementById('billingZip').value.trim() : '';
                 const bCity = document.getElementById('billingCity') ? document.getElementById('billingCity').value.trim() : '';
                 const bEmail = document.getElementById('billingEmail') ? document.getElementById('billingEmail').value.trim() : '';
 
-                if (!bCompany || !bCif || !bAddress || !bZip || !bCity) {
-                    alert('Por favor, completa los campos requeridos de facturación para la empresa (Razón Social, CIF/NIF, Dirección Fiscal, Código Postal y Ciudad).');
+                if (!bCompany || !bAddress || !bZip || !bCity) {
+                    alert('Por favor, completa los campos requeridos de facturación (Razón Social, Dirección, CP y Ciudad).');
                     loadingOverlay.classList.remove('active');
                     setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
                     submitBtn.disabled = false;
@@ -4225,7 +4217,6 @@
                 }
 
                 billingInfo.companyName = bCompany;
-                billingInfo.nif = bCif;
                 billingInfo.address = bAddress;
                 billingInfo.zip = bZip;
                 billingInfo.city = bCity;
