@@ -5646,6 +5646,7 @@ Menú del Index: Líena 742
             };
 
             function showProductWheel(productId) {
+                window.currentActiveProduct = productId;
                 const wheels = document.querySelectorAll(".product-wheel");
                 let targetSection = null;
 
@@ -5668,6 +5669,11 @@ Menú del Index: Líena 742
                     }
                 });
 
+                // Sincronizar automáticamente la sección Reservas con el producto que se está viendo
+                if (typeof window.switchReservasProduct === 'function') {
+                    window.switchReservasProduct(productId);
+                }
+
                 if (targetSection && wheelConfigs[productId]) {
                     if (!wheelConfigs[productId].instance) {
                         wheelConfigs[productId].instance = wheelConfigs[productId].init();
@@ -5686,12 +5692,36 @@ Menú del Index: Líena 742
                 if (event) {
                     try { event.preventDefault(); event.stopPropagation(); } catch (e) {}
                 }
+                const targetProduct = productId || window.currentActiveProduct || 'doxa';
+                window.currentActiveProduct = targetProduct;
+
+                // 1. Sincronizar catálogo de Reservas
                 if (typeof window.switchReservasProduct === 'function') {
-                    window.switchReservasProduct(productId);
+                    window.switchReservasProduct(targetProduct);
                 }
+
+                // 2. Sincronizar también las secciones Rueda y Sabor
+                const wheels = document.querySelectorAll(".product-wheel");
+                wheels.forEach(sec => {
+                    if (sec.getAttribute("data-product") === targetProduct) {
+                        sec.classList.add("active-product-wheel");
+                    } else {
+                        sec.classList.remove("active-product-wheel");
+                    }
+                });
+                const saborSections = document.querySelectorAll(".product-sabor");
+                saborSections.forEach(sec => {
+                    if (sec.getAttribute("data-product") === targetProduct) {
+                        sec.classList.add("active-product-sabor");
+                    } else {
+                        sec.classList.remove("active-product-sabor");
+                    }
+                });
+
+                // 3. Scroll suave hacia la sección Reservas teniendo en cuenta la cabecera fija (95px)
                 const reservasSec = document.getElementById('la-coleccion') || document.getElementById('reserva');
                 if (reservasSec) {
-                    const topY = reservasSec.getBoundingClientRect().top + window.pageYOffset - 30;
+                    const topY = reservasSec.getBoundingClientRect().top + window.pageYOffset - 95;
                     window.scrollTo({
                         top: topY,
                         behavior: "smooth"
@@ -6105,6 +6135,17 @@ Menú del Index: Líena 742
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Botón directo a Reservas -->
+                        <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('doxa', event)" class="btn-reserva-rueda">
+                                RESERVA TU CAJA
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24" style="margin-left: 10px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -6246,6 +6287,17 @@ Menú del Index: Líena 742
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Botón directo a Reservas -->
+                        <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('cookie', event)" class="btn-reserva-rueda">
+                                RESERVA TU CAJA
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24" style="margin-left: 10px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -6373,6 +6425,17 @@ Menú del Index: Líena 742
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Botón directo a Reservas -->
+                        <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('bbb', event)" class="btn-reserva-rueda">
+                                RESERVA TU CAJA
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24" style="margin-left: 10px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -6484,6 +6547,17 @@ Menú del Index: Líena 742
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Botón directo a Reservas -->
+                        <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('lingote', event)" class="btn-reserva-rueda">
+                                RESERVA TU CAJA
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24" style="margin-left: 10px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -6593,6 +6667,17 @@ Menú del Index: Líena 742
                                     <p style="margin:0;"><strong>Contiene:</strong> Frutos de cáscara (almendra). Sin gluten declarado naturalmente.</p>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Botón directo a Reservas -->
+                        <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('oblea', event)" class="btn-reserva-rueda">
+                                RESERVA TU CAJA
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24" style="margin-left: 10px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -6704,6 +6789,17 @@ Menú del Index: Líena 742
                                     <p style="margin:0;"><strong>Contiene:</strong> Frutos de cáscara (almendra). Puede contener trazas de soja.</p>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Botón directo a Reservas -->
+                        <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('pequebloom', event)" class="btn-reserva-rueda">
+                                RESERVA TU CAJA
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24" style="margin-left: 10px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -9420,6 +9516,7 @@ Menú del Index: Líena 742
                         window.switchReservasProduct = function (productId) {
                             if (!RESERVAS_CATALOG[productId]) return;
                             currentProductId = productId;
+                            window.currentActiveProduct = productId;
                             const prod = RESERVAS_CATALOG[productId];
 
                             // 1. Actualizar barra superior de productos
@@ -9432,6 +9529,24 @@ Menú del Index: Líena 742
                                 } else {
                                     item.classList.remove('active');
                                     item.setAttribute('aria-selected', 'false');
+                                }
+                            });
+
+                            // Mantener sincronizadas también Rueda y El Sabor en segundo plano
+                            const wheels = document.querySelectorAll(".product-wheel");
+                            wheels.forEach(sec => {
+                                if (sec.getAttribute("data-product") === productId) {
+                                    sec.classList.add("active-product-wheel");
+                                } else {
+                                    sec.classList.remove("active-product-wheel");
+                                }
+                            });
+                            const saborSections = document.querySelectorAll(".product-sabor");
+                            saborSections.forEach(sec => {
+                                if (sec.getAttribute("data-product") === productId) {
+                                    sec.classList.add("active-product-sabor");
+                                } else {
+                                    sec.classList.remove("active-product-sabor");
                                 }
                             });
 
@@ -9618,8 +9733,9 @@ Menú del Index: Líena 742
                             });
                         }
 
-                        // Inicialización: cargar DOXA por defecto
-                        switchReservasProduct('doxa');
+                        // Inicialización: cargar el producto actualmente activo (o DOXA por defecto)
+                        const initialReservasProd = window.currentActiveProduct || (typeof getProductFromHash === 'function' ? getProductFromHash() : null) || 'doxa';
+                        switchReservasProduct(initialReservasProd);
                     })();
                 </script>
 
