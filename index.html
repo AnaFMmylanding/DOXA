@@ -7475,6 +7475,22 @@ Menú del Index: Líena 742
                 overflow-x: auto;
                 scrollbar-width: none;
                 -webkit-overflow-scrolling: touch;
+                touch-action: pan-x;
+                cursor: grab;
+                user-select: none;
+                -webkit-user-select: none;
+            }
+
+            .reservas-products-nav * {
+                -webkit-user-drag: none;
+                user-drag: none;
+                user-select: none;
+                -webkit-user-select: none;
+            }
+
+            .reservas-nav-thumb,
+            .reservas-nav-title {
+                pointer-events: none;
             }
 
             .reservas-products-nav::-webkit-scrollbar {
@@ -8489,7 +8505,6 @@ Menú del Index: Líena 742
                     -webkit-overflow-scrolling: touch !important;
                     touch-action: pan-x !important;
                     overscroll-behavior-x: contain !important;
-                    scroll-behavior: smooth !important;
                     scrollbar-width: none !important;
                     cursor: grab;
                     user-select: none;
@@ -8741,7 +8756,7 @@ Menú del Index: Líena 742
                     <button type="button" class="reservas-nav-item active" data-product="doxa" role="tab"
                         aria-selected="true" title="Doxa" onclick="switchReservasProduct('doxa')">
                         <div class="reservas-nav-thumb-wrap">
-                            <img src="Doxa.png" alt="Doxa" class="reservas-nav-thumb">
+                            <img src="Doxa.png" alt="Doxa" class="reservas-nav-thumb" draggable="false">
                         </div>
                         <span class="reservas-nav-title">DOXA</span>
                     </button>
@@ -8750,7 +8765,7 @@ Menú del Index: Líena 742
                     <button type="button" class="reservas-nav-item" data-product="cookie" role="tab"
                         aria-selected="false" title="Doxa Cookie" onclick="switchReservasProduct('cookie')">
                         <div class="reservas-nav-thumb-wrap">
-                            <img src="Cookie.png" alt="Doxa Cookie" class="reservas-nav-thumb">
+                            <img src="Cookie.png" alt="Doxa Cookie" class="reservas-nav-thumb" draggable="false">
                         </div>
                         <span class="reservas-nav-title">DOXA<br>COOKIE</span>
                     </button>
@@ -8759,7 +8774,7 @@ Menú del Index: Líena 742
                     <button type="button" class="reservas-nav-item" data-product="bbb" role="tab" aria-selected="false"
                         title="Bloom" onclick="switchReservasProduct('bbb')">
                         <div class="reservas-nav-thumb-wrap">
-                            <img src="BBB 1.png" alt="Bombón Blooms" class="reservas-nav-thumb">
+                            <img src="BBB 1.png" alt="Bombón Blooms" class="reservas-nav-thumb" draggable="false">
                         </div>
                         <span class="reservas-nav-title">BLOOM</span>
                     </button>
@@ -8768,7 +8783,7 @@ Menú del Index: Líena 742
                     <button type="button" class="reservas-nav-item" data-product="lingote" role="tab"
                         aria-selected="false" title="Lingote Pistacho" onclick="switchReservasProduct('lingote')">
                         <div class="reservas-nav-thumb-wrap">
-                            <img src="Lingote.png" alt="Lingote Pistacho" class="reservas-nav-thumb">
+                            <img src="Lingote.png" alt="Lingote Pistacho" class="reservas-nav-thumb" draggable="false">
                         </div>
                         <span class="reservas-nav-title">LINGOTE<br>PISTACHO</span>
                     </button>
@@ -8777,7 +8792,7 @@ Menú del Index: Líena 742
                     <button type="button" class="reservas-nav-item" data-product="oblea" role="tab"
                         aria-selected="false" title="Crujiente Almendra" onclick="switchReservasProduct('oblea')">
                         <div class="reservas-nav-thumb-wrap">
-                            <img src="Oblea.png" alt="Crujiente Almendra" class="reservas-nav-thumb">
+                            <img src="Oblea.png" alt="Crujiente Almendra" class="reservas-nav-thumb" draggable="false">
                         </div>
                         <span class="reservas-nav-title">CRUJIENTE<br>ALMENDRA</span>
                     </button>
@@ -8786,7 +8801,7 @@ Menú del Index: Líena 742
                     <button type="button" class="reservas-nav-item" data-product="pequebloom" role="tab"
                         aria-selected="false" title="Peque Bloom" onclick="switchReservasProduct('pequebloom')">
                         <div class="reservas-nav-thumb-wrap">
-                            <img src="Pequebloom.png" alt="Peque Bloom" class="reservas-nav-thumb">
+                            <img src="Pequebloom.png" alt="Peque Bloom" class="reservas-nav-thumb" draggable="false">
                         </div>
                         <span class="reservas-nav-title">PEQUE<br>BLOOM</span>
                     </button>
@@ -10117,47 +10132,29 @@ Menú del Index: Líena 742
                             if (!nav || nav._hasDragListener) return;
                             nav._hasDragListener = true;
 
+                            // Prevenir arrastre nativo de imágenes HTML5
+                            nav.addEventListener('dragstart', (e) => e.preventDefault());
+
                             let isDown = false;
                             let startX = 0;
                             let scrollLeft = 0;
                             let hasMoved = false;
 
-                            // Deslizamiento con el dedo de izquierda a derecha (touch en móvil)
-                            nav.addEventListener('touchstart', (e) => {
-                                isDown = true;
-                                hasMoved = false;
-                                startX = e.touches[0].pageX - nav.offsetLeft;
-                                scrollLeft = nav.scrollLeft;
-                            }, { passive: true });
-
-                            nav.addEventListener('touchmove', (e) => {
-                                if (!isDown) return;
-                                const x = e.touches[0].pageX - nav.offsetLeft;
-                                const walk = (x - startX);
-                                if (Math.abs(walk) > 4) {
-                                    hasMoved = true;
-                                    nav.scrollLeft = scrollLeft - walk;
-                                }
-                            }, { passive: true });
-
-                            nav.addEventListener('touchend', () => {
-                                isDown = false;
-                            }, { passive: true });
-
-                            // Deslizamiento con ratón (desktop)
+                            // --- 1. ARRASTRE CON RATÓN (PC, DevTools y simulador móvil de pantalla) ---
                             nav.addEventListener('mousedown', (e) => {
+                                if (e.button !== 0) return; // Solo clic izquierdo
                                 isDown = true;
                                 hasMoved = false;
-                                nav.style.cursor = 'grabbing';
-                                startX = e.pageX - nav.offsetLeft;
+                                startX = e.pageX;
                                 scrollLeft = nav.scrollLeft;
+                                nav.style.cursor = 'grabbing';
                             });
 
                             window.addEventListener('mousemove', (e) => {
                                 if (!isDown) return;
-                                const x = e.pageX - nav.offsetLeft;
+                                const x = e.pageX;
                                 const walk = (x - startX);
-                                if (Math.abs(walk) > 4) {
+                                if (Math.abs(walk) > 3) {
                                     hasMoved = true;
                                     nav.scrollLeft = scrollLeft - walk;
                                 }
@@ -10167,9 +10164,47 @@ Menú del Index: Líena 742
                                 if (!isDown) return;
                                 isDown = false;
                                 nav.style.cursor = 'grab';
+                                setTimeout(() => {
+                                    hasMoved = false;
+                                }, 50);
                             });
 
-                            // Evitar activación accidental de selección si el usuario estaba deslizando
+                            // --- 2. GESTOS TÁCTILES (Smartphones reales y emulador táctil DevTools) ---
+                            let touchStartX = 0;
+                            let touchScrollLeft = 0;
+
+                            nav.addEventListener('touchstart', (e) => {
+                                if (!e.touches || e.touches.length === 0) return;
+                                hasMoved = false;
+                                touchStartX = e.touches[0].pageX;
+                                touchScrollLeft = nav.scrollLeft;
+                            }, { passive: true });
+
+                            nav.addEventListener('touchmove', (e) => {
+                                if (!e.touches || e.touches.length === 0) return;
+                                const currentX = e.touches[0].pageX;
+                                const walk = currentX - touchStartX;
+                                if (Math.abs(walk) > 4) {
+                                    hasMoved = true;
+                                    nav.scrollLeft = touchScrollLeft - walk;
+                                }
+                            }, { passive: true });
+
+                            nav.addEventListener('touchend', () => {
+                                setTimeout(() => {
+                                    hasMoved = false;
+                                }, 50);
+                            });
+
+                            // --- 3. RUEDA HORIZONTAL DEL RATÓN EN PC ---
+                            nav.addEventListener('wheel', (e) => {
+                                if (e.deltaY !== 0) {
+                                    nav.scrollLeft += e.deltaY;
+                                    e.preventDefault();
+                                }
+                            }, { passive: false });
+
+                            // --- 4. PREVENIR CLIC ACCIDENTAL SI HUBO ARRASTRE O SWIPE ---
                             nav.addEventListener('click', (e) => {
                                 if (hasMoved) {
                                     e.preventDefault();
