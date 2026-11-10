@@ -82,6 +82,11 @@ Menú del Index: Líena 742
                     if ('scrollRestoration' in history) {
                         history.scrollRestoration = 'manual';
                     }
+                    if (h === '#reservasProductsNav') {
+                        try {
+                            history.replaceState(null, null, window.location.pathname + window.location.search + '#reserva');
+                        } catch(e) {}
+                    }
                     var style = document.createElement('style');
                     style.id = 'reserva-prejump-style';
                     style.textContent = 'html.direct-reservas body { opacity: 0 !important; visibility: hidden !important; }';
@@ -154,6 +159,38 @@ Menú del Index: Líena 742
             #reserva {
                 scroll-margin-top: 70px;
             }
+        }
+
+        /* =========================================================================
+           ELIMINAR FOCO, OUTLINE Y LÍNEAS NEGRAS EN EL MENÚ DE RESERVAS
+           ========================================================================= */
+        #reservasProductsNav,
+        #reservasProductsNav:focus,
+        #reservasProductsNav:focus-visible,
+        #reservasProductsNav:focus-within,
+        #reservasProductsNav:target,
+        #reservasProductsNav:active,
+        .reservas-products-nav,
+        .reservas-products-nav:focus,
+        .reservas-products-nav:focus-visible,
+        .reservas-products-nav:focus-within,
+        .reservas-products-nav:target,
+        .reservas-products-nav:active {
+            outline: none !important;
+            outline-width: 0 !important;
+            border: none !important;
+            border-top: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        /* Desactivar permanentemente la animación translateY en Reservas para evitar saltos */
+        #la-coleccion .animate-appear,
+        #la-coleccion .container {
+            animation: none !important;
+            transform: none !important;
+            opacity: 1 !important;
         }
 
         /* =========================================================================
@@ -8859,7 +8896,8 @@ Menú del Index: Líena 742
                      MENÚ HORIZONTAL DE PRODUCTOS EN RESERVAS
                      DOXA | DOXA COOKIE | BLOOM | LINGOTE PISTACHO | CRUJIENTE ALMENDRA | PEQUE BLOOM
                      ========================================================================= -->
-                <div class="reservas-products-nav" id="reservasProductsNav" role="tablist"
+                <div class="reservas-products-nav" id="reservasProductsNav" role="tablist" tabindex="-1"
+                    style="outline: none !important; border: none !important;"
                     aria-label="Selección de producto en reservas">
                     <!-- 1. DOXA -->
                     <button type="button" class="reservas-nav-item active" data-product="doxa" role="tab"
@@ -10373,9 +10411,24 @@ Menú del Index: Líena 742
                         switchReservasProduct(initialReservasProd);
 
                         // Si viene específicamente buscando un producto o el apartado de reservas:
-                        // SALTO DIRECTO E INSTANTÁNEO A LA SECCIÓN DE RESERVAS SIN PASAR POR LA CABECERA Y SIN TEMBLORES
+                        // SALTO DIRECTO E INSTANTÁNEO A LA SECCIÓN DE RESERVAS SIN PASAR POR LA CABECERA Y SIN TEMBLORES NI SALTOS
                         const isReservaIncoming = !!(urlTargetProd || window.location.hash === '#reserva' || window.location.hash === '#la-coleccion' || window.location.hash === '#reservasProductsNav');
                         if (isReservaIncoming) {
+                            // 1. Eliminar permanentemente animación translateY en Reservas para evitar cualquier salto
+                            const reservasElements = document.querySelectorAll('#la-coleccion, #la-coleccion .container, #la-coleccion .animate-appear');
+                            reservasElements.forEach(el => {
+                                el.classList.remove('animate-appear');
+                                el.style.animation = 'none';
+                                el.style.transform = 'none';
+                                el.style.opacity = '1';
+                            });
+
+                            // 2. Desenfocar cualquier elemento activo para evitar líneas o bordes de foco
+                            if (document.activeElement && typeof document.activeElement.blur === 'function') {
+                                document.activeElement.blur();
+                            }
+
+                            // 3. Posicionar el scroll exactamente en el destino de una sola vez
                             const isMobile = window.innerWidth <= 768;
                             const scrollTarget = document.getElementById('reservasProductsNav') || document.getElementById('la-coleccion');
                             if (scrollTarget) {
@@ -10384,29 +10437,23 @@ Menú del Index: Líena 742
                                 window.scrollTo(0, Math.max(0, targetY));
                             }
 
-                            // Revelar el contenido con el elemento ya fijado en su sitio exacto
-                            const preStyle = document.getElementById('reserva-prejump-style');
-                            if (preStyle) preStyle.remove();
+                            // 4. Revelar el contenido de forma suave y sin sobresaltos visuales
                             if (document.body) {
+                                document.body.style.transition = 'opacity 0.12s ease-out';
                                 document.body.style.visibility = 'visible';
                                 document.body.style.opacity = '1';
                             }
+                            const preStyle = document.getElementById('reserva-prejump-style');
+                            if (preStyle) preStyle.remove();
 
-                            // Asegurar en el siguiente frame una única vez sin bucles repetidos
-                            requestAnimationFrame(() => {
-                                if (scrollTarget) {
-                                    const topOffset = isMobile ? 70 : 85;
-                                    const targetY = scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset;
-                                    window.scrollTo(0, Math.max(0, targetY));
-                                }
-                            });
-
-                            // Una vez completamente asentado el scroll y pintado en pantalla (350ms),
-                            // retiramos la clase de bloqueo para restaurar el comportamiento suave normal del index
+                            // 5. Tras asentar el viewport, devolver el comportamiento suave habitual de navegación
                             setTimeout(() => {
                                 document.documentElement.classList.remove('direct-reservas');
                                 document.documentElement.style.scrollBehavior = '';
-                            }, 350);
+                                if (document.body) {
+                                    document.body.style.transition = '';
+                                }
+                            }, 250);
                         }
                     })();
                 </script>
