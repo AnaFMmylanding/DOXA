@@ -190,7 +190,7 @@
         /* RECUADRO AMARILLO PLANO (MÓVIL) */
         .navbar-menu-square-btn {
             position: relative;
-            display: none;
+            display: inline-flex !important;
             width: 26px;
             height: 26px;
             min-width: 26px;
@@ -459,13 +459,7 @@
         }
 
         /* MENÚ EN PC */
-        .navbar-menu {
-            display: flex;
-            align-items: center;
-            gap: 35px;
-            margin-left: auto;
-            justify-content: flex-end;
-        }
+
 
         .navbar-link {
             font-family: 'Lexend', sans-serif;
@@ -533,29 +527,148 @@
             visibility: visible;
         }
 
-        @media (min-width: 769px) {
-            .navbar-mobile-actions {
-                display: none !important;
-            }
-            .navbar-menu-square-btn {
-                display: none !important;
-            }
-            .navbar-cart-pc {
-                display: none !important;
-            }
-            .navbar-cart-pc.has-items {
-                display: inline-flex !important;
-            }
-            .navbar-cart-mobile {
-                display: none !important;
-            }
-            .navbar-menu {
-                display: flex !important;
-                align-items: center;
-                gap: 16px;
-                margin-left: auto;
-                justify-content: flex-end;
-            }
+        /* =========================================================================
+           ACCIONES DERECHA EN NAVBAR (SISTEMA UNIFICADO PC Y MÓVIL):
+           - CESTA: SÓLO SE MUESTRA CON SU NÚMERO CUANDO HAY PRODUCTOS SELECCIONADOS
+           - CUADRADO AMARILLO: CONGLOMERADO CON TODO EL MENÚ DENTRO
+           ========================================================================= */
+        .navbar-mobile-actions {
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-flex !important;
+            align-items: center;
+            gap: 16px;
+            margin: 0;
+            z-index: 1002;
+        }
+
+        /* =========================================================================
+           PERSIANA DE BOTONES DEL CUADRO AMARILLO (SISTEMA UNIFICADO PC Y MÓVIL)
+           Recuadro rectangular vertical y esbelto, textos alineados a la derecha.
+           Todo el menú reside dentro de este panel al pulsar el cuadrado amarillo.
+           ========================================================================= */
+        .navbar-menu {
+            position: fixed;
+            top: 75px;
+            right: 50px;
+            width: 175px;
+            max-width: calc(100% - 32px);
+            height: auto;
+            background: rgba(30, 20, 16, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-end;
+            gap: 26px;
+            padding: 34px 22px 38px 22px;
+            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
+            border: none;
+            border-radius: 0;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-8px);
+            transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.3s ease, background 0.35s ease;
+            display: flex !important;
+        }
+
+        .navbar.scrolled .navbar-menu {
+            top: 70px;
+            background: rgba(38, 26, 20, 0.65) !important;
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar-menu.active {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transform: translateY(0) !important;
+        }
+
+        /* TEXTOS DENTRO DE LA PERSIANA DESPLEGABLE */
+        .navbar-menu .navbar-link,
+        .navbar-menu .navbar-link:visited,
+        .navbar.scrolled .navbar-menu .navbar-link,
+        .navbar.scrolled .navbar-menu .navbar-link:visited {
+            font-family: 'Lato', 'Lexend', -apple-system, sans-serif !important;
+            font-size: 13px !important;
+            font-weight: 400 !important;
+            letter-spacing: 2px !important;
+            text-transform: uppercase !important;
+            white-space: nowrap !important;
+            color: #FFFFFF !important;
+            opacity: 0.7 !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+            text-align: right !important;
+            display: block !important;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
+            transition: opacity 0.25s ease, font-weight 0.2s ease;
+            border-radius: 0 !important;
+            transform: none !important;
+        }
+
+        .navbar-menu .navbar-link:hover,
+        .navbar-menu .navbar-link:focus,
+        .navbar-menu .navbar-link:active,
+        .navbar.scrolled .navbar-menu .navbar-link:hover,
+        .navbar.scrolled .navbar-menu .navbar-link:focus,
+        .navbar.scrolled .navbar-menu .navbar-link:active {
+            color: #FFFFFF !important;
+            opacity: 1 !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            outline: none !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+
+        .navbar-menu .navbar-link.active,
+        .navbar.scrolled .navbar-menu .navbar-link.active {
+            color: #FFFFFF !important;
+            opacity: 1 !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            font-weight: 600 !important;
+            transform: none !important;
+        }
+
+        /* Desplegable resumen de la cesta (PC y Móvil) */
+        .navbar-cart-dropdown {
+            position: fixed;
+            top: 75px;
+            right: 50px;
+            width: 340px;
+            background: rgba(26, 17, 13, 0.96);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+            padding: 24px;
+            display: none;
+            z-index: 10001;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .navbar.scrolled .navbar-cart-dropdown {
+            top: 70px;
+        }
+
+        .navbar-cart-dropdown.active {
+            display: flex !important;
         }
 
         /* =========================================
@@ -1731,136 +1844,40 @@
                 letter-spacing: 2px;
             }
 
+            /* ACCIONES DERECHA EN MÓVIL: B) CESTA + C) CUADRADO AMARILLO */
             .navbar-mobile-actions {
-                position: absolute;
                 right: 16px;
-                top: 50%;
-                transform: translateY(-50%);
-                display: inline-flex !important;
-                align-items: center;
                 gap: 12px;
-                margin: 0;
-                z-index: 1002;
-            }
-
-            .navbar-cart-mobile {
-                display: none !important;
-            }
-
-            .navbar-cart-mobile.has-items {
-                display: inline-flex !important;
-            }
-
-            .navbar-cart-pc {
-                display: none !important;
-            }
-
-            .navbar-menu-square-btn {
-                display: inline-flex !important;
             }
 
             .navbar-cart-dropdown {
                 top: 66px;
                 right: 16px;
-                width: min(320px, calc(100vw - 32px));
+                left: 16px;
+                width: auto;
             }
 
             .navbar.scrolled .navbar-cart-dropdown {
                 top: 62px;
             }
 
+            .navbar-menu-square-btn {
+                width: 26px;
+                height: 26px;
+                min-width: 26px;
+                min-height: 26px;
+            }
+
             .navbar-menu {
-                position: fixed;
                 top: 66px;
                 right: 16px;
                 width: 155px;
-                max-width: calc(100% - 32px);
-                height: auto;
-                background: rgba(30, 20, 16, 0.88);
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-end;
-                gap: 26px;
                 padding: 34px 18px 38px 18px;
-                box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
-                border: none;
-                border-radius: 0;
-                z-index: 999;
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-                transform: translateY(-8px);
-                transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.3s ease, background 0.35s ease;
             }
 
             .navbar.scrolled .navbar-menu {
                 top: 62px;
-                background: rgba(38, 26, 20, 0.65) !important;
-                backdrop-filter: blur(22px);
-                -webkit-backdrop-filter: blur(22px);
-                box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
-            }
-
-            .navbar-menu.active {
-                opacity: 1;
-                visibility: visible;
-                pointer-events: auto;
-                transform: translateY(0);
-            }
-
-            .navbar-menu .navbar-link,
-            .navbar-menu .navbar-link:visited,
-            .navbar.scrolled .navbar-menu .navbar-link,
-            .navbar.scrolled .navbar-menu .navbar-link:visited {
-                font-family: 'Lato', 'Lexend', -apple-system, sans-serif !important;
-                font-size: 13px !important;
-                font-weight: 400 !important;
-                letter-spacing: 2px !important;
-                text-transform: uppercase !important;
-                white-space: nowrap !important;
-                color: #FFFFFF !important;
-                opacity: 0.7 !important;
-                background: transparent !important;
-                background-color: transparent !important;
-                border: none !important;
-                outline: none !important;
-                box-shadow: none !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                width: 100% !important;
-                text-align: right !important;
-                display: block !important;
-                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
-                transition: opacity 0.25s ease, font-weight 0.2s ease;
-                border-radius: 0 !important;
-                transform: none !important;
-            }
-
-            .navbar-menu .navbar-link:hover,
-            .navbar-menu .navbar-link:focus,
-            .navbar-menu .navbar-link:active,
-            .navbar.scrolled .navbar-menu .navbar-link:hover,
-            .navbar.scrolled .navbar-menu .navbar-link:focus,
-            .navbar.scrolled .navbar-menu .navbar-link:active {
-                color: #FFFFFF !important;
-                opacity: 1 !important;
-                background: transparent !important;
-                background-color: transparent !important;
-                outline: none !important;
-                box-shadow: none !important;
-                transform: none !important;
-            }
-
-            .navbar-menu .navbar-link.active,
-            .navbar.scrolled .navbar-menu .navbar-link.active {
-                color: #FFFFFF !important;
-                opacity: 1 !important;
-                background: transparent !important;
-                background-color: transparent !important;
-                font-weight: 600 !important;
-                transform: none !important;
+                right: 16px;
             }
 
             .collection-carousel-container {
@@ -2013,16 +2030,10 @@
                 <a href="galeria.html" class="navbar-link btn-gallery" data-visible="on">Galería</a>
                 <a href="articulos.html" class="navbar-link btn-blog" data-visible="on">Blog</a>
 
-                <a href="compra.html" class="navbar-cart-btn navbar-cart-pc" id="navbarCartBtnPC" aria-label="Cesta de la compra">
-                    <div class="cart-icon-wrapper">
-                        <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
-                        <span class="navbar-cart-badge">0</span>
-                    </div>
-                </a>
             </div>
 
             <div class="navbar-mobile-actions" id="navbarMobileActions">
-                <a href="compra.html" class="navbar-cart-btn navbar-cart-mobile" id="navbarCartBtnMobile" aria-label="Cesta de la compra">
+                <a href="compra.html" class="navbar-cart-btn navbar-cart-mobile navbar-cart-pc" id="navbarCartBtnMobile" aria-label="Cesta de la compra">
                     <div class="cart-icon-wrapper">
                         <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
                         <span class="navbar-cart-badge">0</span>
