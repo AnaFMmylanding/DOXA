@@ -3785,8 +3785,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
                 if (lightboxRightContent) {
                     lightboxRightContent.style.transition = 'none';
+                    lightboxRightContent.style.transform = 'none';
                     lightboxRightContent.style.opacity = '1';
-                    lightboxRightContent.style.transform = 'translateX(0px)';
                 }
 
                 lightbox.classList.add('active');
@@ -3797,9 +3797,16 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 lightbox.classList.remove('active');
                 lightboxContent.classList.remove('details-collapsed', 'is-vertical');
                 if (toggleIconPath) toggleIconPath.setAttribute('points', '9 18 15 12 9 6');
-                lightboxLeft.style.transition = 'none';
-                lightboxLeft.style.transform = 'translateX(0px)';
-                lightboxLeft.style.opacity = '1';
+                if (lightboxLeft) {
+                    lightboxLeft.style.transition = 'none';
+                    lightboxLeft.style.transform = 'translateX(0px)';
+                    lightboxLeft.style.opacity = '1';
+                }
+                if (lightboxRightContent) {
+                    lightboxRightContent.style.transition = 'none';
+                    lightboxRightContent.style.transform = 'none';
+                    lightboxRightContent.style.opacity = '1';
+                }
                 document.body.style.overflow = '';
             }
 
@@ -3809,18 +3816,14 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 if (isLightboxAnimating || !activeArtworkElements || activeArtworkElements.length <= 1) return;
                 isLightboxAnimating = true;
 
-                // Desplazamiento de salida de la obra actual
+                // Desplazamiento de salida SOLO de la imagen de la obra (el texto se queda quieto)
                 const exitX = direction > 0 ? '-115%' : '115%';
                 const enterX = direction > 0 ? '115%' : '-115%';
 
-                lightboxLeft.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease';
-                lightboxLeft.style.transform = `translateX(${exitX})`;
-                lightboxLeft.style.opacity = '0.3';
-
-                if (lightboxRightContent) {
-                    lightboxRightContent.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-                    lightboxRightContent.style.opacity = '0';
-                    lightboxRightContent.style.transform = `translateX(${direction > 0 ? '-25px' : '25px'})`;
+                if (lightboxLeft) {
+                    lightboxLeft.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease';
+                    lightboxLeft.style.transform = `translateX(${exitX})`;
+                    lightboxLeft.style.opacity = '0.3';
                 }
 
                 setTimeout(() => {
@@ -3854,28 +3857,20 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         }
                     };
 
-                    // Colocar en el punto de entrada opuesto
-                    lightboxLeft.style.transition = 'none';
-                    lightboxLeft.style.transform = `translateX(${enterX})`;
-                    lightboxLeft.style.opacity = '0.3';
-
-                    if (lightboxRightContent) {
-                        lightboxRightContent.style.transition = 'none';
-                        lightboxRightContent.style.transform = `translateX(${direction > 0 ? '25px' : '-25px'})`;
-                        lightboxRightContent.style.opacity = '0';
+                    // Colocar solo la imagen en el punto de entrada opuesto
+                    if (lightboxLeft) {
+                        lightboxLeft.style.transition = 'none';
+                        lightboxLeft.style.transform = `translateX(${enterX})`;
+                        lightboxLeft.style.opacity = '0.3';
                     }
 
-                    // Animar la entrada al centro suavemente
+                    // Animar la entrada de la imagen al centro suavemente (el texto se mantiene quieto)
                     requestAnimationFrame(() => {
                         requestAnimationFrame(() => {
-                            lightboxLeft.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease';
-                            lightboxLeft.style.transform = 'translateX(0px)';
-                            lightboxLeft.style.opacity = '1';
-
-                            if (lightboxRightContent) {
-                                lightboxRightContent.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease';
-                                lightboxRightContent.style.transform = 'translateX(0px)';
-                                lightboxRightContent.style.opacity = '1';
+                            if (lightboxLeft) {
+                                lightboxLeft.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease';
+                                lightboxLeft.style.transform = 'translateX(0px)';
+                                lightboxLeft.style.opacity = '1';
                             }
 
                             setTimeout(() => {
