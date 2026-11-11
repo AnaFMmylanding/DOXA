@@ -832,6 +832,32 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             /* Opacidad total */
         }
 
+        @media (max-width: 768px) {
+            .authors-submenu-section {
+                padding: 24px 16px 18px 16px;
+                top: 60px;
+            }
+
+            .authors-nav {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .author-btn {
+                display: block;
+                width: auto;
+                max-width: 90%;
+                text-align: center;
+                padding: 8px 16px;
+                font-size: 11px;
+                letter-spacing: 2px;
+            }
+        }
+
         /* =========================================================================
            [FIN ESTILOS] SUBMENÚ DE AUTORES Y ARTISTAS
            ========================================================================= */
@@ -1068,19 +1094,30 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         .artwork-card {
             background-color: var(--yeso-oscuro);
             /* <-- COLOR DE FONDO DE CADA FICHA/TARJETA DE ARTISTA: YESO OSCURO (#e6e7e1) (Punto 4) */
-            border: 1px solid rgba(60, 51, 42, 0.08);
+            border: none !important;
+            outline: none !important;
             border-radius: 4px;
             padding: 30px;
             display: flex;
             flex-direction: column;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            -webkit-tap-highlight-color: transparent !important;
         }
 
         .artwork-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.06);
-            border-color: rgba(60, 51, 42, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.08);
+            border: none !important;
+            outline: none !important;
+        }
+
+        .artwork-card:focus,
+        .artwork-card:focus-visible,
+        .artwork-card:active {
+            border: none !important;
+            outline: none !important;
         }
 
         .artwork-image-wrapper {
@@ -1092,6 +1129,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             overflow: hidden;
             margin-bottom: 25px;
             background-color: rgba(60, 51, 42, 0.02);
+            border: none !important;
+            outline: none !important;
             border-radius: 2px;
         }
 
@@ -1143,9 +1182,11 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--text-dark);
-            border: none;
+            border: none !important;
             background: none;
-            border-bottom: 1px solid var(--text-dark);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-thickness: 1px;
             padding-bottom: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -1153,7 +1194,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
         .btn-view-details:hover {
             color: #000;
-            border-bottom-color: var(--accent-color);
+            letter-spacing: 2.5px;
             padding-left: 5px;
         }
 
@@ -1287,52 +1328,16 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         }
 
         .lightbox-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 60px;
-            height: 60px;
-            background-color: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: none !important;
-            color: var(--text-dark);
-            cursor: pointer;
-            z-index: 2100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
-            border-radius: 50%;
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
         }
 
-        .lightbox-arrow:hover {
-            background-color: rgba(255, 255, 255, 0.85) !important;
-            color: #000000 !important;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .lightbox-arrow.prev-arrow {
-            left: 40px;
-        }
-
-        .lightbox-arrow.next-arrow {
-            right: 40px;
-        }
-
-        @media (max-width: 1100px) {
-            .lightbox-arrow {
-                width: 45px;
-                height: 45px;
-            }
-
-            .lightbox-arrow.prev-arrow {
-                left: 15px;
-            }
-
-            .lightbox-arrow.next-arrow {
-                right: 15px;
+        @media (max-width: 768px) {
+            .scroll-arrow {
+                display: none !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
             }
         }
 
@@ -1370,6 +1375,8 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             max-width: 90vw;
             max-height: 85vh;
             border-radius: 6px;
+            border: none !important;
+            outline: none !important;
             overflow: hidden;
             display: flex;
             flex-direction: row;
@@ -1506,7 +1513,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             align-items: center;
             justify-content: center;
             padding: 30px;
-            border-right: 1px solid rgba(60, 51, 42, 0.06);
+            border: none !important;
             flex: 1;
             height: 100%;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1667,8 +1674,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             .lightbox-content.is-vertical .lightbox-left {
                 height: 45%;
                 padding: 15px;
-                border-right: none;
-                border-bottom: 1px solid rgba(60, 51, 42, 0.06);
+                border: none !important;
                 flex: none;
             }
 
@@ -3824,6 +3830,11 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
             lightboxImage.addEventListener('click', (e) => {
                 e.stopPropagation();
+                if (didMouseDrag || isSwiping) {
+                    didMouseDrag = false;
+                    isSwiping = false;
+                    return;
+                }
                 toggleDetails();
             });
 
@@ -3831,8 +3842,90 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 if (e.target === lightbox) closeLightbox();
             });
 
-            lightboxPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
-            lightboxNextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+            if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
+            if (lightboxNextBtn) lightboxNextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+
+            // Navegación táctil con el dedo (swipe horizontal en móvil y tablet)
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchStartTime = 0;
+            let isSwiping = false;
+
+            lightbox.addEventListener('touchstart', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.target.closest('#lightboxClose') || e.target.closest('#lightboxToggleDetails')) return;
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                touchStartTime = Date.now();
+                isSwiping = false;
+            }, { passive: true });
+
+            lightbox.addEventListener('touchmove', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                const diffX = e.touches[0].clientX - touchStartX;
+                const diffY = e.touches[0].clientY - touchStartY;
+                if (Math.abs(diffX) > 15 && Math.abs(diffX) > Math.abs(diffY)) {
+                    isSwiping = true;
+                }
+            }, { passive: true });
+
+            lightbox.addEventListener('touchend', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.target.closest('#lightboxClose') || e.target.closest('#lightboxToggleDetails')) return;
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                const diffX = touchEndX - touchStartX;
+                const diffY = touchEndY - touchStartY;
+                const timeDiff = Date.now() - touchStartTime;
+
+                if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY) * 1.15 && timeDiff < 750) {
+                    if (diffX < 0) {
+                        navigateLightbox(1);
+                    } else {
+                        navigateLightbox(-1);
+                    }
+                }
+            }, { passive: true });
+
+            // Navegación mediante arrastre de ratón en escritorio
+            let mouseStartX = 0;
+            let mouseStartY = 0;
+            let isMouseDown = false;
+            let didMouseDrag = false;
+            let mouseStartTime = 0;
+
+            lightboxContent.addEventListener('mousedown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.target.closest('#lightboxClose') || e.target.closest('#lightboxToggleDetails')) return;
+                isMouseDown = true;
+                didMouseDrag = false;
+                mouseStartX = e.clientX;
+                mouseStartY = e.clientY;
+                mouseStartTime = Date.now();
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isMouseDown) return;
+                if (Math.abs(e.clientX - mouseStartX) > 12) {
+                    didMouseDrag = true;
+                }
+            });
+
+            window.addEventListener('mouseup', (e) => {
+                if (!isMouseDown) return;
+                isMouseDown = false;
+                const diffX = e.clientX - mouseStartX;
+                const diffY = e.clientY - mouseStartY;
+                const timeDiff = Date.now() - mouseStartTime;
+
+                if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY) * 1.15 && timeDiff < 650) {
+                    if (diffX < 0) {
+                        navigateLightbox(1);
+                    } else {
+                        navigateLightbox(-1);
+                    }
+                }
+            });
 
             document.addEventListener('keydown', (e) => {
                 if (lightbox.classList.contains('active')) {
