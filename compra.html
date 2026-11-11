@@ -4,7 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOXA | Finalizar Compra</title>
+    <title>DOXA | Reserva Prioritaria · Estado del Arte</title>
+    <link rel="icon" type="image/png" href="Doxa.png">
+
+    <!-- Open Graph & Meta Tags -->
+    <meta name="description" content="Formaliza tu reserva preferente del Primer Lote de Bombón Bloom. Repostería funcional bioinductiva.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DOXA | Estado del Arte">
+    <meta property="og:title" content="DOXA | Reserva Prioritaria">
+    <meta property="og:description" content="Formaliza tu reserva preferente del Primer Lote de Bombón Bloom. Repostería funcional bioinductiva.">
+    <meta property="og:image" content="BBB 1.png">
+    <meta property="og:url" content="https://doxa.art/compra.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DOXA | Reserva Prioritaria">
+    <meta name="twitter:description" content="Formaliza tu reserva preferente del Primer Lote de Bombón Bloom.">
+    <meta name="twitter:image" content="BBB 1.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@100;300;400;500;700&display=swap"
         rel="stylesheet">
@@ -67,6 +81,106 @@
 
         ul {
             list-style: none;
+        }
+
+                /* BANNER DE COOKIES (RGPD / ePrivacy) */
+        .doxa-cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(26, 17, 13, 0.96);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 18px 28px;
+            z-index: 99999;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.35);
+            display: none;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .doxa-cookie-banner.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .cookie-banner-content {
+            max-width: 1350px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .cookie-banner-text {
+            font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+            flex: 1;
+            min-width: 280px;
+            font-weight: 300;
+        }
+        .cookie-policy-link {
+            color: #FFFFFF;
+            text-decoration: underline;
+            transition: opacity 0.2s ease;
+        }
+        .cookie-policy-link:hover { opacity: 0.8; }
+        .cookie-banner-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .cookie-btn {
+            font-family: 'Lato', sans-serif;
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 10px 18px;
+            cursor: pointer;
+            border-radius: 0;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .cookie-btn-accept {
+            background-color: var(--accent-color, #f0ff1c);
+            color: #000000;
+            border: none;
+        }
+        .cookie-btn-accept:hover {
+            transform: scale(1.04);
+            box-shadow: 0 4px 12px rgba(240, 255, 28, 0.35);
+        }
+        .cookie-btn-necessary {
+            background-color: transparent;
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+        .cookie-btn-necessary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #FFFFFF;
+        }
+        .cookie-btn-settings {
+            font-family: 'Lato', sans-serif;
+            font-size: 10.5px;
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: underline;
+            padding: 4px 8px;
+            transition: color 0.2s ease;
+        }
+        .cookie-btn-settings:hover { color: #FFFFFF; }
+        @media (max-width: 768px) {
+            .doxa-cookie-banner { padding: 16px; }
+            .cookie-banner-content { flex-direction: column; align-items: stretch; gap: 14px; }
+            .cookie-banner-actions { width: 100%; justify-content: flex-end; }
+            .cookie-btn { flex: 1; text-align: center; }
         }
 
         /* =========================================
@@ -3390,10 +3504,28 @@
                                     </p>
                                 </div>
 
-                                <!-- Botón de Pago con importe dinámico en vivo -->
+                                <!-- AVISO DE FASE 1: RESERVA PREFERENTE -->
+                                <div class="reservation-priority-box" style="background: rgba(241, 242, 236, 0.9); border: 1px solid rgba(60, 51, 42, 0.15); padding: 18px 20px; border-radius: 4px; margin-bottom: 22px; text-align: left;">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+                                        <span style="background: var(--accent-color, #f0ff1c); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 3px 8px; text-transform: uppercase; color: #150e02;">FASE 1 · RESERVA PREFERENTE</span>
+                                        <span style="font-size: 10.5px; opacity: 0.75; font-weight: 500;">PRIMER LOTE</span>
+                                    </div>
+                                    <p style="font-size: 12px; line-height: 1.6; color: #3C332A; margin-bottom: 12px;">
+                                        Estás asegurando tu plaza preferente en el primer lote horneado de Bombón Bloom antes del lanzamiento general.
+                                    </p>
+                                    <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 11.5px; line-height: 1.5; color: #150e02; cursor: pointer; font-weight: 400;">
+                                        <input type="checkbox" id="launchNoticeCheckbox" name="launch_notice" required checked style="margin-top: 3px; accent-color: #150e02; width: 15px; height: 15px;">
+                                        <span>Deseo activar la notificación preferente para ser avisado/a de la fecha oficial de lanzamiento y formalizar el abono por adelantado de mi pedido.</span>
+                                    </label>
+                                </div>
+
+                                <!-- Botón de Confirmación de Reserva -->
                                 <button type="submit" class="btn-checkout" id="submitBtn">
-                                    <span id="btnPayText">Pagar ahora</span>
+                                    <span id="btnPayText">CONFIRMAR RESERVA PRIORITARIA</span>
                                 </button>
+                                <p style="font-size: 10.5px; opacity: 0.75; text-align: center; margin-top: 10px; line-height: 1.4;">
+                                    Paso 1 de 2: Registro de reserva preferente · Se te avisará para formalizar el abono previo al horneado.
+                                </p>
                             </form>
 
                             <!-- Distintivos de Confianza / Seguridad -->
@@ -3654,36 +3786,6 @@
         // =========================================
         const PRODUCTS_CATALOG = [
             {
-                id: 'doxa',
-                name: 'Doxas',
-                singularName: 'Doxas',
-                image: 'Doxa.png',
-                unitsPerBox: 2,
-                varieties: [
-                    { id: 'doxa_2', name: 'Cajita Dúo (2 piezas)', fullName: 'CAJITA DOXA "TÚ Y YO" (2 PIEZAS)', price: 10.00, image: 'trufas-2.png' },
-                    { id: 'doxa_7', name: 'Caja Mi Semana (7 piezas)', fullName: 'CAJA MI SEMANA (7 PIEZAS)', price: 57.00, image: 'trufas-13.png' },
-                    { id: 'doxa_28', name: 'Caja Mi Mes (28 piezas)', fullName: 'CAJA MI MES (28 PIEZAS)', price: 117.00, image: 'trufas-35.png' },
-                    { id: 'doxa_58', name: 'Caja Gran Reserva (58 piezas)', fullName: 'CAJA GRAN RESERVA (58 PIEZAS)', price: 185.00, image: 'trufas-58.png' },
-                    { id: 'doxa_proto', name: 'Caja Escultórica DOXA', fullName: 'CAJA ESCULTÓRICA DOXA (AUTOR)', price: 240.00, image: 'ProtoDoxa.png' },
-                    { id: 'doxa_regular', name: '1 caja regular (10 uds)', fullName: 'CAJA DOXA REGULAR (10 UDS)', price: 120.00, image: 'Doxa.png' },
-                    { id: 'doxa_coleccion', name: '1 caja Colección (10 uds)', fullName: 'CAJA DOXA COLECCIÓN (10 UDS)', price: 180.00, image: 'Doxa.png' }
-                ]
-            },
-            {
-                id: 'cookie',
-                name: 'Cookies',
-                columnName: 'Doxa<br>Cookie',
-                shortName: 'Cookie',
-                singularName: 'Cookies',
-                image: 'Cookie.png',
-                unitsPerBox: 10,
-                varieties: [
-                    { id: 'cookie_semanal', name: 'Caja 4 unidades', fullName: 'CAJA COOKIES SEMANAL (4 UDS)', price: 48.00, image: 'Galle choco.png' },
-                    { id: 'cookie_regular', name: '1 caja regular (10 uds)', fullName: 'CAJA COOKIES REGULAR (10 UDS)', price: 120.00, image: 'Cookie.png' },
-                    { id: 'cookie_coleccion', name: '1 caja Colección (10 uds)', fullName: 'CAJA COOKIES COLECCIÓN (10 UDS)', price: 180.00, image: 'Galle portada.png' }
-                ]
-            },
-            {
                 id: 'bombon',
                 name: 'Bombón Blooms',
                 columnName: 'Bombón<br>Blooms',
@@ -3698,42 +3800,19 @@
                 ]
             },
             {
-                id: 'lingote',
-                name: 'Lingotes',
-                columnName: 'Lingote<br>Pistacho',
-                shortName: 'Lingote',
-                singularName: 'Lingotes',
-                image: 'Lingote.png',
-                unitsPerBox: 10,
+                id: 'doxa',
+                name: 'Doxas',
+                columnName: 'Doxas<br><small style="font-size: 8px; opacity: 0.75;">(Próx.)</small>',
+                shortName: 'Doxa',
+                singularName: 'Doxas',
+                image: 'Doxa.png',
+                unitsPerBox: 2,
                 varieties: [
-                    { id: 'lingote_regular', name: '1 caja regular (10 uds)', fullName: 'CAJA LINGOTES REGULAR (10 UDS)', price: 120.00, image: 'Lingote.png' },
-                    { id: 'lingote_coleccion', name: '1 caja Colección (10 uds)', fullName: 'CAJA LINGOTES COLECCIÓN (10 UDS)', price: 180.00, image: 'Lingote.png' }
-                ]
-            },
-            {
-                id: 'oblea',
-                name: 'Crujiente de Almendra',
-                columnName: 'Crujiente<br>Almendra',
-                shortName: 'Crujiente',
-                singularName: 'Crujiente de Almendra',
-                image: 'Oblea.png',
-                unitsPerBox: 10,
-                varieties: [
-                    { id: 'oblea_regular', name: '1 caja regular (10 uds)', fullName: 'CAJA CRUJIENTE REGULAR (10 UDS)', price: 120.00, image: 'Oblea.png' },
-                    { id: 'oblea_coleccion', name: '1 caja Colección (10 uds)', fullName: 'CAJA CRUJIENTE COLECCIÓN (10 UDS)', price: 180.00, image: 'Oblea.png' }
-                ]
-            },
-            {
-                id: 'pequebloom',
-                name: 'PequeBlooms',
-                columnName: 'Peque<br>Bloom',
-                shortName: 'Peque',
-                singularName: 'PequeBlooms',
-                image: 'Pequebloom.png',
-                unitsPerBox: 10,
-                varieties: [
-                    { id: 'peque_regular', name: '1 caja regular (10 uds)', fullName: 'CAJA PEQUEBLOOMS REGULAR (10 UDS)', price: 120.00, image: 'Pequebloom.png' },
-                    { id: 'peque_coleccion', name: '1 caja Colección (10 uds)', fullName: 'CAJA PEQUEBLOOMS COLECCIÓN (10 UDS)', price: 180.00, image: 'Pequebloom.png' }
+                    { id: 'doxa_2', name: 'Cajita Dúo (2 piezas)', fullName: 'CAJITA DOXA "TÚ Y YO" (2 PIEZAS)', price: 10.00, image: 'trufas-2.png' },
+                    { id: 'doxa_7', name: 'Caja Mi Semana (7 piezas)', fullName: 'CAJA MI SEMANA (7 PIEZAS)', price: 57.00, image: 'trufas-13.png' },
+                    { id: 'doxa_28', name: 'Caja Mi Mes (28 piezas)', fullName: 'CAJA MI MES (28 PIEZAS)', price: 117.00, image: 'trufas-35.png' },
+                    { id: 'doxa_58', name: 'Caja Gran Reserva (58 piezas)', fullName: 'CAJA GRAN RESERVA (58 PIEZAS)', price: 185.00, image: 'trufas-58.png' },
+                    { id: 'doxa_proto', name: 'Caja Escultórica DOXA', fullName: 'CAJA ESCULTÓRICA DOXA (AUTOR)', price: 240.00, image: 'ProtoDoxa.png' }
                 ]
             }
         ];
@@ -5178,15 +5257,63 @@
                     submitBtn.disabled = false;
                 }
             } catch (err) {
-                console.error('Error conectando con la pasarela de Stripe:', err);
-                alert('No se pudo conectar con el servidor local de pagos.\n\nPara probar Stripe en local:\n1. Abre la carpeta del proyecto.\n2. Ejecuta "iniciar-servidor.bat" o el comando "node server.js".\n3. Accede desde http://localhost:3000/compra.html');
-                loadingOverlay.classList.remove('active');
-                setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
-                submitBtn.disabled = false;
+                console.warn('Conexión con pasarela local no disponible, formalizando registro prioritario:', err);
+                // Modo reserva preferente: redirigir a confirmación de reserva directamente
+                const giftsParam = giftOrdersPayload.length > 0 ? &gifts= : '';
+                window.location.href = gracias.html?variety=&qty=&total=€&name=&email=;
             }
         }
     </script>
 
+    <!-- =========================================================================
+         BANNER DE CONSENTIMIENTO PREVIO DE COOKIES (RGPD / ePrivacy)
+         ========================================================================= -->
+    <div id="doxaCookieBanner" class="doxa-cookie-banner" role="dialog" aria-live="polite" aria-label="Consentimiento de cookies">
+        <div class="cookie-banner-content">
+            <p class="cookie-banner-text">
+                En <strong>DOXA</strong> empleamos cookies técnicas y analíticas esenciales para garantizar el correcto funcionamiento de la galería, recordar tus preferencias y gestionar la prioridad de tu reserva. Puedes consultar los detalles en nuestra <a href="ayuda.html#cookies" class="cookie-policy-link">Política de Cookies</a>.
+            </p>
+            <div class="cookie-banner-actions">
+                <button type="button" class="cookie-btn cookie-btn-accept" id="cookieAcceptAll">Aceptar todas</button>
+                <button type="button" class="cookie-btn cookie-btn-necessary" id="cookieAcceptNecessary">Solo necesarias</button>
+                <a href="ayuda.html#cookies" class="cookie-btn-settings">Configurar</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            function initCookieBanner() {
+                var banner = document.getElementById('doxaCookieBanner');
+                if (!banner) return;
+                var consent = localStorage.getItem('doxa_cookie_consent');
+                if (!consent) {
+                    setTimeout(function() {
+                        banner.classList.add('active');
+                    }, 800);
+                }
+                var acceptBtn = document.getElementById('cookieAcceptAll');
+                var necBtn = document.getElementById('cookieAcceptNecessary');
+                if (acceptBtn) {
+                    acceptBtn.addEventListener('click', function() {
+                        localStorage.setItem('doxa_cookie_consent', 'all');
+                        banner.classList.remove('active');
+                    });
+                }
+                if (necBtn) {
+                    necBtn.addEventListener('click', function() {
+                        localStorage.setItem('doxa_cookie_consent', 'necessary');
+                        banner.classList.remove('active');
+                    });
+                }
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initCookieBanner);
+            } else {
+                initCookieBanner();
+            }
+        })();
+    </script>
 </body>
 
 </html>

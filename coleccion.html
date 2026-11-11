@@ -4,7 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOXA | La Colección — Alta Repostería Molecular</title>
+    <title>DOXA | La Colección — Alta Repostería Bioinductiva</title>
+    <link rel="icon" type="image/png" href="Doxa.png">
+
+    <!-- Open Graph & Meta Tags -->
+    <meta name="description" content="Explora la pieza escultórica y arquitectónica de La Colección Doxa. Repostería funcional bioinductiva numerada a mano.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DOXA | Estado del Arte">
+    <meta property="og:title" content="DOXA | La Colección — Alta Repostería Bioinductiva">
+    <meta property="og:description" content="Explora la pieza escultórica y arquitectónica de La Colección Doxa. Repostería funcional bioinductiva numerada a mano.">
+    <meta property="og:image" content="MASEDA 2.jpg">
+    <meta property="og:url" content="https://doxa.art/coleccion.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DOXA | La Colección">
+    <meta name="twitter:description" content="Explora la pieza escultórica y arquitectónica de La Colección Doxa.">
+    <meta name="twitter:image" content="MASEDA 2.jpg">
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@100;300;400;500;700&display=swap"
         rel="stylesheet">
@@ -1884,6 +1898,100 @@
                 justify-content: center;
             }
         }
+    
+        /* BANNER DE COOKIES (RGPD / ePrivacy) */
+        .doxa-cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(26, 17, 13, 0.96);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 18px 28px;
+            z-index: 99999;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.35);
+            display: none;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .doxa-cookie-banner.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .cookie-banner-content {
+            max-width: 1350px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .cookie-banner-text {
+            font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+            flex: 1;
+            min-width: 280px;
+            font-weight: 300;
+        }
+        .cookie-policy-link {
+            color: #FFFFFF;
+            text-decoration: underline;
+            transition: opacity 0.2s ease;
+        }
+        .cookie-policy-link:hover { opacity: 0.8; }
+        .cookie-banner-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .cookie-btn {
+            font-family: 'Lato', sans-serif;
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 10px 18px;
+            cursor: pointer;
+            border-radius: 0;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .cookie-btn-accept {
+            background-color: var(--accent-color, #f0ff1c);
+            color: #000000;
+            border: none;
+        }
+        .cookie-btn-accept:hover {
+            transform: scale(1.04);
+            box-shadow: 0 4px 12px rgba(240, 255, 28, 0.35);
+        }
+        .cookie-btn-necessary {
+            background-color: transparent;
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+        .cookie-btn-necessary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #FFFFFF;
+        }
+        .cookie-btn-settings {
+            font-family: 'Lato', sans-serif;
+            font-size: 10.5px;
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: underline;
+            padding: 4px 8px;
+            transition: color 0.2s ease;
+        }
+        .cookie-btn-settings:hover { color: #FFFFFF; }
     </style>
 </head>
 
@@ -2791,6 +2899,56 @@
                 }
             });
         });
+    </script>
+
+    <!-- =========================================================================
+         BANNER DE CONSENTIMIENTO PREVIO DE COOKIES (RGPD / ePrivacy)
+         ========================================================================= -->
+    <div id="doxaCookieBanner" class="doxa-cookie-banner" role="dialog" aria-live="polite" aria-label="Consentimiento de cookies">
+        <div class="cookie-banner-content">
+            <p class="cookie-banner-text">
+                En <strong>DOXA</strong> empleamos cookies técnicas y analíticas esenciales para garantizar el correcto funcionamiento de la galería, recordar tus preferencias y gestionar la prioridad de tu reserva. Puedes consultar los detalles en nuestra <a href="ayuda.html#cookies" class="cookie-policy-link">Política de Cookies</a>.
+            </p>
+            <div class="cookie-banner-actions">
+                <button type="button" class="cookie-btn cookie-btn-accept" id="cookieAcceptAll">Aceptar todas</button>
+                <button type="button" class="cookie-btn cookie-btn-necessary" id="cookieAcceptNecessary">Solo necesarias</button>
+                <a href="ayuda.html#cookies" class="cookie-btn-settings">Configurar</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            function initCookieBanner() {
+                var banner = document.getElementById('doxaCookieBanner');
+                if (!banner) return;
+                var consent = localStorage.getItem('doxa_cookie_consent');
+                if (!consent) {
+                    setTimeout(function() {
+                        banner.classList.add('active');
+                    }, 800);
+                }
+                var acceptBtn = document.getElementById('cookieAcceptAll');
+                var necBtn = document.getElementById('cookieAcceptNecessary');
+                if (acceptBtn) {
+                    acceptBtn.addEventListener('click', function() {
+                        localStorage.setItem('doxa_cookie_consent', 'all');
+                        banner.classList.remove('active');
+                    });
+                }
+                if (necBtn) {
+                    necBtn.addEventListener('click', function() {
+                        localStorage.setItem('doxa_cookie_consent', 'necessary');
+                        banner.classList.remove('active');
+                    });
+                }
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initCookieBanner);
+            } else {
+                initCookieBanner();
+            }
+        })();
     </script>
 </body>
 
