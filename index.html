@@ -469,25 +469,29 @@ Menú del Index: Líena 742
 
         .navbar-cart-badge {
             position: absolute;
-            top: -6px;
-            right: -9px;
-            background-color: #ff5500;
-            color: #ffffff;
+            top: -7px;
+            right: -4px;
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            color: var(--nav-text-initial, #ffffff);
             font-family: 'Lato', 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 10px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 500;
             line-height: 1;
-            min-width: 17px;
-            height: 17px;
-            border-radius: 999px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 4px;
-            box-sizing: border-box;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+            min-width: unset !important;
+            height: auto !important;
+            padding: 0 !important;
+            margin: 0 !important;
             pointer-events: none;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+            transition: color 0.35s ease, transform 0.2s ease;
+        }
+
+        .navbar.scrolled .navbar-cart-badge {
+            color: var(--nav-text-scrolled, #000000) !important;
+            text-shadow: none !important;
         }
 
         /* En PC (min-width: 769px): sólo se ven los 7 elementos */
@@ -889,153 +893,108 @@ Menú del Index: Líena 742
                 margin: 0 !important;
             }
 
-            /* COLUMNA DESPLEGABLE DEL CUADRO AMARILLO */
+            /* PERSIANA DE BOTONES DEL CUADRO AMARILLO:
+               De arriba a abajo, ordenada, textos solos, alineada a la derecha bajo el botón amarillo */
             .navbar-menu {
                 position: fixed;
-                top: 70px;
-                right: -120%;
-                width: 260px;
+                top: 66px;
+                right: 16px;
+                width: 200px;
                 max-width: calc(100% - 32px);
                 height: auto;
-                max-height: calc(100vh - 85px);
-                background: rgba(18, 18, 18, 0.94);
+                background: rgba(30, 20, 16, 0.94);
                 backdrop-filter: blur(16px);
                 -webkit-backdrop-filter: blur(16px);
                 flex-direction: column;
                 justify-content: flex-start;
-                align-items: stretch;
-                gap: 8px;
-                padding: 14px 12px;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-                box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
-                transition: right 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-                z-index: 999;
-                border: 1px solid rgba(255, 255, 255, 0.12);
+                align-items: flex-start;
+                gap: 20px;
+                padding: 24px 22px;
+                box-shadow: 0 16px 38px rgba(0, 0, 0, 0.65);
+                border: none;
                 border-radius: 0;
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-8px);
+                transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.3s ease;
             }
 
             .navbar.scrolled .navbar-menu {
-                top: 65px;
+                top: 62px;
             }
 
             .navbar-menu.active {
-                right: 16px;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
             }
 
-            /* BOTONES DENTRO DE LA COLUMNA DESPLEGABLE */
+            /* TEXTOS SOLOS DENTRO DE LA PERSIANA DESPLEGABLE */
             .navbar-menu .navbar-link {
-                font-family: 'Lato', 'Lexend', sans-serif;
-                font-size: 12px !important;
+                font-family: 'Lato', 'Lexend', -apple-system, sans-serif !important;
+                font-size: 13px !important;
                 font-weight: 400 !important;
-                letter-spacing: 2.5px !important;
+                letter-spacing: 2px !important;
+                text-transform: uppercase !important;
                 color: rgba(255, 255, 255, 0.9) !important;
-                background-color: rgba(255, 255, 255, 0.04) !important;
-                border: 1px solid rgba(255, 255, 255, 0.08) !important;
-                width: 100%;
-                text-align: center;
-                padding: 12px 16px !important;
-                transition: all 0.25s ease;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                box-sizing: border-box;
+                background: transparent !important;
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: auto !important;
+                text-align: left !important;
+                display: block !important;
+                transition: color 0.25s ease, opacity 0.25s ease;
                 border-radius: 0 !important;
             }
 
             .navbar-menu .navbar-link:hover,
             .navbar-menu .navbar-link:active {
-                background-color: rgba(255, 255, 255, 0.12) !important;
                 color: #FFFFFF !important;
-                border-color: rgba(255, 255, 255, 0.2) !important;
+                opacity: 0.8;
+                background: transparent !important;
             }
 
             .navbar-menu .navbar-link.active {
-                background-color: var(--accent-color, #f0ff1c) !important;
-                color: #000000 !important;
-                font-weight: 600 !important;
-                border-color: var(--accent-color, #f0ff1c) !important;
+                color: var(--accent-color, #f0ff1c) !important;
+                background: transparent !important;
+                font-weight: 500 !important;
             }
 
-            /* Adaptación del menú desplegable de Productos en móvil */
+            /* Desplegable de Productos adaptado a texto solo en móvil */
             .navbar-dropdown-wrapper {
-                width: 100%;
+                width: auto !important;
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
             .navbar-dropdown-btn {
-                width: 100%;
-                justify-content: center;
-                font-family: 'Lato', sans-serif !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                border: none !important;
+                background: transparent !important;
+                justify-content: flex-start !important;
+                font-family: 'Lato', 'Lexend', -apple-system, sans-serif !important;
                 font-weight: 400 !important;
-                letter-spacing: 2.5px !important;
-                font-size: 12px !important;
-                -webkit-font-smoothing: antialiased;
-            }
-
-            .productos-submenu-horizontal {
-                position: static;
-                transform: none !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-                pointer-events: auto !important;
-                background: transparent;
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                border: none;
-                border-radius: 0;
-                padding: 6px 0 2px 0;
-                width: 100%;
-                max-width: 100%;
-                overflow: visible;
-                box-shadow: none;
-                margin: 0 auto;
-            }
-
-            .productos-submenu-track {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-                width: 100%;
-                padding: 0;
-            }
-
-            .producto-sub-card {
-                min-width: unset;
-                width: 100%;
-                padding: 8px 6px;
-                border: none;
-                border-radius: 0;
-                box-sizing: border-box;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                background: rgba(255, 255, 255, 0.03) !important;
-            }
-
-            .producto-sub-card:hover {
-                background: rgba(255, 255, 255, 0.08) !important;
-            }
-
-            .producto-sub-thumb {
-                width: 44px;
-                height: 44px;
-                margin-bottom: 5px;
-                border: none;
-                background: transparent;
-            }
-
-            .producto-sub-title {
-                font-family: 'Lato', sans-serif;
-                font-size: 9px;
-                font-weight: 300;
-                letter-spacing: 1.8px;
-                text-align: center;
+                letter-spacing: 2px !important;
+                font-size: 13px !important;
+                text-transform: uppercase !important;
                 color: rgba(255, 255, 255, 0.9) !important;
-                text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4) !important;
                 -webkit-font-smoothing: antialiased;
+            }
+
+            .navbar-dropdown-btn .dropdown-chevron {
+                display: none !important;
+            }
+
+            /* Ocultar el submenú de tarjetas en móvil para mantener la persiana sólo con textos */
+            .productos-submenu-horizontal {
+                display: none !important;
             }
         }
 
@@ -1735,13 +1694,13 @@ Menú del Index: Líena 742
                    Para MOSTRAR / LIBERAR un botón en la web: cambia data-visible="off" por data-visible="on"
                    Para OCULTAR un botón de la web: cambia data-visible="on" por data-visible="off"
                    ========================================================================= -->
-                <!-- 4) LA COLECCIÓN (OFF) -->
-                <a href="coleccion.html" class="navbar-link btn-coleccion" data-visible="off">La Colección</a>
-                <!-- 5) GALERÍA (OFF) -->
+                <!-- 4) LA COLECCIÓN (ON) -->
+                <a href="coleccion.html" class="navbar-link btn-coleccion" data-visible="on">La Colección</a>
+                <!-- 5) GALERÍA (ON) -->
                 <!--NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
-                <a href="galeria.html" class="navbar-link btn-gallery" data-visible="off">Galería</a>
-                <!-- 6) ARTÍCULOS (OFF) -->
-                <a href="articulos.html" class="navbar-link btn-articulos" data-visible="off">Artículos</a>
+                <a href="galeria.html" class="navbar-link btn-gallery" data-visible="on">Galería</a>
+                <!-- 6) BLOG (ON) -->
+                <a href="articulos.html" class="navbar-link btn-blog" data-visible="on">Blog</a>
 
                 <!-- 7) ICONO PARA LA CESTA DE LA COMPRA EN PC -->
                 <a href="compra.html" class="navbar-cart-btn navbar-cart-pc" id="navbarCartBtnPC" aria-label="Cesta de la compra">
@@ -11302,6 +11261,25 @@ Menú del Index: Líena 742
 
                     // Permitir también clic (útil en móviles o toque)
                     btnProductos.addEventListener('click', (e) => {
+                        if (window.innerWidth <= 768) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const target = document.getElementById('rueda-activos-doxa') || document.getElementById('rueda-activos');
+                            if (target) {
+                                const navH = navbar ? navbar.offsetHeight : 70;
+                                const targetPos = target.getBoundingClientRect().top + window.pageYOffset - navH - 10;
+                                window.scrollTo({
+                                    top: Math.max(0, targetPos),
+                                    behavior: 'smooth'
+                                });
+                                if (window.history.pushState) {
+                                    window.history.pushState(null, '', '#rueda-activos-doxa');
+                                }
+                                closeMobileMenu();
+                                if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
+                            }
+                            return;
+                        }
                         e.stopPropagation();
                         if (closeDropdownTimer) {
                             clearTimeout(closeDropdownTimer);
