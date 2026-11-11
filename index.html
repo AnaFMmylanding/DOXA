@@ -479,8 +479,8 @@ Menú del Index: Líena 742
             border: none !important;
             border-radius: 0 !important;
             box-shadow: none !important;
-            color: var(--nav-text-initial, #ffffff);
-            opacity: 0.7 !important; /* Opacidad 70% solicitada */
+            color: #FFFFFF !important;
+            opacity: 0.7 !important;
             font-family: 'Lato', 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 11px;
             font-weight: 600;
@@ -490,13 +490,13 @@ Menú del Index: Líena 742
             padding: 0 !important;
             margin: 0 !important;
             pointer-events: none;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+            text-shadow: none !important;
             transition: color 0.35s ease, opacity 0.25s ease, transform 0.2s ease;
         }
 
         .navbar.scrolled .navbar-cart-badge {
-            color: var(--nav-text-scrolled, #000000) !important;
-            opacity: 0.7 !important; /* Opacidad 70% solicitada en scroll */
+            color: #000000 !important;
+            opacity: 0.7 !important;
             text-shadow: none !important;
         }
 
@@ -1831,7 +1831,7 @@ Menú del Index: Líena 742
                    [BOTÓN Y SUBMENÚ HORIZONTAL DE PRODUCTOS]
                    ========================================================================= -->
                 <div class="navbar-dropdown-wrapper" id="productosDropdownWrapper">
-                    <button class="navbar-link navbar-dropdown-btn" id="btnProductos" type="button"
+                    <button class="navbar-link navbar-dropdown-btn btn-productos" id="btnProductos" type="button"
                         aria-expanded="false">
                         <span>Productos</span>
                         <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
@@ -11506,28 +11506,46 @@ Menú del Index: Líena 742
                     });
                 });
 
+                // Función unificada para navegar de forma idéntica a la barra horizontal de productos en Reservas
+                function scrollToReservasProducts(e, activeBtn) {
+                    if (e) {
+                        e.preventDefault();
+                        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+                    }
+                    if (typeof closeDropdown === 'function') closeDropdown();
+                    const prodDrop = document.getElementById('productosDropdownWrapper');
+                    if (prodDrop) prodDrop.classList.remove('active');
+                    closeMobileMenu();
+                    closeCartDropdown();
+
+                    const scrollTarget = document.getElementById('reservasProductsNav') || document.getElementById('reserva') || document.getElementById('la-coleccion');
+                    if (scrollTarget) {
+                        const isMobile = window.innerWidth <= 768;
+                        const topOffset = isMobile ? 65 : 75;
+                        let el = scrollTarget;
+                        let elemTop = 0;
+                        while (el) {
+                            elemTop += el.offsetTop || 0;
+                            el = el.offsetParent;
+                        }
+                        const targetY = elemTop > 0 ? (elemTop - topOffset) : (scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset);
+                        window.scrollTo({
+                            top: Math.max(0, targetY),
+                            behavior: 'smooth'
+                        });
+                        if (window.history.pushState) {
+                            window.history.pushState(null, '', '#reservasProductsNav');
+                        }
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        if (activeBtn) activeBtn.classList.add('active');
+                        if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
+                    }
+                }
+                window.scrollToReservasProducts = scrollToReservasProducts;
+
                 // Botón "Reservas" -> scroll directo a la sección de reservas
                 document.querySelectorAll('.btn-reservas').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const target = document.getElementById('reservasProductsNav') || document.getElementById('reserva') || document.getElementById('la-coleccion');
-                        if (target) {
-                            e.preventDefault();
-                            const navH = navbar ? navbar.offsetHeight : 70;
-                            const targetPos = target.getBoundingClientRect().top + window.pageYOffset - navH - 10;
-                            window.scrollTo({
-                                top: Math.max(0, targetPos),
-                                behavior: 'smooth'
-                            });
-                            if (window.history.pushState) {
-                                window.history.pushState(null, '', '#reservasProductsNav');
-                            }
-                            navLinks.forEach(l => l.classList.remove('active'));
-                            btn.classList.add('active');
-                            closeMobileMenu();
-                            closeCartDropdown();
-                            if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
-                        }
-                    });
+                    btn.addEventListener('click', (e) => scrollToReservasProducts(e, btn));
                 });
 
                 window.addEventListener('scroll', () => {
@@ -11625,27 +11643,7 @@ Menú del Index: Líena 742
                     });
 
                     // Clic en "Productos": lleva al apartado Reservas, al menú horizontal de productos (igual que botón Reservas)
-                    btnProductos.addEventListener('click', (e) => {
-                        const target = document.getElementById('reservasProductsNav') || document.getElementById('reserva') || document.getElementById('la-coleccion');
-                        if (target) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            const navH = navbar ? navbar.offsetHeight : 70;
-                            const targetPos = target.getBoundingClientRect().top + window.pageYOffset - navH - 10;
-                            window.scrollTo({
-                                top: Math.max(0, targetPos),
-                                behavior: 'smooth'
-                            });
-                            if (window.history.pushState) {
-                                window.history.pushState(null, '', '#reservasProductsNav');
-                            }
-                            navLinks.forEach(l => l.classList.remove('active'));
-                            btnProductos.classList.add('active');
-                            closeMobileMenu();
-                            closeCartDropdown();
-                            if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
-                        }
-                    });
+                    btnProductos.addEventListener('click', (e) => scrollToReservasProducts(e, btnProductos));
 
                     // Cerrar el desplegable al hacer clic fuera
                     document.addEventListener('click', (e) => {
