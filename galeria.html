@@ -1231,6 +1231,9 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             /* Firefox */
             -ms-overflow-style: none;
             /* IE and Edge */
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x pan-y;
+            scroll-snap-type: x proximity;
         }
 
         .portfolio-scroll-wrapper::-webkit-scrollbar {
@@ -1258,11 +1261,13 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
 
         .portfolio-grid:not(.grid-layout) .artwork-card {
             flex: 0 0 280px;
+            scroll-snap-align: start;
         }
 
         @media (max-width: 600px) {
             .portfolio-grid:not(.grid-layout) .artwork-card {
                 flex: 0 0 260px;
+                scroll-snap-align: center;
             }
         }
 
@@ -1518,6 +1523,10 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             height: 100%;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
+            will-change: transform, opacity;
         }
 
         .lightbox-image {
@@ -1526,6 +1535,10 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             object-fit: contain;
             filter: drop-shadow(0px 20px 45px rgba(0, 0, 0, 0.25));
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            -webkit-user-drag: none;
+            user-select: none;
+            -webkit-user-select: none;
+            pointer-events: auto;
         }
 
         .lightbox-right {
@@ -3765,18 +3778,36 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 lightbox.classList.remove('active');
                 lightboxContent.classList.remove('details-collapsed', 'is-vertical');
                 if (toggleIconPath) toggleIconPath.setAttribute('points', '9 18 15 12 9 6');
+                lightboxLeft.style.transition = 'none';
+                lightboxLeft.style.transform = 'translateX(0px)';
+                lightboxLeft.style.opacity = '1';
                 document.body.style.overflow = '';
             }
 
-            function navigateLightbox(direction) {
-                if (activeArtworkElements.length === 0) return;
-                currentArtworkIndex = (currentArtworkIndex + direction + activeArtworkElements.length) % activeArtworkElements.length;
-                const nextCard = activeArtworkElements[currentArtworkIndex];
+            let isLightboxAnimating = false;
 
-                lightboxImage.style.opacity = '0';
-                if (lightboxRightContent) lightboxRightContent.style.opacity = '0';
+            function slideLightbox(direction) {
+                if (isLightboxAnimating || !activeArtworkElements || activeArtworkElements.length <= 1) return;
+                isLightboxAnimating = true;
+
+                // Desplazamiento de salida de la obra actual
+                const exitX = direction > 0 ? '-115%' : '115%';
+                const enterX = direction > 0 ? '115%' : '-115%';
+
+                lightboxLeft.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease';
+                lightboxLeft.style.transform = `translateX(${exitX})`;
+                lightboxLeft.style.opacity = '0.3';
+
+                if (lightboxRightContent) {
+                    lightboxRightContent.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+                    lightboxRightContent.style.opacity = '0';
+                    lightboxRightContent.style.transform = `translateX(${direction > 0 ? '-25px' : '25px'})`;
+                }
 
                 setTimeout(() => {
+                    currentArtworkIndex = (currentArtworkIndex + direction + activeArtworkElements.length) % activeArtworkElements.length;
+                    const nextCard = activeArtworkElements[currentArtworkIndex];
+
                     const imageSrc = nextCard.querySelector('.artwork-image-wrapper img').src;
                     const imageAlt = nextCard.querySelector('.artwork-image-wrapper img').alt;
                     const number = nextCard.querySelector('.artwork-number').textContent;
@@ -3790,9 +3821,9 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     lightboxActives.textContent = nextCard.getAttribute('data-actives') || '';
                     lightboxFlavor.textContent = nextCard.getAttribute('data-flavor') || '';
                     lightboxConcept.textContent = nextCard.getAttribute('data-concept') || '';
-                    document.getElementById('lightboxWeight').textContent = nextCard.getAttribute('data-weight') || '90 gramos por pieza';
+                    const weightEl = document.getElementById('lightboxWeight');
+                    if (weightEl) weightEl.textContent = nextCard.getAttribute('data-weight') || '90 gramos por pieza';
 
-                    // Determinar si la obra es vertical o horizontal analizando la imagen
                     const imgTemp = new Image();
                     imgTemp.src = imageSrc;
                     imgTemp.onload = function () {
@@ -3804,15 +3835,41 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                         }
                     };
 
-                    lightboxImage.style.opacity = '1';
-                    if (lightboxRightContent) lightboxRightContent.style.opacity = '1';
-                }, 300);
+                    // Colocar en el punto de entrada opuesto
+                    lightboxLeft.style.transition = 'none';
+                    lightboxLeft.style.transform = `translateX(${enterX})`;
+                    lightboxLeft.style.opacity = '0.3';
+
+                    if (lightboxRightContent) {
+                        lightboxRightContent.style.transition = 'none';
+                        lightboxRightContent.style.transform = `translateX(${direction > 0 ? '25px' : '-25px'})`;
+                        lightboxRightContent.style.opacity = '0';
+                    }
+
+                    // Animar la entrada al centro suavemente
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            lightboxLeft.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease';
+                            lightboxLeft.style.transform = 'translateX(0px)';
+                            lightboxLeft.style.opacity = '1';
+
+                            if (lightboxRightContent) {
+                                lightboxRightContent.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease';
+                                lightboxRightContent.style.transform = 'translateX(0px)';
+                                lightboxRightContent.style.opacity = '1';
+                            }
+
+                            setTimeout(() => {
+                                isLightboxAnimating = false;
+                            }, 360);
+                        });
+                    });
+                }, 280);
             }
 
-            document.addEventListener('click', (e) => {
-                const card = e.target.closest('.artwork-card');
-                if (card) openLightbox(card);
-            });
+            function navigateLightbox(direction) {
+                slideLightbox(direction);
+            }
 
             closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
 
@@ -3828,103 +3885,127 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 toggleDetails();
             });
 
-            lightboxImage.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (didMouseDrag || isSwiping) {
-                    didMouseDrag = false;
-                    isSwiping = false;
-                    return;
-                }
-                toggleDetails();
-            });
-
             lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) closeLightbox();
+                if (e.target === lightbox && !lbDidSwipe) closeLightbox();
             });
 
             if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
             if (lightboxNextBtn) lightboxNextBtn.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
 
-            // Navegación táctil con el dedo (swipe horizontal en móvil y tablet)
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let touchStartTime = 0;
-            let isSwiping = false;
+            // Control gestual para pasar obras con el dedo en scroll lateral
+            let lbStartX = 0;
+            let lbStartY = 0;
+            let lbDiffX = 0;
+            let lbDiffY = 0;
+            let lbIsActive = false;
+            let lbDirection = null;
+            let lbStartTime = 0;
+            let lbDidSwipe = false;
 
-            lightbox.addEventListener('touchstart', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-                if (e.target.closest('#lightboxClose') || e.target.closest('#lightboxToggleDetails')) return;
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-                touchStartTime = Date.now();
-                isSwiping = false;
-            }, { passive: true });
+            const lbModal = document.getElementById('artworkLightbox');
 
-            lightbox.addEventListener('touchmove', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-                const diffX = e.touches[0].clientX - touchStartX;
-                const diffY = e.touches[0].clientY - touchStartY;
-                if (Math.abs(diffX) > 15 && Math.abs(diffX) > Math.abs(diffY)) {
-                    isSwiping = true;
-                }
-            }, { passive: true });
+            function startLbGesture(clientX, clientY, target) {
+                if (!lightbox.classList.contains('active')) return false;
+                if (target.closest('#lightboxClose') || target.closest('#lightboxToggleDetails')) return false;
+                lbStartX = clientX;
+                lbStartY = clientY;
+                lbDiffX = 0;
+                lbDiffY = 0;
+                lbIsActive = true;
+                lbDirection = null;
+                lbStartTime = Date.now();
+                lbDidSwipe = false;
+                return true;
+            }
 
-            lightbox.addEventListener('touchend', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-                if (e.target.closest('#lightboxClose') || e.target.closest('#lightboxToggleDetails')) return;
-                const touchEndX = e.changedTouches[0].clientX;
-                const touchEndY = e.changedTouches[0].clientY;
-                const diffX = touchEndX - touchStartX;
-                const diffY = touchEndY - touchStartY;
-                const timeDiff = Date.now() - touchStartTime;
+            function moveLbGesture(clientX, clientY, e) {
+                if (!lbIsActive || isLightboxAnimating) return;
+                lbDiffX = clientX - lbStartX;
+                lbDiffY = clientY - lbStartY;
 
-                if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY) * 1.15 && timeDiff < 750) {
-                    if (diffX < 0) {
-                        navigateLightbox(1);
-                    } else {
-                        navigateLightbox(-1);
+                if (!lbDirection) {
+                    if (Math.abs(lbDiffX) > 6 || Math.abs(lbDiffY) > 6) {
+                        lbDirection = (Math.abs(lbDiffX) >= Math.abs(lbDiffY)) ? 'horizontal' : 'vertical';
                     }
                 }
+
+                if (lbDirection === 'horizontal') {
+                    if (e && e.cancelable) e.preventDefault();
+                    lbDidSwipe = true;
+                    // Arrastre en tiempo real bajo el dedo
+                    lightboxLeft.style.transition = 'none';
+                    lightboxLeft.style.transform = `translateX(${lbDiffX}px)`;
+                    const dragOp = Math.max(0.5, 1 - Math.abs(lbDiffX) / 380);
+                    lightboxLeft.style.opacity = dragOp;
+                }
+            }
+
+            function endLbGesture() {
+                if (!lbIsActive) return;
+                lbIsActive = false;
+
+                if (lbDirection === 'horizontal') {
+                    const elapsed = Date.now() - lbStartTime;
+                    const isQuick = elapsed < 320 && Math.abs(lbDiffX) > 20;
+                    const isFar = Math.abs(lbDiffX) > 40;
+
+                    if (isQuick || isFar) {
+                        if (lbDiffX < 0) {
+                            slideLightbox(1);
+                        } else {
+                            slideLightbox(-1);
+                        }
+                    } else {
+                        lightboxLeft.style.transition = 'transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease';
+                        lightboxLeft.style.transform = 'translateX(0px)';
+                        lightboxLeft.style.opacity = '1';
+                    }
+                    setTimeout(() => { lbDidSwipe = false; }, 150);
+                }
+            }
+
+            // Eventos táctiles en Lightbox (móviles y tablets)
+            lbModal.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    startLbGesture(e.touches[0].clientX, e.touches[0].clientY, e.target);
+                }
             }, { passive: true });
 
-            // Navegación mediante arrastre de ratón en escritorio
-            let mouseStartX = 0;
-            let mouseStartY = 0;
-            let isMouseDown = false;
-            let didMouseDrag = false;
-            let mouseStartTime = 0;
+            lbModal.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1) {
+                    moveLbGesture(e.touches[0].clientX, e.touches[0].clientY, e);
+                }
+            }, { passive: false });
 
-            lightboxContent.addEventListener('mousedown', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-                if (e.target.closest('#lightboxClose') || e.target.closest('#lightboxToggleDetails')) return;
-                isMouseDown = true;
-                didMouseDrag = false;
-                mouseStartX = e.clientX;
-                mouseStartY = e.clientY;
-                mouseStartTime = Date.now();
+            lbModal.addEventListener('touchend', endLbGesture, { passive: true });
+            lbModal.addEventListener('touchcancel', endLbGesture, { passive: true });
+
+            // Eventos de ratón en Lightbox (arrastre horizontal con ratón en PC)
+            lbModal.addEventListener('mousedown', (e) => {
+                if (e.button === 0) {
+                    startLbGesture(e.clientX, e.clientY, e.target);
+                }
             });
 
             window.addEventListener('mousemove', (e) => {
-                if (!isMouseDown) return;
-                if (Math.abs(e.clientX - mouseStartX) > 12) {
-                    didMouseDrag = true;
+                if (lbIsActive) {
+                    moveLbGesture(e.clientX, e.clientY, e);
                 }
             });
 
-            window.addEventListener('mouseup', (e) => {
-                if (!isMouseDown) return;
-                isMouseDown = false;
-                const diffX = e.clientX - mouseStartX;
-                const diffY = e.clientY - mouseStartY;
-                const timeDiff = Date.now() - mouseStartTime;
-
-                if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY) * 1.15 && timeDiff < 650) {
-                    if (diffX < 0) {
-                        navigateLightbox(1);
-                    } else {
-                        navigateLightbox(-1);
-                    }
+            window.addEventListener('mouseup', () => {
+                if (lbIsActive) {
+                    endLbGesture();
                 }
+            });
+
+            lightboxImage.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (lbDidSwipe) {
+                    lbDidSwipe = false;
+                    return;
+                }
+                toggleDetails();
             });
 
             document.addEventListener('keydown', (e) => {
@@ -3932,6 +4013,46 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     if (e.key === 'Escape') closeLightbox();
                     else if (e.key === 'ArrowLeft') navigateLightbox(-1);
                     else if (e.key === 'ArrowRight') navigateLightbox(1);
+                }
+            });
+
+            // Scroll lateral con el dedo en las fichas del carrusel de la página (sin abrir modal)
+            let isPageCardSwiping = false;
+            let pageCardStartX = 0;
+            let pageCardStartY = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                const card = e.target.closest('.artwork-card');
+                if (card && !e.target.closest('#artworkLightbox')) {
+                    pageCardStartX = e.touches[0].clientX;
+                    pageCardStartY = e.touches[0].clientY;
+                    isPageCardSwiping = false;
+                }
+            }, { passive: true });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!pageCardStartX) return;
+                const diffX = e.touches[0].clientX - pageCardStartX;
+                const diffY = e.touches[0].clientY - pageCardStartY;
+                if (Math.abs(diffX) > 8 || Math.abs(diffY) > 8) {
+                    isPageCardSwiping = true;
+                }
+            }, { passive: true });
+
+            document.addEventListener('touchend', () => {
+                if (isPageCardSwiping) {
+                    setTimeout(() => { isPageCardSwiping = false; }, 120);
+                }
+            }, { passive: true });
+
+            document.addEventListener('click', (e) => {
+                const card = e.target.closest('.artwork-card');
+                if (card && !e.target.closest('#artworkLightbox')) {
+                    if (isPageCardSwiping) {
+                        isPageCardSwiping = false;
+                        return; // Se estaba haciendo scroll lateral con el dedo en el carrusel
+                    }
+                    openLightbox(card);
                 }
             });
 
@@ -3955,6 +4076,33 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     wrapper.addEventListener('scroll', updateArrows);
                     leftArrow.addEventListener('click', () => wrapper.scrollBy({ left: -310, behavior: 'smooth' }));
                     rightArrow.addEventListener('click', () => wrapper.scrollBy({ left: 310, behavior: 'smooth' }));
+
+                    // Arrastre horizontal con ratón en escritorio
+                    let isWrapperMouseDown = false;
+                    let wrapperStartX = 0;
+                    let wrapperScrollLeft = 0;
+
+                    wrapper.addEventListener('mousedown', (e) => {
+                        isWrapperMouseDown = true;
+                        wrapperStartX = e.pageX - wrapper.offsetLeft;
+                        wrapperScrollLeft = wrapper.scrollLeft;
+                    });
+
+                    window.addEventListener('mouseup', () => {
+                        if (isWrapperMouseDown) {
+                            isWrapperMouseDown = false;
+                            setTimeout(() => { isPageCardSwiping = false; }, 100);
+                        }
+                    });
+
+                    wrapper.addEventListener('mousemove', (e) => {
+                        if (!isWrapperMouseDown) return;
+                        e.preventDefault();
+                        const x = e.pageX - wrapper.offsetLeft;
+                        const walk = (x - wrapperStartX) * 1.5;
+                        wrapper.scrollLeft = wrapperScrollLeft - walk;
+                        isPageCardSwiping = true;
+                    });
 
                     function checkLayout() {
                         const needsSlider = window.innerWidth <= 768 || grid.querySelectorAll('.artwork-card').length > 4;
