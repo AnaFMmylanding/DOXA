@@ -469,8 +469,8 @@ Menú del Index: Líena 742
 
         .navbar-cart-badge {
             position: absolute;
-            top: -7px;
-            right: -4px;
+            top: -2px;
+            right: 2px;
             background: transparent !important;
             border: none !important;
             border-radius: 0 !important;
@@ -478,7 +478,7 @@ Menú del Index: Líena 742
             color: var(--nav-text-initial, #ffffff);
             font-family: 'Lato', 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 600;
             line-height: 1;
             min-width: unset !important;
             height: auto !important;
@@ -902,7 +902,7 @@ Menú del Index: Líena 742
                 width: 200px;
                 max-width: calc(100% - 32px);
                 height: auto;
-                background: rgba(30, 20, 16, 0.94);
+                background: rgba(30, 20, 16, 0.85);
                 backdrop-filter: blur(16px);
                 -webkit-backdrop-filter: blur(16px);
                 flex-direction: column;
@@ -910,7 +910,7 @@ Menú del Index: Líena 742
                 align-items: flex-start;
                 gap: 20px;
                 padding: 24px 22px;
-                box-shadow: 0 16px 38px rgba(0, 0, 0, 0.65);
+                box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
                 border: none;
                 border-radius: 0;
                 z-index: 999;
@@ -918,11 +918,16 @@ Menú del Index: Líena 742
                 visibility: hidden;
                 pointer-events: none;
                 transform: translateY(-8px);
-                transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.3s ease;
+                transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.3s ease, background 0.35s ease;
             }
 
+            /* En zona de fondo claro (scrolled): fondo aclarado y más transparente para menor contraste */
             .navbar.scrolled .navbar-menu {
                 top: 62px;
+                background: rgba(45, 34, 28, 0.65) !important;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
             }
 
             .navbar-menu.active {
@@ -932,14 +937,16 @@ Menú del Index: Líena 742
                 transform: translateY(0);
             }
 
-            /* TEXTOS SOLOS DENTRO DE LA PERSIANA DESPLEGABLE */
-            .navbar-menu .navbar-link {
+            /* TEXTOS SOLOS DENTRO DE LA PERSIANA DESPLEGABLE:
+               SIEMPRE en blanco con máxima legibilidad tanto en fondo oscuro como claro */
+            .navbar-menu .navbar-link,
+            .navbar.scrolled .navbar-menu .navbar-link {
                 font-family: 'Lato', 'Lexend', -apple-system, sans-serif !important;
                 font-size: 13px !important;
                 font-weight: 400 !important;
                 letter-spacing: 2px !important;
                 text-transform: uppercase !important;
-                color: rgba(255, 255, 255, 0.9) !important;
+                color: #FFFFFF !important;
                 background: transparent !important;
                 border: none !important;
                 padding: 0 !important;
@@ -947,18 +954,22 @@ Menú del Index: Líena 742
                 width: auto !important;
                 text-align: left !important;
                 display: block !important;
+                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
                 transition: color 0.25s ease, opacity 0.25s ease;
                 border-radius: 0 !important;
             }
 
             .navbar-menu .navbar-link:hover,
-            .navbar-menu .navbar-link:active {
-                color: #FFFFFF !important;
-                opacity: 0.8;
+            .navbar-menu .navbar-link:active,
+            .navbar.scrolled .navbar-menu .navbar-link:hover,
+            .navbar.scrolled .navbar-menu .navbar-link:active {
+                color: var(--accent-color, #f0ff1c) !important;
+                opacity: 1 !important;
                 background: transparent !important;
             }
 
-            .navbar-menu .navbar-link.active {
+            .navbar-menu .navbar-link.active,
+            .navbar.scrolled .navbar-menu .navbar-link.active {
                 color: var(--accent-color, #f0ff1c) !important;
                 background: transparent !important;
                 font-weight: 500 !important;
@@ -973,7 +984,8 @@ Menú del Index: Líena 742
                 padding: 0 !important;
             }
 
-            .navbar-dropdown-btn {
+            .navbar-dropdown-btn,
+            .navbar.scrolled .navbar-dropdown-btn {
                 padding: 0 !important;
                 margin: 0 !important;
                 border: none !important;
@@ -984,8 +996,14 @@ Menú del Index: Líena 742
                 letter-spacing: 2px !important;
                 font-size: 13px !important;
                 text-transform: uppercase !important;
-                color: rgba(255, 255, 255, 0.9) !important;
+                color: #FFFFFF !important;
+                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
                 -webkit-font-smoothing: antialiased;
+            }
+
+            .navbar-dropdown-btn:hover,
+            .navbar.scrolled .navbar-dropdown-btn:hover {
+                color: var(--accent-color, #f0ff1c) !important;
             }
 
             .navbar-dropdown-btn .dropdown-chevron {
