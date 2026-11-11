@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 =========================================================================
 ÍNDICE DE CONTENIDO EDITABLE E IMPORTANTE (LÍNEAS DE CÓDIGO)
 =========================================================================
@@ -148,6 +148,7 @@ Menú del Index: Líena 742
         }
 
         @media (max-width: 768px) {
+
             #reservasProductsNav,
             #la-coleccion,
             #reserva {
@@ -377,7 +378,8 @@ Menú del Index: Líena 742
            ========================================================================= */
         .navbar-menu-square-btn {
             position: relative;
-            display: none; /* En PC está oculto */
+            display: none;
+            /* En PC está oculto */
             width: 26px;
             height: 26px;
             min-width: 26px;
@@ -424,7 +426,8 @@ Menú del Index: Líena 742
            ========================================================================= */
         .navbar-cart-btn {
             position: relative;
-            display: none !important; /* Oculta por defecto si no hay productos seleccionados */
+            display: none !important;
+            /* Oculta por defecto si no hay productos seleccionados */
             align-items: center;
             justify-content: center;
             background: transparent !important;
@@ -665,18 +668,23 @@ Menú del Index: Líena 742
             .navbar-mobile-actions {
                 display: none !important;
             }
+
             .navbar-menu-square-btn {
                 display: none !important;
             }
+
             .navbar-cart-pc {
                 display: none !important;
             }
+
             .navbar-cart-pc.has-items {
                 display: inline-flex !important;
             }
+
             .navbar-cart-mobile {
                 display: none !important;
             }
+
             .navbar-menu {
                 display: flex !important;
                 align-items: center;
@@ -1082,7 +1090,8 @@ Menú del Index: Líena 742
                 position: fixed;
                 top: 66px;
                 right: 16px;
-                width: 155px; /* Estrecho y esbelto para un formato marcadamente rectangular vertical */
+                width: 155px;
+                /* Estrecho y esbelto para un formato marcadamente rectangular vertical */
                 max-width: calc(100% - 32px);
                 height: auto;
                 background: rgba(30, 20, 16, 0.88);
@@ -1090,12 +1099,15 @@ Menú del Index: Líena 742
                 -webkit-backdrop-filter: blur(16px);
                 flex-direction: column;
                 justify-content: flex-start;
-                align-items: flex-end; /* Alineado a la derecha */
-                gap: 26px; /* Separación vertical que estiliza el formato rectangular */
+                align-items: flex-end;
+                /* Alineado a la derecha */
+                gap: 26px;
+                /* Separación vertical que estiliza el formato rectangular */
                 padding: 34px 18px 38px 18px;
                 box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
                 border: none;
-                border-radius: 0; /* Rectangular limpio */
+                border-radius: 0;
+                /* Rectangular limpio */
                 z-index: 999;
                 opacity: 0;
                 visibility: hidden;
@@ -1107,10 +1119,10 @@ Menú del Index: Líena 742
             /* En zona de fondo claro (scrolled): fondo translúcido cálido con contraste óptimo para letras blancas */
             .navbar.scrolled .navbar-menu {
                 top: 62px;
-                background: rgba(38, 26, 20, 0.82) !important;
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+                background: rgba(38, 26, 20, 0.65) !important;
+                backdrop-filter: blur(22px);
+                -webkit-backdrop-filter: blur(22px);
+                box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
             }
 
             .navbar-menu.active {
@@ -1137,7 +1149,8 @@ Menú del Index: Líena 742
                 text-transform: uppercase !important;
                 white-space: nowrap !important;
                 color: #FFFFFF !important;
-                opacity: 0.7 !important; /* 70% de opacidad en estado inactivo */
+                opacity: 0.7 !important;
+                /* 70% de opacidad en estado inactivo */
                 background: transparent !important;
                 background-color: transparent !important;
                 border: none !important;
@@ -1167,7 +1180,8 @@ Menú del Index: Líena 742
             .navbar.scrolled .navbar-dropdown-btn:focus,
             .navbar.scrolled .navbar-dropdown-btn:active {
                 color: #FFFFFF !important;
-                opacity: 1 !important; /* 100% de opacidad al interactuar */
+                opacity: 1 !important;
+                /* 100% de opacidad al interactuar */
                 background: transparent !important;
                 background-color: transparent !important;
                 outline: none !important;
@@ -1180,7 +1194,8 @@ Menú del Index: Líena 742
             .navbar-dropdown-btn.active,
             .navbar.scrolled .navbar-dropdown-btn.active {
                 color: #FFFFFF !important;
-                opacity: 1 !important; /* 100% de opacidad en estado activo */
+                opacity: 1 !important;
+                /* 100% de opacidad en estado activo */
                 background: transparent !important;
                 background-color: transparent !important;
                 font-weight: 600 !important;
@@ -1917,7 +1932,8 @@ Menú del Index: Líena 742
                 <a href="articulos.html" class="navbar-link btn-blog" data-visible="on">Blog</a>
 
                 <!-- 7) ICONO PARA LA CESTA DE LA COMPRA EN PC -->
-                <a href="compra.html" class="navbar-cart-btn navbar-cart-pc" id="navbarCartBtnPC" aria-label="Cesta de la compra">
+                <a href="compra.html" class="navbar-cart-btn navbar-cart-pc" id="navbarCartBtnPC"
+                    aria-label="Cesta de la compra">
                     <div class="cart-icon-wrapper">
                         <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
                         <span class="navbar-cart-badge">0</span>
@@ -1927,7 +1943,8 @@ Menú del Index: Líena 742
 
             <!-- ACCIONES EN MÓVIL: B) ICONO CESTA + C) BOTÓN CUADRADO AMARILLO PLANO -->
             <div class="navbar-mobile-actions" id="navbarMobileActions">
-                <a href="compra.html" class="navbar-cart-btn navbar-cart-mobile" id="navbarCartBtnMobile" aria-label="Cesta de la compra">
+                <a href="compra.html" class="navbar-cart-btn navbar-cart-mobile" id="navbarCartBtnMobile"
+                    aria-label="Cesta de la compra">
                     <div class="cart-icon-wrapper">
                         <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
                         <span class="navbar-cart-badge">0</span>
@@ -2638,7 +2655,8 @@ Menú del Index: Líena 742
                 }
 
                 .bg-layer:not(.bg-layer-overlay) {
-                    opacity: 1 !important;
+                    opacity: 1;
+                    z-index: 1;
                 }
 
                 .bg-layer-overlay {
@@ -2943,6 +2961,7 @@ Menú del Index: Líena 742
             <a id="rueda-doxa" style="position: absolute; top: 0; pointer-events: none;"></a>
             <a id="cajas-activos" style="position: absolute; top: 0; pointer-events: none;"></a>
             <div class="bg-layer" id="caja-bg-doxa" style="background-image: url('piel negra.jpg');"></div>
+            <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-doxa"></div>
 
             <div class="content-grid">
                 <div class="wheel-column">
@@ -2954,7 +2973,8 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-doxa">
                         <div class="tagline">TRUFAS PURAS</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS
+                        </h3>
                         <p class="hero-value-prop-neg">Alta Confitería Bioinductiva</p>
                         <div class="hero-value-prop">
                             Trufas Puras de Alta Confitería Bioinductiva.<br>
@@ -2987,6 +3007,7 @@ Menú del Index: Líena 742
             data-visible="on">
             <a id="rueda-cookie" style="position: absolute; top: 0; pointer-events: none;"></a>
             <div class="bg-layer" id="caja-bg-cookie" style="background-image: url('piel negra.jpg');"></div>
+            <div class="bg-layer bg-layer-overlay" id="caja-bg-overlay-cookie"></div>
 
             <div class="content-grid">
                 <div class="wheel-column">
@@ -2998,7 +3019,8 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-cookie">
                         <div class="tagline">DOXA COOKIE</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS
+                        </h3>
                         <p class="hero-value-prop-neg">Cookies Artesanales Bioinductivas</p>
                         <div class="hero-value-prop">
                             Haz clic en cualquiera de las categorías para explorar los activos que componen cada
@@ -3006,7 +3028,8 @@ Menú del Index: Líena 742
                         </div>
                     </div>
                     <div class="rueda-cta-wrapper">
-                        <a href="#la-coleccion" onclick="goToReservasProduct('cookie', event)" class="btn-reserva-rueda">
+                        <a href="#la-coleccion" onclick="goToReservasProduct('cookie', event)"
+                            class="btn-reserva-rueda">
                             RESERVA TU CAJA
                             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24" style="margin-left: 10px;">
@@ -3040,7 +3063,8 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-bbb">
                         <div class="tagline">BOMBÓN BLOOM</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS
+                        </h3>
                         <p class="hero-value-prop-neg">Repostería Nutricosmética</p>
                         <div class="hero-value-prop">
                             Haz clic en cualquiera de las 8 variedades de Bombón Bloom para explorar su formulación
@@ -3083,7 +3107,8 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-lingote">
                         <div class="tagline">LINGOTE</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS
+                        </h3>
                         <p class="hero-value-prop-neg">Nutrición y Placer</p>
                         <div class="hero-value-prop">
                             Haz clic en cualquiera de las variedades de Lingote para explorar su formulación activa y
@@ -3091,7 +3116,8 @@ Menú del Index: Líena 742
                         </div>
                     </div>
                     <div class="rueda-cta-wrapper">
-                        <a href="#la-coleccion" onclick="goToReservasProduct('lingote', event)" class="btn-reserva-rueda">
+                        <a href="#la-coleccion" onclick="goToReservasProduct('lingote', event)"
+                            class="btn-reserva-rueda">
                             RESERVA TU CAJA
                             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24" style="margin-left: 10px;">
@@ -3126,7 +3152,8 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-oblea">
                         <div class="tagline">CRUJIENTE DE ALMENDRA</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS
+                        </h3>
                         <p class="hero-value-prop-neg">Nutrición y Placer</p>
                         <div class="hero-value-prop">
                             Haz clic en cualquiera de las variedades de Crujiente de Almendra para explorar sus activos
@@ -3168,14 +3195,16 @@ Menú del Index: Líena 742
                 <div class="text-column">
                     <div class="text-box" id="caja-text-pequebloom">
                         <div class="tagline">PEQUEBLOOM</div>
-                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS</h3>
+                        <h3 class="variety-title" style="margin-bottom: 25px; line-height: 1.2;">ARQUITECTURA DE ACTIVOS
+                        </h3>
                         <p class="hero-value-prop-neg">Nutrición Infantil y Juvenil</p>
                         <div class="hero-value-prop">
                             Haz clic en cualquiera de las variedades de PequeBlooms para explorar su formulación activa.
                         </div>
                     </div>
                     <div class="rueda-cta-wrapper">
-                        <a href="#la-coleccion" onclick="goToReservasProduct('pequebloom', event)" class="btn-reserva-rueda">
+                        <a href="#la-coleccion" onclick="goToReservasProduct('pequebloom', event)"
+                            class="btn-reserva-rueda">
                             RESERVA TU CAJA
                             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24" style="margin-left: 10px;">
@@ -4014,7 +4043,7 @@ Menú del Index: Líena 742
                 let cleanUrl = url.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '').trim();
                 try {
                     cleanUrl = decodeURIComponent(cleanUrl);
-                } catch (e) {}
+                } catch (e) { }
                 const fileName = cleanUrl.split('/').pop().split('\\').pop();
                 const key = fileName.toLowerCase();
 
@@ -4095,6 +4124,100 @@ Menú del Index: Líena 742
             window.updateSectionLuminanceTheme = updateSectionLuminanceTheme;
             window.analyzeImageLuminance = analyzeImageLuminance;
 
+            // Precarga anticipada de fondos de la rueda de activos para transición instantánea sin tirones
+            (function preloadWheelBackgrounds() {
+                const WHEEL_BGS = [
+                    'piel negra.jpg',
+                    'Hidratación.jpg',
+                    'Claridad mental.jpg',
+                    'Energía.jpg',
+                    'articulaciones.jpg',
+                    'Pelo y uñas.jpg',
+                    'cabello y uñas.jpg',
+                    'Creatina _ok.jpg',
+                    'respeto.jpg',
+                    'amazona.jpg'
+                ];
+                WHEEL_BGS.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                });
+            })();
+
+            /* =========================================================================
+               SISTEMA DE TRANSICIÓN SUAVE DE FONDO EN RUEDA DE ACTIVOS (CROSSFADE)
+               ========================================================================= */
+            function createWheelBackgroundCrossfader(sec) {
+                if (!sec) return { transitionBg: () => {}, reset: () => {} };
+                const cajaBg = sec.querySelector('.bg-layer:not(.bg-layer-overlay)') || sec.querySelector('.bg-layer');
+                let cajaBgOverlay = sec.querySelector('.bg-layer-overlay');
+                if (!cajaBgOverlay && cajaBg) {
+                    cajaBgOverlay = document.createElement('div');
+                    cajaBgOverlay.className = 'bg-layer bg-layer-overlay';
+                    cajaBg.parentNode.insertBefore(cajaBgOverlay, cajaBg.nextSibling);
+                }
+
+                let activeBgUrl = 'piel negra.jpg';
+                let bgTransitionTimer = null;
+
+                function transitionBg(newBgUrl) {
+                    if (!newBgUrl) newBgUrl = 'piel negra.jpg';
+                    updateSectionLuminanceTheme(sec, newBgUrl);
+                    if (!cajaBg) return;
+
+                    if (!cajaBgOverlay) {
+                        cajaBg.style.backgroundImage = 'url("' + newBgUrl + '")';
+                        activeBgUrl = newBgUrl;
+                        return;
+                    }
+
+                    if (activeBgUrl === newBgUrl && cajaBgOverlay.style.opacity === '1') {
+                        return;
+                    }
+
+                    activeBgUrl = newBgUrl;
+
+                    if (bgTransitionTimer) {
+                        clearTimeout(bgTransitionTimer);
+                        bgTransitionTimer = null;
+                    }
+
+                    // Preparar la capa overlay con opacidad 0 y la nueva imagen
+                    cajaBgOverlay.style.transition = 'none';
+                    cajaBgOverlay.style.opacity = '0';
+                    cajaBgOverlay.style.backgroundImage = 'url("' + newBgUrl + '")';
+
+                    // Forzar reflujo del navegador
+                    void cajaBgOverlay.offsetHeight;
+
+                    // Desvanecimiento cruzado suave con curva cúbica
+                    cajaBgOverlay.style.transition = 'opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1)';
+                    cajaBgOverlay.style.opacity = '1';
+
+                    bgTransitionTimer = setTimeout(() => {
+                        // Una vez que el overlay ya cubre al 100%, sincronizamos la capa base debajo
+                        cajaBg.style.backgroundImage = 'url("' + newBgUrl + '")';
+
+                        // Esperamos 2 frames antes de reiniciar el overlay para garantizar que la base ya pintó
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                cajaBgOverlay.style.transition = 'none';
+                                cajaBgOverlay.style.opacity = '0';
+                                bgTransitionTimer = null;
+                            });
+                        });
+                    }, 870);
+                }
+
+                function reset(bgUrl) {
+                    transitionBg(bgUrl || 'piel negra.jpg');
+                }
+
+                return {
+                    transitionBg: transitionBg,
+                    reset: reset
+                };
+            }
 
             /* =========================================================================
                MOTOR 1: RUEDAS ESTILO DOXA (DOXA Y DOXA-COOKIE)
@@ -4102,13 +4225,15 @@ Menú del Index: Líena 742
             function initDoxaStyleWheel(sec, activos) {
                 if (!sec) return;
                 const rueda = sec.querySelector(".rueda-giro");
-                const cajaBg = sec.querySelector(".bg-layer");
+                const cajaBg = sec.querySelector(".bg-layer:not(.bg-layer-overlay)") || sec.querySelector(".bg-layer");
+                const cajaBgOverlay = sec.querySelector(".bg-layer-overlay");
                 const cajaText = sec.querySelector(".text-box");
                 const radialWrapper = sec.querySelector(".radial-wrapper");
                 const galletaCentral = sec.querySelector(".galleta-fija");
                 if (!rueda || !cajaText || !radialWrapper) return;
                 const defaultNeutralHTML = cajaText.innerHTML;
                 updateSectionLuminanceTheme(sec);
+                const bgCrossfader = createWheelBackgroundCrossfader(sec);
 
                 const getRadioCategorias = () => (window.innerWidth <= 768 ? 205 : 215);
                 let rotacionActual = 0;
@@ -4213,14 +4338,12 @@ Menú del Index: Líena 742
                     const a = activos[index];
                     const isMobile = window.innerWidth <= 768;
 
-                    const currentBg = a.bg;
-                    if (currentBg) {
-                        cajaBg.style.backgroundImage = `url('${currentBg}')`;
+                    const currentBg = a.bg || 'piel negra.jpg';
+                    if (initial) {
+                        if (cajaBg) cajaBg.style.backgroundImage = `url('${currentBg}')`;
                         updateSectionLuminanceTheme(sec, currentBg);
                     } else {
-                        cajaBg.style.backgroundImage = 'none';
-                        cajaBg.style.backgroundColor = isMobile ? 'var(--yeso-oscuro)' : 'var(--dark-bg)';
-                        updateSectionLuminanceTheme(sec, 'none');
+                        bgCrossfader.transitionBg(currentBg);
                     }
 
                     const defaultTagline = sec.id.includes('cookie') ? 'DOXA COOKIE' : 'TRUFAS PURAS';
@@ -4296,8 +4419,7 @@ Menú del Index: Líena 742
 
                     transitionCajaText(defaultNeutralHTML);
 
-                    cajaBg.style.backgroundImage = "url('piel negra.jpg')";
-                    updateSectionLuminanceTheme(sec, 'piel negra.jpg');
+                    bgCrossfader.reset('piel negra.jpg');
                     renderRueda();
                 }
 
@@ -5327,7 +5449,7 @@ Menú del Index: Líena 742
                 const cajaText = sec.querySelector(".text-box");
                 const galletaFija = sec.querySelector(".galleta-fija");
                 const radialWrapper = sec.querySelector(".radial-wrapper");
-                const cajaBg = sec.querySelector(".bg-layer");
+                const cajaBg = sec.querySelector(".bg-layer:not(.bg-layer-overlay)") || sec.querySelector(".bg-layer");
                 const cajaBgOverlay = sec.querySelector(".bg-layer-overlay");
                 if (!rueda || !cajaText || !radialWrapper) return;
 
@@ -5336,55 +5458,9 @@ Menú del Index: Líena 742
                 const defaultNeutralHTML = cajaText.innerHTML;
                 updateSectionLuminanceTheme(sec);
 
-                let activeBgUrl = 'piel negra.jpg';
-                let bgTransitionTimer = null;
-
-                function updateTextTheme(bgUrl) {
-                    updateSectionLuminanceTheme(sec, bgUrl);
-                }
-
-                updateTextTheme(activeBgUrl);
-
+                const bgCrossfader = createWheelBackgroundCrossfader(sec);
                 function transitionBg(newBgUrl) {
-                    updateTextTheme(newBgUrl);
-                    if (!newBgUrl) newBgUrl = 'piel negra.jpg';
-                    if (!cajaBg) return;
-
-                    if (!cajaBgOverlay) {
-                        cajaBg.style.backgroundImage = 'url("' + newBgUrl + '")';
-                        return;
-                    }
-
-                    if (bgTransitionTimer) {
-                        clearTimeout(bgTransitionTimer);
-                        bgTransitionTimer = null;
-                        if (cajaBgOverlay.style.backgroundImage) {
-                            cajaBg.style.backgroundImage = cajaBgOverlay.style.backgroundImage;
-                        }
-                    }
-
-                    const currentBg = cajaBg.style.backgroundImage || '';
-                    if (activeBgUrl === newBgUrl && (cajaBgOverlay.style.opacity === '0' || !cajaBgOverlay.style.opacity)) {
-                        return;
-                    }
-
-                    activeBgUrl = newBgUrl;
-                    cajaBgOverlay.style.transition = 'none';
-                    cajaBgOverlay.style.opacity = '0';
-                    cajaBgOverlay.style.backgroundImage = 'url("' + newBgUrl + '")';
-
-                    void cajaBgOverlay.offsetHeight;
-
-                    cajaBgOverlay.style.transition = 'opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1)';
-                    cajaBgOverlay.style.opacity = '1';
-
-                    bgTransitionTimer = setTimeout(() => {
-                        cajaBg.style.backgroundImage = 'url("' + newBgUrl + '")';
-                        activeBgUrl = newBgUrl;
-                        cajaBgOverlay.style.transition = 'none';
-                        cajaBgOverlay.style.opacity = '0';
-                        bgTransitionTimer = null;
-                    }, 870);
+                    bgCrossfader.transitionBg(newBgUrl);
                 }
 
                 const getRadioCategorias = () => (window.innerWidth <= 768 ? 155 : 180);
@@ -6329,7 +6405,7 @@ Menú del Index: Líena 742
             // Navegación directa desde 'Reserva tu caja' hacia la sección Reservas sincronizando el producto
             window.goToReservasProduct = function (productId, event) {
                 if (event) {
-                    try { event.preventDefault(); event.stopPropagation(); } catch (e) {}
+                    try { event.preventDefault(); event.stopPropagation(); } catch (e) { }
                 }
                 const targetProduct = productId || window.currentActiveProduct || 'doxa';
                 window.currentActiveProduct = targetProduct;
@@ -6370,7 +6446,7 @@ Menú del Index: Líena 742
                         });
                         try {
                             history.replaceState(null, null, '#reserva');
-                        } catch (err) {}
+                        } catch (err) { }
                     }
                 };
                 scrollToBuyPosition();
@@ -6442,7 +6518,7 @@ Menú del Index: Líena 742
                     const uParams = new URLSearchParams(window.location.search);
                     urlProd = uParams.get('producto') || uParams.get('reserva');
                     if (urlProd === 'bombon') urlProd = 'bbb';
-                } catch(e) {}
+                } catch (e) { }
                 const initialProd = hashProd || urlProd || (activeBtn ? activeBtn.getAttribute("data-product") : "doxa");
 
                 document.querySelectorAll(".bbb-submenu-item").forEach(b => {
@@ -6663,7 +6739,7 @@ Menú del Index: Líena 742
 
 
 
-                <!--=== SECCIONES "EL SABOR" INDEPENDIENTES POR PRODUCTO ===-->
+        <!--=== SECCIONES "EL SABOR" INDEPENDIENTES POR PRODUCTO ===-->
         <!-- 1. EL SABOR: DOXA (TRUFAS PURAS)
              [FOTOS / VÍDEOS]: Se configuran en SABOR_MEDIA_CONFIG['doxa'] (~línea 6830).
              Aquí se muestran planos cercanos, texturas y vídeos del producto. -->
@@ -6680,27 +6756,33 @@ Menú del Index: Líena 742
                     <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
                         <div class="sabor-gallery-wrap">
                             <div class="sabor-main-img-wrap" id="sabor-main-media-doxa">
-                                <img src="trufas-2.png" alt="Trufas Puras Doxa" id="sabor-main-img-doxa" class="placer-cookie-img"
+                                <img src="trufas-2.png" alt="Trufas Puras Doxa" id="sabor-main-img-doxa"
+                                    class="placer-cookie-img"
                                     style="width: 100%; max-width: 480px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.3)); border-radius: 0;">
                             </div>
                             <div class="sabor-variants-strip" id="sabor-variants-doxa">
-                                <button type="button" class="sabor-variant-thumb active" onclick="switchSaborVariant('doxa', 0)" title="Cajita Dúo (2 piezas)">
+                                <button type="button" class="sabor-variant-thumb active"
+                                    onclick="switchSaborVariant('doxa', 0)" title="Cajita Dúo (2 piezas)">
                                     <img src="trufas-2.png" alt="Dúo">
                                     <span class="sabor-variant-name">Dúo (2 uds)</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('doxa', 1)" title="Mi Semana (7 piezas)">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('doxa', 1)" title="Mi Semana (7 piezas)">
                                     <img src="trufas-13.png" alt="Mi Semana">
                                     <span class="sabor-variant-name">Semana (7 uds)</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('doxa', 2)" title="Mi Mes (28 piezas)">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('doxa', 2)" title="Mi Mes (28 piezas)">
                                     <img src="trufas-35.png" alt="Mi Mes">
                                     <span class="sabor-variant-name">Mes (28 uds)</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('doxa', 3)" title="Gran Reserva (58 piezas)">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('doxa', 3)" title="Gran Reserva (58 piezas)">
                                     <img src="trufas-58.png" alt="Gran Reserva">
                                     <span class="sabor-variant-name">Reserva (58 uds)</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('doxa', 4)" title="Caja Escultórica">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('doxa', 4)" title="Caja Escultórica">
                                     <img src="ProtoDoxa.png" alt="Escultórica">
                                     <span class="sabor-variant-name">Escultórica</span>
                                 </button>
@@ -6708,9 +6790,11 @@ Menú del Index: Líena 742
                         </div>
                     </div>
                     <div class="column-text" style="flex: 1; display: flex; flex-direction: column;">
-                        <h3 class="variety-title" id="sabor-title-doxa" style="margin-bottom: 25px;">ESTUCHE DE TRUFAS PURAS — DÚO (2 PIEZAS)</h3>
+                        <h3 class="variety-title" id="sabor-title-doxa" style="margin-bottom: 25px;">ESTUCHE DE TRUFAS
+                            PURAS — DÚO (2 PIEZAS)</h3>
                         <div class="variety-desc" id="sabor-desc-doxa" style="margin-bottom: 25px; line-height: 1.6;">
-                            Dos trufas de chocolate negro noble con ganache batida aérea y fina camisa de chocolate crujiente, envueltas en un sutil velo de cacao puro amargo. Una textura fundente legendaria.
+                            Dos trufas de chocolate negro noble con ganache batida aérea y fina camisa de chocolate
+                            crujiente, envueltas en un sutil velo de cacao puro amargo. Una textura fundente legendaria.
                         </div>
 
                         <div class="sheet-accordion-item">
@@ -6721,13 +6805,19 @@ Menú del Index: Líena 742
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
                                     <p style="margin:0 0 12px 0;">
-                                        Una creación maestra nacida del saber hacer de los maestros chocolateros franceses. Se necesitan <strong>3 días de meticulosa elaboración</strong> para conseguir la textura inconfundible de esta trufa legendaria.
+                                        Una creación maestra nacida del saber hacer de los maestros chocolateros
+                                        franceses. Se necesitan <strong>3 días de meticulosa elaboración</strong> para
+                                        conseguir la textura inconfundible de esta trufa legendaria.
                                     </p>
                                     <p style="margin:0 0 12px 0;">
-                                        Su interior alberga una ganache montada hasta alcanzar una ligereza sublime, casi aérea, que contrasta delicadamente con una fina y crujiente camisa de chocolate negro puro. Como toque final, cada pieza es espolvoreada a mano con cacao amargo de la más pura procedencia.
+                                        Su interior alberga una ganache montada hasta alcanzar una ligereza sublime,
+                                        casi aérea, que contrasta delicadamente con una fina y crujiente camisa de
+                                        chocolate negro puro. Como toque final, cada pieza es espolvoreada a mano con
+                                        cacao amargo de la más pura procedencia.
                                     </p>
                                     <p style="margin:0; font-style: italic; color: rgba(60,51,42,0.7);">
-                                        Presentadas en nuestro estuche característico con cinta de satén, listas para regalo o degustación privada.
+                                        Presentadas en nuestro estuche característico con cinta de satén, listas para
+                                        regalo o degustación privada.
                                     </p>
                                 </div>
                             </div>
@@ -6740,11 +6830,16 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;">Para apreciar plenamente la complejidad de los matices aromáticos y la textura fundente de las trufas:</p>
+                                    <p style="margin:0 0 10px 0;">Para apreciar plenamente la complejidad de los matices
+                                        aromáticos y la textura fundente de las trufas:</p>
                                     <ul style="margin:0 0 12px 20px; padding:0; line-height: 1.6;">
-                                        <li>Conservar en un lugar fresco, seco y al abrigo de la luz, a una temperatura ideal entre <strong>14 °C y 18 °C</strong>.</li>
-                                        <li>Consumir preferentemente en un plazo de <strong>2 a 4 semanas</strong> desde su recepción para disfrutar de su máxima expresión de frescura.</li>
-                                        <li>Si se conservan en frigorífico debido a altas temperaturas, retirar la caja aprox. <strong>30 minutos antes</strong> de la degustación para que alcancen la temperatura idónea (aprox. 20 °C).</li>
+                                        <li>Conservar en un lugar fresco, seco y al abrigo de la luz, a una temperatura
+                                            ideal entre <strong>14 °C y 18 °C</strong>.</li>
+                                        <li>Consumir preferentemente en un plazo de <strong>2 a 4 semanas</strong> desde
+                                            su recepción para disfrutar de su máxima expresión de frescura.</li>
+                                        <li>Si se conservan en frigorífico debido a altas temperaturas, retirar la caja
+                                            aprox. <strong>30 minutos antes</strong> de la degustación para que alcancen
+                                            la temperatura idónea (aprox. 20 °C).</li>
                                     </ul>
                                 </div>
                             </div>
@@ -6757,9 +6852,15 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;"><strong>Cacao mínimo: 56% en el chocolate negro.</strong></p>
-                                    <p style="margin:0 0 12px 0;"><strong>Ingredientes:</strong> Chocolate negro (pasta de cacao, azúcar, manteca de cacao, emulgente: lecitina de girasol, extracto natural de vainilla), nata líquida (leche), mantequilla concentrada (leche), estabilizante: sorbitol, cacao puro en polvo desgrasado.</p>
-                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">Compromiso: <strong>100% pura manteca de cacao</strong>, sin aceite de palma, sin aromas artificiales, sin colorantes añadidos.</p>
+                                    <p style="margin:0 0 10px 0;"><strong>Cacao mínimo: 56% en el chocolate
+                                            negro.</strong></p>
+                                    <p style="margin:0 0 12px 0;"><strong>Ingredientes:</strong> Chocolate negro (pasta
+                                        de cacao, azúcar, manteca de cacao, emulgente: lecitina de girasol, extracto
+                                        natural de vainilla), nata líquida (leche), mantequilla concentrada (leche),
+                                        estabilizante: sorbitol, cacao puro en polvo desgrasado.</p>
+                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">Compromiso:
+                                        <strong>100% pura manteca de cacao</strong>, sin aceite de palma, sin aromas
+                                        artificiales, sin colorantes añadidos.</p>
                                 </div>
                             </div>
                         </div>
@@ -6780,14 +6881,46 @@ Menú del Index: Líena 742
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td>Valor Energético</td><td>120 kcal (502 kJ)</td><td>600 kcal (2.510 kJ)</td></tr>
-                                            <tr><td>Grasas Totales</td><td>10 g (13% VRN)</td><td>50 g</td></tr>
-                                            <tr><td>— de las cuales Saturadas</td><td>6 g (30% VRN)</td><td>30 g</td></tr>
-                                            <tr><td>Hidratos de Carbono</td><td>7 g (3% VRN)</td><td>35 g</td></tr>
-                                            <tr><td>— de los cuales Azúcares</td><td>6 g (12% VRN)</td><td>30 g</td></tr>
-                                            <tr><td>Fibra Alimentaria</td><td>2 g (7% VRN)</td><td>10 g</td></tr>
-                                            <tr><td>Proteínas</td><td>1 g</td><td>5 g</td></tr>
-                                            <tr><td>Sal</td><td>&lt;0.01 g</td><td>0.04 g</td></tr>
+                                            <tr>
+                                                <td>Valor Energético</td>
+                                                <td>120 kcal (502 kJ)</td>
+                                                <td>600 kcal (2.510 kJ)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Grasas Totales</td>
+                                                <td>10 g (13% VRN)</td>
+                                                <td>50 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>— de las cuales Saturadas</td>
+                                                <td>6 g (30% VRN)</td>
+                                                <td>30 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hidratos de Carbono</td>
+                                                <td>7 g (3% VRN)</td>
+                                                <td>35 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>— de los cuales Azúcares</td>
+                                                <td>6 g (12% VRN)</td>
+                                                <td>30 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fibra Alimentaria</td>
+                                                <td>2 g (7% VRN)</td>
+                                                <td>10 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Proteínas</td>
+                                                <td>1 g</td>
+                                                <td>5 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sal</td>
+                                                <td>&lt;0.01 g</td>
+                                                <td>0.04 g</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -6801,15 +6934,19 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;"><strong>Este producto contiene:</strong> Leche y derivados lácteos (incluida lactosa).</p>
-                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);"><strong>Puede contener trazas de:</strong> Frutos de cáscara (almendras, avellanas, pistachos), soja y huevo.</p>
+                                    <p style="margin:0 0 10px 0;"><strong>Este producto contiene:</strong> Leche y
+                                        derivados lácteos (incluida lactosa).</p>
+                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);"><strong>Puede
+                                            contener trazas de:</strong> Frutos de cáscara (almendras, avellanas,
+                                        pistachos), soja y huevo.</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Botón directo a Reservas -->
                         <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
-                            <a href="#la-coleccion" onclick="goToReservasProduct('doxa', event)" class="btn-reserva-rueda">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('doxa', event)"
+                                class="btn-reserva-rueda">
                                 RESERVA TU CAJA
                                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24" style="margin-left: 10px;">
@@ -6838,27 +6975,33 @@ Menú del Index: Líena 742
                     <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
                         <div class="sabor-gallery-wrap">
                             <div class="sabor-main-img-wrap" id="sabor-main-media-cookie">
-                                <img src="Galle choco.png" alt="DOXA Cookie Bésame Choco" id="sabor-main-img-cookie" class="placer-cookie-img"
+                                <img src="Galle choco.png" alt="DOXA Cookie Bésame Choco" id="sabor-main-img-cookie"
+                                    class="placer-cookie-img"
                                     style="width: 100%; max-width: 480px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.3)); border-radius: 0;">
                             </div>
                             <div class="sabor-variants-strip" id="sabor-variants-cookie">
-                                <button type="button" class="sabor-variant-thumb active" onclick="switchSaborVariant('cookie', 0)" title="Bésame Choco">
+                                <button type="button" class="sabor-variant-thumb active"
+                                    onclick="switchSaborVariant('cookie', 0)" title="Bésame Choco">
                                     <img src="Galle choco.png" alt="Bésame Choco">
                                     <span class="sabor-variant-name">Bésame Choco</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('cookie', 1)" title="Café Despertar">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('cookie', 1)" title="Café Despertar">
                                     <img src="Galle cafe.png" alt="Café Despertar">
                                     <span class="sabor-variant-name">Café Despertar</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('cookie', 2)" title="Choco Negro">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('cookie', 2)" title="Choco Negro">
                                     <img src="Galle choco negro.png" alt="Choco Negro">
                                     <span class="sabor-variant-name">Choco Negro</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('cookie', 3)" title="Frutos del Bosque">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('cookie', 3)" title="Frutos del Bosque">
                                     <img src="Galle frutos bosque.png" alt="Frutos del Bosque">
                                     <span class="sabor-variant-name">Frutos Bosque</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('cookie', 4)" title="Edición Colección">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('cookie', 4)" title="Edición Colección">
                                     <img src="Galle portada.png" alt="Colección">
                                     <span class="sabor-variant-name">Colección</span>
                                 </button>
@@ -6868,7 +7011,9 @@ Menú del Index: Líena 742
                     <div class="column-text" style="flex: 1; display: flex; flex-direction: column;">
                         <h3 class="variety-title" id="sabor-title-cookie" style="margin-bottom: 25px;">BÉSAME CHOCO</h3>
                         <div class="variety-desc" id="sabor-desc-cookie" style="margin-bottom: 25px; line-height: 1.6;">
-                            La primera expresión DOXA. Pepitas de cacao puro se funden entre la masa mientras un centro cremoso de cacao, almendra y aceite MCT cede lentamente con cada bocado. Profunda, reconfortante y difícil de olvidar.
+                            La primera expresión DOXA. Pepitas de cacao puro se funden entre la masa mientras un centro
+                            cremoso de cacao, almendra y aceite MCT cede lentamente con cada bocado. Profunda,
+                            reconfortante y difícil de olvidar.
                         </div>
 
                         <div class="sheet-accordion-item">
@@ -6879,10 +7024,13 @@ Menú del Index: Líena 742
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
                                     <p style="margin:0 0 12px 0;">
-                                        DOXAS Cookies se elaboran artesanalmente bajo pedido. Horneadas a baja temperatura para preservar intactos los triglicéridos de cadena media (MCT) y los flavonoides antioxidantes del cacao noble.
+                                        DOXAS Cookies se elaboran artesanalmente bajo pedido. Horneadas a baja
+                                        temperatura para preservar intactos los triglicéridos de cadena media (MCT) y
+                                        los flavonoides antioxidantes del cacao noble.
                                     </p>
                                     <p style="margin:0 0 12px 0;">
-                                        Presentan una textura crujiente y tostada en el borde exterior que contrasta con un núcleo fundente, untuoso y tierno que despierta todos los sentidos.
+                                        Presentan una textura crujiente y tostada en el borde exterior que contrasta con
+                                        un núcleo fundente, untuoso y tierno que despierta todos los sentidos.
                                     </p>
                                 </div>
                             </div>
@@ -6896,10 +7044,12 @@ Menú del Index: Líena 742
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
                                     <p style="margin:0 0 10px 0;">
-                                        Un toque de calor de <strong>10 a 15 segundos en el microondas</strong> antes de consumir les devuelve ese punto tierno, aromático y recién horneado.
+                                        Un toque de calor de <strong>10 a 15 segundos en el microondas</strong> antes de
+                                        consumir les devuelve ese punto tierno, aromático y recién horneado.
                                     </p>
                                     <p style="margin:0 0 10px 0;">
-                                        Conservar en su envase sellado en un lugar fresco y seco alejado de la humedad. Consumir preferentemente antes de 3 semanas.
+                                        Conservar en su envase sellado en un lugar fresco y seco alejado de la humedad.
+                                        Consumir preferentemente antes de 3 semanas.
                                     </p>
                                 </div>
                             </div>
@@ -6912,8 +7062,13 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;"><strong>Ingredientes:</strong> Harina de almendra marcona seleccionada, chocolate negro 70% (pasta de cacao, manteca de cacao pura), aceite MCT (coco), huevo campero, eritritol bio, fibra de acacia, sal rosa del Himalaya, extracto de vainilla natural Bourbon.</p>
-                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">0% harinas refinadas, 0% aceites vegetales refinados, sin azúcares industriales añadidos.</p>
+                                    <p style="margin:0 0 10px 0;"><strong>Ingredientes:</strong> Harina de almendra
+                                        marcona seleccionada, chocolate negro 70% (pasta de cacao, manteca de cacao
+                                        pura), aceite MCT (coco), huevo campero, eritritol bio, fibra de acacia, sal
+                                        rosa del Himalaya, extracto de vainilla natural Bourbon.</p>
+                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">0% harinas
+                                        refinadas, 0% aceites vegetales refinados, sin azúcares industriales añadidos.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -6934,14 +7089,46 @@ Menú del Index: Líena 742
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td>Valor Energético</td><td>368 kcal</td><td>460 kcal</td></tr>
-                                            <tr><td>Grasas Saludables</td><td>25.6 g</td><td>32 g</td></tr>
-                                            <tr><td>— de las cuales MCTs</td><td>11.2 g</td><td>14 g</td></tr>
-                                            <tr><td>Hidratos de Carbono Netos</td><td>16 g</td><td>20 g</td></tr>
-                                            <tr><td>— de los cuales Azúcares Naturales</td><td>6.4 g</td><td>8 g</td></tr>
-                                            <tr><td>Fibra Dietética Prebiótica</td><td>9.6 g</td><td>12 g</td></tr>
-                                            <tr><td>Proteínas Naturales</td><td>11.2 g</td><td>14 g</td></tr>
-                                            <tr><td>Sodio</td><td>0.12 g</td><td>0.15 g</td></tr>
+                                            <tr>
+                                                <td>Valor Energético</td>
+                                                <td>368 kcal</td>
+                                                <td>460 kcal</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Grasas Saludables</td>
+                                                <td>25.6 g</td>
+                                                <td>32 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>— de las cuales MCTs</td>
+                                                <td>11.2 g</td>
+                                                <td>14 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hidratos de Carbono Netos</td>
+                                                <td>16 g</td>
+                                                <td>20 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>— de los cuales Azúcares Naturales</td>
+                                                <td>6.4 g</td>
+                                                <td>8 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fibra Dietética Prebiótica</td>
+                                                <td>9.6 g</td>
+                                                <td>12 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Proteínas Naturales</td>
+                                                <td>11.2 g</td>
+                                                <td>14 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sodio</td>
+                                                <td>0.12 g</td>
+                                                <td>0.15 g</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -6955,15 +7142,19 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;"><strong>Contiene:</strong> Frutos de cáscara (almendra) y huevo.</p>
-                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">Elaborado con ingredientes naturalmente libres de gluten. Puede contener trazas de leche y soja.</p>
+                                    <p style="margin:0 0 10px 0;"><strong>Contiene:</strong> Frutos de cáscara
+                                        (almendra) y huevo.</p>
+                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">Elaborado con
+                                        ingredientes naturalmente libres de gluten. Puede contener trazas de leche y
+                                        soja.</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Botón directo a Reservas -->
                         <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
-                            <a href="#la-coleccion" onclick="goToReservasProduct('cookie', event)" class="btn-reserva-rueda">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('cookie', event)"
+                                class="btn-reserva-rueda">
                                 RESERVA TU CAJA
                                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24" style="margin-left: 10px;">
@@ -6992,19 +7183,23 @@ Menú del Index: Líena 742
                     <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
                         <div class="sabor-gallery-wrap">
                             <div class="sabor-main-img-wrap" id="sabor-main-media-bbb">
-                                <img src="BBB 1.png" alt="Bombón Bloom Pistacho" id="sabor-main-img-bbb" class="placer-cookie-img"
+                                <img src="BBB 1.png" alt="Bombón Bloom Pistacho" id="sabor-main-img-bbb"
+                                    class="placer-cookie-img"
                                     style="width: 100%; max-width: 480px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.3)); border-radius: 0;">
                             </div>
                             <div class="sabor-variants-strip" id="sabor-variants-bbb">
-                                <button type="button" class="sabor-variant-thumb active" onclick="switchSaborVariant('bbb', 0)" title="Pistacho & Brillo">
+                                <button type="button" class="sabor-variant-thumb active"
+                                    onclick="switchSaborVariant('bbb', 0)" title="Pistacho & Brillo">
                                     <img src="BBB 1.png" alt="Pistacho">
                                     <span class="sabor-variant-name">Pistacho</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('bbb', 1)" title="Maracuyá Exótico">
+                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('bbb', 1)"
+                                    title="Maracuyá Exótico">
                                     <img src="BBB 2.png" alt="Maracuyá">
                                     <span class="sabor-variant-name">Maracuyá</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('bbb', 2)" title="Colección Joya">
+                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('bbb', 2)"
+                                    title="Colección Joya">
                                     <img src="BBB 3.png" alt="Colección">
                                     <span class="sabor-variant-name">Colección</span>
                                 </button>
@@ -7012,9 +7207,12 @@ Menú del Index: Líena 742
                         </div>
                     </div>
                     <div class="column-text" style="flex: 1; display: flex; flex-direction: column;">
-                        <h3 class="variety-title" id="sabor-title-bbb" style="margin-bottom: 25px;">BLOOM PISTACHO VERDE</h3>
+                        <h3 class="variety-title" id="sabor-title-bbb" style="margin-bottom: 25px;">BLOOM PISTACHO VERDE
+                        </h3>
                         <div class="variety-desc" id="sabor-desc-bbb" style="margin-bottom: 25px; line-height: 1.6;">
-                            Bombón joya nutricosmético con pasta pura de pistacho verde y péptidos biodisponibles de colágeno, envuelto en cobertura crujiente de chocolate belga puro 70%. Textura untuosa, aromática y regeneradora.
+                            Bombón joya nutricosmético con pasta pura de pistacho verde y péptidos biodisponibles de
+                            colágeno, envuelto en cobertura crujiente de chocolate belga puro 70%. Textura untuosa,
+                            aromática y regeneradora.
                         </div>
 
                         <div class="sheet-accordion-item">
@@ -7025,10 +7223,13 @@ Menú del Index: Líena 742
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
                                     <p style="margin:0 0 12px 0;">
-                                        Una joya nutricosmética diseñada para nutrir la belleza celular desde dentro. Cada bombón se ensambla capa por capa encapsulando en frío bioactivos de alta potencia como colágeno hidrolizado tipo I y ácido hialurónico vegetal.
+                                        Una joya nutricosmética diseñada para nutrir la belleza celular desde dentro.
+                                        Cada bombón se ensambla capa por capa encapsulando en frío bioactivos de alta
+                                        potencia como colágeno hidrolizado tipo I y ácido hialurónico vegetal.
                                     </p>
                                     <p style="margin:0; font-style: italic; color: rgba(60,51,42,0.7);">
-                                        La fina cubierta de chocolate negro actúa como escudo natural protegiendo los nutrientes de la degradación térmica.
+                                        La fina cubierta de chocolate negro actúa como escudo natural protegiendo los
+                                        nutrientes de la degradación térmica.
                                     </p>
                                 </div>
                             </div>
@@ -7041,8 +7242,10 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;">Conservar entre <strong>14 °C y 18 °C</strong> en un entorno seco y protegido de olores fuertes.</p>
-                                    <p style="margin:0 0 10px 0;">Disfrutar de 1 a 2 bombones al día como un ritual de indulgencia consciente por la mañana o antes de descansar.</p>
+                                    <p style="margin:0 0 10px 0;">Conservar entre <strong>14 °C y 18 °C</strong> en un
+                                        entorno seco y protegido de olores fuertes.</p>
+                                    <p style="margin:0 0 10px 0;">Disfrutar de 1 a 2 bombones al día como un ritual de
+                                        indulgencia consciente por la mañana o antes de descansar.</p>
                                 </div>
                             </div>
                         </div>
@@ -7054,8 +7257,12 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;"><strong>Ingredientes:</strong> Chocolate belga 70% (pasta de cacao, manteca de cacao), pasta pura de pistacho de Bronte 35%, péptidos bioactivos de colágeno marino hidrolizado, ácido hialurónico vegetal, coenzima Q10, tocoferol (vitamina E natural).</p>
-                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">Sin gluten, sin azúcares refinados, formulado con biodisponibilidad verificada.</p>
+                                    <p style="margin:0 0 10px 0;"><strong>Ingredientes:</strong> Chocolate belga 70%
+                                        (pasta de cacao, manteca de cacao), pasta pura de pistacho de Bronte 35%,
+                                        péptidos bioactivos de colágeno marino hidrolizado, ácido hialurónico vegetal,
+                                        coenzima Q10, tocoferol (vitamina E natural).</p>
+                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">Sin gluten, sin
+                                        azúcares refinados, formulado con biodisponibilidad verificada.</p>
                                 </div>
                             </div>
                         </div>
@@ -7076,12 +7283,36 @@ Menú del Index: Líena 742
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td>Valor Energético</td><td>82 kcal</td><td>546 kcal</td></tr>
-                                            <tr><td>Grasas Totales</td><td>6.3 g</td><td>42 g</td></tr>
-                                            <tr><td>Hidratos de Carbono</td><td>3.6 g</td><td>24 g</td></tr>
-                                            <tr><td>Proteínas y Péptidos</td><td>3.3 g</td><td>22 g</td></tr>
-                                            <tr><td>Colágeno Marino Bioactivo</td><td>1.250 mg</td><td>8.330 mg</td></tr>
-                                            <tr><td>Ácido Hialurónico</td><td>30 mg</td><td>200 mg</td></tr>
+                                            <tr>
+                                                <td>Valor Energético</td>
+                                                <td>82 kcal</td>
+                                                <td>546 kcal</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Grasas Totales</td>
+                                                <td>6.3 g</td>
+                                                <td>42 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hidratos de Carbono</td>
+                                                <td>3.6 g</td>
+                                                <td>24 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Proteínas y Péptidos</td>
+                                                <td>3.3 g</td>
+                                                <td>22 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Colágeno Marino Bioactivo</td>
+                                                <td>1.250 mg</td>
+                                                <td>8.330 mg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ácido Hialurónico</td>
+                                                <td>30 mg</td>
+                                                <td>200 mg</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -7095,15 +7326,18 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;"><strong>Contiene:</strong> Pescado (colágeno marino) y frutos de cáscara (pistacho).</p>
-                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">Puede contener trazas de leche y soja.</p>
+                                    <p style="margin:0 0 10px 0;"><strong>Contiene:</strong> Pescado (colágeno marino) y
+                                        frutos de cáscara (pistacho).</p>
+                                    <p style="margin:0; font-size: 13px; color: rgba(60,51,42,0.8);">Puede contener
+                                        trazas de leche y soja.</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Botón directo a Reservas -->
                         <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
-                            <a href="#la-coleccion" onclick="goToReservasProduct('bbb', event)" class="btn-reserva-rueda">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('bbb', event)"
+                                class="btn-reserva-rueda">
                                 RESERVA TU CAJA
                                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24" style="margin-left: 10px;">
@@ -7132,15 +7366,18 @@ Menú del Index: Líena 742
                     <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
                         <div class="sabor-gallery-wrap">
                             <div class="sabor-main-img-wrap" id="sabor-main-media-lingote">
-                                <img src="Lingote.png" alt="Lingote Pistacho" id="sabor-main-img-lingote" class="placer-cookie-img"
+                                <img src="Lingote.png" alt="Lingote Pistacho" id="sabor-main-img-lingote"
+                                    class="placer-cookie-img"
                                     style="width: 100%; max-width: 480px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.3)); border-radius: 0;">
                             </div>
                             <div class="sabor-variants-strip" id="sabor-variants-lingote">
-                                <button type="button" class="sabor-variant-thumb active" onclick="switchSaborVariant('lingote', 0)" title="Lingote Regular">
+                                <button type="button" class="sabor-variant-thumb active"
+                                    onclick="switchSaborVariant('lingote', 0)" title="Lingote Regular">
                                     <img src="Lingote.png" alt="Regular">
                                     <span class="sabor-variant-name">Regular (10 uds)</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('lingote', 1)" title="Edición Colección">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('lingote', 1)" title="Edición Colección">
                                     <img src="Lingote.png" alt="Colección">
                                     <span class="sabor-variant-name">Colección</span>
                                 </button>
@@ -7148,9 +7385,13 @@ Menú del Index: Líena 742
                         </div>
                     </div>
                     <div class="column-text" style="flex: 1; display: flex; flex-direction: column;">
-                        <h3 class="variety-title" id="sabor-title-lingote" style="margin-bottom: 25px;">LINGOTE PISTACHO REGULAR (10 PIEZAS)</h3>
-                        <div class="variety-desc" id="sabor-desc-lingote" style="margin-bottom: 25px; line-height: 1.6;">
-                            Una pieza densa, untuosa y elegante nacida del pistacho seleccionado y tostado en frío, fundido en una estructura de chocolate negro puro 72% y bioactivos que sacia y nutre profundamente.
+                        <h3 class="variety-title" id="sabor-title-lingote" style="margin-bottom: 25px;">LINGOTE PISTACHO
+                            REGULAR (10 PIEZAS)</h3>
+                        <div class="variety-desc" id="sabor-desc-lingote"
+                            style="margin-bottom: 25px; line-height: 1.6;">
+                            Una pieza densa, untuosa y elegante nacida del pistacho seleccionado y tostado en frío,
+                            fundido en una estructura de chocolate negro puro 72% y bioactivos que sacia y nutre
+                            profundamente.
                         </div>
 
                         <div class="sheet-accordion-item">
@@ -7161,7 +7402,9 @@ Menú del Index: Líena 742
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
                                     <p style="margin:0 0 12px 0;">
-                                        Molienda a baja fricción que preserva los fitonutrientes y ácidos grasos monoinsaturados del pistacho silvestre. Prensado en moldes individuales para asegurar una densidad sedosa que se corta limpiamente.
+                                        Molienda a baja fricción que preserva los fitonutrientes y ácidos grasos
+                                        monoinsaturados del pistacho silvestre. Prensado en moldes individuales para
+                                        asegurar una densidad sedosa que se corta limpiamente.
                                     </p>
                                 </div>
                             </div>
@@ -7174,7 +7417,9 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;">Servir fresco a <strong>16 °C - 18 °C</strong>. Cortar en láminas sutiles y dejar atemperar unos segundos en la boca para liberar su persistente buqué a pistacho tostado y cacao amargo.</p>
+                                    <p style="margin:0 0 10px 0;">Servir fresco a <strong>16 °C - 18 °C</strong>. Cortar
+                                        en láminas sutiles y dejar atemperar unos segundos en la boca para liberar su
+                                        persistente buqué a pistacho tostado y cacao amargo.</p>
                                 </div>
                             </div>
                         </div>
@@ -7186,7 +7431,9 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;"><strong>Ingredientes:</strong> Pistacho tostado en frío 65%, cobertura de chocolate negro 72% (pasta de cacao, manteca de cacao), fibra prebiótica de raíz de achicoria, escamas de sal marina virgen.</p>
+                                    <p style="margin:0 0 10px 0;"><strong>Ingredientes:</strong> Pistacho tostado en
+                                        frío 65%, cobertura de chocolate negro 72% (pasta de cacao, manteca de cacao),
+                                        fibra prebiótica de raíz de achicoria, escamas de sal marina virgen.</p>
                                 </div>
                             </div>
                         </div>
@@ -7199,14 +7446,44 @@ Menú del Index: Líena 742
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
                                     <table class="sheet-nutrition-table">
-                                        <thead><tr><th>Valores Medios</th><th>Por Lingote (20 g)</th><th>Por 100 g</th></tr></thead>
+                                        <thead>
+                                            <tr>
+                                                <th>Valores Medios</th>
+                                                <th>Por Lingote (20 g)</th>
+                                                <th>Por 100 g</th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
-                                            <tr><td>Valor Energético</td><td>114 kcal</td><td>570 kcal</td></tr>
-                                            <tr><td>Grasas Monoinsaturadas</td><td>9.2 g</td><td>46 g</td></tr>
-                                            <tr><td>Hidratos de Carbono</td><td>4.4 g</td><td>22 g</td></tr>
-                                            <tr><td>Fibra Prebiótica</td><td>2.8 g</td><td>14 g</td></tr>
-                                            <tr><td>Proteínas</td><td>3.2 g</td><td>16 g</td></tr>
-                                            <tr><td>Magnesio Natural</td><td>28 mg</td><td>140 mg</td></tr>
+                                            <tr>
+                                                <td>Valor Energético</td>
+                                                <td>114 kcal</td>
+                                                <td>570 kcal</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Grasas Monoinsaturadas</td>
+                                                <td>9.2 g</td>
+                                                <td>46 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hidratos de Carbono</td>
+                                                <td>4.4 g</td>
+                                                <td>22 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fibra Prebiótica</td>
+                                                <td>2.8 g</td>
+                                                <td>14 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Proteínas</td>
+                                                <td>3.2 g</td>
+                                                <td>16 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Magnesio Natural</td>
+                                                <td>28 mg</td>
+                                                <td>140 mg</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -7220,14 +7497,16 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0;"><strong>Contiene:</strong> Frutos de cáscara (pistacho). Puede contener trazas de almendra y avellana.</p>
+                                    <p style="margin:0;"><strong>Contiene:</strong> Frutos de cáscara (pistacho). Puede
+                                        contener trazas de almendra y avellana.</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Botón directo a Reservas -->
                         <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
-                            <a href="#la-coleccion" onclick="goToReservasProduct('lingote', event)" class="btn-reserva-rueda">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('lingote', event)"
+                                class="btn-reserva-rueda">
                                 RESERVA TU CAJA
                                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24" style="margin-left: 10px;">
@@ -7256,15 +7535,18 @@ Menú del Index: Líena 742
                     <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
                         <div class="sabor-gallery-wrap">
                             <div class="sabor-main-img-wrap" id="sabor-main-media-oblea">
-                                <img src="Oblea.png" alt="Crujiente de Almendra" id="sabor-main-img-oblea" class="placer-cookie-img"
+                                <img src="Oblea.png" alt="Crujiente de Almendra" id="sabor-main-img-oblea"
+                                    class="placer-cookie-img"
                                     style="width: 100%; max-width: 480px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.3)); border-radius: 0;">
                             </div>
                             <div class="sabor-variants-strip" id="sabor-variants-oblea">
-                                <button type="button" class="sabor-variant-thumb active" onclick="switchSaborVariant('oblea', 0)" title="Crujiente Regular">
+                                <button type="button" class="sabor-variant-thumb active"
+                                    onclick="switchSaborVariant('oblea', 0)" title="Crujiente Regular">
                                     <img src="Oblea.png" alt="Regular">
                                     <span class="sabor-variant-name">Regular (10 uds)</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('oblea', 1)" title="Edición Colección">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('oblea', 1)" title="Edición Colección">
                                     <img src="Oblea.png" alt="Colección">
                                     <span class="sabor-variant-name">Colección</span>
                                 </button>
@@ -7272,9 +7554,11 @@ Menú del Index: Líena 742
                         </div>
                     </div>
                     <div class="column-text" style="flex: 1; display: flex; flex-direction: column;">
-                        <h3 class="variety-title" id="sabor-title-oblea" style="margin-bottom: 25px;">CRUJIENTE DE ALMENDRA REGULAR (10 PIEZAS)</h3>
+                        <h3 class="variety-title" id="sabor-title-oblea" style="margin-bottom: 25px;">CRUJIENTE DE
+                            ALMENDRA REGULAR (10 PIEZAS)</h3>
                         <div class="variety-desc" id="sabor-desc-oblea" style="margin-bottom: 25px; line-height: 1.6;">
-                            Láminas crujientes de extrema ligereza donde la almendra tostada y el cacao fino de aroma se entrelazan para crear un bocado adictivo, sutil y consciente que cruje en cada instante.
+                            Láminas crujientes de extrema ligereza donde la almendra tostada y el cacao fino de aroma se
+                            entrelazan para crear un bocado adictivo, sutil y consciente que cruje en cada instante.
                         </div>
 
                         <div class="sheet-accordion-item">
@@ -7285,7 +7569,9 @@ Menú del Index: Líena 742
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
                                     <p style="margin:0 0 12px 0;">
-                                        Elaboradas a mano extendiendo finas capas de masa de almendra marcona sobre planchas de hierro caliente. Horneado rápido y preciso para conseguir ese crujido inconfundible y etéreo.
+                                        Elaboradas a mano extendiendo finas capas de masa de almendra marcona sobre
+                                        planchas de hierro caliente. Horneado rápido y preciso para conseguir ese
+                                        crujido inconfundible y etéreo.
                                     </p>
                                 </div>
                             </div>
@@ -7298,7 +7584,9 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;">Conservar en lata o estuche hermético protegido de la humedad ambiental. Ideal como acompañamiento de té verde, matcha o café de finca.</p>
+                                    <p style="margin:0 0 10px 0;">Conservar en lata o estuche hermético protegido de la
+                                        humedad ambiental. Ideal como acompañamiento de té verde, matcha o café de
+                                        finca.</p>
                                 </div>
                             </div>
                         </div>
@@ -7310,7 +7598,9 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;"><strong>Ingredientes:</strong> Almendra marcona tostada 55%, manteca de cacao pura, cacao criollo en polvo desgrasado, harina de coco ecológica, fibra vegetal de acacia, canela de Ceilán molida.</p>
+                                    <p style="margin:0 0 10px 0;"><strong>Ingredientes:</strong> Almendra marcona
+                                        tostada 55%, manteca de cacao pura, cacao criollo en polvo desgrasado, harina de
+                                        coco ecológica, fibra vegetal de acacia, canela de Ceilán molida.</p>
                                 </div>
                             </div>
                         </div>
@@ -7323,13 +7613,39 @@ Menú del Index: Líena 742
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
                                     <table class="sheet-nutrition-table">
-                                        <thead><tr><th>Valores Medios</th><th>Por Pieza (18 g)</th><th>Por 100 g</th></tr></thead>
+                                        <thead>
+                                            <tr>
+                                                <th>Valores Medios</th>
+                                                <th>Por Pieza (18 g)</th>
+                                                <th>Por 100 g</th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
-                                            <tr><td>Valor Energético</td><td>93 kcal</td><td>520 kcal</td></tr>
-                                            <tr><td>Grasas Saludables</td><td>7.5 g</td><td>42 g</td></tr>
-                                            <tr><td>Hidratos de Carbono</td><td>2.8 g</td><td>16 g</td></tr>
-                                            <tr><td>Fibra Prebiótica</td><td>3.2 g</td><td>18 g</td></tr>
-                                            <tr><td>Proteínas</td><td>2.7 g</td><td>15 g</td></tr>
+                                            <tr>
+                                                <td>Valor Energético</td>
+                                                <td>93 kcal</td>
+                                                <td>520 kcal</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Grasas Saludables</td>
+                                                <td>7.5 g</td>
+                                                <td>42 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hidratos de Carbono</td>
+                                                <td>2.8 g</td>
+                                                <td>16 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fibra Prebiótica</td>
+                                                <td>3.2 g</td>
+                                                <td>18 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Proteínas</td>
+                                                <td>2.7 g</td>
+                                                <td>15 g</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -7343,14 +7659,16 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0;"><strong>Contiene:</strong> Frutos de cáscara (almendra). Sin gluten declarado naturalmente.</p>
+                                    <p style="margin:0;"><strong>Contiene:</strong> Frutos de cáscara (almendra). Sin
+                                        gluten declarado naturalmente.</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Botón directo a Reservas -->
                         <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
-                            <a href="#la-coleccion" onclick="goToReservasProduct('oblea', event)" class="btn-reserva-rueda">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('oblea', event)"
+                                class="btn-reserva-rueda">
                                 RESERVA TU CAJA
                                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24" style="margin-left: 10px;">
@@ -7379,15 +7697,18 @@ Menú del Index: Líena 742
                     <div class="column-img" style="flex: 1; display: flex; justify-content: center;">
                         <div class="sabor-gallery-wrap">
                             <div class="sabor-main-img-wrap" id="sabor-main-media-pequebloom">
-                                <img src="Pequebloom.png" alt="PequeBloom" id="sabor-main-img-pequebloom" class="placer-cookie-img"
+                                <img src="Pequebloom.png" alt="PequeBloom" id="sabor-main-img-pequebloom"
+                                    class="placer-cookie-img"
                                     style="width: 100%; max-width: 480px; height: auto; filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.3)); border-radius: 0;">
                             </div>
                             <div class="sabor-variants-strip" id="sabor-variants-pequebloom">
-                                <button type="button" class="sabor-variant-thumb active" onclick="switchSaborVariant('pequebloom', 0)" title="PequeBloom Regular">
+                                <button type="button" class="sabor-variant-thumb active"
+                                    onclick="switchSaborVariant('pequebloom', 0)" title="PequeBloom Regular">
                                     <img src="Pequebloom.png" alt="Regular">
                                     <span class="sabor-variant-name">Regular (10 uds)</span>
                                 </button>
-                                <button type="button" class="sabor-variant-thumb" onclick="switchSaborVariant('pequebloom', 1)" title="Edición Especial">
+                                <button type="button" class="sabor-variant-thumb"
+                                    onclick="switchSaborVariant('pequebloom', 1)" title="Edición Especial">
                                     <img src="Pequebloom.png" alt="Colección">
                                     <span class="sabor-variant-name">Colección</span>
                                 </button>
@@ -7395,9 +7716,13 @@ Menú del Index: Líena 742
                         </div>
                     </div>
                     <div class="column-text" style="flex: 1; display: flex; flex-direction: column;">
-                        <h3 class="variety-title" id="sabor-title-pequebloom" style="margin-bottom: 25px;">PEQUEBLOOM REGULAR (10 PIEZAS)</h3>
-                        <div class="variety-desc" id="sabor-desc-pequebloom" style="margin-bottom: 25px; line-height: 1.6;">
-                            La máxima concentración de bioactivos en una versión pequeña y exquisita. Diseñada para llevar siempre contigo y disfrutar en cualquier momento de pausa activa recargando tu vitalidad.
+                        <h3 class="variety-title" id="sabor-title-pequebloom" style="margin-bottom: 25px;">PEQUEBLOOM
+                            REGULAR (10 PIEZAS)</h3>
+                        <div class="variety-desc" id="sabor-desc-pequebloom"
+                            style="margin-bottom: 25px; line-height: 1.6;">
+                            La máxima concentración de bioactivos en una versión pequeña y exquisita. Diseñada para
+                            llevar siempre contigo y disfrutar en cualquier momento de pausa activa recargando tu
+                            vitalidad.
                         </div>
 
                         <div class="sheet-accordion-item">
@@ -7408,7 +7733,9 @@ Menú del Index: Líena 742
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
                                     <p style="margin:0 0 12px 0;">
-                                        Mini bombones elaborados con moldes micrométricos para concentrar extractos bioactivos como melena de león y bisglicinato de magnesio en un bocado de placer sensorial inmediato.
+                                        Mini bombones elaborados con moldes micrométricos para concentrar extractos
+                                        bioactivos como melena de león y bisglicinato de magnesio en un bocado de placer
+                                        sensorial inmediato.
                                     </p>
                                 </div>
                             </div>
@@ -7421,7 +7748,8 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;">Conservar a <strong>16 °C - 20 °C</strong>. Formato de bolsillo perfecto para acompañar tu jornada laboral o antes de entrenar.</p>
+                                    <p style="margin:0 0 10px 0;">Conservar a <strong>16 °C - 20 °C</strong>. Formato de
+                                        bolsillo perfecto para acompañar tu jornada laboral o antes de entrenar.</p>
                                 </div>
                             </div>
                         </div>
@@ -7433,7 +7761,9 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0 0 10px 0;"><strong>Ingredientes:</strong> Pasta de cacao fino 60%, leche vegetal de almendra, manteca de cacao, extracto de melena de león, bisglicinato de magnesio, vainilla natural.</p>
+                                    <p style="margin:0 0 10px 0;"><strong>Ingredientes:</strong> Pasta de cacao fino
+                                        60%, leche vegetal de almendra, manteca de cacao, extracto de melena de león,
+                                        bisglicinato de magnesio, vainilla natural.</p>
                                 </div>
                             </div>
                         </div>
@@ -7446,14 +7776,44 @@ Menú del Index: Líena 742
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
                                     <table class="sheet-nutrition-table">
-                                        <thead><tr><th>Valores Medios</th><th>Por Bombón (10 g)</th><th>Por 100 g</th></tr></thead>
+                                        <thead>
+                                            <tr>
+                                                <th>Valores Medios</th>
+                                                <th>Por Bombón (10 g)</th>
+                                                <th>Por 100 g</th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
-                                            <tr><td>Valor Energético</td><td>52 kcal</td><td>520 kcal</td></tr>
-                                            <tr><td>Grasas Totales</td><td>3.8 g</td><td>38 g</td></tr>
-                                            <tr><td>Hidratos de Carbono</td><td>3.2 g</td><td>32 g</td></tr>
-                                            <tr><td>Fibra</td><td>1.8 g</td><td>18 g</td></tr>
-                                            <tr><td>Proteínas</td><td>1.2 g</td><td>12 g</td></tr>
-                                            <tr><td>Magnesio Activo</td><td>35 mg</td><td>350 mg</td></tr>
+                                            <tr>
+                                                <td>Valor Energético</td>
+                                                <td>52 kcal</td>
+                                                <td>520 kcal</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Grasas Totales</td>
+                                                <td>3.8 g</td>
+                                                <td>38 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hidratos de Carbono</td>
+                                                <td>3.2 g</td>
+                                                <td>32 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fibra</td>
+                                                <td>1.8 g</td>
+                                                <td>18 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Proteínas</td>
+                                                <td>1.2 g</td>
+                                                <td>12 g</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Magnesio Activo</td>
+                                                <td>35 mg</td>
+                                                <td>350 mg</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -7467,14 +7827,16 @@ Menú del Index: Líena 742
                             </button>
                             <div class="sheet-accordion-body">
                                 <div class="sheet-accordion-body-inner">
-                                    <p style="margin:0;"><strong>Contiene:</strong> Frutos de cáscara (almendra). Puede contener trazas de soja.</p>
+                                    <p style="margin:0;"><strong>Contiene:</strong> Frutos de cáscara (almendra). Puede
+                                        contener trazas de soja.</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Botón directo a Reservas -->
                         <div class="sabor-cta-wrapper" style="margin-top: 40px; padding-top: 10px;">
-                            <a href="#la-coleccion" onclick="goToReservasProduct('pequebloom', event)" class="btn-reserva-rueda">
+                            <a href="#la-coleccion" onclick="goToReservasProduct('pequebloom', event)"
+                                class="btn-reserva-rueda">
                                 RESERVA TU CAJA
                                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24" style="margin-left: 10px;">
@@ -10300,9 +10662,9 @@ Menú del Index: Líena 742
                                 let lines = getSanitizedCartLines();
                                 lines = lines.filter(l => l.id !== giftId);
                                 localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
-                            if (typeof window.updateNavbarCartBadge === 'function') {
-                                window.updateNavbarCartBadge();
-                            }
+                                if (typeof window.updateNavbarCartBadge === 'function') {
+                                    window.updateNavbarCartBadge();
+                                }
                                 if (typeof window.updateNavbarCartBadge === 'function') {
                                     window.updateNavbarCartBadge();
                                 }
@@ -10795,7 +11157,7 @@ Menú del Index: Líena 742
                             if (urlTargetProd && !RESERVAS_CATALOG[urlTargetProd]) {
                                 urlTargetProd = null;
                             }
-                        } catch (e) {}
+                        } catch (e) { }
 
                         const initialReservasProd = urlTargetProd || window.currentActiveProduct || (typeof getProductFromHash === 'function' ? getProductFromHash() : null) || 'doxa';
                         switchReservasProduct(initialReservasProd);
