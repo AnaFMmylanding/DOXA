@@ -372,21 +372,22 @@ Menú del Index: Líena 742
 
         /* =========================================================================
            BOTÓN CUADRADO AMARILLO: DESPLEGAR MENÚ
-           Sustituye al antiguo botón rectangular "DOXA" (tamaño reducido y limpio sin líneas)
+           Oculto en PC (donde sólo se ven los 7 elementos).
+           Visible en versión móvil como conglomerado de botones.
            ========================================================================= */
         .navbar-menu-square-btn {
             position: relative;
-            display: inline-flex;
-            width: 28px;
-            height: 28px;
-            min-width: 28px;
-            min-height: 28px;
+            display: none; /* En PC está oculto */
+            width: 26px;
+            height: 26px;
+            min-width: 26px;
+            min-height: 26px;
             background-color: var(--accent-color, #f0ff1c) !important;
             border: none !important;
             border-radius: 0 !important;
             cursor: pointer;
             padding: 0 !important;
-            margin-left: 20px;
+            margin: 0;
             z-index: 1002;
             transition: transform 0.25s ease, background-color 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
             -webkit-tap-highlight-color: transparent;
@@ -416,6 +417,100 @@ Menú del Index: Líena 742
 
         .navbar-menu-square-btn span {
             display: none !important;
+        }
+
+        /* =========================================================================
+           ESTILOS CESTA DE LA COMPRA EN NAVBAR (PC Y MÓVIL)
+           ========================================================================= */
+        .navbar-cart-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent !important;
+            border: none !important;
+            padding: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .navbar-cart-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .navbar-cart-btn:active {
+            transform: scale(0.95);
+        }
+
+        .cart-icon-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+        }
+
+        .navbar-cart-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            display: block;
+            filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+            transition: filter 0.35s ease, transform 0.25s ease;
+        }
+
+        /* En modo scrolled (fondo claro / translúcido): icono oscuro/negro */
+        .navbar.scrolled .navbar-cart-icon {
+            filter: brightness(0) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+        }
+
+        .navbar-cart-badge {
+            position: absolute;
+            top: -6px;
+            right: -9px;
+            background-color: #ff5500;
+            color: #ffffff;
+            font-family: 'Lato', 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1;
+            min-width: 17px;
+            height: 17px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* En PC (min-width: 769px): sólo se ven los 7 elementos */
+        @media (min-width: 769px) {
+            .navbar-mobile-actions {
+                display: none !important;
+            }
+            .navbar-menu-square-btn {
+                display: none !important;
+            }
+            .navbar-cart-pc {
+                display: inline-flex !important;
+            }
+            .navbar-cart-mobile {
+                display: none !important;
+            }
+            .navbar-menu {
+                display: flex !important;
+                align-items: center;
+                gap: 16px;
+                margin-left: auto;
+                justify-content: flex-end;
+            }
         }
 
         .navbar-logo {
@@ -714,53 +809,109 @@ Menú del Index: Líena 742
             visibility: visible;
         }
 
-        /* Estilos del menú móvil desplegable */
+        /* =========================================================================
+           ESTILOS NAVBAR MÓVIL (SÓLO 3 ELEMENTOS VISIBLES EN CABECERA)
+           A) Marca "ESTADO DEL ARTE"
+           B) Icono cesta con número de artículos
+           C) Recuadro amarillo plano (conglomerado de botones que despliega la columna)
+           ========================================================================= */
         @media (max-width: 768px) {
             .navbar {
                 padding: 0 16px;
                 height: 70px;
                 display: flex;
-                justify-content: flex-end;
                 align-items: center;
-                gap: 0;
+                justify-content: space-between;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                box-sizing: border-box;
             }
 
             .navbar.scrolled {
                 height: 65px;
             }
 
-            /* Botón cuadrado amarillo de desplegar menú */
+            /* A) MARCA "ESTADO DEL ARTE" CENTRADA */
+            .navbar-brand-center {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                max-width: calc(100% - 145px);
+                z-index: 1001;
+            }
+
+            .navbar-brand-center .brand-link {
+                font-size: 16px;
+                letter-spacing: 3px;
+                gap: 6px;
+                white-space: nowrap;
+            }
+
+            .navbar-brand-center .brand-del {
+                font-size: 0.65em;
+                letter-spacing: 2px;
+            }
+
+            /* ACCIONES DERECHA EN MÓVIL: B) CESTA + C) CUADRADO AMARILLO */
+            .navbar-mobile-actions {
+                position: absolute;
+                right: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                display: inline-flex !important;
+                align-items: center;
+                gap: 12px;
+                margin: 0;
+                z-index: 1002;
+            }
+
+            .navbar-cart-mobile {
+                display: inline-flex !important;
+            }
+
+            .navbar-cart-pc {
+                display: none !important;
+            }
+
+            /* C) BOTÓN CUADRADO AMARILLO */
             .navbar-menu-square-btn {
                 display: inline-flex !important;
                 width: 26px;
                 height: 26px;
                 min-width: 26px;
                 min-height: 26px;
-                margin-left: auto;
-                order: 2;
+                margin: 0 !important;
             }
 
+            /* COLUMNA DESPLEGABLE DEL CUADRO AMARILLO */
             .navbar-menu {
                 position: fixed;
                 top: 70px;
                 right: -120%;
-                width: calc(100% - 32px);
-                max-width: 270px;
+                width: 260px;
+                max-width: calc(100% - 32px);
                 height: auto;
                 max-height: calc(100vh - 85px);
-                background: rgba(10, 10, 10, 0.45);
-                backdrop-filter: blur(14px);
-                -webkit-backdrop-filter: blur(14px);
+                background: rgba(18, 18, 18, 0.94);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
                 flex-direction: column;
                 justify-content: flex-start;
-                gap: 12px;
-                padding: 16px 14px;
+                align-items: stretch;
+                gap: 8px;
+                padding: 14px 12px;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
-                box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+                box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
                 transition: right 0.35s cubic-bezier(0.25, 1, 0.5, 1);
                 z-index: 999;
-                border: none;
+                border: 1px solid rgba(255, 255, 255, 0.12);
                 border-radius: 0;
             }
 
@@ -772,31 +923,38 @@ Menú del Index: Líena 742
                 right: 16px;
             }
 
-            .navbar-link {
-                font-family: 'Lexend', sans-serif;
-                font-size: 13px !important;
-                letter-spacing: 2px !important;
-                color: rgba(255, 255, 255, 0.85) !important;
-                background-color: transparent !important;
+            /* BOTONES DENTRO DE LA COLUMNA DESPLEGABLE */
+            .navbar-menu .navbar-link {
+                font-family: 'Lato', 'Lexend', sans-serif;
+                font-size: 12px !important;
+                font-weight: 400 !important;
+                letter-spacing: 2.5px !important;
+                color: rgba(255, 255, 255, 0.9) !important;
+                background-color: rgba(255, 255, 255, 0.04) !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
                 width: 100%;
                 text-align: center;
-                padding: 14px 20px !important;
-                transition: all 0.3s ease;
+                padding: 12px 16px !important;
+                transition: all 0.25s ease;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
+                box-sizing: border-box;
                 border-radius: 0 !important;
             }
 
-            .navbar-link.active {
-                background-color: var(--accent-color) !important;
-                color: #150e02 !important;
-                font-weight: 600;
+            .navbar-menu .navbar-link:hover,
+            .navbar-menu .navbar-link:active {
+                background-color: rgba(255, 255, 255, 0.12) !important;
+                color: #FFFFFF !important;
+                border-color: rgba(255, 255, 255, 0.2) !important;
             }
 
-            .navbar-link:not(.active):hover {
-                background-color: rgba(255, 255, 255, 0.08) !important;
-                color: #FFFFFF !important;
+            .navbar-menu .navbar-link.active {
+                background-color: var(--accent-color, #f0ff1c) !important;
+                color: #000000 !important;
+                font-weight: 600 !important;
+                border-color: var(--accent-color, #f0ff1c) !important;
             }
 
             /* Adaptación del menú desplegable de Productos en móvil */
@@ -810,8 +968,8 @@ Menú del Index: Líena 742
                 width: 100%;
                 justify-content: center;
                 font-family: 'Lato', sans-serif !important;
-                font-weight: 300 !important;
-                letter-spacing: 3px !important;
+                font-weight: 400 !important;
+                letter-spacing: 2.5px !important;
                 font-size: 12px !important;
                 -webkit-font-smoothing: antialiased;
             }
@@ -827,7 +985,7 @@ Menú del Index: Líena 742
                 -webkit-backdrop-filter: none;
                 border: none;
                 border-radius: 0;
-                padding: 4px 0 0 0;
+                padding: 6px 0 2px 0;
                 width: 100%;
                 max-width: 100%;
                 overflow: visible;
@@ -838,7 +996,7 @@ Menú del Index: Líena 742
             .productos-submenu-track {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                gap: 8px;
                 width: 100%;
                 padding: 0;
             }
@@ -854,7 +1012,11 @@ Menú del Index: Líena 742
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                background: transparent;
+                background: rgba(255, 255, 255, 0.03) !important;
+            }
+
+            .producto-sub-card:hover {
+                background: rgba(255, 255, 255, 0.08) !important;
             }
 
             .producto-sub-thumb {
@@ -871,6 +1033,8 @@ Menú del Index: Líena 742
                 font-weight: 300;
                 letter-spacing: 1.8px;
                 text-align: center;
+                color: rgba(255, 255, 255, 0.9) !important;
+                text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4) !important;
                 -webkit-font-smoothing: antialiased;
             }
         }
@@ -1563,18 +1727,42 @@ Menú del Index: Líena 742
                     </div>
                 </div>
 
+                <!-- 3) RESERVAS (TIENDA) -->
+                <a href="#reservasProductsNav" class="navbar-link btn-reservas">Reservas</a>
+
                 <!--=========================================================================
                    [INTERRUPTORES DE BOTONES DEL MENÚ]
                    Para MOSTRAR / LIBERAR un botón en la web: cambia data-visible="off" por data-visible="on"
                    Para OCULTAR un botón de la web: cambia data-visible="on" por data-visible="off"
                    ========================================================================= -->
+                <!-- 4) LA COLECCIÓN (OFF) -->
                 <a href="coleccion.html" class="navbar-link btn-coleccion" data-visible="off">La Colección</a>
+                <!-- 5) GALERÍA (OFF) -->
                 <!--NOTA: Este es el enlace/botón que redirige a la página de la galería (galeria.html) -->
                 <a href="galeria.html" class="navbar-link btn-gallery" data-visible="off">Galería</a>
+                <!-- 6) ARTÍCULOS (OFF) -->
                 <a href="articulos.html" class="navbar-link btn-articulos" data-visible="off">Artículos</a>
+
+                <!-- 7) ICONO PARA LA CESTA DE LA COMPRA EN PC -->
+                <a href="compra.html" class="navbar-cart-btn navbar-cart-pc" id="navbarCartBtnPC" aria-label="Cesta de la compra">
+                    <div class="cart-icon-wrapper">
+                        <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
+                        <span class="navbar-cart-badge">0</span>
+                    </div>
+                </a>
             </div>
-            <!-- BOTÓN CUADRADO AMARILLO: DESPLEGAR MENÚ -->
-            <button class="navbar-menu-square-btn" id="mobileToggle" aria-label="Desplegar menú"></button>
+
+            <!-- ACCIONES EN MÓVIL: B) ICONO CESTA + C) BOTÓN CUADRADO AMARILLO PLANO -->
+            <div class="navbar-mobile-actions" id="navbarMobileActions">
+                <a href="compra.html" class="navbar-cart-btn navbar-cart-mobile" id="navbarCartBtnMobile" aria-label="Cesta de la compra">
+                    <div class="cart-icon-wrapper">
+                        <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
+                        <span class="navbar-cart-badge">0</span>
+                    </div>
+                </a>
+                <!-- C) RECUADRO AMARILLO PLANO: CONGLOMERADO DE BOTONES -->
+                <button class="navbar-menu-square-btn" id="mobileToggle" aria-label="Desplegar menú"></button>
+            </div>
         </nav>
         <div class="navbar-overlay" id="navbarOverlay"></div>
         <!--=========================================================================
@@ -9640,6 +9828,9 @@ Menú del Index: Líena 742
                                 }
 
                                 localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                                if (typeof window.updateNavbarCartBadge === 'function') {
+                                    window.updateNavbarCartBadge();
+                                }
                             } catch (e) {
                                 console.warn('Error sincronizando con localStorage:', e);
                             }
@@ -9718,6 +9909,9 @@ Menú del Index: Líena 742
                                 if (totalCost) totalCost.innerText = (parseFloat(total) || 0).toFixed(2).replace('.', ',') + ' €';
 
                                 localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                                if (typeof window.updateNavbarCartBadge === 'function') {
+                                    window.updateNavbarCartBadge();
+                                }
                             } catch (err) {
                                 console.warn('Error en updateOrderSummary:', err);
                             }
@@ -9912,6 +10106,9 @@ Menú del Index: Líena 742
                                 let lines = getSanitizedCartLines();
                                 lines = lines.filter(l => l.id !== giftId);
                                 localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                                if (typeof window.updateNavbarCartBadge === 'function') {
+                                    window.updateNavbarCartBadge();
+                                }
                                 renderReservasGiftsList();
                                 updateOrderSummary();
                             } catch (e) {
@@ -10953,13 +11150,82 @@ Menú del Index: Líena 742
                     });
                 }
 
-                window.addEventListener('scroll', () => {
+                function updateNavbarScrolledState() {
                     const threshold = (hero ? hero.offsetHeight : window.innerHeight) - 90;
                     if (window.scrollY > threshold) {
                         navbar.classList.add('scrolled');
                     } else {
                         navbar.classList.remove('scrolled');
                     }
+                }
+                updateNavbarScrolledState();
+                window.addEventListener('load', updateNavbarScrolledState);
+                document.addEventListener('DOMContentLoaded', updateNavbarScrolledState);
+
+                // Sincronización del número de artículos en la cesta (PC y móvil)
+                function updateNavbarCartBadge() {
+                    try {
+                        let count = 0;
+                        const saved = localStorage.getItem('doxa_cart_lines');
+                        if (saved) {
+                            const parsed = JSON.parse(saved);
+                            if (Array.isArray(parsed)) {
+                                count = parsed.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
+                            }
+                        }
+                        document.querySelectorAll('.navbar-cart-badge').forEach(badge => {
+                            badge.textContent = count;
+                        });
+                    } catch (e) {
+                        console.warn('Error al actualizar contador del carrito:', e);
+                    }
+                }
+                window.updateNavbarCartBadge = updateNavbarCartBadge;
+                updateNavbarCartBadge();
+                window.addEventListener('storage', updateNavbarCartBadge);
+                window.addEventListener('pageshow', updateNavbarCartBadge);
+
+                // Enlace marca "ESTADO DEL ARTE" -> vuelve arriba si ya estamos en index
+                document.querySelectorAll('.brand-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        const href = link.getAttribute('href');
+                        if (href === 'index.html' || href === '#' || href === '/') {
+                            if (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname === '') {
+                                e.preventDefault();
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                if (window.history.pushState) {
+                                    window.history.pushState(null, '', 'index.html');
+                                }
+                                closeMobileMenu();
+                                updateNavbarScrolledState();
+                            }
+                        }
+                    });
+                });
+
+                // Botón "Reservas" -> scroll directo a la sección de reservas
+                document.querySelectorAll('.btn-reservas').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const target = document.getElementById('reservasProductsNav') || document.getElementById('reserva') || document.getElementById('la-coleccion');
+                        if (target) {
+                            e.preventDefault();
+                            const navH = navbar ? navbar.offsetHeight : 70;
+                            const targetPos = target.getBoundingClientRect().top + window.pageYOffset - navH - 10;
+                            window.scrollTo({
+                                top: Math.max(0, targetPos),
+                                behavior: 'smooth'
+                            });
+                            if (window.history.pushState) {
+                                window.history.pushState(null, '', '#reservasProductsNav');
+                            }
+                            closeMobileMenu();
+                            if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
+                        }
+                    });
+                });
+
+                window.addEventListener('scroll', () => {
+                    updateNavbarScrolledState();
 
                     if (disableScrollspy) return;
 
