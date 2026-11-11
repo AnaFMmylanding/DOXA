@@ -4087,11 +4087,11 @@
         function loadCartLinesFromStorage() {
             try {
                 const saved = localStorage.getItem('doxa_cart_lines');
-                if (saved) {
+                if (saved !== null) {
                     const parsed = JSON.parse(saved);
-                    if (Array.isArray(parsed) && parsed.length > 0) {
+                    if (Array.isArray(parsed)) {
                         cartLines = parsed;
-                        selectedLineId = cartLines[0].id;
+                        selectedLineId = cartLines.length > 0 ? cartLines[0].id : null;
                         return;
                     }
                 }
@@ -4125,29 +4125,18 @@
                 }
             } catch (e) {}
 
-            // Fallback 2: si no hay líneas previas guardadas (acceso directo a compra.html)
-            if (cartLines.length === 0) {
-                cartLines = [
-                    {
-                        id: 'line_' + Date.now(),
-                        productId: 'doxa',
-                        productName: 'Doxas',
-                        productImage: 'Doxa.png',
-                        varietyId: 'doxa_2',
-                        varietyName: 'DOXAS DÚO (2 piezas)',
-                        unitPrice: 10.00,
-                        qty: 1,
-                        isGift: false
-                    }
-                ];
-                selectedLineId = cartLines[0].id;
-            }
+            // Si no hay líneas guardadas ni selección previa, el carrito empieza vacío
+            cartLines = [];
+            selectedLineId = null;
         }
         loadCartLinesFromStorage();
 
         function saveCartLinesToStorage() {
             try {
                 localStorage.setItem('doxa_cart_lines', JSON.stringify(cartLines));
+                if (cartLines.length === 0) {
+                    localStorage.removeItem('doxa_active_selection');
+                }
             } catch (e) {
                 console.warn('Error guardando doxa_cart_lines:', e);
             }
@@ -4269,7 +4258,7 @@
                 container.innerHTML = `
                     <div class="empty-orders-msg">
                         Tu pedido está vacío.<br>
-                        <a href="index.html#seccion-reservas" style="display: inline-block; margin-top: 10px; color: #3C332A; text-decoration: underline; font-weight: 500;">Volver a la selección de productos</a>
+                        <a href="index.html#reservasProductsNav" style="display: inline-block; margin-top: 10px; color: #3C332A; text-decoration: underline; font-weight: 500;">Volver a la selección de productos</a>
                     </div>
                 `;
                 updateTotalOrderPanel();

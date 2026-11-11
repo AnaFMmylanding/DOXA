@@ -9466,7 +9466,7 @@ Menú del Index: Líena 742
                         </div>
 
                         <!-- FEEDBACK DE ADICIÓN AL PEDIDO -->
-                        <div class="product-cart-feedback" id="productCartFeedback">
+                        <div class="product-cart-feedback" id="productCartFeedback" style="display: none;">
                             SE HA AÑADIDO A TU PEDIDO <span id="cartFeedbackQty">1</span> CAJA DE "<span
                                 id="cartFeedbackProduct">DOXAS DÚO</span>"
                         </div>
@@ -10015,9 +10015,6 @@ Menú del Index: Líena 742
                                 }
 
                                 localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
-                            if (typeof window.updateNavbarCartBadge === 'function') {
-                                window.updateNavbarCartBadge();
-                            }
                                 if (typeof window.updateNavbarCartBadge === 'function') {
                                     window.updateNavbarCartBadge();
                                 }
@@ -10041,7 +10038,7 @@ Menú del Index: Líena 742
                                         (prod.id === 'pequebloom' ? ('peque_' + fmt.key) :
                                             (prod.id + '_' + fmt.key)));
 
-                                // Sincronizar selección activa personal en el array
+                                // Si el producto ya está en el carrito, actualizar su formato/cantidad seleccionados
                                 const lineIdx = lines.findIndex(l => !l.isGift && l.productId === prodId);
                                 if (lineIdx >= 0) {
                                     lines[lineIdx].varietyId = varietyCode;
@@ -10049,40 +10046,49 @@ Menú del Index: Líena 742
                                     lines[lineIdx].unitPrice = parseFloat(fmt.price) || 0;
                                     lines[lineIdx].qty = qty;
                                     lines[lineIdx].productImage = fmt.image || (prod.id + '.png');
-                                } else {
-                                    lines.push({
-                                        id: 'line_' + Date.now(),
-                                        productId: prodId,
-                                        productName: prod.name,
-                                        productImage: fmt.image || (prod.id + '.png'),
-                                        varietyId: varietyCode,
-                                        varietyName: `${fmt.feedbackName} (${fmt.optSub})`,
-                                        unitPrice: parseFloat(fmt.price) || 0,
-                                        qty: qty,
-                                        isGift: false
-                                    });
+                                    localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                                    if (typeof window.updateNavbarCartBadge === 'function') {
+                                        window.updateNavbarCartBadge();
+                                    }
                                 }
 
-                                const totalBoxes = lines.reduce((s, l) => s + (parseInt(l.qty) || 0), 0);
-                                const subtotal = lines.reduce((s, l) => s + ((parseFloat(l.unitPrice) || 0) * (parseInt(l.qty) || 0)), 0);
+                                // Cálculo de desglose:
+                                // Si hay líneas reales en el carrito, usamos el carrito real
+                                // Si no hay nada en el carrito, mostramos la estimación del producto en pantalla (sin guardarlo en storage)
+                                let totalBoxes, subtotal, shipping, total, tax;
 
-                                const hasPersonal = lines.some(l => !l.isGift && (parseInt(l.qty) || 0) > 0);
-                                const giftDestinations = new Set();
-                                lines.filter(l => l.isGift).forEach(g => {
-                                    const addrKey = `${(g.address || '').trim().toLowerCase()}_${(g.zip || '').trim()}_${(g.city || '').trim().toLowerCase()}`;
-                                    giftDestinations.add(addrKey);
-                                });
-                                const totalDestinations = (hasPersonal ? 1 : 0) + giftDestinations.size;
-                                const shipping = totalBoxes > 0 ? (totalDestinations * 6.00) : 0;
-                                const total = subtotal + shipping;
-                                const tax = total - (total / 1.10);
+                                if (lines.length > 0) {
+                                    totalBoxes = lines.reduce((s, l) => s + (parseInt(l.qty) || 0), 0);
+                                    subtotal = lines.reduce((s, l) => s + ((parseFloat(l.unitPrice) || 0) * (parseInt(l.qty) || 0)), 0);
+                                    const hasPersonal = lines.some(l => !l.isGift && (parseInt(l.qty) || 0) > 0);
+                                    const giftDestinations = new Set();
+                                    lines.filter(l => l.isGift).forEach(g => {
+                                        const addrKey = `${(g.address || '').trim().toLowerCase()}_${(g.zip || '').trim()}_${(g.city || '').trim().toLowerCase()}`;
+                                        giftDestinations.add(addrKey);
+                                    });
+                                    const totalDestinations = (hasPersonal ? 1 : 0) + giftDestinations.size;
+                                    shipping = totalBoxes > 0 ? (totalDestinations * 6.00) : 0;
+                                    total = subtotal + shipping;
+                                    tax = total - (total / 1.10);
+                                } else {
+                                    totalBoxes = qty;
+                                    subtotal = (parseFloat(fmt.price) || 0) * qty;
+                                    shipping = 6.00;
+                                    total = subtotal + shipping;
+                                    tax = total - (total / 1.10);
+                                }
 
-                                // 1. Texto de feedback
+                                // 1. Texto de feedback: solo visible si este producto está realmente en el carrito
                                 const feedbackBox = document.getElementById('productCartFeedback');
                                 if (feedbackBox) {
-                                    const verb = qty === 1 ? 'SE HA AÑADIDO' : 'SE HAN AÑADIDO';
-                                    const cajaWord = qty === 1 ? 'CAJA' : 'CAJAS';
-                                    feedbackBox.innerHTML = `${verb} ${qty} ${cajaWord} DE "${fmt.feedbackName}" A TU PEDIDO`;
+                                    if (lineIdx >= 0) {
+                                        const verb = qty === 1 ? 'SE HA AÑADIDO' : 'SE HAN AÑADIDO';
+                                        const cajaWord = qty === 1 ? 'CAJA' : 'CAJAS';
+                                        feedbackBox.innerHTML = `${verb} ${qty} ${cajaWord} DE "${fmt.feedbackName}" A TU PEDIDO`;
+                                        feedbackBox.style.display = 'block';
+                                    } else {
+                                        feedbackBox.style.display = 'none';
+                                    }
                                 }
 
                                 // 2. Desglose en vivo
@@ -10097,14 +10103,6 @@ Menú del Index: Líena 742
                                 if (shippingCost) shippingCost.innerText = (parseFloat(shipping) || 0).toFixed(2).replace('.', ',') + ' €';
                                 if (taxCost) taxCost.innerText = (parseFloat(tax) || 0).toFixed(2).replace('.', ',') + ' €';
                                 if (totalCost) totalCost.innerText = (parseFloat(total) || 0).toFixed(2).replace('.', ',') + ' €';
-
-                                localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
-                            if (typeof window.updateNavbarCartBadge === 'function') {
-                                window.updateNavbarCartBadge();
-                            }
-                                if (typeof window.updateNavbarCartBadge === 'function') {
-                                    window.updateNavbarCartBadge();
-                                }
                             } catch (err) {
                                 console.warn('Error en updateOrderSummary:', err);
                             }
