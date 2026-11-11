@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 =========================================================================
 ÍNDICE DE CONTENIDO EDITABLE E IMPORTANTE (LÍNEAS DE CÓDIGO)
 =========================================================================
@@ -4180,6 +4180,9 @@ Menú del Index: Líena 742
                     if (bgTransitionTimer) {
                         clearTimeout(bgTransitionTimer);
                         bgTransitionTimer = null;
+                        if (cajaBgOverlay && cajaBgOverlay.style.backgroundImage) {
+                            cajaBg.style.backgroundImage = cajaBgOverlay.style.backgroundImage;
+                        }
                     }
 
                     // Preparar la capa overlay con opacidad 0 y la nueva imagen
@@ -5573,7 +5576,14 @@ Menú del Index: Líena 742
 
                 function formatSubActivoName(name) {
                     if (!name) return '';
-                    const words = name.split(' ').map(w => {
+                    let badge = '';
+                    let clean = name;
+                    if (clean.includes(' — ')) {
+                        const parts = clean.split(' — ');
+                        clean = parts[0];
+                        badge = parts[1];
+                    }
+                    const words = clean.split(' ').map(w => {
                         if (/^q10$/i.test(w)) return "Q10";
                         if (/^b12$/i.test(w)) return "B12";
                         if (/^d3$/i.test(w)) return "D3";
@@ -5583,19 +5593,25 @@ Menú del Index: Líena 742
                         if (/^msm$/i.test(w)) return "MSM";
                         return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
                     });
+                    let formatted = '';
                     if (words.length > 2) {
-                        return '<span style="display:block; white-space:nowrap;">' + words.slice(0, 2).join(' ') + '</span><span style="display:block; white-space:nowrap; margin-top:2px;">' + words.slice(2).join(' ') + '</span>';
+                        formatted = '<span style="display:block; white-space:nowrap;">' + words.slice(0, 2).join(' ') + '</span><span style="display:block; white-space:nowrap; margin-top:2px;">' + words.slice(2).join(' ') + '</span>';
                     } else if (words.length === 2) {
-                        return '<span style="display:block; white-space:nowrap;">' + words[0] + '</span><span style="display:block; white-space:nowrap; margin-top:2px;">' + words[1] + '</span>';
+                        formatted = '<span style="display:block; white-space:nowrap;">' + words[0] + '</span><span style="display:block; white-space:nowrap; margin-top:2px;">' + words[1] + '</span>';
+                    } else {
+                        formatted = '<span style="display:block; white-space:nowrap;">' + words.join(' ') + '</span>';
                     }
-                    return '<span style="display:block; white-space:nowrap;">' + words.join(' ') + '</span>';
+                    if (badge) {
+                        formatted += '<span style="display:block; font-size:8px; opacity:0.8; margin-top:2px; letter-spacing:0.5px;">' + badge + '</span>';
+                    }
+                    return formatted;
                 }
 
                 function updateCategoryText(index) {
                     if (index < 0 || index >= bbbCategorias.length) return;
                     const a = bbbCategorias[index];
                     const cleanTitle = (a.title || a.n || '').replace(/^(?:bbb|lingote|oblea|crujiente|peque\s*bloom|pequebloom|bomb[oó]n\s*bloom|cookie|doxa)\s+/i, '').trim();
-                    const productPretitle = a.tagline || (sec.id.includes('bbb') ? 'BOMBÓN BLOOM' : (sec.id.includes('lingote') ? 'LINGOTE' : (sec.id.includes('oblea') ? 'CRUJIENTE DE ALMENDRA' : (sec.id.includes('pequebloom') ? 'PEQUEBLOOM' : 'DOXA'))));
+                    const productPretitle = a.tagline || (sec.id.includes('cookie') ? 'DOXA COOKIE' : (sec.id.includes('doxa') ? 'TRUFAS PURAS' : (sec.id.includes('bbb') ? 'BOMBÓN BLOOM' : (sec.id.includes('lingote') ? 'LINGOTE' : (sec.id.includes('oblea') ? 'CRUJIENTE DE ALMENDRA' : (sec.id.includes('pequebloom') ? 'PEQUEBLOOM' : 'DOXA'))))));
                     const newHTML = `
                         <div class="tagline" style="font-family:'Lexend',sans-serif;font-size:10.5px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:8px;display:block;">${productPretitle}</div>
                         <h3 class="variety-title" style="margin-bottom: 20px; line-height: 1.2;">${cleanTitle}</h3>
@@ -5711,8 +5727,8 @@ Menú del Index: Líena 742
                         t.style.transform = 'rotate(0deg)';
                     });
 
-                    // Resetear la foto central al producto por defecto
-                    if (galletaFija) {
+                    // Resetear la foto central al producto por defecto si había cambiado
+                    if (galletaFija && galletaFija.getAttribute('src') !== defaultImgSrc) {
                         galletaFija.style.transition = 'opacity 0.25s ease, transform 0.3s ease';
                         galletaFija.style.opacity = '0';
                         setTimeout(() => {
@@ -6332,11 +6348,11 @@ Menú del Index: Líena 742
             const wheelConfigs = {
                 "doxa": {
                     instance: null,
-                    init: () => initDoxaStyleWheel(document.getElementById("rueda-activos-doxa"), activosDoxa)
+                    init: () => initBBBStyleWheel(document.getElementById("rueda-activos-doxa"), activosDoxa)
                 },
                 "cookie": {
                     instance: null,
-                    init: () => initDoxaStyleWheel(document.getElementById("rueda-activos-cookie"), activosDoxaCookie)
+                    init: () => initBBBStyleWheel(document.getElementById("rueda-activos-cookie"), activosDoxaCookie)
                 },
                 "bbb": {
                     instance: null,
@@ -6355,6 +6371,23 @@ Menú del Index: Líena 742
                     init: () => initBBBStyleWheel(document.getElementById("rueda-activos-pequebloom"), pequebloomCategorias)
                 }
             };
+
+            // Inicializar proactivamente todas las ruedas para que sus categorías y nodos existan y estén listos de inmediato
+            function initAllWheelInstances() {
+                Object.keys(wheelConfigs).forEach(prodKey => {
+                    try {
+                        if (wheelConfigs[prodKey] && !wheelConfigs[prodKey].instance) {
+                            wheelConfigs[prodKey].instance = wheelConfigs[prodKey].init();
+                        }
+                    } catch (e) {
+                        console.error("Error inicializando rueda " + prodKey, e);
+                    }
+                });
+            }
+            initAllWheelInstances();
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initAllWheelInstances);
+            }
 
             function showProductWheel(productId) {
                 window.currentActiveProduct = productId;
@@ -10819,6 +10852,19 @@ Menú del Index: Líena 742
                                         sec.classList.remove("active-product-sabor");
                                     }
                                 });
+
+                                // Asegurar que la rueda del producto seleccionado esté inicializada y en estado neutro
+                                if (typeof wheelConfigs !== 'undefined' && wheelConfigs[productId]) {
+                                    if (!wheelConfigs[productId].instance) {
+                                        wheelConfigs[productId].instance = wheelConfigs[productId].init();
+                                    } else if (wheelConfigs[productId].instance && wheelConfigs[productId].instance.resetToNeutral) {
+                                        wheelConfigs[productId].instance.resetToNeutral();
+                                    }
+                                }
+                                const currentWheelSec = document.querySelector(`.product-wheel[data-product="${productId}"]`);
+                                if (currentWheelSec && typeof updateSectionLuminanceTheme === 'function') {
+                                    updateSectionLuminanceTheme(currentWheelSec);
+                                }
 
                                 // 2. Actualizar pretítulo y descripción corta
                                 if (pretitleEl && prod.pretitle) pretitleEl.innerText = prod.pretitle;
