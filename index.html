@@ -424,7 +424,7 @@ Menú del Index: Líena 742
            ========================================================================= */
         .navbar-cart-btn {
             position: relative;
-            display: inline-flex;
+            display: none !important; /* Oculta por defecto si no hay productos seleccionados */
             align-items: center;
             justify-content: center;
             background: transparent !important;
@@ -434,6 +434,10 @@ Menú del Index: Líena 742
             text-decoration: none;
             -webkit-tap-highlight-color: transparent;
             transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .navbar-cart-btn.has-items {
+            display: inline-flex !important;
         }
 
         .navbar-cart-btn:hover {
@@ -476,6 +480,7 @@ Menú del Index: Líena 742
             border-radius: 0 !important;
             box-shadow: none !important;
             color: var(--nav-text-initial, #ffffff);
+            opacity: 0.7 !important; /* Opacidad 70% solicitada */
             font-family: 'Lato', 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 11px;
             font-weight: 600;
@@ -486,12 +491,173 @@ Menú del Index: Líena 742
             margin: 0 !important;
             pointer-events: none;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
-            transition: color 0.35s ease, transform 0.2s ease;
+            transition: color 0.35s ease, opacity 0.25s ease, transform 0.2s ease;
         }
 
         .navbar.scrolled .navbar-cart-badge {
             color: var(--nav-text-scrolled, #000000) !important;
+            opacity: 0.7 !important; /* Opacidad 70% solicitada en scroll */
             text-shadow: none !important;
+        }
+
+        /* =========================================================================
+           DESPLEGABLE RESUMEN DE LA CESTA (HOJA DE PEDIDO RESUMIDA)
+           ========================================================================= */
+        .navbar-cart-dropdown {
+            position: fixed;
+            top: 80px;
+            right: 50px;
+            width: 340px;
+            max-width: calc(100% - 32px);
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: rgba(26, 17, 13, 0.94);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 26px 20px 24px 20px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+            border: none;
+            border-radius: 0;
+            z-index: 1005;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-8px);
+            transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.3s ease;
+        }
+
+        .navbar.scrolled .navbar-cart-dropdown {
+            top: 68px;
+            background: rgba(34, 23, 18, 0.88) !important;
+        }
+
+        .navbar-cart-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .cart-dropdown-items-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .cart-dropdown-item {
+            display: grid;
+            grid-template-columns: 28px 24px 1fr auto;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .cart-dropdown-thumb {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: rgba(255, 255, 255, 0.05);
+            flex-shrink: 0;
+        }
+
+        .cart-dropdown-qty {
+            font-family: 'Lato', 'Lexend', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: #FFFFFF;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .cart-dropdown-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+
+        .cart-dropdown-name {
+            font-family: 'Lato', 'Lexend', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 1.3;
+            word-break: break-word;
+        }
+
+        .cart-dropdown-recipient {
+            font-family: 'Lato', 'Lexend', sans-serif;
+            font-size: 11px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.2;
+        }
+
+        .cart-dropdown-price {
+            font-family: 'Lato', 'Lexend', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: #FFFFFF;
+            text-align: right;
+            white-space: nowrap;
+            margin-left: 8px;
+        }
+
+        .cart-dropdown-total-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: baseline;
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            width: 100%;
+        }
+
+        .cart-dropdown-total-label {
+            font-family: 'Lato', 'Lexend', sans-serif;
+            font-size: 12.5px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+        }
+
+        .cart-dropdown-total-value {
+            font-family: 'Lato', 'Lexend', sans-serif;
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .cart-dropdown-checkout-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 18px;
+            padding: 11px 16px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: #FFFFFF;
+            font-family: 'Lato', 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .cart-dropdown-checkout-btn:hover {
+            background: #FFFFFF;
+            color: #000000;
+            border-color: #FFFFFF;
         }
 
         /* En PC (min-width: 769px): sólo se ven los 7 elementos */
@@ -503,6 +669,9 @@ Menú del Index: Líena 742
                 display: none !important;
             }
             .navbar-cart-pc {
+                display: none !important;
+            }
+            .navbar-cart-pc.has-items {
                 display: inline-flex !important;
             }
             .navbar-cart-mobile {
@@ -876,11 +1045,25 @@ Menú del Index: Líena 742
             }
 
             .navbar-cart-mobile {
+                display: none !important;
+            }
+
+            .navbar-cart-mobile.has-items {
                 display: inline-flex !important;
             }
 
             .navbar-cart-pc {
                 display: none !important;
+            }
+
+            .navbar-cart-dropdown {
+                top: 66px;
+                right: 16px;
+                width: min(320px, calc(100vw - 32px));
+            }
+
+            .navbar.scrolled .navbar-cart-dropdown {
+                top: 62px;
             }
 
             /* C) BOTÓN CUADRADO AMARILLO */
@@ -1752,6 +1935,20 @@ Menú del Index: Líena 742
                 </a>
                 <!-- C) RECUADRO AMARILLO PLANO: CONGLOMERADO DE BOTONES -->
                 <button class="navbar-menu-square-btn" id="mobileToggle" aria-label="Desplegar menú"></button>
+            </div>
+
+            <!-- DESPLEGABLE RESUMEN DE LA CESTA (HOJA DE PEDIDO RESUMIDA) -->
+            <div class="navbar-cart-dropdown" id="navbarCartDropdown">
+                <div class="cart-dropdown-items-wrap" id="cartDropdownItemsWrap">
+                    <!-- Filas añadidas dinámicamente -->
+                </div>
+                <div class="cart-dropdown-total-row">
+                    <span class="cart-dropdown-total-label">TOTAL:</span>
+                    <span class="cart-dropdown-total-value" id="cartDropdownTotal">0.00€</span>
+                </div>
+                <a href="compra.html" class="cart-dropdown-checkout-btn">
+                    IR A LA HOJA DE PAGO &rarr;
+                </a>
             </div>
         </nav>
         <div class="navbar-overlay" id="navbarOverlay"></div>
@@ -9818,6 +10015,9 @@ Menú del Index: Líena 742
                                 }
 
                                 localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                            if (typeof window.updateNavbarCartBadge === 'function') {
+                                window.updateNavbarCartBadge();
+                            }
                                 if (typeof window.updateNavbarCartBadge === 'function') {
                                     window.updateNavbarCartBadge();
                                 }
@@ -9899,6 +10099,9 @@ Menú del Index: Líena 742
                                 if (totalCost) totalCost.innerText = (parseFloat(total) || 0).toFixed(2).replace('.', ',') + ' €';
 
                                 localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                            if (typeof window.updateNavbarCartBadge === 'function') {
+                                window.updateNavbarCartBadge();
+                            }
                                 if (typeof window.updateNavbarCartBadge === 'function') {
                                     window.updateNavbarCartBadge();
                                 }
@@ -10036,6 +10239,9 @@ Menú del Index: Líena 742
                             let lines = getSanitizedCartLines();
                             lines.push(giftLine);
                             localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                            if (typeof window.updateNavbarCartBadge === 'function') {
+                                window.updateNavbarCartBadge();
+                            }
 
                             // Resetear formulario
                             nameInp.value = '';
@@ -10096,6 +10302,9 @@ Menú del Index: Líena 742
                                 let lines = getSanitizedCartLines();
                                 lines = lines.filter(l => l.id !== giftId);
                                 localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                            if (typeof window.updateNavbarCartBadge === 'function') {
+                                window.updateNavbarCartBadge();
+                            }
                                 if (typeof window.updateNavbarCartBadge === 'function') {
                                     window.updateNavbarCartBadge();
                                 }
@@ -11166,6 +11375,17 @@ Menú del Index: Líena 742
                         document.querySelectorAll('.navbar-cart-badge').forEach(badge => {
                             badge.textContent = count;
                         });
+                        // La cesta sólo aparece en pantalla cuando se seleccionan productos (count > 0)
+                        document.querySelectorAll('.navbar-cart-btn').forEach(btn => {
+                            if (count > 0) {
+                                btn.classList.add('has-items');
+                            } else {
+                                btn.classList.remove('has-items');
+                            }
+                        });
+                        if (typeof renderCartDropdownPreview === 'function') {
+                            renderCartDropdownPreview();
+                        }
                     } catch (e) {
                         console.warn('Error al actualizar contador del carrito:', e);
                     }
@@ -11174,6 +11394,100 @@ Menú del Index: Líena 742
                 updateNavbarCartBadge();
                 window.addEventListener('storage', updateNavbarCartBadge);
                 window.addEventListener('pageshow', updateNavbarCartBadge);
+
+                // Renderizado dinámico del desplegable con la hoja de pedido resumida
+                function renderCartDropdownPreview() {
+                    const wrap = document.getElementById('cartDropdownItemsWrap');
+                    const totalEl = document.getElementById('cartDropdownTotal');
+                    if (!wrap) return;
+
+                    let lines = [];
+                    try {
+                        const saved = localStorage.getItem('doxa_cart_lines');
+                        if (saved) {
+                            const parsed = JSON.parse(saved);
+                            if (Array.isArray(parsed)) lines = parsed;
+                        }
+                    } catch (e) {
+                        console.warn('Error leyendo carrito:', e);
+                    }
+
+                    if (lines.length === 0) {
+                        wrap.innerHTML = '<div style="color: rgba(255,255,255,0.7); font-size: 13px; text-align: center; padding: 14px 0; font-family: \'Lato\', sans-serif;">Tu cesta está vacía.</div>';
+                        if (totalEl) totalEl.textContent = '0.00€';
+                        return;
+                    }
+
+                    let total = 0;
+                    let html = '';
+                    lines.forEach(item => {
+                        const qty = parseInt(item.qty) || 1;
+                        const price = parseFloat(item.unitPrice) || 0;
+                        const subtotal = price * qty;
+                        total += subtotal;
+
+                        let img = item.productImage || 'Doxa.png';
+                        let name = item.productName || 'DOXA';
+                        if (item.varietyName && item.varietyName !== item.productName) {
+                            name += ' ' + item.varietyName;
+                        }
+
+                        let recipientHtml = '';
+                        if (item.recipientName) {
+                            recipientHtml = `<span class="cart-dropdown-recipient">para ${item.recipientName}</span>`;
+                        }
+
+                        html += `
+                            <div class="cart-dropdown-item">
+                                <img src="${img}" alt="${name}" class="cart-dropdown-thumb" onerror="this.src='Doxa.png'">
+                                <span class="cart-dropdown-qty">${qty}x</span>
+                                <div class="cart-dropdown-info">
+                                    <span class="cart-dropdown-name">${name}</span>
+                                    ${recipientHtml}
+                                </div>
+                                <span class="cart-dropdown-price">${subtotal.toFixed(2)}€</span>
+                            </div>
+                        `;
+                    });
+
+                    wrap.innerHTML = html;
+                    if (totalEl) totalEl.textContent = total.toFixed(2) + '€';
+                }
+                window.renderCartDropdownPreview = renderCartDropdownPreview;
+
+                const cartDropdown = document.getElementById('navbarCartDropdown');
+                const cartBtns = document.querySelectorAll('.navbar-cart-btn');
+
+                function toggleCartDropdown(e) {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    if (!cartDropdown) return;
+                    closeMobileMenu();
+                    const willOpen = !cartDropdown.classList.contains('active');
+                    if (willOpen) {
+                        renderCartDropdownPreview();
+                        cartDropdown.classList.add('active');
+                        if (navbarOverlay) navbarOverlay.classList.add('active');
+                        document.body.classList.add('menu-open');
+                    } else {
+                        closeCartDropdown();
+                    }
+                }
+
+                function closeCartDropdown() {
+                    if (!cartDropdown) return;
+                    cartDropdown.classList.remove('active');
+                    if (navbarOverlay && (!navbarMenu || !navbarMenu.classList.contains('active'))) {
+                        navbarOverlay.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                    }
+                }
+
+                cartBtns.forEach(btn => {
+                    btn.addEventListener('click', toggleCartDropdown);
+                });
 
                 // Enlace marca "ESTADO DEL ARTE" -> vuelve arriba si ya estamos en index
                 document.querySelectorAll('.brand-link').forEach(link => {
@@ -11187,6 +11501,7 @@ Menú del Index: Líena 742
                                     window.history.pushState(null, '', 'index.html');
                                 }
                                 closeMobileMenu();
+                                closeCartDropdown();
                                 updateNavbarScrolledState();
                             }
                         }
@@ -11211,6 +11526,7 @@ Menú del Index: Líena 742
                             navLinks.forEach(l => l.classList.remove('active'));
                             btn.classList.add('active');
                             closeMobileMenu();
+                            closeCartDropdown();
                             if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
                         }
                     });
@@ -11242,6 +11558,7 @@ Menú del Index: Líena 742
                 const navbarOverlay = document.getElementById('navbarOverlay');
 
                 function toggleMobileMenu() {
+                    closeCartDropdown();
                     const isOpen = navbarMenu.classList.toggle('active');
                     mobileToggle.classList.toggle('active', isOpen);
                     if (navbarOverlay) navbarOverlay.classList.toggle('active', isOpen);
@@ -11251,8 +11568,10 @@ Menú del Index: Líena 742
                 function closeMobileMenu() {
                     navbarMenu.classList.remove('active');
                     mobileToggle.classList.remove('active');
-                    if (navbarOverlay) navbarOverlay.classList.remove('active');
-                    document.body.classList.remove('menu-open');
+                    if (navbarOverlay && (!cartDropdown || !cartDropdown.classList.contains('active'))) {
+                        navbarOverlay.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                    }
                 }
 
                 // Toggle del menú móvil
@@ -11261,8 +11580,23 @@ Menú del Index: Líena 742
                 }
 
                 if (navbarOverlay) {
-                    navbarOverlay.addEventListener('click', closeMobileMenu);
+                    navbarOverlay.addEventListener('click', () => {
+                        closeMobileMenu();
+                        closeCartDropdown();
+                    });
                 }
+
+                // Cerrar al hacer clic fuera
+                document.addEventListener('click', (e) => {
+                    if (cartDropdown && cartDropdown.classList.contains('active')) {
+                        const clickedInsideCart = cartDropdown.contains(e.target);
+                        let clickedOnCartBtn = false;
+                        cartBtns.forEach(b => { if (b.contains(e.target)) clickedOnCartBtn = true; });
+                        if (!clickedInsideCart && !clickedOnCartBtn) {
+                            closeCartDropdown();
+                        }
+                    }
+                });
 
                 // Toggle y hover interactivo del desplegable de Productos
                 const productosDropdown = document.getElementById('productosDropdownWrapper');
@@ -11292,36 +11626,27 @@ Menú del Index: Líena 742
                         closeDropdownTimer = setTimeout(closeDropdown, 180);
                     });
 
-                    // Permitir también clic (útil en móviles o toque)
+                    // Clic en "Productos": lleva al apartado Reservas, al menú horizontal de productos (igual que botón Reservas)
                     btnProductos.addEventListener('click', (e) => {
-                        if (window.innerWidth <= 768) {
+                        const target = document.getElementById('reservasProductsNav') || document.getElementById('reserva') || document.getElementById('la-coleccion');
+                        if (target) {
                             e.preventDefault();
                             e.stopPropagation();
-                            const target = document.getElementById('rueda-activos-doxa') || document.getElementById('rueda-activos');
-                            if (target) {
-                                const navH = navbar ? navbar.offsetHeight : 70;
-                                const targetPos = target.getBoundingClientRect().top + window.pageYOffset - navH - 10;
-                                window.scrollTo({
-                                    top: Math.max(0, targetPos),
-                                    behavior: 'smooth'
-                                });
-                                if (window.history.pushState) {
-                                    window.history.pushState(null, '', '#rueda-activos-doxa');
-                                }
-                                navLinks.forEach(l => l.classList.remove('active'));
-                                btnProductos.classList.add('active');
-                                closeMobileMenu();
-                                if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
+                            const navH = navbar ? navbar.offsetHeight : 70;
+                            const targetPos = target.getBoundingClientRect().top + window.pageYOffset - navH - 10;
+                            window.scrollTo({
+                                top: Math.max(0, targetPos),
+                                behavior: 'smooth'
+                            });
+                            if (window.history.pushState) {
+                                window.history.pushState(null, '', '#reservasProductsNav');
                             }
-                            return;
+                            navLinks.forEach(l => l.classList.remove('active'));
+                            btnProductos.classList.add('active');
+                            closeMobileMenu();
+                            closeCartDropdown();
+                            if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
                         }
-                        e.stopPropagation();
-                        if (closeDropdownTimer) {
-                            clearTimeout(closeDropdownTimer);
-                            closeDropdownTimer = null;
-                        }
-                        const isExpanded = productosDropdown.classList.toggle('active');
-                        btnProductos.setAttribute('aria-expanded', isExpanded);
                     });
 
                     // Cerrar el desplegable al hacer clic fuera
@@ -11353,6 +11678,7 @@ Menú del Index: Líena 742
                         navLinks.forEach(l => l.classList.remove('active'));
                         if (link.classList.contains('navbar-link')) link.classList.add('active');
                         closeMobileMenu();
+                        closeCartDropdown();
                         if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
                     });
                 });
