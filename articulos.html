@@ -1106,16 +1106,21 @@
             flex-direction: column;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            border: 1px solid rgba(0, 0, 0, 0.03);
+            border: none !important;
+            outline: none !important;
         }
 
         .related-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: none !important;
+            outline: none !important;
         }
 
         .related-card.active {
-            border: 2px solid var(--text-color);
+            border: none !important;
+            outline: none !important;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
         }
 
         .card-img-wrapper {
