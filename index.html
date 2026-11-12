@@ -7382,10 +7382,13 @@ Menú del Index: Líena 742
             .reservas-products-nav {
                 display: flex;
                 justify-content: center;
+                justify-content: safe center;
                 align-items: flex-start;
                 gap: 26px;
                 margin: 5px auto 40px auto;
-                max-width: 760px;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
                 padding: 10px 15px;
                 overflow-x: auto;
                 scrollbar-width: none;
@@ -8407,13 +8410,14 @@ Menú del Index: Líena 742
 
                 .reservas-products-nav {
                     display: flex !important;
-                    justify-content: flex-start !important;
+                    justify-content: center !important;
+                    justify-content: safe center !important;
                     align-items: flex-start !important;
-                    gap: 12px !important;
+                    gap: 16px !important;
                     padding: 8px 16px !important;
-                    margin: 0 -16px 26px -16px !important;
-                    width: calc(100% + 32px) !important;
-                    max-width: calc(100% + 32px) !important;
+                    margin: 0 auto 26px auto !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
                     box-sizing: border-box !important;
                     overflow-x: auto !important;
                     overflow-y: hidden !important;
@@ -9911,10 +9915,10 @@ Menú del Index: Líena 742
                                     }
                                 });
 
-                                // Centrar el producto seleccionado en el menú horizontal (móvil y desktop) sin mover la página
+                                // Centrar el producto seleccionado en el menú horizontal cuando desborda sin mover la página
                                 const activeNavItem = document.querySelector(`#reservasProductsNav .reservas-nav-item[data-product="${productId}"]`);
                                 const navContainer = document.getElementById('reservasProductsNav');
-                                if (activeNavItem && navContainer) {
+                                if (activeNavItem && navContainer && navContainer.scrollWidth > navContainer.clientWidth) {
                                     const itemRect = activeNavItem.getBoundingClientRect();
                                     const navRect = navContainer.getBoundingClientRect();
                                     const offset = itemRect.left - navRect.left + navContainer.scrollLeft;
