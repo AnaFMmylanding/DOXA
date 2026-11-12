@@ -10139,10 +10139,14 @@ Menú del Index: Líena 742
                             };
                         }
 
-                        // Botón Ir a la Hoja de Pago: registra la selección activa previa sin auto-añadir al carrito
+                        // Botón Ir a la Hoja de Pago: asegura sincronización de la selección actual al carrito antes de ir a checkout
                         if (btnCheckout) {
                             btnCheckout.addEventListener('click', () => {
-                                syncCartToStorage(false);
+                                try {
+                                    syncCartToStorage(true);
+                                } catch (e) {
+                                    console.warn('Error sincronizando al ir a checkout:', e);
+                                }
                             });
                         }
 
