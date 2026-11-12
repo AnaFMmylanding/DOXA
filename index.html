@@ -61,7 +61,7 @@ Menú del Index: Líena 742
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#150e02">
     <title>DOXA | Repostería NutriCosmética & Alta Confitería Bioinductiva</title>
     <link rel="icon" type="image/png" href="Doxa.png">
@@ -146,13 +146,11 @@ Menú del Index: Líena 742
         body,
         html {
             width: 100%;
-            max-width: 100%;
             overflow-x: hidden;
             /* Evita el scroll horizontal */
             background-color: var(--dark-bg);
             font-family: 'Lexend', sans-serif;
             scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
         }
 
         #reservasProductsNav,
@@ -334,13 +332,6 @@ Menú del Index: Líena 742
             .navbar-brand-center .brand-del {
                 font-size: 0.65em;
                 letter-spacing: 1.5px;
-            }
-
-            .navbar-menu-square-btn {
-                width: 24px;
-                height: 24px;
-                min-width: 24px;
-                min-height: 24px;
             }
         }
 
@@ -723,7 +714,7 @@ Menú del Index: Líena 742
             position: fixed;
             top: 75px;
             right: 50px;
-            width: 175px;
+            width: 185px;
             max-width: calc(100% - 32px);
             height: auto;
             background: rgba(30, 20, 16, 0.88);
@@ -733,7 +724,7 @@ Menú del Index: Líena 742
             justify-content: flex-start;
             align-items: flex-end;
             gap: 26px;
-            padding: 34px 22px 38px 22px;
+            padding: 36px 24px 40px 24px;
             box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
             border: none;
             border-radius: 0;
@@ -762,6 +753,8 @@ Menú del Index: Líena 742
         }
 
         /* TEXTOS DENTRO DE LA PERSIANA DESPLEGABLE */
+        div.navbar-menu a.navbar-link,
+        div.navbar-menu a.navbar-link:visited,
         .navbar-menu .navbar-link,
         .navbar-menu .navbar-link:visited,
         .navbar.scrolled .navbar-menu .navbar-link,
@@ -769,7 +762,7 @@ Menú del Index: Líena 742
         .navbar-dropdown-btn,
         .navbar.scrolled .navbar-dropdown-btn {
             font-family: 'Lato', 'Lexend', -apple-system, sans-serif !important;
-            font-size: 13px !important;
+            font-size: 13.5px !important;
             font-weight: 400 !important;
             letter-spacing: 2px !important;
             text-transform: uppercase !important;
@@ -786,11 +779,16 @@ Menú del Index: Líena 742
             width: 100% !important;
             text-align: right !important;
             display: block !important;
+            line-height: 1.4 !important;
             text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
             transition: opacity 0.25s ease, font-weight 0.2s ease;
             border-radius: 0 !important;
+            transform: none !important;
         }
 
+        div.navbar-menu a.navbar-link:hover,
+        div.navbar-menu a.navbar-link:focus,
+        div.navbar-menu a.navbar-link:active,
         .navbar-menu .navbar-link:hover,
         .navbar-menu .navbar-link:focus,
         .navbar-menu .navbar-link:active,
@@ -809,8 +807,10 @@ Menú del Index: Líena 742
             background-color: transparent !important;
             outline: none !important;
             box-shadow: none !important;
+            transform: none !important;
         }
 
+        div.navbar-menu a.navbar-link.active,
         .navbar-menu .navbar-link.active,
         .navbar.scrolled .navbar-menu .navbar-link.active,
         .navbar-dropdown-btn.active,
@@ -992,7 +992,8 @@ Menú del Index: Líena 742
             .cookie-btn { flex: 1; text-align: center; }
         }
 
-        .navbar-link {
+        .navbar-links-pc .navbar-link,
+        .navbar-nav .navbar-link {
             font-family: 'Lexend', sans-serif;
             font-size: 11px;
             font-weight: 500;
@@ -1306,13 +1307,17 @@ Menú del Index: Líena 742
             .navbar-menu {
                 top: 66px;
                 right: 16px;
-                width: 155px;
-                padding: 34px 18px 38px 18px;
+                width: 185px;
+                padding: 36px 24px 40px 24px;
+                gap: 26px;
             }
 
             .navbar.scrolled .navbar-menu {
                 top: 62px;
                 right: 16px;
+                width: 185px;
+                padding: 36px 24px 40px 24px;
+                gap: 26px;
             }
         }
 

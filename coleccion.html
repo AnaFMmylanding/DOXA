@@ -547,7 +547,7 @@
             position: fixed;
             top: 75px;
             right: 50px;
-            width: 175px;
+            width: 185px;
             max-width: calc(100% - 32px);
             height: auto;
             background: rgba(30, 20, 16, 0.88);
@@ -557,7 +557,7 @@
             justify-content: flex-start;
             align-items: flex-end;
             gap: 26px;
-            padding: 34px 22px 38px 22px;
+            padding: 36px 24px 40px 24px;
             box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
             border: none;
             border-radius: 0;
@@ -586,12 +586,14 @@
         }
 
         /* TEXTOS DENTRO DE LA PERSIANA DESPLEGABLE */
+        div.navbar-menu a.navbar-link,
+        div.navbar-menu a.navbar-link:visited,
         .navbar-menu .navbar-link,
         .navbar-menu .navbar-link:visited,
         .navbar.scrolled .navbar-menu .navbar-link,
         .navbar.scrolled .navbar-menu .navbar-link:visited {
             font-family: 'Lato', 'Lexend', -apple-system, sans-serif !important;
-            font-size: 13px !important;
+            font-size: 13.5px !important;
             font-weight: 400 !important;
             letter-spacing: 2px !important;
             text-transform: uppercase !important;
@@ -608,12 +610,16 @@
             width: 100% !important;
             text-align: right !important;
             display: block !important;
+            line-height: 1.4 !important;
             text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
             transition: opacity 0.25s ease, font-weight 0.2s ease;
             border-radius: 0 !important;
             transform: none !important;
         }
 
+        div.navbar-menu a.navbar-link:hover,
+        div.navbar-menu a.navbar-link:focus,
+        div.navbar-menu a.navbar-link:active,
         .navbar-menu .navbar-link:hover,
         .navbar-menu .navbar-link:focus,
         .navbar-menu .navbar-link:active,
@@ -629,6 +635,7 @@
             transform: none !important;
         }
 
+        div.navbar-menu a.navbar-link.active,
         .navbar-menu .navbar-link.active,
         .navbar.scrolled .navbar-menu .navbar-link.active {
             color: #FFFFFF !important;
@@ -1866,13 +1873,17 @@
             .navbar-menu {
                 top: 66px;
                 right: 16px;
-                width: 155px;
-                padding: 34px 18px 38px 18px;
+                width: 185px;
+                padding: 36px 24px 40px 24px;
+                gap: 26px;
             }
 
             .navbar.scrolled .navbar-menu {
                 top: 62px;
                 right: 16px;
+                width: 185px;
+                padding: 36px 24px 40px 24px;
+                gap: 26px;
             }
 
             .collection-carousel-container {
