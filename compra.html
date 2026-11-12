@@ -5511,8 +5511,9 @@
             } catch (err) {
                 console.warn('Conexión con pasarela local no disponible, formalizando registro prioritario:', err);
                 // Modo reserva preferente: redirigir a confirmación de reserva directamente
-                const giftsParam = giftOrdersPayload.length > 0 ? & gifts= : '';
-                window.location.href = gracias.html ? variety =& qty=& total=€& name=& email=;
+                const giftsParam = giftOrdersPayload.length > 0 ? `&gifts=${encodeURIComponent(JSON.stringify(giftOrdersPayload))}` : '';
+                const mainVariety = cartLines[0] ? cartLines[0].varietyName : 'Bombón Blooms';
+                window.location.href = `gracias.html?variety=${encodeURIComponent(mainVariety)}&qty=${encodeURIComponent(totalBoxes)}&total=${encodeURIComponent(total.toFixed(2))}€&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}${giftsParam}`;
             }
         }
     </script>
