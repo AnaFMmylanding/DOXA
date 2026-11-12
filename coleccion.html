@@ -479,31 +479,25 @@
             border: none;
         }
 
-        .navbar-link.active {
-            color: #000000 !important;
-            background-color: var(--accent-color, #f0ff1c) !important;
-            transform: scale(1.05);
-        }
-
-        .navbar-link:not(.active):hover {
-            color: var(--nav-text-hover, #FFFFFF) !important;
-            background-color: transparent !important;
-            transform: scale(1.05);
-        }
-
-        .navbar.scrolled .navbar-link {
-            color: var(--nav-text-scrolled, #000000) !important;
-            background-color: transparent !important;
-        }
-
+                .navbar-link.active,
         .navbar.scrolled .navbar-link.active {
-            color: #000000 !important;
-            background-color: var(--accent-color, #f0ff1c) !important;
+            color: #FFFFFF !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            opacity: 1 !important;
+            font-weight: 600 !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
+        .navbar-link:not(.active):hover,
         .navbar.scrolled .navbar-link:not(.active):hover {
-            color: var(--nav-text-scrolled-hover, #524b3f) !important;
+            color: #FFFFFF !important;
+            background: transparent !important;
             background-color: transparent !important;
+            opacity: 1 !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
         .navbar-overlay {
@@ -643,6 +637,7 @@
             background-color: transparent !important;
             font-weight: 600 !important;
             transform: none !important;
+            box-shadow: none !important;
         }
 
         /* Desplegable resumen de la cesta (PC y Móvil) */

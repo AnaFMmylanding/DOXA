@@ -817,7 +817,11 @@ Menú del Index: Líena 742
         .navbar.scrolled .navbar-dropdown-btn.active {
             color: #FFFFFF !important;
             opacity: 1 !important;
+            background: transparent !important;
+            background-color: transparent !important;
             font-weight: 600 !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
         /* Desplegable de Productos adaptado a texto solo alineado a la derecha */
@@ -1006,31 +1010,25 @@ Menú del Index: Líena 742
             border: none;
         }
 
-        .navbar-link.active {
-            color: #000000 !important;
-            background-color: var(--accent-color) !important;
-            transform: scale(1.05);
-        }
-
-        .navbar-link:not(.active):hover {
-            color: var(--nav-text-hover, #FFFFFF) !important;
-            background-color: transparent !important;
-            transform: scale(1.05);
-        }
-
-        .navbar.scrolled .navbar-link {
-            color: var(--nav-text-scrolled, #000000) !important;
-            background-color: transparent !important;
-        }
-
+        .navbar-link.active,
         .navbar.scrolled .navbar-link.active {
-            color: #000000 !important;
-            background-color: var(--accent-color) !important;
+            color: #FFFFFF !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            opacity: 1 !important;
+            font-weight: 600 !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
+        .navbar-link:not(.active):hover,
         .navbar.scrolled .navbar-link:not(.active):hover {
-            color: var(--nav-text-scrolled-hover, #524b3f) !important;
+            color: #FFFFFF !important;
+            background: transparent !important;
             background-color: transparent !important;
+            opacity: 1 !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
         /* =========================================================================
@@ -1936,78 +1934,10 @@ Menú del Index: Líena 742
                 <!--=========================================================================
                    [BOTÓN Y SUBMENÚ HORIZONTAL DE PRODUCTOS]
                    ========================================================================= -->
-                <div class="navbar-dropdown-wrapper" id="productosDropdownWrapper">
-                    <button class="navbar-link navbar-dropdown-btn btn-productos" id="btnProductos" type="button"
-                        aria-expanded="false">
-                        <span>Productos</span>
-                        <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
+                <!-- 1) PRODUCTOS -->
+                <a href="#reservasProductsNav" class="navbar-link btn-productos">Productos</a>
 
-                    <!--Submenú horizontal desplegable -->
-                    <div class="productos-submenu-horizontal" id="productosSubmenu">
-                        <div class="productos-submenu-track">
-                            <!-- PRODUCTO 1: BOMBON BLOOMS (ACTIVO / INMINENTE) -->
-                            <a href="#rueda-activos-bbb" class="producto-sub-card producto-item" data-product="bbb"
-                                data-visible="on">
-                                <div class="producto-sub-thumb">
-                                    <img src="BBB 1.png" alt="Bombón Blooms">
-                                </div>
-                                <span class="producto-sub-title">Bloom</span>
-                            </a>
-
-                            <!-- PRODUCTO 2: DOXA (PRÓXIMO LANZAMIENTO) -->
-                            <a href="#rueda-activos-doxa" class="producto-sub-card producto-item" data-product="doxa"
-                                data-visible="on">
-                                <div class="producto-sub-thumb" style="position: relative;">
-                                    <img src="Doxa.png" alt="Doxa">
-                                    <span style="position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); background: #150e02; color: #FFFFFF; font-size: 7px; letter-spacing: 0.5px; padding: 1px 4px; border-radius: 2px; white-space: nowrap; text-transform: uppercase;">Próx.</span>
-                                </div>
-                                <span class="producto-sub-title">Doxa<br><small style="font-size: 8px; opacity: 0.7; font-weight: 300;">(Próximamente)</small></span>
-                            </a>
-
-                            <!-- PRODUCTO 3: DOXA-COOKIE (OFF) -->
-                            <a href="#rueda-activos-cookie" class="producto-sub-card producto-item"
-                                data-product="cookie" data-visible="off">
-                                <div class="producto-sub-thumb">
-                                    <img src="Cookie.png" alt="Doxa-Cookie">
-                                </div>
-                                <span class="producto-sub-title">Doxa<br>Cookie</span>
-                            </a>
-
-                            <!-- PRODUCTO 4: LINGOTES (OFF) -->
-                            <a href="#rueda-activos-lingote" class="producto-sub-card producto-item"
-                                data-product="lingote" data-visible="off">
-                                <div class="producto-sub-thumb">
-                                    <img src="Lingote.png" alt="Lingotes">
-                                </div>
-                                <span class="producto-sub-title">Lingote<br>Pistacho</span>
-                            </a>
-
-                            <!-- PRODUCTO 5: CRUJIENTE DE ALMENDRA (OFF) -->
-                            <a href="#rueda-activos-oblea" class="producto-sub-card producto-item" data-product="oblea"
-                                data-visible="off">
-                                <div class="producto-sub-thumb">
-                                    <img src="Oblea.png" alt="Crujiente de Almendra">
-                                </div>
-                                <span class="producto-sub-title">Crujiente<br>Almendra</span>
-                            </a>
-
-                            <!-- PRODUCTO 6: PEQUEBLOOMS (OFF) -->
-                            <a href="#rueda-activos-pequebloom" class="producto-sub-card producto-item"
-                                data-product="pequebloom" data-visible="off">
-                                <div class="producto-sub-thumb">
-                                    <img src="Pequebloom.png" alt="PequeBlooms">
-                                </div>
-                                <span class="producto-sub-title">Peque<br>Bloom</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3) RESERVAS (TIENDA) -->
+                <!-- 2) RESERVAS (TIENDA) -->
                 <a href="#reservasProductsNav" class="navbar-link btn-reservas">Reservas</a>
 
                 <!--=========================================================================
@@ -10858,7 +10788,7 @@ Menú del Index: Líena 742
                 window.scrollToReservasProducts = scrollToReservasProducts;
 
                 // Botón "Reservas" -> scroll directo a la sección de reservas
-                document.querySelectorAll('.btn-reservas').forEach(btn => {
+                document.querySelectorAll('.btn-reservas, .btn-productos').forEach(btn => {
                     btn.addEventListener('click', (e) => scrollToReservasProducts(e, btn));
                 });
 

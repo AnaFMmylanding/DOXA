@@ -489,31 +489,25 @@ debes pegar o modificar los textos reales:
             border: none;
         }
 
-        .navbar-link.active {
-            color: #000000 !important;
-            background-color: var(--accent-color, #f0ff1c) !important;
-            transform: scale(1.05);
-        }
-
-        .navbar-link:not(.active):hover {
-            color: #000000 !important;
-            background-color: transparent !important;
-            transform: scale(1.05);
-        }
-
-        .navbar.scrolled .navbar-link {
-            color: var(--text-main) !important;
-            background-color: transparent !important;
-        }
-
+                .navbar-link.active,
         .navbar.scrolled .navbar-link.active {
-            color: #000000 !important;
-            background-color: var(--accent-color, #f0ff1c) !important;
+            color: #FFFFFF !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            opacity: 1 !important;
+            font-weight: 600 !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
+        .navbar-link:not(.active):hover,
         .navbar.scrolled .navbar-link:not(.active):hover {
-            color: #000000 !important;
+            color: #FFFFFF !important;
+            background: transparent !important;
             background-color: transparent !important;
+            opacity: 1 !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
         .navbar-overlay {
@@ -714,14 +708,15 @@ debes pegar o modificar los textos reales:
             }
 
             .navbar-menu .navbar-link.active,
-            .navbar.scrolled .navbar-menu .navbar-link.active {
-                color: #FFFFFF !important;
-                opacity: 1 !important;
-                background: transparent !important;
-                background-color: transparent !important;
-                font-weight: 600 !important;
-                transform: none !important;
-            }
+        .navbar.scrolled .navbar-menu .navbar-link.active {
+            color: #FFFFFF !important;
+            opacity: 1 !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            font-weight: 600 !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
         }
 
         /* =========================================

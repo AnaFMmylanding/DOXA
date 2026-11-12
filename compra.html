@@ -348,31 +348,25 @@
             justify-content: center;
         }
 
-        .navbar-link.active {
-            color: #000000 !important;
-            background-color: var(--accent-color) !important;
-            transform: scale(1.05);
-        }
-
-        .navbar-link:not(.active):hover {
-            color: var(--nav-text-hover, #FFFFFF) !important;
-            background-color: transparent !important;
-            transform: scale(1.05);
-        }
-
-        .navbar.scrolled .navbar-link {
-            color: var(--nav-text-scrolled, #000000) !important;
-            background-color: transparent !important;
-        }
-
+                .navbar-link.active,
         .navbar.scrolled .navbar-link.active {
-            color: #000000 !important;
-            background-color: var(--accent-color) !important;
+            color: #FFFFFF !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            opacity: 1 !important;
+            font-weight: 600 !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
+        .navbar-link:not(.active):hover,
         .navbar.scrolled .navbar-link:not(.active):hover {
-            color: var(--nav-text-scrolled-hover, #524b3f) !important;
+            color: #FFFFFF !important;
+            background: transparent !important;
             background-color: transparent !important;
+            opacity: 1 !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
         /* Menú Hamburguesa Móvil */
@@ -472,8 +466,13 @@
             }
 
             .navbar-link.active {
-                background-color: var(--accent-color) !important;
-                color: #150e02 !important;
+                background: transparent !important;
+                background-color: transparent !important;
+                color: #FFFFFF !important;
+                opacity: 1 !important;
+                font-weight: 600 !important;
+                transform: none !important;
+                box-shadow: none !important;
             }
 
             .navbar-link:not(.active):hover {
