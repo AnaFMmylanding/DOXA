@@ -5588,14 +5588,14 @@ Menú del Index: Líena 742
             // Mostrar inicialmente la rueda del producto activo (por defecto Doxas o segun URL hash)
             function initInitialProductWheel() {
                 const hashProd = getProductFromHash();
-                const activeBtn = document.querySelector(".bbb-submenu-item.active") || document.querySelector(".bbb-submenu-item");
+                const activeBtn = document.querySelector(".presentacion-nav-item.active") || document.querySelector(".bbb-submenu-item.active") || document.querySelector(".presentacion-nav-item");
                 let urlProd = null;
                 try {
                     const uParams = new URLSearchParams(window.location.search);
                     urlProd = uParams.get('producto') || uParams.get('reserva');
                     if (urlProd === 'bombon') urlProd = 'bbb';
                 } catch (e) { }
-                const initialProd = hashProd || urlProd || (activeBtn ? activeBtn.getAttribute("data-product") : "doxa");
+                const initialProd = hashProd || urlProd || (activeBtn ? activeBtn.getAttribute("data-product") : "bbb");
 
                 document.querySelectorAll(".bbb-submenu-item").forEach(b => {
                     if (b.getAttribute("data-product") === initialProd) {
@@ -7284,6 +7284,7 @@ Menú del Index: Líena 742
                 object-fit: contain;
                 display: block;
                 filter: drop-shadow(0 3px 6px rgba(60, 51, 42, 0.16));
+                pointer-events: none;
             }
 
             /* Indicador sutil debajo de la miniatura activa (sin marco) */
@@ -7420,6 +7421,7 @@ Menú del Index: Líena 742
             }
 
             .reservas-nav-thumb,
+            .reservas-nav-thumb-wrap,
             .reservas-nav-title {
                 pointer-events: none;
             }
@@ -7555,6 +7557,10 @@ Menú del Index: Líena 742
                 justify-content: center;
                 outline: none;
                 font-family: inherit;
+            }
+
+            .product-format-option * {
+                pointer-events: none;
             }
 
             .product-format-option:hover {
@@ -8808,64 +8814,48 @@ Menú del Index: Líena 742
 
                     <!-- TÍTULO DINÁMICO DEL PRODUCTO ANTES DEL CARRUSEL DE FOTOS (ESTILO BÉSAME CHOCO: MAYÚSCULAS) -->
                     <div class="product-carousel-title" id="productCarouselTitle">
-                        CAJITA <strong>DÚO</strong> <span class="format-pieces-sub">(2 PIEZAS)</span>
+                        CAJA <strong>PISTACHO</strong> <span class="format-pieces-sub">PELA &amp; PALO (10 UDS)</span>
                     </div>
 
                     <!-- SLIDER PROTAGONISTA A TODO LO ANCHO (SCROLL CON EL DEDO, SIN FLECHAS) -->
                     <div class="product-slider-wrapper">
                         <!-- Carrusel swipeable nativo (deslizable con el dedo) -->
                         <div class="product-gallery-slider" id="productGallerySlider">
-                            <!-- Slide 0: 2 piezas (por defecto) -->
-                            <div class="product-slide-item" data-index="0" data-format="2">
-                                <img src="trufas-2.png" alt="Estuche de 2 Trufas (15 g)">
+                            <!-- Slide 0: Pistacho (por defecto) -->
+                            <div class="product-slide-item" data-index="0" data-format="pist">
+                                <img src="BBB 1.png" alt="Caja Bombón Bloom Pistacho — 10 piezas (150 g)">
                             </div>
-                            <!-- Slide 1: 7 piezas -->
-                            <div class="product-slide-item" data-index="1" data-format="7">
-                                <img src="trufas-13.png" alt="Estuche de 7 Trufas (90 g)" loading="lazy">
+                            <!-- Slide 1: Maracuyá -->
+                            <div class="product-slide-item" data-index="1" data-format="maracuya">
+                                <img src="BBB 2.png" alt="Caja Bombón Bloom Maracuyá — 10 piezas (150 g)" loading="lazy">
                             </div>
-                            <!-- Slide 2: 28 piezas -->
-                            <div class="product-slide-item" data-index="2" data-format="28">
-                                <img src="trufas-35.png" alt="Estuche de 28 Trufas (245 g)" loading="lazy">
-                            </div>
-                            <!-- Slide 3: 58 piezas -->
-                            <div class="product-slide-item" data-index="3" data-format="58">
-                                <img src="trufas-58.png" alt="Estuche de 58 Trufas (405 g)" loading="lazy">
-                            </div>
-                            <!-- Slide 4: Caja Colección DOXA -->
-                            <div class="product-slide-item" data-index="4" data-format="proto">
-                                <img src="ProtoDoxa.png" alt="Caja Escultórica Colección DOXA" loading="lazy">
+                            <!-- Slide 2: Colección -->
+                            <div class="product-slide-item" data-index="2" data-format="coleccion">
+                                <img src="BBB 3.png" alt="Caja Bombón Bloom Colección Completa (150 g)" loading="lazy">
                             </div>
                         </div>
 
                         <!-- Miniaturas flotantes (SIN MARCOS NI CAJA BLANCA) -->
                         <div class="product-thumbs-strip" id="productThumbsStrip">
-                            <button type="button" class="product-thumb-btn active" data-index="0" data-format="2"
-                                title="Estuche 2 Trufas (15 g)">
-                                <img src="trufas-2.png" alt="2 Trufas">
+                            <button type="button" class="product-thumb-btn active" data-index="0" data-format="pist"
+                                title="Caja Bombón Bloom Pistacho — 10 piezas (150 g)">
+                                <img src="BBB 1.png" alt="BLOOM PISTACHO">
                             </button>
-                            <button type="button" class="product-thumb-btn" data-index="1" data-format="7"
-                                title="Estuche 7 Trufas (90 g)">
-                                <img src="trufas-13.png" alt="7 Trufas">
+                            <button type="button" class="product-thumb-btn" data-index="1" data-format="maracuya"
+                                title="Caja Bombón Bloom Maracuyá — 10 piezas (150 g)">
+                                <img src="BBB 2.png" alt="BLOOM MARACUYÁ">
                             </button>
-                            <button type="button" class="product-thumb-btn" data-index="2" data-format="28"
-                                title="Estuche 28 Trufas (245 g)">
-                                <img src="trufas-35.png" alt="28 Trufas">
-                            </button>
-                            <button type="button" class="product-thumb-btn" data-index="3" data-format="58"
-                                title="Estuche 58 Trufas (405 g)">
-                                <img src="trufas-58.png" alt="58 Trufas">
-                            </button>
-                            <button type="button" class="product-thumb-btn" data-index="4" data-format="proto"
-                                title="Caja Escultórica DOXA">
-                                <img src="ProtoDoxa.png" alt="Caja Colección DOXA">
+                            <button type="button" class="product-thumb-btn" data-index="2" data-format="coleccion"
+                                title="Caja Bombón Bloom Colección Completa (150 g)">
+                                <img src="BBB 3.png" alt="BLOOM COLECCIÓN">
                             </button>
                         </div>
                     </div>
 
                     <!-- CAJA DE COMPRA Y DETALLES (SIN MARCO BLANCO: LETRAS DIRECTAS SOBRE EL FONDO) -->
                     <div class="product-buy-box">
-                        <div class="product-pretitle" id="productPretitle">Colección Alta Confitería Bioinductiva</div>
-                        <h3 class="product-main-title" id="productMainTitle">Cajita DOXAS DÚO — 2 piezas (15 g)
+                        <div class="product-pretitle" id="productPretitle">Repostería Nutricosmética Bioactiva</div>
+                        <h3 class="product-main-title" id="productMainTitle">Caja Bombón Bloom Pistacho — 10 piezas (150 g)
                         </h3>
 
                         <!-- =========================================================================
@@ -8881,48 +8871,37 @@ Menú del Index: Líena 742
                         </div>
 
                         <p class="product-short-desc" id="productShortDesc">
-                            Las trufas de chocolate negro de DOXA ofrecen una sensación cremosa y
-                            fundente única, combinando una ganache batida de textura aérea con una fina capa de
-                            chocolate crujiente y un delicado velo de cacao puro amargo en polvo.
+                            Bombones nutricosméticos de alta biodisponibilidad formulados para nutrir desde el interior. Arquitectura de capas activas protegidas por una cobertura crujiente de chocolate belga puro y cacao fino.
                         </p>
 
                         <!-- SELECTOR DE FORMATOS DISPONIBLES (ENTRE DESCRIPCIÓN Y PRECIO) -->
                         <div class="product-formats-top">
                             <div class="product-formats-top-label">Formatos disponibles:</div>
                             <div class="product-formats-top-grid" id="productFormatsTopGrid">
-                                <!-- Formato 1: 2 piezas (Activo por defecto como en la captura) -->
-                                <button type="button" class="product-format-option active" data-pieces="2"
-                                    data-weight="15 g" data-price="10.00" data-kilo="666,67 € / kg · Peso: 15 g"
-                                    data-title="Estuche de Trufas Puras — 2 piezas (15 g)"
-                                    data-carousel-title="CAJITA <strong>DÚO</strong> <span class=&quot;format-pieces-sub&quot;>(2 PIEZAS)</span>">
+                                <!-- Formato 1: Pistacho -->
+                                <button type="button" class="product-format-option active" data-key="pist">
                                     <span class="format-opt-title">Caja</span>
-                                    <span class="format-opt-sub">2 piezas</span>
+                                    <span class="format-opt-sub">Pistacho</span>
                                 </button>
 
-                                <!-- Formato 2: 7 piezas -->
-                                <button type="button" class="product-format-option" data-pieces="7" data-weight="90 g"
-                                    data-price="57.00" data-kilo="633,33 € / kg · Peso: 90 g"
-                                    data-title="Estuche de Trufas Puras — 7 piezas (90 g)"
-                                    data-carousel-title="CAJA <strong>MI SEMANA</strong> <span class=&quot;format-pieces-sub&quot;>(7 PIEZAS)</span>">
+                                <!-- Formato 2: Maracuyá -->
+                                <button type="button" class="product-format-option" data-key="maracuya">
                                     <span class="format-opt-title">Caja</span>
-                                    <span class="format-opt-sub">7 piezas</span>
+                                    <span class="format-opt-sub">Maracuyá</span>
                                 </button>
 
-                                <!-- Formato 3: 28 piezas -->
-                                <button type="button" class="product-format-option" data-pieces="28" data-weight="245 g"
-                                    data-price="117.00" data-kilo="477,55 € / kg · Peso: 245 g"
-                                    data-title="Estuche de Trufas Puras — 28 piezas (245 g)"
-                                    data-carousel-title="CAJA <strong>MI MES</strong> <span class=&quot;format-pieces-sub&quot;>(28 PIEZAS)</span>">
+                                <!-- Formato 3: Colección -->
+                                <button type="button" class="product-format-option" data-key="coleccion">
                                     <span class="format-opt-title">Caja</span>
-                                    <span class="format-opt-sub">28 piezas</span>
+                                    <span class="format-opt-sub">Colección</span>
                                 </button>
                             </div>
                         </div>
 
                         <!-- PRECIO DINÁMICO -->
                         <div class="product-price-row">
-                            <span class="product-main-price" id="productDisplayPrice">10,00 €</span>
-                            <span class="product-price-kilo" id="productDisplayKilo">666,67 € / kg · Peso: 15 g</span>
+                            <span class="product-main-price" id="productDisplayPrice">120,00 €</span>
+                            <span class="product-price-kilo" id="productDisplayKilo">800,00 € / kg · Peso: 150 g</span>
                         </div>
 
                         <!-- ACCIONES: STEPPER DE CANTIDAD + BOTÓN RESERVA/COMPRA -->
@@ -8935,17 +8914,17 @@ Menú del Index: Líena 742
                                     aria-label="Aumentar cantidad">+</button>
                             </div>
                             <button type="button" class="btn-add-cart" id="btnAddToCart">
-                                <span>Añadir a la Cesta — 10,00 €</span>
+                                <span>Añadir a la Cesta — 120,00 €</span>
                             </button>
                         </div>
 
                         <!-- FEEDBACK DE ADICIÓN AL PEDIDO -->
                         <div class="product-cart-feedback" id="productCartFeedback" style="display: none;">
                             SE HA AÑADIDO A TU PEDIDO <span id="cartFeedbackQty">1</span> CAJA DE "<span
-                                id="cartFeedbackProduct">DOXAS DÚO</span>"
+                                id="cartFeedbackProduct">BLOOM PISTACHO</span>"
                         </div>
 
-                        <!-- TARJETA REGALO: ¿QUIERES ENVIAR DOXAS COMO REGALO? -->
+                        <!-- TARJETA REGALO: ¿QUIERES ENVIAR BOMBÓN BLOOMS COMO REGALO? -->
                         <div class="gift-container-box">
                             <div class="gift-header-title">
                                 <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"
@@ -8953,14 +8932,14 @@ Menú del Index: Líena 742
                                     <path
                                         d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.65-.5-.65C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1h-2.22l.85-1.14c.26-.36.69-.86 1.37-.86zM9 4c.68 0 1.11.5 1.37.86L11.22 6H9c-.55 0-1-.45-1-1s.45-1 1-1zm11 15H4V8h7v13h2V8h7v11z" />
                                 </svg>
-                                <span id="giftHeaderTitleText">¿QUIERES ENVIAR DOXAS COMO REGALO?</span>
+                                <span id="giftHeaderTitleText">¿QUIERES ENVIAR BOMBÓN BLOOMS COMO REGALO?</span>
                             </div>
                             <p class="gift-header-desc">
                                 Sorprende a alguien especial. Añade uno o varios destinatarios en este mismo pedido con
                                 su propia dirección y dedicatoria personalizada.
                             </p>
                             <button type="button" class="btn-gift-trigger" id="btnGiftRegalo">
-                                SÍ, QUIERO REGALAR DOXAS
+                                SÍ, QUIERO REGALAR BOMBÓN BLOOMS
                             </button>
 
                             <!-- LISTA DE REGALOS AÑADIDOS -->
@@ -9429,7 +9408,7 @@ Menú del Index: Líena 742
                         const btnReservas = document.getElementById('btnGoToReservas');
 
                         let currentProductId = 'bbb';
-                        let activeFormatKey = '2';
+                        let activeFormatKey = 'pist';
 
                         function getCurrentProduct() {
                             return RESERVAS_CATALOG[currentProductId] || RESERVAS_CATALOG['doxa'];
@@ -9858,17 +9837,27 @@ Menú del Index: Líena 742
                             }
                         };
 
+                        let _isProgrammaticScroll = false;
+                        let _programmaticScrollTimer = null;
+
                         function scrollToSlide(index, smooth = true) {
                             if (!slider) return;
                             const isDirect = document.documentElement.classList.contains('direct-reservas');
                             const slides = slider.querySelectorAll('.product-slide-item');
                             if (slides[index]) {
                                 const leftPos = slides[index].offsetLeft - slider.offsetLeft;
+                                _isProgrammaticScroll = true;
+                                if (_programmaticScrollTimer) clearTimeout(_programmaticScrollTimer);
+
                                 if (smooth && !isDirect) {
                                     slider.scrollTo({ left: leftPos, behavior: 'smooth' });
+                                    _programmaticScrollTimer = setTimeout(() => {
+                                        _isProgrammaticScroll = false;
+                                    }, 450);
                                 } else {
                                     slider.scrollTo({ left: leftPos, behavior: 'auto' });
                                     slider.scrollLeft = leftPos;
+                                    _isProgrammaticScroll = false;
                                 }
                                 updateActiveThumb(index);
                             }
@@ -9949,6 +9938,7 @@ Menú del Index: Líena 742
                             try {
                                 if (!RESERVAS_CATALOG[productId]) return;
                                 _isSwitchingProduct = true;
+                                _isProgrammaticScroll = true;
                                 currentProductId = productId;
                                 window.currentActiveProduct = productId;
                                 const prod = RESERVAS_CATALOG[productId];
@@ -10020,13 +10010,15 @@ Menú del Index: Líena 742
                                 if (pretitleEl && prod.pretitle) pretitleEl.innerText = prod.pretitle;
                                 if (shortDescEl && prod.shortDesc) shortDescEl.innerText = prod.shortDesc;
 
+                                const targetFormatKey = prod.defaultFormat || prod.formats[0].key;
+
                                 // 3. Renderizar botones de formatos disponibles para este producto
                                 if (formatsGrid) {
                                     formatsGrid.innerHTML = '';
-                                    prod.formats.forEach((fmt, idx) => {
+                                    prod.formats.forEach((fmt) => {
                                         const btn = document.createElement('button');
                                         btn.type = 'button';
-                                        btn.className = 'product-format-option' + (idx === 0 ? ' active' : '');
+                                        btn.className = 'product-format-option' + (fmt.key === targetFormatKey ? ' active' : '');
                                         btn.setAttribute('data-key', fmt.key);
                                         btn.innerHTML = `
                                             <span class="format-opt-title">${fmt.optTitle}</span>
@@ -10060,7 +10052,7 @@ Menú del Index: Líena 742
                                     prod.formats.forEach((fmt, idx) => {
                                         const tbtn = document.createElement('button');
                                         tbtn.type = 'button';
-                                        tbtn.className = 'product-thumb-btn' + (idx === 0 ? ' active' : '');
+                                        tbtn.className = 'product-thumb-btn' + (fmt.key === targetFormatKey ? ' active' : '');
                                         tbtn.setAttribute('data-index', idx);
                                         tbtn.setAttribute('data-key', fmt.key);
                                         tbtn.title = fmt.title;
@@ -10093,15 +10085,16 @@ Menú del Index: Líena 742
                                 }
 
                                 // 7. Aplicar formato inicial y posicionar slide inmediatamente
-                                const targetFormatKey = prod.defaultFormat || prod.formats[0].key;
                                 applyFormatData(targetFormatKey, false);
 
                                 setTimeout(() => {
                                     _isSwitchingProduct = false;
-                                }, 200);
+                                    _isProgrammaticScroll = false;
+                                }, 300);
                             } catch (err) {
                                 console.error('Error al cambiar de producto en Reservas:', err);
                                 _isSwitchingProduct = false;
+                                _isProgrammaticScroll = false;
                             }
                         };
 
@@ -10109,10 +10102,10 @@ Menú del Index: Líena 742
                         if (slider) {
                             let scrollTimeout;
                             slider.addEventListener('scroll', () => {
-                                if (_isSwitchingProduct) return;
+                                if (_isSwitchingProduct || _isProgrammaticScroll) return;
                                 clearTimeout(scrollTimeout);
                                 scrollTimeout = setTimeout(() => {
-                                    if (_isSwitchingProduct) return;
+                                    if (_isSwitchingProduct || _isProgrammaticScroll) return;
                                     const prod = getCurrentProduct();
                                     const scrollLeft = slider.scrollLeft;
                                     const slideWidth = slider.clientWidth;
@@ -10126,7 +10119,7 @@ Menú del Index: Líena 742
                                             applyFormatData(fmt.key, false);
                                         }
                                     }
-                                }, 60);
+                                }, 80);
                             }, { passive: true });
                         }
 
@@ -10259,57 +10252,82 @@ Menú del Index: Líena 742
                             // --- 1. ARRASTRE CON RATÓN (PC, DevTools y simulador móvil de pantalla) ---
                             nav.addEventListener('mousedown', (e) => {
                                 if (e.button !== 0) return; // Solo clic izquierdo
-                                isDown = true;
-                                hasMoved = false;
-                                startX = e.pageX;
-                                scrollLeft = nav.scrollLeft;
+                                isMouseDown = true;
+                                hasMouseMoved = false;
+                                startMouseX = e.pageX;
+                                mouseScrollLeft = nav.scrollLeft;
                                 nav.style.cursor = 'grabbing';
                             });
 
                             window.addEventListener('mousemove', (e) => {
-                                if (!isDown) return;
+                                if (!isMouseDown) return;
                                 const x = e.pageX;
-                                const walk = (x - startX);
-                                if (Math.abs(walk) > 3) {
-                                    hasMoved = true;
-                                    nav.scrollLeft = scrollLeft - walk;
+                                const walk = (x - startMouseX);
+                                if (Math.abs(walk) > 4) {
+                                    hasMouseMoved = true;
+                                    nav.scrollLeft = mouseScrollLeft - walk;
                                 }
                             });
 
                             window.addEventListener('mouseup', () => {
-                                if (!isDown) return;
-                                isDown = false;
+                                if (!isMouseDown) return;
+                                isMouseDown = false;
                                 nav.style.cursor = 'grab';
                                 setTimeout(() => {
-                                    hasMoved = false;
-                                }, 50);
+                                    hasMouseMoved = false;
+                                }, 60);
                             });
 
-                            // --- 2. GESTOS TÁCTILES (Smartphones reales y emulador táctil DevTools) ---
+                            // Prevenir clic accidental si el usuario arrastró con el ratón
+                            nav.addEventListener('click', (e) => {
+                                if (hasMouseMoved) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    e.stopImmediatePropagation();
+                                    hasMouseMoved = false;
+                                }
+                            }, true);
+
+                            // --- 2. GESTOS TÁCTILES MÓVILES (SMARTPHONES Y TABLETS) ---
+                            // El scroll horizontal lo gestiona fluidamente el motor nativo (-webkit-overflow-scrolling: touch).
+                            // Detectamos tap vs swipe para disparar la activación inmediata del producto sin latencia.
                             let touchStartX = 0;
-                            let touchScrollLeft = 0;
+                            let touchStartY = 0;
+                            let hasTouchMoved = false;
 
                             nav.addEventListener('touchstart', (e) => {
                                 if (!e.touches || e.touches.length === 0) return;
-                                hasMoved = false;
+                                hasTouchMoved = false;
                                 touchStartX = e.touches[0].pageX;
-                                touchScrollLeft = nav.scrollLeft;
+                                touchStartY = e.touches[0].pageY;
                             }, { passive: true });
 
                             nav.addEventListener('touchmove', (e) => {
                                 if (!e.touches || e.touches.length === 0) return;
-                                const currentX = e.touches[0].pageX;
-                                const walk = currentX - touchStartX;
-                                if (Math.abs(walk) > 4) {
-                                    hasMoved = true;
-                                    nav.scrollLeft = touchScrollLeft - walk;
+                                const dx = Math.abs(e.touches[0].pageX - touchStartX);
+                                const dy = Math.abs(e.touches[0].pageY - touchStartY);
+                                if (dx > 12 || dy > 12) {
+                                    hasTouchMoved = true;
                                 }
                             }, { passive: true });
 
-                            nav.addEventListener('touchend', () => {
+                            nav.addEventListener('touchend', (e) => {
+                                if (!hasTouchMoved) {
+                                    const item = e.target ? e.target.closest('.reservas-nav-item') : null;
+                                    if (item) {
+                                        const prod = item.getAttribute('data-product');
+                                        if (prod && typeof window.switchReservasProduct === 'function') {
+                                            window.switchReservasProduct(prod);
+                                        }
+                                    }
+                                }
                                 setTimeout(() => {
-                                    hasMoved = false;
+                                    hasTouchMoved = false;
                                 }, 50);
+                            });
+
+                            nav.addEventListener('touchcancel', () => {
+                                hasTouchMoved = false;
                             });
 
                             // --- 3. RUEDA HORIZONTAL DEL RATÓN EN PC ---
@@ -10319,29 +10337,19 @@ Menú del Index: Líena 742
                                     e.preventDefault();
                                 }
                             }, { passive: false });
-
-                            // --- 4. PREVENIR CLIC ACCIDENTAL SI HUBO ARRASTRE O SWIPE ---
-                            nav.addEventListener('click', (e) => {
-                                if (hasMoved) {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    e.stopImmediatePropagation();
-                                    hasMoved = false;
-                                }
-                            }, true);
                         }
 
                         // Vinculación directa y robusta de eventos de clic a los botones de productos en Reservas
                         function bindReservasNavEvents() {
                             const navItems = document.querySelectorAll('#reservasProductsNav .reservas-nav-item');
                             navItems.forEach(item => {
-                                item.addEventListener('click', function (e) {
-                                    e.preventDefault();
+                                item.onclick = function (e) {
+                                    if (e && typeof e.preventDefault === 'function') e.preventDefault();
                                     const prod = this.getAttribute('data-product');
                                     if (prod && typeof window.switchReservasProduct === 'function') {
                                         window.switchReservasProduct(prod);
                                     }
-                                });
+                                };
                             });
                         }
                         bindReservasNavEvents();
@@ -10353,7 +10361,7 @@ Menú del Index: Líena 742
                             });
                         }
 
-                        // Inicialización: cargar el producto solicitado en URL (?producto=... o #reserva-...), producto activo o DOXA
+                        // Inicialización: cargar el producto solicitado en URL (?producto=... o #reserva-...), producto activo o BLOOM por defecto
                         let urlTargetProd = null;
                         try {
                             const urlParams = new URLSearchParams(window.location.search);
@@ -10370,7 +10378,9 @@ Menú del Index: Líena 742
                             }
                         } catch (e) { }
 
-                        const initialReservasProd = urlTargetProd || window.currentActiveProduct || (typeof getProductFromHash === 'function' ? getProductFromHash() : null) || 'bbb';
+                        const activeNavBtn = document.querySelector('#reservasProductsNav .reservas-nav-item.active');
+                        const defaultNavProd = activeNavBtn ? activeNavBtn.getAttribute('data-product') : 'bbb';
+                        const initialReservasProd = urlTargetProd || (typeof getProductFromHash === 'function' ? getProductFromHash() : null) || defaultNavProd || 'bbb';
                         switchReservasProduct(initialReservasProd);
 
                         // Si viene específicamente buscando un producto o el apartado de reservas:
