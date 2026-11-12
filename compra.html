@@ -4,7 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOXA | Reserva Prioritaria · Estado del Arte</title>
+
+    <!-- =========================================================================
+         [INTERRUPTOR DE PÁGINA: ESTADO PROVISIONAL DE RESERVAS]
+         -------------------------------------------------------------------------
+         ESTADO ACTUAL: APAGADA (Fase de Reserva Preferente Activa)
+         
+         Para ENCENDER esta página de compra directa cuando se abra la venta oficial:
+         1. Cambia la variable de abajo a:
+            const PAGINA_COMPRA_ACTIVA = true;
+         
+         Mientras esté en 'false' (APAGADA), cualquier usuario que acceda a esta URL
+         será redirigido automáticamente a 'reservas.html' conservando su selección.
+         ========================================================================= -->
+    <script>
+        const PAGINA_COMPRA_ACTIVA = false; // <-- CAMBIAR A true PARA ENCENDER ESTA PÁGINA DE COMPRA DIRECTA
+        if (!PAGINA_COMPRA_ACTIVA) {
+            window.location.replace('reservas.html' + window.location.search + window.location.hash);
+        }
+    </script>
+    <noscript>
+        <div style="background:#f1f2ec; color:#3C332A; padding:20px; text-align:center; font-family:sans-serif; border-bottom:1px solid #dcdbd5;">
+            Estamos actualmente en fase de Reservas. <a href="reservas.html" style="font-weight:bold; color:#150e02;">Haz clic aquí para ir a la Hoja de Reservas</a>.
+        </div>
+    </noscript>
+
+    <title>DOXA | Hoja de Compra y Pago · Estado del Arte</title>
     <link rel="icon" type="image/png" href="Doxa.png">
 
     <!-- Open Graph & Meta Tags -->

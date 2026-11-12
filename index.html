@@ -2094,7 +2094,7 @@ Menú del Index: Líena 742
 
             <!-- ACCIONES DEL NAVBAR (PC Y MÓVIL): B) CESTA (SÓLO SI HAY PRODUCTOS) + C) BOTÓN CUADRADO AMARILLO (TODO EL MENÚ DENTRO) -->
             <div class="navbar-mobile-actions" id="navbarMobileActions">
-                <a href="compra.html" class="navbar-cart-btn navbar-cart-mobile navbar-cart-pc" id="navbarCartBtnMobile"
+                <a href="reservas.html" class="navbar-cart-btn navbar-cart-mobile navbar-cart-pc" id="navbarCartBtnMobile"
                     aria-label="Cesta de la compra">
                     <div class="cart-icon-wrapper">
                         <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
@@ -2114,8 +2114,21 @@ Menú del Index: Líena 742
                     <span class="cart-dropdown-total-label">TOTAL:</span>
                     <span class="cart-dropdown-total-value" id="cartDropdownTotal">0.00€</span>
                 </div>
-                <a href="compra.html" class="cart-dropdown-checkout-btn">
+                <!-- =========================================================================
+                     [BOTÓN 1: IR A LA HOJA DE PAGO EN CESTA] (APAGADO)
+                     ========================================================================= -->
+                <a href="compras.html" class="cart-dropdown-checkout-btn cart-btn-pago"
+                    name="Botón ir a la hoja de pago" data-button-name="Botón ir a la hoja de pago"
+                    data-visible="off" style="display: none;">
                     IR A LA HOJA DE PAGO &rarr;
+                </a>
+                <!-- =========================================================================
+                     [BOTÓN 2: IR A LA HOJA DE RESERVAS / HACER MI RESERVA EN CESTA] (ENCENDIDO)
+                     ========================================================================= -->
+                <a href="reservas.html" class="cart-dropdown-checkout-btn cart-btn-reserva"
+                    name="Ir a la hoja de reservas" data-button-name="Ir a la hoja de reservas"
+                    data-visible="on">
+                    HACER MI RESERVA &rarr;
                 </a>
             </div>
         </nav>
@@ -9062,8 +9075,37 @@ Menú del Index: Líena 742
                                 total.
                             </p>
                             <div class="checkout-btn-wrap" style="text-align: center; margin-top: 100px;">
-                                <a href="compra.html" class="btn-checkout-link" id="btnGoToCheckout">
+                                <!-- =========================================================================
+                                     [INTERRUPTOR: BOTÓN IR A LA HOJA DE PAGO]
+                                     Identificador en código: "Botón ir a la hoja de pago"
+                                     Destino: compras.html (Venta directa con pago)
+                                     ESTADO ACTUAL: APAGADO (style="display: none;")
+                                     -------------------------------------------------------------------------
+                                     Para ENCENDER este botón y pasar a Venta Directa con pago:
+                                     1. Quita style="display: none;" (o cambia a style="display: inline-flex;")
+                                     2. Oculta el botón "Ir a la hoja de reservas" añadiéndole style="display: none;"
+                                     ========================================================================= -->
+                                <a href="compras.html" class="btn-checkout-link" id="btnGoToCheckout"
+                                    name="Botón ir a la hoja de pago" data-button-name="Botón ir a la hoja de pago"
+                                    data-visible="off" style="display: none;">
                                     IR A LA HOJA DE PAGO &rarr;
+                                </a>
+
+                                <!-- =========================================================================
+                                     [INTERRUPTOR: IR A LA HOJA DE RESERVAS / HACER MI RESERVA]
+                                     Identificador en código: "Ir a la hoja de reservas"
+                                     Texto para el usuario: "Hacer mi reserva"
+                                     Destino: reservas.html (Registro de reserva preferente sin cobro previo)
+                                     ESTADO ACTUAL: ENCENDIDO (Activo durante la fase provisional de reservas)
+                                     -------------------------------------------------------------------------
+                                     Para APAGAR este botón cuando abra la venta oficial:
+                                     1. Añade style="display: none;" (o pon data-visible="off")
+                                     2. Enciende el "Botón ir a la hoja de pago" quitándole style="display: none;"
+                                     ========================================================================= -->
+                                <a href="reservas.html" class="btn-checkout-link" id="btnGoToReservas"
+                                    name="Ir a la hoja de reservas" data-button-name="Ir a la hoja de reservas"
+                                    data-visible="on">
+                                    Hacer mi reserva &rarr;
                                 </a>
                             </div>
                         </div>
@@ -9385,6 +9427,7 @@ Menú del Index: Líena 742
                         const giftTitleEl = document.getElementById('giftHeaderTitleText');
                         const btnGift = document.getElementById('btnGiftRegalo');
                         const btnCheckout = document.getElementById('btnGoToCheckout');
+                        const btnReservas = document.getElementById('btnGoToReservas');
 
                         let currentProductId = 'bbb';
                         let activeFormatKey = '2';
@@ -9587,14 +9630,23 @@ Menú del Index: Líena 742
                                     (prod.id === 'bbb' ? ('bb_' + fmt.key) :
                                         (prod.id === 'pequebloom' ? ('peque_' + fmt.key) :
                                             (prod.id + '_' + fmt.key)));
-                                const targetUrl = `compra.html?product=${encodeURIComponent(prodId)}&variety=${encodeURIComponent(varietyCode)}&qty=${encodeURIComponent(qty)}`;
+                                const targetUrlCompra = `compras.html?product=${encodeURIComponent(prodId)}&variety=${encodeURIComponent(varietyCode)}&qty=${encodeURIComponent(qty)}`;
+                                const targetUrlReserva = `reservas.html?product=${encodeURIComponent(prodId)}&variety=${encodeURIComponent(varietyCode)}&qty=${encodeURIComponent(qty)}`;
 
                                 const btnCheckoutEl = document.getElementById('btnGoToCheckout');
                                 if (btnCheckoutEl) {
-                                    btnCheckoutEl.href = targetUrl;
+                                    btnCheckoutEl.href = targetUrlCompra;
+                                }
+                                const btnReservasEl = document.getElementById('btnGoToReservas');
+                                if (btnReservasEl) {
+                                    btnReservasEl.href = targetUrlReserva;
                                 }
                                 document.querySelectorAll('.cart-dropdown-checkout-btn').forEach(btn => {
-                                    btn.href = targetUrl;
+                                    if (btn.classList.contains('cart-btn-pago')) {
+                                        btn.href = targetUrlCompra;
+                                    } else {
+                                        btn.href = targetUrlReserva;
+                                    }
                                 });
                             } catch (e) {
                                 console.warn('Error actualizando href de checkout:', e);
@@ -10180,6 +10232,10 @@ Menú del Index: Líena 742
                         if (btnCheckout) {
                             btnCheckout.addEventListener('click', handleCheckoutNavigation);
                             btnCheckout.addEventListener('touchstart', handleCheckoutNavigation, { passive: true });
+                        }
+                        if (btnReservas) {
+                            btnReservas.addEventListener('click', handleCheckoutNavigation);
+                            btnReservas.addEventListener('touchstart', handleCheckoutNavigation, { passive: true });
                         }
 
                         document.querySelectorAll('.cart-dropdown-checkout-btn').forEach(btn => {
