@@ -9574,8 +9574,6 @@ Menú del Index: Líena 742
                         }
 
                         function updateCheckoutBtnHref() {
-                            const btnCheckoutEl = document.getElementById('btnGoToCheckout');
-                            if (!btnCheckoutEl) return;
                             try {
                                 const prod = getCurrentProduct();
                                 const fmt = getCurrentFormat();
@@ -9585,7 +9583,15 @@ Menú del Index: Líena 742
                                     (prod.id === 'bbb' ? ('bb_' + fmt.key) :
                                         (prod.id === 'pequebloom' ? ('peque_' + fmt.key) :
                                             (prod.id + '_' + fmt.key)));
-                                btnCheckoutEl.href = `compra.html?product=${encodeURIComponent(prodId)}&variety=${encodeURIComponent(varietyCode)}&qty=${encodeURIComponent(qty)}`;
+                                const targetUrl = `compra.html?product=${encodeURIComponent(prodId)}&variety=${encodeURIComponent(varietyCode)}&qty=${encodeURIComponent(qty)}`;
+
+                                const btnCheckoutEl = document.getElementById('btnGoToCheckout');
+                                if (btnCheckoutEl) {
+                                    btnCheckoutEl.href = targetUrl;
+                                }
+                                document.querySelectorAll('.cart-dropdown-checkout-btn').forEach(btn => {
+                                    btn.href = targetUrl;
+                                });
                             } catch (e) {
                                 console.warn('Error actualizando href de checkout:', e);
                             }
@@ -10158,20 +10164,24 @@ Menú del Index: Líena 742
                         }
 
                         // Botón Ir a la Hoja de Pago: asegura sincronización de la selección actual al carrito antes de ir a checkout
-                        if (btnCheckout) {
-                            btnCheckout.addEventListener('click', (e) => {
-                                if (e && typeof e.preventDefault === 'function') {
-                                    e.preventDefault();
-                                }
-                                try {
-                                    syncCartToStorage(true);
-                                } catch (err) {
-                                    console.warn('Error sincronizando al ir a checkout:', err);
-                                }
-                                updateCheckoutBtnHref();
-                                window.location.href = btnCheckout.href;
-                            });
+                        function handleCheckoutNavigation() {
+                            try {
+                                syncCartToStorage(true);
+                            } catch (err) {
+                                console.warn('Error sincronizando al ir a checkout:', err);
+                            }
+                            updateCheckoutBtnHref();
                         }
+
+                        if (btnCheckout) {
+                            btnCheckout.addEventListener('click', handleCheckoutNavigation);
+                            btnCheckout.addEventListener('touchstart', handleCheckoutNavigation, { passive: true });
+                        }
+
+                        document.querySelectorAll('.cart-dropdown-checkout-btn').forEach(btn => {
+                            btn.addEventListener('click', handleCheckoutNavigation);
+                            btn.addEventListener('touchstart', handleCheckoutNavigation, { passive: true });
+                        });
 
                         // Deslizamiento táctil suave (swipe izquierda/derecha) y con ratón en el menú de Reservas
                         function setupReservasNavDrag() {

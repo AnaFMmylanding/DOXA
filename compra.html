@@ -3950,6 +3950,58 @@
                     { id: 'doxa_58', name: 'Caja Gran Reserva (58 piezas)', fullName: 'CAJA GRAN RESERVA (58 PIEZAS)', price: 185.00, image: 'trufas-58.png' },
                     { id: 'doxa_proto', name: 'Caja Escultórica DOXA', fullName: 'CAJA ESCULTÓRICA DOXA (AUTOR)', price: 240.00, image: 'ProtoDoxa.png' }
                 ]
+            },
+            {
+                id: 'cookie',
+                name: 'Doxa Cookie',
+                columnName: 'Doxa<br>Cookie',
+                shortName: 'Cookie',
+                singularName: 'Doxa Cookie',
+                image: 'Cookie.png',
+                unitsPerBox: 4,
+                varieties: [
+                    { id: 'cookie_semanal', name: 'Caja Mi Semana (4 piezas)', fullName: 'CAJA MI SEMANA (4 COOKIES)', price: 48.00, image: 'Galle choco.png' },
+                    { id: 'cookie_coleccion', name: 'Caja Colección (8 piezas)', fullName: 'CAJA COLECCIÓN (8 COOKIES)', price: 120.00, image: 'Galle portada.png' }
+                ]
+            },
+            {
+                id: 'lingote',
+                name: 'Lingotes',
+                columnName: 'Lingote<br>Pistacho',
+                shortName: 'Lingote',
+                singularName: 'Lingote Pistacho',
+                image: 'Lingote.png',
+                unitsPerBox: 10,
+                varieties: [
+                    { id: 'lingote_regular', name: 'Caja Regular (10 piezas)', fullName: 'CAJA LINGOTE PISTACHO REGULAR (10 UDS)', price: 120.00, image: 'Lingote.png' },
+                    { id: 'lingote_coleccion', name: 'Caja Colección (10 piezas)', fullName: 'CAJA LINGOTE PISTACHO COLECCIÓN (10 UDS)', price: 180.00, image: 'Lingote.png' }
+                ]
+            },
+            {
+                id: 'oblea',
+                name: 'Crujiente de Almendra',
+                columnName: 'Crujiente<br>Almendra',
+                shortName: 'Crujiente',
+                singularName: 'Crujiente de Almendra',
+                image: 'Oblea.png',
+                unitsPerBox: 10,
+                varieties: [
+                    { id: 'oblea_regular', name: 'Caja Regular (10 piezas)', fullName: 'CAJA CRUJIENTE ALMENDRA REGULAR (10 UDS)', price: 120.00, image: 'Oblea.png' },
+                    { id: 'oblea_coleccion', name: 'Caja Colección (10 piezas)', fullName: 'CAJA CRUJIENTE ALMENDRA COLECCIÓN (10 UDS)', price: 180.00, image: 'Oblea.png' }
+                ]
+            },
+            {
+                id: 'pequebloom',
+                name: 'PequeBlooms',
+                columnName: 'Peque<br>Bloom',
+                shortName: 'PequeBloom',
+                singularName: 'PequeBloom',
+                image: 'Pequebloom.png',
+                unitsPerBox: 10,
+                varieties: [
+                    { id: 'peque_regular', name: 'Caja Regular (10 piezas)', fullName: 'CAJA PEQUEBLOOM REGULAR (10 UDS)', price: 120.00, image: 'Pequebloom.png' },
+                    { id: 'peque_coleccion', name: 'Caja Colección (10 piezas)', fullName: 'CAJA PEQUEBLOOM COLECCIÓN (10 UDS)', price: 180.00, image: 'Pequebloom.png' }
+                ]
             }
         ];
 
@@ -4304,13 +4356,11 @@
                 const saved = localStorage.getItem('doxa_cart_lines');
                 if (saved !== null) {
                     const parsed = JSON.parse(saved);
-                    if (Array.isArray(parsed)) {
-                        cartLines = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0);
-                        selectedLineId = cartLines.length > 0 ? cartLines[0].id : null;
-                        if (cartLines.length !== parsed.length) {
-                            saveCartLinesToStorage();
-                        }
-                        if (cartLines.length > 0) {
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        const valid = parsed.filter(l => l && typeof l === 'object' && (parseInt(l.qty) || 0) > 0);
+                        if (valid.length > 0) {
+                            cartLines = valid;
+                            selectedLineId = cartLines[0].id;
                             return;
                         }
                     }
@@ -4346,24 +4396,21 @@
                     ];
                     selectedLineId = cartLines[0].id;
                     saveCartLinesToStorage();
-                    if (window.history && window.history.replaceState) {
-                        window.history.replaceState({}, document.title, window.location.pathname);
-                    }
                     return;
                 }
             } catch (e) {
                 console.warn('Error procesando parámetros de URL en compra.html:', e);
             }
 
-            // Fallback de rescate: Si cartLines no tenía líneas válidas pero el usuario tiene una selección activa previa
+            // Fallback 2: Si no hay parámetros ni líneas previas, comprobar si hay una selección activa (doxa_active_selection)
             try {
                 const activeSel = JSON.parse(localStorage.getItem('doxa_active_selection'));
-                if (activeSel && activeSel.productId) {
-                    const prodId = (activeSel.productId === 'bbb' || activeSel.productId === 'bombon') ? 'bombon' : activeSel.productId;
+                if (activeSel && (activeSel.productId || activeSel.varietyId)) {
+                    const prodId = (activeSel.productId === 'bbb' || activeSel.productId === 'bombon') ? 'bombon' : (activeSel.productId || 'bombon');
                     const prodInfo = PRODUCTS_CATALOG.find(p => p.id === prodId) || PRODUCTS_CATALOG[0];
-                    const vName = activeSel.name || (prodInfo.varieties[0] ? prodInfo.varieties[0].name : prodInfo.name);
-                    const vId = activeSel.varietyId || (prodInfo.varieties[0] ? prodInfo.varieties[0].id : '');
-                    const vPrice = parseFloat(activeSel.price) || (prodInfo.varieties[0] ? prodInfo.varieties[0].price : 120.00);
+                    const matchedVar = (prodInfo.varieties || []).find(v => v.id === activeSel.varietyId) || prodInfo.varieties[0] || {};
+                    const vName = activeSel.name || matchedVar.fullName || matchedVar.name || prodInfo.name;
+                    const vPrice = parseFloat(activeSel.price) || parseFloat(matchedVar.price) || 120.00;
                     const vQty = parseInt(activeSel.qty) || 1;
 
                     cartLines = [
@@ -4371,8 +4418,8 @@
                             id: 'line_' + Date.now(),
                             productId: prodInfo.id,
                             productName: prodInfo.name,
-                            productImage: activeSel.image || prodInfo.image,
-                            varietyId: vId,
+                            productImage: activeSel.image || matchedVar.image || prodInfo.image,
+                            varietyId: matchedVar.id || (prodInfo.varieties[0] ? prodInfo.varieties[0].id : ''),
                             varietyName: vName,
                             unitPrice: vPrice,
                             qty: vQty,
@@ -4384,20 +4431,37 @@
                     saveCartLinesToStorage();
                     return;
                 }
-            } catch (e) {}
+            } catch (e) {
+                console.warn('Error procesando doxa_active_selection:', e);
+            }
 
-            // Si no hay líneas guardadas ni selección previa, el carrito empieza estrictamente vacío
-            cartLines = [];
-            selectedLineId = null;
+            // Fallback 3 (Garantía de compra): Si el carrito está completamente vacío al llegar a la hoja de pago,
+            // inicializar siempre con el producto activo insignia de DOXA (Bombón Blooms - Pistacho Pela&Palo 10 uds, 120.00 €)
+            // para que la hoja de pago NUNCA aparezca vacía.
+            const defaultProd = PRODUCTS_CATALOG[0]; // Bombón Blooms
+            const defaultVar = (defaultProd.varieties && defaultProd.varieties[0]) || { id: 'bb_pist', name: '1 caja Pist.Pela&Palo', fullName: 'CAJA PIST.PELA&PALO (10 UDS)', price: 120.00, image: 'BBB 1.png' };
+            cartLines = [
+                {
+                    id: 'line_' + Date.now(),
+                    productId: defaultProd.id,
+                    productName: defaultProd.name,
+                    productImage: defaultVar.image || defaultProd.image,
+                    varietyId: defaultVar.id,
+                    varietyName: defaultVar.fullName || defaultVar.name,
+                    unitPrice: parseFloat(defaultVar.price) || 120.00,
+                    qty: 1,
+                    isGift: false,
+                    explicit: true
+                }
+            ];
+            selectedLineId = cartLines[0].id;
+            saveCartLinesToStorage();
         }
         loadCartLinesFromStorage();
 
         function saveCartLinesToStorage() {
             try {
                 localStorage.setItem('doxa_cart_lines', JSON.stringify(cartLines));
-                if (cartLines.length === 0) {
-                    localStorage.removeItem('doxa_active_selection');
-                }
             } catch (e) {
                 console.warn('Error guardando doxa_cart_lines:', e);
             }
@@ -5059,11 +5123,14 @@
             }
         }
 
-        // Detectar producto desde URL (?product=...) o desde localStorage (doxa_active_selection)
+        // Detectar producto desde URL (?product=...), carrito activo o localStorage (doxa_active_selection)
         (function initInitialProductFromUrlOrStorage() {
             try {
                 const urlParams = new URLSearchParams(window.location.search);
-                let targetId = urlParams.get('product');
+                let targetId = urlParams.get('product') || urlParams.get('producto');
+                if (!targetId && cartLines.length > 0) {
+                    targetId = cartLines[0].productId;
+                }
                 if (!targetId) {
                     const activeSel = JSON.parse(localStorage.getItem('doxa_active_selection'));
                     if (activeSel && activeSel.productId) targetId = activeSel.productId;
