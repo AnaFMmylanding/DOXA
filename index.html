@@ -9566,8 +9566,28 @@ Menú del Index: Líena 742
                                 if (shippingCost) shippingCost.innerText = (parseFloat(shipping) || 0).toFixed(2).replace('.', ',') + ' €';
                                 if (taxCost) taxCost.innerText = (parseFloat(tax) || 0).toFixed(2).replace('.', ',') + ' €';
                                 if (totalCost) totalCost.innerText = (parseFloat(total) || 0).toFixed(2).replace('.', ',') + ' €';
+
+                                updateCheckoutBtnHref();
                             } catch (err) {
                                 console.warn('Error en updateOrderSummary:', err);
+                            }
+                        }
+
+                        function updateCheckoutBtnHref() {
+                            const btnCheckoutEl = document.getElementById('btnGoToCheckout');
+                            if (!btnCheckoutEl) return;
+                            try {
+                                const prod = getCurrentProduct();
+                                const fmt = getCurrentFormat();
+                                const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+                                const prodId = prod.id === 'bbb' ? 'bombon' : prod.id;
+                                const varietyCode = prod.id === 'doxa' ? ('doxa_' + fmt.key) :
+                                    (prod.id === 'bbb' ? ('bb_' + fmt.key) :
+                                        (prod.id === 'pequebloom' ? ('peque_' + fmt.key) :
+                                            (prod.id + '_' + fmt.key)));
+                                btnCheckoutEl.href = `compra.html?product=${encodeURIComponent(prodId)}&variety=${encodeURIComponent(varietyCode)}&qty=${encodeURIComponent(qty)}`;
+                            } catch (e) {
+                                console.warn('Error actualizando href de checkout:', e);
                             }
                         }
 
@@ -9999,9 +10019,7 @@ Menú del Index: Líena 742
                                 if (btnGift) {
                                     btnGift.innerText = `SÍ, QUIERO REGALAR ${prod.giftName}`;
                                 }
-                                if (btnCheckout) {
-                                    btnCheckout.href = `compra.html`;
-                                }
+                                updateCheckoutBtnHref();
                                 try {
                                     populateReservasGiftVarieties();
                                 } catch (e) {
@@ -10141,12 +10159,17 @@ Menú del Index: Líena 742
 
                         // Botón Ir a la Hoja de Pago: asegura sincronización de la selección actual al carrito antes de ir a checkout
                         if (btnCheckout) {
-                            btnCheckout.addEventListener('click', () => {
+                            btnCheckout.addEventListener('click', (e) => {
+                                if (e && typeof e.preventDefault === 'function') {
+                                    e.preventDefault();
+                                }
                                 try {
                                     syncCartToStorage(true);
-                                } catch (e) {
-                                    console.warn('Error sincronizando al ir a checkout:', e);
+                                } catch (err) {
+                                    console.warn('Error sincronizando al ir a checkout:', err);
                                 }
+                                updateCheckoutBtnHref();
+                                window.location.href = btnCheckout.href;
                             });
                         }
 
