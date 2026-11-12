@@ -7597,6 +7597,7 @@ Menú del Index: Líena 742
                 font-family: 'Lexend', sans-serif !important;
                 font-size: clamp(20px, 2.5vw, 28px) !important;
                 font-weight: 300 !important;
+                line-height: 1.4 !important;
                 letter-spacing: 3px !important;
                 text-transform: uppercase !important;
                 color: var(--text-dark, #181818) !important;
@@ -7611,9 +7612,12 @@ Menú del Index: Líena 742
                 font-size: clamp(14px, 1.8vw, 18px);
                 font-weight: 300;
                 color: rgba(60, 51, 42, 0.65);
-                margin-left: 8px;
                 letter-spacing: 2px;
                 text-transform: uppercase;
+                display: inline-block;
+                white-space: nowrap;
+                margin-left: 6px;
+                vertical-align: baseline;
             }
 
             /* Precio actual */
@@ -8498,14 +8502,20 @@ Menú del Index: Líena 742
                 }
 
                 .product-carousel-title {
-                    font-size: clamp(18px, 4.5vw, 22px) !important;
-                    padding: 0 4px;
-                    margin: 50px auto 20px auto !important;
+                    font-size: clamp(17px, 4.2vw, 21px) !important;
+                    line-height: 1.45 !important;
+                    padding: 0 12px;
+                    margin: 45px auto 20px auto !important;
                     text-align: center;
                 }
 
                 .product-carousel-title .format-pieces-sub {
-                    font-size: clamp(13px, 3.2vw, 15px);
+                    font-size: clamp(12.5px, 3.2vw, 14.5px) !important;
+                    display: inline-block !important;
+                    white-space: nowrap !important;
+                    letter-spacing: 1.5px !important;
+                    margin-left: 4px;
+                    vertical-align: baseline;
                 }
 
                 .product-pretitle {
