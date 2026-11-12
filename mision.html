@@ -8,16 +8,19 @@
     <link rel="icon" type="image/png" href="Doxa.png">
 
     <!-- Open Graph & Meta Tags -->
-    <meta name="description" content="Manifiesto de DOXA: La convergencia de la alta confitería, la bioquímica funcional y el coleccionismo estético.">
+    <meta name="description"
+        content="Manifiesto de DOXA: La convergencia de la alta confitería, la bioquímica funcional y el coleccionismo estético.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="DOXA | Estado del Arte">
     <meta property="og:title" content="DOXA | La Misión — La Cocina como Taller Alquímico">
-    <meta property="og:description" content="Manifiesto de DOXA: La convergencia de la alta confitería, la bioquímica funcional y el coleccionismo estético.">
+    <meta property="og:description"
+        content="Manifiesto de DOXA: La convergencia de la alta confitería, la bioquímica funcional y el coleccionismo estético.">
     <meta property="og:image" content="Doxa.png">
     <meta property="og:url" content="https://doxa.art/mision.html">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DOXA | La Misión">
-    <meta name="twitter:description" content="La convergencia de la alta confitería, la bioquímica funcional y el coleccionismo estético.">
+    <meta name="twitter:description"
+        content="La convergencia de la alta confitería, la bioquímica funcional y el coleccionismo estético.">
     <meta name="twitter:image" content="Doxa.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@100;300;400;500;700&display=swap"
@@ -245,8 +248,13 @@
             display: inline-flex !important;
         }
 
-        .navbar-cart-btn:hover { transform: scale(1.08); }
-        .navbar-cart-btn:active { transform: scale(0.95); }
+        .navbar-cart-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .navbar-cart-btn:active {
+            transform: scale(0.95);
+        }
 
         .cart-icon-wrapper {
             position: relative;
@@ -474,7 +482,7 @@
             border: none;
         }
 
-                .navbar-link.active,
+        .navbar-link.active,
         .navbar.scrolled .navbar-link.active {
             color: #FFFFFF !important;
             background: transparent !important;
@@ -520,18 +528,23 @@
             .navbar-mobile-actions {
                 display: none !important;
             }
+
             .navbar-menu-square-btn {
                 display: none !important;
             }
+
             .navbar-cart-pc {
                 display: none !important;
             }
+
             .navbar-cart-pc.has-items {
                 display: inline-flex !important;
             }
+
             .navbar-cart-mobile {
                 display: none !important;
             }
+
             .navbar-menu {
                 display: flex !important;
                 align-items: center;
@@ -696,15 +709,15 @@
             }
 
             .navbar-menu .navbar-link.active,
-        .navbar.scrolled .navbar-menu .navbar-link.active {
-            color: #FFFFFF !important;
-            opacity: 1 !important;
-            background: transparent !important;
-            background-color: transparent !important;
-            font-weight: 600 !important;
-            transform: none !important;
-            box-shadow: none !important;
-        }
+            .navbar.scrolled .navbar-menu .navbar-link.active {
+                color: #FFFFFF !important;
+                opacity: 1 !important;
+                background: transparent !important;
+                background-color: transparent !important;
+                font-weight: 600 !important;
+                transform: none !important;
+                box-shadow: none !important;
+            }
         }
 
         .btn-ver-galeria {
@@ -1159,7 +1172,7 @@
                 text-align: center;
             }
         }
-    
+
         /* BANNER DE COOKIES (RGPD / ePrivacy) */
         .doxa-cookie-banner {
             position: fixed;
@@ -1178,11 +1191,13 @@
             transform: translateY(100%);
             transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
+
         .doxa-cookie-banner.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
         }
+
         .cookie-banner-content {
             max-width: 1350px;
             margin: 0 auto;
@@ -1192,6 +1207,7 @@
             gap: 24px;
             flex-wrap: wrap;
         }
+
         .cookie-banner-text {
             font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 12px;
@@ -1202,18 +1218,24 @@
             min-width: 280px;
             font-weight: 300;
         }
+
         .cookie-policy-link {
             color: #FFFFFF;
             text-decoration: underline;
             transition: opacity 0.2s ease;
         }
-        .cookie-policy-link:hover { opacity: 0.8; }
+
+        .cookie-policy-link:hover {
+            opacity: 0.8;
+        }
+
         .cookie-banner-actions {
             display: flex;
             align-items: center;
             gap: 12px;
             flex-wrap: wrap;
         }
+
         .cookie-btn {
             font-family: 'Lato', sans-serif;
             font-size: 10.5px;
@@ -1226,24 +1248,29 @@
             transition: all 0.25s ease;
             white-space: nowrap;
         }
+
         .cookie-btn-accept {
             background-color: var(--accent-color, #f0ff1c);
             color: #000000;
             border: none;
         }
+
         .cookie-btn-accept:hover {
             transform: scale(1.04);
             box-shadow: 0 4px 12px rgba(240, 255, 28, 0.35);
         }
+
         .cookie-btn-necessary {
             background-color: transparent;
             color: #FFFFFF;
             border: 1px solid rgba(255, 255, 255, 0.35);
         }
+
         .cookie-btn-necessary:hover {
             background-color: rgba(255, 255, 255, 0.1);
             border-color: #FFFFFF;
         }
+
         .cookie-btn-settings {
             font-family: 'Lato', sans-serif;
             font-size: 10.5px;
@@ -1252,7 +1279,10 @@
             padding: 4px 8px;
             transition: color 0.2s ease;
         }
-        .cookie-btn-settings:hover { color: #FFFFFF; }
+
+        .cookie-btn-settings:hover {
+            color: #FFFFFF;
+        }
     </style>
 </head>
 
@@ -1273,7 +1303,8 @@
             <a href="galeria.html" class="navbar-link btn-gallery" data-visible="on">Galería</a>
             <a href="articulos.html" class="navbar-link btn-blog" data-visible="on">Blog</a>
 
-            <a href="compra.html" class="navbar-cart-btn navbar-cart-pc" id="navbarCartBtnPC" aria-label="Cesta de la compra">
+            <a href="compra.html" class="navbar-cart-btn navbar-cart-pc" id="navbarCartBtnPC"
+                aria-label="Cesta de la compra">
                 <div class="cart-icon-wrapper">
                     <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
                     <span class="navbar-cart-badge">0</span>
@@ -1282,7 +1313,8 @@
         </div>
 
         <div class="navbar-mobile-actions" id="navbarMobileActions">
-            <a href="compra.html" class="navbar-cart-btn navbar-cart-mobile" id="navbarCartBtnMobile" aria-label="Cesta de la compra">
+            <a href="compra.html" class="navbar-cart-btn navbar-cart-mobile" id="navbarCartBtnMobile"
+                aria-label="Cesta de la compra">
                 <div class="cart-icon-wrapper">
                     <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
                     <span class="navbar-cart-badge">0</span>
@@ -1457,20 +1489,31 @@
             try {
                 let count = 0;
                 const saved = localStorage.getItem('doxa_cart_lines');
+                let cleanLines = [];
                 if (saved) {
-                    const parsed = JSON.parse(saved);
-                    if (Array.isArray(parsed)) {
-                        count = parsed.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
+                    try {
+                        const parsed = JSON.parse(saved);
+                        if (Array.isArray(parsed)) {
+                            cleanLines = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0);
+                            if (cleanLines.length !== parsed.length) {
+                                localStorage.setItem('doxa_cart_lines', JSON.stringify(cleanLines));
+                            }
+                            count = cleanLines.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
+                        }
+                    } catch (e) {
+                        localStorage.removeItem('doxa_cart_lines');
                     }
                 }
                 document.querySelectorAll('.navbar-cart-badge').forEach(badge => {
-                    badge.textContent = count;
+                    badge.textContent = count > 0 ? count : '';
                 });
                 document.querySelectorAll('.navbar-cart-btn').forEach(btn => {
                     if (count > 0) {
                         btn.classList.add('has-items');
+                        btn.style.setProperty('display', 'inline-flex', 'important');
                     } else {
                         btn.classList.remove('has-items');
+                        btn.style.setProperty('display', 'none', 'important');
                     }
                 });
                 if (typeof renderCartDropdownPreview === 'function') {
@@ -1495,7 +1538,9 @@
                 const saved = localStorage.getItem('doxa_cart_lines');
                 if (saved) {
                     const parsed = JSON.parse(saved);
-                    if (Array.isArray(parsed)) lines = parsed;
+                    if (Array.isArray(parsed)) {
+                        lines = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0);
+                    }
                 }
             } catch (e) {
                 console.warn('Error leyendo carrito:', e);
@@ -1647,40 +1692,45 @@
     <!-- =========================================================================
          BANNER DE CONSENTIMIENTO PREVIO DE COOKIES (RGPD / ePrivacy)
          ========================================================================= -->
-    <div id="doxaCookieBanner" class="doxa-cookie-banner" role="dialog" aria-live="polite" aria-label="Consentimiento de cookies">
+    <div id="doxaCookieBanner" class="doxa-cookie-banner" role="dialog" aria-live="polite"
+        aria-label="Consentimiento de cookies">
         <div class="cookie-banner-content">
             <p class="cookie-banner-text">
-                En <strong>DOXA</strong> empleamos cookies técnicas y analíticas esenciales para garantizar el correcto funcionamiento de la galería, recordar tus preferencias y gestionar la prioridad de tu reserva. Puedes consultar los detalles en nuestra <a href="ayuda.html#cookies" class="cookie-policy-link">Política de Cookies</a>.
+                En <strong>DOXA</strong> empleamos cookies técnicas y analíticas esenciales para garantizar el correcto
+                funcionamiento de la galería, recordar tus preferencias y gestionar la prioridad de tu reserva. Puedes
+                consultar los detalles en nuestra <a href="ayuda.html#cookies" class="cookie-policy-link">Política de
+                    Cookies</a>.
             </p>
             <div class="cookie-banner-actions">
                 <button type="button" class="cookie-btn cookie-btn-accept" id="cookieAcceptAll">Aceptar todas</button>
-                <button type="button" class="cookie-btn cookie-btn-necessary" id="cookieAcceptNecessary">Solo necesarias</button>
+                <button type="button" class="cookie-btn cookie-btn-necessary" id="cookieAcceptNecessary">Solo
+                    necesarias</button>
                 <a href="ayuda.html#cookies" class="cookie-btn-settings">Configurar</a>
             </div>
         </div>
     </div>
 
     <script>
-        (function() {
+        (function () {
             function initCookieBanner() {
                 var banner = document.getElementById('doxaCookieBanner');
                 if (!banner) return;
                 var consent = localStorage.getItem('doxa_cookie_consent');
                 if (!consent) {
-                    setTimeout(function() {
+                    setTimeout(function () {
                         banner.classList.add('active');
                     }, 800);
                 }
                 var acceptBtn = document.getElementById('cookieAcceptAll');
                 var necBtn = document.getElementById('cookieAcceptNecessary');
                 if (acceptBtn) {
-                    acceptBtn.addEventListener('click', function() {
+                    acceptBtn.addEventListener('click', function () {
                         localStorage.setItem('doxa_cookie_consent', 'all');
                         banner.classList.remove('active');
                     });
                 }
                 if (necBtn) {
-                    necBtn.addEventListener('click', function() {
+                    necBtn.addEventListener('click', function () {
                         localStorage.setItem('doxa_cookie_consent', 'necessary');
                         banner.classList.remove('active');
                     });

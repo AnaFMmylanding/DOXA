@@ -12,12 +12,14 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="DOXA | Estado del Arte">
     <meta property="og:title" content="DOXA | Reserva Prioritaria Confirmada">
-    <meta property="og:description" content="Tu plaza preferente para el lanzamiento de DOXA ha sido confirmada con éxito.">
+    <meta property="og:description"
+        content="Tu plaza preferente para el lanzamiento de DOXA ha sido confirmada con éxito.">
     <meta property="og:image" content="Doxa.png">
     <meta property="og:url" content="https://doxa.art/gracias.html">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DOXA | Reserva Confirmada">
-    <meta name="twitter:description" content="Tu plaza preferente para el lanzamiento de DOXA ha sido confirmada con éxito.">
+    <meta name="twitter:description"
+        content="Tu plaza preferente para el lanzamiento de DOXA ha sido confirmada con éxito.">
     <meta name="twitter:image" content="Doxa.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&family=Lato:wght@100;300;400;500;700&display=swap"
@@ -206,8 +208,13 @@
             display: inline-flex !important;
         }
 
-        .navbar-cart-btn:hover { transform: scale(1.08); }
-        .navbar-cart-btn:active { transform: scale(0.95); }
+        .navbar-cart-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .navbar-cart-btn:active {
+            transform: scale(0.95);
+        }
 
         .cart-icon-wrapper {
             position: relative;
@@ -435,7 +442,7 @@
             border: none;
         }
 
-                .navbar-link.active,
+        .navbar-link.active,
         .navbar.scrolled .navbar-link.active {
             color: #FFFFFF !important;
             background: transparent !important;
@@ -481,18 +488,23 @@
             .navbar-mobile-actions {
                 display: none !important;
             }
+
             .navbar-menu-square-btn {
                 display: none !important;
             }
+
             .navbar-cart-pc {
                 display: none !important;
             }
+
             .navbar-cart-pc.has-items {
                 display: inline-flex !important;
             }
+
             .navbar-cart-mobile {
                 display: none !important;
             }
+
             .navbar-menu {
                 display: flex !important;
                 align-items: center;
@@ -657,15 +669,15 @@
             }
 
             .navbar-menu .navbar-link.active,
-        .navbar.scrolled .navbar-menu .navbar-link.active {
-            color: #FFFFFF !important;
-            opacity: 1 !important;
-            background: transparent !important;
-            background-color: transparent !important;
-            font-weight: 600 !important;
-            transform: none !important;
-            box-shadow: none !important;
-        }
+            .navbar.scrolled .navbar-menu .navbar-link.active {
+                color: #FFFFFF !important;
+                opacity: 1 !important;
+                background: transparent !important;
+                background-color: transparent !important;
+                font-weight: 600 !important;
+                transform: none !important;
+                box-shadow: none !important;
+            }
         }
 
         /* =========================================
@@ -785,8 +797,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .animate-fade {
@@ -948,7 +967,7 @@
                 text-align: center;
             }
         }
-    
+
         /* BANNER DE COOKIES (RGPD / ePrivacy) */
         .doxa-cookie-banner {
             position: fixed;
@@ -967,11 +986,13 @@
             transform: translateY(100%);
             transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
+
         .doxa-cookie-banner.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
         }
+
         .cookie-banner-content {
             max-width: 1350px;
             margin: 0 auto;
@@ -981,6 +1002,7 @@
             gap: 24px;
             flex-wrap: wrap;
         }
+
         .cookie-banner-text {
             font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 12px;
@@ -991,18 +1013,24 @@
             min-width: 280px;
             font-weight: 300;
         }
+
         .cookie-policy-link {
             color: #FFFFFF;
             text-decoration: underline;
             transition: opacity 0.2s ease;
         }
-        .cookie-policy-link:hover { opacity: 0.8; }
+
+        .cookie-policy-link:hover {
+            opacity: 0.8;
+        }
+
         .cookie-banner-actions {
             display: flex;
             align-items: center;
             gap: 12px;
             flex-wrap: wrap;
         }
+
         .cookie-btn {
             font-family: 'Lato', sans-serif;
             font-size: 10.5px;
@@ -1015,24 +1043,29 @@
             transition: all 0.25s ease;
             white-space: nowrap;
         }
+
         .cookie-btn-accept {
             background-color: var(--accent-color, #f0ff1c);
             color: #000000;
             border: none;
         }
+
         .cookie-btn-accept:hover {
             transform: scale(1.04);
             box-shadow: 0 4px 12px rgba(240, 255, 28, 0.35);
         }
+
         .cookie-btn-necessary {
             background-color: transparent;
             color: #FFFFFF;
             border: 1px solid rgba(255, 255, 255, 0.35);
         }
+
         .cookie-btn-necessary:hover {
             background-color: rgba(255, 255, 255, 0.1);
             border-color: #FFFFFF;
         }
+
         .cookie-btn-settings {
             font-family: 'Lato', sans-serif;
             font-size: 10.5px;
@@ -1041,7 +1074,10 @@
             padding: 4px 8px;
             transition: color 0.2s ease;
         }
-        .cookie-btn-settings:hover { color: #FFFFFF; }
+
+        .cookie-btn-settings:hover {
+            color: #FFFFFF;
+        }
     </style>
 </head>
 
@@ -1064,7 +1100,8 @@
                 <a href="galeria.html" class="navbar-link btn-gallery" data-visible="on">Galería</a>
                 <a href="articulos.html" class="navbar-link btn-blog" data-visible="on">Blog</a>
 
-                <a href="compra.html" class="navbar-cart-btn navbar-cart-pc" id="navbarCartBtnPC" aria-label="Cesta de la compra">
+                <a href="compra.html" class="navbar-cart-btn navbar-cart-pc" id="navbarCartBtnPC"
+                    aria-label="Cesta de la compra">
                     <div class="cart-icon-wrapper">
                         <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
                         <span class="navbar-cart-badge">0</span>
@@ -1073,7 +1110,8 @@
             </div>
 
             <div class="navbar-mobile-actions" id="navbarMobileActions">
-                <a href="compra.html" class="navbar-cart-btn navbar-cart-mobile" id="navbarCartBtnMobile" aria-label="Cesta de la compra">
+                <a href="compra.html" class="navbar-cart-btn navbar-cart-mobile" id="navbarCartBtnMobile"
+                    aria-label="Cesta de la compra">
                     <div class="cart-icon-wrapper">
                         <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
                         <span class="navbar-cart-badge">0</span>
@@ -1100,16 +1138,19 @@
         <section class="thankyou-section">
             <div class="container animate-fade" style="display: flex; justify-content: center;">
                 <div class="thankyou-card">
-                    
+
                     <div class="success-icon">
                         <svg width="36" height="36" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                         </svg>
                     </div>
 
                     <h2 class="thankyou-title">¡Reserva Preferente Confirmada!</h2>
-                    
-                    <p class="thankyou-text">Tu plaza ha quedado registrada con máxima prioridad para el primer lote exclusivo de <strong>Bombón Bloom</strong>. En cuanto anunciemos la fecha oficial de lanzamiento, recibirás un correo y notificación preferente para formalizar tu pago por adelantado y garantizar la entrega de tu pedido.</p>
+
+                    <p class="thankyou-text">Tu plaza ha quedado registrada con máxima prioridad para el primer lote
+                        exclusivo de <strong>Bombón Bloom</strong>. En cuanto anunciemos la fecha oficial de
+                        lanzamiento, recibirás un correo y notificación preferente para formalizar tu pago por
+                        adelantado y garantizar la entrega de tu pedido.</p>
 
                     <!-- Resumen del pedido extraído de la URL -->
                     <div class="receipt-box">
@@ -1121,11 +1162,19 @@
                             <span>Cantidad:</span>
                             <strong id="receiptQty">-</strong>
                         </div>
-                        <div id="receiptGiftsSection" style="display: none; margin-top: 26px; padding-top: 24px; margin-bottom: 26px; border-top: 1px dashed rgba(60, 51, 42, 0.2); border-bottom: 1px dashed rgba(60, 51, 42, 0.2); padding-bottom: 24px;">
-                            <span style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: #150e02; display: flex; align-items: center; gap: 7px; margin-bottom: 16px;"><img src="Icono regalo.png" alt="" style="width: 14px; height: 14px; object-fit: contain;">Regalos incluidos en el envío:</span>
+                        <div id="receiptGiftsSection"
+                            style="display: none; margin-top: 26px; padding-top: 24px; margin-bottom: 26px; border-top: 1px dashed rgba(60, 51, 42, 0.2); border-bottom: 1px dashed rgba(60, 51, 42, 0.2); padding-bottom: 24px;">
+                            <span
+                                style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: #150e02; display: flex; align-items: center; gap: 7px; margin-bottom: 16px;"><img
+                                    src="Icono regalo.png" alt=""
+                                    style="width: 14px; height: 14px; object-fit: contain;">Regalos incluidos en el
+                                envío:</span>
                             <div id="receiptGiftsList"></div>
-                            <div style="margin-top: 18px; font-size: 12px; opacity: 0.9; line-height: 1.65; background: rgba(255, 255, 255, 0.9); padding: 14px 18px; border-left: 3px solid #3C332A; border-radius: 4px; font-style: italic; color: #3C332A; text-align: left;">
-                                "Un regalo está en camino hacia tí... Te hemos enviado un correo y SMS con el enlace de seguimiento en tiempo real. Si algo se dificultase para entregártelo podrían llamarte.<br>
+                            <div
+                                style="margin-top: 18px; font-size: 12px; opacity: 0.9; line-height: 1.65; background: rgba(255, 255, 255, 0.9); padding: 14px 18px; border-left: 3px solid #3C332A; border-radius: 4px; font-style: italic; color: #3C332A; text-align: left;">
+                                "Un regalo está en camino hacia tí... Te hemos enviado un correo y SMS con el enlace de
+                                seguimiento en tiempo real. Si algo se dificultase para entregártelo podrían
+                                llamarte.<br>
                                 Espero que sea de tu agrado. Alguien te aprecia mucho..."
                             </div>
                         </div>
@@ -1162,9 +1211,11 @@
                         <div class="footer-column-links">
                             <a href="ayuda.html#contacto" class="footer-link-underline">Envíanos un correo</a>
                             <div class="footer-social-icons">
-                                <a href="https://instagram.com" class="social-icon" target="_blank" aria-label="Instagram">
+                                <a href="https://instagram.com" class="social-icon" target="_blank"
+                                    aria-label="Instagram">
                                     <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                                     </svg>
                                 </a>
                             </div>
@@ -1203,7 +1254,8 @@
                     <div class="footer-column">
                         <h4 class="footer-column-title">Aviso Legal</h4>
                         <div class="footer-column-links">
-                            <a href="ayuda.html#condiciones-venta" class="footer-link">Condiciones generales de venta</a>
+                            <a href="ayuda.html#condiciones-venta" class="footer-link">Condiciones generales de
+                                venta</a>
                             <a href="ayuda.html#privacidad" class="footer-link">Política de privacidad</a>
                             <a href="ayuda.html#cookies" class="footer-link">Cookies</a>
                         </div>
@@ -1225,7 +1277,7 @@
     <script>
         // Obtener parámetros de la URL
         const urlParams = new URLSearchParams(window.location.search);
-        
+
         const variety = urlParams.get('variety');
         const qty = urlParams.get('qty');
         const total = urlParams.get('total');
@@ -1279,7 +1331,7 @@
                         giftsList.appendChild(div);
                     });
                 }
-            } catch(e) {
+            } catch (e) {
                 console.warn('Error interpretando datos de regalos:', e);
             }
         }
@@ -1307,20 +1359,31 @@
             try {
                 let count = 0;
                 const saved = localStorage.getItem('doxa_cart_lines');
+                let cleanLines = [];
                 if (saved) {
-                    const parsed = JSON.parse(saved);
-                    if (Array.isArray(parsed)) {
-                        count = parsed.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
+                    try {
+                        const parsed = JSON.parse(saved);
+                        if (Array.isArray(parsed)) {
+                            cleanLines = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0);
+                            if (cleanLines.length !== parsed.length) {
+                                localStorage.setItem('doxa_cart_lines', JSON.stringify(cleanLines));
+                            }
+                            count = cleanLines.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
+                        }
+                    } catch (e) {
+                        localStorage.removeItem('doxa_cart_lines');
                     }
                 }
                 document.querySelectorAll('.navbar-cart-badge').forEach(badge => {
-                    badge.textContent = count;
+                    badge.textContent = count > 0 ? count : '';
                 });
                 document.querySelectorAll('.navbar-cart-btn').forEach(btn => {
                     if (count > 0) {
                         btn.classList.add('has-items');
+                        btn.style.setProperty('display', 'inline-flex', 'important');
                     } else {
                         btn.classList.remove('has-items');
+                        btn.style.setProperty('display', 'none', 'important');
                     }
                 });
                 if (typeof renderCartDropdownPreview === 'function') {
@@ -1345,7 +1408,9 @@
                 const saved = localStorage.getItem('doxa_cart_lines');
                 if (saved) {
                     const parsed = JSON.parse(saved);
-                    if (Array.isArray(parsed)) lines = parsed;
+                    if (Array.isArray(parsed)) {
+                        lines = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0);
+                    }
                 }
             } catch (e) {
                 console.warn('Error leyendo carrito:', e);
@@ -1476,40 +1541,45 @@
     <!-- =========================================================================
          BANNER DE CONSENTIMIENTO PREVIO DE COOKIES (RGPD / ePrivacy)
          ========================================================================= -->
-    <div id="doxaCookieBanner" class="doxa-cookie-banner" role="dialog" aria-live="polite" aria-label="Consentimiento de cookies">
+    <div id="doxaCookieBanner" class="doxa-cookie-banner" role="dialog" aria-live="polite"
+        aria-label="Consentimiento de cookies">
         <div class="cookie-banner-content">
             <p class="cookie-banner-text">
-                En <strong>DOXA</strong> empleamos cookies técnicas y analíticas esenciales para garantizar el correcto funcionamiento de la galería, recordar tus preferencias y gestionar la prioridad de tu reserva. Puedes consultar los detalles en nuestra <a href="ayuda.html#cookies" class="cookie-policy-link">Política de Cookies</a>.
+                En <strong>DOXA</strong> empleamos cookies técnicas y analíticas esenciales para garantizar el correcto
+                funcionamiento de la galería, recordar tus preferencias y gestionar la prioridad de tu reserva. Puedes
+                consultar los detalles en nuestra <a href="ayuda.html#cookies" class="cookie-policy-link">Política de
+                    Cookies</a>.
             </p>
             <div class="cookie-banner-actions">
                 <button type="button" class="cookie-btn cookie-btn-accept" id="cookieAcceptAll">Aceptar todas</button>
-                <button type="button" class="cookie-btn cookie-btn-necessary" id="cookieAcceptNecessary">Solo necesarias</button>
+                <button type="button" class="cookie-btn cookie-btn-necessary" id="cookieAcceptNecessary">Solo
+                    necesarias</button>
                 <a href="ayuda.html#cookies" class="cookie-btn-settings">Configurar</a>
             </div>
         </div>
     </div>
 
     <script>
-        (function() {
+        (function () {
             function initCookieBanner() {
                 var banner = document.getElementById('doxaCookieBanner');
                 if (!banner) return;
                 var consent = localStorage.getItem('doxa_cookie_consent');
                 if (!consent) {
-                    setTimeout(function() {
+                    setTimeout(function () {
                         banner.classList.add('active');
                     }, 800);
                 }
                 var acceptBtn = document.getElementById('cookieAcceptAll');
                 var necBtn = document.getElementById('cookieAcceptNecessary');
                 if (acceptBtn) {
-                    acceptBtn.addEventListener('click', function() {
+                    acceptBtn.addEventListener('click', function () {
                         localStorage.setItem('doxa_cookie_consent', 'all');
                         banner.classList.remove('active');
                     });
                 }
                 if (necBtn) {
-                    necBtn.addEventListener('click', function() {
+                    necBtn.addEventListener('click', function () {
                         localStorage.setItem('doxa_cookie_consent', 'necessary');
                         banner.classList.remove('active');
                     });
@@ -1523,4 +1593,5 @@
         })();
     </script>
 </body>
+
 </html>

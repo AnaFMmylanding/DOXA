@@ -135,13 +135,19 @@
         }
 
         .navbar-cart-btn {
-            display: flex;
+            display: none !important;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             padding: 6px;
             background: none;
             border: none;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .navbar-cart-btn.has-items {
+            display: inline-flex !important;
         }
 
         .cart-icon-wrapper {
@@ -781,19 +787,35 @@
                 let total = 0;
                 let items = [];
                 if (saved) {
-                    items = JSON.parse(saved);
-                    if (Array.isArray(items)) {
-                        items.forEach(item => {
-                            const q = parseInt(item.quantity || item.qty || 1, 10);
-                            count += q;
-                            const p = parseFloat(item.price || 0);
-                            total += (p * q);
-                        });
+                    try {
+                        const parsed = JSON.parse(saved);
+                        if (Array.isArray(parsed)) {
+                            items = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty || l.quantity) || 0) > 0);
+                            if (items.length !== parsed.length) {
+                                localStorage.setItem('doxa_cart_lines', JSON.stringify(items));
+                            }
+                            items.forEach(item => {
+                                const q = parseInt(item.quantity || item.qty || 1, 10);
+                                count += q;
+                                const p = parseFloat(item.price || item.unitPrice || 0);
+                                total += (p * q);
+                            });
+                        }
+                    } catch (e) {
+                        localStorage.removeItem('doxa_cart_lines');
                     }
                 }
                 document.querySelectorAll('.navbar-cart-badge').forEach(b => {
-                    b.textContent = count;
-                    b.style.display = count > 0 ? 'flex' : 'none';
+                    b.textContent = count > 0 ? count : '';
+                });
+                document.querySelectorAll('.navbar-cart-btn').forEach(btn => {
+                    if (count > 0) {
+                        btn.classList.add('has-items');
+                        btn.style.setProperty('display', 'inline-flex', 'important');
+                    } else {
+                        btn.classList.remove('has-items');
+                        btn.style.setProperty('display', 'none', 'important');
+                    }
                 });
                 const totalEl = document.getElementById('cartDropdownTotal');
                 if (totalEl) totalEl.textContent = total.toFixed(2) + '€';
@@ -805,8 +827,16 @@
                     } else {
                         wrap.innerHTML = items.map(it => `
                             <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid #eee;">
-                                <span>${it.title || it.name || 'Producto'} (x${it.quantity || it.qty || 1})</span>
-                                <strong>${((parseFloat(it.price || 0)) * (parseInt(it.quantity || it.qty || 1, 10))).toFixed(2)}€</strong>
+                                <span>${it.title || it.productName || it.name || 'Producto'} (x${it.quantity || it.qty || 1})</span>
+                                <strong>${((parseFloat(it.price || it.unitPrice || 0)) * (parseInt(it.quantity || it.qty || 1, 10))).toFixed(2)}€</strong>
+                            </div>
+                        `).join('');
+                    }
+                }
+            } catch (e) {
+                console.error('Error syncing cart:', e);
+            }
+        }
                             </div>
                         `).join('');
                     }

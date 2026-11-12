@@ -566,10 +566,26 @@ Menú del Index: Líena 742
 
         .cart-dropdown-item {
             display: grid;
-            grid-template-columns: 28px 24px 1fr auto;
+            grid-template-columns: 28px 24px 1fr auto auto;
             align-items: center;
             gap: 10px;
             width: 100%;
+        }
+
+        .cart-dropdown-del-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 2px 4px;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .cart-dropdown-del-btn:hover {
+            color: #FFFFFF;
+            transform: scale(1.15);
         }
 
         .cart-dropdown-thumb {
@@ -9385,7 +9401,7 @@ Menú del Index: Líena 742
                                 if (!saved) return [];
                                 const parsed = JSON.parse(saved);
                                 if (!Array.isArray(parsed)) return [];
-                                return parsed.filter(l => l && typeof l === 'object').map(l => {
+                                return parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0).map(l => {
                                     return {
                                         id: l.id || ('line_' + Date.now() + Math.random().toString(36).substr(2, 4)),
                                         productId: String(l.productId || 'doxa'),
@@ -9397,6 +9413,7 @@ Menú del Index: Líena 742
                                         unitPrice: parseFloat(l.unitPrice) || 0,
                                         qty: parseInt(l.qty) || 1,
                                         isGift: !!l.isGift,
+                                        explicit: true,
                                         recipientName: String(l.recipientName || l.recipient || ''),
                                         phone: String(l.phone || ''),
                                         address: String(l.address || ''),
@@ -9436,6 +9453,8 @@ Menú del Index: Líena 742
                                 };
                                 localStorage.setItem('doxa_active_selection', JSON.stringify(selection));
 
+                                if (!explicitAdd) return;
+
                                 let lines = getSanitizedCartLines();
                                 const lineIdx = lines.findIndex(l => !l.isGift && l.productId === prodId);
                                 const newLine = {
@@ -9447,7 +9466,8 @@ Menú del Index: Líena 742
                                     varietyName: `${fmt.feedbackName} (${fmt.optSub})`,
                                     unitPrice: parseFloat(fmt.price) || 0,
                                     qty: qty,
-                                    isGift: false
+                                    isGift: false,
+                                    explicit: true
                                 };
 
                                 if (lineIdx >= 0) {
@@ -9488,6 +9508,7 @@ Menú del Index: Líena 742
                                     lines[lineIdx].unitPrice = parseFloat(fmt.price) || 0;
                                     lines[lineIdx].qty = qty;
                                     lines[lineIdx].productImage = fmt.image || (prod.id + '.png');
+                                    lines[lineIdx].explicit = true;
                                     localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
                                     if (typeof window.updateNavbarCartBadge === 'function') {
                                         window.updateNavbarCartBadge();
@@ -9668,6 +9689,7 @@ Menú del Index: Líena 742
                                 unitPrice: fmt.price,
                                 qty: qty,
                                 isGift: true,
+                                explicit: true,
                                 recipientName: recipientName,
                                 phone: recipientPhone,
                                 address: recipientAddress,
@@ -10117,10 +10139,10 @@ Menú del Index: Líena 742
                             };
                         }
 
-                        // Botón Ir a la Hoja de Pago: asegurar sincronización previa de la selección activa
+                        // Botón Ir a la Hoja de Pago: registra la selección activa previa sin auto-añadir al carrito
                         if (btnCheckout) {
                             btnCheckout.addEventListener('click', () => {
-                                syncCartToStorage(true);
+                                syncCartToStorage(false);
                             });
                         }
 
@@ -10819,23 +10841,38 @@ Menú del Index: Líena 742
                     try {
                         let count = 0;
                         const saved = localStorage.getItem('doxa_cart_lines');
+                        let cleanLines = [];
                         if (saved) {
-                            const parsed = JSON.parse(saved);
-                            if (Array.isArray(parsed)) {
-                                count = parsed.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
+                            try {
+                                const parsed = JSON.parse(saved);
+                                if (Array.isArray(parsed)) {
+                                    // Saneamiento activo: sólo se consideran líneas añadidas explícitamente por el usuario
+                                    cleanLines = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0);
+                                    if (cleanLines.length !== parsed.length) {
+                                        localStorage.setItem('doxa_cart_lines', JSON.stringify(cleanLines));
+                                    }
+                                    count = cleanLines.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
+                                }
+                            } catch (e) {
+                                localStorage.removeItem('doxa_cart_lines');
                             }
                         }
+
                         document.querySelectorAll('.navbar-cart-badge').forEach(badge => {
-                            badge.textContent = count;
+                            badge.textContent = count > 0 ? count : '';
                         });
+
                         // La cesta sólo aparece en pantalla cuando se seleccionan productos (count > 0)
                         document.querySelectorAll('.navbar-cart-btn').forEach(btn => {
                             if (count > 0) {
                                 btn.classList.add('has-items');
+                                btn.style.setProperty('display', 'inline-flex', 'important');
                             } else {
                                 btn.classList.remove('has-items');
+                                btn.style.setProperty('display', 'none', 'important');
                             }
                         });
+
                         if (typeof renderCartDropdownPreview === 'function') {
                             renderCartDropdownPreview();
                         }
@@ -10848,6 +10885,34 @@ Menú del Index: Líena 742
                 window.addEventListener('storage', updateNavbarCartBadge);
                 window.addEventListener('pageshow', updateNavbarCartBadge);
 
+                // Función para eliminar un artículo directamente desde el desplegable de la cesta
+                window.removeNavbarCartItem = function (idx, e) {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    try {
+                        const saved = localStorage.getItem('doxa_cart_lines');
+                        if (!saved) return;
+                        let lines = JSON.parse(saved);
+                        if (!Array.isArray(lines)) return;
+                        lines = lines.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift));
+                        if (idx >= 0 && idx < lines.length) {
+                            lines.splice(idx, 1);
+                            localStorage.setItem('doxa_cart_lines', JSON.stringify(lines));
+                            updateNavbarCartBadge();
+                            if (typeof window.renderReservasGiftsList === 'function') {
+                                window.renderReservasGiftsList();
+                            }
+                            if (typeof updateOrderSummary === 'function') {
+                                updateOrderSummary();
+                            }
+                        }
+                    } catch (err) {
+                        console.warn('Error eliminando producto de la cesta:', err);
+                    }
+                };
+
                 // Renderizado dinámico del desplegable con la hoja de pedido resumida
                 function renderCartDropdownPreview() {
                     const wrap = document.getElementById('cartDropdownItemsWrap');
@@ -10859,7 +10924,9 @@ Menú del Index: Líena 742
                         const saved = localStorage.getItem('doxa_cart_lines');
                         if (saved) {
                             const parsed = JSON.parse(saved);
-                            if (Array.isArray(parsed)) lines = parsed;
+                            if (Array.isArray(parsed)) {
+                                lines = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0);
+                            }
                         }
                     } catch (e) {
                         console.warn('Error leyendo carrito:', e);
@@ -10873,7 +10940,7 @@ Menú del Index: Líena 742
 
                     let total = 0;
                     let html = '';
-                    lines.forEach(item => {
+                    lines.forEach((item, index) => {
                         const qty = parseInt(item.qty) || 1;
                         const price = parseFloat(item.unitPrice) || 0;
                         const subtotal = price * qty;
@@ -10899,6 +10966,7 @@ Menú del Index: Líena 742
                                     ${recipientHtml}
                                 </div>
                                 <span class="cart-dropdown-price">${subtotal.toFixed(2)}€</span>
+                                <button type="button" class="cart-dropdown-del-btn" onclick="removeNavbarCartItem(${index}, event)" title="Eliminar este artículo">&times;</button>
                             </div>
                         `;
                     });

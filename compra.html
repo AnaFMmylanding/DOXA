@@ -4168,8 +4168,11 @@
                 if (saved !== null) {
                     const parsed = JSON.parse(saved);
                     if (Array.isArray(parsed)) {
-                        cartLines = parsed;
+                        cartLines = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0);
                         selectedLineId = cartLines.length > 0 ? cartLines[0].id : null;
+                        if (cartLines.length !== parsed.length) {
+                            saveCartLinesToStorage();
+                        }
                         return;
                     }
                 }
@@ -4177,33 +4180,7 @@
                 console.warn('Error leyendo doxa_cart_lines:', e);
             }
 
-            // Fallback 1: Si hay selección activa previa en doxa_active_selection
-            try {
-                const activeSel = JSON.parse(localStorage.getItem('doxa_active_selection'));
-                if (activeSel && activeSel.productId) {
-                    const prodId = activeSel.productId === 'bbb' ? 'bombon' : activeSel.productId;
-                    const prodInfo = PRODUCTS_CATALOG.find(p => p.id === prodId) || PRODUCTS_CATALOG[0];
-                    const vName = activeSel.name || (prodInfo.varieties[0] ? prodInfo.varieties[0].name : prodInfo.name);
-                    cartLines = [
-                        {
-                            id: 'line_' + Date.now(),
-                            productId: prodInfo.id,
-                            productName: prodInfo.name,
-                            productImage: activeSel.image || prodInfo.image,
-                            varietyId: activeSel.varietyId || (prodInfo.varieties[0] ? prodInfo.varieties[0].id : ''),
-                            varietyName: vName,
-                            unitPrice: parseFloat(activeSel.price) || (prodInfo.varieties[0] ? prodInfo.varieties[0].price : 10.00),
-                            qty: parseInt(activeSel.qty) || 1,
-                            isGift: false
-                        }
-                    ];
-                    selectedLineId = cartLines[0].id;
-                    saveCartLinesToStorage();
-                    return;
-                }
-            } catch (e) {}
-
-            // Si no hay líneas guardadas ni selección previa, el carrito empieza vacío
+            // Si no hay líneas guardadas explícitas, el carrito empieza estrictamente vacío
             cartLines = [];
             selectedLineId = null;
         }
@@ -4296,7 +4273,8 @@
                     varietyName: varietyName,
                     unitPrice: unitPrice,
                     qty: qty,
-                    isGift: false
+                    isGift: false,
+                    explicit: true
                 };
                 cartLines.push(newLine);
                 selectedLineId = newLine.id;
@@ -4557,6 +4535,7 @@
                 unitPrice: unitPrice,
                 qty: qty,
                 isGift: true,
+                explicit: true,
                 recipientName: recipientName,
                 phone: recipientPhone,
                 address: recipientAddress,
@@ -4757,6 +4736,7 @@
                 unitPrice: unitPrice,
                 qty: qty,
                 isGift: true,
+                explicit: true,
                 recipientName: recipientName,
                 phone: recipientPhone,
                 address: recipientAddress,

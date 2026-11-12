@@ -2390,20 +2390,31 @@
             try {
                 let count = 0;
                 const saved = localStorage.getItem('doxa_cart_lines');
+                let cleanLines = [];
                 if (saved) {
-                    const parsed = JSON.parse(saved);
-                    if (Array.isArray(parsed)) {
-                        count = parsed.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
+                    try {
+                        const parsed = JSON.parse(saved);
+                        if (Array.isArray(parsed)) {
+                            cleanLines = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0);
+                            if (cleanLines.length !== parsed.length) {
+                                localStorage.setItem('doxa_cart_lines', JSON.stringify(cleanLines));
+                            }
+                            count = cleanLines.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
+                        }
+                    } catch (e) {
+                        localStorage.removeItem('doxa_cart_lines');
                     }
                 }
                 document.querySelectorAll('.navbar-cart-badge').forEach(badge => {
-                    badge.textContent = count;
+                    badge.textContent = count > 0 ? count : '';
                 });
                 document.querySelectorAll('.navbar-cart-btn').forEach(btn => {
                     if (count > 0) {
                         btn.classList.add('has-items');
+                        btn.style.setProperty('display', 'inline-flex', 'important');
                     } else {
                         btn.classList.remove('has-items');
+                        btn.style.setProperty('display', 'none', 'important');
                     }
                 });
                 if (typeof renderCartDropdownPreview === 'function') {
@@ -2428,7 +2439,9 @@
                 const saved = localStorage.getItem('doxa_cart_lines');
                 if (saved) {
                     const parsed = JSON.parse(saved);
-                    if (Array.isArray(parsed)) lines = parsed;
+                    if (Array.isArray(parsed)) {
+                        lines = parsed.filter(l => l && typeof l === 'object' && (l.explicit || l.isGift) && (parseInt(l.qty) || 0) > 0);
+                    }
                 }
             } catch (e) {
                 console.warn('Error leyendo carrito:', e);
