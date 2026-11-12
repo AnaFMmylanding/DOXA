@@ -153,6 +153,8 @@ Menú del Index: Líena 742
             scroll-behavior: smooth;
         }
 
+        #menu-productos,
+        #productos,
         #reservasProductsNav,
         #la-coleccion,
         #reserva {
@@ -161,6 +163,8 @@ Menú del Index: Líena 742
 
         @media (max-width: 768px) {
 
+            #menu-productos,
+            #productos,
             #reservasProductsNav,
             #la-coleccion,
             #reserva {
@@ -169,8 +173,14 @@ Menú del Index: Líena 742
         }
 
         /* =========================================================================
-           ELIMINAR FOCO, OUTLINE Y LÍNEAS NEGRAS EN EL MENÚ DE RESERVAS
+           ELIMINAR FOCO, OUTLINE Y LÍNEAS NEGRAS EN MENÚS DE PRODUCTOS Y RESERVAS
            ========================================================================= */
+        #menu-productos,
+        #menu-productos:focus,
+        #menu-productos:focus-visible,
+        #menu-productos:focus-within,
+        #menu-productos:target,
+        #menu-productos:active,
         #reservasProductsNav,
         #reservasProductsNav:focus,
         #reservasProductsNav:focus-visible,
@@ -1640,6 +1650,106 @@ Menú del Index: Líena 742
             filter: drop-shadow(0px 20px 30px rgba(0, 0, 0, 0.5));
         }
 
+        /* =========================================================================
+           MENÚ HORIZONTAL DE PRODUCTOS EN PRESENTACIÓN DE LA DOXA
+           ========================================================================= */
+        .presentacion-products-nav {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 36px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            padding: 0 16px;
+            flex-wrap: wrap;
+            scroll-margin-top: 85px;
+            position: relative;
+            outline: none !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .presentacion-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background: transparent !important;
+            border: none !important;
+            cursor: pointer;
+            padding: 8px 12px;
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+            text-decoration: none;
+            color: var(--text-dark, #181818);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            min-width: 80px;
+        }
+
+        .presentacion-nav-item[data-visible="off"] {
+            display: none !important;
+            pointer-events: none !important;
+        }
+
+        .presentacion-nav-item:hover {
+            transform: translateY(-4px) scale(1.05);
+        }
+
+        .presentacion-nav-item:active {
+            transform: scale(0.96);
+        }
+
+        .presentacion-nav-thumb-wrap {
+            width: 62px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .presentacion-nav-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.22));
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), filter 0.35s ease;
+        }
+
+        .presentacion-nav-item:hover .presentacion-nav-thumb {
+            transform: scale(1.1);
+            filter: drop-shadow(0px 12px 22px rgba(0, 0, 0, 0.32));
+        }
+
+        .presentacion-nav-title {
+            font-family: 'Lato', 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-dark, #181818);
+            text-align: center;
+            line-height: 1.35;
+            transition: color 0.3s ease, font-weight 0.2s ease;
+        }
+
+        .presentacion-nav-item.active .presentacion-nav-title {
+            font-weight: 700;
+            color: #000000;
+        }
+
+        .presentacion-nav-item.active .presentacion-nav-thumb-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 26px;
+            height: 2px;
+            background: #181818;
+        }
+
         /* =========================================
        ADAPTACIÓN PARA MÓVILES (Responsiveness)
        Media Queries: Aquí está el truco
@@ -1657,7 +1767,25 @@ Menú del Index: Líena 742
             }
 
             .sobre-doxa-section {
-                padding: 65px 0 150px 0 !important;
+                padding: 65px 0 80px 0 !important;
+            }
+
+            .presentacion-products-nav {
+                gap: 20px;
+                margin-top: 30px;
+                margin-bottom: 50px;
+                scroll-margin-top: 70px;
+            }
+
+            .presentacion-nav-thumb-wrap {
+                width: 54px;
+                height: 54px;
+                margin-bottom: 8px;
+            }
+
+            .presentacion-nav-title {
+                font-size: 10px;
+                letter-spacing: 2px;
             }
 
             .sobre-doxa-img-wrap {
@@ -1940,7 +2068,7 @@ Menú del Index: Líena 742
                    [BOTÓN Y SUBMENÚ HORIZONTAL DE PRODUCTOS]
                    ========================================================================= -->
                 <!-- 1) PRODUCTOS -->
-                <a href="#reservasProductsNav" class="navbar-link btn-productos">Productos</a>
+                <a href="#menu-productos" class="navbar-link btn-productos">Productos</a>
 
                 <!-- 2) RESERVAS (TIENDA) -->
                 <a href="#reservasProductsNav" class="navbar-link btn-reservas">Reservas</a>
@@ -2058,10 +2186,74 @@ Menú del Index: Líena 742
                         Pero con intención, significado, valor.
                     </p>
 
-                    <p>
+                    <p style="margin-bottom: 0;">
                         Alta repostería y ciencia se fusionan para que pecar <br class="desktop-only">se transforme en
                         todo un regalo para tu cuerpo.
                     </p>
+                </div>
+
+                <!-- =========================================================================
+                   MENÚ HORIZONTAL DE PRODUCTOS (PRESENTACIÓN DE LA DOXA)
+                   Navegación entre familias de productos | Interruptores data-visible="on"/"off"
+                   Margen superior de 30px bajo el texto y margen inferior de 50px
+                   ========================================================================= -->
+                <div class="presentacion-products-nav" id="menu-productos" role="tablist"
+                    aria-label="Catálogo horizontal de productos DOXA">
+                    <a id="productos" style="position: absolute; top: -85px; pointer-events: none;"></a>
+
+                    <!-- 1. BLOOM (ACTIVO / INMINENTE) -->
+                    <button type="button" class="presentacion-nav-item active" data-product="bbb" role="tab"
+                        aria-selected="true" title="Bombón Bloom" onclick="selectPresentacionProduct('bbb')" data-visible="on">
+                        <div class="presentacion-nav-thumb-wrap">
+                            <img src="BBB 1.png" alt="Bombón Blooms" class="presentacion-nav-thumb" draggable="false">
+                        </div>
+                        <span class="presentacion-nav-title">BLOOM</span>
+                    </button>
+
+                    <!-- 2. DOXA (PRÓXIMO LANZAMIENTO) -->
+                    <button type="button" class="presentacion-nav-item" data-product="doxa" role="tab"
+                        aria-selected="false" title="Doxa" onclick="selectPresentacionProduct('doxa')" data-visible="on">
+                        <div class="presentacion-nav-thumb-wrap">
+                            <img src="Doxa.png" alt="Doxa" class="presentacion-nav-thumb" draggable="false">
+                        </div>
+                        <span class="presentacion-nav-title">DOXA<br><small style="font-size: 8px; opacity: 0.75; font-weight: 400; text-transform: uppercase; letter-spacing: 0.5px;">(Próximamente)</small></span>
+                    </button>
+
+                    <!-- 3. DOXA COOKIE (OFF) -->
+                    <button type="button" class="presentacion-nav-item" data-product="cookie" role="tab"
+                        aria-selected="false" title="Doxa Cookie" onclick="selectPresentacionProduct('cookie')" data-visible="off">
+                        <div class="presentacion-nav-thumb-wrap">
+                            <img src="Cookie.png" alt="Doxa Cookie" class="presentacion-nav-thumb" draggable="false">
+                        </div>
+                        <span class="presentacion-nav-title">DOXA<br>COOKIE</span>
+                    </button>
+
+                    <!-- 4. LINGOTE PISTACHO (OFF) -->
+                    <button type="button" class="presentacion-nav-item" data-product="lingote" role="tab"
+                        aria-selected="false" title="Lingote Pistacho" onclick="selectPresentacionProduct('lingote')" data-visible="off">
+                        <div class="presentacion-nav-thumb-wrap">
+                            <img src="Lingote.png" alt="Lingote Pistacho" class="presentacion-nav-thumb" draggable="false">
+                        </div>
+                        <span class="presentacion-nav-title">LINGOTE<br>PISTACHO</span>
+                    </button>
+
+                    <!-- 5. CRUJIENTE ALMENDRA (OFF) -->
+                    <button type="button" class="presentacion-nav-item" data-product="oblea" role="tab"
+                        aria-selected="false" title="Crujiente Almendra" onclick="selectPresentacionProduct('oblea')" data-visible="off">
+                        <div class="presentacion-nav-thumb-wrap">
+                            <img src="Oblea.png" alt="Crujiente Almendra" class="presentacion-nav-thumb" draggable="false">
+                        </div>
+                        <span class="presentacion-nav-title">CRUJIENTE<br>ALMENDRA</span>
+                    </button>
+
+                    <!-- 6. PEQUE BLOOM (OFF) -->
+                    <button type="button" class="presentacion-nav-item" data-product="pequebloom" role="tab"
+                        aria-selected="false" title="Peque Bloom" onclick="selectPresentacionProduct('pequebloom')" data-visible="off">
+                        <div class="presentacion-nav-thumb-wrap">
+                            <img src="Pequebloom.png" alt="Peque Bloom" class="presentacion-nav-thumb" draggable="false">
+                        </div>
+                        <span class="presentacion-nav-title">PEQUE<br>BLOOM</span>
+                    </button>
                 </div>
 
             </div>
@@ -5226,6 +5418,13 @@ Menú del Index: Líena 742
                     window.switchReservasProduct(productId);
                 }
 
+                // Sincronizar el menú horizontal de presentación de la DOXA
+                document.querySelectorAll('.presentacion-nav-item').forEach(btn => {
+                    const isCurrent = btn.getAttribute('data-product') === productId;
+                    btn.classList.toggle('active', isCurrent);
+                    btn.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+                });
+
                 if (targetSection && wheelConfigs[productId]) {
                     if (!wheelConfigs[productId].instance) {
                         wheelConfigs[productId].instance = wheelConfigs[productId].init();
@@ -5242,6 +5441,24 @@ Menú del Index: Líena 742
                 return targetSection;
             }
             window.showProductWheel = showProductWheel;
+
+            function selectPresentacionProduct(prodId) {
+                if (!prodId) return;
+                const targetSection = showProductWheel(prodId);
+                if (targetSection) {
+                    try {
+                        history.replaceState(null, null, '#rueda-activos-' + prodId);
+                    } catch (err) { }
+                    const isMobile = window.innerWidth <= 768;
+                    const topOffset = isMobile ? 70 : 85;
+                    const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset - topOffset;
+                    window.scrollTo({
+                        top: Math.max(0, targetY),
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            window.selectPresentacionProduct = selectPresentacionProduct;
 
             // Navegación directa desde 'Reserva tu caja' hacia la sección Reservas sincronizando el producto
             window.goToReservasProduct = function (productId, event) {
@@ -10793,9 +11010,65 @@ Menú del Index: Líena 742
                 window.scrollToReservasProducts = scrollToReservasProducts;
 
                 // Botón "Reservas" -> scroll directo a la sección de reservas
-                document.querySelectorAll('.btn-reservas, .btn-productos').forEach(btn => {
+                document.querySelectorAll('.btn-reservas').forEach(btn => {
                     btn.addEventListener('click', (e) => scrollToReservasProducts(e, btn));
                 });
+
+                // Función para navegar directamente al menú horizontal de productos en "Presentación de la Doxa"
+                function scrollToMenuProductos(e, activeBtn) {
+                    if (e) {
+                        e.preventDefault();
+                        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+                    }
+                    if (typeof closeDropdown === 'function') closeDropdown();
+                    closeMobileMenu();
+                    closeCartDropdown();
+
+                    const scrollTarget = document.getElementById('menu-productos') || document.getElementById('productos') || document.getElementById('sobre-doxa');
+                    if (scrollTarget) {
+                        const isMobile = window.innerWidth <= 768;
+                        const topOffset = isMobile ? 70 : 85;
+                        let el = scrollTarget;
+                        let elemTop = 0;
+                        while (el) {
+                            elemTop += el.offsetTop || 0;
+                            el = el.offsetParent;
+                        }
+                        const targetY = elemTop > 0 ? (elemTop - topOffset) : (scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset);
+                        window.scrollTo({
+                            top: Math.max(0, targetY),
+                            behavior: 'smooth'
+                        });
+                        if (window.history.pushState) {
+                            window.history.pushState(null, '', '#menu-productos');
+                        }
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        if (activeBtn) activeBtn.classList.add('active');
+                        if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
+                    }
+                }
+                window.scrollToMenuProductos = scrollToMenuProductos;
+
+                // Botón "Productos" -> scroll directo al menú horizontal de productos en Presentación de la Doxa
+                document.querySelectorAll('.btn-productos').forEach(btn => {
+                    btn.addEventListener('click', (e) => scrollToMenuProductos(e, btn));
+                });
+
+                // Si la URL viene con anclaje a #menu-productos o #productos:
+                if (window.location.hash === '#menu-productos' || window.location.hash === '#productos') {
+                    const scrollTarget = document.getElementById('menu-productos') || document.getElementById('sobre-doxa');
+                    if (scrollTarget) {
+                        setTimeout(() => {
+                            const isMobile = window.innerWidth <= 768;
+                            const topOffset = isMobile ? 70 : 85;
+                            const targetY = scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset;
+                            window.scrollTo({
+                                top: Math.max(0, targetY),
+                                behavior: 'smooth'
+                            });
+                        }, 120);
+                    }
+                }
 
                 window.addEventListener('scroll', () => {
                     updateNavbarScrolledState();
