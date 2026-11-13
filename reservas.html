@@ -1834,6 +1834,143 @@
             line-height: 1.35;
         }
 
+        /* SELECTOR PERSONALIZADO ELEGANTE PARA VARIEDAD DE REGALO (SUSTITUYE MODAL TOSCO DE ANDROID/IOS) */
+        .card-gift-custom-select-wrap {
+            position: relative;
+            width: 100%;
+            user-select: none;
+        }
+
+        .card-gift-native-select-hidden {
+            position: absolute !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            width: 1px !important;
+            height: 1px !important;
+            margin: -1px !important;
+            border: 0 !important;
+            padding: 0 !important;
+            clip: rect(0 0 0 0) !important;
+            overflow: hidden !important;
+        }
+
+        .card-gift-select-trigger {
+            width: 100%;
+            min-height: 38px;
+            background: #FFFFFF;
+            border: 1px solid rgba(60, 51, 42, 0.2);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-family: 'Lexend', 'Lato', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            color: #150e02;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card-gift-select-trigger:hover,
+        .card-gift-custom-select-wrap.open .card-gift-select-trigger {
+            border-color: #3C332A;
+            box-shadow: 0 0 0 2px rgba(60, 51, 42, 0.08);
+        }
+
+        .card-gift-trigger-text {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-gift-trigger-arrow {
+            flex-shrink: 0;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #3C332A;
+            opacity: 0.7;
+        }
+
+        .card-gift-custom-select-wrap.open .card-gift-trigger-arrow {
+            transform: rotate(180deg);
+        }
+
+        .card-gift-select-dropdown {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            border: 1px solid rgba(60, 51, 42, 0.18);
+            border-radius: 4px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+            z-index: 120;
+            max-height: 220px;
+            overflow-y: auto;
+            display: none;
+            padding: 4px 0;
+        }
+
+        .card-gift-custom-select-wrap.open .card-gift-select-dropdown {
+            display: block;
+            animation: giftDropFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes giftDropFade {
+            0% { opacity: 0; transform: translateY(-4px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-gift-dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 8px 12px;
+            font-family: 'Lexend', 'Lato', sans-serif;
+            font-size: 11px;
+            color: #1e1a16;
+            cursor: pointer;
+            transition: background-color 0.15s ease, color 0.15s ease;
+            border-bottom: 1px solid rgba(60, 51, 42, 0.05);
+        }
+
+        .card-gift-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .card-gift-dropdown-item:hover,
+        .card-gift-dropdown-item.active {
+            background-color: rgba(60, 51, 42, 0.06);
+            color: #000000;
+        }
+
+        .card-gift-dropdown-item.selected {
+            background-color: rgba(226, 255, 0, 0.22);
+            font-weight: 600;
+        }
+
+        .card-gift-item-name {
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            font-size: 10.5px;
+            flex: 1;
+        }
+
+        .card-gift-item-price {
+            font-weight: 600;
+            color: #3C332A;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0.85;
+        }
+
         .card-gift-actions {
             display: flex;
             flex-direction: column;
@@ -4618,10 +4755,10 @@
             // Generar una tarjeta por cada tipo de producto
             Object.keys(groupedByProduct).forEach(prodId => {
                 const prodLines = groupedByProduct[prodId];
-                const prodInfo = PRODUCTS_CATALOG.find(p => p.id === prodId) || {
+                const prodInfo = PRODUCTS_CATALOG.find(p => p.id === prodId || (prodId === 'bbb' && p.id === 'bombon')) || {
                     id: prodId,
-                    name: prodLines[0].productName,
-                    image: prodLines[0].productImage,
+                    name: (prodLines[0] && prodLines[0].productName) || 'Bombón Blooms',
+                    image: (prodLines[0] && prodLines[0].productImage) || 'Blooms 1.png',
                     varieties: []
                 };
 
@@ -4647,9 +4784,24 @@
                 const giftHeaderName = prodId === 'doxa' ? 'DOXA' : (prodInfo.shortName ? prodInfo.shortName.toUpperCase() : prodInfo.name.toUpperCase());
 
                 let varietiesOptionsHTML = '';
+                let varietiesCustomListHTML = '';
+                let initialVarietyLabel = '';
                 if (prodInfo.varieties && prodInfo.varieties.length > 0) {
-                    prodInfo.varieties.forEach(v => {
+                    prodInfo.varieties.forEach((v, idx) => {
+                        const optText = `${v.fullName || v.name} — ${parseFloat(v.price).toFixed(2).replace('.', ',')} €`;
+                        if (idx === 0) {
+                            initialVarietyLabel = optText;
+                        }
                         varietiesOptionsHTML += `<option value="${v.id}" data-price="${v.price}" data-name="${v.name}">${v.fullName || v.name} — ${parseFloat(v.price).toFixed(2)} €</option>`;
+                        varietiesCustomListHTML += `
+                            <div class="card-gift-dropdown-item ${idx === 0 ? 'selected' : ''}" 
+                                 data-value="${v.id}" 
+                                 data-label="${optText}"
+                                 onclick="selectGiftVarietyOption('${prodId}', '${v.id}', this, event)">
+                                <span class="card-gift-item-name">${v.fullName || v.name}</span>
+                                <span class="card-gift-item-price">${parseFloat(v.price).toFixed(2).replace('.', ',')} €</span>
+                            </div>
+                        `;
                     });
                 }
 
@@ -4704,9 +4856,20 @@
                                 <div class="card-gift-grid-2-1">
                                     <div class="card-gift-field">
                                         <label class="card-gift-label" for="inlineGiftVariety_${prodId}">VARIEDAD DE CAJA *</label>
-                                        <select class="card-gift-input" id="inlineGiftVariety_${prodId}" required>
-                                            ${varietiesOptionsHTML}
-                                        </select>
+                                        <div class="card-gift-custom-select-wrap" id="customGiftSelectWrap_${prodId}">
+                                            <select class="card-gift-input card-gift-native-select-hidden" id="inlineGiftVariety_${prodId}" required>
+                                                ${varietiesOptionsHTML}
+                                            </select>
+                                            <button type="button" class="card-gift-select-trigger" id="customGiftTrigger_${prodId}" onclick="toggleGiftVarietyDropdown('${prodId}', event)">
+                                                <span class="card-gift-trigger-text" id="customGiftTriggerText_${prodId}">${initialVarietyLabel}</span>
+                                                <svg class="card-gift-trigger-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                                                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </button>
+                                            <div class="card-gift-select-dropdown" id="customGiftDropdown_${prodId}">
+                                                ${varietiesCustomListHTML}
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="card-gift-field">
                                         <label class="card-gift-label" for="inlineGiftQty_${prodId}">CANTIDAD *</label>
@@ -4770,6 +4933,53 @@
             }
             renderCart();
         }
+
+        window.toggleGiftVarietyDropdown = function (prodId, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            const wrap = document.getElementById(`customGiftSelectWrap_${prodId}`);
+            if (!wrap) return;
+            const isOpen = wrap.classList.contains('open');
+            document.querySelectorAll('.card-gift-custom-select-wrap.open').forEach(el => {
+                if (el !== wrap) el.classList.remove('open');
+            });
+            wrap.classList.toggle('open', !isOpen);
+        };
+
+        window.selectGiftVarietyOption = function (prodId, value, itemEl, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            const wrap = document.getElementById(`customGiftSelectWrap_${prodId}`);
+            const nativeSelect = document.getElementById(`inlineGiftVariety_${prodId}`);
+            const triggerText = document.getElementById(`customGiftTriggerText_${prodId}`);
+
+            if (nativeSelect) {
+                nativeSelect.value = value;
+                nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            if (triggerText && itemEl) {
+                const label = itemEl.getAttribute('data-label') || itemEl.innerText;
+                triggerText.textContent = label;
+            }
+            if (wrap) {
+                wrap.querySelectorAll('.card-gift-dropdown-item').forEach(it => it.classList.remove('selected'));
+                if (itemEl) itemEl.classList.add('selected');
+                wrap.classList.remove('open');
+            }
+        };
+
+        // Cerrar dropdown si se hace click fuera
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.card-gift-custom-select-wrap')) {
+                document.querySelectorAll('.card-gift-custom-select-wrap.open').forEach(el => {
+                    el.classList.remove('open');
+                });
+            }
+        });
 
         function saveInlineGiftOrder(event, prodId) {
             event.preventDefault();

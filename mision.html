@@ -580,10 +580,14 @@
                 height: 60px;
             }
 
+            .navbar-brand-center {
+                max-width: calc(100% - 90px);
+            }
+
             .navbar-brand-center .brand-link {
-                font-size: 16.5px;
-                letter-spacing: 3.5px;
-                gap: 6px;
+                font-size: 15px;
+                letter-spacing: 2.5px;
+                gap: 5px;
             }
 
             .navbar-brand-center .brand-del {
@@ -597,10 +601,47 @@
                 top: 50%;
                 transform: translateY(-50%);
                 display: inline-flex !important;
-                align-items: center;
-                gap: 12px;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 2px !important;
                 margin: 0;
                 z-index: 1002;
+            }
+
+            .navbar-menu-square-btn {
+                order: 1 !important;
+                width: 26px !important;
+                height: 26px !important;
+                min-width: 26px !important;
+                min-height: 26px !important;
+            }
+
+            .navbar-mobile-actions .navbar-cart-btn {
+                order: 2 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                line-height: 1 !important;
+            }
+
+            .navbar-mobile-actions .cart-icon-wrapper {
+                width: 22px !important;
+                height: 22px !important;
+            }
+
+            .navbar-mobile-actions .navbar-cart-icon {
+                width: 20px !important;
+                height: 20px !important;
+            }
+
+            .navbar-mobile-actions .navbar-cart-badge {
+                font-size: 10px !important;
+                top: -3px !important;
+                right: -2px !important;
+            }
+
+            body.menu-open .navbar-mobile-actions .navbar-cart-btn {
+                display: none !important;
             }
 
             .navbar-cart-mobile {

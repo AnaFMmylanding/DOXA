@@ -724,6 +724,63 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             box-shadow: none !important;
         }
 
+        /* CESTA DENTRO DEL MENÚ DESPLEGABLE (ABAJO DE TODO) */
+        .navbar-menu .navbar-menu-cart-link {
+            display: none;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            gap: 10px !important;
+            width: 100% !important;
+            margin-top: 10px !important;
+            padding-top: 18px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
+            text-align: right !important;
+            text-decoration: none !important;
+        }
+
+        .navbar-menu .navbar-menu-cart-link.has-items {
+            display: flex !important;
+        }
+
+        .navbar-menu .navbar-menu-cart-link .navbar-menu-cart-text {
+            font-family: 'Lato', 'Lexend', -apple-system, sans-serif !important;
+            font-size: 13.5px !important;
+            font-weight: 500 !important;
+            letter-spacing: 2px !important;
+            text-transform: uppercase !important;
+            color: #FFFFFF !important;
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+
+        .navbar-menu .navbar-menu-cart-link:hover .navbar-menu-cart-text {
+            opacity: 1 !important;
+        }
+
+        .navbar-menu .navbar-menu-cart-link .cart-icon-wrapper {
+            width: 24px !important;
+            height: 24px !important;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-menu .navbar-menu-cart-link .navbar-cart-icon {
+            width: 22px !important;
+            height: 22px !important;
+            filter: brightness(0) invert(1) !important;
+            display: block;
+        }
+
+        .navbar-menu .navbar-menu-cart-link .navbar-cart-badge {
+            color: #FFFFFF !important;
+            opacity: 0.95 !important;
+            font-size: 11px !important;
+            top: -3px !important;
+            right: -2px !important;
+        }
+
         /* Desplegable resumen de la cesta (PC y Móvil) */
         .navbar-cart-dropdown {
             position: fixed;
@@ -768,10 +825,14 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 height: 60px;
             }
 
+            .navbar-brand-center {
+                max-width: calc(100% - 90px);
+            }
+
             .navbar-brand-center .brand-link {
-                font-size: 16.5px;
-                letter-spacing: 3.5px;
-                gap: 6px;
+                font-size: 15px;
+                letter-spacing: 2.5px;
+                gap: 5px;
             }
 
             .navbar-brand-center .brand-del {
@@ -779,10 +840,49 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 letter-spacing: 2px;
             }
 
-            /* ACCIONES DERECHA EN MÓVIL: B) CESTA + C) CUADRADO AMARILLO */
+            /* ACCIONES DERECHA EN MÓVIL: B) CESTA POR DEBAJO DEL CUADRADO AMARILLO */
             .navbar-mobile-actions {
                 right: 16px;
-                gap: 12px;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 2px !important;
+            }
+
+            .navbar-menu-square-btn {
+                order: 1 !important;
+                width: 26px !important;
+                height: 26px !important;
+                min-width: 26px !important;
+                min-height: 26px !important;
+            }
+
+            .navbar-mobile-actions .navbar-cart-btn {
+                order: 2 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                line-height: 1 !important;
+            }
+
+            .navbar-mobile-actions .cart-icon-wrapper {
+                width: 22px !important;
+                height: 22px !important;
+            }
+
+            .navbar-mobile-actions .navbar-cart-icon {
+                width: 20px !important;
+                height: 20px !important;
+            }
+
+            .navbar-mobile-actions .navbar-cart-badge {
+                font-size: 10px !important;
+                top: -3px !important;
+                right: -2px !important;
+            }
+
+            /* Al abrir el menú desplegable en móvil, la cesta exterior se oculta */
+            body.menu-open .navbar-mobile-actions .navbar-cart-btn {
+                display: none !important;
             }
 
             .navbar-cart-dropdown {
@@ -2436,7 +2536,14 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 <a href="coleccion.html" class="navbar-link btn-coleccion" data-visible="on">La Colección</a>
                 <a href="galeria.html" class="navbar-link btn-gallery active" data-visible="on">Galería</a>
                 <a href="articulos.html" class="navbar-link btn-blog" data-visible="on">Blog</a>
-
+                <!-- CESTA DENTRO DEL MENÚ (ABAJO DE TODO) -->
+                <a href="reservas.html" class="navbar-link navbar-cart-btn navbar-menu-cart-link" id="navbarMenuCartBtn" aria-label="Cesta de la compra">
+                    <span class="navbar-menu-cart-text">Cesta</span>
+                    <div class="cart-icon-wrapper">
+                        <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
+                        <span class="navbar-cart-badge">0</span>
+                    </div>
+                </a>
             </div>
 
             <div class="navbar-mobile-actions" id="navbarMobileActions">
@@ -3699,11 +3806,10 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                     document.querySelectorAll('.navbar-cart-btn').forEach(btn => {
                         if (count > 0) {
                             btn.classList.add('has-items');
-                            btn.style.setProperty('display', 'inline-flex', 'important');
                         } else {
                             btn.classList.remove('has-items');
-                            btn.style.setProperty('display', 'none', 'important');
                         }
+                        btn.style.removeProperty('display');
                     });
                     if (typeof renderCartDropdownPreview === 'function') {
                         renderCartDropdownPreview();

@@ -858,6 +858,63 @@ Menú del Index: Líena 742
             box-shadow: none !important;
         }
 
+        /* CESTA DENTRO DEL MENÚ DESPLEGABLE (ABAJO DE TODO) */
+        .navbar-menu .navbar-menu-cart-link {
+            display: none;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            gap: 10px !important;
+            width: 100% !important;
+            margin-top: 10px !important;
+            padding-top: 18px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
+            text-align: right !important;
+            text-decoration: none !important;
+        }
+
+        .navbar-menu .navbar-menu-cart-link.has-items {
+            display: flex !important;
+        }
+
+        .navbar-menu .navbar-menu-cart-link .navbar-menu-cart-text {
+            font-family: 'Lato', 'Lexend', -apple-system, sans-serif !important;
+            font-size: 13.5px !important;
+            font-weight: 500 !important;
+            letter-spacing: 2px !important;
+            text-transform: uppercase !important;
+            color: #FFFFFF !important;
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+
+        .navbar-menu .navbar-menu-cart-link:hover .navbar-menu-cart-text {
+            opacity: 1 !important;
+        }
+
+        .navbar-menu .navbar-menu-cart-link .cart-icon-wrapper {
+            width: 24px !important;
+            height: 24px !important;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-menu .navbar-menu-cart-link .navbar-cart-icon {
+            width: 22px !important;
+            height: 22px !important;
+            filter: brightness(0) invert(1) !important;
+            display: block;
+        }
+
+        .navbar-menu .navbar-menu-cart-link .navbar-cart-badge {
+            color: #FFFFFF !important;
+            opacity: 0.95 !important;
+            font-size: 11px !important;
+            top: -3px !important;
+            right: -2px !important;
+        }
+
         /* Desplegable de Productos adaptado a texto solo alineado a la derecha */
         .navbar-dropdown-wrapper {
             width: 100% !important;
@@ -1298,14 +1355,14 @@ Menú del Index: Líena 742
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                max-width: calc(100% - 145px);
+                max-width: calc(100% - 90px);
                 z-index: 1001;
             }
 
             .navbar-brand-center .brand-link {
-                font-size: 16px;
-                letter-spacing: 3px;
-                gap: 6px;
+                font-size: 15px;
+                letter-spacing: 2.5px;
+                gap: 5px;
                 white-space: nowrap;
             }
 
@@ -1314,10 +1371,49 @@ Menú del Index: Líena 742
                 letter-spacing: 2px;
             }
 
-            /* ACCIONES DERECHA EN MÓVIL: B) CESTA + C) CUADRADO AMARILLO */
+            /* ACCIONES DERECHA EN MÓVIL: B) CESTA POR DEBAJO DEL CUADRADO AMARILLO */
             .navbar-mobile-actions {
                 right: 16px;
-                gap: 12px;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 2px !important;
+            }
+
+            .navbar-menu-square-btn {
+                order: 1 !important;
+                width: 26px !important;
+                height: 26px !important;
+                min-width: 26px !important;
+                min-height: 26px !important;
+            }
+
+            .navbar-mobile-actions .navbar-cart-btn {
+                order: 2 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                line-height: 1 !important;
+            }
+
+            .navbar-mobile-actions .cart-icon-wrapper {
+                width: 22px !important;
+                height: 22px !important;
+            }
+
+            .navbar-mobile-actions .navbar-cart-icon {
+                width: 20px !important;
+                height: 20px !important;
+            }
+
+            .navbar-mobile-actions .navbar-cart-badge {
+                font-size: 10px !important;
+                top: -3px !important;
+                right: -2px !important;
+            }
+
+            /* Al abrir el menú desplegable en móvil, la cesta exterior se oculta */
+            body.menu-open .navbar-mobile-actions .navbar-cart-btn {
+                display: none !important;
             }
 
             .navbar-cart-dropdown {
@@ -1329,13 +1425,6 @@ Menú del Index: Líena 742
 
             .navbar.scrolled .navbar-cart-dropdown {
                 top: 62px;
-            }
-
-            .navbar-menu-square-btn {
-                width: 26px;
-                height: 26px;
-                min-width: 26px;
-                min-height: 26px;
             }
 
             .navbar-menu {
@@ -2098,6 +2187,15 @@ Menú del Index: Líena 742
                 <a href="galeria.html" class="navbar-link btn-gallery" data-visible="on">Galería</a>
                 <!-- 6) BLOG (ON) -->
                 <a href="articulos.html" class="navbar-link btn-blog" data-visible="on">Blog</a>
+
+                <!-- 7) CESTA DE LA COMPRA (DENTRO DEL MENÚ, ABAJO DE TODO) -->
+                <a href="reservas.html" class="navbar-link navbar-cart-btn navbar-menu-cart-link" id="navbarMenuCartBtn" aria-label="Cesta de la compra">
+                    <span class="navbar-menu-cart-text">Cesta</span>
+                    <div class="cart-icon-wrapper">
+                        <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
+                        <span class="navbar-cart-badge">0</span>
+                    </div>
+                </a>
             </div>
 
             <!-- ACCIONES DEL NAVBAR (PC Y MÓVIL): B) CESTA (SÓLO SI HAY PRODUCTOS) + C) BOTÓN CUADRADO AMARILLO (TODO EL MENÚ DENTRO) -->
@@ -7990,6 +8088,143 @@ Menú del Index: Líena 742
                 text-align: left;
             }
 
+            /* SELECTOR PERSONALIZADO ELEGANTE PARA VARIEDAD DE REGALO (SUSTITUYE MODAL TOSCO DE ANDROID/IOS) */
+            .card-gift-custom-select-wrap {
+                position: relative;
+                width: 100%;
+                user-select: none;
+            }
+
+            .card-gift-native-select-hidden {
+                position: absolute !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+                width: 1px !important;
+                height: 1px !important;
+                margin: -1px !important;
+                border: 0 !important;
+                padding: 0 !important;
+                clip: rect(0 0 0 0) !important;
+                overflow: hidden !important;
+            }
+
+            .card-gift-select-trigger {
+                width: 100%;
+                min-height: 38px;
+                background: #FFFFFF;
+                border: 1px solid rgba(60, 51, 42, 0.2);
+                border-radius: 4px;
+                padding: 8px 12px;
+                font-family: 'Lexend', 'Lato', sans-serif;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.3px;
+                color: #150e02;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+                cursor: pointer;
+                text-align: left;
+                transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .card-gift-select-trigger:hover,
+            .card-gift-custom-select-wrap.open .card-gift-select-trigger {
+                border-color: #3C332A;
+                box-shadow: 0 0 0 2px rgba(60, 51, 42, 0.08);
+            }
+
+            .card-gift-trigger-text {
+                flex: 1;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .card-gift-trigger-arrow {
+                flex-shrink: 0;
+                transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+                color: #3C332A;
+                opacity: 0.7;
+            }
+
+            .card-gift-custom-select-wrap.open .card-gift-trigger-arrow {
+                transform: rotate(180deg);
+            }
+
+            .card-gift-select-dropdown {
+                position: absolute;
+                top: calc(100% + 4px);
+                left: 0;
+                right: 0;
+                background: #FFFFFF;
+                border: 1px solid rgba(60, 51, 42, 0.18);
+                border-radius: 4px;
+                box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+                z-index: 120;
+                max-height: 220px;
+                overflow-y: auto;
+                display: none;
+                padding: 4px 0;
+            }
+
+            .card-gift-custom-select-wrap.open .card-gift-select-dropdown {
+                display: block;
+                animation: giftDropFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+
+            @keyframes giftDropFade {
+                0% { opacity: 0; transform: translateY(-4px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+
+            .card-gift-dropdown-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                padding: 8px 12px;
+                font-family: 'Lexend', 'Lato', sans-serif;
+                font-size: 11px;
+                color: #1e1a16;
+                cursor: pointer;
+                transition: background-color 0.15s ease, color 0.15s ease;
+                border-bottom: 1px solid rgba(60, 51, 42, 0.05);
+            }
+
+            .card-gift-dropdown-item:last-child {
+                border-bottom: none;
+            }
+
+            .card-gift-dropdown-item:hover,
+            .card-gift-dropdown-item.active {
+                background-color: rgba(60, 51, 42, 0.06);
+                color: #000000;
+            }
+
+            .card-gift-dropdown-item.selected {
+                background-color: rgba(226, 255, 0, 0.22);
+                font-weight: 600;
+            }
+
+            .card-gift-item-name {
+                font-weight: 500;
+                letter-spacing: 0.3px;
+                text-transform: uppercase;
+                font-size: 10.5px;
+                flex: 1;
+            }
+
+            .card-gift-item-price {
+                font-weight: 600;
+                color: #3C332A;
+                font-size: 11px;
+                white-space: nowrap;
+                opacity: 0.85;
+            }
+
             .card-gift-actions {
                 display: flex;
                 flex-direction: column;
@@ -8972,9 +9207,17 @@ Menú del Index: Líena 742
                                 <form class="card-gift-form" id="reservasGiftForm" onsubmit="submitReservasGift(event)">
                                     <div class="card-gift-grid-2-1">
                                         <div class="card-gift-field">
-                                            <label class="card-gift-label" for="resGiftVarietySelect">VARIEDAD DE CAJA
-                                                *</label>
-                                            <select class="card-gift-input" id="resGiftVarietySelect" required></select>
+                                            <label class="card-gift-label" for="resGiftVarietySelect">VARIEDAD DE CAJA *</label>
+                                            <div class="card-gift-custom-select-wrap" id="resGiftCustomSelectWrap">
+                                                <select class="card-gift-input card-gift-native-select-hidden" id="resGiftVarietySelect" required></select>
+                                                <button type="button" class="card-gift-select-trigger" id="resGiftCustomTrigger" onclick="toggleResGiftCustomDropdown(event)">
+                                                    <span class="card-gift-trigger-text" id="resGiftTriggerText">Selecciona una variedad</span>
+                                                    <svg class="card-gift-trigger-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                                                        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </button>
+                                                <div class="card-gift-select-dropdown" id="resGiftCustomDropdown"></div>
+                                            </div>
                                         </div>
                                         <div class="card-gift-field">
                                             <label class="card-gift-label" for="resGiftQtyInput">CANTIDAD *</label>
@@ -9693,23 +9936,84 @@ Menú del Index: Líena 742
                         function populateReservasGiftVarieties() {
                             const prod = getCurrentProduct();
                             const select = document.getElementById('resGiftVarietySelect');
+                            const dropdown = document.getElementById('resGiftCustomDropdown');
+                            const triggerText = document.getElementById('resGiftTriggerText');
                             const titleEl = document.getElementById('reservasGiftPanelTitle');
                             if (titleEl) {
                                 titleEl.innerText = `ENVIAR ${prod.giftName || prod.name.toUpperCase()} COMO REGALO`;
                             }
                             if (!select) return;
                             select.innerHTML = '';
-                            prod.formats.forEach(f => {
+                            if (dropdown) dropdown.innerHTML = '';
+
+                            let initialSelectedLabel = '';
+
+                            prod.formats.forEach((f, idx) => {
                                 const opt = document.createElement('option');
                                 opt.value = f.key;
                                 opt.setAttribute('data-price', f.price);
-                                opt.innerText = `${f.feedbackName} (${f.optSub}) — ${f.price.toFixed(2).replace('.', ',')} €`;
-                                if (f.key === activeFormatKey) {
+                                const labelText = `${f.feedbackName} (${f.optSub}) — ${f.price.toFixed(2).replace('.', ',')} €`;
+                                opt.innerText = labelText;
+                                const isSelected = (f.key === activeFormatKey) || (!activeFormatKey && idx === 0);
+                                if (isSelected) {
                                     opt.selected = true;
+                                    initialSelectedLabel = labelText;
                                 }
                                 select.appendChild(opt);
+
+                                if (dropdown) {
+                                    const item = document.createElement('div');
+                                    item.className = 'card-gift-dropdown-item' + (isSelected ? ' selected' : '');
+                                    item.setAttribute('data-key', f.key);
+                                    item.innerHTML = `
+                                        <span class="card-gift-item-name">${f.feedbackName} (${f.optSub})</span>
+                                        <span class="card-gift-item-price">${f.price.toFixed(2).replace('.', ',')} €</span>
+                                    `;
+                                    item.onclick = function (e) {
+                                        selectResGiftOption(f.key, labelText, item, e);
+                                    };
+                                    dropdown.appendChild(item);
+                                }
                             });
+
+                            if (triggerText && initialSelectedLabel) {
+                                triggerText.innerText = initialSelectedLabel;
+                            }
                         }
+
+                        window.toggleResGiftCustomDropdown = function (e) {
+                            if (e) { e.preventDefault(); e.stopPropagation(); }
+                            const wrap = document.getElementById('resGiftCustomSelectWrap');
+                            if (!wrap) return;
+                            wrap.classList.toggle('open');
+                        };
+
+                        window.selectResGiftOption = function (key, labelText, itemEl, e) {
+                            if (e) { e.preventDefault(); e.stopPropagation(); }
+                            const select = document.getElementById('resGiftVarietySelect');
+                            const triggerText = document.getElementById('resGiftTriggerText');
+                            const wrap = document.getElementById('resGiftCustomSelectWrap');
+                            if (select) {
+                                select.value = key;
+                                select.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                            if (triggerText) {
+                                triggerText.innerText = labelText;
+                            }
+                            if (wrap) {
+                                wrap.querySelectorAll('.card-gift-dropdown-item').forEach(el => el.classList.remove('selected'));
+                                if (itemEl) itemEl.classList.add('selected');
+                                wrap.classList.remove('open');
+                            }
+                        };
+
+                        // Cerrar desplegable de regalo al hacer click fuera
+                        document.addEventListener('click', function (e) {
+                            if (!e.target.closest('#resGiftCustomSelectWrap')) {
+                                const wrap = document.getElementById('resGiftCustomSelectWrap');
+                                if (wrap) wrap.classList.remove('open');
+                            }
+                        });
 
                         function submitReservasGift(event) {
                             event.preventDefault();
@@ -10980,11 +11284,10 @@ Menú del Index: Líena 742
                         document.querySelectorAll('.navbar-cart-btn').forEach(btn => {
                             if (count > 0) {
                                 btn.classList.add('has-items');
-                                btn.style.setProperty('display', 'inline-flex', 'important');
                             } else {
                                 btn.classList.remove('has-items');
-                                btn.style.setProperty('display', 'none', 'important');
                             }
+                            btn.style.removeProperty('display');
                         });
 
                         if (typeof renderCartDropdownPreview === 'function') {
