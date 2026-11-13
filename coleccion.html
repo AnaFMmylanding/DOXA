@@ -31,6 +31,14 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
         }
 
         :root {
@@ -2640,7 +2648,8 @@
                 });
             });
 
-            // --- 2. CARRUSEL CENTRAL AL 70% ---
+            // --- 2. CARRUSEL CENTRAL AL 70% (CON SOPORTE TÁCTIL Y FLECHAS) ---
+            const collectionCarousel = document.getElementById('collectionCarousel');
             const track = document.getElementById('carouselTrack');
             const slides = track ? Array.from(track.children) : [];
             const prevBtn = document.getElementById('carouselPrevBtn');
@@ -2650,6 +2659,7 @@
 
             function updateCarousel() {
                 if (!track || slides.length === 0) return;
+                track.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
                 track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
                 if (badge) {
                     badge.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
@@ -2667,6 +2677,91 @@
                 prevBtn.addEventListener('click', () => {
                     currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
                     updateCarousel();
+                });
+            }
+
+            // Desplazamiento gestual con el dedo (táctil) y ratón en el carrusel principal
+            if (collectionCarousel && track) {
+                let cStartX = 0;
+                let cStartY = 0;
+                let cDiffX = 0;
+                let cIsActive = false;
+                let cDirection = null;
+                let cStartTime = 0;
+
+                function startCarouselGesture(clientX, clientY) {
+                    cStartX = clientX;
+                    cStartY = clientY;
+                    cDiffX = 0;
+                    cIsActive = true;
+                    cDirection = null;
+                    cStartTime = Date.now();
+                }
+
+                function moveCarouselGesture(clientX, clientY, e) {
+                    if (!cIsActive) return;
+                    cDiffX = clientX - cStartX;
+                    const diffY = clientY - cStartY;
+
+                    if (!cDirection) {
+                        if (Math.abs(cDiffX) > 6 || Math.abs(diffY) > 6) {
+                            cDirection = Math.abs(cDiffX) >= Math.abs(diffY) ? 'horizontal' : 'vertical';
+                        }
+                    }
+
+                    if (cDirection === 'horizontal') {
+                        if (e && e.cancelable) e.preventDefault();
+                        track.style.transition = 'none';
+                        track.style.transform = `translateX(calc(-${currentSlideIndex * 100}% + ${cDiffX}px))`;
+                    }
+                }
+
+                function endCarouselGesture() {
+                    if (!cIsActive) return;
+                    cIsActive = false;
+                    track.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+                    if (cDirection === 'horizontal') {
+                        const elapsed = Date.now() - cStartTime;
+                        const isQuick = elapsed < 320 && Math.abs(cDiffX) > 25;
+                        const isFar = Math.abs(cDiffX) > 50;
+                        if (isQuick || isFar) {
+                            if (cDiffX < 0) {
+                                currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                            } else {
+                                currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+                            }
+                        }
+                    }
+                    updateCarousel();
+                }
+
+                collectionCarousel.addEventListener('touchstart', (e) => {
+                    if (e.touches.length === 1) {
+                        startCarouselGesture(e.touches[0].clientX, e.touches[0].clientY);
+                    }
+                }, { passive: true });
+
+                collectionCarousel.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 1) {
+                        moveCarouselGesture(e.touches[0].clientX, e.touches[0].clientY, e);
+                    }
+                }, { passive: false });
+
+                collectionCarousel.addEventListener('touchend', endCarouselGesture, { passive: true });
+                collectionCarousel.addEventListener('touchcancel', endCarouselGesture, { passive: true });
+
+                collectionCarousel.addEventListener('mousedown', (e) => {
+                    if (e.button === 0 && !e.target.closest('.carousel-arrow')) {
+                        startCarouselGesture(e.clientX, e.clientY);
+                    }
+                });
+
+                window.addEventListener('mousemove', (e) => {
+                    if (cIsActive) moveCarouselGesture(e.clientX, e.clientY, e);
+                });
+
+                window.addEventListener('mouseup', () => {
+                    if (cIsActive) endCarouselGesture();
                 });
             }
 
@@ -2691,11 +2786,40 @@
                 });
             }
 
-            // --- 4. SCROLL HORIZONTAL DE COLECCIONES PASADAS (IDÉNTICO A GALERÍA) ---
+            // --- 4. SCROLL HORIZONTAL DE COLECCIONES PASADAS (TÁCTIL CON DEDO Y FLECHAS) ---
             const pastWrapper = document.getElementById('pastScrollWrapper');
             const pastLeft = document.getElementById('pastScrollLeft');
             const pastRight = document.getElementById('pastScrollRight');
             const pastGrid = document.querySelector('.past-collections-section .portfolio-grid');
+
+            // Scroll lateral con el dedo en las fichas del carrusel de la página (sin abrir modal)
+            let isPageCardSwiping = false;
+            let pageCardStartX = 0;
+            let pageCardStartY = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                const card = e.target.closest('.past-collections-section .artwork-card');
+                if (card && !e.target.closest('#artworkLightbox')) {
+                    pageCardStartX = e.touches[0].clientX;
+                    pageCardStartY = e.touches[0].clientY;
+                    isPageCardSwiping = false;
+                }
+            }, { passive: true });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!pageCardStartX) return;
+                const diffX = e.touches[0].clientX - pageCardStartX;
+                const diffY = e.touches[0].clientY - pageCardStartY;
+                if (Math.abs(diffX) > 8 || Math.abs(diffY) > 8) {
+                    isPageCardSwiping = true;
+                }
+            }, { passive: true });
+
+            document.addEventListener('touchend', () => {
+                if (isPageCardSwiping) {
+                    setTimeout(() => { isPageCardSwiping = false; }, 120);
+                }
+            }, { passive: true });
 
             function updatePastArrows() {
                 if (!pastWrapper || !pastLeft || !pastRight) return;
@@ -2710,6 +2834,33 @@
                 pastLeft.addEventListener('click', () => pastWrapper.scrollBy({ left: -310, behavior: 'smooth' }));
                 pastRight.addEventListener('click', () => pastWrapper.scrollBy({ left: 310, behavior: 'smooth' }));
 
+                // Arrastre horizontal con ratón en escritorio
+                let isWrapperMouseDown = false;
+                let wrapperStartX = 0;
+                let wrapperScrollLeft = 0;
+
+                pastWrapper.addEventListener('mousedown', (e) => {
+                    isWrapperMouseDown = true;
+                    wrapperStartX = e.pageX - pastWrapper.offsetLeft;
+                    wrapperScrollLeft = pastWrapper.scrollLeft;
+                });
+
+                window.addEventListener('mouseup', () => {
+                    if (isWrapperMouseDown) {
+                        isWrapperMouseDown = false;
+                        setTimeout(() => { isPageCardSwiping = false; }, 100);
+                    }
+                });
+
+                pastWrapper.addEventListener('mousemove', (e) => {
+                    if (!isWrapperMouseDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - pastWrapper.offsetLeft;
+                    const walk = (x - wrapperStartX) * 1.5;
+                    pastWrapper.scrollLeft = wrapperScrollLeft - walk;
+                    isPageCardSwiping = true;
+                });
+
                 function checkPastLayout() {
                     if (!pastGrid) return;
                     const needsSlider = window.innerWidth <= 768 || pastGrid.querySelectorAll('.artwork-card').length > 4;
@@ -2723,11 +2874,13 @@
                 checkPastLayout();
             }
 
-            // --- 5. LIGHTBOX DE FICHA TÉCNICA (IDÉNTICO A GALERÍA) ---
+            // --- 5. LIGHTBOX DE FICHA TÉCNICA (DESPLAZAMIENTO TÁCTIL CON DEDO Y FLECHAS) ---
             const lightbox = document.getElementById('artworkLightbox');
             const closeBtn = document.getElementById('lightboxClose');
             const toggleDetailsBtn = document.getElementById('lightboxToggleDetails');
             const lightboxContent = lightbox ? lightbox.querySelector('.lightbox-content') : null;
+            const lightboxLeft = lightbox ? lightbox.querySelector('.lightbox-left') : null;
+            const lightboxRight = lightbox ? lightbox.querySelector('.lightbox-right') : null;
             const lightboxRightContent = lightbox ? lightbox.querySelector('.lightbox-right-content') : null;
             const toggleIconPath = document.getElementById('toggleIconPath');
 
@@ -2745,6 +2898,7 @@
 
             let pastArtworks = [];
             let currentArtworkIndex = -1;
+            let isLightboxAnimating = false;
 
             function openLightbox(card) {
                 if (!card || !lightbox) return;
@@ -2793,6 +2947,12 @@
                 pastArtworks = Array.from(document.querySelectorAll('.past-collections-section .artwork-card'));
                 currentArtworkIndex = pastArtworks.indexOf(card);
 
+                if (lightboxLeft) {
+                    lightboxLeft.style.transition = 'none';
+                    lightboxLeft.style.transform = 'translateX(0px)';
+                    lightboxLeft.style.opacity = '1';
+                }
+
                 if (lightboxRightContent) {
                     lightboxRightContent.style.opacity = '1';
                     lightboxRightContent.style.transform = 'translateY(0)';
@@ -2814,16 +2974,28 @@
                 document.body.style.overflow = '';
             }
 
-            function navigateLightbox(direction) {
-                if (!pastArtworks.length) return;
-                currentArtworkIndex = (currentArtworkIndex + direction + pastArtworks.length) % pastArtworks.length;
-                const nextCard = pastArtworks[currentArtworkIndex];
-                if (!nextCard) return;
+            function slideLightbox(direction) {
+                if (isLightboxAnimating || !pastArtworks || pastArtworks.length <= 1) return;
+                isLightboxAnimating = true;
 
-                if (lightboxImage) lightboxImage.style.opacity = '0';
-                if (lightboxRightContent) lightboxRightContent.style.opacity = '0';
+                // Desplazamiento de salida SOLO de la imagen de la obra (el texto se queda quieto)
+                const exitX = direction > 0 ? '-115%' : '115%';
+                const enterX = direction > 0 ? '115%' : '-115%';
+
+                if (lightboxLeft) {
+                    lightboxLeft.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease';
+                    lightboxLeft.style.transform = `translateX(${exitX})`;
+                    lightboxLeft.style.opacity = '0.3';
+                }
 
                 setTimeout(() => {
+                    currentArtworkIndex = (currentArtworkIndex + direction + pastArtworks.length) % pastArtworks.length;
+                    const nextCard = pastArtworks[currentArtworkIndex];
+                    if (!nextCard) {
+                        isLightboxAnimating = false;
+                        return;
+                    }
+
                     const imageEl = nextCard.querySelector('.artwork-image-wrapper img');
                     const numberEl = nextCard.querySelector('.artwork-number');
                     const titleEl = nextCard.querySelector('.artwork-title');
@@ -2859,9 +3031,32 @@
                         };
                     }
 
-                    if (lightboxImage) lightboxImage.style.opacity = '1';
-                    if (lightboxRightContent) lightboxRightContent.style.opacity = '1';
-                }, 300);
+                    // Colocar solo la imagen en el punto de entrada opuesto
+                    if (lightboxLeft) {
+                        lightboxLeft.style.transition = 'none';
+                        lightboxLeft.style.transform = `translateX(${enterX})`;
+                        lightboxLeft.style.opacity = '0.3';
+                    }
+
+                    // Animar la entrada de la imagen al centro suavemente (el texto se mantiene quieto)
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            if (lightboxLeft) {
+                                lightboxLeft.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease';
+                                lightboxLeft.style.transform = 'translateX(0px)';
+                                lightboxLeft.style.opacity = '1';
+                            }
+
+                            setTimeout(() => {
+                                isLightboxAnimating = false;
+                            }, 360);
+                        });
+                    });
+                }, 280);
+            }
+
+            function navigateLightbox(direction) {
+                slideLightbox(direction);
             }
 
             function toggleDetails() {
@@ -2872,10 +3067,129 @@
                 }
             }
 
-            // Delegación de eventos para tarjetas
+            // Control gestual para pasar obras con el dedo o ratón en scroll lateral
+            let lbStartX = 0;
+            let lbStartY = 0;
+            let lbDiffX = 0;
+            let lbDiffY = 0;
+            let lbIsActive = false;
+            let lbDirection = null;
+            let lbStartTime = 0;
+            let lbDidSwipe = false;
+
+            function startLbGesture(clientX, clientY, target) {
+                if (!lightbox || !lightbox.classList.contains('active')) return false;
+                if (target.closest('#lightboxClose') || target.closest('#lightboxToggleDetails') || target.closest('.lightbox-arrow')) return false;
+                lbStartX = clientX;
+                lbStartY = clientY;
+                lbDiffX = 0;
+                lbDiffY = 0;
+                lbIsActive = true;
+                lbDirection = null;
+                lbStartTime = Date.now();
+                lbDidSwipe = false;
+                return true;
+            }
+
+            function moveLbGesture(clientX, clientY, e) {
+                if (!lbIsActive || isLightboxAnimating) return;
+                lbDiffX = clientX - lbStartX;
+                lbDiffY = clientY - lbStartY;
+
+                if (!lbDirection) {
+                    if (Math.abs(lbDiffX) > 6 || Math.abs(lbDiffY) > 6) {
+                        lbDirection = (Math.abs(lbDiffX) >= Math.abs(lbDiffY)) ? 'horizontal' : 'vertical';
+                    }
+                }
+
+                if (lbDirection === 'horizontal') {
+                    if (e && e.cancelable) e.preventDefault();
+                    lbDidSwipe = true;
+                    // Arrastre en tiempo real bajo el dedo
+                    if (lightboxLeft) {
+                        lightboxLeft.style.transition = 'none';
+                        lightboxLeft.style.transform = `translateX(${lbDiffX}px)`;
+                        const dragOp = Math.max(0.5, 1 - Math.abs(lbDiffX) / 380);
+                        lightboxLeft.style.opacity = dragOp;
+                    }
+                }
+            }
+
+            function endLbGesture() {
+                if (!lbIsActive) return;
+                lbIsActive = false;
+
+                if (lbDirection === 'horizontal') {
+                    const elapsed = Date.now() - lbStartTime;
+                    const isQuick = elapsed < 320 && Math.abs(lbDiffX) > 20;
+                    const isFar = Math.abs(lbDiffX) > 40;
+
+                    if (isQuick || isFar) {
+                        if (lbDiffX < 0) {
+                            slideLightbox(1);
+                        } else {
+                            slideLightbox(-1);
+                        }
+                    } else {
+                        if (lightboxLeft) {
+                            lightboxLeft.style.transition = 'transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease';
+                            lightboxLeft.style.transform = 'translateX(0px)';
+                            lightboxLeft.style.opacity = '1';
+                        }
+                    }
+                    setTimeout(() => { lbDidSwipe = false; }, 150);
+                }
+            }
+
+            // Eventos táctiles en Lightbox (móviles y tablets)
+            if (lightbox) {
+                lightbox.addEventListener('touchstart', (e) => {
+                    if (e.touches.length === 1) {
+                        startLbGesture(e.touches[0].clientX, e.touches[0].clientY, e.target);
+                    }
+                }, { passive: true });
+
+                lightbox.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 1) {
+                        moveLbGesture(e.touches[0].clientX, e.touches[0].clientY, e);
+                    }
+                }, { passive: false });
+
+                lightbox.addEventListener('touchend', endLbGesture, { passive: true });
+                lightbox.addEventListener('touchcancel', endLbGesture, { passive: true });
+
+                // Eventos de ratón en Lightbox (arrastre horizontal con ratón en PC)
+                lightbox.addEventListener('mousedown', (e) => {
+                    if (e.button === 0) {
+                        startLbGesture(e.clientX, e.clientY, e.target);
+                    }
+                });
+
+                window.addEventListener('mousemove', (e) => {
+                    if (lbIsActive) {
+                        moveLbGesture(e.clientX, e.clientY, e);
+                    }
+                });
+
+                window.addEventListener('mouseup', () => {
+                    if (lbIsActive) {
+                        endLbGesture();
+                    }
+                });
+
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox && !lbDidSwipe) closeLightbox();
+                });
+            }
+
+            // Delegación de eventos para apertura de tarjetas (respetando scroll con el dedo)
             document.addEventListener('click', (e) => {
                 const card = e.target.closest('.past-collections-section .artwork-card');
-                if (card) {
+                if (card && !e.target.closest('#artworkLightbox')) {
+                    if (isPageCardSwiping) {
+                        isPageCardSwiping = false;
+                        return; // Se estaba haciendo scroll lateral con el dedo
+                    }
                     openLightbox(card);
                 }
             });
@@ -2897,13 +3211,11 @@
             if (lightboxImage) {
                 lightboxImage.addEventListener('click', (e) => {
                     e.stopPropagation();
+                    if (lbDidSwipe) {
+                        lbDidSwipe = false;
+                        return;
+                    }
                     toggleDetails();
-                });
-            }
-
-            if (lightbox) {
-                lightbox.addEventListener('click', (e) => {
-                    if (e.target === lightbox) closeLightbox();
                 });
             }
 

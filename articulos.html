@@ -31,6 +31,14 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
         }
 
         :root {
@@ -2737,6 +2745,10 @@
                 `;
 
                 card.addEventListener('click', () => {
+                    if (isCarouselSwiping) {
+                        isCarouselSwiping = false;
+                        return; // Se estaba haciendo scroll lateral con el dedo o ratón
+                    }
                     // Actualizar URL hash y cargar artículo
                     window.location.hash = article.id;
                 });
@@ -2768,10 +2780,68 @@
             if (e.target === lightboxModal) closeLightbox();
         });
 
-        // CONTROL DE FLECHAS Y SCROLL DEL CARRUSEL
+        // CONTROL DE FLECHAS Y SCROLL DEL CARRUSEL (CON SOPORTE TÁCTIL Y RATÓN)
         const leftArrow = document.getElementById('carouselLeftArrow');
         const rightArrow = document.getElementById('carouselRightArrow');
         const scrollAmount = 330; // 300px ancho tarjeta + 30px gap
+
+        let isCarouselSwiping = false;
+        let carouselTouchStartX = 0;
+        let carouselTouchStartY = 0;
+
+        if (carouselContainer) {
+            carouselContainer.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    carouselTouchStartX = e.touches[0].clientX;
+                    carouselTouchStartY = e.touches[0].clientY;
+                    isCarouselSwiping = false;
+                }
+            }, { passive: true });
+
+            carouselContainer.addEventListener('touchmove', (e) => {
+                if (!carouselTouchStartX) return;
+                const diffX = e.touches[0].clientX - carouselTouchStartX;
+                const diffY = e.touches[0].clientY - carouselTouchStartY;
+                if (Math.abs(diffX) > 8 || Math.abs(diffY) > 8) {
+                    isCarouselSwiping = true;
+                }
+            }, { passive: true });
+
+            carouselContainer.addEventListener('touchend', () => {
+                if (isCarouselSwiping) {
+                    setTimeout(() => { isCarouselSwiping = false; }, 120);
+                }
+            }, { passive: true });
+
+            // Arrastre horizontal con ratón en escritorio
+            let isCarouselMouseDown = false;
+            let carouselMouseStartX = 0;
+            let carouselMouseScrollLeft = 0;
+
+            carouselContainer.addEventListener('mousedown', (e) => {
+                if (e.button === 0) {
+                    isCarouselMouseDown = true;
+                    carouselMouseStartX = e.pageX - carouselContainer.offsetLeft;
+                    carouselMouseScrollLeft = carouselContainer.scrollLeft;
+                }
+            });
+
+            window.addEventListener('mouseup', () => {
+                if (isCarouselMouseDown) {
+                    isCarouselMouseDown = false;
+                    setTimeout(() => { isCarouselSwiping = false; }, 100);
+                }
+            });
+
+            carouselContainer.addEventListener('mousemove', (e) => {
+                if (!isCarouselMouseDown) return;
+                e.preventDefault();
+                const x = e.pageX - carouselContainer.offsetLeft;
+                const walk = (x - carouselMouseStartX) * 1.5;
+                carouselContainer.scrollLeft = carouselMouseScrollLeft - walk;
+                isCarouselSwiping = true;
+            });
+        }
 
         leftArrow.addEventListener('click', () => {
             carouselContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
