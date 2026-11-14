@@ -1377,7 +1377,7 @@ Menú del Index: Líena 742
                 flex-direction: column !important;
                 align-items: center !important;
                 justify-content: center !important;
-                gap: 2px !important;
+                gap: 8px !important;
             }
 
             .navbar-menu-square-btn {
@@ -1407,7 +1407,7 @@ Menú del Index: Líena 742
 
             .navbar-mobile-actions .navbar-cart-badge {
                 font-size: 10px !important;
-                top: -3px !important;
+                top: -2px !important;
                 right: -2px !important;
             }
 
@@ -8023,27 +8023,34 @@ Menú del Index: Líena 742
                 display: grid;
                 grid-template-columns: 2fr 1fr;
                 gap: 12px;
+                align-items: flex-start;
             }
 
             .card-gift-grid-1-1 {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 12px;
+                align-items: flex-start;
             }
 
             .card-gift-field {
                 display: flex;
                 flex-direction: column;
-                gap: 5px;
+                gap: 6px;
             }
 
             .card-gift-label {
                 font-family: 'Lexend', sans-serif;
-                font-size: 9.5px;
+                font-size: 8.5px;
                 font-weight: 500;
-                letter-spacing: 1.5px;
+                letter-spacing: 0.8px;
                 text-transform: uppercase;
                 color: #3C332A;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: 1.2;
+                display: block;
                 text-align: left;
             }
 
@@ -8054,7 +8061,7 @@ Menú del Index: Líena 742
                 border-radius: 4px;
                 padding: 9px 12px;
                 font-family: 'Lexend', sans-serif;
-                font-size: 12.5px;
+                font-size: 12px;
                 color: #150e02;
                 box-sizing: border-box;
                 transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -8069,13 +8076,14 @@ Menú del Index: Líena 742
             .card-gift-input::placeholder {
                 color: rgba(60, 51, 42, 0.45);
                 font-weight: 300;
-                font-size: 11.5px;
+                font-size: 11px;
             }
 
             .card-gift-textarea {
                 resize: vertical;
-                min-height: 48px;
+                min-height: 76px;
                 line-height: 1.45;
+                padding: 10px 12px;
             }
 
             .card-gift-help {
@@ -8979,7 +8987,7 @@ Menú del Index: Líena 742
 
                         <p style="margin-bottom: 28px;">
                             <strong>Paso 2: AVISO Y PAGO FORMAL</strong><br>
-                            Cuando ya hayamos confeccionado tus productos, te avisaremos<br class="desktop-only">
+                            Cuando estemos listos para confeccionar tus productos, te avisaremos<br class="desktop-only">
                             por correo y por mensaje al móvil.<br>
                             En ese momento es cuando ya puedes rellenar la ficha con todos tus datos y realizar el pago para formalizar el pedido.
                         </p>
@@ -9207,7 +9215,7 @@ Menú del Index: Líena 742
                                 <form class="card-gift-form" id="reservasGiftForm" onsubmit="submitReservasGift(event)">
                                     <div class="card-gift-grid-2-1">
                                         <div class="card-gift-field">
-                                            <label class="card-gift-label" for="resGiftVarietySelect">VARIEDAD DE CAJA *</label>
+                                            <label class="card-gift-label" for="resGiftVarietySelect">VARIEDAD DE CAJA</label>
                                             <div class="card-gift-custom-select-wrap" id="resGiftCustomSelectWrap">
                                                 <select class="card-gift-input card-gift-native-select-hidden" id="resGiftVarietySelect" required></select>
                                                 <button type="button" class="card-gift-select-trigger" id="resGiftCustomTrigger" onclick="toggleResGiftCustomDropdown(event)">
@@ -9220,54 +9228,48 @@ Menú del Index: Líena 742
                                             </div>
                                         </div>
                                         <div class="card-gift-field">
-                                            <label class="card-gift-label" for="resGiftQtyInput">CANTIDAD *</label>
+                                            <label class="card-gift-label" for="resGiftQtyInput">CANTIDAD</label>
                                             <input class="card-gift-input" type="number" id="resGiftQtyInput" min="1"
                                                 max="50" value="1" required>
                                         </div>
                                     </div>
 
                                     <div class="card-gift-field">
-                                        <label class="card-gift-label" for="resGiftRecipientName">NOMBRE DEL
-                                            DESTINATARIO *</label>
+                                        <label class="card-gift-label" for="resGiftRecipientName">NOMBRE DEL DESTINATARIO</label>
                                         <input class="card-gift-input" type="text" id="resGiftRecipientName"
                                             placeholder="Nombre y apellidos de quien recibe el regalo" required>
                                     </div>
 
                                     <div class="card-gift-field">
-                                        <label class="card-gift-label" for="resGiftRecipientPhone">TELÉFONO DEL
-                                            DESTINATARIO *</label>
+                                        <label class="card-gift-label" for="resGiftRecipientPhone">TELÉFONO DEL DESTINATARIO</label>
                                         <input class="card-gift-input" type="tel" id="resGiftRecipientPhone"
                                             placeholder="Para el transportista y aviso de entrega por SMS" required>
-                                        <span class="card-gift-help">Necesario para que la mensajería pueda coordinar la
-                                            entrega.</span>
+                                        <span class="card-gift-help">Necesario para que la mensajería pueda coordinar la entrega.</span>
                                     </div>
 
                                     <div class="card-gift-field">
-                                        <label class="card-gift-label" for="resGiftRecipientAddress">DIRECCIÓN DE
-                                            ENTREGA DEL DESTINATARIO *</label>
+                                        <label class="card-gift-label" for="resGiftRecipientAddress">DIRECCIÓN DE ENTREGA DEL DESTINATARIO</label>
                                         <input class="card-gift-input" type="text" id="resGiftRecipientAddress"
                                             placeholder="Calle, número, piso, puerta..." required>
                                     </div>
 
                                     <div class="card-gift-grid-1-1">
                                         <div class="card-gift-field">
-                                            <label class="card-gift-label" for="resGiftRecipientZip">CÓDIGO POSTAL
-                                                *</label>
+                                            <label class="card-gift-label" for="resGiftRecipientZip">CÓDIGO POSTAL</label>
                                             <input class="card-gift-input" type="text" id="resGiftRecipientZip"
                                                 placeholder="número del cp" required>
                                         </div>
                                         <div class="card-gift-field">
-                                            <label class="card-gift-label" for="resGiftRecipientCity">CIUDAD *</label>
+                                            <label class="card-gift-label" for="resGiftRecipientCity">CIUDAD</label>
                                             <input class="card-gift-input" type="text" id="resGiftRecipientCity"
                                                 placeholder="nombre de la ciudad destino" required>
                                         </div>
                                     </div>
 
                                     <div class="card-gift-field">
-                                        <label class="card-gift-label" for="resGiftMessage">DEDICATORIA / MENSAJE EN LA
-                                            CAJA (OPCIONAL)</label>
+                                        <label class="card-gift-label" for="resGiftMessage">DEDICATORIA / MENSAJE EN LA CAJA (OPCIONAL)</label>
                                         <textarea class="card-gift-input card-gift-textarea" id="resGiftMessage"
-                                            rows="2"
+                                            rows="3"
                                             placeholder="Escribe un mensaje para que lo incluyamos en una elegante tarjeta de regalo..."></textarea>
                                     </div>
 
