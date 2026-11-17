@@ -666,12 +666,12 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         }
 
         /* TEXTOS DENTRO DE LA PERSIANA DESPLEGABLE */
-        div.navbar-menu a.navbar-link,
-        div.navbar-menu a.navbar-link:visited,
-        .navbar-menu .navbar-link,
-        .navbar-menu .navbar-link:visited,
-        .navbar.scrolled .navbar-menu .navbar-link,
-        .navbar.scrolled .navbar-menu .navbar-link:visited {
+        div.navbar-menu a.navbar-link:not(.navbar-menu-cart-link),
+        div.navbar-menu a.navbar-link:not(.navbar-menu-cart-link):visited,
+        .navbar-menu .navbar-link:not(.navbar-menu-cart-link),
+        .navbar-menu .navbar-link:not(.navbar-menu-cart-link):visited,
+        .navbar.scrolled .navbar-menu .navbar-link:not(.navbar-menu-cart-link),
+        .navbar.scrolled .navbar-menu .navbar-link:not(.navbar-menu-cart-link):visited {
             font-family: 'Lato', 'Lexend', -apple-system, sans-serif !important;
             font-size: 13.5px !important;
             font-weight: 400 !important;
@@ -730,8 +730,11 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
         /* CESTA DENTRO DEL MENÚ DESPLEGABLE (ABAJO DE TODO) */
         div.navbar-menu a.navbar-menu-cart-link,
         .navbar-menu a.navbar-menu-cart-link,
-        .navbar-menu .navbar-menu-cart-link {
-            display: none;
+        .navbar-menu .navbar-menu-cart-link,
+        div.navbar-menu a.navbar-menu-cart-link.has-items,
+        .navbar-menu a.navbar-menu-cart-link.has-items,
+        .navbar-menu .navbar-menu-cart-link.has-items {
+            display: flex !important;
             align-items: center !important;
             justify-content: flex-end !important;
             gap: 10px !important;
@@ -743,12 +746,6 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             text-align: right !important;
             text-decoration: none !important;
             line-height: 1 !important;
-        }
-
-        div.navbar-menu a.navbar-menu-cart-link.has-items,
-        .navbar-menu a.navbar-menu-cart-link.has-items,
-        .navbar-menu .navbar-menu-cart-link.has-items {
-            display: inline-flex !important;
         }
 
         div.navbar-menu a.navbar-menu-cart-link .navbar-menu-cart-text,
@@ -763,6 +760,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             line-height: 1 !important;
             display: inline-flex !important;
             align-items: center !important;
+            vertical-align: middle !important;
             transition: opacity 0.2s ease;
         }
 
@@ -779,6 +777,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
+            vertical-align: middle !important;
             margin: 0 !important;
             padding: 0 !important;
             transform: none !important;
@@ -2559,7 +2558,7 @@ Nota: Si añades o eliminas líneas en este archivo, los números pueden variar 
                 <a href="galeria.html" class="navbar-link btn-gallery active" data-visible="on">Galería</a>
                 <a href="articulos.html" class="navbar-link btn-blog" data-visible="on">Blog</a>
                 <!-- CESTA DENTRO DEL MENÚ (ABAJO DE TODO) -->
-                <a href="reservas.html" class="navbar-link navbar-cart-btn navbar-menu-cart-link" id="navbarMenuCartBtn" aria-label="Cesta de la compra">
+                <a href="reservas.html" class="navbar-link navbar-menu-cart-link" id="navbarMenuCartBtn" aria-label="Cesta de la compra">
                     <span class="navbar-menu-cart-text">Cesta</span>
                     <div class="cart-icon-wrapper">
                         <img src="Icono cesta.png" alt="Cesta" class="navbar-cart-icon">
