@@ -2351,7 +2351,7 @@ Menú del Index: Líena 742
                     Lo que antes era un esfuerzo... ahora es tu momento de placer
                 </p>
 
-                <a href="compra.html" class="btn-oro">HAZ TU SELECCIÓN</a>
+                <a href="#reservasProductsNav" class="btn-oro" onclick="if(typeof scrollToReservasProducts==='function'){scrollToReservasProducts(event);}">HAZ TU SELECCIÓN</a>
 
             </div>
         </header>
@@ -11539,14 +11539,10 @@ Menú del Index: Líena 742
                     const scrollTarget = document.getElementById('reservasProductsNav') || document.getElementById('reserva') || document.getElementById('la-coleccion');
                     if (scrollTarget) {
                         const isMobile = window.innerWidth <= 768;
-                        const topOffset = isMobile ? 65 : 75;
-                        let el = scrollTarget;
-                        let elemTop = 0;
-                        while (el) {
-                            elemTop += el.offsetTop || 0;
-                            el = el.offsetParent;
-                        }
-                        const targetY = elemTop > 0 ? (elemTop - topOffset) : (scrollTarget.getBoundingClientRect().top + window.pageYOffset - topOffset);
+                        const topOffset = isMobile ? 75 : 120;
+                        const rect = scrollTarget.getBoundingClientRect();
+                        const absTop = rect.top + window.pageYOffset;
+                        const targetY = absTop - topOffset;
                         window.scrollTo({
                             top: Math.max(0, targetY),
                             behavior: 'smooth'
@@ -11555,14 +11551,19 @@ Menú del Index: Líena 742
                             window.history.pushState(null, '', '#reservasProductsNav');
                         }
                         navLinks.forEach(l => l.classList.remove('active'));
-                        if (activeBtn) activeBtn.classList.add('active');
+                        const navResBtn = document.querySelector('.navbar-link.btn-reservas');
+                        if (activeBtn && activeBtn.classList.contains('navbar-link')) {
+                            activeBtn.classList.add('active');
+                        } else if (navResBtn) {
+                            navResBtn.classList.add('active');
+                        }
                         if (typeof tempDisableScrollspy === 'function') tempDisableScrollspy();
                     }
                 }
                 window.scrollToReservasProducts = scrollToReservasProducts;
 
-                // Botón "Reservas" -> scroll directo a la sección de reservas
-                document.querySelectorAll('.btn-reservas').forEach(btn => {
+                // Botón "Reservas" y botón "Haz tu selección" -> scroll directo a la sección de reservas
+                document.querySelectorAll('.btn-reservas, .hero-content .btn-oro').forEach(btn => {
                     btn.addEventListener('click', (e) => scrollToReservasProducts(e, btn));
                 });
 
