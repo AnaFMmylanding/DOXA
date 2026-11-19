@@ -24,8 +24,10 @@
         }
     </script>
     <noscript>
-        <div style="background:#f1f2ec; color:#3C332A; padding:20px; text-align:center; font-family:sans-serif; border-bottom:1px solid #dcdbd5;">
-            Estamos actualmente en fase de Reservas. <a href="reservas.html" style="font-weight:bold; color:#150e02;">Haz clic aquí para ir a la Hoja de Reservas</a>.
+        <div
+            style="background:#f1f2ec; color:#3C332A; padding:20px; text-align:center; font-family:sans-serif; border-bottom:1px solid #dcdbd5;">
+            Estamos actualmente en fase de Reservas. <a href="reservas.html"
+                style="font-weight:bold; color:#150e02;">Haz clic aquí para ir a la Hoja de Reservas</a>.
         </div>
     </noscript>
 
@@ -1959,8 +1961,15 @@
         }
 
         @keyframes giftDropFade {
-            0% { opacity: 0; transform: translateY(-4px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(-4px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card-gift-dropdown-item {
@@ -4643,7 +4652,8 @@
                 }
             ];
             selectedLineId = cartLines[0].id;
-            saveCartLinesToStorage();
+            // No guardamos automáticamente en localStorage en Fallback 3 para evitar que una mera visita
+            // o el vaciado tras una compra/reserva reintroduzca productos fantasmas en la cesta.
         }
         loadCartLinesFromStorage();
 
@@ -5774,6 +5784,12 @@
                 // Modo reserva preferente: redirigir a confirmación de reserva directamente
                 const giftsParam = giftOrdersPayload.length > 0 ? `&gifts=${encodeURIComponent(JSON.stringify(giftOrdersPayload))}` : '';
                 const mainVariety = cartLines[0] ? cartLines[0].varietyName : 'Bombón Blooms';
+                try {
+                    localStorage.removeItem('doxa_cart_lines');
+                    localStorage.removeItem('doxa_active_selection');
+                } catch (e) {
+                    console.warn('Error limpiando cesta tras reserva:', e);
+                }
                 window.location.href = `gracias.html?variety=${encodeURIComponent(mainVariety)}&qty=${encodeURIComponent(totalBoxes)}&total=${encodeURIComponent(total.toFixed(2))}€&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}${giftsParam}`;
             }
         }

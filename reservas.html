@@ -4624,7 +4624,8 @@
                 }
             ];
             selectedLineId = cartLines[0].id;
-            saveCartLinesToStorage();
+            // No guardamos automáticamente en localStorage en Fallback 3 para evitar que una mera visita
+            // o el vaciado tras una reserva previa reintroduzca productos fantasmas en la cesta.
         }
         loadCartLinesFromStorage();
 
@@ -5685,6 +5686,15 @@
             // Redirección inmediata a gracias.html con confirmación de reserva
             const giftsParam = giftOrdersPayload.length > 0 ? `&gifts=${encodeURIComponent(JSON.stringify(giftOrdersPayload))}` : '';
             const mainVariety = cartLines[0] ? cartLines[0].varietyName : 'Bombón Blooms';
+
+            // Vaciar completamente la cesta y la selección activa al formalizar la reserva
+            try {
+                localStorage.removeItem('doxa_cart_lines');
+                localStorage.removeItem('doxa_active_selection');
+            } catch (e) {
+                console.warn('Error limpiando cesta tras reserva:', e);
+            }
+
             window.location.href = `gracias.html?variety=${encodeURIComponent(mainVariety)}&qty=${encodeURIComponent(totalBoxes)}&total=${encodeURIComponent(total.toFixed(2))}€&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}${giftsParam}&modo=reserva`;
         }
     </script>

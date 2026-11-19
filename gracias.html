@@ -1362,7 +1362,7 @@
                         </div>
                     </div>
 
-                    <a href="index.html" class="btn-home">
+                    <a href="index.html" class="btn-home" onclick="try{localStorage.removeItem('doxa_cart_lines');localStorage.removeItem('doxa_active_selection');}catch(e){}">
                         Volver al Inicio
                     </a>
 
@@ -1445,6 +1445,14 @@
        LÓGICA DE EXTRACCIÓN DE PARÁMETROS
        ========================================= -->
     <script>
+        // Vaciar inmediatamente la cesta y la selección activa tras confirmar la reserva o pedido
+        try {
+            localStorage.removeItem('doxa_cart_lines');
+            localStorage.removeItem('doxa_active_selection');
+        } catch (e) {
+            console.warn('Error limpiando cesta en gracias.html:', e);
+        }
+
         // Obtener parámetros de la URL
         const urlParams = new URLSearchParams(window.location.search);
 

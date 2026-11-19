@@ -11371,8 +11371,14 @@ Menú del Index: Líena 742
                 }
                 window.updateNavbarCartBadge = updateNavbarCartBadge;
                 updateNavbarCartBadge();
-                window.addEventListener('storage', updateNavbarCartBadge);
-                window.addEventListener('pageshow', updateNavbarCartBadge);
+
+                function handleCartStateRefresh() {
+                    updateNavbarCartBadge();
+                    if (typeof updateOrderSummary === 'function') updateOrderSummary();
+                    if (typeof renderReservasGiftsList === 'function') renderReservasGiftsList();
+                }
+                window.addEventListener('storage', handleCartStateRefresh);
+                window.addEventListener('pageshow', handleCartStateRefresh);
 
                 // Función para eliminar un artículo directamente desde el desplegable de la cesta
                 window.removeNavbarCartItem = function (idx, e) {
