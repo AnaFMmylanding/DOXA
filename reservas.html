@@ -1,20 +1,81 @@
+<!--
+=========================================================================
+ÍNDICE DE CONTENIDO EDITABLE E IMPORTANTE (LÍNEAS DE CÓDIGO)
+=========================================================================
+Este índice indica la línea de código exacta de los elementos clave de la Hoja de Reserva Preferente.
+Cada sección y elemento editable está identificado en el código con la etiqueta [EDITABLE].
+
+-------------------------------------------------------------------------
+0. METADATOS Y SEO (HEAD)
+-------------------------------------------------------------------------
+- Título de la pestaña del navegador:______61
+- Descripción para buscadores (Google SEO):______66
+- Título para compartir en redes sociales:______71
+- Descripción para compartir en redes sociales:______73
+
+-------------------------------------------------------------------------
+1. CABECERA Y MARCA CENTRAL (NAVBAR)
+-------------------------------------------------------------------------
+- Marca central: Título "ESTADO DEL ARTE" y Subtítulo "CONFITERÍA BIOINDUCTIVA":______3411
+
+-------------------------------------------------------------------------
+2. PANELES DE RESERVA Y RESUMEN
+-------------------------------------------------------------------------
+- Título del panel: "Tu Pedido":______3441
+- Título del panel: "Total Pedido":______3452
+- Título del formulario: "Tus datos (Comprador y reserva)":______3478
+- Botón del modal de regalo: "Añadir Regalo al Pedido":______4152
+
+-------------------------------------------------------------------------
+3. PIE DE PÁGINA (FOOTER)
+-------------------------------------------------------------------------
+- Columna 1: Contacto (email y redes):______3939
+- Columna 2: Mis Pedidos:______3956
+- Columna 3: Newsletter:______3967
+- Columna 4: DOXA, la Misión:______3976
+- Columna 5: Aviso Legal:______3984
+- Fila inferior: Copyright:______3998
+
+-------------------------------------------------------------------------
+4. CATÁLOGO JAVASCRIPT DE PRODUCTOS (PRODUCTS_CATALOG)
+-------------------------------------------------------------------------
+- Catálogo general de productos (precios, formatos y fotos):______4172
+- 1. Bombón Blooms (precios, formatos y fotos):______4174
+- 2. Doxas (precios, formatos y fotos):______4189
+- 3. Doxa Cookie (precios, formatos y fotos):______4206
+- 4. Lingote Pistacho (precios, formatos y fotos):______4220
+- 5. Crujiente Almendra (precios, formatos y fotos):______4234
+- 6. Peque Bloom (precios, formatos y fotos):______4248
+
+=========================================================================
+-->
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- =========================================================================
+         [INICIO SECCIÓN 0] METADATOS Y SEO (HEAD)
+         ========================================================================= -->
+    <!-- [EDITABLE] Título de la pestaña del navegador -->
     <title>DOXA | Hoja de Reserva Preferente · Estado del Arte</title>
     <link rel="icon" type="image/png" href="Doxa.png">
 
     <!-- Open Graph & Meta Tags -->
+    <!-- [EDITABLE] Descripción para buscadores (Google SEO) -->
     <meta name="description"
         content="Formaliza tu reserva preferente del Primer Lote de Bombón Bloom y Doxa. Repostería funcional bioinductiva.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="DOXA | Estado del Arte">
+    <!-- [EDITABLE] Título para compartir en redes sociales -->
     <meta property="og:title" content="DOXA | Hoja de Reserva Preferente">
+    <!-- [EDITABLE] Descripción para compartir en redes sociales -->
     <meta property="og:description"
         content="Formaliza tu reserva preferente del Primer Lote de Bombón Bloom y Doxa. Repostería funcional bioinductiva.">
+    <!-- =========================================================================
+         [FIN SECCIÓN 0] METADATOS Y SEO (HEAD)
+         ========================================================================= -->
     <meta property="og:image" content="BBB 1.png">
     <meta property="og:url" content="https://doxa.art/reservas.html">
     <meta name="twitter:card" content="summary_large_image">
@@ -3343,8 +3404,11 @@
 
     <div class="page-wrapper">
 
-        <!-- NAVEGACIÓN PRINCIPAL: MARCA CENTRADA CON ENLACE AL INDEX (SIN IMAGEN DE FONDO) -->
+        <!-- =========================================================================
+           [INICIO SECCIÓN 1] CABECERA Y MARCA CENTRAL (NAVBAR)
+           ========================================================================= -->
         <header class="navbar" id="mainNavbar">
+            <!-- [EDITABLE] Marca central: Título "ESTADO DEL ARTE" y Subtítulo "CONFITERÍA BIOINDUCTIVA" -->
             <div class="navbar-brand-center">
                 <a href="index.html" class="brand-link" aria-label="Volver al Inicio">
                     <span class="brand-title">ESTADO <span class="brand-del">DEL</span> ARTE</span>
@@ -3356,6 +3420,9 @@
                 </a>
             </div>
         </header>
+        <!-- =========================================================================
+           [FIN SECCIÓN 1] CABECERA Y MARCA CENTRAL (NAVBAR)
+           ========================================================================= -->
 
         <!-- SECCIÓN FORMULARIO DE COMPRA -->
         <section class="checkout-section">
@@ -3366,8 +3433,12 @@
                     <!-- COLUMNA IZQUIERDA: TU PEDIDO Y TOTAL PEDIDO -->
                     <div class="left-column-stack" id="leftOrderStack">
 
+                        <!-- =========================================================================
+                           [INICIO SECCIÓN 2] PANELES DE RESERVA Y RESUMEN
+                           ========================================================================= -->
                         <!-- PANEL: TU PEDIDO -->
                         <div class="order-summary-panel" id="orderSummaryPanel">
+                            <!-- [EDITABLE] Título del panel: "Tu Pedido" -->
                             <h3 class="panel-header-title">Tu Pedido</h3>
                             <div class="panel-header-subtext">*Para modificar cantidad o borrar, selecciona la línea y
                                 pulsa el botón</div>
@@ -3378,6 +3449,7 @@
 
                         <!-- PANEL: TOTAL PEDIDO -->
                         <div class="order-total-panel" id="orderTotalPanel">
+                            <!-- [EDITABLE] Título del panel: "Total Pedido" -->
                             <h3 class="panel-header-title">Total Pedido</h3>
                             <div class="summary-row">
                                 <span id="totItemsLabel">Artículos (0 cajas):</span>
@@ -3403,6 +3475,7 @@
 
                     <!-- COLUMNA DERECHA: TUS DATOS (COMPRADOR Y RESERVA) -->
                     <div class="form-column" id="checkoutFormColumn">
+                        <!-- [EDITABLE] Título del formulario: "Tus datos (Comprador y reserva)" -->
                         <h3 class="form-title">Tus datos <span class="form-title-sub">(Comprador y reserva)</span>
                         </h3>
                         <p id="buyerAddressNote"
@@ -3856,12 +3929,14 @@
             </div>
         </section>
 
-        <!-- SECCIÓN DE FOOTER -->
+        <!-- =========================================================================
+           [INICIO SECCIÓN 3] PIE DE PÁGINA (FOOTER)
+           ========================================================================= -->
         <footer class="gallery-footer">
             <div class="footer-grid-container">
                 <div class="footer-columns-row">
 
-                    <!-- CONTACTO -->
+                    <!-- [EDITABLE] Columna 1: Contacto -->
                     <div class="footer-column">
                         <h4 class="footer-column-title">Contacto</h4>
                         <div class="footer-column-links">
@@ -3878,7 +3953,7 @@
                         </div>
                     </div>
 
-                    <!-- MIS PEDIDOS -->
+                    <!-- [EDITABLE] Columna 2: Mis Pedidos -->
                     <div class="footer-column">
                         <h4 class="footer-column-title">Mis Pedidos</h4>
                         <div class="footer-column-links">
@@ -3889,7 +3964,7 @@
                         </div>
                     </div>
 
-                    <!-- NEWSLETTER -->
+                    <!-- [EDITABLE] Columna 3: Newsletter -->
                     <div class="footer-column newsletter-col">
                         <h4 class="footer-column-title">Newsletter</h4>
                         <div class="footer-newsletter-info">
@@ -3898,7 +3973,7 @@
                         </div>
                     </div>
 
-                    <!-- DOXA, LA MISIÓN -->
+                    <!-- [EDITABLE] Columna 4: DOXA, la Misión -->
                     <div class="footer-column">
                         <h4 class="footer-column-title">DOXA, la Misión</h4>
                         <div class="footer-column-links">
@@ -3906,7 +3981,7 @@
                         </div>
                     </div>
 
-                    <!-- AVISO LEGAL -->
+                    <!-- [EDITABLE] Columna 5: Aviso Legal -->
                     <div class="footer-column">
                         <h4 class="footer-column-title">Aviso Legal</h4>
                         <div class="footer-column-links">
@@ -3920,10 +3995,14 @@
                 </div>
 
                 <div class="footer-bottom-row">
+                    <!-- [EDITABLE] Fila inferior: Copyright -->
                     <p class="footer-copy">© 2026 DOXA | Alta Repostería Funcional. Todos los derechos reservados.</p>
                 </div>
             </div>
         </footer>
+        <!-- =========================================================================
+           [FIN SECCIÓN 3] PIE DE PÁGINA (FOOTER)
+           ========================================================================= -->
 
     </div>
 
@@ -4070,6 +4149,7 @@
                     </div>
 
                     <div class="gift-form-actions">
+                        <!-- [EDITABLE] Botón del modal de regalo: "Añadir Regalo al Pedido" -->
                         <button type="submit" class="btn-gift-modal-submit">Añadir Regalo al Pedido</button>
                         <button type="button" class="btn-gift-modal-cancel" onclick="closeGiftModal()">Cancelar</button>
                     </div>
@@ -4086,10 +4166,12 @@
         const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xyeyjnoo';
 
         // =========================================
-        // =========================================
-        // CONFIGURACIÓN DE CATÁLOGO MULTI-PRODUCTO
-        // =========================================
+        /* =========================================================================
+           [INICIO SECCIÓN 4 - DATOS JS] CATÁLOGO MULTI-PRODUCTO (PRECIOS, FORMATOS Y FOTOS)
+           ========================================================================= */
+        /* [EDITABLE] PRODUCTS_CATALOG: Precios, formatos y fotos de las 6 familias: */
         const PRODUCTS_CATALOG = [
+            /* [EDITABLE] 1. Bombón Blooms: */
             {
                 id: 'bombon',
                 name: 'Bombón Blooms',
@@ -4104,6 +4186,7 @@
                     { id: 'bb_coleccion', name: '1 caja Colección', fullName: 'CAJA COLECCIÓN (10 UDS)', price: 180.00, image: 'BBB 3.png' }
                 ]
             },
+            /* [EDITABLE] 2. Doxas: */
             {
                 id: 'doxa',
                 name: 'Doxas',
@@ -4120,6 +4203,7 @@
                     { id: 'doxa_proto', name: 'Caja Escultórica DOXA', fullName: 'CAJA ESCULTÓRICA DOXA (AUTOR)', price: 240.00, image: 'ProtoDoxa.png' }
                 ]
             },
+            /* [EDITABLE] 3. Doxa Cookie: */
             {
                 id: 'cookie',
                 name: 'Doxa Cookie',
@@ -4133,6 +4217,7 @@
                     { id: 'cookie_coleccion', name: 'Caja Colección (8 piezas)', fullName: 'CAJA COLECCIÓN (8 COOKIES)', price: 120.00, image: 'Galle portada.png' }
                 ]
             },
+            /* [EDITABLE] 4. Lingote Pistacho: */
             {
                 id: 'lingote',
                 name: 'Lingotes',
@@ -4146,6 +4231,7 @@
                     { id: 'lingote_coleccion', name: 'Caja Colección (10 piezas)', fullName: 'CAJA LINGOTE PISTACHO COLECCIÓN (10 UDS)', price: 180.00, image: 'Lingote.png' }
                 ]
             },
+            /* [EDITABLE] 5. Crujiente Almendra: */
             {
                 id: 'oblea',
                 name: 'Crujiente de Almendra',
@@ -4159,6 +4245,7 @@
                     { id: 'oblea_coleccion', name: 'Caja Colección (10 piezas)', fullName: 'CAJA CRUJIENTE ALMENDRA COLECCIÓN (10 UDS)', price: 180.00, image: 'Oblea.png' }
                 ]
             },
+            /* [EDITABLE] 6. Peque Bloom: */
             {
                 id: 'pequebloom',
                 name: 'PequeBlooms',
